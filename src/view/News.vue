@@ -181,7 +181,7 @@
 			return {
 				tabs: 1,
 				title: "所有新闻",
-				swiperOption: { //swiper3
+				swiperOption: { //其他推荐轮播图设置
 					autoplay: 3000,
 					speed: 1000,
 					slidesPerView: 4,
@@ -345,21 +345,21 @@
 			swiperSlide
 		},
 		methods: {
-			// 分页1
+			// 所有新闻分页1
 			handleCurrentChange(val) {
 				console.log(`当前页: ${val}`);
 				if (val == 1) this.k = 0;
 				else this.k = 7;
 				this.page = val;
 			},
-			// 分页2
+			// 海洋欢乐世界新闻分页2
 			handleCurrentChange2(val) {
 				console.log(`当前页: ${val}`);
 				if (val == 1) this.k2 = 0;
 				else this.k2 = 7;
 				this.page2 = val;
 			},
-			// 分页3
+			// 麦迪卡斯水乐园分页3
 			handleCurrentChange3(val) {
 				console.log(`当前页: ${val}`);
 				if (val == 1) this.k3 = 0;
@@ -384,6 +384,9 @@
 // 					this.list3 = data.body.data;
 // 				})
 			}
+		},
+		created() {
+			document.title = "新闻中心";
 		},
 		mounted() {
 			this.GetList();

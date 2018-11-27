@@ -231,7 +231,7 @@
 		name: "McGrady",
 		data() {
 			return {
-				swiperOption: { //swiper3
+				swiperOption: { //明星场馆轮播图
 					autoplay: false,
 					speed: 300,
 					slidesPerView: 3,
@@ -245,7 +245,7 @@
 						hiddenClass: 'my-button-hidden', //按钮隐藏时的Class
 					}
 				},
-				swiperOptionThumbs: {
+				swiperOptionThumbs: {//背景轮播图
 					autoplay: true,
 					effect: 'fade',
 					pagination: {
@@ -254,8 +254,8 @@
 					}
 				},
 				lists: ["连雨不知春去", "一晴方觉夏深"],
-				list:[],
-				list2:[]
+				list:[],//明星场馆数据
+				list2:[]//最新新闻数据
 			}
 		},
 		components: {
@@ -263,17 +263,20 @@
 			swiperSlide,
 			Scroller
 		},
+		created() {
+			document.title = "麦迪卡斯";
+		},
 		mounted() {
 			this.GetList();
 			this.GetList2();
 		},
 		methods: {
-			GetList() {
+			GetList() {//明星场馆数据
 // 				this.$http.post('/api/goods').then((data) => {
 // 					this.list = data.body.data;
 // 				})
 			},
-			GetList2() {
+			GetList2() {//最新新闻数据
 // 				this.$http.post('/api/goods').then((data) => {
 // 					this.list2 = data.body.data;
 // 				})
@@ -291,7 +294,7 @@
 		height: 30px;
 		line-height: 30px;
 		overflow: hidden;
-		margin-top: -24px;
+		margin-top: -30px;
 		margin-left: 40px;
 	}
 </style>

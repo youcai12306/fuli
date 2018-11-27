@@ -5,6 +5,7 @@ import McGrady from '@/view/McGrady'
 import News from '@/view/News'
 import Reset from '@/view/Reset'
 import Index from '@/view/Index'
+import waterworld from '@/view/waterworld'
 
 Vue.use(Router)
 
@@ -43,6 +44,11 @@ export default new Router({
       path: '/reset',
       name: 'Reset',
       component: Reset
+    },
+    {
+      path: '/waterworld',
+      name: 'waterworld',
+      component: waterworld
     }
   ]
 })

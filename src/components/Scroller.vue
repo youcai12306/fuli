@@ -54,6 +54,7 @@
 	.wrap {
 		overflow: hidden;
 		color: #fff;
+		height: 100%;
 	}
 	
 	#box {
@@ -63,10 +64,11 @@
 	
 	#box div {
 		float: left;
+		height: 100%;
 	}
 	
 	#marquee {
-		margin: -5px 16px 0 20px;
+		margin: 0 16px 0 20px;
 	}
 	
 	#node {

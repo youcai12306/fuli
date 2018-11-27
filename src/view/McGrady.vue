@@ -245,7 +245,7 @@
 		methods: {}
 	};
 </script>
-<style scoped lang="scss" src="../assets/mcgrady.scss"></style>
+<style scoped lang="scss" src="../assets/scss/mcgrady.scss"></style>
 <style lang="scss" scoped>
 	.scrollContainer {
 		color: #ffffff;

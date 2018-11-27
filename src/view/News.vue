@@ -395,9 +395,10 @@
 
 <style scoped="" lang="scss">
 	.news {
-		width: 1920px;
+		width: 100%;
 		height: 1802px;
 		background: #fff url(../assets/img/new-1.png) no-repeat top center;
+		background-size: 1920px 100%;
 
 		.main-contion {
 			width: 1200px;

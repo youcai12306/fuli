@@ -143,6 +143,13 @@
 							<swiper-slide>
 								<router-link :to="{path:'/'}"><img src="../assets/img/md-16.png"><span>2019精彩活动马上来袭！</span></router-link>
 							</swiper-slide>
+							
+							<!-- <template v-for="item in list">
+								<swiper-slide>
+									<router-link :to="{path:'/'}"><img :src="item.img"><span>{{item.title}}</span></router-link>
+								</swiper-slide>
+							</template> -->
+							
 						</swiper>
 					</div>
 					<div class="swiper-button-next"></div>
@@ -163,6 +170,11 @@
 					</div>
 					<div class="conent-main">
 						<div class="main-top">
+							<!-- <template v-for="(item,k) in list2" v-if="k == 0">
+								<img :src="item.img" />
+								<p class="p1">{{item.title}}</p>
+								<p class="p2">{{item.title2}}</p>
+							</template> -->
 							<img src="../assets/img/md-23.png" />
 							<p class="p1">世界马戏精英亮相珠海长隆国际顺准开幕...</p>
 							<p class="p2">长隆海洋王国的“丛林过山车、沙雕城堡、海鸟世界象龟展区”于2018年11月20日起暂停服务，该区域将会进行升级改造，敬请期待！</p>
@@ -181,6 +193,13 @@
 								<li>
 									<a href="" title=""><i></i><strong class="font">世界马戏精英亮相珠海长隆 国际顺准开幕式明</strong><span>2018.05.06</span></a>
 								</li>
+								
+								<!-- <li v-for="(item,k) in lis2" v-if="k > 0">
+									<router-link :to="{paht:'/'}">
+										<i></i><strong class="font">{{item.title}}</strong><span>{{item.time}}</span>
+									</router-link>
+								</li> -->
+								
 							</ul>
 						</div>
 					</div>
@@ -234,7 +253,9 @@
 						clickable: true
 					}
 				},
-				lists: ["连雨不知春去", "一晴方觉夏深"]
+				lists: ["连雨不知春去", "一晴方觉夏深"],
+				list:[],
+				list2:[]
 			}
 		},
 		components: {
@@ -242,7 +263,22 @@
 			swiperSlide,
 			Scroller
 		},
-		methods: {}
+		mounted() {
+			this.GetList();
+			this.GetList2();
+		},
+		methods: {
+			GetList() {
+// 				this.$http.post('/api/goods').then((data) => {
+// 					this.list = data.body.data;
+// 				})
+			},
+			GetList2() {
+// 				this.$http.post('/api/goods').then((data) => {
+// 					this.list2 = data.body.data;
+// 				})
+			}
+		},
 	};
 </script>
 <style scoped lang="scss" src="../assets/scss/mcgrady.scss"></style>

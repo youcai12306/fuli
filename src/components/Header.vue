@@ -2,12 +2,18 @@
   <div class="main">
     <div class="main-content">
       <div class="logo floatLeft">
-        <img src="../assets/img/logo.png" alt="">
+        <img
+          src="../assets/img/logo.png"
+          alt=""
+        >
       </div>
       <div class="floatLeft">
         <ul>
-          <li @mouseover="showNavList(1)" @mouseout="hiddenNavList(1)">主题乐园</li>
-          <li class="hotel" >度假酒店</li>
+          <li
+            @mouseover="showNavList(1)"
+            @mouseout="hiddenNavList(1)"
+          >主题乐园</li>
+          <li class="hotel">度假酒店</li>
           <li class="news">新闻中心</li>
           <li class="trip">计划旅程</li>
           <li class="discounts">特别优惠</li>
@@ -24,15 +30,26 @@
       </div>
     </div>
 
-    <div class="nav-list" v-show="show" @mouseover="showNavList(2)" @mouseout="hiddenNavList(2)">
+    <div
+      class="nav-list"
+      v-show="show"
+      @mouseover="showNavList(2)"
+      @mouseout="hiddenNavList(2)"
+    >
       <div class="lists">
         <ul>
           <li>
-            <p class="list-img"><img src="../assets/img/header-img1.png" alt=""></p>
+            <p class="list-img"><img
+                src="../assets/img/header-img1.png"
+                alt=""
+              ></p>
             <p class="list-title">欢乐海洋世界</p>
           </li>
           <li>
-            <p class="list-img"><img src="../assets/img/header-img2.png" alt=""></p>
+            <p class="list-img"><img
+                src="../assets/img/header-img2.png"
+                alt=""
+              ></p>
             <p class="list-title">麦迪斯卡水乐园</p>
           </li>
         </ul>
@@ -46,20 +63,24 @@ export default {
   name: "Hearer",
   data() {
     return {
-      show:false
+      show: false
     };
   },
-  methods:{
-    showNavList(type){
-      if(type === 2){
+  methods: {
+    showNavList(type) {
+      if (type === 2) {
         clearTimeout(this.time);
       }
-      this.show = true
+      this.show = true;
     },
-    hiddenNavList(type){
-      this.time = setTimeout(()=>{
+    hiddenNavList(type) {
+      if (type === 2) {
         this.show = false;
-      },2000) 
+      } else {
+        this.time = setTimeout(() => {
+          this.show = false;
+        }, 2000);
+      }
     }
   }
 };
@@ -171,7 +192,7 @@ export default {
               vertical-align: middle;
             }
           }
-          .list-title{
+          .list-title {
             line-height: 30px;
           }
         }

@@ -2,15 +2,18 @@
   <div id="app">
     <Header></Header>
     <router-view/>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
-import Header from "@/components/Header";
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
+
 export default {
   name: 'App',
   components:{
-    Header,
+    Header,Footer
   }
 }
 </script>
@@ -115,6 +118,8 @@ input,
 select,
 textarea {
   font-size: 100%;
+  outline:none;
+  border: 0;
 }
 .floatLeft{
   float: left;

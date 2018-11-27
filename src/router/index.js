@@ -4,6 +4,7 @@ import Login from '@/view/Login'
 import McGrady from '@/view/McGrady'
 import News from '@/view/News'
 import Reset from '@/view/Reset'
+import Index from '@/view/Index'
 
 Vue.use(Router)
 
@@ -11,6 +12,11 @@ export default new Router({
   routes: [
     {
       path: '/',
+      name: 'Index',
+      component: Index
+    },
+    {
+      path: '/login',
       name: 'Login',
       component: Login
     },

@@ -302,7 +302,7 @@ export default {
       swiperOption: {
         // notNextTick是一个组件自有属性，如果notNextTick设置为true，组件则不会通过NextTick来实例化swiper，也就意味着你可以在第一时间获取到swiper对象，假如你需要刚加载遍使用获取swiper对象来做什么事，那么这个属性一定要是true
         notNextTick: true,
-        slidesPerView: 6,
+        slidesPerView: 6
         // autoplay: {
         //   delay: 3000
         // },
@@ -352,8 +352,8 @@ export default {
     swiper,
     swiperSlide
   },
-  created(){
-    document.title = "海洋欢乐世界度假区"
+  created() {
+    document.title = "海洋欢乐世界度假区";
   },
   computed: {
     swiper() {
@@ -636,12 +636,22 @@ export default {
                 width: 351px;
                 font-size: 16px;
                 color: #333333;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                -o-text-overflow: ellipsis;
               }
               .list-content {
                 width: 365px;
                 font-size: 14px;
                 line-height: 25px;
+                height: 100px;
                 color: #333333;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 4;
+                -webkit-box-orient: vertical;
               }
             }
           }

@@ -353,7 +353,7 @@ export default {
     swiperSlide
   },
   created() {
-    document.title = "海洋欢乐世界度假区11";
+    document.title = "海洋欢乐世界度假区";
   },
   computed: {
     swiper() {

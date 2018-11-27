@@ -1,0 +1,182 @@
+<template>
+  <div class="main">
+    <div class="main-content">
+      <div class="logo floatLeft">
+        <img src="../assets/img/logo.png" alt="">
+      </div>
+      <div class="floatLeft">
+        <ul>
+          <li @mouseover="showNavList(1)" @mouseout="hiddenNavList(1)">主题乐园</li>
+          <li class="hotel" >度假酒店</li>
+          <li class="news">新闻中心</li>
+          <li class="trip">计划旅程</li>
+          <li class="discounts">特别优惠</li>
+          <li class="order">网上订购</li>
+          <li class="risk">冒险之旅</li>
+        </ul>
+      </div>
+      <div class="nav-right floatLeft">
+        <div class="right-info">
+          <div class="login">富力会员登录</div>
+          <div class="language-change"><span class="ch">中文</span><span>英文</span></div>
+        </div>
+        <input type="text">
+      </div>
+    </div>
+
+    <div class="nav-list" v-show="show" @mouseover="showNavList(2)" @mouseout="hiddenNavList(2)">
+      <div class="lists">
+        <ul>
+          <li>
+            <p class="list-img"><img src="../assets/img/header-img1.png" alt=""></p>
+            <p class="list-title">欢乐海洋世界</p>
+          </li>
+          <li>
+            <p class="list-img"><img src="../assets/img/header-img2.png" alt=""></p>
+            <p class="list-title">麦迪斯卡水乐园</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "Hearer",
+  data() {
+    return {
+      show:false
+    };
+  },
+  methods:{
+    showNavList(type){
+      if(type === 2){
+        clearTimeout(this.time);
+      }
+      this.show = true
+    },
+    hiddenNavList(type){
+      this.time = setTimeout(()=>{
+        this.show = false;
+      },2000) 
+    }
+  }
+};
+</script>
+<style lang='scss' scoped>
+.main {
+  position: relative;
+  .main-content {
+    height: 97px;
+    background-color: #f5f9ff;
+    .logo {
+      padding-top: 36px;
+      margin-left: 441px;
+    }
+    ul {
+      padding-top: 52px;
+      padding-left: 80px;
+      li {
+        height: 26px;
+        line-height: 26px;
+        float: left;
+        font-size: 12px;
+        color: #333333;
+        background: url(../assets/img/index-theme.png) no-repeat 0 0;
+        padding-left: 36px;
+        margin-right: 33px;
+      }
+      .hotel {
+        background: url(../assets/img/index-hotel.png) no-repeat 0 0;
+        padding-left: 27px;
+      }
+      .news {
+        background: url(../assets/img/index-news.png) no-repeat 0 0;
+        padding-left: 27px;
+      }
+      .trip {
+        background: url(../assets/img/index-trip.png) no-repeat 0 0;
+        padding-left: 27px;
+      }
+      .discounts {
+        background: url(../assets/img/index-discounts.png) no-repeat 0 0;
+        padding-left: 27px;
+      }
+      .order {
+        background: url(../assets/img/index-order.png) no-repeat 0 3px;
+        padding-left: 27px;
+      }
+      .risk {
+        background: url(../assets/img/index-risk.png) no-repeat 0 0;
+        padding-left: 27px;
+      }
+    }
+    .nav-right {
+      font-size: 12px;
+      padding-top: 22px;
+      .right-info {
+        color: #333333;
+        .login {
+          float: left;
+          background: url(../assets/img/index-login.png) no-repeat 0 0;
+          padding-left: 20px;
+        }
+        .language-change {
+          float: left;
+          margin-left: 14px;
+          span {
+            padding: 0 10px;
+            letter-spacing: 1px;
+          }
+          .ch {
+            color: #0764e9;
+            border-right: 1px solid #333333;
+          }
+        }
+      }
+      input {
+        width: 199px;
+        height: 32px;
+        border-radius: 16px;
+        border: solid 1px #bfbfbf;
+        background: url(../assets/img/index-search.png) no-repeat 163px center;
+        text-indent: 10px;
+        margin-top: 8px;
+      }
+    }
+  }
+  .nav-list {
+    width: 100%;
+    height: 110px;
+    background: rgba(7, 100, 233, 1);
+    position: absolute;
+    z-index: 10;
+    .lists {
+      padding-left: 691px;
+      ul {
+        li {
+          float: left;
+          font-size: 12px;
+          font-weight: 400;
+          color: rgba(245, 249, 255, 1);
+          margin-right: 46px;
+          .list-img {
+            height: 52px;
+            line-height: 52px;
+            text-align: center;
+            margin-top: 10px;
+            img {
+              display: inline-block;
+              vertical-align: middle;
+            }
+          }
+          .list-title{
+            line-height: 30px;
+          }
+        }
+      }
+    }
+  }
+}
+</style>

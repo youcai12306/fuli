@@ -22,7 +22,7 @@
 							<img src="../assets/img/new-1.png" alt="图片">
 							<div class="bt">
 								<p class="p1">关于“海洋露天剧场围蔽施工”暂停服务的公告</p>
-								<p class="p2">来自长隆海洋王国 | 2018.08.09</p>
+								<p class="p2">来自长隆海洋王国2 | 2018.08.09</p>
 							</div>
 							<div class="button"></div>
 						</router-link>

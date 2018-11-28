@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/view/Login'
-import News from '@/view/News'
-import Reset from '@/view/Reset'
 import Index from '@/view/Index'
-import waterworld from '@/view/waterworld'
+
+
 const McGrady = r => require.ensure([], () => r(require('@/view/McGrady/McGrady')), 'McGrady')
+const waterworld = r => require.ensure([], () => r(require('@/view/waterworld')), 'waterworld')
+const News = r => require.ensure([], () => r(require('@/view/News')), 'News')
+const Reset = r => require.ensure([], () => r(require('@/view/Reset')), 'Reset')
 
 Vue.use(Router)
 

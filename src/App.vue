@@ -119,7 +119,6 @@ select,
 textarea {
   font-size: 100%;
   outline:none;
-  border: 0;
 }
 .floatLeft{
   float: left;

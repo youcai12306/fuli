@@ -2,12 +2,22 @@
   <div>
     <!-- 背景层 -->
     <div class="leyuan">
+			<!-- 背景轮播图 -->
+			<section class="LeBg">
+				<swiper :options="swiperOptionThumbs">
+					<swiper-slide :style="{backgroundImage:'url(../../../static/le0.png)', backgroundRepeat:'no-repeat', backgroundPosition:'top center',width:'1920px'}"></swiper-slide>
+					<swiper-slide :style="{backgroundImage:'url(../../../static/le0.png)', backgroundRepeat:'no-repeat', backgroundPosition:'top center',width:'1920px'}"></swiper-slide>
+					<swiper-slide :style="{backgroundImage:'url(../../../static/le0.png)', backgroundRepeat:'no-repeat', backgroundPosition:'top center',width:'1920px'}"></swiper-slide>
+				</swiper>
+			</section>
       <!-- main -->
       <div class="main">
         <!-- 咨询公告 -->
         <div class="clearDiv">
           <!-- 分类 -->
           <div class="le1">
+						<!--//背景轮播图标页码-->
+						<div class="swiper-pagination"></div>
             <ul class="clearDiv">
               <li class="le2 actives">
                 <a href="">乐园介绍</a>
@@ -130,7 +140,24 @@
                           <button class="c7">了解详情</button>
                         </div>
                       </div>
-                      <div class="tab-card">2</div>
+                      <div class="tab-card">
+												<div class="c1">
+													<div class="c2">
+														<div class="c3">
+															<p class="c4">平常日</p>
+															<p>9:00-12:00</p>
+															<p class="cc">1:00-6:00</p>
+														</div>
+														<div class="c5">
+															<p class="c6">特殊日</p>
+															<p>9:00-12:00</p>
+															<p>1:00-6:00</p>
+														</div>
+													</div>
+
+													<button class="c7">了解详情</button>
+												</div>
+											</div>
                     </div>
                   </div>
                   <div></div>
@@ -202,7 +229,7 @@ export default {
       ],
       active:true,
 			lists: ["致决定在相互尊重、坦诚相待、平等互利、合作共赢基础上建立中菲全面战略合作关系,一致决定在相互尊重、坦诚相待"],
-			swiperOption: { 
+			swiperOption: { //场馆设备推荐轮播图设置
 				autoplay: false,
 				speed: 300,
 				slidesPerView: 3,
@@ -216,6 +243,14 @@ export default {
 					hiddenClass: 'my-button-hidden', //按钮隐藏时的Class
 				}
 			},
+			swiperOptionThumbs: {//背景轮播图
+				autoplay: true,
+				// effect: 'fade',
+				pagination: {
+					el: '.swiper-pagination',
+					clickable: true
+				}
+			}
     };
   },
 	components: {
@@ -250,9 +285,23 @@ a {
   color: #fff;
 }
 .leyuan {
-  background-image: url(../assets/img/le0.png);
+  // background-image: url(../assets/img/le0.png);
   height: 1867px;
   overflow: hidden;
+	position: relative;
+	.LeBg{
+		position: absolute;
+		z-index: -1;
+		top: 0;
+		left: 0;
+		height: 1867px;
+		width: 100%;
+		.swiper-slide {
+			height: 1867px;
+			width: 1920px;
+		}
+	}
+	
   .main {
     width: 1200px;
     margin: 0 auto;
@@ -261,6 +310,7 @@ a {
       margin-left: 20px;
 			position: relative;
 			z-index: 10;
+			
       li {
         color: #fff;
         float: left;
@@ -561,4 +611,32 @@ a {
 		}
   }
 }
+</style>
+<style lang="scss">
+	.le1 .swiper-pagination {
+		left: 50%;
+		top: -85px;
+		transform: translate(-50%,0);
+		z-index: 999;
+		.swiper-pagination-bullet {
+			width:12px;
+			height:12px;
+			background:rgba(214,239,250,1);
+			border: 5px solid #4FC2F8;
+			margin: 0 14px;
+			border-radius: 50%;
+			opacity: 1;
+			&:focus {
+				outline: none;
+			}
+		}
+		.swiper-pagination-bullet-active {
+			width:12px;
+			height:12px;
+			background:rgba(246,179,127,1);
+			border: 5px solid #4FC2F8;
+			border-radius: 50%;
+		}
+		
+	}
 </style>

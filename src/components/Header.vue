@@ -2,7 +2,7 @@
 	<div class="main">
 		<div class="main-content">
 			<div class="logo floatLeft">
-				<img src="../assets/img/logo.png" alt="">
+				<router-link tag="div" to="/index"><img src="../assets/img/logo.png" alt=""></router-link>
 			</div>
 			<div class="floatLeft">
 				<ul>

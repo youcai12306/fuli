@@ -237,7 +237,7 @@
               alt=""
               class="title-img"
             >
-            <div class="ch">最新活动<span>/Latest activities</span></div>
+            <div class="ch">最新热点<span>/Latest activities</span></div>
             <div class="title-bottom">
               <div></div>
             </div>

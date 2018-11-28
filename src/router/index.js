@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/view/Login'
 import Index from '@/view/Index'
+import Mine from '@/view/Mine/Mine'
+
 
 //麦迪卡斯首页
 const McGrady = r => require.ensure([], () => r(require('@/view/McGrady/McGrady')), 'McGrady')
@@ -16,15 +18,14 @@ const Reset = r => require.ensure([], () => r(require('@/view/Reset')), 'Reset')
 Vue.use(Router)
 
 export default new Router({
-  routes: [
-    {
+  routes: [{
       path: '*',
-      redirect:'/index'
+      redirect: '/index'
     },
     {
       path: '/',
-      name: 'Index',
-      component: Index
+      path: '/',
+      redirect: '/index'
     },
     {
       path: '/index',
@@ -36,17 +37,17 @@ export default new Router({
       name: 'Login',
       component: Login
     },
-		{
+    {
       path: '/mcgrady',
       name: 'McGrady',
       component: McGrady
     },
-		{
+    {
       path: '/news',
       name: 'News',
       component: News
     },
-		{
+    {
       path: '/reset',
       name: 'Reset',
       component: Reset
@@ -55,6 +56,14 @@ export default new Router({
       path: '/waterworld',
       name: 'waterworld',
       component: waterworld
+    },
+    {
+      path: '/mine',
+      name: 'Mine',
+      component: Mine,
+      meta: {
+        nav: 2
+      }
     }
   ]
 })

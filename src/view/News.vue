@@ -455,9 +455,11 @@
 					color: rgba(238, 238, 238, 1);
 					cursor: pointer;
 
-					&.hover,
-					&:hover {
+					&.hover{
 						background: rgba(228, 119, 30, 1);
+					}
+					&:nth-of-type(3).hover{
+						border-radius: 0 0 10px 10px;
 					}
 				}
 			}

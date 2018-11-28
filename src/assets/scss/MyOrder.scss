@@ -11,5 +11,244 @@
 		font-family:MicrosoftYaHei;
 		font-weight:bold;
 		color:rgba(51,51,51,1);
+		margin-bottom: 16px;
+	}
+	.m-table-header{
+		height:48px;
+		line-height: 48px;
+		background:rgba(239,245,253,1);
+		font-size:14px;
+		font-family:MicrosoftYaHei;
+		font-weight:400;
+		color:rgba(51,51,51,1);
+		text-align: center;
+		margin-bottom: 30px;
+		.el-col-4:nth-of-type(1){
+			width: 280px;
+		}
+		.el-col-4:nth-of-type(2){
+			width: 117px;
+		}
+		.el-col-4:nth-of-type(3){
+			width: 150px;
+		}
+		.el-col-4:nth-of-type(4){
+			width: 110px;
+		}
+		.el-col-4:nth-of-type(5){
+			width: 101px;
+		}
+		.el-col-4:nth-of-type(6){
+			width: 117px;
+		}
+	}
+	
+	.m-table-body{
+		height:145px;
+		border:1px solid rgba(205,226,255,1);
+		margin-bottom: 10px;
+		.title{
+			width: 100%;
+			height:43px;
+			line-height: 43px;
+			padding: 0 23px 0 14px;
+			background:rgba(239,245,253,1);
+			span{
+				font-size:12px;
+				font-family:MicrosoftYaHei;
+				font-weight:400;
+				color:rgba(51,51,51,1);
+				float: left;
+				&:nth-of-type(2){
+					float: right;
+				}
+			}
+		}
+		.m-tr{
+			height: 100px;
+			.m-td1{
+				width: 280px;
+				float: left;
+				padding: 12px 0;
+				padding-left: 14px;
+				position: relative;
+				
+				img{
+					width: 75px;
+					height: 75px;
+					margin-right: 10px;
+				}
+				span:nth-of-type(1){
+					width: 86px;
+					text-align: center;
+					font-size:14px;
+					font-family:MicrosoftYaHei;
+					font-weight:bold;
+					color:rgba(51,51,51,1);
+					display:block;
+					position: absolute;
+					left: 99px;
+					top: 50%;
+					transform: translate(0,-50%);
+				}
+				.p-time{
+					position: absolute;
+					left: 99px;
+					bottom: 14px;
+					font-size:12px;
+					font-family:MicrosoftYaHei;
+					font-weight:bold;
+					color:rgba(197,197,197,1);
+				}
+				span:nth-of-type(2){
+					display: inline-block;
+					position: absolute;
+					left: 223px;
+					top: 50%;
+					transform: translate(0,-50%);
+					font-size:14px;
+					font-family:MicrosoftYaHei;
+					font-weight:400;
+					color:rgba(51,51,51,1);
+				}
+			}
+			.m-td2,.m-td4,.m-td5{
+				float: left;
+				width: 117px;
+				text-align: center;
+				height: 100%;
+				line-height: 100px;
+				font-size:14px;
+				font-family:MicrosoftYaHei;
+				font-weight:400;
+				color:rgba(51,51,51,1);
+				border-right: 2px solid #EFF5FD;
+				vertical-align: middle;
+			}
+			.m-td3,.m-td6{
+				float: left;
+				height: 100px;
+				width: 150px;
+				text-align: center;
+				border-right: 2px solid #EFF5FD;
+				font-size:14px;
+				font-family:MicrosoftYaHei;
+				font-weight:400;
+				color:rgba(51,51,51,1);
+				position: relative;
+				span{
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%,-50%);
+				}
+			}
+			.m-td4{
+				width: 110px;
+				color:rgba(227,87,76,1);
+			}
+			.m-td5{
+				width: 101px;
+			}
+			.m-td6{
+				width: 115px;
+				border: none;
+				a:nth-of-type(1){
+					color: #2D7AE4;
+				}
+				a:nth-of-type(2){
+					color: #FFAA17;
+				}
+			}
+		}
+	}
+}
+
+// 订单详情
+.orderdetails{
+	.m-table-header{
+		margin-bottom: 0;
+	}
+	.m-table-body{
+		height: 102px;
+		margin-bottom: 0;
+		.m-td1{
+			.ioce{
+				position: absolute;
+				top: 34px;
+				right: 24px;
+				width:65px;
+				height:24px;
+				border:1px solid rgba(245,157,1,1);
+				border-radius:5px;
+				text-align: center;
+				line-height: 24px;
+				font-size:12px;
+				font-family:MicrosoftYaHei;
+				font-weight:bold;
+				color:rgba(228,161,45,1);
+				// cursor: pointer;
+			}
+		}
+		.m-td2{
+			border-left: 2px solid #EFF5FD;
+		}
+		.m-td3,.m-td6{
+			line-height: 102px;
+		}
+	}
+	.m-lxr{
+		padding-left: 14px;
+		height:53px;
+		border:1px solid rgba(205,226,255,1);
+		border-top: none;
+		line-height: 53px;
+		font-size:14px;
+		font-family:MicrosoftYaHei;
+		font-weight:bold;
+		color:rgba(51,51,51,1);
+		span{
+			display: inline-block;
+			margin-left: 24px;
+			font-weight:400;
+		}
+	}
+	.m-count{
+		width: 100%;
+		text-align: right;
+		padding-right: 20px;
+		height:63px;
+		line-height: 63px;
+		font-size:14px;
+		font-family:MicrosoftYaHei;
+		font-weight:bold;
+		color:rgba(51,51,51,1);
+		border:1px solid rgba(205,226,255,1);
+		border-top: none;
+		span{
+			color: #F65D52;
+		}
+	}
+	.m-button{
+		width: 100%;
+		text-align: right;
+		margin-top: 26px;
+		a{
+			text-align: center;
+			display: inline-block;
+			width:128px;
+			height:39px;
+			line-height: 39px;
+			background:rgba(241,241,241,1);
+			font-size:14px;
+			font-family:MicrosoftYaHei;
+			font-weight:bold;
+			color:rgba(51,51,51,1);
+			&:nth-of-type(2){
+				background:rgba(45,122,228,1);
+				color:rgba(255,255,255,1);
+				margin-left: 18px;
+			}
+		}
 	}
 }

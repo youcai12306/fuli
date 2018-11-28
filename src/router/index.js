@@ -17,6 +17,7 @@ const Reset = r => require.ensure([], () => r(require('@/view/Reset')), 'Reset')
 
 // 个人中心-我的订单
 const MyOrder = r => require.ensure([], () => r(require('@/view/Mine/MyOrder')), 'MyOrder')
+const OrderDetails = r => require.ensure([], () => r(require('@/view/Mine/OrderDetails')), 'OrderDetails')
 
 Vue.use(Router)
 
@@ -77,6 +78,11 @@ export default new Router({
 					path: '/myorder',
 					name: 'MyOrder',
 					component: MyOrder
+				},
+				{
+					path: '/orderdetails',
+					name: 'OrderDetails',
+					component: OrderDetails
 				}
 			]
     }

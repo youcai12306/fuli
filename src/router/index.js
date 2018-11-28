@@ -15,6 +15,9 @@ const waterworld = r => require.ensure([], () => r(require('@/view/waterworld'))
 const News = r => require.ensure([], () => r(require('@/view/News')), 'News')
 const Reset = r => require.ensure([], () => r(require('@/view/Reset')), 'Reset')
 
+// 个人中心-我的订单
+const MyOrder = r => require.ensure([], () => r(require('@/view/Mine/MyOrder')), 'MyOrder')
+
 Vue.use(Router)
 
 export default new Router({
@@ -63,7 +66,19 @@ export default new Router({
       component: Mine,
       meta: {
         nav: 2
-      }
+      },
+			children: [
+				{
+					path: '',
+					name: 'MyOrder',
+					component: MyOrder
+				},
+				{
+					path: '/myorder',
+					name: 'MyOrder',
+					component: MyOrder
+				}
+			]
     }
   ]
 })

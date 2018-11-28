@@ -51,6 +51,7 @@
           </dl>
         </div>
         <div class="content-right floatRight">
+					<router-view/>
           <!-- 订单详情 -->
           <!-- <div class="orderDetails" v-show="false">
             <ul class="clearDiv">

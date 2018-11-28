@@ -3,9 +3,13 @@ import Router from 'vue-router'
 import Login from '@/view/Login'
 import Index from '@/view/Index'
 
-
+//麦迪卡斯首页
 const McGrady = r => require.ensure([], () => r(require('@/view/McGrady/McGrady')), 'McGrady')
+
+//欢乐海洋世界首页
 const waterworld = r => require.ensure([], () => r(require('@/view/waterworld')), 'waterworld')
+
+// 新闻中心首页
 const News = r => require.ensure([], () => r(require('@/view/News')), 'News')
 const Reset = r => require.ensure([], () => r(require('@/view/Reset')), 'Reset')
 

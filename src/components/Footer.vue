@@ -30,7 +30,7 @@
                     <div>Android下载</div>
                 </div>
                 <div class="code floatLeft">
-                    <img src="../assets/img/footer-logo.png" alt="">
+                    <img src="../assets/img/footer-code.png" alt="">
                     <p>扫码关注更多信息</p>
                 </div>
             </div>

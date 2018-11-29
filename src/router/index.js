@@ -23,6 +23,19 @@ const CouponCenter = r => require.ensure([], () => r(require('@/view/Mine/Coupon
 // 个人中心-我的订单
 const MyOrder = r => require.ensure([], () => r(require('@/view/Mine/MyOrder')), 'MyOrder')
 const OrderDetails = r => require.ensure([], () => r(require('@/view/Mine/OrderDetails')), 'OrderDetails')
+// 个人中心-积分
+const MyIntegral = r => require.ensure([], () => r(require('@/view/Mine/MyIntegral')), 'MyIntegral')
+// 个人中心-购物车
+const ShoppingCar = r => require.ensure([], () => r(require('@/view/Mine/ShoppingCar')), 'ShoppingCar')
+// 个人中心-收货地址
+const ShoppingAdress = r => require.ensure([], () => r(require('@/view/Mine/ShoppingAdress')), 'ShoppingAdress')
+// 个人中心-消息管理
+const MyMessage = r => require.ensure([], () => r(require('@/view/Mine/MyMessage')), 'MyMessage')
+// 个人中心-会员资料
+const Membership = r => require.ensure([], () => r(require('@/view/Mine/Membership')), 'Membership')
+// 个人中心-修改密码
+const ChangePwd = r => require.ensure([], () => r(require('@/view/Mine/ChangePwd')), 'ChangePwd')
+
 
 Vue.use(Router)
 
@@ -98,7 +111,38 @@ export default new Router({
 					path: '/orderdetails',
 					name: 'OrderDetails',
 					component: OrderDetails
-				}
+        },
+        {
+					path: '/myIntegral',
+					name: 'MyIntegral',
+					component: MyIntegral
+        },
+        {
+					path: '/shoppingCar',
+					name: 'ShoppingCar',
+					component: ShoppingCar
+        },
+        {
+					path: '/shoppingAdress',
+					name: 'ShoppingAdress',
+					component: ShoppingAdress
+        },
+        {
+					path: '/myMessage',
+					name: 'MyMessage',
+					component: MyMessage
+        },
+        {
+					path: '/membership',
+					name: 'Membership',
+					component: Membership
+        },
+        {
+					path: '/changePwd',
+					name: 'ChangePwd',
+					component: ChangePwd
+        }
+         
 			]
     }
   ]

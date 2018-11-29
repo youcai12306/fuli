@@ -21,6 +21,11 @@ const MyOrder = r => require.ensure([], () => r(require('@/view/Mine/MyOrder')),
 const MyCoupon = r => require.ensure([], () => r(require('@/view/Mine/MyCoupon')), 'MyCoupon')
 // 个人中心-卡券中心
 const CouponCenter = r => require.ensure([], () => r(require('@/view/Mine/CouponCenter')), 'CouponCenter')
+const Reset = r => require.ensure([], () => r(require('@/view/Reset')), 'Reset')
+
+// 个人中心-我的订单
+const MyOrder = r => require.ensure([], () => r(require('@/view/Mine/MyOrder')), 'MyOrder')
+const OrderDetails = r => require.ensure([], () => r(require('@/view/Mine/OrderDetails')), 'OrderDetails')
 
 Vue.use(Router)
 
@@ -91,6 +96,11 @@ export default new Router({
 					path: '/couponCenter',
 					name: 'CouponCenter',
 					component: CouponCenter
+        },
+        {
+					path: '/orderdetails',
+					name: 'OrderDetails',
+					component: OrderDetails
 				}
 			]
     }

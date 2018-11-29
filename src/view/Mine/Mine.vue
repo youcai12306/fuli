@@ -33,7 +33,7 @@
       </ul>
       <div class="mine-content clearDiv">
         <div class="content-left floatLeft">
-          <dl>
+          <!-- <dl>
             <dt>订单管理<span></span></dt>
             <dd>订单详情</dd>
           </dl>
@@ -48,7 +48,45 @@
             <dd>消息管理</dd>
             <dd>会员资料</dd>
             <dd>修改密码</dd>
-          </dl>
+          </dl> -->
+					
+				<el-menu
+					router
+					class="el-menu-vertical-demo"
+					active-text-color = "#2D7AE4"
+					@open="handleOpen"
+					@close="handleClose" :default-openeds="openeds">
+					<el-submenu index="1">
+						<template slot="title">
+							<span>订单管理</span>
+						</template>
+							<el-menu-item :index="`/myorder`" :class="{'is_active' : $route.path=='/myorder'}">我的订单</el-menu-item>
+					</el-submenu>
+					<el-submenu index="2">
+						<template slot="title">
+							<span>我的钱包</span>
+						</template>
+							<el-menu-item :index="`/myCoupon`" :class="{'is_active' : $route.path=='/myCoupon'}">我的卡券</el-menu-item>
+							<el-menu-item :index="`/CouponCenter`" :class="{'is_active' : $route.path=='/CouponCenter'}">卡券中心</el-menu-item>
+					</el-submenu>
+					<el-submenu index="3">
+						<template slot="title">
+							<span>会员中心</span>
+						</template>
+							<el-menu-item :index="`/`">积分</el-menu-item>
+					</el-submenu>
+					<el-submenu index="4">
+						<template slot="title">
+							<span>账户中心</span>
+						</template>
+							<el-menu-item :index="`/`">购物车</el-menu-item>
+							<el-menu-item :index="`/`">收货地址</el-menu-item>
+							<el-menu-item :index="`/`">消息管理</el-menu-item>
+							<el-menu-item :index="`/`">会员资料</el-menu-item>
+							<el-menu-item :index="`/`">修改密码</el-menu-item>
+					</el-submenu>
+				</el-menu>
+					
         </div>
         <div class="content-right floatRight">
 					<router-view/>
@@ -287,6 +325,7 @@
 export default {
   data() {
     return {
+			openeds: ['1','2','3','4'],//展开的菜单导航
       beginTime: "",
       endTime: "",
       tableData: [
@@ -435,7 +474,13 @@ export default {
     //计数器方法
     handleChange() {
       this.getTotal();
-    }
+    },
+		handleOpen(key, keyPath) {
+			console.log(key, keyPath);
+		},
+		handleClose(key, keyPath) {
+			console.log(key, keyPath);
+		}
   }
 };
 </script>
@@ -592,7 +637,9 @@ export default {
         height: 1244px;
         background: rgba(255, 255, 255, 1);
         text-align: center;
-        padding-top: 48px;
+        padding-top: 32px;
+				
+
         dl {
           dt {
             font-size: 18px;
@@ -1053,5 +1100,33 @@ export default {
 }
 .date .el-input--small .el-input__icon {
   line-height: 27px;
+}
+.content-left{
+	.el-submenu__title:hover{
+		background: none;
+	}
+	.el-submenu__title{
+		font-size:18px;
+		font-family:MicrosoftYaHei;
+		font-weight:bold;
+		color:rgba(51,51,51,1);
+	}
+	.el-submenu__icon-arrow{
+		right: 60px;
+		font-size: 20px;
+		color: #666666;
+	}
+	.el-submenu .el-menu-item{
+		font-size:14px;
+		font-family:MicrosoftYaHei;
+		font-weight:400;
+		color:rgba(51,51,51,1);
+	}
+	.el-menu-item:focus, .el-menu-item:hover{
+		background: none;
+	}
+	.el-menu-item.is_active{
+		color: #2D7AE4;
+	}
 }
 </style>

@@ -15,13 +15,10 @@ const waterworld = r => require.ensure([], () => r(require('@/view/waterworld'))
 const News = r => require.ensure([], () => r(require('@/view/News')), 'News')
 const Reset = r => require.ensure([], () => r(require('@/view/Reset')), 'Reset')
 
-// 个人中心-我的订单
-const MyOrder = r => require.ensure([], () => r(require('@/view/Mine/MyOrder')), 'MyOrder')
 // 个人中心-我的卡券
 const MyCoupon = r => require.ensure([], () => r(require('@/view/Mine/MyCoupon')), 'MyCoupon')
 // 个人中心-卡券中心
 const CouponCenter = r => require.ensure([], () => r(require('@/view/Mine/CouponCenter')), 'CouponCenter')
-const Reset = r => require.ensure([], () => r(require('@/view/Reset')), 'Reset')
 
 // 个人中心-我的订单
 const MyOrder = r => require.ensure([], () => r(require('@/view/Mine/MyOrder')), 'MyOrder')

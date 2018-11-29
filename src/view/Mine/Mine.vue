@@ -60,7 +60,7 @@
 						<template slot="title">
 							<span>订单管理</span>
 						</template>
-							<el-menu-item :index="`/myorder`" :class="{'is_active' : $route.path=='/myorder'}">我的订单</el-menu-item>
+							<el-menu-item :index="`/myorder`" :class="{'is_active' : $route.path=='/myorder' || $route.path=='/orderdetails'}">我的订单</el-menu-item>
 					</el-submenu>
 					<el-submenu index="2">
 						<template slot="title">
@@ -73,17 +73,17 @@
 						<template slot="title">
 							<span>会员中心</span>
 						</template>
-							<el-menu-item :index="`/`">积分</el-menu-item>
+							<el-menu-item :index="`/MyIntegral`" :class="{'is_active' : $route.path=='/MyIntegral'}">积分</el-menu-item>
 					</el-submenu>
 					<el-submenu index="4">
 						<template slot="title">
 							<span>账户中心</span>
 						</template>
-							<el-menu-item :index="`/`">购物车</el-menu-item>
-							<el-menu-item :index="`/`">收货地址</el-menu-item>
-							<el-menu-item :index="`/`">消息管理</el-menu-item>
-							<el-menu-item :index="`/`">会员资料</el-menu-item>
-							<el-menu-item :index="`/`">修改密码</el-menu-item>
+							<el-menu-item :index="`/ShoppingCar`" :class="{'is_active' : $route.path=='/ShoppingCar'}">购物车</el-menu-item>
+							<el-menu-item :index="`/ShoppingAdress`" :class="{'is_active' : $route.path=='/ShoppingAdress'}">收货地址</el-menu-item>
+							<el-menu-item :index="`/MyMessage`" :class="{'is_active' : $route.path=='/MyMessage'}">消息管理</el-menu-item>
+							<el-menu-item :index="`/Membership`" :class="{'is_active' : $route.path=='/Membership'}">会员资料</el-menu-item>
+							<el-menu-item :index="`/ChangePwd`" :class="{'is_active' : $route.path=='/ChangePwd'}">修改密码</el-menu-item>
 					</el-submenu>
 				</el-menu>
 					

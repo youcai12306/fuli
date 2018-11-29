@@ -81,66 +81,98 @@ export default new Router({
     },
     {
       path: '/mine',
-      name: 'Mine',
       component: Mine,
       meta: {
         nav: 2
       },
 			children: [
-				{
-					path: '',
-					name: 'MyOrder',
-					component: MyOrder
-				},
+        {
+          path: '/',
+          name: 'MyOrder-default',
+          component: MyOrder,
+          meta: {
+            nav: 2
+          }
+        },
 				{
 					path: '/myorder',
 					name: 'MyOrder',
-					component: MyOrder
+          component: MyOrder,
+          meta: {
+            nav: 2
+          }
         },
         {
 					path: '/myCoupon',
 					name: 'MyCoupon',
-					component: MyCoupon
+          component: MyCoupon,
+          meta: {
+            nav: 2
+          }
         },
         {
 					path: '/couponCenter',
 					name: 'CouponCenter',
-					component: CouponCenter
+          component: CouponCenter,
+          meta: {
+            nav: 2
+          }
         },
         {
 					path: '/orderdetails',
 					name: 'OrderDetails',
-					component: OrderDetails
+          component: OrderDetails,
+          meta: {
+            nav: 2
+          }
         },
         {
 					path: '/myIntegral',
 					name: 'MyIntegral',
-					component: MyIntegral
+          component: MyIntegral,
+          meta: {
+            nav: 2
+          }
         },
         {
 					path: '/shoppingCar',
 					name: 'ShoppingCar',
-					component: ShoppingCar
+          component: ShoppingCar,
+          meta: {
+            nav: 2
+          }
         },
         {
 					path: '/shoppingAdress',
 					name: 'ShoppingAdress',
-					component: ShoppingAdress
+          component: ShoppingAdress,
+          meta: {
+            nav: 2
+          }
         },
         {
 					path: '/myMessage',
 					name: 'MyMessage',
-					component: MyMessage
+          component: MyMessage,
+          meta: {
+            nav: 2
+          }
         },
         {
 					path: '/membership',
 					name: 'Membership',
-					component: Membership
+          component: Membership,
+          meta: {
+            nav: 2
+          }
         },
         {
 					path: '/changePwd',
 					name: 'ChangePwd',
-					component: ChangePwd
+          component: ChangePwd,
+          meta: {
+            nav: 2
+          }
         }
          
 			]

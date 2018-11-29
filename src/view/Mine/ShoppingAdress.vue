@@ -1,45 +1,22 @@
 <template>
   <div class="main">
     <div class="take-address clearDiv">
-      <p class="change-title">收货地址<span class="floatRight">+</span></p>
+      <p class="change-title">收货地址
+        <span class="floatRight">+</span>
+      </p>
       <div class="change-content">
-        <div class="list clearDiv">
+        <div class="list clearDiv" v-for="(item,key) in list" :key="key">
           <div class="list-left floatLeft">
             <div class="list-leftOne clearDiv">
-              <div>王大锤</div>
-              <div>13888888888</div>
-              <div
-                class="moren"
-                v-show="true"
-              >默认地址</div>
+              <div>{{item.name}}</div>
+              <div>{{item.phone}}</div>
+              <div class="moren" v-show="item.type === 0">默认地址</div>
             </div>
             <div class="list-leftTwo">地址：湖北省武汉市武昌区717</div>
           </div>
-          <button class="del floatRight">删除</button>
+          <button class="del floatRight" @click="del(key)">删除</button>
           <button class="floatRight">修改</button>
-          <button
-            class="set-default floatRight"
-            v-show="false"
-          >设为默认</button>
-        </div>
-        <div class="list clearDiv">
-          <div class="list-left floatLeft">
-            <div class="list-leftOne clearDiv">
-              <div>王大锤</div>
-              <div>13888888888</div>
-              <div
-                class="moren"
-                v-show="false"
-              >默认地址</div>
-            </div>
-            <div class="list-leftTwo">地址：湖北省武汉市武昌区717</div>
-          </div>
-          <button class="del floatRight">删除</button>
-          <button class="floatRight">修改</button>
-          <button
-            class="set-default floatRight"
-            v-show="true"
-          >设为默认</button>
+          <button class="set-default floatRight" v-show="item.type !== 0" @click="setDefault(key)">设为默认</button>
         </div>
       </div>
     </div>
@@ -49,7 +26,43 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      list: []
+    };
+  },
+  mounted() {
+    let list = [
+      {
+        name: "油菜",
+        phone: "13811111111",
+        type: 0
+      },
+      {
+        name: "youcai",
+        phone: "13811111112",
+        type: 1
+      },
+      {
+        name: "youcai2",
+        phone: "13811111113",
+        type: 1
+      }
+    ]
+    this.list = list;
+  },
+  methods:{
+    setDefault(key){
+      this.list.forEach((val,k)=>{
+        val.type = 1;
+        if(key === k){
+          val.type = 0;
+        }
+      })
+    },
+    //删除
+    del(key){
+      this.list.splice(key,1)
+    }
   }
 };
 </script>

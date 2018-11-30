@@ -2,7 +2,7 @@
   <div class="main">
     <div class="nav">
       <ul class="nav-content clearDiv">
-        <li class="floatLeft">您好，欢迎登录富力海洋欢乐世界度假区！<a href="#"> [返回首页]</a></li>
+        <li class="floatLeft">您好，欢迎登录富力海洋欢乐世界度假区！<router-link to="/">[返回首页]</router-link></li>
         <li class="floatRight"><span class="phone-img"></span>客服电话400-xxxx-xxx</li>
         <li class="floatRight phon-type">手机版</li>
       </ul>

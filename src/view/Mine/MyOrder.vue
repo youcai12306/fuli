@@ -24,9 +24,11 @@
 			<el-col class="m-tr">
 				<div class="m-td1">
 					<img src="../../assets/img/index-hot-img1.png" alt="图片">
-					<span>富力海洋<br/>世界成人门票</span>
+					<router-link :to="{path:''}">
+						<span>富力海洋<br/>世界成人门票</span>
+					</router-link>
 					<div class="p-time">游玩时间：11月28日</div>
-					<span>x1</span>
+					<span class="count">x1</span>
 				</div>
 				<div class="m-td2">
 					2018-11-02
@@ -55,9 +57,11 @@
 			<el-col class="m-tr">
 				<div class="m-td1">
 					<img src="../../assets/img/index-hot-img1.png" alt="图片">
-					<span>富力海洋<br/>世界成人门票</span>
+					<router-link :to="{path:''}">
+						<span>富力海洋<br/>世界成人门票</span>
+					</router-link>
 					<div class="p-time">游玩时间：11月28日</div>
-					<span>x1</span>
+					<span class="count">x1</span>
 				</div>
 				<div class="m-td2">
 					2018-11-02

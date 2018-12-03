@@ -9,17 +9,17 @@
 			<el-col :span="24">订单信息</el-col>
 		</el-row>
 		<!-- 表头 -->
-		<el-row class="m-table-header">
+		<!-- <el-row class="m-table-header">
 		  <el-col :span="4">商品</el-col>
 		  <el-col :span="4">预定时间</el-col>
 		  <el-col :span="4">联系人</el-col>
 		  <el-col :span="4">总额</el-col>
 		  <el-col :span="4">状态</el-col>
 		  <el-col :span="4">操作</el-col>
-		</el-row>
+		</el-row> -->
 		
 		<!-- 表格主体 -->
-		<el-row class="m-table-body">
+		<!-- <el-row class="m-table-body">
 			<el-col :span="24" class="title"><span>订单号：HQCT18102487076677(门票订单)</span><span>2018-11-02 15：59：06</span></el-col>
 			<el-col class="m-tr">
 				<div class="m-td1">
@@ -50,9 +50,9 @@
 					</span>
 				</div>
 			</el-col>
-		</el-row>
+		</el-row> -->
 		
-		<el-row class="m-table-body">
+		<!-- <el-row class="m-table-body">
 			<el-col :span="24" class="title"><span>订单号：HQCT18102487076677(门票订单)</span><span>2018-11-02 15：59：06</span></el-col>
 			<el-col class="m-tr">
 				<div class="m-td1">
@@ -83,7 +83,40 @@
 					</span>
 				</div>
 			</el-col>
-		</el-row>
+		</el-row> -->
+		
+		
+		<!-- 头部tab -->
+		<section class="tabs">
+			<ul>
+				<li :class="{'active' : $route.path=='/unpaid' || $route.path=='/myorder'}">
+					<router-link to="/unpaid">待支付</router-link>
+				</li>
+				<li :class="{'active' : $route.path=='/prepaid'}">
+					<router-link to="/prepaid">已支付</router-link>
+				</li>
+				<li :class="{'active' : $route.path=='/consumed'}">
+					<router-link to="/consumed">已核销</router-link>
+				</li>
+				<li :class="{'active' : $route.path=='/refund'}">
+					<router-link to="/refund">退款申请中</router-link>
+				</li>
+				<li :class="{'active' : $route.path=='/audit'}">
+					<router-link to="/audit">退款审核通过</router-link>
+				</li>
+				<li :class="{'active' : $route.path=='/faudit'}">
+					<router-link to="/faudit">退款未审核通过</router-link>
+				</li>
+				<li :class="{'active' : $route.path=='/error'}">
+					<router-link to="/error">异常订单</router-link>
+				</li>
+			</ul>
+		</section>
+		
+		<!-- 表格 -->
+		<section>
+			<router-view></router-view>
+		</section>
 		
 	</div>
 </template>

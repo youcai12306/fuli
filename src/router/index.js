@@ -22,7 +22,14 @@ const CouponCenter = r => require.ensure([], () => r(require('@/view/Mine/Coupon
 
 // 个人中心-我的订单
 const MyOrder = r => require.ensure([], () => r(require('@/view/Mine/MyOrder')), 'MyOrder')
-const OrderDetails = r => require.ensure([], () => r(require('@/view/Mine/OrderDetails')), 'OrderDetails')
+const Invoice = r => require.ensure([], () => r(require('@/view/Mine/Invoice')), 'Invoice')
+const Unpaid = r => require.ensure([], () => r(require('@/view/Mine/Order/Unpaid')), 'Unpaid')
+const Prepaid = r => require.ensure([], () => r(require('@/view/Mine/Order/Prepaid')), 'Prepaid')
+const Consumed = r => require.ensure([], () => r(require('@/view/Mine/Order/Consumed')), 'Consumed')
+const Refund = r => require.ensure([], () => r(require('@/view/Mine/Order/Refund')), 'Refund')
+const Audit = r => require.ensure([], () => r(require('@/view/Mine/Order/Audit')), 'Audit')
+const Faudit = r => require.ensure([], () => r(require('@/view/Mine/Order/Faudit')), 'Faudit')
+const Error = r => require.ensure([], () => r(require('@/view/Mine/Order/Error')), 'Error')
 // 个人中心-积分
 const MyIntegral = r => require.ensure([], () => r(require('@/view/Mine/MyIntegral')), 'MyIntegral')
 // 个人中心-购物车
@@ -90,7 +97,7 @@ export default new Router({
       meta: {
         nav: 2
       },
-			children: [
+			children: [//个人中心二级子路由
         {
           path: '/',
           name: 'MyOrder-default',
@@ -101,11 +108,77 @@ export default new Router({
         },
 				{
 					path: '/myorder',
-					name: 'MyOrder',
+					// name: 'MyOrder',
           component: MyOrder,
           meta: {
             nav: 2
-          }
+          },
+					children:[//我的订单子路由
+						{
+							path: '/',
+							name: 'Unpaid-default',
+							component: Unpaid,
+							meta: {
+								nav: 2
+							}
+						},
+						{
+							path: '/unpaid',
+							name: 'Unpaid',
+							component: Unpaid,
+							meta: {
+								nav: 2
+							}
+						},
+						{
+							path: '/prepaid',
+							name: 'Prepaid',
+							component: Prepaid,
+							meta: {
+								nav: 2
+							}
+						},
+						{
+							path: '/consumed',
+							name: 'Consumed',
+							component: Consumed,
+							meta: {
+								nav: 2
+							}
+						},
+						{
+							path: '/refund',
+							name: 'Refund',
+							component: Refund,
+							meta: {
+								nav: 2
+							}
+						},
+						{
+							path: '/audit',
+							name: 'Audit',
+							component: Audit,
+							meta: {
+								nav: 2
+							}
+						},
+						{
+							path: '/faudit',
+							name: 'Faudit',
+							component: Faudit,
+							meta: {
+								nav: 2
+							}
+						},
+						{
+							path: '/error',
+							name: 'Error',
+							component: Error,
+							meta: {
+								nav: 2
+							}
+						}
+					]
         },
         {
 					path: '/myCoupon',
@@ -164,9 +237,9 @@ export default new Router({
           }
         },
         {
-					path: '/orderdetails',
-					name: 'OrderDetails',
-          component: OrderDetails,
+					path: '/Invoice',
+					name: 'Invoice',
+          component: Invoice,
           meta: {
             nav: 2
           }

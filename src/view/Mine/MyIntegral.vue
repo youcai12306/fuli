@@ -8,7 +8,6 @@
           alt=""
           class="floatLeft"
         >
-        <p class="know floatRight">积分须知</p>
       </div>
 
       <div class="change-content">
@@ -109,17 +108,6 @@ export default {
         height: 41px;
         vertical-align: middle;
         margin-left: 63px;
-      }
-      .know{
-        font-size: 12px;
-        width: 68px;
-        height: 27px;
-        line-height: 27px;
-        border-radius: 5px;
-        border: 1px solid #7EA9FF;
-        text-align: center;
-        color: #7EA9FF;
-        margin-top: 7px;
       }
     }
     .change-content {

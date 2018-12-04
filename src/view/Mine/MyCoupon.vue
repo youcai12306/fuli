@@ -4,29 +4,47 @@
       <p class="floatLeft title-left">优惠券</p>
       <p class="floatRight title-right">使用规则</p>
     </div>
-    <div class="content">
-      <p>可使用(<span>4</span>张)</p>
-      <ul class="clearDiv">
-        <li><img src="../../assets/img/mine-coupon20.png" alt=""></li>
-        <li><img src="../../assets/img/mine-coupon30.png" alt=""></li>
-        <li><img src="../../assets/img/mine-coupon50.png" alt=""></li>
-        <li><img src="../../assets/img/mine-coupon100.png" alt=""></li>
-      </ul>
-    </div>
-    <div class="content used">
-      <p>已过期(<span>2</span>张)</p>
-      <ul class="clearDiv">
-        <li><img src="../../assets/img/mine-coupon20-use.png" alt=""></li>
-        <li><img src="../../assets/img/mine-coupon30-use.png" alt=""></li>
-      </ul>
-    </div>
+    <ul class="cards clearDiv">
+      <li :class="{liActive:type === 0}" @click="chooseType(0)">已领取</li>
+      <li :class="{liActive:type === 1}" @click="chooseType(1)">已使用</li>
+      <li :class="{liActive:type === 2}" @click="chooseType(2)">未使用</li>
+      <li :class="{liActive:type === 3}" @click="chooseType(3)">已过期</li>
+    </ul>
+    <router-view/>
   </div>
 </template>
 
 <script>
 export default {
   data() {
-    return {};
+    return {
+      type: 0
+    };
+  },
+  methods: {
+    chooseType(index) {
+      this.type = index;
+      switch (index) {
+        case 0: {
+          console.log(index);
+          this.$router.push({ path: "/couponReceived", query: {} });
+          break;
+        }
+        case 1: {
+          console.log(index);
+          this.$router.push({ path: "/couponused" });
+          break;
+        }
+        case 2: {
+          this.$router.push({ path: "/couponUnused" });
+          break
+        }
+        case 3: {
+          this.$router.push({ path: "/couponStale" });
+          break;
+        }
+      }
+    }
   }
 };
 </script>
@@ -36,56 +54,41 @@ export default {
     font-weight: bold;
     color: rgba(51, 51, 51, 1);
     padding: 49px 0 11px 0;
-    border-bottom: 2px solid rgba(238,238,238,1);
+    border-bottom: 2px solid rgba(238, 238, 238, 1);
     .title-left {
       font-size: 16px;
       line-height: 28px;
     }
     .title-right {
-      font-size:12px;
+      font-size: 12px;
       width: 68px;
       height: 27px;
       line-height: 27px;
       text-align: center;
       border: 1px solid rgba(7, 100, 233, 1);
       border-radius: 5px;
-      color:  rgba(7,100,233,1);
+      color: rgba(7, 100, 233, 1);
     }
   }
-  .content{
-    margin-top:64px;
-    p{
-      font-size:12px;
-      font-weight:bold;
-      color:rgba(227,87,76,1);
-      margin: 0 0 34px 10px;
+  .cards {
+    margin-top: 52px;
+    li {
+      float: left;
+      width: 114px;
+      height: 40px;
+      line-height: 40px;
+      border-radius: 5px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 400;
+      border: 1px solid rgba(101, 156, 238, 1);
+      color: rgba(101, 156, 238, 1);
+      margin-right: 16px;
     }
-    ul{
-      padding-left: 77px;
-      li{
-        position: relative;
-        float: left;
-        margin-right: 31px;
-        img{
-          width:134px;
-          height:64px;
-        }
-      }
-      li::before{
-        content: '';
-        position: absolute;
-        width:8px;
-        height:8px;
-        background:rgba(187,187,187,1);
-        border-radius:50%;
-        top:50%;
-        margin-top: -4px;
-        left: -22px;
-      }
+    .liActive {
+      color: rgba(255, 255, 255, 1);
+      background: rgba(7, 100, 233, 1);
     }
-  }
-  .used{
-    margin-top: 59px;
   }
 }
 </style>

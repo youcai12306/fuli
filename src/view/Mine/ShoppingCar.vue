@@ -2,6 +2,7 @@
   <div class="main">
     <div class="shopping-car">
       <p class="change-title">购物车</p>
+      <p class="tip">温馨提示：商品金额以实际下单金额为准</p>
       <div class="change-content">
         <table>
           <tr class="title">
@@ -12,23 +13,13 @@
             <td>金额</td>
             <td>操作</td>
           </tr>
-          <tr
-            v-for="(item,key) in good_list"
-            :key="key"
-            class="list"
-          >
-            <td class="checkbox-choose"><input
-                type="checkbox"
-                v-model="item.is_selected"
-                @click="select_one(key)"
-              ></td>
+          <tr v-for="(item,key) in good_list" :key="key" class="list">
+            <td class="checkbox-choose">
+              <input type="checkbox" v-model="item.is_selected" @click="select_one(key)">
+            </td>
             <td class="shop-info">
               <div class="info clearDiv">
-                <img
-                  src="../../assets/img/mine-shop1.png"
-                  alt=""
-                  class="info-left floatLeft"
-                >
+                <img src="../../assets/img/mine-shop1.png" alt class="info-left floatLeft">
 
                 <div class="info-right floatLeft">
                   <p class="shop-name">富力公仔玩偶</p>
@@ -38,30 +29,24 @@
             </td>
             <td class="price">¥{{item.price}}</td>
             <td class="num">
-              <el-input-number
-                v-model="item.num"
-                :min="1"
-                @change="handleChange()"
-              ></el-input-number>
+              <el-input-number v-model="item.num" :min="1" @change="handleChange()"></el-input-number>
             </td>
             <td class="totle">¥{{item.price*item.num}}</td>
-            <td class="del"><button
-                @click="delShopping(item,key)"
-                class="del-btn"
-              >删除</button></td>
+            <td class="del">
+              <button @click="delShopping(item,key)" class="del-btn">删除</button>
+            </td>
           </tr>
           <tr class="count">
-            <td
-              colspan="6"
-              class="count-all clearDiv"
-            >
-              <div class="all-choose"><input
-                  type="checkbox"
-                  @click="slect_all()"
-                  v-model="selected_all"
-                >全选</div>
-              <div class="choosed">已选商品<span>{{totalNum}}</span>件</div>
-              <div class="totles">合计：<span>{{totalPrice}}.00</span>元</div>
+            <td colspan="6" class="count-all clearDiv">
+              <div class="all-choose">
+                <input type="checkbox" @click="slect_all()" v-model="selected_all">全选
+              </div>
+              <div class="choosed">已选商品
+                <span>{{totalNum}}</span>件
+              </div>
+              <div class="totles">合计：
+                <span>{{totalPrice}}.00</span>元
+              </div>
               <button></button>
             </td>
           </tr>
@@ -186,7 +171,8 @@ export default {
       color: #333333;
       padding-top: 48px;
       padding-bottom: 16px;
-    //   border-bottom: 2px solid #eeeeee;
+      border-bottom: 2px solid #eeeeee;
+      font-weight: bold;
       span {
         display: inline-block;
         width: 16px;
@@ -198,6 +184,12 @@ export default {
         border-radius: 4px;
         margin-left: 16px;
       }
+    }
+    .tip {
+      font-size: 12px;
+      font-weight: 400;
+      color: rgba(237, 90, 78, 1);
+      padding:  36px 0 17px 0;
     }
     .change-content {
       table {
@@ -218,7 +210,7 @@ export default {
           }
           .shop-info {
             width: 300px;
-            
+
             .info {
               width: 90%;
               margin: 0 auto;
@@ -255,7 +247,7 @@ export default {
             width: 127px;
             font-size: 16px;
             color: #ec4b3e;
-            font-weight:bold;
+            font-weight: bold;
           }
           .del {
             width: 127px;
@@ -270,6 +262,7 @@ export default {
         }
         .count {
           height: 78px;
+          line-height: 78px;
           font-size: 14px;
           color: #333333;
           .count-all {
@@ -291,9 +284,12 @@ export default {
             }
             button {
               margin-left: 33px;
-              width: 65px;
+              width: 91px;
               height: 30px;
-              background: url(../../assets/img/mine-shoppingcar-pay.png) no-repeat 0 0;
+              background: url(../../assets/img/mine-shoppingcar-pay1.png)
+                no-repeat 0 0;
+              background-size: 100% 100%;
+              vertical-align: middle;
             }
           }
         }

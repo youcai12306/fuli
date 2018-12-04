@@ -36,6 +36,11 @@ const Membership = r => require.ensure([], () => r(require('@/view/Mine/Membersh
 // 个人中心-修改密码
 const ChangePwd = r => require.ensure([], () => r(require('@/view/Mine/ChangePwd')), 'ChangePwd')
 
+const CouponReceived = r => require.ensure([], () => r(require('@/view/Mine/coupon/CouponReceived')), 'CouponReceived')
+const CouponUsed = r => require.ensure([], () => r(require('@/view/Mine/coupon/CouponUsed')), 'CouponUsed')
+const CouponUnused = r => require.ensure([], () => r(require('@/view/Mine/coupon/CouponUnused')), 'CouponUnused')
+const CouponStale = r => require.ensure([], () => r(require('@/view/Mine/coupon/CouponStale')), 'CouponStale')
+
 
 Vue.use(Router)
 
@@ -104,11 +109,51 @@ export default new Router({
         },
         {
 					path: '/myCoupon',
-					name: 'MyCoupon',
           component: MyCoupon,
           meta: {
             nav: 2
-          }
+          },
+          children:[
+            {
+              path: '/',
+              component: CouponReceived,
+              meta:{
+                nav:2
+              }
+            },
+            {
+              path: '/couponReceived',
+              name: 'CouponReceived',
+              component: CouponReceived,
+              meta:{
+                nav:2
+              }
+            },
+            {
+              path: '/couponUsed',
+              name: 'CouponUsed',
+              component: CouponUsed,
+              meta:{
+                nav:2
+              }
+            },
+            {
+              path: '/couponUnused',
+              name: 'CouponUnused',
+              component: CouponUnused,
+              meta:{
+                nav:2
+              }
+            },
+            {
+              path: '/couponStale',
+              name: 'CouponStale',
+              component: CouponStale,
+              meta:{
+                nav:2
+              }
+            }
+          ]
         },
         {
 					path: '/couponCenter',

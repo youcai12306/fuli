@@ -12,6 +12,7 @@
 		color:rgba(51,51,51,1);
 		margin-bottom: 26px;
 	}
+	
 // 	.m-table-header{
 // 		height:48px;
 // 		line-height: 48px;
@@ -206,7 +207,84 @@
 			}
 		}
 	}
-
+	
+	// 开发票
+	.m-bottom{
+		position: relative;
+		width: 100%;
+		height: 1px;
+		background: #E0E0E0;
+		a{
+			display: block;
+			width:68px;
+			height:27px;
+			border:1px solid rgba(7,100,233,1);
+			border-radius:5px;
+			font-size:12px;
+			line-height: 27px;
+			text-align: center;
+			font-family:MicrosoftYaHei;
+			font-weight:bold;
+			color:rgba(103,156,255,1);
+			position: absolute;
+			top: -55px;
+			right: 0;
+		}
+	}
+	.lable{
+		width: 100%;
+		height:14px;
+		line-height: 14px;
+		overflow: hidden;
+		font-size:14px;
+		font-family:MicrosoftYaHei;
+		font-weight:400;
+		color:rgba(51,51,51,1);
+		margin-top: 30px;
+	}
+	.i-title{
+		width: 100%;
+		height:18px;
+		line-height: 18px;
+		font-size:18px;
+		padding-left: 15px;
+		margin-top: 55px;
+		font-family:MicrosoftYaHei;
+		font-weight:bold;
+		color:rgba(51,51,51,1);
+		position: relative;
+		&:before{
+			content: " ";
+			width: 9px;
+			height: 18px;
+			background: #0764E9;
+			display: inline-block;
+			position: absolute;
+			top: 0;
+			left: 0;
+			display: block;
+		}
+	}
+	.i-checkbox{
+		width: 100%;
+		margin-top: 36px;
+		height: 14px;
+		line-height: 14px;
+		font-size: 14px;
+		label{
+			margin-left: 18px;
+		}
+	}
+	
+	.i-input{
+		margin-top: 30px;
+		font-size: 14px;
+		color: #333333;
+		width: (95+13+162)+px;
+		height: 30px;
+		line-height: 30px;
+		
+	}
 }
 
 // 订单详情

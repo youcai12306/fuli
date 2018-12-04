@@ -57,7 +57,7 @@
 							<template slot="title">
 								<span>订单管理</span>
 							</template>
-							<el-menu-item :index="`/myorder`" :class="{'is_active' : $route.path=='/myorder' || $route.path=='/unpaid' || $route.path=='/prepaid' || $route.path=='/consumed' || $route.path=='/refund' || $route.path=='/audit' || $route.path=='/faudit' || $route.path=='/error'}">我的订单</el-menu-item>
+							<el-menu-item :index="`/myorder`" :class="{'is_active' : $route.path=='/myorder' || $route.path=='/unpaid' || $route.path=='/prepaid' || $route.path=='/consumed' || $route.path=='/refund' || $route.path=='/audit' || $route.path=='/faudit' || $route.path=='/error' || $route.path=='/Invoice'}">我的订单</el-menu-item>
 						</el-submenu>
 						<el-submenu index="2">
 							<template slot="title">

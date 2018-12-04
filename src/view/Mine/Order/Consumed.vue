@@ -14,7 +14,7 @@
 								<span>{{ props.row.status }}</span>
 							</el-form-item>
 							<el-form-item align="right">
-								<el-button type="primary" plain>申请发票</el-button>
+								<el-button type="primary" plain @click="invoice">申请发票</el-button>
 							</el-form-item>
 
 
@@ -154,6 +154,9 @@
 					this.expands = [];
 				}
 
+			},
+			invoice(){
+				this.$router.push({ path: 'Invoice' })
 			}
 		},
 	}

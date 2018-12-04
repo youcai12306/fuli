@@ -22,7 +22,7 @@ const CouponCenter = r => require.ensure([], () => r(require('@/view/Mine/Coupon
 
 // 个人中心-我的订单
 const MyOrder = r => require.ensure([], () => r(require('@/view/Mine/MyOrder')), 'MyOrder')
-const OrderDetails = r => require.ensure([], () => r(require('@/view/Mine/OrderDetails')), 'OrderDetails')
+const Invoice = r => require.ensure([], () => r(require('@/view/Mine/Invoice')), 'Invoice')
 const Unpaid = r => require.ensure([], () => r(require('@/view/Mine/Order/Unpaid')), 'Unpaid')
 const Prepaid = r => require.ensure([], () => r(require('@/view/Mine/Order/Prepaid')), 'Prepaid')
 const Consumed = r => require.ensure([], () => r(require('@/view/Mine/Order/Consumed')), 'Consumed')
@@ -103,7 +103,7 @@ export default new Router({
         },
 				{
 					path: '/myorder',
-					name: 'MyOrder',
+					// name: 'MyOrder',
           component: MyOrder,
           meta: {
             nav: 2
@@ -192,9 +192,9 @@ export default new Router({
           }
         },
         {
-					path: '/orderdetails',
-					name: 'OrderDetails',
-          component: OrderDetails,
+					path: '/Invoice',
+					name: 'Invoice',
+          component: Invoice,
           meta: {
             nav: 2
           }

@@ -92,7 +92,7 @@ export default new Router({
       meta: {
         nav: 2
       },
-			children: [
+			children: [//个人中心二级子路由
         {
           path: '/',
           name: 'MyOrder-default',
@@ -108,7 +108,7 @@ export default new Router({
           meta: {
             nav: 2
           },
-					children:[
+					children:[//我的订单子路由
 						{
 							path: '/',
 							name: 'Unpaid-default',

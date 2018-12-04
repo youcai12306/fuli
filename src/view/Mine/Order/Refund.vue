@@ -138,12 +138,20 @@
 		mounted() {
 			// 初始化展开哪一行
 			this.expands.push(this.tableData5[0].id);
+
+			this.$axios.get("/movie/top250")
+				.then(res => {
+					console.log(res)
+				})
+				.catch(err => {
+					console.log(err)
+				})
 		},
 		methods: {
-			clickTable(row, index, e) {//点击一行展开
+			clickTable(row, index, e) { //点击一行展开
 				this.$refs.refTable.toggleRowExpansion(row)
 			},
-			showDetail(data, expandedRows) {//控制只显示当前行
+			showDetail(data, expandedRows) { //控制只显示当前行
 				if (expandedRows.length) {
 					this.expands = [];
 					if (data) {
@@ -228,10 +236,11 @@
 			font-weight: bold;
 			color: rgba(255, 255, 255, 1);
 		}
-		.el-button{
-			font-size:12px;
-			font-family:MicrosoftYaHei;
-			font-weight:bold;
+
+		.el-button {
+			font-size: 12px;
+			font-family: MicrosoftYaHei;
+			font-weight: bold;
 			padding: 5px 10px;
 		}
 	}

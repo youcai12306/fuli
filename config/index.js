@@ -10,7 +10,15 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+			'/api':{
+					target: "http://api.douban.com/v2",//接口链接头
+					changeOrigin:true,
+					pathRewrite:{
+							'^/api':''
+					}
+			}
+		},
 
     // Various Dev Server settings
     host: '192.168.2.37', // can be overwritten by process.env.HOST
@@ -49,7 +57,7 @@ module.exports = {
      * Source Maps
      */
 
-    productionSourceMap: true,
+    productionSourceMap: false,
     // https://webpack.js.org/configuration/devtool/#production
     devtool: '#source-map',
 

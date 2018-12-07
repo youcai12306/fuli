@@ -97,10 +97,10 @@ export default {
     testPhone(){
       if(/^1[34578]\d{9}$/.test(this.phone)){
         this.phoneTip = "√"
-        this.$refs.nameTip.style.color = "green"
+        this.$refs.phoneTip.style.color = "green"
       }else{
         this.phoneTip = "请输入正确的手机号码"
-        this.$refs.nameTip.style.color = "red"
+        this.$refs.phoneTip.style.color = "red"
       }
     },
     

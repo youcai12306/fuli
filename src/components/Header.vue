@@ -17,7 +17,7 @@
 			</div>
 			<div class="nav-right floatLeft">
 				<div class="right-info">
-					<div class="login">富力会员登录</div>
+					<div class="login" @click="jumpMine">{{name}}</div>
 					<div class="language-change"><span class="ch">中文</span><span>英文</span></div>
 				</div>
 				<input type="text">
@@ -50,8 +50,25 @@
 		name: "Hearer",
 		data() {
 			return {
-				show: false
+				show: false,
+				name:'富力会员登录'
 			};
+		},
+		watch:{
+			// $route(to){
+			// 	if(!to.path.indexOf('/login')){
+			// 		this.name = '富力会员登录'
+			// 	}else{
+			// 		this.name = this.$store.getters.userInfo.userName+',欢迎您！';
+			// 	}
+			// }
+		},
+		created(){
+			if(Object.keys(this.$store.getters.userInfo).length === 0){
+				this.name = '富力会员登录'
+			}else{
+				this.name = this.$store.getters.userInfo.userName+',欢迎您！';
+			}
 		},
 		methods: {
 			showNavList(type) {
@@ -67,6 +84,15 @@
 					this.time = setTimeout(() => {
 						this.show = false;
 					}, 2000);
+				}
+			},
+			//跳转个人中心
+			jumpMine(){
+				console.log(Object.keys(this.$store.getters.userInfo).length)
+				if(Object.keys(this.$store.getters.userInfo).length === 0){
+					this.$router.push('/login')
+				}else{
+					this.$router.push('/mine')
 				}
 			}
 		}
@@ -142,8 +168,10 @@
 						float: left;
 						background: url(../assets/img/index-login.png) no-repeat 0 0;
 						padding-left: 20px;
+						&:hover{
+							cursor: pointer;
+						}
 					}
-
 					.language-change {
 						float: left;
 						margin-left: 14px;

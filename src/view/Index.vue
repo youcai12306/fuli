@@ -1,5 +1,6 @@
 <template>
   <div class="main">
+    <Header v-show="!$route.meta.nav"></Header>
     <div class="banner">
       <div class="banner-imgs">
         <img
@@ -280,6 +281,7 @@
 </template>
 
 <script>
+import Header from '@/components/Header' //引入头部
 import "swiper/dist/css/swiper.css";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
 export default {
@@ -350,7 +352,8 @@ export default {
   },
   components: {
     swiper,
-    swiperSlide
+    swiperSlide,
+    Header
   },
   created() {
     document.title = "海洋欢乐世界度假区";

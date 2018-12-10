@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Login from '@/view/Login'
 import Index from '@/view/Index'
 import Mine from '@/view/Mine/Mine'
-
+import Forget from '@/view/Forget'
 
 //麦迪卡斯首页
 const McGrady = r => require.ensure([], () => r(require('@/view/McGrady/McGrady')), 'McGrady')
@@ -70,6 +70,11 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/forget',
+      name: 'Forget',
+      component: Forget
     },
     {
       path: '/mcgrady',

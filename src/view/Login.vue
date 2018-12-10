@@ -50,8 +50,8 @@
                 >
                 <span>{{pwdTip}}</span>
               </div>
-              <div class="bac7">
-                <a href>忘记密码?</a>
+              <div class="bac7 clearDiv">
+                <router-link to="/forget">忘记密码?</router-link>
               </div>
             </div>
             <div class="bac6 login">
@@ -305,7 +305,7 @@ a {
 
         span {
           padding-left: 10px;
-          position: absolute;
+          height: 14px;
         }
       }
       .code {
@@ -325,6 +325,7 @@ a {
         }
       }
       .bac7 {
+
         a {
           float: left;
           margin-left: 307px;

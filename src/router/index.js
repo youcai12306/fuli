@@ -5,6 +5,9 @@ import Index from '@/view/Index'
 import Mine from '@/view/Mine/Mine'
 import Forget from '@/view/Forget'
 
+
+//注册
+const Register = r =>require.ensure([], () => r(require('@/view/Register')), 'Register')
 //麦迪卡斯首页
 const McGrady = r => require.ensure([], () => r(require('@/view/McGrady/McGrady')), 'McGrady')
 
@@ -75,6 +78,11 @@ export default new Router({
       path: '/forget',
       name: 'Forget',
       component: Forget
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: Register
     },
     {
       path: '/mcgrady',

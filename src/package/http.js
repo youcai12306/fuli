@@ -1,16 +1,22 @@
 import axios from 'axios';
 axios.defaults.timeout = 5000;
+<<<<<<< HEAD
 axios.defaults.withCredentials=true;//设置允许获取cookie
 axios.defaults.baseURL = 'http://192.168.2.34:5050';
+=======
+axios.defaults.withCredentials=true;
+axios.defaults.baseURL = 'http://192.168.2.34:5050';
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+>>>>>>> 359c1491a22adf27f73b8c3142e7a8a4e30cd459
 
 //http request 拦截器
 axios.interceptors.request.use(
   config => {
     // const token = getCookie('名称');注意使用的时候需要引入cookie方法，推荐js-cookie
     // config.data = JSON.stringify(config.data);
-    config.headers = {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    }
+    // config.headers = {
+    //   'Content-Type': 'application/x-www-form-urlencoded'
+    // }
     // if(token){
     //   config.params = {'token':token}
     // }

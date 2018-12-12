@@ -92,7 +92,7 @@ export default {
     if (Object.keys(this.$store.getters.userInfo).length === 0) {
       this.name = "登录/注册";
     } else {
-      this.name = this.$store.getters.userInfo.userName + ",欢迎您！";
+      this.name = this.$store.getters.userInfo.mobile + ",欢迎您！";
     }
     document.addEventListener("click", e => {
       console.log(this.$refs.box.contains(e.target));

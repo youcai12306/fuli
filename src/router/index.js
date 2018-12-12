@@ -12,6 +12,12 @@ const McGrady = r => require.ensure([], () => r(require('@/view/McGrady/McGrady'
 //欢乐海洋世界首页
 const waterworld = r => require.ensure([], () => r(require('@/view/waterworld')), 'waterworld')
 
+//零售商品详情页
+const ProductDetail = r => require.ensure([], () => r(require('@/view/ProductDetail')), 'ProductDetail')
+
+//购物车页面
+const ShoppingCar1 = r => require.ensure([], () => r(require('@/view/ShoppingCar1')), 'ShoppingCar1')
+
 // 新闻中心首页
 const News = r => require.ensure([], () => r(require('@/view/News')), 'News')
 const Reset = r => require.ensure([], () => r(require('@/view/Reset')), 'Reset')
@@ -96,6 +102,16 @@ export default new Router({
       path: '/waterworld',
       name: 'waterworld',
       component: waterworld
+    },
+    {
+      path: '/productDetail',
+      name: 'ProductDetail',
+      component: ProductDetail
+    },
+    {
+      path: '/shoppingCar1',
+      name: 'ShoppingCar1',
+      component: ShoppingCar1
     },
     {
       path: '/mine',

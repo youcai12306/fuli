@@ -9,10 +9,10 @@
           <a href>会员登录</a>
         </div>
         <div class="clearDiv ban1 ban2 ban5">
-          <a href>
-            我不是会员？立即注册
+          <router-link to='/register'>
+             我不是会员？立即注册
             <img src="../assets/img/login.png" alt>
-          </a>
+          </router-link>
         </div>
       </div>
     </div>
@@ -24,11 +24,11 @@
             <a href @click.prevent="changeLoginType(1)">账号密码登录</a>
           </div>
           <div class="bac5">
-            <div class="bac6 phone">
+            <div class="phone">
               <input type="text" placeholder="手机号" class="inp" v-model="phone" @blur="checkPhone">
               <span>{{phoneTip}}</span>
             </div>
-            <div class="bac6">
+            <div class="bac66">
               <div v-show="showLogin === 0" class="code">
                 <input
                   type="text"
@@ -40,7 +40,7 @@
                 <button class="bac8" @click="getCode" :disabled="isActive">{{showPin}}</button>
                 <span>{{codeTip}}</span>
               </div>
-              <div v-show="showLogin" class="password">
+              <div v-show="showLogin === 1" class="password">
                 <input
                   type="password"
                   placeholder="请输入密码"
@@ -50,9 +50,9 @@
                 >
                 <span>{{pwdTip}}</span>
               </div>
-              <div class="bac7">
-                <a href>忘记密码?</a>
-              </div>
+            </div>
+            <div class="bac7">
+              <a href="javascript:;" @click="jumpForget">忘记密码?</a>
             </div>
             <div class="bac6 login">
               <button class="bac9" @click="login">登录</button>
@@ -96,7 +96,8 @@ export default {
       pwdTip: "",
       showPin: "获取验证码",
       isActive: false,
-      msg:''
+      msg: "",
+      img:''
     };
   },
   methods: {
@@ -104,9 +105,11 @@ export default {
     checkPhone() {
       if (!/^1[34578]\d{9}$/.test(this.phone)) {
         this.phoneTip = "请输入正确的手机号码";
+        this.isOk = false
         return false;
       } else {
         this.phoneTip = "";
+        this.isOk = true
         return true;
       }
     },
@@ -122,9 +125,11 @@ export default {
     checkPwd() {
       if (!/^[a-zA-Z0-9]{6,10}$/.test(this.password)) {
         this.pwdTip = "密码不正确";
+        this.isOk1 = false
         return false;
       } else {
         this.pwdTip = "";
+        this.isOk1 = true
         return true;
       }
     },
@@ -150,38 +155,36 @@ export default {
         }
       }, 1000);
     },
+    //跳转忘记密码
+    jumpForget() {
+      console.log(111);
+      this.$router.push("/mine");
+    },
     ...mapActions(["setUserData", "setUserInfo"]),
     //登录
     login() {
       if (this.showLogin === 0) {
-        if (!(this.checkPhone() && this.checkCode())) {
-          console.log(222);
+        // if (!(this.isOk && this.isOk1)) {
+        //   this.msg = "手机号或者密码不正确"
+        //   return false;
+        // }
+      } else {
+        if (!(this.isOk && this.isOk1)) {
+          this.msg = "手机号或者密码不正确"
           return false;
         }
         //验证通过发起请求
-        console.log(111);
-      } else {
-        // if (!(this.checkPhone() && this.checkPwd())) {
-        //   console.log(222);
-        //   return false;
-        // }
-        //验证通过发起请求
-        // let data = {
-        //   userName: this.phone,
-        //   userPwd: this.password
-        // };
         let data = {
-          userName: 'admin1',
-          userPwd: 'admin'
+          mobile: this.phone,
+          passWord: this.password
         };
-        let datas = this.$tool.formatDatas(data);
-        this.$post("/user/isLogIn", datas).then(res => {
-          if (res.code === 400) {
-            this.msg = res.message;
-          } else {
+        this.$post("/tourist/login",data,{headers:{'Content-Type':'application/json;charset=UTF-8'}}).then(res => {
+          if (res.code === 200) {
             this.setUserInfo(data);
             this.setUserData(res);
             this.$router.replace("/index");
+          } else {
+             this.msg = res.message;
           }
         });
       }
@@ -252,7 +255,6 @@ a {
     float: right;
     background-color: #fff;
     margin-top: 100px;
-    // margin-left: 1056px;
     width: 504px;
     height: 497px;
     .bac3 {
@@ -278,43 +280,55 @@ a {
   }
   .bac5 {
     margin: 0 62px;
-
-    .inp {
-      width: 379px;
-      height: 42px;
-      border: none;
-      background-color: #f7f7f7;
-      text-indent: 10px;
+    .phone {
+      position: relative;
+      input {
+        width: 379px;
+        height: 42px;
+        border: none;
+        background-color: #f7f7f7;
+        text-indent: 10px;
+      }
+      span {
+        position: absolute;
+        left: 10px;
+        bottom: -20px;
+        color: red;
+        font-size: 12px;
+      }
     }
-    .inp2 {
-      width: 275px;
+    .bac66 {
       height: 42px;
-      border: none;
-      background-color: #f7f7f7;
-      vertical-align: middle;
-      text-indent: 10px;
-    }
-    .bac6 {
-      margin-bottom: 31px;
-
+      line-height: 42px;
+      margin-top: 31px;
       .code,
       .password {
+        height: 100%;
         position: relative;
         color: red;
         font-size: 12px;
-
         span {
           padding-left: 10px;
           position: absolute;
+          bottom: -32px;
+        }
+        input {
+          width: 379px;
+          height: 42px;
+          border: none;
+          background-color: #f7f7f7;
+          text-indent: 10px;
         }
       }
       .code {
+        position: relative;
+        input {
+          width: 274px;
+        }
         input,
         button {
           float: left;
         }
-      }
-      div {
         .bac8 {
           width: 105px;
           height: 42px;
@@ -323,41 +337,44 @@ a {
           border: none;
           vertical-align: middle;
         }
-      }
-      .bac7 {
-        a {
-          float: left;
-          margin-left: 307px;
-          margin-top: 16px;
-          font-size: 14px;
+        span {
+          position: absolute;
+          left: 0;
+          bottom: -35px;
         }
       }
+    }
+    .bac7 {
+      margin-top: 16px;
+      clear: both;
+      height: 14px;
+      a {
+        float: right;
+        font-size: 14px;
+        height: 14px;
+        line-height: 14px;
+      }
+    }
+    .bac6 {
+      margin-top: 25px;
+      margin-bottom: 50px;
       .bac9 {
         width: 379px;
         height: 47px;
         border: none;
         color: #fff;
         background-color: #0764e9;
-        margin-top: 25px;
-        margin-bottom: 25px;
       }
     }
-    .login{
+    .login {
       position: relative;
-      span{
-        position: absolute;
-        color: red;
-        font-size: 12px;
-        padding-left: 10px;
-        top:155px;
-      }
-    }
-    .phone {
+      height: 47px;
       span {
         position: absolute;
         color: red;
         font-size: 12px;
         padding-left: 10px;
+        top: 50px;
       }
     }
   }

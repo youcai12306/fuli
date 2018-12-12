@@ -1,6 +1,7 @@
 import axios from 'axios';
 axios.defaults.timeout = 5000;
-axios.defaults.baseURL = 'http://192.168.2.29:2060';
+axios.defaults.withCredentials=true;//设置允许获取cookie
+axios.defaults.baseURL = 'http://192.168.2.34:5050';
 
 //http request 拦截器
 axios.interceptors.request.use(

@@ -3,7 +3,10 @@
     <div class="bac clearDiv">
       <div class="ban clearDiv">
         <div class="clearDiv ban1 ban3">
-          <img src="../assets/img/logo.png" alt>
+          <img
+            src="../assets/img/logo.png"
+            alt
+          >
         </div>
         <div class="clearDiv ban1 ban2 ban4">
           <a href>会员登录</a>
@@ -11,7 +14,10 @@
         <div class="clearDiv ban1 ban2 ban5">
           <a href>
             我不是会员？立即注册
-            <img src="../assets/img/login.png" alt>
+            <img
+              src="../assets/img/login.png"
+              alt
+            >
           </a>
         </div>
       </div>
@@ -22,12 +28,22 @@
           <h3>会员注册</h3>
           <p class="clearDiv">
             <label for>手机号</label>
-            <input type="text" v-model="phone" placeholder="请填写您的手机" @blur="checkPhone">
+            <input
+              type="text"
+              v-model="phone"
+              placeholder="请填写您的手机"
+              @blur="checkPhone"
+            >
             <span class="tip">{{phoneTip}}</span>
           </p>
           <p class="clearDiv">
             <label for>设置密码</label>
-            <input type="text" v-model="password" placeholder="建议使用至少两种字符组合" @blur="checkPwd">
+            <input
+              type="text"
+              v-model="password"
+              placeholder="建议使用至少两种字符组合"
+              @blur="checkPwd"
+            >
             <span class="tip">{{pwdTip}}</span>
           </p>
           <p class="clearDiv">
@@ -48,12 +64,22 @@
             <span class="tip">{{codeTip}}</span>
           </p>
           <div class="deal">
-            <input type="checkbox" v-model="agree">我已阅读并同意用户注册协议
+            <input
+              type="checkbox"
+              v-model="agree"
+            >我已阅读并同意用户注册协议
           </div>
           <div class="btn">
-            <button class="zhuce" @click="register">立即注册</button>
+            <button
+              class="zhuce"
+              @click="register"
+            >立即注册</button>
             <span class="msg">{{msg}}</span>
           </div>
+          <button @click="getaa">dsds</button>
+          <img :src="imgs" alt="">
+          <input type="text" v-model="abc"  class="pp">
+          <input type="button" @click="yanzheng" value="验证">
         </div>
       </div>
     </div>
@@ -74,7 +100,9 @@ export default {
       showPin: "获取验证码",
       isActive: false,
       msg: "",
-      agree: true
+      agree: true,
+      imgs:'',
+      abc:''
     };
   },
   methods: {
@@ -147,12 +175,39 @@ export default {
       };
       let datas = this.$tool.formatDatas(data);
       //请求注册接口
+      // let data1 = {
+      //   phone:'',
+      //   password:'',
+        
+
+      // }
+      // console.log(0)
+      // this.$post('/tourist/regist',data1).then((res) =>{
+      //   console.log(res);
+      //   // this.phone=res.
+      // })
+    },
+    getaa(){
+      this.$fetch('/tourist/getKaptcha',{params:{}}).then((res)=>{
+        
+        this.imgs = 'data:image/png;base64,'+res;
+      })
+     
+    },
+    yanzheng(){
+      this.$fetch('/tourist/checkKaptcha',{picCode:this.abc}).then((res)=>{
+        console.log(res);
+        // this.abc=res.data
+      })
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
+.pp{
+  border: 1px solid  #0764e9;
+}
 .bac {
   background-color: #0764e9;
   height: 106px;

@@ -29,7 +29,7 @@
 					</div>
 
 					<ul>
-						<li v-for="(item,key) in list" v-if="k<7 && key<7">
+						<li v-for="(item,key) in list" v-if="k<7 && key<7" :key="item">
 							<router-link :to="{path:'/'}">
 								<i></i>
 								<span class="li-itme">{{item.title}}</span>
@@ -65,7 +65,7 @@
 					</div>
 
 					<ul>
-						<li v-for="(item,key) in list2" v-if="k2<7 && key<7">
+						<li v-for="(item,key) in list2" v-if="k2<7 && key<7" :key="item">
 							<router-link :to="{path:'/'}">
 								<i></i>
 								<span class="li-itme">{{item.title}}</span>
@@ -101,7 +101,7 @@
 					</div>
 
 					<ul>
-						<li v-for="(item,key) in list3" v-if="k3<7 && key<7">
+						<li v-for="(item,key) in list3" v-if="k3<7 && key<7" :key="item">
 							<router-link :to="{path:'/'}">
 								<i></i>
 								<span class="li-itme">{{item.title}}</span>

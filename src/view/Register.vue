@@ -3,7 +3,10 @@
     <div class="bac clearDiv">
       <div class="ban clearDiv">
         <div class="clearDiv ban1 ban3">
-          <img src="../assets/img/logo.png" alt>
+          <img
+            src="../assets/img/logo.png"
+            alt
+          >
         </div>
         <div class="clearDiv ban1 ban2 ban4">
           <a href>会员登录</a>
@@ -11,7 +14,10 @@
         <div class="clearDiv ban1 ban2 ban5">
           <a href>
             我不是会员？立即注册
-            <img src="../assets/img/login.png" alt>
+            <img
+              src="../assets/img/login.png"
+              alt
+            >
           </a>
         </div>
       </div>
@@ -81,6 +87,10 @@
               <span class="msg">{{msg1}}</span>
             </div>
           </div>
+          <button @click="getaa">dsds</button>
+          <img :src="imgs" alt="">
+          
+          
         </div>
       </div>
     </div>
@@ -267,6 +277,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.pp{
+  border: 1px solid  #0764e9;
+}
 .bac {
   background-color: #0764e9;
   height: 106px;

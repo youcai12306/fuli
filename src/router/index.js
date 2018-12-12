@@ -4,8 +4,10 @@ import Login from '@/view/Login'
 import Index from '@/view/Index'
 import Mine from '@/view/Mine/Mine'
 import Forget from '@/view/Forget'
-
-
+import Order from '@/view/Orderonline/Order'
+import tickets from '@/view/Orderonline/tickets'
+import Suborder from '@/view/Orderonline/Suborder'
+import success from '@/view/Orderonline/success'
 //注册
 const Register = r =>require.ensure([], () => r(require('@/view/Register')), 'Register')
 //麦迪卡斯首页
@@ -88,10 +90,28 @@ export default new Router({
       name: 'Forget',
       component: Forget
     },
+    
+    {
+      path: '/order',
+      name: 'Order',
+      component: Order,
+      children:[
+        {
+          path: '/tickets',
+          name: 'tickets',
+          component: tickets,
+        }
+      ]
+    },
     {
       path: '/register',
       name: 'Register',
       component: Register
+    },
+    {
+      path: '/suborder',
+      name: 'Suborder',
+      component: Suborder
     },
     {
       path: '/mcgrady',
@@ -102,6 +122,11 @@ export default new Router({
       path: '/news',
       name: 'News',
       component: News
+    },
+    {
+      path: '/success',
+      name: 'success',
+      component: success
     },
     {
       path: '/reset',

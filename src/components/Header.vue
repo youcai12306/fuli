@@ -122,13 +122,13 @@ export default {
     //跳转个人中心
     jumpMine() {
       console.log(Object.keys(this.$store.getters.userInfo).length);
-      //   if (Object.keys(this.$store.getters.userInfo).length === 0) {
-      //     this.$router.push("/login");
-      //   } else {
+        if (Object.keys(this.$store.getters.userInfo).length === 0) {
+          this.$router.push("/login");
+        } else {
 
-      // 	// this.$router.push("/mine");
-      // 	this.loginShow = true;
-      //   }
+      	// this.$router.push("/mine");
+      	this.loginShow = true;
+        }
       this.loginShow = true;
     }
   }

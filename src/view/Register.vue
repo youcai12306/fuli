@@ -26,57 +26,6 @@
       <div class="content">
         <div class="box">
           <h3>会员注册</h3>
-<<<<<<< HEAD
-          <p class="clearDiv">
-            <label for>手机号</label>
-            <input
-              type="text"
-              v-model="phone"
-              placeholder="请填写您的手机"
-              @blur="checkPhone"
-            >
-            <span class="tip">{{phoneTip}}</span>
-          </p>
-          <p class="clearDiv">
-            <label for>设置密码</label>
-            <input
-              type="text"
-              v-model="password"
-              placeholder="建议使用至少两种字符组合"
-              @blur="checkPwd"
-            >
-            <span class="tip">{{pwdTip}}</span>
-          </p>
-          <p class="clearDiv">
-            <label for>验证码</label>
-            <input
-              type="text"
-              v-model="code"
-              placeholder="请输入验证码"
-              class="code-input"
-              @blur="checkCode"
-            >
-            <button
-              class="code-btn"
-              @click="getCode"
-              :disabled="isActive"
-              :class="{colorActive:isActive}"
-            >{{showPin}}</button>
-            <span class="tip">{{codeTip}}</span>
-          </p>
-          <div class="deal">
-            <input
-              type="checkbox"
-              v-model="agree"
-            >我已阅读并同意用户注册协议
-          </div>
-          <div class="btn">
-            <button
-              class="zhuce"
-              @click="register"
-            >立即注册</button>
-            <span class="msg">{{msg}}</span>
-=======
           <div class="step1" v-if="step">
             <p class="clearDiv">
               <label for>手机号</label>
@@ -137,12 +86,11 @@
               <button class="zhuce" @click="register2">完成</button>
               <span class="msg">{{msg1}}</span>
             </div>
->>>>>>> 359c1491a22adf27f73b8c3142e7a8a4e30cd459
           </div>
           <button @click="getaa">dsds</button>
           <img :src="imgs" alt="">
-          <input type="text" v-model="abc"  class="pp">
-          <input type="button" @click="yanzheng" value="验证">
+          
+          
         </div>
       </div>
     </div>
@@ -166,17 +114,11 @@ export default {
       password: "",
       pwdTip: "",
       msg: "",
-<<<<<<< HEAD
-      agree: true,
-      imgs:'',
-      abc:''
-=======
       msg1: "",
       agree: true,
       isActive: false,
       showPin: "获取验证码",
       step: true
->>>>>>> 359c1491a22adf27f73b8c3142e7a8a4e30cd459
     };
   },
   components: {
@@ -315,43 +257,6 @@ export default {
         this.msg1 = "请先验证通过";
         return;
       }
-<<<<<<< HEAD
-      //验证通过发起请求
-      // let data = {
-      //   userName: this.phone,
-      //   userPwd: this.password
-      // };
-      let data = {
-        userName: "admin1",
-        userPwd: "admin"
-      };
-      let datas = this.$tool.formatDatas(data);
-      //请求注册接口
-      // let data1 = {
-      //   phone:'',
-      //   password:'',
-        
-
-      // }
-      // console.log(0)
-      // this.$post('/tourist/regist',data1).then((res) =>{
-      //   console.log(res);
-      //   // this.phone=res.
-      // })
-    },
-    getaa(){
-      this.$fetch('/tourist/getKaptcha',{params:{}}).then((res)=>{
-        
-        this.imgs = 'data:image/png;base64,'+res;
-      })
-     
-    },
-    yanzheng(){
-      this.$fetch('/tourist/checkKaptcha',{picCode:this.abc}).then((res)=>{
-        console.log(res);
-        // this.abc=res.data
-      })
-=======
       if (!(this.isOk2 && this.isOk3)) {
           this.msg1 = "验证码或密码有错";
           return false;
@@ -366,7 +271,6 @@ export default {
             }
           });
         }
->>>>>>> 359c1491a22adf27f73b8c3142e7a8a4e30cd459
     }
   }
 };

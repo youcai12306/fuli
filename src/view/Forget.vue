@@ -4,10 +4,7 @@
     <div class="bac clearDiv">
       <div class="ban clearDiv">
         <div class="clearDiv ban1 ban3">
-          <img
-            src="../assets/img/logo.png"
-            alt
-          >
+          <img src="../assets/img/logo.png" alt>
         </div>
         <div class="clearDiv ban1 ban2 ban4">
           <a href>忘记密码</a>
@@ -15,10 +12,7 @@
         <div class="clearDiv ban1 ban2 ban5">
           <a href>
             我不是会员？立即注册
-            <img
-              src="../assets/img/login.png"
-              alt
-            >
+            <img src="../assets/img/login.png" alt>
           </a>
         </div>
       </div>
@@ -26,10 +20,7 @@
     <!-- 忘记密码页面 -->
     <div class="fo1">
       <div class="fo3">
-        <el-steps
-          :active="active"
-          finish-status="success"
-        >
+        <el-steps :active="active" finish-status="success">
           <el-step title="填写账户名"></el-step>
           <el-step title="设置新密码"></el-step>
           <el-step title="完成"></el-step>
@@ -37,60 +28,34 @@
         <!-- 填写用户名 -->
         <div class="fo2" v-show="0===flag">
           <div class="fo4">
-            <input
-              type="text"
-              placeholder="手机号"
-              v-model="phone"
-               @blur="checkPhone"
-            >
+            <input type="text" placeholder="手机号" v-model="phone" @blur="checkPhone">
             <span>{{phoneTip}}</span>
           </div>
           <div class="fo5">
-            <input
-              type="text"
-              placeholder="请输入验证码"
-              @blur="checkCode"
-              v-model="code"
-            >
+            <input type="text" placeholder="请输入验证码" @blur="checkCode" v-model="code">
             <button class="bac8" @click="getCode" :disabled="isActive">{{showPin}}</button>
             <span>{{codeTip}}</span>
           </div>
-          <el-button
-            style="margin-top: 34px;"
-            @click="next"
-          >下一步</el-button>
+          <el-button style="margin-top: 34px;" @click="next">下一步</el-button>
         </div>
         <!-- 设置新密码 -->
         <div class="fo2" v-show="1===flag">
           <div class="fo4">
-            <input
-              type="text"
-              placeholder="请输入新密码"
-            >
+            <input type="text" placeholder="请输入新密码">
           </div>
           <div class="fo7">
-            <input
-              type="text"
-              placeholder="请再次输入新密码"
-            >
-            
+            <input type="text" placeholder="请再次输入新密码">
           </div>
-          <el-button
-            style="margin-top: 34px;"
-            @click="next"
-          >下一步</el-button>
+          <el-button style="margin-top: 34px;" @click="next">下一步</el-button>
         </div>
         <!-- 确认 -->
         <div v-show="2===flag" class="fo6">
-            <el-row>
-                <el-button type="success" icon="el-icon-check" circle></el-button>
-            </el-row>
-            确认
+          <el-row>
+            <el-button type="success" icon="el-icon-check" circle></el-button>
+          </el-row>确认
         </div>
       </div>
-
     </div>
-
   </div>
 </template>
 
@@ -99,13 +64,13 @@ export default {
   data() {
     return {
       active: 0,
-      flag:0,
+      flag: 0,
       showPin: "获取验证码",
       isActive: false,
       codeTip: "",
-      code:"",
+      code: "",
       phone: "",
-      phoneTip: "",
+      phoneTip: ""
     };
   },
   methods: {
@@ -138,14 +103,14 @@ export default {
         }
       }, 1000);
     },
-     //判断验证码
+    //判断验证码
     checkCode() {
       if (!/^\d{6}$/.test(this.code)) {
         this.codeTip = "请输入正确的验证码";
       } else {
         this.codeTip = "";
       }
-    },
+    }
   }
 };
 </script>
@@ -159,7 +124,6 @@ input {
   height: 36px;
   vertical-align: middle;
   text-indent: 10px;
-  
 }
 
 // 头部样式
@@ -280,49 +244,47 @@ a {
   margin-top: 103px;
   margin-left: 263px;
   margin-right: 265px;
-  .fo7{
-      
-      margin-top: 35px;
-      input{
-        //   float:left;
-          width: 272px;
-      }
+  .fo7 {
+    margin-top: 35px;
+    input {
+      //   float:left;
+      width: 272px;
+    }
   }
-  button{
-      &:hover{
-          background-color:#0764E9
-      }
-      
-      &:focus{
-        background-color:#0764E9
-         
-      }
+  button {
+    &:hover {
+      background-color: #0764e9;
+    }
+
+    &:focus {
+      background-color: #0764e9;
+    }
   }
   .fo4 {
     input {
       width: 272px;
     }
-    span{
-        color:red;
-        font-size: 12px;
+    span {
+      color: red;
+      font-size: 12px;
     }
   }
   .fo5 {
     margin-top: 35px;
-    span{
-        color:red;
-        font-size: 12px;
+    span {
+      color: red;
+      font-size: 12px;
     }
     input {
       width: 167px;
-      float:left;
+      float: left;
     }
     button {
       background-color: #6dc426;
       color: #fff;
       width: 105px;
       height: 36px;
-      border:none;
+      border: none;
       vertical-align: middle;
       cursor: pointer;
       font-size: 14px;
@@ -332,9 +294,9 @@ a {
 .fo3 {
   overflow: hidden;
 }
-.fo6{
-    text-align: center;
-    margin-top: 105px;
+.fo6 {
+  text-align: center;
+  margin-top: 105px;
 }
 </style>
 <style lang="scss">
@@ -348,22 +310,21 @@ a {
   margin-left: 209px;
   margin-right: 212px;
 }
-.fo2>.el-button {
+.fo2 > .el-button {
   width: 272px;
   background-color: #0764e9;
 }
-.fo6>.el-button.is-circle{
-    padding:20px;
-    
+.fo6 > .el-button.is-circle {
+  padding: 20px;
 }
-.fo6>.el-row{
-    margin-bottom:8px;
+.fo6 > .el-row {
+  margin-bottom: 8px;
 }
-.fo2>.el-button:hover{
-    color:#0764E9 !important;
+.fo2 > .el-button:hover {
+  color: #0764e9 !important;
 }
 
-.el-button>span {
+.el-button > span {
   color: #fff;
 }
 </style>

@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import Login from '@/view/Login'
 import Index from '@/view/Index'
 import Mine from '@/view/Mine/Mine'
+import Forget from '@/view/Forget'
+
 
 //注册
 const Register = r =>require.ensure([], () => r(require('@/view/Register')), 'Register')
@@ -77,6 +79,11 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/forget',
+      name: 'Forget',
+      component: Forget
     },
     {
       path: '/register',

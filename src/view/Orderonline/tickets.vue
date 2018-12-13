@@ -192,33 +192,12 @@ export default {
           pri2: "¥290"
         },
       ]
-<<<<<<< HEAD
-    };
-  },
-  mounted(){
-    // getproduct()
-  },
-  // methods:{
-  //   根据日期选择产品库存
-  //   getproduct(){
-  //     if(radio==3){
-
-  //     }else if(radio==6){
-
-  //     }else if(radio==9){
-
-  //     }
-  //   }
-  // }
-}
-=======
       this.items = list;
       //此处要获取总条数
       this.totle = this.items.length;
     }
   }
 };
->>>>>>> f97d809ebd2f91754d987db19d5794561639c960
 </script>
 
 <style lang="scss" scoped>

@@ -87,12 +87,6 @@
               <span class="msg">{{msg1}}</span>
             </div>
           </div>
-<<<<<<< HEAD
-          
-          
-          
-=======
->>>>>>> f97d809ebd2f91754d987db19d5794561639c960
         </div>
       </div>
     </div>

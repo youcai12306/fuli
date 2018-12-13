@@ -16,7 +16,7 @@
         <div class="one-right">
           <div class="right-title">{{product.productName}}</div>
           <div class="right-pay clearDiv">
-            <div class="title">{{product.returnSign}}</div>
+            <div class="title">{{canDebook(product.returnSign)}}</div>
             <div class="new-price">
               ￥{{product.salePrice}}
               <span class="old-price">原价￥{{product.originalPrice}}</span>
@@ -34,8 +34,8 @@
               ></el-input-number>
             </div>
             <p class="tip">注：一个手机号最多可购买{{product.commitCount}}张票</p>
-            <img src="../assets/img/add-shoppingcar.png" alt class="img1">
-            <img src="../assets/img/nowbuy.png" alt class="img2">
+            <img src="../assets/img/add-shoppingcar.png" alt class="img1" >
+            <img src="../assets/img/nowbuy.png" alt class="img2" @click="jumpSubmitOrder()">
           </div>
         </div>
       </div>
@@ -88,23 +88,29 @@ export default {
     },
     //初始化数据
     init(){
-      let id = this.$router.query.id;
-      let stockId = this.$router.query.stockId;
+      let id = this.$route.query.id;
+      let stockId = this.$route.query.stockId;
       this.$fetch('http://192.168.2.38:5010/product/find/'+id,{stockId:stockId}).then((res)=>{
-        if(res.code){
+        if(res.code === 200){
+          console.log(res)
           this.product = res.data
         }
       })
     },
     //是否可退订
     canDebook(type){
-      if(type === 1){
-        this.sign = "可退订"
-      }else{
-        this.sign = "不可退订"
-      }
-    }
+      return type === 1 ?  this.sign = "可退订":this.sign = "可退订" 
+    },
+    //跳转提交订单页面
+    jumpSubmitOrder(){
+      this.$router.push({path:'/Suborder',query:{
 
+      }})
+    },
+    //加入购物车
+    addShoppingCar(){
+
+    }
   },
   mounted(){
     console.log(this.$route.query.id)

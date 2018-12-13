@@ -14,14 +14,14 @@
           <img src="../assets/img/index-item6.png" alt>
         </div>
         <div class="one-right">
-          <div class="right-title">熊大熊二毛绒玩具光头强儿童玩偶套装公仔之变形记生日礼物</div>
+          <div class="right-title">{{product.productName}}</div>
           <div class="right-pay clearDiv">
-            <div class="title">可退订</div>
+            <div class="title">{{product.returnSign}}</div>
             <div class="new-price">
-              ￥{{100}}
-              <span class="old-price">原价￥{{290}}</span>
+              ￥{{product.salePrice}}
+              <span class="old-price">原价￥{{product.originalPrice}}</span>
             </div>
-            <div class="pay pay-time">游玩时间：{{time}}</div>
+            <div class="pay pay-time">游玩时间：{{product.useBeginTime}}-{{product.useEndTime}}</div>
             <div class="pay pay-num">
               <span>购买数量:</span>
               <el-input-number
@@ -33,7 +33,7 @@
                 class="num-change"
               ></el-input-number>
             </div>
-            <p class="tip">注：一个手机号最多可购买5张票</p>
+            <p class="tip">注：一个手机号最多可购买{{product.commitCount}}张票</p>
             <img src="../assets/img/add-shoppingcar.png" alt class="img1">
             <img src="../assets/img/nowbuy.png" alt class="img2">
           </div>
@@ -46,26 +46,26 @@
         <div class="know">
           <div class="instructions">
             <h3>【使用说明】</h3>
-            <p>
+            <!-- <p>
               <span>1</span>方特乐园门票一经预定成功后不可进行改期、退票等操作，请务必确认信息无误再进行购买。
             </p>
             <p>
               <span>2</span>方特乐园门票一经预定成功后不可进行改期、退票等操作，请务必确认信息无误再进行购买。
-            </p>
+            </p> -->
           </div>
           <div class="instructions">
             <h3>【退款说明】</h3>
           </div>
           <div class="remark">
             <h3>【备注】</h3>
-            <div class="remark-box">
+            <!-- <div class="remark-box">
               <div>一、适用范围:</div>
               <p>全价票：适用于成人及身高≥1.5米的儿童；儿童票：适用于1.2米≤身高＜1.5米的儿童；长者票：适用于65周岁≤年龄＜70周岁的长者，须出示本人有效身份证件</p>
             </div>
             <div class="remark-box">
               <div>一、适用范围:</div>
               <p>全价票：适用于成人及身高≥1.5米的儿童；儿童票：适用于1.2米≤身高＜1.5米的儿童；长者票：适用于65周岁≤年龄＜70周岁的长者，须出示本人有效身份证件</p>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -78,16 +78,37 @@ export default {
   data() {
     return {
       num1: 1,
-      time: "2018.12.09 08.00- 17.30"
+      time: "2018.12.09 08.00- 17.30",
+      product:{}
     };
   },
   methods: {
     handleChange(value) {
       console.log(typeof value);
+    },
+    //初始化数据
+    init(){
+      let id = this.$router.query.id;
+      let stockId = this.$router.query.stockId;
+      this.$fetch('http://192.168.2.38:5010/product/find/'+id,{stockId:stockId}).then((res)=>{
+        if(res.code){
+          this.product = res.data
+        }
+      })
+    },
+    //是否可退订
+    canDebook(type){
+      if(type === 1){
+        this.sign = "可退订"
+      }else{
+        this.sign = "不可退订"
+      }
     }
+
   },
   mounted(){
     console.log(this.$route.query.id)
+    this.init()
   }
 };
 </script>

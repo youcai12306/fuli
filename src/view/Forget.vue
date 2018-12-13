@@ -26,20 +26,25 @@
           <el-step title="完成"></el-step>
         </el-steps>
         <!-- 填写用户名 -->
-        <div class="fo2" v-show="0===flag">
+        <div class="fo2" v-if="0===flag">
           <div class="fo4">
-            <input type="text" placeholder="手机号" v-model="phone" @blur="checkPhone">
+            <input type="text" placeholder="手机号" v-model="phone" @blur="checkPhone" :change="can">
             <span>{{phoneTip}}</span>
           </div>
           <div class="fo5">
             <input type="text" placeholder="请输入验证码" @blur="checkCode" v-model="code">
-            <button class="bac8" @click="getCode" :disabled="isActive">{{showPin}}</button>
+            <button
+              class="bac8"
+              @click="getCode"
+              :disabled="isActive"
+              :class="{colorActive:isActive}"
+            >{{showPin}}</button>
             <span>{{codeTip}}</span>
           </div>
           <el-button style="margin-top: 34px;" @click="next">下一步</el-button>
         </div>
         <!-- 设置新密码 -->
-        <div class="fo2" v-show="1===flag">
+        <div class="fo2" v-else-if="1===flag">
           <div class="fo4">
             <input type="text" placeholder="请输入新密码">
           </div>
@@ -49,7 +54,7 @@
           <el-button style="margin-top: 34px;" @click="next">下一步</el-button>
         </div>
         <!-- 确认 -->
-        <div v-show="2===flag" class="fo6">
+        <div v-else class="fo6">
           <el-row>
             <el-button type="success" icon="el-icon-check" circle></el-button>
           </el-row>确认
@@ -66,46 +71,71 @@ export default {
       active: 0,
       flag: 0,
       showPin: "获取验证码",
-      isActive: false,
+      isActive: true,
       codeTip: "",
       code: "",
       phone: "",
       phoneTip: ""
     };
   },
+  computed:{
+    can(){
+      if (!/^1[34578]\d{9}$/.test(this.phone)) {
+        this.isActive = true;
+      } else {
+        this.isActive = false;
+      }
+      return this.isActive;
+    }
+  },
   methods: {
     next() {
       if (this.active++ > 2) this.active = 0;
+      if(this.flag === 0){
+        // this.
+      }
       this.flag++;
     },
     //判断手机号
     checkPhone() {
+      console.log(111)
       if (!/^1[34578]\d{9}$/.test(this.phone)) {
         this.phoneTip = "请输入正确的手机号码";
+        this.isActive = true;
+        this.isOk = false;
         return false;
       } else {
         this.phoneTip = "";
-        return true;
+        this.isActive = false;
+        this.isOk = true;
       }
     },
     //获取验证码
     getCode() {
-      clearInterval(setsund);
-      let num = 59;
-      let setsund = setInterval(() => {
-        this.showPin = num + "s后重新发送";
-        this.isActive = true;
-        num--;
-        if (num < 0) {
-          clearInterval(setsund);
-          this.showPin = "获取验证码";
-          this.isActive = false;
+      let that = this;
+      clearInterval(that.setsund);
+      this.$fetch("http://192.168.2.34:5050/tourist/getSmsCode", { mobile: this.phone,smsFlag:'sms_back'}).then(res => {
+        if (res.code === 200) {
+          this.isActive = true;
+          let num = 59;
+          that.setsund = setInterval(() => {
+            this.showPin = num + "s后重新发送";
+            num--;
+            if (num < 0) {
+              clearInterval(that.setsund);
+              this.showPin = "获取验证码";
+              this.isActive = false;
+            }
+          }, 1000);
+        } else {
+          //this.isActive = false;
+          this.codeTip1 = res.message;
         }
-      }, 1000);
+      });
     },
     //判断验证码
     checkCode() {
-      if (!/^\d{6}$/.test(this.code)) {
+      if (!/^\d{4}$/.test(this.code)) {
         this.codeTip = "请输入正确的验证码";
       } else {
         this.codeTip = "";
@@ -288,6 +318,9 @@ a {
       vertical-align: middle;
       cursor: pointer;
       font-size: 14px;
+    }
+    .colorActive {
+      background: #cbcbcb;
     }
   }
 }

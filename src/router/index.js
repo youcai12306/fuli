@@ -97,7 +97,7 @@ export default new Router({
       component: Order,
       children:[
         {
-          path: '/tickets',
+          path: '/tickets/:id',
           name: 'tickets',
           component: tickets,
         }

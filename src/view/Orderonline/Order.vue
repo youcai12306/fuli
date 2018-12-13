@@ -40,7 +40,7 @@
             <li class="or8">
               网上订购
             </li>
-            <router-link class="clearDiv or9" tag="li" to="/tickets">
+            <router-link class="clearDiv or9" tag="li" to="/tickets/1">
               <img
                 src="../../../src/assets/img/menpiao.png"
                 alt=""

@@ -85,6 +85,9 @@ export default {
     handleChange(value) {
       console.log(typeof value);
     }
+  },
+  mounted(){
+    console.log(this.$route.query.id)
   }
 };
 </script>

@@ -87,9 +87,12 @@
               <span class="msg">{{msg1}}</span>
             </div>
           </div>
+<<<<<<< HEAD
           
           
           
+=======
+>>>>>>> f97d809ebd2f91754d987db19d5794561639c960
         </div>
       </div>
     </div>
@@ -98,8 +101,9 @@
 
 <script>
 import { mapActions } from "vuex";
-import { sesetCookie } from "../package/aa";
+import { setCookie } from "../package/aa";
 import moveBox from "../components/movebox";
+import axios from 'axios'
 export default {
   data() {
     return {
@@ -129,7 +133,7 @@ export default {
   methods: {
     //显示验证码
     getCode() {
-      this.$fetch("/tourist/getKaptcha").then(res => {
+      this.$fetch("http://192.168.2.34:5050/tourist/getKaptcha").then(res => {
         this.codeImg = "data:image/png;base64," + res;
       });
     },
@@ -139,9 +143,8 @@ export default {
         this.phoneTip = "请输入正确的手机号码";
         return false;
       } else {
-        this.$fetch("/tourist/checkIsRegist", { mobile: this.phone }).then(
+        this.$fetch("http://192.168.2.34:5050/tourist/checkIsRegist", { mobile: this.phone }).then(
           res => {
-            console.log(res);
             if (res.code === 200) {
               this.phoneTip = "";
               this.isOk = true;
@@ -160,9 +163,8 @@ export default {
         this.codeTip = "请输入正确的验证码";
         return false;
       } else {
-        this.$fetch("/tourist/checkKaptcha", { picCode: this.code }).then(
+        this.$fetch("http://192.168.2.34:5050/tourist/checkKaptcha", { picCode: this.code }).then(
           res => {
-            console.log(res);
             if (res.code === 200) {
               this.codeTip = "";
               this.isOk1 = true;
@@ -181,24 +183,21 @@ export default {
         this.msg = "请同意用户注册协议";
         return false;
       }
-      console.log(this.isOk);
-      console.log(this.isOk1);
-      console.log(!(this.isOk && this.isOk1));
       if (!(this.isOk && this.isOk1)) {
         this.msg = "请正确填写信息";
         return false;
       } else {
         //验证通过发起请求
         this.getCode1();
-        this.step = !this.step;
       }
     },
     //获取短信验证码
     getCode1() {
       let that = this;
       clearInterval(that.setsund);
-      this.$fetch("/tourist/getSmsCode", { mobile: this.phone }).then(res => {
+      this.$fetch("http://192.168.2.34:5050/tourist/getSmsCode", { mobile: this.phone,smsFlag:'sms_code'}).then(res => {
         if (res.code === 200) {
+          this.step = !this.step;
           this.isActive = true;
           let num = 59;
           that.setsund = setInterval(() => {
@@ -219,11 +218,11 @@ export default {
     //检查验证码
     checkCode1() {
       //校验数位
-      if (!/^\d{6}$/.test(this.code1)) {
+      if (!/^\d{4}$/.test(this.code1)) {
         this.codeTip1 = "请输入正确的验证码";
         return false;
       } else {
-        this.$fetch("/tourist/checkSmsCode", { smsCode: "123456" }).then(
+        this.$fetch("http://192.168.2.34:5050/tourist/checkSmsCode", { smsCode: this.code1 }).then(
           res => {
             if (res.code === 200) {
               this.codeTip1 = "";
@@ -261,7 +260,7 @@ export default {
           return false;
         } else {
           //注册接口
-          this.$post("/tourist/regist",{mobile:this.phone,passWord:this.password},{headers:{'Content-Type':'application/json;charset=UTF-8'}}).then(res => {
+          this.$post("http://192.168.2.34:5050/tourist/regist",{mobile:this.phone,passWord:this.password},{headers:{'Content-Type':'application/json;charset=UTF-8'}}).then(res => {
             if(res.code === 200){
               this.$router.push('/login')
             }else{

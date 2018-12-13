@@ -17,6 +17,9 @@ const McGrady = r => require.ensure([], () => r(require('@/view/McGrady/McGrady'
 //欢乐海洋世界首页
 const waterworld = r => require.ensure([], () => r(require('@/view/waterworld')), 'waterworld')
 
+//门票商品详情页
+const TicketDetail = r => require.ensure([], () => r(require('@/view/TicketDetail')), 'TicketDetail')
+
 //零售商品详情页
 const ProductDetail = r => require.ensure([], () => r(require('@/view/ProductDetail')), 'ProductDetail')
 
@@ -95,7 +98,7 @@ export default new Router({
       component: Order,
       children:[
         {
-          path: '/tickets',
+          path: '/tickets/:id',
           name: 'tickets',
           component: tickets,
         }
@@ -140,6 +143,11 @@ export default new Router({
       path: '/waterworld',
       name: 'waterworld',
       component: waterworld
+    },
+    {
+      path: '/ticketDetail',
+      name: 'TicketDetail',
+      component: TicketDetail
     },
     {
       path: '/productDetail',

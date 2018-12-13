@@ -165,42 +165,30 @@
 	.tabs{
 		width: 100%;
 		height: 40px;
-		margin-bottom: 42px;
+		margin-bottom: 20px;
 		overflow: hidden;
+		color: #333333;
+		.tabs-title{
+			font-size: 16px;
+		}
 		li{
-			min-width: 108px;
+			padding: 0 20px;
 			height: 40px;
 			line-height: 40px;
 			float: left;
 			margin-right: 3px;
-			background:rgba(118,163,223,0.1);
 			text-align: center;
 			font-size:14px;
-			font-family:MicrosoftYaHei;
 			font-weight:bold;
-			&:nth-of-type(6){
-				width: 128px;
-			}
 			&.active{
 				position: relative;
-				background:rgba(7,100,233,1);
+				border-bottom:  2px solid #0764E9;
 				a{
-					color:rgba(255,255,255,1);
-				}
-				&:after{
-					content: '';
-					position: absolute;
-					bottom: 0;
-					left: 50%;
-					transform: translate(-50%,0);
-					border-bottom: 9px solid rgba(255,255,255,1);
-					/*此处将左右的边框设置为透明色*/
-					border-right: 9px solid transparent ; 
-					border-left: 9px solid transparent;
+					color:#0764E9;
 				}
 			}
 			a{
-				color:rgba(75,137,225,1);
+				color: #333333;
 				width: 100%;
 				height: 100%;
 				display: inline-block;

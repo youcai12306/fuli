@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
 			'/api':{
-					target: "http://api.douban.com/v2",//接口链接头
+					target: "http://192.168.2.34",//接口链接头
 					changeOrigin:true,
 					pathRewrite:{
 							'^/api':''
@@ -21,7 +21,7 @@ module.exports = {
 		},
 
     // Various Dev Server settings
-    host: 'localhost', // can be overwritten by process.env.HOST
+    host: '192.168.2.200', // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,

@@ -1,19 +1,19 @@
 import axios from 'axios';
-axios.defaults.timeout = 5000;
+// axios.defaults.timeout = 5000;
 axios.defaults.withCredentials=true;
-axios.defaults.baseURL = 'http://192.168.2.34:5050';
+//axios.defaults.baseURL = 'http://192.168.2.34:5050';
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 //http request 拦截器
 axios.interceptors.request.use(
   config => {
-    // const token = getCookie('名称');注意使用的时候需要引入cookie方法，推荐js-cookie
+    //;注意使用的时候需要引入cookie方法，推荐js-cookie
     // config.data = JSON.stringify(config.data);
     // config.headers = {
     //   'Content-Type': 'application/x-www-form-urlencoded'
     // }
     // if(token){
-    //   config.params = {'token':token}
+    //   config.headers = {'picCode':token}
     // }
     return config;
   },

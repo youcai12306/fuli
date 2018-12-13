@@ -1,6 +1,6 @@
 <template>
 	<section>
-		<!-- 未支付 -->
+		<!-- 全部 -->
 		<section class="o_order">
 			<el-table :data="tableData5" @row-click="clickTable" ref="refTable" :row-key="getRowKeys" :expand-row-keys="expands"
 			 @expand-change="showDetail" style="width: 100%">

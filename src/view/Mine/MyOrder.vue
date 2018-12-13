@@ -5,9 +5,6 @@
 		描述：我的订单
 	-->
 	<div class="myOrder">
-		<el-row class="m-title">
-			<el-col :span="24">订单信息</el-col>
-		</el-row>
 		<!-- 表头 -->
 		<!-- <el-row class="m-table-header">
 		  <el-col :span="4">商品</el-col>
@@ -89,26 +86,27 @@
 		<!-- 头部tab -->
 		<section class="tabs">
 			<ul>
+				<li class="tabs-title">订单状态：</li>
 				<li :class="{'active' : $route.path=='/unpaid' || $route.path=='/myorder'}">
-					<router-link to="/unpaid">待支付</router-link>
+					<router-link to="/unpaid">全部</router-link>
 				</li>
 				<li :class="{'active' : $route.path=='/prepaid'}">
-					<router-link to="/prepaid">已支付</router-link>
+					<router-link to="/prepaid">预支付</router-link>
 				</li>
 				<li :class="{'active' : $route.path=='/consumed'}">
-					<router-link to="/consumed">已核销</router-link>
+					<router-link to="/consumed">待支付</router-link>
 				</li>
 				<li :class="{'active' : $route.path=='/refund'}">
-					<router-link to="/refund">退款申请中</router-link>
+					<router-link to="/refund">处理中</router-link>
 				</li>
 				<li :class="{'active' : $route.path=='/audit'}">
-					<router-link to="/audit">退款审核通过</router-link>
+					<router-link to="/audit">下单成功</router-link>
 				</li>
 				<li :class="{'active' : $route.path=='/faudit'}">
-					<router-link to="/faudit">退款未审核通过</router-link>
+					<router-link to="/faudit">退订</router-link>
 				</li>
 				<li :class="{'active' : $route.path=='/error'}">
-					<router-link to="/error">异常订单</router-link>
+					<router-link to="/error">已取消</router-link>
 				</li>
 			</ul>
 		</section>

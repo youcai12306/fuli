@@ -87,8 +87,7 @@
               <span class="msg">{{msg1}}</span>
             </div>
           </div>
-          <button @click="getaa">dsds</button>
-          <img :src="imgs" alt="">
+          
           
           
         </div>

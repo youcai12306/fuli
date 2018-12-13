@@ -6,7 +6,7 @@
       <!-- 订单详情 -->
       <div class="su2 clearDiv">
         <div class="su22">
-          当前位置：网上订购>详情页>提交订单
+          当前位置：网上订购>详情页>购物车
         </div>
         <!-- 弹出框遮罩内容 -->
         <div
@@ -34,6 +34,7 @@
               cellspacing="0"
               width="1078"
               height="353"
+              
             >
               <tr>
                 <th>商品信息</th>
@@ -46,30 +47,47 @@
                   <p>游玩时间：2018.11.23</p>
 
                 </td>
-                <td>¥{{price1}}元</td>
-                <td>×{{count}}</td>
-                <td class="td">¥{{price2}}元</td>
+                <td>¥199.00元</td>
+                <td>×2</td>
+                <td class="td">¥199.00元</td>
               </tr>
-              <!-- <tr>
-                <td>富力成人全日票
+
+              <tr>
+                <td>
+                  富力成人全日票
                   <p>游玩时间：2018.11.23</p>
 
                 </td>
                 <td>¥199.00元</td>
                 <td>×2</td>
                 <td class="td">¥199.00元</td>
-              </tr> -->
+              </tr>
+              <!-- 需要邮寄 -->
+              <tr>
+                <th>商品信息</th>
+                <th>单价</th>
+                <th>数量</th>
+                <th>小计</th>
+              </tr>
+              <tr>
+                <td>
+                  海豚纪念品
+                  <p>邮寄(邮费：¥10)</p>
+                </td>
+                <td>¥199.00元</td>
+                <td>×2</td>
+                <td class="td">¥199.00元</td>
+              </tr>
+              <tr>
+                <td>
+                  海豚纪念品
+                  <p>邮寄(邮费：¥10)</p>
 
-              <!-- <tr>
-              <td>
-                富力成人全日票
-                <p>游玩时间：2018.11.23</p>
-
-              </td>
-              <td>¥199.00元</td>
-              <td>×2</td>
-              <td>¥199.00元</td>
-            </tr> -->
+                </td>
+                <td>¥199.00元</td>
+                <td>×2</td>
+                <td class="td">¥199.00元</td>
+              </tr>
 
             </table>
           </div>
@@ -94,39 +112,46 @@
                   label-width="85px"
                 >
                   <span>*</span>
-                  <el-form-item label="姓名 ：" class="el1">
-                    
+                  <el-form-item label="姓名 ：">
                     <el-input v-model="form.name">
 
                     </el-input>
-                    <span v-show="flag">请填写姓名</span>
                   </el-form-item>
                   <span>*</span>
-                  <el-form-item label="手机号 ：" class="el2">
+                  <el-form-item label="手机号 ：">
                     <el-input v-model="form.name">
 
                     </el-input>
-                    <span v-show="flag">请填写手机号</span>
-                    <p>此手机号用于接受入园短信</p>
                   </el-form-item>
-                  
-                  <el-form-item label="身份证 ：" class="el3">
+                  <el-form-item label="身份证 ：">
                     <el-input v-model="form.name">
 
                     </el-input>
-                    <span>(非必填项)</span>
                   </el-form-item>
                 </el-form>
               </div>
-              
 
+            </div>
+            <!-- 邮寄地址 -->
+            <div class="su18">
+              <div class="su19">
+                <span class="su20">邮寄地址</span>
+                <span class="su21">
+                  <a href="">选择收货地址</a>
+                </span>
+              </div>
+              <div class="su23">
+                <p>收件人：<span>王大锤</span></p>
+                <p>手机号：<span>15054495959</span></p>
+                <p>地址：<span>湖北省武汉市洪山区xxxxxxx</span></p>
+              </div>
             </div>
             <div class="su11">
               <el-checkbox v-model="checked">同意《购买协议》</el-checkbox>
             </div>
             <div class="su14">
               <span class="su15">总计金额：</span>
-              <span class="su16">¥{{price2}}元</span>
+              <span class="su16">¥116.00元</span>
               <img
                 src="../../assets/img/but1.png"
                 alt=""
@@ -134,6 +159,7 @@
               >
             </div>
           </div>
+
         </div>
       </div>
     </div>
@@ -159,27 +185,13 @@ export default {
         desc: ""
       },
       checked: true,
-      flag: false,
-      count:2,
-      price1:120.00,
+      flag: false
     };
   },
- 
   methods: {
     //   提交
     onSubmit() {
       this.flag = true;
-    },
-    // 姓名以及手机号是否为空验证
-    yanzheng(){
-      if(form.name==''){
-        this.flag = true;
-      }
-    }
-  },
-  computed:{
-    price2(){
-      return this.price1*this.count
     }
   }
 };
@@ -194,9 +206,9 @@ export default {
     margin: 0 auto;
     background-color: #fff;
     overflow: hidden;
-    .su22{
+    .su22 {
       font-size: 12px;
-      margin-top:33px;
+      margin-top: 33px;
       margin-left: 48px;
     }
     .su21 {
@@ -225,22 +237,19 @@ export default {
         background-color: #fff;
         z-index: 1002;
         .su22 {
-          
           margin-top: 49px;
           img {
             margin-bottom: 27px;
-            margin-left:108px;
+            margin-left: 108px;
           }
-          
-            
-          
+
           .su23 {
             color: #333333;
             font-size: 24px;
             font-weight: bold;
             line-height: 28px;
             margin-bottom: 19px;
-            margin-left:44px;
+            margin-left: 44px;
           }
           .su24 {
             color: #0764e9;
@@ -259,6 +268,7 @@ export default {
       border-bottom: 1px solid #d8d8d8;
       margin-bottom: 31px;
       padding-bottom: 24px;
+      position: relative;
       span {
         margin-left: 18px;
         color: #333333;
@@ -269,8 +279,8 @@ export default {
           height: 18px;
           background: #2d7ae4;
           position: absolute;
-          left: 412px;
-          top: 239px;
+          left: 0px;
+          top: 0px;
         }
       }
     }
@@ -305,7 +315,7 @@ export default {
       margin-top: 42px;
       margin-bottom: 59px;
       padding-bottom: 14px;
-
+      position: relative;
       .su6 {
         font-weight: bold;
         margin-right: 913px;
@@ -316,8 +326,8 @@ export default {
           height: 18px;
           background: #2d7ae4;
           position: absolute;
-          left: 412px;
-          top: 711px;
+          left: 0px;
+          top: 0px;
         }
       }
       .su7 {
@@ -331,6 +341,7 @@ export default {
         margin-bottom: 59px;
         padding-bottom: 14px;
         border-bottom: 1px solid #d8d8d8;
+        position: relative;
         .su91 {
           font-weight: bold;
           margin-left: 18px;
@@ -341,8 +352,8 @@ export default {
             height: 18px;
             background: #2d7ae4;
             position: absolute;
-            left: 412px;
-            top: 805px;
+            left: 0px;
+            top: 0px;
           }
         }
         .su92 {
@@ -351,13 +362,24 @@ export default {
         }
       }
       .su10 {
-        border-bottom: 1px solid #d8d8d8;
+        // border-bottom: 1px solid #d8d8d8;
         padding-bottom: 65px;
         margin-bottom: 24px;
         .su11 {
           float: left;
         }
-        
+        .su12 {
+          float: left;
+          margin-left: 145px;
+          .su13 {
+            margin-bottom: 40px;
+            margin-top: 10px;
+            span {
+              color: #606266;
+              font-size: 14px;
+            }
+          }
+        }
       }
       .su14 {
         margin-left: 789px;
@@ -378,6 +400,46 @@ export default {
           cursor: pointer;
         }
       }
+      .su18 {
+        .su19 {
+          border-bottom: 1px solid #d8d8d8;
+          padding-bottom: 12px;
+          margin-bottom: 22px;
+          position: relative;
+          .su20 {
+            font-weight: bold;
+            margin-right: 913px;
+            margin-left: 18px;
+            &:before {
+              content: "";
+              width: 9px;
+              height: 18px;
+              background: #2d7ae4;
+              position: absolute;
+              left: 0px;
+              top: 0px;
+            }
+          }
+          a {
+            color: #666666;
+            font-size: 14px;
+          }
+        }
+        .su22 {
+          margin-bottom: 37px;
+        }
+        .su23 {
+          border: 1px solid #e3e3e3;
+          width: 377px;
+          height: 175px;
+          padding-top: 24px;
+          padding-left: 30px;
+          margin-bottom: 37px;
+          p {
+            margin-bottom: 27px;
+          }
+        }
+      }
     }
   }
 }
@@ -386,25 +448,21 @@ export default {
 .el-input {
   width: 340px;
 }
-.el1{
+.el1 {
   margin-bottom: 18px;
 }
-
-.el-form-item__content>span{
- color:red;
- margin-left: 5px;
- 
+.el-form-item__content > span {
+  color: red;
+  margin-left: 5px;
 }
-.el-form-item__content>p{
-   
-    color:#999999;
-    font-size: 12px;
-  
+.el-form-item__content > p {
+  color: #999999;
+  font-size: 12px;
 }
-.el-form>span{
+.el-form > span {
   position: relative;
-  top:32px;
-  left:0px;
-  color:red;
+  top: 32px;
+  left: 0px;
+  color: red;
 }
 </style>

@@ -155,8 +155,23 @@ export default {
           }
       ]
     };
-  }
-};
+  },
+  mounted(){
+    // getproduct()
+  },
+  // methods:{
+  //   根据日期选择产品库存
+  //   getproduct(){
+  //     if(radio==3){
+
+  //     }else if(radio==6){
+
+  //     }else if(radio==9){
+
+  //     }
+  //   }
+  // }
+}
 </script>
 
 <style lang="scss" scoped>

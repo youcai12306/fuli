@@ -7,6 +7,7 @@ import Forget from '@/view/Forget'
 import Order from '@/view/Orderonline/Order'
 import tickets from '@/view/Orderonline/tickets'
 import Suborder from '@/view/Orderonline/Suborder'
+import Carsuborder from '@/view/Orderonline/Carsuborder'
 import success from '@/view/Orderonline/success'
 //注册
 const Register = r =>require.ensure([], () => r(require('@/view/Register')), 'Register')
@@ -109,6 +110,11 @@ export default new Router({
       path: '/suborder',
       name: 'Suborder',
       component: Suborder
+    },
+    {
+      path: '/carsuborder',
+      name: 'Carsuborder',
+      component: Carsuborder
     },
     {
       path: '/mcgrady',

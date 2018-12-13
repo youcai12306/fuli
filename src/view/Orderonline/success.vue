@@ -28,6 +28,7 @@
                 :class="{active:isActive==1}"
                 @click="change(1)"
               >
+              
               <img
                 class="m3"
                 src="../../assets/img/wangyin.png"
@@ -35,6 +36,7 @@
                 :class="{active:isActive==2}"
                 @click="change(2)"
               >
+              <p class="scc">此功能暂未开通</p>
               <p class="sc63">请在30分钟内完成支付，如未完成订单自动关闭</p>
               <p class="sc64">剩余时间 <span>{{minute}}分{{second}}秒</span></p>
 
@@ -75,6 +77,7 @@ export default {
     num: function(n) {
       return n < 10 ? "0" + n : "" + n;
     },
+    // 倒计时器
     add: function() {
       var _this = this;
       var time = window.setInterval(function() {
@@ -150,6 +153,12 @@ span {
       }
       .sc5 {
         .sc6 {
+            .scc{
+                color:#E3574C;
+                font-size: 12px;
+                margin-left:456px;
+                margin-top: 13px;
+            }
           .sc61 {
             margin-bottom: 33px;
             .sc7 {
@@ -162,6 +171,7 @@ span {
           }
           .sc63 {
             margin-bottom: 26px;
+            margin-top: 63px;
           }
           .sc64 {
             span {
@@ -169,7 +179,7 @@ span {
             }
           }
           img {
-            margin-bottom: 89px;
+            // margin-bottom: 89px;
             margin-right: 44px;
             border: 1px solid #bfbfbf;
             &.active {

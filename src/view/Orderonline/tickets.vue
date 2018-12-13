@@ -18,16 +18,16 @@
       <!-- 产品 -->
       <div class="pro">
         <ul class="pro1 clearDiv">
-          <li v-for="(item,index) in items" :key="index">
-            <div @click="jumpDetail(item.id)">
-              <img :src="item.img" alt>
+          <li v-for="(item,index) in list" :key="index">
+            <div @click="jumpDetail(item.id,item.stockId)">
+              <img :src="item.pictureId" alt>
             </div>
             <div class="clearDiv ti4">
-              <p>{{item.titl}}</p>
-              <img :src="item.order" alt>
+              <p>{{item.productName}}</p>
+              <div>{{item.returnSign}}</div>
               <div class="clearDiv">
-                <span class="ti5 ti6">{{item.pri1}}</span>
-                <span class="ti5 ti7">{{item.pri2}}</span>
+                <span class="ti5 ti6">{{item.originalPrice}}</span>
+                <span class="ti5 ti7">{{item.settlementPrice}}</span>
               </div>
             </div>
           </li>
@@ -50,24 +50,41 @@ export default {
       pageSize: 9,
       pageIndex: 1,
       totle:0,
-      date:''
+      date:'',
+      imgs:[]
     };
+  },
+  computed:{
+    list() {
+      let list = this.items;
+      let str = [];
+      list.forEach((v,k) => {
+        this.imgs.forEach(val => {
+          if(v.pictureId == val.id){
+            v.pictureId = "http://192.168.2.34:2600/file/"+val.fileName;
+          }
+        })
+        str.push(v);
+      })
+      return str;
+    }
   },
   mounted() {
     let today = new Date();
     this.value1 = this.value2 = this.$tool.formatData(today);
-    console.log(this.$route.params.id);
+    // console.log(this.$route.params.id);
     let id = this.$route.params.id;
     //请求数据接口
     this.getTicketList(id, this.value2, this.pageSize, this.pageIndex);
   },
   methods: {
     //跳转详情页面
-    jumpDetail(id) {
+    jumpDetail(id,stockId) {
       this.$router.push({
         path: "/TicketDetail",
         query: {
-          id: id
+          id: id,
+          stockId:stockId
         }
       });
     },
@@ -92,107 +109,59 @@ export default {
       }else{
         this.date = this.value1
       }
-      console.log(id)
-      console.log(this.date)
-      console.log(this.pageSize)
-      console.log(this.pageIndex)
+      // console.log(id)
+      // console.log(this.date)
+      // console.log(this.pageSize)
+      // console.log(this.pageIndex)
       this.getTicketList(id, this.date, this.pageSize, this.pageIndex);
     },
     //分页
     changePage(val){
       let id = this.$route.params.id;
-      console.log(id)
-      console.log(this.date)
-      console.log(this.pageSize)
-      console.log(this.pageIndex)
+      // console.log(id)
+      // console.log(this.date)
+      // console.log(this.pageSize)
+      // console.log(this.pageIndex)
       this.getTicketList(id, this.date, this.pageSize, val);
     },
     //获取门票信息
     getTicketList(typeId, date, pageSize, pageIndex) {
+       
       //请求后台接口
-      let list =  [
-        {
-          id: 1,
-          img: "../../static/piao-1.png",
-          titl: "富力成人全日票",
-          order: "../../static/group.png",
-          pri1: "¥280",
-          pri2: "¥290"
-        },
-        {
-          id: 2,
-          img: "../../static/piao-1.png",
-          titl: "富力成人全日票",
-          order: "../../static/group.png",
-          pri1: "¥280",
-          pri2: "¥290"
-        },
-        {
-          id: 3,
-          img: "../../static/piao-1.png",
-          titl: "富力成人全日票",
-          order: "../../static/group.png",
-          pri1: "¥280",
-          pri2: "¥290"
-        },
-        {
-          id: 4,
-          img: "../../static/piao-1.png",
-          titl: "富力成人全日票",
-          order: "../../static/group.png",
-          pri1: "¥280",
-          pri2: "¥290"
-        },
-        {
-          id: 5,
-          img: "../../static/piao-1.png",
-          titl: "富力成人全日票",
-          order: "../../static/group.png",
-          pri1: "¥280",
-          pri2: "¥290"
-        },
-        {
-          id: 6,
-          img: "../../static/piao-1.png",
-          titl: "富力成人全日票",
-          order: "../../static/group.png",
-          pri1: "¥280",
-          pri2: "¥290"
-        },
-        {
-          id: 7,
-          img: "../../static/piao-1.png",
-          titl: "富力成人全日票",
-          order: "../../static/group.png",
-          pri1: "¥280",
-          pri2: "¥290"
-        },
-        {
-          id: 8,
-          img: "../../static/piao-1.png",
-          titl: "富力成人全日票",
-          order: "../../static/group.png",
-          pri1: "¥280",
-          pri2: "¥290"
-        },
-        {
-          id: 9,
-          img: "../../static/piao-1.png",
-          titl: "富力成人全日票",
-          order: "../../static/group.png",
-          pri1: "¥280",
-          pri2: "¥290"
-        },
-        {
-          id: 10,
-          img: "../../static/piao-1.png",
-          titl: "富力成人全日票",
-          order: "../../static/group.png",
-          pri1: "¥280",
-          pri2: "¥290"
-        },
-      ]
-      this.items = list;
+      this.$fetch('http://192.168.2.38:5010/product/findProductByStock',{playDate:date}).then((res) =>{
+        // console.log(res);
+        // console.log(res.data.list);
+        this.items = res.data.list;
+        this.totle = res.data.total;
+        let xin =[];
+        let xin2 = '';
+        this.items.forEach((v,k) => {
+          // console.log(v.pictureId);
+          
+          xin.push(v.pictureId);
+          // console.log(xin);
+          xin2 = xin.join(',');
+           
+        })
+        console.log(xin2);
+        let imgs = [];
+        this.$fetch('http://192.168.2.34:2600/staticResource/selectFiles',{ids:xin2}).then((res) =>{
+            
+            // var img = res.data;
+            // img.forEach((v,k) => {
+            //   imgs[k] = v.fileName;
+            //   imgs[k]=v.id;
+            // })
+            this.imgs = res.data;
+        })
+        
+      }).catch(error => {
+        
+          // alert("今天没有库存")
+          
+      })
+      
+      // this.items = list;
       //此处要获取总条数
       this.totle = this.items.length;
     }

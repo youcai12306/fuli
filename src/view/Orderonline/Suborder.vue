@@ -180,7 +180,7 @@ export default {
     },
     shopmsg(){
       this.$fetch('http://192.168.2.38:5010/product/findProductByStock').then((res) =>{
-
+        
       })
     }
   },

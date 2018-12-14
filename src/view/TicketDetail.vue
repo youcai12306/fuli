@@ -104,7 +104,7 @@ export default {
     //跳转提交订单页面
     jumpSubmitOrder(){
       this.$router.push({path:'/Suborder',query:{
-
+        
       }})
     },
     //加入购物车

@@ -28,13 +28,13 @@
                 v-model="num1"
                 @change="handleChange"
                 :min="1"
-                :max="10"
+                :max="product.commitCount"
                 label="描述文字"
                 class="num-change"
               ></el-input-number>
             </div>
             <p class="tip">注：一个手机号最多可购买{{product.commitCount}}张票</p>
-            <img src="../assets/img/add-shoppingcar.png" alt class="img1" >
+            <img src="../assets/img/add-shoppingcar.png" alt class="img1">
             <img src="../assets/img/nowbuy.png" alt class="img2" @click="jumpSubmitOrder()">
           </div>
         </div>
@@ -51,7 +51,7 @@
             </p>
             <p>
               <span>2</span>方特乐园门票一经预定成功后不可进行改期、退票等操作，请务必确认信息无误再进行购买。
-            </p> -->
+            </p>-->
           </div>
           <div class="instructions">
             <h3>【退款说明】</h3>
@@ -65,7 +65,7 @@
             <div class="remark-box">
               <div>一、适用范围:</div>
               <p>全价票：适用于成人及身高≥1.5米的儿童；儿童票：适用于1.2米≤身高＜1.5米的儿童；长者票：适用于65周岁≤年龄＜70周岁的长者，须出示本人有效身份证件</p>
-            </div> -->
+            </div>-->
           </div>
         </div>
       </div>
@@ -79,7 +79,7 @@ export default {
     return {
       num1: 1,
       time: "2018.12.09 08.00- 17.30",
-      product:{}
+      product: {}
     };
   },
   methods: {
@@ -87,34 +87,49 @@ export default {
       console.log(typeof value);
     },
     //初始化数据
-    init(){
+    init() {
       let id = this.$route.query.id;
       let stockId = this.$route.query.stockId;
-      this.$fetch('http://192.168.2.38:5010/product/find/'+id,{stockId:stockId}).then((res)=>{
-        if(res.code === 200){
-          console.log(res)
-          this.product = res.data
+      this.$fetch("http://192.168.2.38:5010/product/find/" + id, {
+        stockId: stockId
+      }).then(res => {
+        if (res.code === 200) {
+          console.log(res);
+          this.product = res.data;
         }
-      })
+      });
     },
     //是否可退订
-    canDebook(type){
-      return type === 1 ?  this.sign = "可退订":this.sign = "可退订" 
+    canDebook(type) {
+      return type === 1 ? (this.sign = "可退订") : (this.sign = "可退订");
     },
     //跳转提交订单页面
-    jumpSubmitOrder(){
-      this.$router.push({path:'/Suborder',query:{
-        
-      }})
+    jumpSubmitOrder() {
+      this.$router.push({
+        path: "/Suborder",
+        query: {
+          id: this.product.id,
+          stockId: this.$route.query.stockId,
+          num: this.num1
+        }
+      });
     },
     //加入购物车
-    addShoppingCar(){
-
+    addShoppingCar() {
+      let data = {
+        touristId: "a",
+        productId: this.product.parentId,
+        createDateId: cc,
+        productCount: this.num1
+      };
+      this.$post("http://192.168.2.34:6061/shopCart/addToshopCart", data).then(
+        res => {}
+      );
     }
   },
-  mounted(){
-    console.log(this.$route.query.id)
-    this.init()
+  mounted() {
+    console.log(this.$route.query.id);
+    this.init();
   }
 };
 </script>
@@ -290,7 +305,7 @@ export default {
             padding-top: 42px;
           }
           .remark-box {
-              margin-bottom: 20px;
+            margin-bottom: 20px;
             div {
               font-size: 18px;
               font-weight: bold;

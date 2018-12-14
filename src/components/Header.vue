@@ -13,7 +13,7 @@
           <li class="news">新闻中心</li>
           <li class="trip">计划旅程</li>
           <li class="discounts">特别优惠</li>
-          <li class="order">网上订购</li>
+          <li class="order" @click="jumpOrderTicket">网上订购</li>
           <li class="risk">冒险之旅</li>
         </ul>
       </div>
@@ -130,6 +130,9 @@ export default {
       	this.loginShow = true;
         }
       this.loginShow = true;
+    },
+    jumpOrderTicket(){
+      this.$router.push('/tickets/1')
     }
   }
 };

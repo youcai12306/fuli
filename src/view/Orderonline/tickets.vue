@@ -94,14 +94,16 @@ export default {
       let id = this.$route.params.id;
       this.pageIndex = 1;
       if (type === 0) {
+        
         if (this.radio2 === 1) {
-          this.value2 = this.$tool.formatData(today);
+          
+          this.value1 =this.value2 = this.$tool.formatData(today);
         } else if (this.radio2 === 2) {
-          this.value2 = this.$tool.formatData(
+          this.value1 =this.value2 = this.$tool.formatData(
             new Date(today.getTime() + 24 * 60 * 60 * 1000)
           );
         } else {
-          this.value2 = this.$tool.formatData(
+          this.value1 =this.value2 = this.$tool.formatData(
             new Date(today.getTime() + 24 * 60 * 60 * 1000 * 2)
           );
         }
@@ -129,7 +131,7 @@ export default {
        
       //请求后台接口
       this.$fetch('http://192.168.2.38:5010/product/findProductByStock',{playDate:date}).then((res) =>{
-        // console.log(res);
+        console.log(res);
         // console.log(res.data.list);
         this.items = res.data.list;
         this.totle = res.data.total;
@@ -189,7 +191,9 @@ export default {
     margin-top: 12px;
     .pro1 {
       margin-top: 25px;
+      margin-left:74px;
       li {
+        width: 230px;
         float: left;
         margin-right: 30px;
         margin-bottom: 60px;

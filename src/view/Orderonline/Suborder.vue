@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="suborder">
     <Header1></Header1>
     <div class="su1">
 
@@ -383,7 +383,7 @@ export default {
 }
 </style>
 <style lang="">
-.el-input {
+.suborder .el-input {
   width: 340px;
 }
 .el1{

@@ -28,7 +28,7 @@
         <!-- 填写用户名 -->
         <div class="fo2" v-if="0===flag">
           <div class="fo4">
-            <input type="text" placeholder="手机号" v-model="phone" @blur="checkPhone" :change="can">
+            <input type="text" placeholder="手机号" v-model="phone" @blur="checkPhone">
             <span>{{phoneTip}}</span>
           </div>
           <div class="fo5">
@@ -36,8 +36,8 @@
             <button
               class="bac8"
               @click="getCode"
-              :disabled="isActive"
-              :class="{colorActive:isActive}"
+              :disabled="can"
+              :class="{colorActive:can}"
             >{{showPin}}</button>
             <span>{{codeTip}}</span>
           </div>
@@ -81,10 +81,16 @@ export default {
   computed:{
     can(){
       if (!/^1[34578]\d{9}$/.test(this.phone)) {
-        this.isActive = true;
+        return true
       } else {
-        this.isActive = false;
+        this.phoneTip = "";
+        if(this.isActive){
+          return false
+        }else{
+          return true
+        }
       }
+      console.log(this.isActive)
       return this.isActive;
     }
   },
@@ -98,15 +104,12 @@ export default {
     },
     //判断手机号
     checkPhone() {
-      console.log(111)
       if (!/^1[34578]\d{9}$/.test(this.phone)) {
         this.phoneTip = "请输入正确的手机号码";
-        this.isActive = true;
         this.isOk = false;
         return false;
       } else {
         this.phoneTip = "";
-        this.isActive = false;
         this.isOk = true;
       }
     },
@@ -116,7 +119,8 @@ export default {
       clearInterval(that.setsund);
       this.$fetch("http://192.168.2.34:5050/tourist/getSmsCode", { mobile: this.phone,smsFlag:'sms_back'}).then(res => {
         if (res.code === 200) {
-          this.isActive = true;
+          this.isActive = false;
+          console.log(this.isActive)
           let num = 59;
           that.setsund = setInterval(() => {
             this.showPin = num + "s后重新发送";
@@ -124,7 +128,7 @@ export default {
             if (num < 0) {
               clearInterval(that.setsund);
               this.showPin = "获取验证码";
-              this.isActive = false;
+              this.isActive = true;
             }
           }, 1000);
         } else {
@@ -291,17 +295,25 @@ a {
     }
   }
   .fo4 {
+    position: relative;
     input {
       width: 272px;
     }
     span {
+      position: absolute;
+      left: 10px;
+      bottom:-18px;
       color: red;
       font-size: 12px;
     }
   }
   .fo5 {
+    position: relative;
     margin-top: 35px;
     span {
+      position: absolute;
+      left: 10px;
+      bottom:-18px;
       color: red;
       font-size: 12px;
     }
@@ -310,7 +322,7 @@ a {
       float: left;
     }
     button {
-      background-color: #6dc426;
+      background: #6dc426;
       color: #fff;
       width: 105px;
       height: 36px;

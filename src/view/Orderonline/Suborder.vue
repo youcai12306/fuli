@@ -164,7 +164,9 @@ export default {
       price1:120.00,
     };
   },
- 
+  mounted(){
+      shopmsg()
+  },
   methods: {
     //   提交
     onSubmit() {
@@ -175,6 +177,11 @@ export default {
       if(form.name==''){
         this.flag = true;
       }
+    },
+    shopmsg(){
+      this.$fetch('http://192.168.2.38:5010/product/findProductByStock').then((res) =>{
+
+      })
     }
   },
   computed:{

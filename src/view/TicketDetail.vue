@@ -28,7 +28,7 @@
                 v-model="num1"
                 @change="handleChange"
                 :min="1"
-                :max="10"
+                :max="product.commitCount"
                 label="描述文字"
                 class="num-change"
               ></el-input-number>
@@ -109,7 +109,15 @@ export default {
     },
     //加入购物车
     addShoppingCar(){
+      let data = {
+        touristId:'a',
+        productId:this.product.parentId,
+        createDateId:cc,
+        productCount:this.num1
+      }
+      this.$post('http://192.168.2.34:6061/shopCart/addToshopCart',data).then((res) =>{
 
+      })
     }
   },
   mounted(){

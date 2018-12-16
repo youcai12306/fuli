@@ -178,11 +178,11 @@ export default {
           mobile: this.phone,
           passWord: this.password
         };
-        this.$post("http://192.168.2.34:5050/tourist/login",data,{headers:{'Content-Type':'application/json;charset=UTF-8'}}).then(res => {
+        this.$post("http://192.168.2.34:5010/tourist/login",data,{headers:{'Content-Type':'application/json;charset=UTF-8'}}).then(res => {
           if (res.code === 200) {
-            console.log(res)
+            console.log(res.data)
             this.setUserInfo(data);
-            this.setUserData(res);
+            this.setUserData(res.data);
             this.$router.replace("/index");
           } else {
              this.msg = res.message;

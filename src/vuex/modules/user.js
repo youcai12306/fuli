@@ -2,11 +2,11 @@ import * as types from '../types'
 
 const state = {
     // 用户登录状态
-    loginStatus: JSON.parse(sessionStorage.getItem('loginStatus')) || false,
+    loginStatus: JSON.parse(localStorage.getItem('loginStatus')) || false,
     // 用户登录信息
-    userInfo: JSON.parse(sessionStorage.getItem('userInfo')) || {},
+    userInfo: JSON.parse(localStorage.getItem('userInfo')) || {},
     // 用户数据信息
-    userData: JSON.parse(sessionStorage.getItem('userData')) || {},
+    userData: JSON.parse(localStorage.getItem('userData')) || {},
 }
 
 const actions = {
@@ -14,8 +14,8 @@ const actions = {
      * 用户登录
      */
     setUserInfo({ commit }, res) {
-        sessionStorage.setItem('userInfo', JSON.stringify(res))
-        sessionStorage.setItem('loginStatus', true)
+        localStorage.setItem('userInfo', JSON.stringify(res))
+        localStorage.setItem('loginStatus', true)
         commit(types.SET_USER_INFO, res)
         commit(types.SET_LOGIN_STATUS, false)
     },
@@ -24,9 +24,9 @@ const actions = {
      * 退出登录
      */
     setSignOut({ commit }) {
-        sessionStorage.removeItem('loginStatus')
-        sessionStorage.removeItem('userInfo')
-        sessionStorage.removeItem('userData')
+        localStorage.removeItem('loginStatus')
+        localStorage.removeItem('userInfo')
+        localStorage.removeItem('userData')
         commit(types.SET_LOGIN_STATUS, false)
         commit(types.SET_USER_INFO, {})
         commit(types.SET_USER_DATA, {})
@@ -36,7 +36,7 @@ const actions = {
      * 设置用户信息
      */
     setUserData({ commit },res) {
-        sessionStorage.setItem('userData', JSON.stringify(res))
+        localStorage.setItem('userData', JSON.stringify(res))
         commit(types.COM_LOADING_STATUS, false)
         commit(types.SET_USER_DATA, res)
     },

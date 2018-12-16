@@ -53,6 +53,9 @@ const ShoppingCar = r => require.ensure([], () => r(require('@/view/Mine/Shoppin
 const ShoppingAdress = r => require.ensure([], () => r(require('@/view/Mine/ShoppingAdress')), 'ShoppingAdress')
 // 个人中心-消息管理
 const MyMessage = r => require.ensure([], () => r(require('@/view/Mine/MyMessage')), 'MyMessage')
+// 个人中心-消息详情
+const MessageDetail = r => require.ensure([], () => r(require('@/view/Mine/MessageDetail')), 'MessageDetail')
+
 // 个人中心-会员资料
 const Membership = r => require.ensure([], () => r(require('@/view/Mine/Membership')), 'Membership')
 // 个人中心-修改密码
@@ -340,6 +343,14 @@ export default new Router({
 					path: '/myMessage',
 					name: 'MyMessage',
           component: MyMessage,
+          meta: {
+            nav: 2
+          }
+        },
+        {
+					path: '/messageDetail',
+					name: 'MessageDetail',
+          component: MessageDetail,
           meta: {
             nav: 2
           }

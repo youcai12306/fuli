@@ -101,7 +101,7 @@ export default {
     },
     //是否可退订
     canDebook(type) {
-      return type === 1 ? (this.sign = "可退订") : (this.sign = "可退订");
+      return type === 1 ? (this.sign = "可退订") : (this.sign = "不可退订");
     },
     //跳转提交订单页面
     jumpSubmitOrder() {

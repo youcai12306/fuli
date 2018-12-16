@@ -3,7 +3,7 @@
        <div class="message-manage">
             <p class="change-title">消息管理</p>
             <div class="change-content">
-              <div class="content-list clearDiv">
+              <div class="content-list clearDiv" @click="jumpDetail(1)">
                 <img src="../../assets/img/mine-message.png" alt="" class="floatLeft">
                 <div class="list-info floatLeft">
                   <div><span class="tongzhi">系统通知</span><span class="time">3天前</span></div>
@@ -30,6 +30,13 @@ export default {
     return {
     };
   },
+  methods:{
+    jumpDetail(id){
+      this.$router.push({path:'/messageDetail',query:{
+        id:id
+      }})
+    }
+  }
 }
 
 </script>

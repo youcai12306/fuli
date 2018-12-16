@@ -14,18 +14,18 @@
           </tr>
           <tr v-for="(item,key) in good_list" :key="key" class="list">
             <td class="checkbox-choose">
-              <input type="checkbox" v-model="item.is_selected" @click="select_one(key)">
+              <input type="checkbox" v-model="item.is_selected" @click="select_one(key)" :disabled="!item.enableStock">
             </td>
             <td class="shop-info">
-              <div class="name">{{item.name}}</div>
-              <div class="tui">{{item.tui}}</div>
+              <div class="name">{{item.product.productName}}</div>
+              <div class="tui">{{canDebook(item.product.returnSign)}}</div>
               <div class="timeslot">
-                游玩时间
-                <span>{{item.timeslot}}</span>
+                游玩时间：
+                <span>{{item.product.dataBaseDate}}</span>
               </div>
             </td>
             <td class="num">
-              {{item.num}}
+              {{item.productCount}}
               <span class="tip">注：一个手机号最多可购买5张票</span>
             </td>
             <td class="del">
@@ -46,7 +46,7 @@
                 合计：
                 <span>{{totalPrice}}.00</span>元
               </div>-->
-              <button></button>
+              <button @click="jumpShoppingCarOrder"></button>
             </td>
           </tr>
         </table>
@@ -75,39 +75,43 @@ export default {
       deep: true
     }
   },
-  created() {
-    let tableDate2 = [
-      {
-        id: "1",
-        name: "富力公仔玩偶",
-        type: 0,
-        price: 155,
-        num: 1,
-        tui: "可推定",
-        timeslot: "2017-11-11 12:00:00",
-        is_selected: false
-      },
-      {
-        id: "2",
-        name: "富力公仔玩偶",
-        type: 1,
-        price: 1995,
-        num: 1,
-        tui: "不可推定",
-        timeslot: "2017-11-11 12:00:00",
-        is_selected: false
-      }
-    ];
-    this.good_list = tableDate2;
+  mounted() {
+    let Uid = this.$store.getters.getUserData.userId;
+    this.searchShoppingCar(Uid)
   },
   methods: {
+    aa(){
+      console.log(11)
+    },
+     //查询购物车
+    searchShoppingCar(Uid) {
+      this.$fetch("http://192.168.2.34:6061/shopCart/selectShopCarts", {
+        touristId: Uid
+      }).then(res => {
+        if (res.code === 200) {
+          this.good_list = res.data;
+          this.good_list.forEach((val) =>{
+            val.is_selected = false;
+          })
+          console.log(this.good_list)
+        }
+      });
+    },
+    //是否可退订
+    canDebook(type) {
+      return type === 1 ? (this.sign = "可退订") : (this.sign = "可退订");
+    },
     //删除表格数据
     // deleteRow(index, rows) {
     //   rows.splice(index, 1);
     // },
     //删除购物车商品
     delShopping(item, key) {
-      this.good_list.splice(key, 1);
+      this.$fetch('http://192.168.2.34:6061/shopCart/deleteshopCart',{id:item.id}).then((res) =>{
+        if(res.code === 200){
+          this.good_list.splice(key, 1);
+        }
+      })
       this.getTotal();
     },
     // 计算选中商品金额
@@ -117,8 +121,8 @@ export default {
       for (let i = 0; i < this.good_list.length; i++) {
         let _d = this.good_list[i];
         if (_d.is_selected) {
-          this.totalPrice += _d["price"] * _d["num"];
-          this.totalNum += _d["num"];
+          //this.totalPrice += _d["price"] * _d["num"];
+          this.totalNum += _d["productCount"];
         }
       }
     },
@@ -137,10 +141,18 @@ export default {
     // },
     // 选中其中一件商品
     select_one(index) {
+      // for(let val of this.good_list){
+      //   if(val.)
+      // }
       if (this.good_list[index].is_selected === true) {
         this.good_list[index].is_selected = false;
       } else {
         this.good_list[index].is_selected = true;
+      }
+      if(this.good_list.some(v => v.is_selected === false)){
+        this.selected_all = false
+      }else{
+        this.selected_all = true
       }
       this.getTotal();
     },
@@ -163,6 +175,9 @@ export default {
     delAll() {
       this.good_list = {}
       this.getTotal();
+    },
+    jumpShoppingCarOrder(){
+      this.$router.push('/Carsuborder')
     }
     //计数器方法
     // handleChange() {
@@ -178,6 +193,7 @@ export default {
   background: url(../assets/img/mine-bg.png) no-repeat;
   background-size: 100% 100%;
   .shopping-car {
+    min-height: 800px;
     width: 1200px;
     background: #ffffff;
     margin: 0 auto;

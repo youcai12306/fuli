@@ -6,56 +6,61 @@
       <div class="change-content">
         <table>
           <tr class="title">
-            <td></td>
-            <td>商品信息</td>
-            <td>单价</td>
-            <td>数量</td>
-            <td>金额</td>
-            <td>操作</td>
+            <td class="selectAll">全选</td>
+            <td class="info">商品信息</td>
+            <td class="title-num">数量</td>
+            <td class="title-do">操作</td>
           </tr>
           <tr v-for="(item,key) in good_list" :key="key" class="list">
             <td class="checkbox-choose">
-              <input type="checkbox" v-model="item.is_selected" @click="select_one(key)">
+              <input
+                type="checkbox"
+                v-model="item.is_selected"
+                @click="select_one(key)"
+                :disabled="!item.enableStock"
+              >
             </td>
             <td class="shop-info">
-              <div class="info clearDiv">
-                <img src="../../assets/img/mine-shop1.png" alt class="info-left floatLeft">
-
-                <div class="info-right floatLeft">
-                  <p class="shop-name">富力公仔玩偶</p>
-                  <p class="shop-type">自提</p>
-                </div>
+              <div class="name">{{item.product.productName}}</div>
+              <div class="tui">{{canDebook(item.product.returnSign)}}</div>
+              <div class="timeslot">
+                游玩时间：
+                <span>{{item.product.dataBaseDate}}</span>
               </div>
             </td>
-            <td class="price">¥{{item.price}}</td>
             <td class="num">
-              <el-input-number v-model="item.num" :min="1" @change="handleChange()"></el-input-number>
+              {{item.productCount}}
+              <span class="tip">注：一个手机号最多可购买5张票</span>
             </td>
-            <td class="totle">¥{{item.price*item.num}}</td>
             <td class="del">
-              <button @click="delShopping(item,key)" class="del-btn">删除</button>
+              <button @click="delShopping(item,key)" class="del-btn"></button>
             </td>
           </tr>
-          <tr class="count">
+          <tr class="count" v-show="!this.good_list.length === 0">
             <td colspan="6" class="count-all clearDiv">
               <div class="all-choose">
                 <input type="checkbox" @click="slect_all()" v-model="selected_all">全选
               </div>
-              <div class="choosed">已选商品
+              <div class="delAll" @click="delAll">清空购物车</div>
+              <div class="choosed">
+                已选商品
                 <span>{{totalNum}}</span>件
               </div>
-              <div class="totles">合计：
+              <!-- <div class="totles">
+                合计：
                 <span>{{totalPrice}}.00</span>元
-              </div>
-              <button></button>
+              </div>-->
+              <button @click="jumpShoppingCarOrder"></button>
             </td>
+          </tr>
+          <tr class="empty" v-show="this.good_list.length === 0">
+            <td colspan="6">暂无数据</td>
           </tr>
         </table>
       </div>
     </div>
   </div>
 </template>
-
 <script>
 export default {
   data() {
@@ -76,35 +81,46 @@ export default {
       deep: true
     }
   },
-  created() {
-    let tableDate2 = [
-      {
-        id: "1",
-        name: "富力公仔玩偶",
-        type: 0,
-        price: 155,
-        num: 1,
-        is_selected: false
-      },
-      {
-        id: "2",
-        name: "富力公仔玩偶",
-        type: 1,
-        price: 1995,
-        num: 1,
-        is_selected: false
-      }
-    ];
-    this.good_list = tableDate2;
+  mounted() {
+    let Uid = this.$store.getters.getUserData.userId;
+    this.searchShoppingCar(Uid);
+    console.log(this.good_list);
   },
   methods: {
-    //删除表格数据
-    deleteRow(index, rows) {
-      rows.splice(index, 1);
+    aa() {
+      console.log(11);
     },
+    //查询购物车
+    searchShoppingCar(Uid) {
+      this.$fetch("http://192.168.2.34:6061/shopCart/selectShopCarts", {
+        touristId: Uid
+      }).then(res => {
+        if (res.code === 200) {
+          this.good_list = res.data;
+          this.good_list.forEach(val => {
+            val.is_selected = false;
+          });
+          console.log(this.good_list);
+        }
+      });
+    },
+    //是否可退订
+    canDebook(type) {
+      return type === 1 ? (this.sign = "可退订") : (this.sign = "可退订");
+    },
+    //删除表格数据
+    // deleteRow(index, rows) {
+    //   rows.splice(index, 1);
+    // },
     //删除购物车商品
     delShopping(item, key) {
-      this.good_list.splice(key, 1);
+      this.$fetch("http://192.168.2.34:6061/shopCart/deleteshopCart", {
+        id: item.id
+      }).then(res => {
+        if (res.code === 200) {
+          this.good_list.splice(key, 1);
+        }
+      });
       this.getTotal();
     },
     // 计算选中商品金额
@@ -114,8 +130,8 @@ export default {
       for (let i = 0; i < this.good_list.length; i++) {
         let _d = this.good_list[i];
         if (_d.is_selected) {
-          this.totalPrice += _d["price"] * _d["num"];
-          this.totalNum += _d["num"];
+          //this.totalPrice += _d["price"] * _d["num"];
+          this.totalNum += _d["productCount"];
         }
       }
     },
@@ -134,10 +150,18 @@ export default {
     // },
     // 选中其中一件商品
     select_one(index) {
+      // for(let val of this.good_list){
+      //   if(val.)
+      // }
       if (this.good_list[index].is_selected === true) {
         this.good_list[index].is_selected = false;
       } else {
         this.good_list[index].is_selected = true;
+      }
+      if (this.good_list.some(v => v.is_selected === false)) {
+        this.selected_all = false;
+      } else {
+        this.selected_all = true;
       }
       this.getTotal();
     },
@@ -156,10 +180,18 @@ export default {
       }
       this.getTotal();
     },
-    //计数器方法
-    handleChange() {
+    //清空购物车
+    delAll() {
+      this.good_list = {};
       this.getTotal();
+    },
+    jumpShoppingCarOrder() {
+      this.$router.push("/Carsuborder");
     }
+    //计数器方法
+    // handleChange() {
+    //   this.getTotal();
+    // }
   }
 };
 </script>
@@ -189,80 +221,92 @@ export default {
       font-size: 12px;
       font-weight: 400;
       color: rgba(237, 90, 78, 1);
-      padding:  36px 0 17px 0;
+      padding: 36px 0 17px 0;
     }
     .change-content {
       table {
         border-collapse: collapse;
         text-align: center;
-        border: solid 1px #e1e1e1;
+        // border: solid 1px #e1e1e1;
         .title {
           height: 48px;
           background-color: #cde2ff;
           font-size: 14px;
           color: #333333;
+          .selectAll {
+            width: 70px;
+          }
+          .info {
+            width: 400px;
+          }
+          .title-num {
+            width: 250px;
+          }
+          .title-do {
+            width: 150px;
+          }
         }
         .list {
-          height: 160px;
+          height: 250px;
           border-bottom: 1px solid #e1e1e1;
           .checkbox-choose {
-            width: 30px;
+            width: 70px;
           }
           .shop-info {
             width: 300px;
-
-            .info {
-              width: 90%;
-              margin: 0 auto;
-              .info-left {
-                width: 130px;
-                height: 131px;
-              }
-
-              .info-right {
-                padding-top: 28px;
-                padding-left: 15px;
-                p {
-                  text-align: left;
-                }
-                .shop-name {
-                  font-size: 14px;
-                  color: #333333;
-                }
-                .shop-type {
-                  font-size: 12px;
-                  color: #e3574c;
-                  margin-top: 22px;
-                }
+            font-weight: 400;
+            text-align: left;
+            padding-left: 40px;
+            .name {
+              font-size: 16px;
+              font-weight: bold;
+              color: rgba(51, 51, 51, 1);
+            }
+            .tui {
+              font-size: 12px;
+              color: rgba(242, 115, 115, 1);
+              //   height: 23px;
+              min-width: 72px;
+              width: 72px;
+              border: 1px solid rgba(242, 115, 115, 1);
+              border-radius: 5px;
+              padding: 5px 10px;
+              margin: 15px 0;
+              text-align: center;
+            }
+            .timeslot {
+              font-size: 14px;
+              color: rgba(51, 51, 51, 0.5);
+              span {
+                color: rgba(51, 51, 51, 1);
               }
             }
           }
-          .price {
-            width: 127px;
-          }
           .num {
-            width: 150px;
-          }
-          .totle {
-            width: 127px;
-            font-size: 16px;
-            color: #ec4b3e;
-            font-weight: bold;
+            width: 200px;
+            position: relative;
+            .tip {
+              position: absolute;
+              font-size: 12px;
+              font-weight: 400;
+              color: rgba(227, 87, 76, 1);
+              left: 100px;
+              bottom: 40px;
+            }
           }
           .del {
-            width: 127px;
+            width: 150px;
             .del-btn {
-              width: 57px;
-              height: 30px;
-              background-color: #e1e1e1;
-              font-size: 14px;
-              color: #333333;
+              width: 31px;
+              height: 32px;
+              background: url(../../assets/img/shopping-car-del.png) no-repeat;
             }
           }
         }
         .count {
-          height: 78px;
-          line-height: 78px;
+          height: 83px;
+          background: rgba(242, 245, 250, 1);
+          line-height: 83px;
           font-size: 14px;
           color: #333333;
           .count-all {
@@ -274,15 +318,21 @@ export default {
                 width: 30px;
               }
             }
+            .delAll {
+              font-weight: 400;
+              color: rgba(102, 102, 102, 1);
+              margin-left: 50px;
+            }
             .choosed {
-              margin-left: 415px;
-              margin-right: 45px;
+              margin-left: 650px;
+              //   margin-right: 45px;
+              color: rgba(238, 50, 35, 1);
               span {
-                color: #ee5043;
                 margin: 0 5px;
               }
             }
             button {
+              float: left;
               margin-left: 33px;
               width: 91px;
               height: 30px;
@@ -290,7 +340,20 @@ export default {
                 no-repeat 0 0;
               background-size: 100% 100%;
               vertical-align: middle;
+              margin-top: 25px;
             }
+          }
+        }
+        .empty {
+          height: 60px;
+          line-height: 60px;
+          width: 870px;
+          td {
+            color: #909399;
+            text-align: center;
+            border: 1px solid #ebeef5;
+            border-top: 0;
+            font-size: 14px;
           }
         }
       }

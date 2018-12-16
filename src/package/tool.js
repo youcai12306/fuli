@@ -6,7 +6,7 @@ function padding(s, len) {
   return s;
 };
 
-export default {
+export default { 
   isEmpty(s) {
     return s == null || s == "" || s == "undefined" ? true : false;
   },

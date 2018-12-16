@@ -4,14 +4,14 @@
       <div class="nav clearDiv">
         <div class="floatLeft">当前位置：网上订购>零售商品详情页</div>
         <div class="floatRight">我的订单</div>
-        <div class="floatRight shopping-car">
+        <div class="floatRight shopping-car" @click="jumpShoppingCar">
           <img src="../assets/img/shopping-car.png">购物车(
-          <span>0</span>)
+          <span>{{shopNum}}</span>)
         </div>
       </div>
       <div class="main-one clearDiv">
         <div class="one-left">
-          <img src="../assets/img/index-item6.png" alt>
+          <img :src="img" alt>
         </div>
         <div class="one-right">
           <div class="right-title">{{product.productName}}</div>
@@ -26,7 +26,6 @@
               <span>购买数量:</span>
               <el-input-number
                 v-model="num1"
-                @change="handleChange"
                 :min="1"
                 :max="product.commitCount"
                 label="描述文字"
@@ -34,7 +33,7 @@
               ></el-input-number>
             </div>
             <p class="tip">注：一个手机号最多可购买{{product.commitCount}}张票</p>
-            <img src="../assets/img/add-shoppingcar.png" alt class="img1">
+            <img src="../assets/img/add-shoppingcar.png" alt class="img1" @click="addShoppingCar">
             <img src="../assets/img/nowbuy.png" alt class="img2" @click="jumpSubmitOrder()">
           </div>
         </div>
@@ -74,18 +73,18 @@
 </template>
 
 <script>
+import { IMG_Url } from "../package/common.js";
 export default {
   data() {
     return {
       num1: 1,
       time: "2018.12.09 08.00- 17.30",
-      product: {}
+      product: {},
+      img: "",
+      shopNum: 0
     };
   },
   methods: {
-    handleChange(value) {
-      console.log(typeof value);
-    },
     //初始化数据
     init() {
       let id = this.$route.query.id;
@@ -94,8 +93,15 @@ export default {
         stockId: stockId
       }).then(res => {
         if (res.code === 200) {
-          console.log(res);
+          // console.log(res);
           this.product = res.data;
+          //请求图片接口
+          this.$fetch(
+            "http://192.168.2.34:2600/staticResource/selectFileById",
+            { id: this.product.pictureId }
+          ).then(res => {
+            this.img = IMG_Url + res.data.fileName;
+          });
         }
       });
     },
@@ -110,26 +116,60 @@ export default {
         query: {
           id: this.product.id,
           stockId: this.$route.query.stockId,
-          num: this.num1
+          num: this.num1 //
         }
       });
     },
     //加入购物车
     addShoppingCar() {
+      let Uid = this.$store.getters.getUserData.userId;
+      let createDateId = this.$route.query.stockId;
       let data = {
-        touristId: "a",
-        productId: this.product.parentId,
-        createDateId: cc,
+        touristId: Uid,
+        productId: this.product.id,
+        createDateId: createDateId,
         productCount: this.num1
       };
-      this.$post("http://192.168.2.34:6061/shopCart/addToshopCart", data).then(
-        res => {}
-      );
+      this.$post(
+        "http://192.168.2.34:6061/shopCart/addToshopCart",
+        {
+          touristId: Uid,
+          productId: this.product.id,
+          createDateId: createDateId,
+          productCount: this.num1
+        },
+        { headers: { "Content-Type": "application/json;charset=UTF-8" } }
+      ).then(res => {
+        if (res.code === 200) {
+          this.searchShoppingCar(Uid)
+        }
+      });
+    },
+    //查询购物车
+    searchShoppingCar(Uid) {
+      this.$fetch("http://192.168.2.34:6061/shopCart/selectShopCarts", {
+        touristId: Uid
+      }).then(res => {
+        if (res.code === 200) {
+          console.log(res.data);
+          let list = res.data;
+          let shopNum = 0;
+          for(let item of list){
+            shopNum += item.productCount;
+          }
+          this.shopNum = shopNum;
+        }
+      });
+    },
+    //跳转购物车页面
+    jumpShoppingCar(){
+      this.$router.push('/shoppingCar1')
     }
   },
   mounted() {
-    console.log(this.$route.query.id);
+    let Uid = this.$store.getters.getUserData.userId;
     this.init();
+    this.searchShoppingCar(Uid)
   }
 };
 </script>

@@ -3,7 +3,7 @@
     <div class="take-address clearDiv">
       <div class="change-title">
         收货地址
-        <span class="floatRight add">+</span>
+        <span class="floatRight add" @click="showMeng">+</span>
         <div class="floatRight refresh clearDiv">
           <span class="floatLeft">刷新</span>
           <img class="floatLeft" src="../../assets/img/mine-refresh.png" alt>
@@ -36,23 +36,30 @@
           :header-cell-style="{background:'#CDE2FF'}"
           class="table-address"
         >
-          <el-table-column prop="name" label="收货人" width="96" align="center"></el-table-column>
-          <el-table-column prop="name" label="所在地区" width="123" align="center"></el-table-column>
-          <el-table-column prop="name" label="详细地址" width="136" align="center"></el-table-column>
-          <el-table-column prop="name" label="邮编" width="99" align="center"></el-table-column>
-          <el-table-column prop="name" label="电话" width="136" align="center"></el-table-column>
+          <el-table-column prop="receivePersonName" label="收货人" width="96" align="center"></el-table-column>
+          <el-table-column label="所在地区" width="123" align="center">
+            <template
+              slot-scope="scope"
+            >{{scope.row.receiveProvince}}{{scope.row.receiveCity}}{{scope.row.receiveArea}}</template>
+          </el-table-column>
+          <el-table-column prop="receiveAddress" label="详细地址" width="136" align="center"></el-table-column>
+          <el-table-column prop="receieveCode" label="邮编" width="99" align="center"></el-table-column>
+          <el-table-column prop="receivePersonMobile" label="电话" width="136" align="center"></el-table-column>
           <el-table-column label="操作" width="167" align="center">
             <template slot-scope="scope">
-              <span class="change-address">修改</span>
-              <span @click.prevent="deleteRow(scope.$index, list)" class="del-address">删除</span>
+              <span class="change-address" @click="changeAddress(scope.$index,list)">修改</span>
+              <span
+                @click.prevent="deleteRow(scope.$index,list,scope.row.id)"
+                class="del-address"
+              >删除</span>
             </template>
           </el-table-column>
           <el-table-column prop="name" label="默认地址" align="center" fixed="right">
             <template slot-scope="scope">
-              <span v-show="scope.row.type === 0" class="default-address">默认地址</span>
+              <span v-show="scope.row.defaultSign === true" class="default-address">默认地址</span>
               <span
-                @click.prevent="setDefault(scope.$index, list)"
-                v-show="scope.row.type === 1"
+                @click.prevent="setDefault(scope.$index,scope.row.id)"
+                v-show="scope.row.defaultSign === false"
                 class="set-default"
               >设为默认</span>
             </template>
@@ -60,49 +67,234 @@
         </el-table>
       </div>
     </div>
+    <div class="meng" v-show="mengShow">
+      <div class="box">
+        <p class="clearDiv">
+          <label for="name">收货人姓名：</label>
+          <input type="text" v-model="name" id="name">
+        </p>
+        <p class="clearDiv">
+          <label for="mobile">收货人电话：</label>
+          <input type="text" v-model="mobile" id="mobile">
+        </p>
+        <p class="clearDiv">
+          <label for="code">邮政编码：</label>
+          <input type="text" v-model="code" id="code">
+        </p>
+        <p class="clearDiv address">
+          <label for="address">收货地址：</label>
+          <v-distpicker
+            :placeholders="{province: '省', city: '市', area: '区'}"
+            @selected="selected"
+            class="floatLeft"
+            id="address"
+            :province="select.province"
+            :city="select.city"
+            :area="select.area"
+          ></v-distpicker>
+        </p>
+        <p class="clearDiv detailAdress-box">
+          <label for="detailAdress">详细地址：</label>
+          <input type="text" class="detailAdress" v-model="detailAdress" id="detailAdress">
+        </p>
+        <p class="clearDiv default" v-show="isChange">
+          <input type="checkbox" class="setDefault" v-model="type">
+          <span>设为默认地址</span>
+        </p>
+        <div class="btn">
+          <button @click="addAddress(0)" v-show="isChange">保存</button>
+          <button @click="addAddress(1)" v-show="!isChange">保存</button>
+          <button class="close" @click="showMeng">关闭</button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import VDistpicker from "v-distpicker";
 export default {
   data() {
     return {
-      list: []
+      list: [],
+      name: "",
+      mobile: "",
+      code: "",
+      detailAdress: "",
+      type: false,
+      select: {
+        province: "",
+        city: "",
+        area: ""
+      },
+      mengShow: false,
+      isChange:false
     };
   },
+  components: {
+    VDistpicker
+  },
   mounted() {
-    let list = [
-      {
-        name: "油菜",
-        phone: "13811111111",
-        type: 0
-      },
-      {
-        name: "youcai",
-        phone: "13811111112",
-        type: 1
-      },
-      {
-        name: "youcai2",
-        phone: "13811111113",
-        type: 1
+    this.init();
+  },
+  computed: {
+    checkType() {
+      if (this.type === false) {
+        this.type = 0;
+      } else {
+        this.type = 1;
       }
-    ];
-    this.list = list;
+      return this.type;
+    }
   },
   methods: {
-    //设为默认
-    setDefault(index, rows) {
-      this.list.forEach((val, k) => {
-        val.type = 1;
-        if (index === k) {
-          val.type = 0;
+    //初始化数据
+    init() {
+      let Uid = this.$store.getters.getUserData.userId;
+      console.log(Uid);
+      this.$fetch(
+        "http://192.168.2.34:5010/tourist/address/selectReceiveAddress",
+        { touristId: Uid }
+      ).then(res => {
+        this.list = res.data;
+      });
+    },
+    //处理地址
+    setAddress(province, city, area) {
+      return province + city + area;
+    },
+    //删除收货地址
+    deleteRow(index, rows, id) {
+      this.$confirm("是否删除改地址?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          this.$fetch(
+            "http://192.168.2.34:5010/tourist/address/deleteReceiveAddress",
+            { id: id }
+          ).then(res => {
+            if (res.code === 200) {
+              rows.splice(index, 1);
+            }
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除"
+          });
+        });
+    },
+    //显示或隐藏蒙版
+    showMeng() {
+      this.isChange = true;
+      if (this.list === null) {
+        this.mengShow = !this.mengShow;
+      } else if (this.list.length >= 3) {
+        this.$alert("最多只能添加三个收货地址哦", "提示", {
+          confirmButtonText: "确定"
+        });
+      } else {
+        this.name = "";
+        this.mobile = "";
+        this.code = "";
+        this.select.province = "";
+        this.select.city = "";
+        this.select.area = "";
+        this.detailAdress = "";
+        this.type = false;
+        this.mengShow = !this.mengShow;
+      }
+    },
+    //获取地址栏的值
+    selected(val) {
+      // console.log(val.province.value)
+      this.select.province = val.province.value;
+      this.select.city = val.city.value;
+      this.select.area = val.area.value;
+    },
+    //新增收货地址
+    addAddress(key) {
+      if (key === 0) {
+        let Uid = this.$store.getters.getUserData.userId;
+        let data = {
+          touristId: Uid,
+          receivePersonName: this.name,
+          receivePersonMobile: this.mobile,
+          receiveAddress: this.detailAdress,
+          receieveCode: this.code,
+          receiveProvince: this.select.province,
+          receiveCity: this.select.city,
+          receiveArea: this.select.area,
+          defaultSign: this.checkType
+        };
+        this.$post(
+          "http://192.168.2.34:5010/tourist/address/addReceiveAddress ",
+          data,
+          { headers: { "Content-Type": "application/json;charset=UTF-8" } }
+        ).then(res => {
+          if (res.code === 200) {
+            this.mengShow = !this.mengShow;
+            this.init();
+          }
+        });
+      } else {
+        let data = {
+          id: this.id,
+          receivePersonName: this.name,
+          receivePersonMobile: this.mobile,
+          receiveAddress: this.detailAdress,
+          receieveCode: this.code,
+          receiveProvince: this.select.province,
+          receiveCity: this.select.city,
+          receiveArea: this.select.area
+        };
+        this.$post(
+          "http://192.168.2.34:5010/tourist/address/updateReceiveAddress",
+          data,
+          { headers: { "Content-Type": "application/json;charset=UTF-8" } }
+        ).then(res => {
+          if (res.code === 200) {
+            this.mengShow = !this.mengShow;
+            this.init();
+          }
+        });
+      }
+    },
+    //设为默认地址
+    setDefault(index, id) {
+      let Uid = this.$store.getters.getUserData.userId;
+      this.$fetch(
+        "http://192.168.2.34:5010/tourist/address/setDefaultReceiveAddress",
+        {
+          touristId: Uid,
+          id: id
+        }
+      ).then(res => {
+        if (res.code === 200) {
+          this.list.forEach((val, k) => {
+            val.defaultSign = false;
+            if (index === k) {
+              val.defaultSign = true;
+            }
+          });
         }
       });
     },
-    //删除
-    deleteRow(index, rows) {
-      rows.splice(index, 1);
+    //修改地址
+    changeAddress(index, rows) {
+      this.isChange = false;
+      this.mengShow = !this.mengShow;
+      this.name = rows[index].receivePersonName;
+      this.mobile = rows[index].receivePersonMobile;
+      this.code = rows[index].receieveCode;
+      this.select.province = rows[index].receiveProvince;
+      this.select.city = rows[index].receiveCity;
+      this.select.area = rows[index].receiveArea;
+      this.detailAdress = rows[index].receiveAddress;
+      this.id = rows[index].id;
     }
   }
 };
@@ -147,20 +339,20 @@ export default {
     .change-content {
       margin-top: 21px;
       .table-address {
-        .change-address{
+        .change-address {
           height: 26px;
           line-height: 26px;
           width: 60px;
           display: inline-block;
-          background-color: #2D7AE4;
+          background-color: #2d7ae4;
           color: #ffffff;
         }
-        .del-address{
+        .del-address {
           height: 26px;
           line-height: 26px;
           width: 60px;
           display: inline-block;
-          background-color: #C0C0C0;
+          background-color: #c0c0c0;
           color: #ffffff;
         }
         .default-address {
@@ -172,7 +364,7 @@ export default {
           color: #ffffff;
           border: 1px dotted #9b9b9b;
         }
-        .set-default{
+        .set-default {
           display: inline-block;
           width: 90px;
           height: 34px;
@@ -182,7 +374,92 @@ export default {
       }
     }
   }
+  .meng {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 999;
+    background: rgba(58, 41, 41, 0.5);
+    .box {
+      width: 491px;
+      height: 525px;
+      background: rgba(255, 255, 255, 1);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-left: -245px;
+      margin-top: -260px;
+      padding: 0 20px;
+      p {
+        font-size: 14px;
+        font-weight: 400;
+        color: rgba(51, 51, 51, 1);
+        height: 34px;
+        line-height: 34px;
+        margin-top: 20px;
+        * {
+          float: left;
+        }
+        label {
+          width: 20%;
+        }
+        input {
+          width: 80%;
+          height: 34px;
+          border: 1px solid rgba(191, 191, 191, 1);
+          text-indent: 10px;
+        }
+        span {
+          display: inline-block;
+          margin-left: 10px;
+        }
+        .setDefault {
+          width: 18px;
+          height: 18px;
+          background: rgba(220, 220, 220, 1);
+          border: 1px solid rgba(191, 191, 191, 1);
+          border-radius: 50%;
+        }
+      }
+      .detailAdress-box {
+        height: 129px;
+        .detailAdress {
+          height: 129px;
+          padding-bottom: 100px;
+        }
+      }
+      .default {
+        height: 18px;
+        line-height: 18px;
+      }
+      .btn {
+        margin-top: 40px;
+        button {
+          width: 114px;
+          height: 44px;
+          background: rgba(7, 100, 233, 1);
+        }
+        .close {
+          margin-left: 20px;
+          border: 1px solid rgba(7, 100, 233, 1);
+          background-color: #ffffff;
+        }
+      }
+    }
+  }
 }
 </style>
-<style>
+<style scoped>
+.address >>> select {
+  float: left;
+  width: 110px;
+  height: 34px;
+  border: solid 1px #c5c5c5;
+  margin-right: 10px;
+  font-size: 14px;
+  border-radius: 0;
+  padding: 0.3rem 0.75rem;
+}
 </style>

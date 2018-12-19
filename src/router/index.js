@@ -10,7 +10,7 @@ import Suborder from '@/view/Orderonline/Suborder'
 import Carsuborder from '@/view/Orderonline/Carsuborder'
 import success from '@/view/Orderonline/success'
 //注册
-const Register = r =>require.ensure([], () => r(require('@/view/Register')), 'Register')
+const Register = r => require.ensure([], () => r(require('@/view/Register')), 'Register')
 //麦迪卡斯首页
 const McGrady = r => require.ensure([], () => r(require('@/view/McGrady/McGrady')), 'McGrady')
 
@@ -27,7 +27,8 @@ const ProductDetail = r => require.ensure([], () => r(require('@/view/ProductDet
 const ShoppingCar1 = r => require.ensure([], () => r(require('@/view/ShoppingCar1')), 'ShoppingCar1')
 
 // 新闻中心首页
-const News = r => require.ensure([], () => r(require('@/view/News')), 'News')
+const News = r => require.ensure([], () => r(require('@/view/news/News')), 'News')
+const NewList = r => require.ensure([], () => r(require('@/view/news/NewList')), 'NewList')
 const Reset = r => require.ensure([], () => r(require('@/view/Reset')), 'Reset')
 
 // 个人中心-我的卡券
@@ -45,6 +46,7 @@ const Refund = r => require.ensure([], () => r(require('@/view/Mine/Order/Refund
 const Audit = r => require.ensure([], () => r(require('@/view/Mine/Order/Audit')), 'Audit')
 const Faudit = r => require.ensure([], () => r(require('@/view/Mine/Order/Faudit')), 'Faudit')
 const Error = r => require.ensure([], () => r(require('@/view/Mine/Order/Error')), 'Error')
+const OrderDetail = r => require.ensure([], () => r(require('@/view/Mine/Order/OrderDetail')), 'OrderDetail')
 // 个人中心-积分
 const MyIntegral = r => require.ensure([], () => r(require('@/view/Mine/MyIntegral')), 'MyIntegral')
 // 个人中心-购物车
@@ -94,18 +96,16 @@ export default new Router({
       name: 'Forget',
       component: Forget
     },
-    
+
     {
       path: '/order',
       name: 'Order',
       component: Order,
-      children:[
-        {
-          path: '/tickets/:id',
-          name: 'tickets',
-          component: tickets,
-        }
-      ]
+      children: [{
+        path: '/tickets/:id',
+        name: 'tickets',
+        component: tickets,
+      }]
     },
     {
       path: '/register',
@@ -130,7 +130,18 @@ export default new Router({
     {
       path: '/news',
       name: 'News',
-      component: News
+      component: News,
+      children: [{
+          path: '/',
+          name: 'NewList',
+          component: NewList
+        },
+        {
+          path: '/newList',
+          name: 'NewList',
+          component: NewList
+        }
+      ]
     },
     {
       path: '/success',
@@ -168,7 +179,7 @@ export default new Router({
       meta: {
         nav: 2
       },
-			children: [//个人中心二级子路由
+      children: [ //个人中心二级子路由
         {
           path: '/',
           name: 'MyOrder-default',
@@ -177,202 +188,206 @@ export default new Router({
             nav: 2
           }
         },
-				{
-					path: '/myorder',
-					// name: 'MyOrder',
+        {
+          path: '/myorder',
+          // name: 'MyOrder',
           component: MyOrder,
           meta: {
             nav: 2
           },
-					children:[//我的订单子路由
-						{
-							path: '/',
-							name: 'Unpaid-default',
-							component: Unpaid,
-							meta: {
-								nav: 2
-							}
-						},
-						{
-							path: '/unpaid',
-							name: 'Unpaid',
-							component: Unpaid,
-							meta: {
-								nav: 2
-							}
-						},
-						{
-							path: '/prepaid',
-							name: 'Prepaid',
-							component: Prepaid,
-							meta: {
-								nav: 2
-							}
-						},
-						{
-							path: '/consumed',
-							name: 'Consumed',
-							component: Consumed,
-							meta: {
-								nav: 2
-							}
-						},
-						{
-							path: '/refund',
-							name: 'Refund',
-							component: Refund,
-							meta: {
-								nav: 2
-							}
-						},
-						{
-							path: '/audit',
-							name: 'Audit',
-							component: Audit,
-							meta: {
-								nav: 2
-							}
-						},
-						{
-							path: '/faudit',
-							name: 'Faudit',
-							component: Faudit,
-							meta: {
-								nav: 2
-							}
-						},
-						{
-							path: '/error',
-							name: 'Error',
-							component: Error,
-							meta: {
-								nav: 2
-							}
-						}
-					]
+          children: [ //我的订单子路由
+            {
+              path: '/',
+              name: 'Unpaid-default',
+              component: Unpaid,
+              meta: {
+                nav: 2
+              }
+            },
+            {
+              path: '/unpaid',
+              name: 'Unpaid',
+              component: Unpaid,
+              meta: {
+                nav: 2
+              }
+            },
+            {
+              path: '/prepaid',
+              name: 'Prepaid',
+              component: Prepaid,
+              meta: {
+                nav: 2
+              }
+            },
+            {
+              path: '/consumed',
+              name: 'Consumed',
+              component: Consumed,
+              meta: {
+                nav: 2
+              }
+            },
+            {
+              path: '/refund',
+              name: 'Refund',
+              component: Refund,
+              meta: {
+                nav: 2
+              }
+            },
+            {
+              path: '/audit',
+              name: 'Audit',
+              component: Audit,
+              meta: {
+                nav: 2
+              }
+            },
+            {
+              path: '/faudit',
+              name: 'Faudit',
+              component: Faudit,
+              meta: {
+                nav: 2
+              }
+            },
+            {
+              path: '/error',
+              name: 'Error',
+              component: Error,
+              meta: {
+                nav: 2
+              }
+            }
+          ]
         },
         {
-					path: '/myCoupon',
+          path: '/myCoupon',
           component: MyCoupon,
           meta: {
             nav: 2
           },
-          children:[
-            {
+          children: [{
               path: '/',
               component: CouponReceived,
-              meta:{
-                nav:2
+              meta: {
+                nav: 2
               }
             },
             {
               path: '/couponReceived',
               name: 'CouponReceived',
               component: CouponReceived,
-              meta:{
-                nav:2
+              meta: {
+                nav: 2
               }
             },
             {
               path: '/couponUsed',
               name: 'CouponUsed',
               component: CouponUsed,
-              meta:{
-                nav:2
+              meta: {
+                nav: 2
               }
             },
             {
               path: '/couponUnused',
               name: 'CouponUnused',
               component: CouponUnused,
-              meta:{
-                nav:2
+              meta: {
+                nav: 2
               }
             },
             {
               path: '/couponStale',
               name: 'CouponStale',
               component: CouponStale,
-              meta:{
-                nav:2
+              meta: {
+                nav: 2
               }
             }
           ]
         },
         {
-					path: '/couponCenter',
-					name: 'CouponCenter',
+          path: '/couponCenter',
+          name: 'CouponCenter',
           component: CouponCenter,
           meta: {
             nav: 2
           }
         },
         {
-					path: '/Invoice',
-					name: 'Invoice',
+          path: '/Invoice',
+          name: 'Invoice',
           component: Invoice,
           meta: {
             nav: 2
           }
         },
         {
-					path: '/myIntegral',
-					name: 'MyIntegral',
+          path: '/myIntegral',
+          name: 'MyIntegral',
           component: MyIntegral,
           meta: {
             nav: 2
           }
         },
         {
-					path: '/shoppingCar',
-					name: 'ShoppingCar',
+          path: '/shoppingCar',
+          name: 'ShoppingCar',
           component: ShoppingCar,
           meta: {
             nav: 2
           }
         },
         {
-					path: '/shoppingAdress',
-					name: 'ShoppingAdress',
+          path: '/shoppingAdress',
+          name: 'ShoppingAdress',
           component: ShoppingAdress,
           meta: {
             nav: 2
           }
         },
         {
-					path: '/myMessage',
-					name: 'MyMessage',
+          path: '/myMessage',
+          name: 'MyMessage',
           component: MyMessage,
           meta: {
             nav: 2
           }
         },
         {
-					path: '/messageDetail',
-					name: 'MessageDetail',
+          path: '/messageDetail',
+          name: 'MessageDetail',
           component: MessageDetail,
           meta: {
             nav: 2
           }
         },
         {
-					path: '/membership',
-					name: 'Membership',
+          path: '/membership',
+          name: 'Membership',
           component: Membership,
           meta: {
             nav: 2
           }
         },
         {
-					path: '/changePwd',
-					name: 'ChangePwd',
+          path: '/changePwd',
+          name: 'ChangePwd',
           component: ChangePwd,
           meta: {
             nav: 2
           }
         }
-         
-			]
-    }
+
+      ]
+    },
+    {
+      path: '/orderDetail',
+      name: 'OrderDetail',
+      component: OrderDetail
+    },
   ]
 })

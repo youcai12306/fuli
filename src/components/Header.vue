@@ -23,8 +23,9 @@
             <span>{{name}}</span>
             <div class="person-info" v-show="loginShow">
               <div class="info-one">
-                <a href="javascript:;" class="mine">个人中心</a>
-                <a href="javascript:;" class="exit">退出</a>
+                <router-link to="/mine" class="mine">个人中心</router-link>
+                <!-- <a href="javascript:;" class="mine" >个人中心</a> -->
+                <a href="javascript:;" class="exit" @click.stop="setSignOuts">退出</a>
               </div>
               <div class="clearDiv info-two">
                 <img src="../assets/img/mine-icon.png" alt class="floatLeft">
@@ -70,6 +71,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "Hearer",
   data() {
@@ -94,12 +96,13 @@ export default {
     } else {
       this.name = this.$store.getters.userInfo.mobile + ",欢迎您！";
     }
-    document.addEventListener("click", e => {
-      console.log(this.$refs.box.contains(e.target));
-      if (!this.$refs.box.contains(e.target)) {
-        this.loginShow = false;
-      }
-    });
+    if (this.$refs.box) {
+      document.addEventListener("click", e => {
+        if (!this.$refs.box.contains(e.target)) {
+          this.loginShow = false;
+        }
+      });
+    }
   },
   updated() {},
 
@@ -122,17 +125,23 @@ export default {
     //跳转个人中心
     jumpMine() {
       console.log(Object.keys(this.$store.getters.userInfo).length);
-        if (Object.keys(this.$store.getters.userInfo).length === 0) {
-          this.$router.push("/login");
-        } else {
-
-      	// this.$router.push("/mine");
-      	this.loginShow = true;
-        }
+      if (Object.keys(this.$store.getters.userInfo).length === 0) {
+        this.$router.push("/login");
+      } else {
+        // this.$router.push("/mine");
+        this.loginShow = true;
+      }
       this.loginShow = true;
     },
-    jumpOrderTicket(){
-      this.$router.push('/tickets/1')
+    //跳转订票页面
+    jumpOrderTicket() {
+      this.$router.push("/tickets/1");
+    },
+    ...mapActions(["setSignOut"]),
+    //退出登录
+    setSignOuts(){
+      this.setSignOut()
+      this.$router.replace('/login')
     }
   }
 };

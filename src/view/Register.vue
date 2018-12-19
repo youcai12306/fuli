@@ -127,7 +127,7 @@ export default {
   methods: {
     //显示验证码
     getCode() {
-      this.$fetch("http://192.168.2.34:5050/tourist/getKaptcha").then(res => {
+      this.$fetch("http://192.168.2.34:5010/tourist/getKaptcha").then(res => {
         this.codeImg = "data:image/png;base64," + res;
       });
     },

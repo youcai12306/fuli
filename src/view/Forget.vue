@@ -26,7 +26,7 @@
           <el-step title="完成"></el-step>
         </el-steps>
         <!-- 填写用户名 -->
-        <div class="fo2" v-if="0===flag">
+        <div class="fo2" v-if="1===this.active">
           <div class="fo4">
             <input type="text" placeholder="手机号" v-model="phone" @blur="checkPhone">
             <span>{{phoneTip}}</span>
@@ -41,22 +41,24 @@
             >{{showPin}}</button>
             <span>{{codeTip}}</span>
           </div>
-          <el-button style="margin-top: 34px;" @click="next">下一步</el-button>
+          <el-button style="margin-top: 34px;" @click="next1">下一步</el-button>
         </div>
         <!-- 设置新密码 -->
-        <div class="fo2" v-else-if="1===flag">
+        <div class="fo2" v-else-if="2===this.active">
           <div class="fo4">
-            <input type="text" placeholder="请输入新密码">
+            <input type="text" placeholder="请输入新密码" v-model="password" @blur="checkPwd">
+            <span>{{pwdTip}}</span>
           </div>
           <div class="fo7">
-            <input type="text" placeholder="请再次输入新密码">
+            <input type="text" placeholder="请再次输入新密码" v-model="confirmPassword" @blur="checkConfirmPwd">
+            <span>{{confirmPwdTip}}</span>
           </div>
-          <el-button style="margin-top: 34px;" @click="next">下一步</el-button>
+          <el-button style="margin-top: 34px;" @click="next2">下一步</el-button>
         </div>
         <!-- 确认 -->
         <div v-else class="fo6">
           <el-row>
-            <el-button type="success" icon="el-icon-check" circle></el-button>
+            <el-button type="success" icon="el-icon-check" circle @click="jumpLogin"></el-button>
           </el-row>确认
         </div>
       </div>
@@ -68,59 +70,58 @@
 export default {
   data() {
     return {
-      active: 0,
+      active: 1,
       flag: 0,
       showPin: "获取验证码",
       isActive: true,
       codeTip: "",
       code: "",
       phone: "",
-      phoneTip: ""
+      phoneTip: "",
+      password: "",
+      pwdTip: "",
+      confirmPassword: "",
+      confirmPwdTip: ""
     };
   },
-  computed:{
-    can(){
+  computed: {
+    can() {
       if (!/^1[34578]\d{9}$/.test(this.phone)) {
-        return true
+        return true;
       } else {
         this.phoneTip = "";
-        if(this.isActive){
-          return false
-        }else{
-          return true
+        if (this.isActive) {
+          return false;
+        } else {
+          return true;
         }
       }
-      console.log(this.isActive)
+      console.log(this.isActive);
       return this.isActive;
     }
   },
   methods: {
-    next() {
-      if (this.active++ > 2) this.active = 0;
-      if(this.flag === 0){
-        // this.
-      }
-      this.flag++;
-    },
     //判断手机号
     checkPhone() {
       if (!/^1[34578]\d{9}$/.test(this.phone)) {
         this.phoneTip = "请输入正确的手机号码";
-        this.isOk = false;
         return false;
       } else {
         this.phoneTip = "";
         this.isOk = true;
+        return true;
       }
     },
     //获取验证码
     getCode() {
       let that = this;
       clearInterval(that.setsund);
-      this.$fetch("http://192.168.2.34:5050/tourist/getSmsCode", { mobile: this.phone,smsFlag:'sms_back'}).then(res => {
+      this.$fetch("http://192.168.2.34:5010/tourist/getSmsCode", {
+        mobile: this.phone,
+        smsFlag: "sms_back"
+      }).then(res => {
         if (res.code === 200) {
           this.isActive = false;
-          console.log(this.isActive)
           let num = 59;
           that.setsund = setInterval(() => {
             this.showPin = num + "s后重新发送";
@@ -132,7 +133,6 @@ export default {
             }
           }, 1000);
         } else {
-          //this.isActive = false;
           this.codeTip1 = res.message;
         }
       });
@@ -141,9 +141,76 @@ export default {
     checkCode() {
       if (!/^\d{4}$/.test(this.code)) {
         this.codeTip = "请输入正确的验证码";
+        return false;
       } else {
         this.codeTip = "";
+        return true;
       }
+    },
+    //第一步
+    next1() {
+      if (this.active >= 3) this.active = 0;
+      if (!this.checkPhone()) {
+        return;
+      }
+      if (!this.checkCode()) {
+        return;
+      }
+      this.$fetch("http://192.168.2.34:5010/tourist/checkSmsCode", { smsCode: this.code }).then(
+        res => {
+          if (res.code === 200) {
+            this.active ++;
+          }else{
+            this.codeTip = res.message;
+          }
+        }
+      );
+    },
+    //检查密码
+    checkPwd() {
+      if (!/^[a-zA-Z0-9]{6,10}$/.test(this.password)) {
+        this.pwdTip = "请填写6-10位数的英文或数字密码";
+        return false;
+      } else {
+        this.pwdTip = "";
+        return true;
+      }
+    },
+    //检查确认密码
+    checkConfirmPwd() {
+      if (!/^[a-zA-Z0-9]{6,10}$/.test(this.confirmPassword)) {
+        this.confirmPwdTip = "请填写6-10位数的英文或数字密码";
+        return false;
+      } else if (this.password !== this.confirmPassword) {
+        this.confirmPwdTip = "两次填写的密码不正确";
+        return false;
+      } else {
+        this.pwdTip = "";
+        return true;
+      }
+    },
+    //第二步
+    next2() {
+      if (this.active >= 3) this.active = 1;
+      if (!this.checkPwd()) {
+        return;
+      }
+      if (!this.checkConfirmPwd()) {
+        return;
+      }
+      this.$post(
+        "http://192.168.2.34:5010/tourist/getBackTouristPassWord",
+        { mobile: this.mobile, passWord: this.password },
+        { headers: { "Content-Type": "application/json;charset=UTF-8" } }
+      ).then(res => {
+         if(res.code === 200){
+           this.active++;
+         }
+      });
+    },
+    //跳转登录页面
+    jumpLogin(){
+      this.$router.replace('/login')
     }
   }
 };
@@ -280,9 +347,16 @@ a {
   margin-right: 265px;
   .fo7 {
     margin-top: 35px;
+    position: relative;
     input {
-      //   float:left;
       width: 272px;
+    }
+    span {
+      position: absolute;
+      left: 10px;
+      bottom: -18px;
+      color: red;
+      font-size: 12px;
     }
   }
   button {
@@ -302,7 +376,7 @@ a {
     span {
       position: absolute;
       left: 10px;
-      bottom:-18px;
+      bottom: -18px;
       color: red;
       font-size: 12px;
     }
@@ -313,7 +387,7 @@ a {
     span {
       position: absolute;
       left: 10px;
-      bottom:-18px;
+      bottom: -18px;
       color: red;
       font-size: 12px;
     }

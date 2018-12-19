@@ -160,8 +160,6 @@
 
 <style lang="scss">
 	.o_order {
-		border: 1px solid rgba(196, 220, 255, 1);
-
 		.demo-table-expand {
 			font-size: 0;
 		}

@@ -6,12 +6,12 @@
         <div class="sc3">
           <div class="sc4">
             <p>
-              订单创建成功，订单号：<span>956868689790890780686</span>
+              订单创建成功，订单号：<span>{{this.$route.query.orderId}}</span>
             </p>
           </div>
           <div class="sc5">
             <div class="sc6">
-              <p class="sc61">支付金额： <span class="sc7">¥320</span></p>
+              <p class="sc61">支付金额： <span class="sc7">{{this.$route.query.price2}}元</span></p>
 
               <span class="sc62">选择支付方式：</span>
               <img
@@ -73,6 +73,9 @@ export default {
   methods: {
     change(isActive) {
       this.isActive = isActive;
+      if(isActive==0){
+        
+      }
     },
     num: function(n) {
       return n < 10 ? "0" + n : "" + n;

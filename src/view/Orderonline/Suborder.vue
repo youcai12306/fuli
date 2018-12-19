@@ -21,7 +21,7 @@
                 alt=""
               >
               <p class="su23">订单创建中，请稍后...</p>
-              <p class="su24">预计等待时间为5秒</p>
+              <p class="su24">预计等待时间为3秒</p>
             </div>
           </div>
         </div>
@@ -130,26 +130,35 @@
                     >
 
                     </el-input>
-                    
+
                     <p>此手机号用于接受入园短信</p>
                   </el-form-item>
 
                   <el-form-item
                     label="身份证 ："
-                    class="el3"
+                    class="el1"
+                    prop="name2"
+                    :rules="[
+                          { required: true, message: '身份证不能为空'},
+                          { type: 'number', message: '身份证必须为数字'}
+                      ]"
                   >
-                    <el-input v-model="form.name">
+
+                    <el-input
+                      type="name2"
+                      v-model.number="numberValidateForm.name2"
+                      autocomplete="off"
+                    >
 
                     </el-input>
-                    <span>(非必填项)</span>
-                  </el-form-item>
 
+                  </el-form-item>
                   <el-form-item>
                     <el-button
                       type="primary"
                       @click="submitForm('numberValidateForm')"
                     >提交</el-button>
-                    
+
                   </el-form-item>
                 </el-form>
               </div>
@@ -161,10 +170,11 @@
             <div class="su14">
               <span class="su15">总计金额：</span>
               <span class="su16">¥{{price2}}元</span>
-              <img
+              <!-- <img
                 src="../../assets/img/but1.png"
-                alt="" @click ="onSubmit"
-              >
+                alt=""
+                @click="onSubmit"
+              > -->
             </div>
           </div>
         </div>
@@ -182,7 +192,9 @@ export default {
   data() {
     return {
       numberValidateForm: {
-        name1: ""
+        name1: "",
+        name2: "",
+        phone: ""
       },
       form: {
         name: "",
@@ -197,9 +209,11 @@ export default {
       checked: true,
       flag: false,
       count: 0,
-      price1: 120.0,
+      price1: "",
       productname: "",
-      playtime: ""
+      playtime: "",
+      orderId: "",
+      times:""
     };
   },
   mounted() {
@@ -208,23 +222,17 @@ export default {
   methods: {
     // 验证
     submitForm(formName) {
-      
       this.$refs[formName].validate(valid => {
         if (valid) {
           this.flag = true;
           // alert("submit!");
+          this.onSubmit();
         } else {
           console.log("error submit!!");
           return false;
         }
       });
     },
-
-    //   提交
-    onSubmit() {
-      
-    },
-
     shopmsg() {
       let id = this.$route.query.id;
       let stockId = this.$route.query.stockId;
@@ -236,13 +244,73 @@ export default {
         stockId: stockId
       }).then(res => {
         if (res.code === 200) {
-          console.log(res);
+          // console.log(res);
           this.productname = res.data.productName;
           this.playtime = res.data.dataBaseDate;
-          this.price1 = res.data.salePrice;
+          this.price1 = res.data.settlementPrice;
+        }
+      });
+    },
+    //   提交
+    onSubmit() {
+      console.log(111);
+      let data = {
+        touristId: "b3bef218485b484f9c535f707601d868",
+        productFormList: [
+          {
+            productId: this.$route.query.id,
+            num: this.$route.query.num,
+            stockId: this.$route.query.stockId
+          }
+        ],
+        saleType: 1,
+        receiveId: 1111111111,//邮寄ID
+        receiveName: this.numberValidateForm.name1,
+        receiveMobile: this.numberValidateForm.phone,
+        receiveIdentityCode: this.numberValidateForm.name2
+      };
+      // 拿到guid以及订单号
+      this.$post("http://192.168.2.38:5041/order/save", data, {
+        headers: { "Content-Type": "application/json;charset=UTF-8" }
+      }).then(res => {
+        if (res.code === 200) {
+          console.log(res);
+          this.orderId = res.data.orderId;
+          let data1 = {
+            guid: "c642abc00cbc40d88bf96b6cb035feff",
+            userId: "b3bef218485b484f9c535f707601d868"
+          };
+          console.log(111);
+          // 读redis，成功创建订单后关闭遮罩层，跳转支付页面
+          this.times = setInterval(()=>{
+            this.$fetch(
+              "http://192.168.2.42:6110/callBack/getOccupation",
+              data1
+            ).then(res => {
+              console.log(res);
+              if (res.code === 200) {
+                clearInterval(this.times);
+                this.flag = false;
+                this.$router.push({
+                  path: "./success",
+                  query: {
+                    orderId: this.orderId,
+                    price2: this.price2
+                  }
+                });
+              } else if (res.code === 400) {
+                alert("下单失败");
+              }
+            })
+          },3000);
+
+          ///
         }
       });
     }
+  },
+  beforeDestroy(){
+    clearInterval(this.times);
   },
   computed: {
     price2() {

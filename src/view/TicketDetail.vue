@@ -18,7 +18,7 @@
           <div class="right-pay clearDiv">
             <div class="title">{{canDebook(product.returnSign)}}</div>
             <div class="new-price">
-              ￥{{product.salePrice}}
+              ￥{{product.settlementPrice}}
               <span class="old-price">原价￥{{product.originalPrice}}</span>
             </div>
             <div class="pay pay-time">游玩时间：{{product.useBeginTime}}-{{product.useEndTime}}</div>

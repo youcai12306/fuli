@@ -9,6 +9,16 @@ import tickets from '@/view/Orderonline/tickets'
 import Suborder from '@/view/Orderonline/Suborder'
 import Carsuborder from '@/view/Orderonline/Carsuborder'
 import success from '@/view/Orderonline/success'
+import guide from '@/view/Visitguide/guide'
+import menpiao from '@/view/Visitguide/menpiao'
+import jiudian from '@/view/Visitguide/jiudian'
+import yingye from '@/view/Visitguide/yingye'
+import jiaotong from '@/view/Visitguide/jiaotong'
+import changjian from '@/view/Visitguide/changjian'
+import binke from '@/view/Visitguide/binke'
+import elie from '@/view/Visitguide/elie'
+import nianka from '@/view/Visitguide/nianka'
+import ditu from '@/view/Visitguide/ditu'
 //注册
 const Register = r =>require.ensure([], () => r(require('@/view/Register')), 'Register')
 //麦迪卡斯首页
@@ -370,9 +380,63 @@ export default new Router({
           meta: {
             nav: 2
           }
-        }
+        },
+        
          
 			]
-    }
+    },
+    {
+      path: '/guide',
+      name: 'guide',
+      component: guide,
+      children:[
+        {
+          path: '/menpiao',
+          name: 'menpiao',
+          component: menpiao,
+        },
+        {
+          path: '/jiudian',
+          name: 'jiudian',
+          component: jiudian,
+        },
+        {
+          path: '/yingye',
+          name: 'yingye',
+          component: yingye,
+        },
+        {
+          path: '/jiaotong',
+          name: 'jiaotong',
+          component: jiaotong,
+        },
+        {
+          path: '/changjian',
+          name: 'changjian',
+          component: changjian,
+        },
+        {
+          path: '/binke',
+          name: 'binke',
+          component: binke,
+        },
+        {
+          path: '/elie',
+          name: 'elie',
+          component: elie,
+        },
+        {
+          path: '/nianka',
+          name: 'nianka',
+          component: nianka,
+        },
+        {
+          path: '/ditu',
+          name: 'ditu',
+          component: ditu,
+        },
+      ]
+    },
+
   ]
 })

@@ -8,24 +8,20 @@
 
     <!-- 所有新闻 -->
     <div class="main-new">
-      <div class="hea-img">
-        <router-link :to="{path:'/'}">
-          <img src="../../assets/img/new-1.png" alt="图片">
-          <div class="bt">
-            <p class="p1">关于“海洋露天剧场围蔽施工”暂停服务的公告</p>
-            <p class="p2">来自长隆海洋王国 | 2018.08.09</p>
-          </div>
-          <div class="button"></div>
-        </router-link>
+      <div class="hea-img" @click="jumpDetail(list.id)">
+        <img src="../../assets/img/new-1.png" alt="图片">
+        <div class="bt">
+          <p class="p1">关于“海洋露天剧场围蔽施工”暂停服务的公告</p>
+          <p class="p2">来自长隆海洋王国 | 2018.08.09</p>
+        </div>
+        <div class="button"></div>
       </div>
 
       <ul>
-        <li v-for="(item,key) in list" :key="key">
-          <router-link :to="{path:'/'}">
-            <i></i>
-            <span class="li-itme">{{item.title}}</span>
-            <span class="li-span">{{item.span}} | {{item.time}}</span>
-          </router-link>
+        <li v-for="(item,key) in list1" :key="key" @click="jumpDetail(item.id)">
+          <i></i>
+          <span class="li-itme">{{item.title}}</span>
+          <span class="li-span">{{item.span}} | {{item.time}}</span>
         </li>
       </ul>
     </div>
@@ -47,20 +43,8 @@ export default {
   data() {
     return {
       page: 1,
-      list: [
-        {
-          title:
-            "关于“丛林过山车、沙雕城堡、海鸟世界象龟展区”升级改造暂停服务的公告",
-          span: "来自海洋欢乐世界",
-          time: "2018.08.09"
-        },
-        {
-          title:
-            "关于“丛林过山车、沙雕城堡、海鸟世界象龟展区”升级改造暂停服务的公告",
-          span: "来自海洋欢乐世界",
-          time: "2018.08.09"
-        }
-      ]
+      list: {},
+      list1:[]
     };
   },
   methods: {
@@ -71,9 +55,33 @@ export default {
     // 园区公告
     // 获取所有新闻數據
     GetList() {
-      // 				this.$http.post('/api/goods').then((data) => {
-      // 					this.list = data.body.data;
-      // 				})
+      let list = [
+        {
+          id: 1,
+          title:
+            "关于“丛林过山车、沙雕城堡、海鸟世界象龟展区”升级改造暂停服务的公告",
+          span: "来自海洋欢乐世界",
+          time: "2018.08.09"
+        },
+        {
+          id: 2,
+          title:
+            "关于“丛林过山车、沙雕城堡、海鸟世界象龟展区”升级改造暂停服务的公告",
+          span: "来自海洋欢乐世界",
+          time: "2018.08.09"
+        }
+      ];
+      this.list = list[0]
+      console.log(this.list)
+      this.list1 = list.slice(1)
+    },
+    jumpDetail(id) {
+      this.$router.push({
+        path: "/newDetail",
+        query: {
+          id: id
+        }
+      });
     }
   },
   created() {

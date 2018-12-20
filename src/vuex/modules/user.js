@@ -1,4 +1,5 @@
 import * as types from '../types'
+import { setCookie } from "../../package/cookie";
 
 const state = {
     // 用户登录状态
@@ -37,6 +38,7 @@ const actions = {
      */
     setUserData({ commit },res) {
         localStorage.setItem('userData', JSON.stringify(res))
+        setCookie('userData',JSON.stringify(res),60*60*24)
         commit(types.COM_LOADING_STATUS, false)
         commit(types.SET_USER_DATA, res)
     },

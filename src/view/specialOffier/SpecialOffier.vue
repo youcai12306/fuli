@@ -3,10 +3,10 @@
     <div class="main-contion">
       <!-- 导航 -->
       <div class="l">
-        <div class="header-title">新闻中心</div>
+        <div class="header-title">优惠活动</div>
         <ul>
-          <li :class="{hover:tabs==1}" @click="changeType(1)">园区新闻</li>
-          <li :class="{hover:tabs==2}" @click="changeType(2)">园区公告</li>
+          <li :class="{hover:tabs==1}" @click="changeType(1)">精彩活动</li>
+          <li :class="{hover:tabs==2}" @click="changeType(2)">优惠信息</li>
         </ul>
       </div>
       <!-- 园区新闻 -->
@@ -19,21 +19,20 @@
 
 <script>
 export default {
-  name: "News",
+  name: "SpecialOffier",
   data() {
     return {
-      title: "所有新闻",
       tabs:1
     };
   },
   methods: {
     changeType(type){
        this.tabs = type
-       return type === 1 ? this.$router.push('newList') : this.$router.push('noticeList')
+       return type === 1 ? this.$router.push('events') : this.$router.push('events')
     }
   },
   created() {
-    document.title = "新闻中心";
+    document.title = "优惠活动";
   },
 };
 </script>
@@ -95,14 +94,7 @@ export default {
 
     // 主体
     .r {
-      // position: relative;
-      // height: 1200px;
-      // width: 920px;
        float: left;
-      // margin-top: 20px;
-      // background-color: rgba(255, 255, 255, 1);
-      // border-radius: 10px;
-      // box-shadow: 0px 4px 13px 0px rgba(1, 12, 24, 0.15);
     }
   }
 }

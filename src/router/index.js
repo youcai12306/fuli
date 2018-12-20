@@ -29,7 +29,21 @@ const ShoppingCar1 = r => require.ensure([], () => r(require('@/view/ShoppingCar
 // 新闻中心首页
 const News = r => require.ensure([], () => r(require('@/view/news/News')), 'News')
 const NewList = r => require.ensure([], () => r(require('@/view/news/NewList')), 'NewList')
+const NewDetail = r => require.ensure([], () => r(require('@/view/news/NewDetail')), 'NewDetail')
+const NoticeList = r => require.ensure([], () => r(require('@/view/news/NoticeList')), 'NoticeList')
+const NoticeDetail = r => require.ensure([], () => r(require('@/view/news/NoticeDetail')), 'NoticeDetail')
 const Reset = r => require.ensure([], () => r(require('@/view/Reset')), 'Reset')
+
+//优惠活动
+const SpecialOffier = r => require.ensure([], () => r(require('@/view/specialOffier/SpecialOffier')), 'SpecialOffier')
+const Events = r => require.ensure([], () => r(require('@/view/specialOffier/Events')), 'Events')
+
+//冒险之旅
+const Risk = r => require.ensure([], () => r(require('@/view/risk/Risk')), 'Risk')
+
+//动物百科
+const Animal = r => require.ensure([], () => r(require('@/view/animal/Animal')), 'Animal')
+
 
 // 个人中心-我的卡券
 const MyCoupon = r => require.ensure([], () => r(require('@/view/Mine/MyCoupon')), 'MyCoupon')
@@ -129,19 +143,55 @@ export default new Router({
     },
     {
       path: '/news',
-      name: 'News',
       component: News,
       children: [{
           path: '/',
-          name: 'NewList',
           component: NewList
         },
         {
           path: '/newList',
           name: 'NewList',
           component: NewList
+        },
+        {
+          path: '/noticeList',
+          name: 'NoticeList',
+          component: NoticeList
+        },
+        {
+          path: '/newDetail',
+          name: 'NewDetail',
+          component: NewDetail
+        },
+        {
+          path: '/noticeDetail',
+          name: 'NoticeDetail',
+          component: NoticeDetail
+        },
+      ]
+    },
+    {
+      path: '/specialOffier',
+      component: SpecialOffier,
+      children: [{
+          path: '/',
+          component: Events
+        },
+        {
+          path: '/events',
+          component: Events
         }
       ]
+    },
+    {
+      path: '/risk',
+      name: 'Risk',
+      component: Risk
+    },
+    {
+      path: '/animal',
+      name: 'Animal',
+      component: Animal
     },
     {
       path: '/success',

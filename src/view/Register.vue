@@ -95,7 +95,7 @@
 
 <script>
 import { mapActions } from "vuex";
-import { setCookie } from "../package/aa";
+import { setCookie } from "../package/cookie";
 import moveBox from "../components/movebox";
 import axios from 'axios'
 export default {

@@ -91,7 +91,7 @@
 					<router-link to="/unpaid">全部</router-link>
 				</li>
 				<li :class="{'active' : $route.path=='/prepaid'}">
-					<router-link to="/prepaid">预支付</router-link>
+					<router-link to="/prepaid">预下单</router-link>
 				</li>
 				<li :class="{'active' : $route.path=='/consumed'}">
 					<router-link to="/consumed">待支付</router-link>

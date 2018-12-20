@@ -21,7 +21,7 @@
                 alt=""
               >
               <p class="su23">订单创建中，请稍后...</p>
-              <p class="su24">预计等待时间为5秒</p>
+              <p class="su24">预计等待时间为3秒</p>
             </div>
           </div>
         </div>
@@ -42,8 +42,8 @@
                 <th>小计</th>
               </tr>
               <tr>
-                <td>富力成人全日票
-                  <p>游玩时间：2018.11.23</p>
+                <td>{{productname}}
+                  <p>游玩时间：{{playtime}}</p>
 
                 </td>
                 <td>¥{{price1}}元</td>
@@ -89,36 +89,79 @@
             <div class="su10 clearDiv">
               <div class="su11">
                 <el-form
-                  ref="form"
-                  :model="form"
+                  ref="numberValidateForm"
+                  :model="numberValidateForm"
                   label-width="85px"
                 >
-                  <span>*</span>
-                  <el-form-item label="姓名 ：" class="el1">
-                    
-                    <el-input v-model="form.name">
+
+                  <el-form-item
+                    label="姓名 ："
+                    class="el1"
+                    prop="name1"
+                    :rules="[
+                          { required: true, message: '姓名不能为空'},
+                          { type: 'string', message: '姓名必须为中文'}
+                      ]"
+                  >
+
+                    <el-input
+                      type="name1"
+                      v-model.number="numberValidateForm.name1"
+                      autocomplete="off"
+                    >
 
                     </el-input>
-                    <span v-show="flag">请填写姓名</span>
+
                   </el-form-item>
-                  <span>*</span>
-                  <el-form-item label="手机号 ：" class="el2">
-                    <el-input v-model="form.name">
+
+                  <el-form-item
+                    label="手机号 ："
+                    class="el2"
+                    prop="phone"
+                    :rules="[
+                          { required: true, message: '手机号不能为空'},
+                          { type: 'number', message: '手机号必须为数字'}
+                      ]"
+                  >
+                    <el-input
+                      type="phone"
+                      v-model.number="numberValidateForm.phone"
+                      autocomplete="off"
+                    >
 
                     </el-input>
-                    <span v-show="flag">请填写手机号</span>
+
                     <p>此手机号用于接受入园短信</p>
                   </el-form-item>
-                  
-                  <el-form-item label="身份证 ：" class="el3">
-                    <el-input v-model="form.name">
+
+                  <el-form-item
+                    label="身份证 ："
+                    class="el1"
+                    prop="name2"
+                    :rules="[
+                          { required: true, message: '身份证不能为空'},
+                          { type: 'number', message: '身份证必须为数字'}
+                      ]"
+                  >
+
+                    <el-input
+                      type="name2"
+                      v-model.number="numberValidateForm.name2"
+                      autocomplete="off"
+                    >
 
                     </el-input>
-                    <span>(非必填项)</span>
+
+                  </el-form-item>
+                  <el-form-item>
+                    <el-button
+                      type="primary"
+                      @click="submitForm('numberValidateForm')"
+                    >提交</el-button>
+
                   </el-form-item>
                 </el-form>
               </div>
-              
 
             </div>
             <div class="su11">
@@ -127,11 +170,11 @@
             <div class="su14">
               <span class="su15">总计金额：</span>
               <span class="su16">¥{{price2}}元</span>
-              <img
+              <!-- <img
                 src="../../assets/img/but1.png"
                 alt=""
                 @click="onSubmit"
-              >
+              > -->
             </div>
           </div>
         </div>
@@ -148,6 +191,11 @@ export default {
   },
   data() {
     return {
+      numberValidateForm: {
+        name1: "",
+        name2: "",
+        phone: ""
+      },
       form: {
         name: "",
         region: "",
@@ -160,33 +208,113 @@ export default {
       },
       checked: true,
       flag: false,
-      count:2,
-      price1:120.00,
+      count: 0,
+      price1: "",
+      productname: "",
+      playtime: "",
+      orderId: "",
+      times:""
     };
   },
-  mounted(){
-      shopmsg()
+  mounted() {
+    this.shopmsg();
   },
   methods: {
+    // 验证
+    submitForm(formName) {
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          this.flag = true;
+          // alert("submit!");
+          this.onSubmit();
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
+    },
+    shopmsg() {
+      let id = this.$route.query.id;
+      let stockId = this.$route.query.stockId;
+      let num1 = this.$route.query.num;
+      // console.log(num1);
+      this.count = num1;
+
+      this.$fetch("http://192.168.2.38:5010/product/find/" + id, {
+        stockId: stockId
+      }).then(res => {
+        if (res.code === 200) {
+          // console.log(res);
+          this.productname = res.data.productName;
+          this.playtime = res.data.dataBaseDate;
+          this.price1 = res.data.settlementPrice;
+        }
+      });
+    },
     //   提交
     onSubmit() {
-      this.flag = true;
-    },
-    // 姓名以及手机号是否为空验证
-    yanzheng(){
-      if(form.name==''){
-        this.flag = true;
-      }
-    },
-    shopmsg(){
-      this.$fetch('http://192.168.2.38:5010/product/findProductByStock').then((res) =>{
-        
-      })
+      console.log(111);
+      let data = {
+        touristId: "b3bef218485b484f9c535f707601d868",
+        productFormList: [
+          {
+            productId: this.$route.query.id,
+            num: this.$route.query.num,
+            stockId: this.$route.query.stockId
+          }
+        ],
+        saleType: 1,
+        receiveId: 1111111111,//邮寄ID
+        receiveName: this.numberValidateForm.name1,
+        receiveMobile: this.numberValidateForm.phone,
+        receiveIdentityCode: this.numberValidateForm.name2
+      };
+      // 拿到guid以及订单号
+      this.$post("http://192.168.2.38:5041/order/save", data, {
+        headers: { "Content-Type": "application/json;charset=UTF-8" }
+      }).then(res => {
+        if (res.code === 200) {
+          console.log(res);
+          this.orderId = res.data.orderId;
+          let data1 = {
+            guid: "c642abc00cbc40d88bf96b6cb035feff",
+            userId: "b3bef218485b484f9c535f707601d868"
+          };
+          console.log(111);
+          // 读redis，成功创建订单后关闭遮罩层，跳转支付页面
+          this.times = setInterval(()=>{
+            this.$fetch(
+              "http://192.168.2.42:6110/callBack/getOccupation",
+              data1
+            ).then(res => {
+              console.log(res);
+              if (res.code === 200) {
+                clearInterval(this.times);
+                this.flag = false;
+                this.$router.push({
+                  path: "./success",
+                  query: {
+                    orderId: this.orderId,
+                    price2: this.price2
+                  }
+                });
+              } else if (res.code === 400) {
+                alert("下单失败");
+              }
+            })
+          },3000);
+
+          ///
+        }
+      });
     }
   },
-  computed:{
-    price2(){
-      return this.price1*this.count
+  beforeDestroy(){
+    clearInterval(this.times);
+  },
+  computed: {
+    price2() {
+      return this.price1 * this.count;
     }
   }
 };
@@ -201,9 +329,9 @@ export default {
     margin: 0 auto;
     background-color: #fff;
     overflow: hidden;
-    .su22{
+    .su22 {
       font-size: 12px;
-      margin-top:33px;
+      margin-top: 33px;
       margin-left: 48px;
     }
     .su21 {
@@ -232,22 +360,19 @@ export default {
         background-color: #fff;
         z-index: 1002;
         .su22 {
-          
           margin-top: 49px;
           img {
             margin-bottom: 27px;
-            margin-left:108px;
+            margin-left: 108px;
           }
-          
-            
-          
+
           .su23 {
             color: #333333;
             font-size: 24px;
             font-weight: bold;
             line-height: 28px;
             margin-bottom: 19px;
-            margin-left:44px;
+            margin-left: 44px;
           }
           .su24 {
             color: #0764e9;
@@ -364,7 +489,6 @@ export default {
         .su11 {
           float: left;
         }
-        
       }
       .su14 {
         margin-left: 789px;
@@ -393,25 +517,22 @@ export default {
 .suborder .el-input {
   width: 340px;
 }
-.el1{
+.el1 {
   margin-bottom: 18px;
 }
 
-.el-form-item__content>span{
- color:red;
- margin-left: 5px;
- 
+.el-form-item__content > span {
+  color: red;
+  margin-left: 5px;
 }
-.el-form-item__content>p{
-   
-    color:#999999;
-    font-size: 12px;
-  
+.el-form-item__content > p {
+  color: #999999;
+  font-size: 12px;
 }
-.el-form>span{
+.el-form > span {
   position: relative;
-  top:32px;
-  left:0px;
-  color:red;
+  top: 32px;
+  left: 0px;
+  color: red;
 }
 </style>

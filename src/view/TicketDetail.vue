@@ -18,7 +18,7 @@
           <div class="right-pay clearDiv">
             <div class="title">{{canDebook(product.returnSign)}}</div>
             <div class="new-price">
-              ￥{{product.salePrice}}
+              ￥{{product.settlementPrice}}
               <span class="old-price">原价￥{{product.originalPrice}}</span>
             </div>
             <div class="pay pay-time">游玩时间：{{product.useBeginTime}}-{{product.useEndTime}}</div>
@@ -107,7 +107,7 @@ export default {
     },
     //是否可退订
     canDebook(type) {
-      return type === 1 ? (this.sign = "可退订") : (this.sign = "可退订");
+      return type === 1 ? (this.sign = "可退订") : (this.sign = "不可退订");
     },
     //跳转提交订单页面
     jumpSubmitOrder() {

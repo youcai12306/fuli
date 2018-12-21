@@ -4,6 +4,28 @@
     <div class="sc1">
       <div class="sc2">
         <div class="sc3">
+          <!-- 微信支付遮罩层 -->
+          <div
+            class="su21 clearDiv"
+            v-show="flag"
+          >
+            <div class="bg clearDiv"></div>
+            <div class="show clearDiv">
+              <div class="su22">微信支付</div>
+              <div class="su23">
+                <div class="su24">
+                  <p>支付金额：<span>{{this.$route.query.price2}}</span></p>
+                </div>
+                <div class="su25">
+                  <!-- <img src="../../assets/img/erweima.png" alt=""> -->
+                  <div id='qrcode'></div>
+                </div>
+                <div class="su26">
+                  <button @click="success()">若已完成支付，请点击</button>
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="sc4">
             <p>
               订单创建成功，订单号：<span>{{this.$route.query.orderId}}</span>
@@ -28,7 +50,7 @@
                 :class="{active:isActive==1}"
                 @click="change(1)"
               >
-              
+
               <img
                 class="m3"
                 src="../../assets/img/wangyin.png"
@@ -46,6 +68,7 @@
             <img
               src="../../assets/img/zhifu111.png"
               alt=""
+              @click="weixin()"
             >
           </div>
         </div>
@@ -55,16 +78,19 @@
 </template>
 
 <script>
+import QRCode from "qrcodejs2";
 import Header1 from "../../components/Header1";
 export default {
   components: {
-    Header1
+    Header1,
+    QRCode
   },
   data() {
     return {
       isActive: "",
       minutes: 30,
-      seconds: 59
+      seconds: 59,
+      flag: false
     };
   },
   mounted() {
@@ -73,9 +99,6 @@ export default {
   methods: {
     change(isActive) {
       this.isActive = isActive;
-      if(isActive==0){
-        
-      }
     },
     num: function(n) {
       return n < 10 ? "0" + n : "" + n;
@@ -94,7 +117,86 @@ export default {
           _this.seconds -= 1;
         }
       }, 1000);
+    },
+
+    weixin() {
+      console.log(0);
+      //   微信支付
+      if (this.isActive == 1) {
+        this.flag = true;
+        let data = {
+          out_trade_no: this.$route.query.orderId
+        };
+        this.$post(
+          "http://jwxra.natapp1.cc/weixin/scanpay?out_trade_no=" +
+            this.$route.query.orderId,
+          data,
+          { headers: { "Content-Type": "application/json;charset=UTF-8" } }
+        ).then(res => {
+          console.log(res);
+          this.qrcode(res.data);
+        });
+      } else if (this.isActive == 0) {
+        // 支付宝支付
+        let data = {
+          out_trade_no: this.$route.query.orderId
+        };
+        this.$post(
+          "http://jwxra.natapp1.cc/ali/aliToPay?out_trade_no=" +
+            this.$route.query.orderId,
+          data,
+          {
+            headers: { "Content-Type": "application/json;charset=UTF-8" }
+          }
+        )
+          .then(res => {
+            console.log(res);
+            const div = document.createElement("div");
+            div.innerHTML = res.data;
+            document.body.appendChild(div);
+            document.forms[0].submit();
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      }
+    },
+
+    success() {
+      // 判断回调是否有值，跳转支付成功页面
+      this.times = setInterval(() => {
+       let data ={
+          guid : this.$route.query.orderId
+        }
+        this.$fetch("http://192.168.2.29:5100/callBack/getPay",data).then((res) => {
+            console.log(res)
+        if (res.code === 200) {
+          clearInterval(this.times);
+          this.$router.push("./ok");
+           
+        }else if(res.code === 400){
+          
+          this.$router.push("./error1");
+        }
+      });
+      },6000);
+       
+    },
+    
+   
+    qrcode(aaa) {
+      let qrcode = new QRCode("qrcode", {
+        width: 200,
+        height: 200, // 高度  [图片上传失败...(image-9ad77b-1525851843730)]
+        text: aaa, // 二维码内容
+        // render: 'canvas' // 设置渲染方式（有两种方式 table和canvas，默认是canvas）
+        background: "#f0f" // foreground: '#ff0'
+      });
+      // console.log(qrcode)
     }
+  },
+   beforeDestroy() {
+    clearInterval(this.times);
   },
   watch: {
     second: {
@@ -109,15 +211,13 @@ export default {
     }
   },
   computed: {
-      second: function () {
-        return this.num(this.seconds)
-      },
-      minute: function () {
-        return this.num(this.minutes)
-      }
+    second: function() {
+      return this.num(this.seconds);
+    },
+    minute: function() {
+      return this.num(this.minutes);
     }
-
-
+  }
 };
 </script>
 
@@ -145,6 +245,34 @@ span {
       margin-top: 66px;
       margin-left: 74px;
       margin-right: 80px;
+      // 遮罩层
+      .su21 {
+        height: 100%;
+        // 遮罩层
+        .bg {
+          display: block;
+          position: fixed;
+          top: 0%;
+          left: 0%;
+          width: 100%;
+          height: 100%;
+          background-color: black;
+          z-index: 1001;
+          opacity: 0.3;
+        }
+        .show {
+          display: block;
+          position: fixed;
+          top: 25%;
+          left: 33%;
+          width: 648px;
+          height: 510px;
+          padding: 8px;
+          border: 1px solid #e8e9f7;
+          background-color: #fff;
+          z-index: 1002;
+        }
+      }
       .sc4 {
         border-bottom: 1px solid #e5e5e5;
         padding-bottom: 26px;
@@ -156,12 +284,12 @@ span {
       }
       .sc5 {
         .sc6 {
-            .scc{
-                color:#E3574C;
-                font-size: 12px;
-                margin-left:456px;
-                margin-top: 13px;
-            }
+          .scc {
+            color: #e3574c;
+            font-size: 12px;
+            margin-left: 456px;
+            margin-top: 13px;
+          }
           .sc61 {
             margin-bottom: 33px;
             .sc7 {
@@ -205,6 +333,50 @@ span {
         img {
           margin-left: 830px;
           margin-top: 93px;
+        }
+      }
+      .su22 {
+        color: #333333;
+        font-weight: bold;
+        margin-top: 42px;
+        margin-left: 32px;
+      }
+      .su23 {
+        margin: 0 auto;
+        text-align: center;
+        .su24 {
+          p {
+            font-size: 18px;
+            font-weight: bold;
+            span {
+              font-size: 18px;
+              font-weight: bold;
+            }
+          }
+        }
+        .su25 {
+          #qrcode {
+            // img {
+            //   display: inline-block;
+            //   width: 164px;
+            //   height: 165px;
+            //   margin-top: 23px;
+            //   margin-bottom: 47px;
+            // }
+            margin-left: 216px;
+            margin-top: 23px;
+            margin-bottom: 47px;
+          }
+        }
+        .su26 {
+          button {
+            border: 1px solid #0764e9;
+            background-color: #fff;
+            border-radius: 15px;
+            padding: 5px 25px;
+            color: #0764e9;
+            cursor: pointer;
+          }
         }
       }
     }

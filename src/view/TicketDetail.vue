@@ -2,7 +2,7 @@
   <div class="main">
     <div class="content">
       <div class="nav clearDiv">
-        <div class="floatLeft">当前位置：网上订购>零售商品详情页</div>
+        <div class="floatLeft">当前位置：网上订购>门票详情页</div>
         <div class="floatRight">我的订单</div>
         <div class="floatRight shopping-car" @click="jumpShoppingCar">
           <img src="../assets/img/shopping-car.png">购物车(
@@ -85,7 +85,7 @@ export default {
     };
   },
   methods: {
-    //初始化数据
+    //初始化数据，接受产品列表产品ID以及库存ID，调用陈鑫的产品日历库存接口以及周卓的图片接口
     init() {
       let id = this.$route.query.id;
       let stockId = this.$route.query.stockId;
@@ -93,7 +93,7 @@ export default {
         stockId: stockId
       }).then(res => {
         if (res.code === 200) {
-          // console.log(res);
+          console.log(res);
           this.product = res.data;
           //请求图片接口
           this.$fetch(
@@ -114,9 +114,9 @@ export default {
       this.$router.push({
         path: "/Suborder",
         query: {
-          id: this.product.id,
-          stockId: this.$route.query.stockId,
-          num: this.num1 //
+          id: this.product.id,//产品ID
+          stockId: this.$route.query.stockId,//库存
+          num: this.num1 //数量
         }
       });
     },
@@ -167,7 +167,7 @@ export default {
     }
   },
   mounted() {
-    let Uid = this.$store.getters.getUserData.userId;
+    let Uid = this.$store.getters.getUserData.userId;//获取登录后的游客ID
     this.init();
     this.searchShoppingCar(Uid)
   }

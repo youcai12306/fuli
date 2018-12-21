@@ -5,32 +5,53 @@
         <div class="floatLeft">当前位置：网上订购>零售商品详情页</div>
         <div class="floatRight">我的订单</div>
         <div class="floatRight shopping-car">
-          <img src="../assets/img/shopping-car.png">购物车(
-          <span>0</span>)
+          <img
+            src="../assets/img/shopping-car.png"
+            @click="jumpShoppingCar"
+          >购物车(
+          <span>{{shopNum}}</span>)
         </div>
       </div>
       <div class="main-one clearDiv">
         <div class="one-left">
-          <img src="../assets/img/index-item6.png" alt>
+          <img
+            src="../assets/img/index-item6.png"
+            alt
+          >
           <div class="swiper">
             <div class="swiper-contents">
-              <swiper :options="swiperOption" ref="mySwiper">
-                <swiper-slide v-for="(list,key) in imgs" :key="key">
-                  <img :src="list" :class="{borderImg:key === index}">
+              <swiper
+                :options="swiperOption"
+                ref="mySwiper"
+              >
+                <swiper-slide
+                  v-for="(list,key) in imgs"
+                  :key="key"
+                >
+                  <img
+                    :src="list"
+                    :class="{borderImg:key === index}"
+                  >
                 </swiper-slide>
               </swiper>
             </div>
-            <div class="swiper-prev" @click="prev"></div>
-            <div class="swiper-next" @click="next"></div>
+            <div
+              class="swiper-prev"
+              @click="prev"
+            ></div>
+            <div
+              class="swiper-next"
+              @click="next"
+            ></div>
           </div>
         </div>
         <div class="one-right">
-          <div class="right-title">熊大熊二毛绒玩具光头强儿童玩偶套装公仔之变形记生日礼物</div>
+          <div class="right-title">{{product.productName}}</div>
           <div class="right-pay clearDiv">
-            <div class="title">可退订</div>
+            <div class="title">{{canDebook(product.returnSign)}}</div>
             <div class="new-price">
-              ￥{{100}}
-              <span class="old-price">原价￥{{290}}</span>
+              ￥{{product.settlementPrice}}
+              <span class="old-price">原价¥{{product.originalPrice}}</span>
             </div>
             <div class="pay pay-num">
               <span>购买数量:</span>
@@ -43,21 +64,44 @@
                 class="num-change"
               ></el-input-number>
             </div>
+            <p class="tip">注：一个手机号最多可购买{{product.commitCount}}张票</p>
             <div class="pay pay-type">
               <span>配送方式：</span>
-              <button @click="changeGiveType(0)" :class="{btn:changeA === 0}">邮寄</button>
-              <button @click="changeGiveType(1)" :class="{btn:changeA === 1}">自提</button>
+              <button
+                @click="changeGiveType(0)"
+                :class="{btn:changeA === 0}"
+              >邮寄</button>
+              <button
+                @click="changeGiveType(1)"
+                :class="{btn:changeA === 1}"
+              >自提</button>
             </div>
             <p class="tip">注：请选择邮寄方式</p>
-            <img src="../assets/img/add-shoppingcar.png" alt class="img1">
-            <img src="../assets/img/nowbuy.png" alt class="img2">
+            <img
+              src="../assets/img/add-shoppingcar.png"
+              alt
+              class="img1"
+              @click="addShoppingCar"
+            >
+            <img
+              src="../assets/img/nowbuy.png"
+              alt
+              class="img2"
+              @click="jumpSubmitOrder()"
+            >
           </div>
         </div>
       </div>
       <div class="details">
         <ul class="clearDiv">
-          <li :class="{li:changeB === 0}" @click="changeType(0)">商品详情</li>
-          <li :class="{li:changeB === 1}" @click="changeType(1)">预定须知</li>
+          <li
+            :class="{li:changeB === 0}"
+            @click="changeType(0)"
+          >商品详情</li>
+          <li
+            :class="{li:changeB === 1}"
+            @click="changeType(1)"
+          >预定须知</li>
         </ul>
       </div>
     </div>
@@ -65,6 +109,7 @@
 </template>
 
 <script>
+import { IMG_Url } from "../package/common.js";
 import "swiper/dist/css/swiper.css";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
 export default {
@@ -75,15 +120,20 @@ export default {
         notNextTick: true
       },
       imgs: [
-        "../assets/pear-1.png",
-        "../assets/pear-2.png",
-        "../assets/pear-3.png",
-        "../assets/pear-4.png"
+        "../static/piao-1.png",
+        "../static/piao-1.png",
+        "../static/piao-1.png",
+       "../static/piao-1.png",
       ],
       index: 0,
       num1: 1,
-      changeA:0,
-      changeB: 0
+      changeA: 0,
+      changeB: 0,
+
+      time: "2018.12.09 08.00- 17.30",
+      product: {},
+      img: "",
+      shopNum: 0
     };
   },
   components: {
@@ -91,13 +141,34 @@ export default {
     swiperSlide
   },
   methods: {
+    //初始化数据
+    init() {
+      let id = this.$route.query.id;
+      let stockId = this.$route.query.stockId;
+      this.$fetch("http://192.168.2.38:5010/product/find/" + id, {
+        stockId: stockId
+      }).then(res => {
+        console.log(res);
+        if (res.code === 200) {
+          console.log(res);
+          this.product = res.data;
+          //请求图片接口
+          this.$fetch(
+            "http://192.168.2.34:2600/staticResource/selectFileById",
+            { id: this.product.pictureId }
+          ).then(res => {
+            this.img = IMG_Url + res.data.fileName;
+          });
+        }
+      });
+    },
     prev() {
       this.swiper.slidePrev();
       this.index--;
       if (this.index <= 0) {
         this.index = 0;
       }
-      console.log(this.index);
+      // console.log(this.index);
     },
     next() {
       this.swiper.slideNext();
@@ -106,17 +177,105 @@ export default {
         this.index = this.imgs.length - 1;
       }
     },
+
     handleChange(value) {
-      console.log(typeof value);
+      // console.log(typeof value);
     },
     //配送方式切换
-    changeGiveType(type){
-        this.changeA = type;
+    changeGiveType(type) {
+      this.changeA = type;
     },
     //详情和须知切换
-    changeType(type){
-        this.changeB = type;
+    changeType(type) {
+      this.changeB = type;
+    },
+
+    //是否可退订
+    canDebook(type) {
+      return type === 1 ? (this.sign = "可退订") : (this.sign = "不可退订");
+    },
+    //跳转提交订单页面
+    jumpSubmitOrder(id, stockId) {
+      // this.$router.push({
+      //   path: "/Suborder",
+      //   query: {
+      //     id: this.product.id,
+      //     stockId: this.$route.query.stockId,
+      //     num: this.num1 //
+      //   }
+      // });
+      // 判如果是邮寄，传stockId参数过去
+      if (this.changeA === 0) {
+        this.$router.push({
+          path: "/Suborder",
+          query: {
+            saleType: this.product.saleType,
+            id: this.product.id,
+            stockId: this.$route.query.stockId,
+            num: this.num1 
+          }
+        });
+      } else if (this.changeA === 1) {
+        this.$router.push({
+          path: "/Suborder",
+          query: {
+            id: this.product.id,
+            stockId: this.$route.query.stockId,
+            num: this.num1 //
+          }
+        });
+      }
+    },
+    //加入购物车
+    addShoppingCar() {
+      let Uid = this.$store.getters.getUserData.userId;
+      let createDateId = this.$route.query.stockId;
+      let data = {
+        touristId: Uid, 
+        productId: this.product.id,
+        createDateId: createDateId,
+        productCount: this.num1
+      };
+      this.$post(
+        "http://192.168.2.34:6061/shopCart/addToshopCart",
+        {
+          touristId: Uid, 
+          productId: this.product.id,
+          createDateId: createDateId,
+          productCount: this.num1
+        },
+        { headers: { "Content-Type": "application/json;charset=UTF-8" } }
+      ).then(res => {
+        if (res.code === 200) {
+          this.searchShoppingCar(Uid);
+        }
+      });
+    },
+    //查询购物车
+    searchShoppingCar(Uid) {
+      this.$fetch("http://192.168.2.34:6061/shopCart/selectShopCarts", {
+        touristId: Uid 
+      }).then(res => {
+        if (res.code === 200) {
+          console.log(res.data);
+          // let list = res.data;
+          let shopNum = 0;
+          for (let item of list) {
+            shopNum += item.productCount;
+          }
+          this.shopNum = shopNum;
+        }
+      });
+    },
+    //跳转购物车页面
+    jumpShoppingCar() {
+      this.$router.push("/shoppingCar1");
     }
+  },
+  mounted() {
+    let Uid = this.$store.getters.getUserData.userId;
+    this.init();
+    this.searchShoppingCar(Uid);
   },
   computed: {
     swiper() {
@@ -264,13 +423,13 @@ export default {
               background-color: rgba(255, 255, 255, 1);
               font-size: 16px;
               font-weight: 400;
-              color:rgba(51,51,51,1);
-              border: 1px solid rgba(51,51,51,1);
+              color: rgba(51, 51, 51, 1);
+              border: 1px solid rgba(51, 51, 51, 1);
             }
-            .btn{
-                border: 1px solid rgba(227, 87, 76, 1);
-                color: rgba(227, 87, 76, 1);
-            }   
+            .btn {
+              border: 1px solid rgba(227, 87, 76, 1);
+              color: rgba(227, 87, 76, 1);
+            }
           }
           .tip {
             font-size: 12px;
@@ -312,9 +471,9 @@ export default {
           font-weight: 400;
           color: rgba(51, 51, 51, 1);
         }
-        .li{
-            color:rgba(255,255,255,1);
-            background:rgba(227,87,76,1);
+        .li {
+          color: rgba(255, 255, 255, 1);
+          background: rgba(227, 87, 76, 1);
         }
       }
     }

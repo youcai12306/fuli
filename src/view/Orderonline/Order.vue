@@ -40,7 +40,11 @@
             <li class="or8">
               网上订购
             </li>
-            <router-link class="clearDiv or9" tag="li" to="/tickets/1">
+            <router-link
+              class="clearDiv or9 oo"
+              tag="li"
+              to="/tickets/1"
+            >
               <img
                 src="../../../src/assets/img/menpiao.png"
                 alt=""
@@ -72,17 +76,15 @@
           </ul>
         </div>
         <!-- 右边 -->
-        
-          <router-view></router-view>
-        
-        
+
+        <router-view></router-view>
+
       </div>
     </div>
   </div>
 </template>
 
 <script>
-
 export default {
   data() {
     return {};
@@ -93,7 +95,6 @@ export default {
 <style lang="scss" scoped>
 .or2 {
   border-top: 1px solid #ededed;
-  margin-top: 20px;
   padding-top: 30px;
   padding-bottom: 24px;
   .or3 {
@@ -140,10 +141,10 @@ export default {
     padding-top: 455px;
     width: 1200px;
     margin-left: 254px;
-    
-    .pp1{
+
+    .pp1 {
       width: 240px;
-      float:left;
+      float: left;
     }
     .or8 {
       height: 166px;
@@ -155,6 +156,9 @@ export default {
       padding-top: 55px;
       border-top-left-radius: 12px;
       border-top-right-radius: 12px;
+      .oo {
+        background-color: red;
+      }
     }
     li {
       img {

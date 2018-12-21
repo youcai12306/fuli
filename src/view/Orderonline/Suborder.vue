@@ -44,7 +44,7 @@
               <tr>
                 <td>{{productname}}
                   <p>游玩时间：{{playtime}}</p>
-
+                  <p>{{canDebook(saleType)}}</p>
                 </td>
                 <td>¥{{price1}}元</td>
                 <td>×{{count}}</td>
@@ -87,7 +87,7 @@
               <span class="su92">游客信息：您需要填写1位游客信息</span>
             </div>
             <div class="su10 clearDiv">
-              <div class="su11">
+              <div>
                 <el-form
                   ref="numberValidateForm"
                   :model="numberValidateForm"
@@ -153,29 +153,28 @@
                     </el-input>
 
                   </el-form-item>
+
+                  <div class="su11">
+                    <el-checkbox v-model="checked">同意《购买协议》</el-checkbox>
+                  </div>
+
+                  <div class="su14">
+                    <span class="su15">总计金额：</span>
+                    <span class="su16">¥{{price2}}元</span>
+                  </div>
+
                   <el-form-item>
                     <el-button
                       type="primary"
                       @click="submitForm('numberValidateForm')"
-                    >提交</el-button>
+                    ></el-button>
 
                   </el-form-item>
                 </el-form>
               </div>
 
             </div>
-            <div class="su11">
-              <el-checkbox v-model="checked">同意《购买协议》</el-checkbox>
-            </div>
-            <div class="su14">
-              <span class="su15">总计金额：</span>
-              <span class="su16">¥{{price2}}元</span>
-              <!-- <img
-                src="../../assets/img/but1.png"
-                alt=""
-                @click="onSubmit"
-              > -->
-            </div>
+
           </div>
         </div>
       </div>
@@ -213,14 +212,17 @@ export default {
       productname: "",
       playtime: "",
       orderId: "",
-      times:""
+      times: "",
+      saleType: "",
+      sign: ""
     };
   },
   mounted() {
     this.shopmsg();
+    // this.saleType = this.$route.query.saleType
   },
   methods: {
-    // 验证
+    // 验证信息
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
@@ -233,15 +235,19 @@ export default {
         }
       });
     },
+    //接受产品详情页面的产品ID，库存ID,数量，是否邮寄，调用接口，展示订单信息
     shopmsg() {
       let id = this.$route.query.id;
       let stockId = this.$route.query.stockId;
       let num1 = this.$route.query.num;
+      this.saleType = this.$route.query.saleType;
+      // console.log(this.saleType);
       // console.log(num1);
       this.count = num1;
 
       this.$fetch("http://192.168.2.38:5010/product/find/" + id, {
-        stockId: stockId
+        stockId: stockId,
+        saleType: this.saleType
       }).then(res => {
         if (res.code === 200) {
           // console.log(res);
@@ -251,20 +257,31 @@ export default {
         }
       });
     },
+    // 判断是邮寄或者自提，邮寄需要显示邮寄地址，传邮寄ID到李顺仪
+    canDebook(type) {
+      // return type === 1 ? (this.sign = "邮寄") : (this.sign = "自提");
+      if (type == 1) {
+        this.sign = "自提";
+      } else if (type == 2) {
+        this.sign = "邮寄";
+      }
+      return this.sign;
+    },
     //   提交
     onSubmit() {
-      console.log(111);
+      // console.log(111);
       let data = {
-        touristId: "b3bef218485b484f9c535f707601d868",
+        touristId: this.$store.getters.getUserData.userId,
         productFormList: [
           {
             productId: this.$route.query.id,
             num: this.$route.query.num,
-            stockId: this.$route.query.stockId
+            stockId: this.$route.query.stockId,
+            saleType: parseInt(this.$route.query.saleType)
           }
         ],
-        saleType: 1,
-        receiveId: 1111111111,//邮寄ID
+
+        receiveId: 1111111111, //邮寄ID
         receiveName: this.numberValidateForm.name1,
         receiveMobile: this.numberValidateForm.phone,
         receiveIdentityCode: this.numberValidateForm.name2
@@ -277,14 +294,14 @@ export default {
           console.log(res);
           this.orderId = res.data.orderId;
           let data1 = {
-            guid: "c642abc00cbc40d88bf96b6cb035feff",
-            userId: "b3bef218485b484f9c535f707601d868"
+            guid: res.data.guid,
+            userId: this.$store.getters.getUserData.userId,
           };
-          console.log(111);
+          // console.log(111);
           // 读redis，成功创建订单后关闭遮罩层，跳转支付页面
-          this.times = setInterval(()=>{
+          this.times = setInterval(() => {
             this.$fetch(
-              "http://192.168.2.42:6110/callBack/getOccupation",
+              "http://192.168.2.29:5100/callBack/getOccupation",
               data1
             ).then(res => {
               console.log(res);
@@ -301,17 +318,19 @@ export default {
               } else if (res.code === 400) {
                 alert("下单失败");
               }
-            })
-          },3000);
+            });
+          }, 3000);
 
           ///
         }
       });
     }
   },
-  beforeDestroy(){
+  // 销毁定时器
+  beforeDestroy() {
     clearInterval(this.times);
   },
+  // 计算产品总价格
   computed: {
     price2() {
       return this.price1 * this.count;
@@ -395,14 +414,15 @@ export default {
         margin-left: 18px;
         color: #333333;
         font-weight: bold;
+        position:relative;
         &:before {
           content: "";
           width: 9px;
           height: 18px;
           background: #2d7ae4;
           position: absolute;
-          left: 412px;
-          top: 239px;
+          left: -16px;
+          top: 0;
         }
       }
     }
@@ -442,14 +462,16 @@ export default {
         font-weight: bold;
         margin-right: 913px;
         margin-left: 18px;
+        position:relative;
+
         &:before {
           content: "";
           width: 9px;
           height: 18px;
           background: #2d7ae4;
           position: absolute;
-          left: 412px;
-          top: 711px;
+          left: -16px;
+          top: 0;
         }
       }
       .su7 {
@@ -467,14 +489,16 @@ export default {
           font-weight: bold;
           margin-left: 18px;
           margin-right: 22px;
+          position:relative;
+
           &:before {
             content: "";
             width: 9px;
             height: 18px;
             background: #2d7ae4;
             position: absolute;
-            left: 412px;
-            top: 805px;
+            left: -16px;
+            top: 0;
           }
         }
         .su92 {
@@ -483,17 +507,19 @@ export default {
         }
       }
       .su10 {
-        border-bottom: 1px solid #d8d8d8;
+        // border-bottom: 1px solid #d8d8d8;
         padding-bottom: 65px;
         margin-bottom: 24px;
         .su11 {
-          float: left;
+          border-top: 1px solid #d8d8d8;
+          padding-top: 24px;
+          margin-top: 65px;
         }
       }
       .su14 {
         margin-left: 789px;
         margin-top: 70px;
-        margin-bottom: 410px;
+
         .su15 {
           font-size: 20px;
           color: #333333;
@@ -528,6 +554,48 @@ export default {
 .el-form-item__content > p {
   color: #999999;
   font-size: 12px;
+}
+.suborder .el-form-item__content > button {
+  margin-left: 716px;
+  margin-top: 31px;
+  background-color: #fff;
+  outline: none;
+  border-color: #fff;
+  background-image: url(../../assets/img/but1.png);
+  padding: 32px 109px;
+}
+.suborder .el-button--primary:focus,
+.suborder .el-button--primary:hover {
+  background-color: transparent;
+}
+.suborder .el-button--primary:focus,
+.suborder .el-button--primary:hover {
+  background-color: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+.suborder .el-button--primary.is-active,
+.suborder .el-button--primary:active {
+  background-color: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+.suborder .el-button--primary:focus,
+.suborder .el-button--primary:hover {
+  background-color: transparent !important;
+  border-color: transparent;
+  color: transparent;
+}
+.suborder .el-button--primary.is-active,
+.suborder .el-button--primary:active {
+  background-color: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+.suborder .el-button--primary:hover {
+  background-color: #fff;
+  border-color: transparent;
+  color: transparent;
 }
 .el-form > span {
   position: relative;

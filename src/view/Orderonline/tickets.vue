@@ -5,22 +5,63 @@
       <p class="ti3">选择游玩日期：</p>
 
       <div class="clearDiv">
-        <el-radio-group v-model="radio2" @change="chooseDate(0)">
+        <el-radio-group
+          v-model="radio2"
+          @change="chooseDate(0)"
+        >
           <el-radio :label="1">今天</el-radio>
           <el-radio :label="2">明天</el-radio>
           <el-radio :label="3">后天</el-radio>
         </el-radio-group>
 
         <div class="block">
-          <el-date-picker v-model="value1" type="date" placeholder="选择日期" @change="chooseDate(1)" format="yyyy-MM-dd" value-format="yyyy-MM-dd"></el-date-picker>
+          <el-date-picker
+            v-model="value1"
+            type="date"
+            placeholder="选择日期"
+            @change="chooseDate(1)"
+            format="yyyy-MM-dd"
+            value-format="yyyy-MM-dd"
+          ></el-date-picker>
         </div>
       </div>
       <!-- 产品 -->
       <div class="pro">
         <ul class="pro1 clearDiv">
-          <li v-for="(item,index) in list" :key="index">
-            <div @click="jumpDetail(item.id,item.stockId)">
-              <img :src="item.pictureId" alt>
+          <li
+            v-for="(item,index) in list"
+            :key="index"
+          >
+            <div
+              @click="jumpDetail(item.id,item.stockId)"
+              class="pp"
+            >
+              <img
+                :src="item.pictureId"
+                alt
+              >
+            </div>
+            <div class="clearDiv ti4">
+              <p>{{item.productName}}</p>
+              <div class="can">{{canDebook(item.returnSign)}}</div>
+              <div class="clearDiv">
+                <span class="ti5 ti6">{{item.originalPrice}}</span>
+                <span class="ti5 ti7">{{item.settlementPrice}}</span>
+              </div>
+            </div>
+          </li>
+          <!-- <li
+            v-for="(item,index) in list"
+            :key="index"
+          >
+            <div
+              @click="jumpDetail(item.id,item.stockId)"
+              class="pp"
+            >
+              <img
+                :src="item.pictureId"
+                alt
+              >
             </div>
             <div class="clearDiv ti4">
               <p>{{item.productName}}</p>
@@ -30,11 +71,22 @@
                 <span class="ti5 ti7">{{item.settlementPrice}}</span>
               </div>
             </div>
-          </li>
+          </li> -->
         </ul>
       </div>
-      <section class="page" id="page">
-        <el-pagination background layout="prev, pager, next" :total="totle" :current-page.sync ="pageIndex" :page-size="pageSize" @current-change="changePage"></el-pagination>
+      <div>{{msg}}</div>
+      <section
+        class="page"
+        id="page"
+      >
+        <el-pagination
+          background
+          layout="prev, pager, next"
+          :total="totle"
+          :current-page.sync="pageIndex"
+          :page-size="pageSize"
+          @current-change="changePage"
+        ></el-pagination>
       </section>
     </div>
   </div>
@@ -49,26 +101,29 @@ export default {
       items: [],
       pageSize: 9,
       pageIndex: 1,
-      totle:0,
-      date:'',
-      imgs:[]
+      totle: 0,
+      date: "",
+      imgs: [],
+      msg:''
     };
   },
-  computed:{
+  //将图片base64位拼接为图片地址
+  computed: {
     list() {
       let list = this.items;
       let str = [];
-      list.forEach((v,k) => {
+      list.forEach((v, k) => {
         this.imgs.forEach(val => {
-          if(v.pictureId == val.id){
-            v.pictureId = "http://192.168.2.34:2600/file/"+val.fileName;
+          if (v.pictureId == val.id) {
+            v.pictureId = "http://192.168.2.34:2600/file/" + val.fileName;
           }
-        })
+        });
         str.push(v);
-      })
+      });
       return str;
     }
   },
+  //将选择时间里面的时间戳转化为时间
   mounted() {
     let today = new Date();
     this.value1 = this.value2 = this.$tool.formatData(today);
@@ -79,14 +134,18 @@ export default {
   },
   methods: {
     //跳转详情页面
-    jumpDetail(id,stockId) {
+    jumpDetail(id, stockId) {
       this.$router.push({
-        path: "/TicketDetail",
+        path: "/ProductDetail",
         query: {
           id: id,
-          stockId:stockId
+          stockId: stockId
         }
       });
+    },
+     //是否可退订
+    canDebook(type) {
+      return type === 1 ? (this.sign = "可退订") : (this.sign = "不可退订");
     },
     //选择日期
     chooseDate(type) {
@@ -94,22 +153,20 @@ export default {
       let id = this.$route.params.id;
       this.pageIndex = 1;
       if (type === 0) {
-        
         if (this.radio2 === 1) {
-          
-          this.value1 =this.value2 = this.$tool.formatData(today);
+          this.value1 = this.value2 = this.$tool.formatData(today);
         } else if (this.radio2 === 2) {
-          this.value1 =this.value2 = this.$tool.formatData(
+          this.value1 = this.value2 = this.$tool.formatData(
             new Date(today.getTime() + 24 * 60 * 60 * 1000)
           );
         } else {
-          this.value1 =this.value2 = this.$tool.formatData(
+          this.value1 = this.value2 = this.$tool.formatData(
             new Date(today.getTime() + 24 * 60 * 60 * 1000 * 2)
           );
         }
-        this.date = this.value2
-      }else{
-        this.date = this.value1
+        this.date = this.value2;
+      } else {
+        this.date = this.value1;
       }
       // console.log(id)
       // console.log(this.date)
@@ -118,7 +175,7 @@ export default {
       this.getTicketList(id, this.date, this.pageSize, this.pageIndex);
     },
     //分页
-    changePage(val){
+    changePage(val) {
       let id = this.$route.params.id;
       // console.log(id)
       // console.log(this.date)
@@ -128,41 +185,50 @@ export default {
     },
     //获取门票信息
     getTicketList(typeId, date, pageSize, pageIndex) {
-       
       //请求后台接口
-      this.$fetch('http://192.168.2.38:5010/product/findProductByStock',{playDate:date}).then((res) =>{
-        console.log(res);
-        // console.log(res.data.list);
-        this.items = res.data.list;
-        this.totle = res.data.total;
-        let xin =[];
-        let xin2 = '';
-        this.items.forEach((v,k) => {
-          // console.log(v.pictureId);
+      this.$fetch("http://192.168.2.38:5010/product/findProductByStock", {
+        playDate: date
+      })
+        .then(res => {
+          console.log(res);
+          if(res.code === 400){
+              this.msg = res.message
+              this.items = []
+          }
+          if(res.code === 200){
+            this.msg = ''
+          }
           
-          xin.push(v.pictureId);
-          // console.log(xin);
-          xin2 = xin.join(',');
-           
-        })
-        console.log(xin2);
-        let imgs = [];
-        this.$fetch('http://192.168.2.34:2600/staticResource/selectFiles',{ids:xin2}).then((res) =>{
-            
+          // console.log(res.data.list);
+          this.items = res.data.list;
+          this.totle = res.data.total;
+          let xin = [];
+          let xin2 = "";
+          this.items.forEach((v, k) => {
+            // console.log(v.pictureId);
+
+            xin.push(v.pictureId);
+            // console.log(xin);
+            xin2 = xin.join(",");
+          });
+          // console.log(xin2);
+          let imgs = [];
+          this.$fetch("http://192.168.2.61:2600/staticResource/selectFiles", {
+            ids: xin2
+          }).then(res => {
+            console.log(res);
             // var img = res.data;
             // img.forEach((v,k) => {
             //   imgs[k] = v.fileName;
             //   imgs[k]=v.id;
             // })
             this.imgs = res.data;
+          });
         })
-        
-      }).catch(error => {
-        
+        .catch(error => {
           // alert("今天没有库存")
-          
-      })
-      
+        });
+
       // this.items = list;
       //此处要获取总条数
       this.totle = this.items.length;
@@ -175,6 +241,9 @@ export default {
 .ti1 {
   float: left;
   margin-left: 40px;
+}
+.or9{
+  background-color: red
 }
 .ti2 {
   background-color: #fff;
@@ -191,18 +260,27 @@ export default {
     margin-top: 12px;
     .pro1 {
       margin-top: 25px;
-      margin-left:74px;
+      margin-left: 74px;
       li {
-        width: 230px;
+        width: 254px;
+        height: 254px;
         float: left;
-        margin-right: 30px;
+        margin-right: 6px;
         margin-bottom: 60px;
+        .pp {
+          height: 254px;
+          img {
+            display: block;
+            width: 254px;
+            height: 254px;
+          }
+        }
       }
     }
   }
   #page {
     text-align: center;
-    margin-top: 10px;
+    margin-top: 100px;
     height: 32px;
   }
   .ti3 {
@@ -210,8 +288,26 @@ export default {
   }
 }
 .ti4 {
+  margin-top: 16px;
+  .can{
+    border:1px solid #f27373;
+    width: 54px;
+    height: 23px;
+    border-radius: 5px;
+    font-weight: 400px;
+    color:#f27373;
+    font-size:12px;
+    line-height: 23px;
+    text-align: center;
+    margin-bottom: 8px;
+  }
   p {
     font-weight: bold;
+    width: 128px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin-bottom: 10px;
   }
   img {
     margin-top: 10px;

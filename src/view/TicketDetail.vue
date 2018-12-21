@@ -97,7 +97,7 @@ export default {
           this.product = res.data;
           //请求图片接口
           this.$fetch(
-            "http://192.168.2.34:2600/staticResource/selectFileById",
+            "http://192.168.2.61:2600/staticResource/selectFileById",
             { id: this.product.pictureId }
           ).then(res => {
             this.img = IMG_Url + res.data.fileName;
@@ -131,7 +131,7 @@ export default {
         productCount: this.num1
       };
       this.$post(
-        "http://192.168.2.34:6061/shopCart/addToshopCart",
+        "http://192.168.2.61:6061/shopCart/addToshopCart",
         {
           touristId: Uid,
           productId: this.product.id,
@@ -147,7 +147,7 @@ export default {
     },
     //查询购物车
     searchShoppingCar(Uid) {
-      this.$fetch("http://192.168.2.34:6061/shopCart/selectShopCarts", {
+      this.$fetch("http://192.168.2.61:6061/shopCart/selectShopCarts", {
         touristId: Uid
       }).then(res => {
         if (res.code === 200) {

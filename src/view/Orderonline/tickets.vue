@@ -213,7 +213,7 @@ export default {
           });
           // console.log(xin2);
           let imgs = [];
-          this.$fetch("http://192.168.2.34:2600/staticResource/selectFiles", {
+          this.$fetch("http://192.168.2.61:2600/staticResource/selectFiles", {
             ids: xin2
           }).then(res => {
             console.log(res);

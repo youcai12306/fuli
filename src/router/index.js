@@ -26,6 +26,9 @@ const ProductDetail = r => require.ensure([], () => r(require('@/view/ProductDet
 //购物车页面
 const ShoppingCar1 = r => require.ensure([], () => r(require('@/view/ShoppingCar1')), 'ShoppingCar1')
 
+//主题乐园
+const Theme = r => require.ensure([], () => r(require('@/view/theme/Theme')), 'Theme')
+
 // 新闻中心首页
 const News = r => require.ensure([], () => r(require('@/view/news/News')), 'News')
 const NewList = r => require.ensure([], () => r(require('@/view/news/NewList')), 'NewList')
@@ -88,27 +91,30 @@ Vue.use(Router)
 export default new Router({
   routes: [{
       path: '*',
-      redirect: '/index'
+      redirect: '/index' //报错去首页
     },
     {
       path: '/',
       path: '/',
-      redirect: '/index'
+      redirect: '/index' //默认首页
     },
     {
       path: '/index',
       name: 'Index',
-      component: Index
+      component: Index, //首页
+      meta: {
+        nav: 1
+      },
     },
     {
       path: '/login',
       name: 'Login',
-      component: Login
+      component: Login //登录
     },
     {
       path: '/forget',
       name: 'Forget',
-      component: Forget
+      component: Forget //忘记密码
     },
 
     {
@@ -118,13 +124,16 @@ export default new Router({
       children: [{
         path: '/tickets/:id',
         name: 'tickets',
-        component: tickets,
+        component: tickets, //订票列表
+        meta: {
+          nav: 1
+        }
       }]
     },
     {
       path: '/register',
       name: 'Register',
-      component: Register
+      component: Register //注册
     },
     {
       path: '/suborder',
@@ -143,55 +152,82 @@ export default new Router({
     },
     {
       path: '/news',
-      component: News,
+      component: News, //新闻
       children: [{
           path: '/',
-          component: NewList
+          component: NewList,
+          meta: {
+            nav: 1
+          },
         },
         {
           path: '/newList',
           name: 'NewList',
-          component: NewList
+          component: NewList,
+          meta: {
+            nav: 1
+          },
         },
         {
           path: '/noticeList',
           name: 'NoticeList',
-          component: NoticeList
+          component: NoticeList,
+          meta: {
+            nav: 1
+          },
         },
         {
           path: '/newDetail',
           name: 'NewDetail',
-          component: NewDetail
+          component: NewDetail,
+          meta: {
+            nav: 1
+          },
         },
         {
           path: '/noticeDetail',
           name: 'NoticeDetail',
-          component: NoticeDetail
+          component: NoticeDetail,
+          meta: {
+            nav: 1
+          },
         },
       ]
     },
     {
       path: '/specialOffier',
-      component: SpecialOffier,
+      component: SpecialOffier, //精彩活动
       children: [{
           path: '/',
-          component: Events
+          component: Events,
+          meta: {
+            nav: 1
+          },
         },
         {
           path: '/events',
-          component: Events
+          component: Events,
+          meta: {
+            nav: 1
+          },
         }
       ]
     },
     {
       path: '/risk',
       name: 'Risk',
-      component: Risk
+      component: Risk, //冒险之旅
+      meta: {
+        nav: 1
+      },
     },
     {
       path: '/animal',
       name: 'Animal',
-      component: Animal
+      component: Animal, //动物百科
+      meta: {
+        nav: 1
+      },
     },
     {
       path: '/success',
@@ -206,12 +242,17 @@ export default new Router({
     {
       path: '/waterworld',
       name: 'waterworld',
-      component: waterworld
+      component: waterworld //水世界
+    },
+    {
+      path: '/theme',
+      name: 'Theme',
+      component: Theme //主题乐园
     },
     {
       path: '/ticketDetail',
       name: 'TicketDetail',
-      component: TicketDetail
+      component: TicketDetail, //订单详情
     },
     {
       path: '/productDetail',
@@ -227,7 +268,7 @@ export default new Router({
       path: '/mine',
       component: Mine,
       meta: {
-        nav: 2
+        nav: 3
       },
       children: [ //个人中心二级子路由
         {
@@ -235,7 +276,7 @@ export default new Router({
           name: 'MyOrder-default',
           component: MyOrder,
           meta: {
-            nav: 2
+            nav: 3
           }
         },
         {
@@ -243,7 +284,7 @@ export default new Router({
           // name: 'MyOrder',
           component: MyOrder,
           meta: {
-            nav: 2
+            nav: 3
           },
           children: [ //我的订单子路由
             {
@@ -251,7 +292,7 @@ export default new Router({
               name: 'Unpaid-default',
               component: Unpaid,
               meta: {
-                nav: 2
+                nav: 3
               }
             },
             {

@@ -254,7 +254,7 @@ export default {
           return false;
         } else {
           //注册接口
-          this.$post("http://192.168.2.34:5050/tourist/regist",{mobile:this.phone,passWord:this.password},{headers:{'Content-Type':'application/json;charset=UTF-8'}}).then(res => {
+          this.$post("http://192.168.2.34:5050/tourist/regist",{mobile:this.phone,passWord:this.password,picCode:this.code1},{headers:{'Content-Type':'application/json;charset=UTF-8'}}).then(res => {
             if(res.code === 200){
               this.$router.push('/login')
             }else{

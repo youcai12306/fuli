@@ -1,24 +1,28 @@
 <template>
   <div id="app">
+    <Header2 v-show="$route.meta.nav === 3"></Header2>
     <router-view/>
     <Footer></Footer>
   </div>
 </template>
 
 <script>
-import Footer from '@/components/Footer'
+import Header from "@/components/Header"; //引入头部
+import Header2 from "@/components/Header2"; //引入个人中心头部
+import Footer from "@/components/Footer";
 
 export default {
-  name: 'App',
-  components:{
+  name: "App",
+  components: {
+    Header2,
     Footer
   }
-}
+};
 </script>
 
 <style>
 #app {
-  font-family: 'MicrosoftYaHei','Avenir', Helvetica, Arial, sans-serif;
+  font-family: "MicrosoftYaHei", "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -116,13 +120,13 @@ input,
 select,
 textarea {
   font-size: 100%;
-  outline:none;
+  outline: none;
   border: 0;
 }
-.floatLeft{
+.floatLeft {
   float: left;
 }
-.floatRight{
+.floatRight {
   float: right;
 }
 .clearDiv:after {

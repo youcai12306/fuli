@@ -3,12 +3,12 @@
   <div class="r">
     <div class="title clearDiv">
       <div class="floatLeft">新闻中心</div>
-      <div class="floatRight location">当前位置：新闻中心>园区新闻</div>
+      <div class="floatRight location">当前位置：新闻中心>园区公告</div>
     </div>
 
     <!-- 所有新闻 -->
     <div class="main-new">
-      <div class="hea-img">
+      <!-- <div class="hea-img">
         <router-link :to="{path:'/'}">
           <img src="../../assets/img/new-1.png" alt="图片">
           <div class="bt">
@@ -17,10 +17,9 @@
           </div>
           <div class="button"></div>
         </router-link>
-      </div>
-
+      </div>-->
       <ul>
-        <li v-for="(item,key) in list" :key="key">
+        <li v-for="(item,key) in list" :key="key" @click="jumpDetail(item.id)">
           <router-link :to="{path:'/'}">
             <i></i>
             <span class="li-itme">{{item.title}}</span>
@@ -47,20 +46,7 @@ export default {
   data() {
     return {
       page: 1,
-      list: [
-        {
-          title:
-            "关于“丛林过山车、沙雕城堡、海鸟世界象龟展区”升级改造暂停服务的公告",
-          span: "来自海洋欢乐世界",
-          time: "2018.08.09"
-        },
-        {
-          title:
-            "关于“丛林过山车、沙雕城堡、海鸟世界象龟展区”升级改造暂停服务的公告",
-          span: "来自海洋欢乐世界",
-          time: "2018.08.09"
-        }
-      ]
+      list: []
     };
   },
   methods: {
@@ -71,9 +57,31 @@ export default {
     // 园区公告
     // 获取所有新闻數據
     GetList() {
-      // 				this.$http.post('/api/goods').then((data) => {
-      // 					this.list = data.body.data;
-      // 				})
+     let list = [
+         {
+          id: 1,
+          title:
+            "关于“丛林过山车、沙雕城堡、海鸟世界象龟展区”升级改造暂停服务的公告",
+          span: "来自海洋欢乐世界",
+          time: "2018.08.09"
+        },
+        {
+          id: 2,
+          title:
+            "关于“丛林过山车、沙雕城堡、海鸟世界象龟展区”升级改造暂停服务的公告",
+          span: "来自海洋欢乐世界",
+          time: "2018.08.09"
+        }
+     ]
+     this.list = list;
+    },
+    jumpDetail(id){
+        this.$router.push({
+        path: "/noticeDetail",
+        query: {
+          id: id
+        }
+      });
     }
   },
   created() {

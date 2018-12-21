@@ -9,8 +9,6 @@ import tickets from '@/view/Orderonline/tickets'
 import Suborder from '@/view/Orderonline/Suborder'
 import Carsuborder from '@/view/Orderonline/Carsuborder'
 import success from '@/view/Orderonline/success'
-import ok from '@/view/Orderonline/ok'
-import error1 from '@/view/Orderonline/error1'
 import guide from '@/view/Visitguide/guide'
 import menpiao from '@/view/Visitguide/menpiao'
 import jiudian from '@/view/Visitguide/jiudian'
@@ -41,7 +39,21 @@ const ShoppingCar1 = r => require.ensure([], () => r(require('@/view/ShoppingCar
 // 新闻中心首页
 const News = r => require.ensure([], () => r(require('@/view/news/News')), 'News')
 const NewList = r => require.ensure([], () => r(require('@/view/news/NewList')), 'NewList')
+const NewDetail = r => require.ensure([], () => r(require('@/view/news/NewDetail')), 'NewDetail')
+const NoticeList = r => require.ensure([], () => r(require('@/view/news/NoticeList')), 'NoticeList')
+const NoticeDetail = r => require.ensure([], () => r(require('@/view/news/NoticeDetail')), 'NoticeDetail')
 const Reset = r => require.ensure([], () => r(require('@/view/Reset')), 'Reset')
+
+//优惠活动
+const SpecialOffier = r => require.ensure([], () => r(require('@/view/specialOffier/SpecialOffier')), 'SpecialOffier')
+const Events = r => require.ensure([], () => r(require('@/view/specialOffier/Events')), 'Events')
+
+//冒险之旅
+const Risk = r => require.ensure([], () => r(require('@/view/risk/Risk')), 'Risk')
+
+//动物百科
+const Animal = r => require.ensure([], () => r(require('@/view/animal/Animal')), 'Animal')
+
 
 // 个人中心-我的卡券
 const MyCoupon = r => require.ensure([], () => r(require('@/view/Mine/MyCoupon')), 'MyCoupon')
@@ -113,17 +125,11 @@ export default new Router({
         path: '/order',
         name: 'Order',
         component: Order,
-        
-        children: [
-          {
-            path: '/tickets/:id',
-            name: 'tickets',
-            component: tickets,
-          },
-          
-
-      ],
-      // redirect:'/tickets/1',
+        children: [{
+          path: '/tickets/:id',
+          name: 'tickets',
+          component: tickets,
+        }]
       },
       {
         path: '/register',
@@ -147,11 +153,9 @@ export default new Router({
       },
       {
         path: '/news',
-        name: 'News',
         component: News,
         children: [{
             path: '/',
-            name: 'NewList',
             component: NewList
           },
           {
@@ -165,16 +169,6 @@ export default new Router({
         path: '/success',
         name: 'success',
         component: success
-      },
-      {
-        path: '/ok',
-        name: 'ok',
-        component: ok
-      },
-      {
-        path: '/error1',
-        name: 'error1',
-        component: error1
       },
       {
         path: '/reset',
@@ -227,7 +221,7 @@ export default new Router({
               {
                 path: '/',
                 name: 'Unpaid-default',
-                component: Unpaid,
+                component: Prepaid,
                 meta: {
                   nav: 2
                 }
@@ -409,14 +403,12 @@ export default new Router({
               nav: 2
             }
           },
-
-
         ]
       },
       {
-        path: '/guide',
+        path: '/ditu',
         name: 'guide',
-        component: guide,
+        component: ditu,
         children: [{
             path: '/menpiao',
             name: 'menpiao',
@@ -464,12 +456,11 @@ export default new Router({
           },
         ]
       },
-
+			{
+				path: '/orderDetail',
+				name: 'OrderDetail',
+				component: OrderDetail
+			}
     ]
-  }, {
-    path: '/orderDetail',
-    name: 'OrderDetail',
-    component: OrderDetail
-  },
-
+  }
 )

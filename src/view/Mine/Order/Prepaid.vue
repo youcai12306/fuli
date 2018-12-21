@@ -89,9 +89,9 @@
 								</template>
 							</el-table-column>
 							<el-table-column label="操作">
-								<!-- <template slot-scope="scope">
-									{{scope.row.orderDetailId}}
-								</template> -->
+								<template slot-scope="scope">
+									<el-button type="text" v-if="tabs == 3" @click="refund(scope.row,item.orderId,item.receiveName)">退票申请</el-button>
+								</template>
 							</el-table-column>
 						</el-table>
 					</el-collapse-item>
@@ -136,10 +136,10 @@
 			//跳转订单详情
 			jumpDetail(id) {
 				this.$router.push({
-					name: 'OrderDetail',
+					name: 'orderDetail',
 					params: {
 						id: id,
-						status:this.tabs
+						status: this.tabs
 					}
 				})
 			},
@@ -161,7 +161,7 @@
 					if (res.code === 200) {
 						this.list = res.data.list || [];
 						this.count = res.data.total;
-						console.log(this.list.length)
+						// console.log(this.list.length)
 					} else {
 						console.log(res.message);
 					}
@@ -198,6 +198,53 @@
 				}).catch(() => {
 
 				});
+			},
+			refund(obj, id, name) { //退票
+				this.$prompt('请输入退票原因', '退票', {
+					confirmButtonText: '确定',
+					cancelButtonText: '取消',
+					inputValidator:(val) => {
+						if (val === null) {
+							return true; //初始化的值为null，不做处理的话，刚打开MessageBox就会校验出错，影响用户体验
+						}
+						return !(val.length < 6 || val.length > 100)
+					},
+					inputErrorMessage: '退票原因长度必须在6~100位'
+				}).then((val) => {
+					let data = {
+						touristId: this.id,
+						linkName: name,
+						orderId: id,
+						orderSubId: obj.orderDetailId,
+						eCode: obj.ecode,
+						returnCount: obj.productCount,
+						returnContent: val.value
+					}
+					console.log(data);
+					this.$axios.post("http://192.168.2.28:5080/returncash/refund/apply",this.$tool.formatDatas(data)).then(res => {
+						if(res.data.code == 200){
+							this.$message({
+								type: 'success',
+								message: '申请成功'
+							});
+							this.PostFindOrderDetail();
+						}else{
+							this.$message({
+								type: 'error',
+								message: '申请失败'
+							});
+						}
+					}).catch(error => {
+						console.log(error)
+					})
+
+				}).catch(() => {
+					this.$message({
+						type: 'info',
+						message: '取消退票'
+					});
+				});
+
 			}
 		},
 		mounted() {
@@ -379,6 +426,12 @@
 			background: #DDDDDD;
 			color: #333333;
 			font-size: 14px;
+		}
+
+		.el-collapse-item:nth-child(even) {
+			.el-collapse-item__header {
+				// background: #EEEEEE;
+			}
 		}
 	}
 

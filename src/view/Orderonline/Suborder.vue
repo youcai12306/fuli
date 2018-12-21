@@ -414,14 +414,15 @@ export default {
         margin-left: 18px;
         color: #333333;
         font-weight: bold;
+        position:relative;
         &:before {
           content: "";
           width: 9px;
           height: 18px;
           background: #2d7ae4;
           position: absolute;
-          left: 412px;
-          top: 239px;
+          left: -16px;
+          top: 0;
         }
       }
     }
@@ -461,14 +462,16 @@ export default {
         font-weight: bold;
         margin-right: 913px;
         margin-left: 18px;
+        position:relative;
+
         &:before {
           content: "";
           width: 9px;
           height: 18px;
           background: #2d7ae4;
           position: absolute;
-          left: 412px;
-          top: 711px;
+          left: -16px;
+          top: 0;
         }
       }
       .su7 {
@@ -486,14 +489,16 @@ export default {
           font-weight: bold;
           margin-left: 18px;
           margin-right: 22px;
+          position:relative;
+
           &:before {
             content: "";
             width: 9px;
             height: 18px;
             background: #2d7ae4;
             position: absolute;
-            left: 412px;
-            top: 805px;
+            left: -16px;
+            top: 0;
           }
         }
         .su92 {
@@ -550,7 +555,7 @@ export default {
   color: #999999;
   font-size: 12px;
 }
-.el-form-item__content > button {
+.suborder .el-form-item__content > button {
   margin-left: 716px;
   margin-top: 31px;
   background-color: #fff;
@@ -559,35 +564,35 @@ export default {
   background-image: url(../../assets/img/but1.png);
   padding: 32px 109px;
 }
-.el-button--primary:focus,
-.el-button--primary:hover {
+.suborder .el-button--primary:focus,
+.suborder .el-button--primary:hover {
   background-color: transparent;
 }
-.el-button--primary:focus,
-.el-button--primary:hover {
-  background-color: transparent;
-  border-color: transparent;
-  color: transparent;
-}
-.el-button--primary.is-active,
-.el-button--primary:active {
+.suborder .el-button--primary:focus,
+.suborder .el-button--primary:hover {
   background-color: transparent;
   border-color: transparent;
   color: transparent;
 }
-.el-button--primary:focus,
-.el-button--primary:hover {
+.suborder .el-button--primary.is-active,
+.suborder .el-button--primary:active {
+  background-color: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+.suborder .el-button--primary:focus,
+.suborder .el-button--primary:hover {
   background-color: transparent !important;
   border-color: transparent;
   color: transparent;
 }
-.el-button--primary.is-active,
-.el-button--primary:active {
+.suborder .el-button--primary.is-active,
+.suborder .el-button--primary:active {
   background-color: transparent;
   border-color: transparent;
   color: transparent;
 }
-.el-button--primary:hover {
+.suborder .el-button--primary:hover {
   background-color: #fff;
   border-color: transparent;
   color: transparent;

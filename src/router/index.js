@@ -102,7 +102,6 @@ export default new Router({
       },
       {
         path: '/',
-        path: '/',
         redirect: '/index'
       },
       {

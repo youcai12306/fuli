@@ -1,61 +1,44 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from '@/view/Login'
-import Index from '@/view/Index'
-import Mine from '@/view/Mine/Mine'
-import Forget from '@/view/Forget'
-import Order from '@/view/Orderonline/Order'
-import tickets from '@/view/Orderonline/tickets'
-import Suborder from '@/view/Orderonline/Suborder'
-import Carsuborder from '@/view/Orderonline/Carsuborder'
-import success from '@/view/Orderonline/success'
+
+//登录
+const Login = r => require.ensure([], () => r(require('@/view/Login')), 'Login')
 //注册
 const Register = r => require.ensure([], () => r(require('@/view/Register')), 'Register')
-//麦迪卡斯首页
-const McGrady = r => require.ensure([], () => r(require('@/view/McGrady/McGrady')), 'McGrady')
-
-//欢乐海洋世界首页
-const waterworld = r => require.ensure([], () => r(require('@/view/waterworld')), 'waterworld')
-
+//忘记密码
+const Forget = r => require.ensure([], () => r(require('@/view/Login')), 'Forget')
+//首页
+const Index = r => require.ensure([], () => r(require('@/view/Index')), 'Index')
+//产品列表
+const Order = r => require.ensure([], () => r(require('@/view/Orderonline/Order')), 'Order')
+const Tickets = r => require.ensure([], () => r(require('@/view/Orderonline/Tickets')), 'Tickets')
 //门票商品详情页
 const TicketDetail = r => require.ensure([], () => r(require('@/view/TicketDetail')), 'TicketDetail')
-
 //零售商品详情页
 const ProductDetail = r => require.ensure([], () => r(require('@/view/ProductDetail')), 'ProductDetail')
-
-//购物车页面
-const ShoppingCar1 = r => require.ensure([], () => r(require('@/view/ShoppingCar1')), 'ShoppingCar1')
-
+//下订单页面
+const Suborder = r => require.ensure([], () => r(require('@/view/Orderonline/Suborder')), 'Suborder')
+//支付页面
+const success = r => require.ensure([], () => r(require('@/view/Orderonline/success')), 'success')
 //主题乐园
 const Theme = r => require.ensure([], () => r(require('@/view/theme/Theme')), 'Theme')
-
+const AnimalTheme = r => require.ensure([], () => r(require('@/view/theme/AnimalTheme')), 'AnimalTheme')
 // 新闻中心首页
 const News = r => require.ensure([], () => r(require('@/view/news/News')), 'News')
 const NewList = r => require.ensure([], () => r(require('@/view/news/NewList')), 'NewList')
 const NewDetail = r => require.ensure([], () => r(require('@/view/news/NewDetail')), 'NewDetail')
 const NoticeList = r => require.ensure([], () => r(require('@/view/news/NoticeList')), 'NoticeList')
 const NoticeDetail = r => require.ensure([], () => r(require('@/view/news/NoticeDetail')), 'NoticeDetail')
-const Reset = r => require.ensure([], () => r(require('@/view/Reset')), 'Reset')
-
 //优惠活动
 const SpecialOffier = r => require.ensure([], () => r(require('@/view/specialOffier/SpecialOffier')), 'SpecialOffier')
 const Events = r => require.ensure([], () => r(require('@/view/specialOffier/Events')), 'Events')
-
 //冒险之旅
 const Risk = r => require.ensure([], () => r(require('@/view/risk/Risk')), 'Risk')
-
 //动物百科
 const Animal = r => require.ensure([], () => r(require('@/view/animal/Animal')), 'Animal')
-
-
-// 个人中心-我的卡券
-const MyCoupon = r => require.ensure([], () => r(require('@/view/Mine/MyCoupon')), 'MyCoupon')
-// 个人中心-卡券中心
-const CouponCenter = r => require.ensure([], () => r(require('@/view/Mine/CouponCenter')), 'CouponCenter')
-
 // 个人中心-我的订单
+const Mine = r => require.ensure([], () => r(require('@/view/Mine/Mine')), 'Mine')
 const MyOrder = r => require.ensure([], () => r(require('@/view/Mine/MyOrder')), 'MyOrder')
-const Invoice = r => require.ensure([], () => r(require('@/view/Mine/Invoice')), 'Invoice')
 const Unpaid = r => require.ensure([], () => r(require('@/view/Mine/Order/Unpaid')), 'Unpaid')
 const Prepaid = r => require.ensure([], () => r(require('@/view/Mine/Order/Prepaid')), 'Prepaid')
 const Consumed = r => require.ensure([], () => r(require('@/view/Mine/Order/Consumed')), 'Consumed')
@@ -64,27 +47,20 @@ const Audit = r => require.ensure([], () => r(require('@/view/Mine/Order/Audit')
 const Faudit = r => require.ensure([], () => r(require('@/view/Mine/Order/Faudit')), 'Faudit')
 const Error = r => require.ensure([], () => r(require('@/view/Mine/Order/Error')), 'Error')
 const OrderDetail = r => require.ensure([], () => r(require('@/view/Mine/Order/OrderDetail')), 'OrderDetail')
-// 个人中心-积分
-const MyIntegral = r => require.ensure([], () => r(require('@/view/Mine/MyIntegral')), 'MyIntegral')
 // 个人中心-购物车
 const ShoppingCar = r => require.ensure([], () => r(require('@/view/Mine/ShoppingCar')), 'ShoppingCar')
+// 个人中心-我的积分
+const MyIntegral = r => require.ensure([], () => r(require('@/view/Mine/MyIntegral')), 'MyIntegral')
+// 个人中心-我的优惠券
+const CouponCenter = r => require.ensure([], () => r(require('@/view/Mine/CouponCenter')), 'CouponCenter')
+// 个人中心-个人信息
+const Membership = r => require.ensure([], () => r(require('@/view/Mine/Membership')), 'Membership')
 // 个人中心-收货地址
 const ShoppingAdress = r => require.ensure([], () => r(require('@/view/Mine/ShoppingAdress')), 'ShoppingAdress')
 // 个人中心-消息管理
 const MyMessage = r => require.ensure([], () => r(require('@/view/Mine/MyMessage')), 'MyMessage')
 // 个人中心-消息详情
 const MessageDetail = r => require.ensure([], () => r(require('@/view/Mine/MessageDetail')), 'MessageDetail')
-
-// 个人中心-会员资料
-const Membership = r => require.ensure([], () => r(require('@/view/Mine/Membership')), 'Membership')
-// 个人中心-修改密码
-const ChangePwd = r => require.ensure([], () => r(require('@/view/Mine/ChangePwd')), 'ChangePwd')
-
-const CouponReceived = r => require.ensure([], () => r(require('@/view/Mine/coupon/CouponReceived')), 'CouponReceived')
-const CouponUsed = r => require.ensure([], () => r(require('@/view/Mine/coupon/CouponUsed')), 'CouponUsed')
-const CouponUnused = r => require.ensure([], () => r(require('@/view/Mine/coupon/CouponUnused')), 'CouponUnused')
-const CouponStale = r => require.ensure([], () => r(require('@/view/Mine/coupon/CouponStale')), 'CouponStale')
-
 
 Vue.use(Router)
 
@@ -123,11 +99,8 @@ export default new Router({
       component: Order,
       children: [{
         path: '/tickets/:id',
-        name: 'tickets',
-        component: tickets, //订票列表
-        meta: {
-          nav: 1
-        }
+        name: 'Tickets',
+        component: Tickets, //订票列表
       }]
     },
     {
@@ -138,17 +111,7 @@ export default new Router({
     {
       path: '/suborder',
       name: 'Suborder',
-      component: Suborder
-    },
-    {
-      path: '/carsuborder',
-      name: 'Carsuborder',
-      component: Carsuborder
-    },
-    {
-      path: '/mcgrady',
-      name: 'McGrady',
-      component: McGrady
+      component: Suborder //下订单页面
     },
     {
       path: '/news',
@@ -232,22 +195,17 @@ export default new Router({
     {
       path: '/success',
       name: 'success',
-      component: success
-    },
-    {
-      path: '/reset',
-      name: 'Reset',
-      component: Reset
-    },
-    {
-      path: '/waterworld',
-      name: 'waterworld',
-      component: waterworld //水世界
+      component: success //支付页面
     },
     {
       path: '/theme',
       name: 'Theme',
       component: Theme //主题乐园
+    },
+    {
+      path: '/animalTheme',
+      name: 'AnimalTheme',
+      component: AnimalTheme //主题乐园
     },
     {
       path: '/ticketDetail',
@@ -257,12 +215,7 @@ export default new Router({
     {
       path: '/productDetail',
       name: 'ProductDetail',
-      component: ProductDetail
-    },
-    {
-      path: '/shoppingCar1',
-      name: 'ShoppingCar1',
-      component: ShoppingCar1
+      component: ProductDetail //零售详情
     },
     {
       path: '/mine',
@@ -300,7 +253,7 @@ export default new Router({
               name: 'Unpaid',
               component: Unpaid,
               meta: {
-                nav: 2
+                nav: 3
               }
             },
             {
@@ -308,7 +261,7 @@ export default new Router({
               name: 'Prepaid',
               component: Prepaid,
               meta: {
-                nav: 2
+                nav: 3
               }
             },
             {
@@ -316,7 +269,7 @@ export default new Router({
               name: 'Consumed',
               component: Consumed,
               meta: {
-                nav: 2
+                nav: 3
               }
             },
             {
@@ -324,7 +277,7 @@ export default new Router({
               name: 'Refund',
               component: Refund,
               meta: {
-                nav: 2
+                nav: 3
               }
             },
             {
@@ -332,7 +285,7 @@ export default new Router({
               name: 'Audit',
               component: Audit,
               meta: {
-                nav: 2
+                nav: 3
               }
             },
             {
@@ -347,87 +300,23 @@ export default new Router({
               path: '/error',
               name: 'Error',
               component: Error,
-              meta: {
-                nav: 2
-              }
-            }
-          ]
-        },
-        {
-          path: '/myCoupon',
-          component: MyCoupon,
-          meta: {
-            nav: 2
-          },
-          children: [{
-              path: '/',
-              component: CouponReceived,
-              meta: {
-                nav: 2
-              }
-            },
-            {
-              path: '/couponReceived',
-              name: 'CouponReceived',
-              component: CouponReceived,
-              meta: {
-                nav: 2
-              }
-            },
-            {
-              path: '/couponUsed',
-              name: 'CouponUsed',
-              component: CouponUsed,
-              meta: {
-                nav: 2
-              }
-            },
-            {
-              path: '/couponUnused',
-              name: 'CouponUnused',
-              component: CouponUnused,
-              meta: {
-                nav: 2
-              }
-            },
-            {
-              path: '/couponStale',
-              name: 'CouponStale',
-              component: CouponStale,
-              meta: {
-                nav: 2
-              }
             }
           ]
         },
         {
           path: '/couponCenter',
           name: 'CouponCenter',
-          component: CouponCenter,
-          meta: {
-            nav: 2
-          }
-        },
-        {
-          path: '/Invoice',
-          name: 'Invoice',
-          component: Invoice,
-          meta: {
-            nav: 2
-          }
+          component: CouponCenter, //我的优惠券
         },
         {
           path: '/myIntegral',
           name: 'MyIntegral',
-          component: MyIntegral,
-          meta: {
-            nav: 2
-          }
+          component: MyIntegral, //我的积分
         },
         {
           path: '/shoppingCar',
           name: 'ShoppingCar',
-          component: ShoppingCar,
+          component: ShoppingCar, //购物车
           meta: {
             nav: 2
           }
@@ -435,7 +324,7 @@ export default new Router({
         {
           path: '/shoppingAdress',
           name: 'ShoppingAdress',
-          component: ShoppingAdress,
+          component: ShoppingAdress, //收货地址
           meta: {
             nav: 2
           }
@@ -443,7 +332,7 @@ export default new Router({
         {
           path: '/myMessage',
           name: 'MyMessage',
-          component: MyMessage,
+          component: MyMessage, //消息列表
           meta: {
             nav: 2
           }
@@ -451,7 +340,7 @@ export default new Router({
         {
           path: '/messageDetail',
           name: 'MessageDetail',
-          component: MessageDetail,
+          component: MessageDetail, //消息详情
           meta: {
             nav: 2
           }
@@ -459,26 +348,17 @@ export default new Router({
         {
           path: '/membership',
           name: 'Membership',
-          component: Membership,
-          meta: {
-            nav: 2
-          }
-        },
-        {
-          path: '/changePwd',
-          name: 'ChangePwd',
-          component: ChangePwd,
+          component: Membership, //个人资料
           meta: {
             nav: 2
           }
         }
-
       ]
     },
     {
       path: '/orderDetail',
       name: 'OrderDetail',
-      component: OrderDetail
+      component: OrderDetail //订单详情
     },
   ]
 })

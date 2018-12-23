@@ -90,7 +90,7 @@
 							</el-table-column>
 							<el-table-column label="操作">
 								<template slot-scope="scope">
-									<el-button type="text" v-if="tabs == 3" @click="refund(scope.row,item.orderId,item.receiveName)">退票申请</el-button>
+									<el-button type="text" v-if="tabs == 3 && scope.row.returnSign == 1" @click="refund(scope.row,item.orderId,item.receiveName)">退票申请</el-button>
 								</template>
 							</el-table-column>
 						</el-table>

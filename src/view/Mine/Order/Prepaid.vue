@@ -1,6 +1,6 @@
 <template>
 	<!-- 预下单 状态0 -->
-	<section>
+	<section class="pt40">
 		<!-- 头部tab -->
 		<section class="tab-s">
 			<ul>
@@ -90,7 +90,7 @@
 							</el-table-column>
 							<el-table-column label="操作">
 								<template slot-scope="scope">
-									<el-button type="text" v-if="tabs == 3" @click="refund(scope.row,item.orderId,item.receiveName)">退票申请</el-button>
+									<el-button type="text" v-if="tabs == 3 && scope.row.returnSign == 1" @click="refund(scope.row,item.orderId,item.receiveName)">退票申请</el-button>
 								</template>
 							</el-table-column>
 						</el-table>
@@ -291,8 +291,11 @@
 		}
 	};
 </script>
-
+<style scoped="scoped" lang="scss" src="../../../assets/scss/MyOrder.scss"></style>
 <style lang="scss" scoped>
+	.pt40{
+		padding-top: 40px;
+	}
 	.tab-s {
 		width: 100%;
 		// height: 40px;

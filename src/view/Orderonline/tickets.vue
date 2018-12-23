@@ -111,7 +111,11 @@ export default {
   computed: {
     list() {
       let list = this.items;
+      console.log(this.imgs);
       let str = [];
+      // if(!this.imgs){
+      //   return;
+      // }
       list.forEach((v, k) => {
         this.imgs.forEach(val => {
           if (v.pictureId == val.id) {
@@ -186,11 +190,11 @@ export default {
     //获取门票信息
     getTicketList(typeId, date, pageSize, pageIndex) {
       //请求后台接口
-      this.$fetch("http://192.168.2.61:5010/product/findProductByStock", {
+      this.$fetch("http://192.168.2.61:5001/product/findProductByStock", {
         playDate: date
       })
         .then(res => {
-          console.log(res);
+          // console.log(res);
           if(res.code === 400){
               this.msg = res.message
               this.items = []
@@ -201,12 +205,16 @@ export default {
           
           // console.log(res.data.list);
           this.items = res.data.list;
+          // console.log(this.items)
           this.totle = res.data.total;
           let xin = [];
           let xin2 = "";
+          // if(!this.items){
+          //   return;
+          // }
           this.items.forEach((v, k) => {
             // console.log(v.pictureId);
-
+            // console.log(v)
             xin.push(v.pictureId);
             // console.log(xin);
             xin2 = xin.join(",");

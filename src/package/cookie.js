@@ -11,3 +11,13 @@ export function getCookie(name) {
   else
     return null;
 }
+
+//删除cookie
+export function delCookie (name) {
+  var exp = new Date();
+  exp.setTime(exp.getTime() - 1);
+  var cval = getCookie(name);
+  if (cval != null)
+   document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
+ };
+ 

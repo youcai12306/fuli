@@ -6,7 +6,7 @@ const Login = r => require.ensure([], () => r(require('@/view/Login')), 'Login')
 //注册
 const Register = r => require.ensure([], () => r(require('@/view/Register')), 'Register')
 //忘记密码
-const Forget = r => require.ensure([], () => r(require('@/view/Login')), 'Forget')
+const Forget = r => require.ensure([], () => r(require('@/view/Forget')), 'Forget')
 //首页
 const Index = r => require.ensure([], () => r(require('@/view/Index')), 'Index')
 //产品列表
@@ -24,6 +24,7 @@ const success = r => require.ensure([], () => r(require('@/view/Orderonline/succ
 //主题乐园
 const Theme = r => require.ensure([], () => r(require('@/view/theme/Theme')), 'Theme')
 const AnimalTheme = r => require.ensure([], () => r(require('@/view/theme/AnimalTheme')), 'AnimalTheme')
+const artTheme = r => require.ensure([], () => r(require('@/view/theme/artTheme')), 'artTheme')
 // 新闻中心首页
 const News = r => require.ensure([], () => r(require('@/view/news/News')), 'News')
 const NewList = r => require.ensure([], () => r(require('@/view/news/NewList')), 'NewList')
@@ -224,6 +225,11 @@ export default new Router({
 			path: '/animalTheme',
 			name: 'AnimalTheme',
 			component: AnimalTheme //主题乐园
+		},
+		{
+			path:'/artTheme',
+			name:'artTheme',
+			component:artTheme
 		},
 		{
 			path: '/ticketDetail',

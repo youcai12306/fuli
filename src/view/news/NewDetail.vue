@@ -10,8 +10,8 @@
     <div class="main-new">
       <div class="titles clearDiv">
         <div class="title-left floatLeft">
-          <div class="one">荟精英，海洋欢乐世界展露头角 创未来，富力集团即将扬帆启航</div>
-          <div class="two">2018-11-26 来源：富力海洋欢乐世界 浏览次数：65</div>
+          <div class="one">{{data.infoTitle}}</div>
+          <div class="two">{{data.createTime}}&nbsp;&nbsp; 来源：富力海洋欢乐世界 浏览次数：65</div>
         </div>
         <router-link to="/newList" tag="div" class="title-right floatRight">返回</router-link>
       </div>
@@ -24,7 +24,7 @@
         <div class="swiper-button-prev swiper-button-black" slot="button-prev"></div>
         <div class="swiper-button-next swiper-button-black" slot="button-next"></div>
       </div>
-      <div>2018年11月26日，一场文旅的激情碰撞在海南博鳌国际会议中心拉开序幕，作为2018年（第十九届）海南国际旅游岛欢乐节的重要组成部分，今年已经是博鳌国际旅游传播论坛走过的第三个春秋，是在海南岛国际旅游迎来国家政策利好的又一次绽放。</div>
+      <div>{{data.infoContent}}</div>
     </div>
   </div>
 </template>
@@ -44,31 +44,17 @@ export default {
         initialSlide: 0,
         //自动播放
         autoplay: true,
-        // autoplay: {
-        //     delay: 3000,
-        //     stopOnLastSlide: false,
-        //     disableOnInteraction: true,
-        // },
-        // 设置轮播
-        effect: "flip",
         //滑动速度
         speed: 800,
         //滑动方向
         direction: "horizontal",
-        //小手掌抓取滑动
-        // grabCursor : true,
-        //滑动之后回调函数
-        on: {
-          slideChangeTransitionEnd: function() {
-            // console.log(this.activeIndex);//切换结束时，告诉我现在是第几个slide
-          }
-        },
         //左右点击
         navigation: {
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev"
         }
-      }
+      },
+      data:{}
     };
   },
   created() {
@@ -77,6 +63,12 @@ export default {
   components: {
     swiper,
     swiperSlide
+  },
+  mounted(){
+     this.$post('http://192.168.2.61:2670/info/secondary/getInfo?infoId='+this.$route.query.id).then((res) =>{
+       console.log(res.data)
+      this.data = res.data
+    })
   }
 };
 </script>
@@ -166,6 +158,9 @@ export default {
         height: 89px;
         margin-top: -44px;
         background: url(../../assets/img/new-6.png) no-repeat 0 0;
+        &:focus{
+          outline-width: 0
+        }
       }
       .swiper-button-next {
         right: -60px;
@@ -173,6 +168,9 @@ export default {
         height: 89px;
         margin-top: -44px;
         background: url(../../assets/img/new-5.png) no-repeat 0 0;
+        &:focus{
+           outline-width: 0
+        }
       }
     }
   }

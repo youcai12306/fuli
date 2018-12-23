@@ -482,8 +482,15 @@
 				<!-- 园区地图 -->
 				<div class="box8" v-if="actives == 8">
 					<div class="info-title">园区地图</div>
-					<div class="info-8-img"><img src="../../assets/img/ditu9.png" alt=""></div>
-
+					<div class="info-8-img">
+						<viewer :images="imgs">
+							<img v-for="src in imgs" :src="src" :key="src">
+						</viewer>
+					</div>
+					<!-- <div class="info-botton">
+						<span class="prev" @click="scale">+</span>
+						<span class="next" @click="scale">-</span>
+					</div> -->
 				</div>
 			</div>
 		</div>
@@ -497,7 +504,8 @@
 		data() {
 			return {
 				tab: 0,
-				actives: 0
+				actives: 0,
+				imgs:['../../../static/ditu9.png']
 			};
 		},
 		components: {
@@ -505,7 +513,7 @@
 		},
 
 		methods: {
-
+			
 		}
 	};
 </script>
@@ -519,7 +527,7 @@
 		/* background-position: center 64px; */
 		background-attachment: fixed;
 		/* background-size: 1920px 100%; */
-		padding-top: 446px;
+		padding-top: 346px;
 		padding-bottom: 50px;
 
 		.title {
@@ -1348,6 +1356,27 @@
 						width: 790px;
 						height: 1107px;
 						margin: 0 auto;
+						cursor: pointer;
+					}
+					.info-botton{
+						text-align: center;
+						padding-top: 30px;
+						font-size: 0;
+						span{
+							display: inline-block;
+							width: 86px;
+							height: 52px;
+							line-height: 52px;
+							font-size: 50px;
+							text-align: center;
+							color: #fff;
+							cursor: pointer;
+							
+							background: #00561F;
+							&.next{
+								margin-left: 64px;
+							}
+						}
 					}
 				}
 

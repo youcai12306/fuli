@@ -87,16 +87,16 @@ import { mapActions } from "vuex";
 export default {
   data() {
     return {
-      showLogin: 0,
-      phone: 15827140685,
-      phoneTip: "",
-      code: "",
-      codeTip: "",
-      password: 123456,
-      pwdTip: "",
-      showPin: "获取验证码",
+      showLogin: 1,
+      phone: '',
+      phoneTip: '',
+      code: '',
+      codeTip: '',
+      password: '',
+      pwdTip: '',
+      showPin: '获取验证码',
       isActive: false,
-      msg: "",
+      msg: '',
       img:''
     };
   },

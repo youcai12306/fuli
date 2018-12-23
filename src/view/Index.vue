@@ -668,7 +668,6 @@ export default {
           img {
             width: 170px;
             height: 80px;
-            display: inline-block;
             margin-right: 22px;
             float: left;
           }

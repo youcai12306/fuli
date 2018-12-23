@@ -22,8 +22,8 @@
         <li v-for="(item,key) in list" :key="key" @click="jumpDetail(item.id)">
           <router-link :to="{path:'/'}">
             <i></i>
-            <span class="li-itme">{{item.title}}</span>
-            <span class="li-span">{{item.span}} | {{item.time}}</span>
+            <span class="li-itme">{{item.infoTitle}}</span>
+            <span class="li-span">来自富力官网 | {{item.createTime}}</span>
           </router-link>
         </li>
       </ul>
@@ -32,9 +32,10 @@
       <el-pagination
         background
         layout="prev, pager, next"
-        :total="list.length"
-        :page-size="7"
-        @current-change="handleCurrentChange"
+        :total="totle"
+        :current-page.sync="pageIndex"
+        :page-size="pageSize"
+        @current-change="changePage"
       ></el-pagination>
     </div>
   </div>
@@ -45,35 +46,35 @@ export default {
   name: "News",
   data() {
     return {
-      page: 1,
-      list: []
+      list: [],
+      pageSize: 15,
+      pageIndex: 1,
+      totle: 0
     };
   },
   methods: {
-    // 所有新闻分页1
-    handleCurrentChange(val) {
-      console.log(val);
-    },
     // 园区公告
-    // 获取所有新闻數據
-    GetList() {
-     let list = [
-         {
-          id: 1,
-          title:
-            "关于“丛林过山车、沙雕城堡、海鸟世界象龟展区”升级改造暂停服务的公告",
-          span: "来自海洋欢乐世界",
-          time: "2018.08.09"
-        },
-        {
-          id: 2,
-          title:
-            "关于“丛林过山车、沙雕城堡、海鸟世界象龟展区”升级改造暂停服务的公告",
-          span: "来自海洋欢乐世界",
-          time: "2018.08.09"
+    // 获取新闻數據
+    GetList(type, pageSize, pageIndex) {
+      this.$post(
+        "http://192.168.2.61:2670/info/secondary/findpage?type=" +
+          type +
+          "&pageSize=" +
+          pageSize +
+          "&pageNum=" +
+          pageIndex
+      ).then(res => {
+        if (res.code === 200) {
+          this.list = res.data.content
+          this.totle = res.data.totalElements;
+        } else {
+          this.$message.error("读取公告列表失败");
         }
-     ]
-     this.list = list;
+      });
+    },
+    //分页
+    changePage(val) {
+      this.GetList(1, this.pageSize, val);
     },
     jumpDetail(id){
         this.$router.push({
@@ -88,7 +89,7 @@ export default {
     document.title = "新闻中心";
   },
   mounted() {
-    this.GetList();
+    this.GetList(1, this.pageSize, this.pageIndex);
   }
 };
 </script>

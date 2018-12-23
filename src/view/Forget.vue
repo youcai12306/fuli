@@ -118,7 +118,7 @@ export default {
       clearInterval(that.setsund);
       this.$fetch("http://192.168.2.34:5010/tourist/getSmsCode", {
         mobile: this.phone,
-        smsFlag: "sms_back"
+        smsFlag: "sms_passWord_back"
       }).then(res => {
         if (res.code === 200) {
           this.isActive = false;

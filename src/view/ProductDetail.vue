@@ -145,7 +145,7 @@ export default {
     init() {
       let id = this.$route.query.id;
       let stockId = this.$route.query.stockId;
-      this.$fetch("http://192.168.2.61:5010/product/find/" + id, {
+      this.$fetch("http://192.168.2.61:5001/product/find/" + id, {
         stockId: stockId
       }).then(res => {
         console.log(res);

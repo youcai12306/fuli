@@ -36,7 +36,7 @@
               <button @click="delShopping(item,key)" class="del-btn"></button>
             </td>
           </tr>
-          <tr class="count" v-show="!good_list.length === 0">
+          <tr class="count" v-show="!flag">
             <td colspan="6" class="count-all clearDiv">
               <div class="all-choose">
                 <input type="checkbox" @click="slect_all()" v-model="selected_all">全选
@@ -53,7 +53,7 @@
               <button @click="jumpShoppingCarOrder"></button>
             </td>
           </tr>
-          <tr class="empty" v-show="this.good_list.length === 0">
+          <tr class="empty" v-show="flag">
             <td colspan="6">暂无数据</td>
           </tr>
         </table>
@@ -68,7 +68,8 @@ export default {
       good_list: [],
       selected_all: false,
       totalPrice: 0,
-      totalNum: 0
+      totalNum: 0,
+      flag:true
     };
   },
   watch: {
@@ -96,7 +97,13 @@ export default {
         touristId: Uid
       }).then(res => {
         if (res.code === 200) {
+          console.log(111)
           this.good_list = res.data;
+            if(this.good_list.length === 0){
+              this.flag = true
+            }else if(this.good_list.length >= 0){
+              this.flag = false
+            } 
           this.good_list.forEach(val => {
             val.is_selected = false;
           });

@@ -46,10 +46,10 @@
             <img src="../assets/img/index-news.png" alt>
             <p>新闻中心</p>
           </router-link>
-          <li class="trip">
-            <img src="../assets/img/index-news.png" alt>
-            <p>游玩指南</p>
-          </li>
+					<router-link to="/ditu" tag="li" class="trip">
+						<img src="../assets/img/index-news.png" alt>
+						<p>游玩指南</p>
+					</router-link>
           <router-link to="/specialOffier" tag="li" class="active">
             <img src="../assets/img/index-theme.png" alt>
             <p>优惠活动</p>

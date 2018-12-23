@@ -36,8 +36,8 @@
                 <span>我的交易</span>
               </template>
               <el-menu-item
-                :index="`/myorder`"
-                :class="{'is_active' : $route.path=='/myorder' || $route.path=='/unpaid' || $route.path=='/prepaid' || $route.path=='/consumed' || $route.path=='/refund' || $route.path=='/audit' || $route.path=='/faudit' || $route.path=='/error' || $route.path=='/Invoice'}"
+                :index="`/prepaid`"
+                :class="{'is_active' : $route.path=='/mine' || $route.path=='/myorder' || $route.path=='/prepaid'}"
               >我的订单</el-menu-item>
               <el-menu-item
                 :index="`/ShoppingCar`"

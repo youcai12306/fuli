@@ -1,27 +1,5 @@
 <template>
   <div class="main">
-    <div class="nav">
-      <ul class="nav-content clearDiv">
-        <li class="floatLeft">您好，欢迎登录富力海洋欢乐世界度假区！
-          <router-link to="/">[返回首页]</router-link>
-        </li>
-        <li class="floatRight">
-          <span class="phone-img"></span>客服电话400-xxxx-xxx
-        </li>
-        <li class="floatRight phon-type">手机版</li>
-      </ul>
-    </div>
-    <div class="nav2">
-      <ul class="nav-logo clearDiv">
-        <li class="floatLeft">
-          <img src="../../assets/img/logo.png" alt>
-        </li>
-        <li class="mine-center floatLeft">会员中心</li>
-        <li class="mine-login floatRight">
-          <span></span>退出登录
-        </li>
-      </ul>
-    </div>
     <div class="mine-bg">
       <ul class="mine-info clearDiv">
         <li class="portrait floatLeft">
@@ -55,43 +33,50 @@
           >
             <el-submenu index="1">
               <template slot="title">
-                <span>订单管理</span>
+                <span>我的交易</span>
               </template>
               <el-menu-item
                 :index="`/myorder`"
                 :class="{'is_active' : $route.path=='/myorder' || $route.path=='/unpaid' || $route.path=='/prepaid' || $route.path=='/consumed' || $route.path=='/refund' || $route.path=='/audit' || $route.path=='/faudit' || $route.path=='/error' || $route.path=='/Invoice'}"
               >我的订单</el-menu-item>
+              <el-menu-item
+                :index="`/ShoppingCar`"
+                :class="{'is_active' : $route.path=='/ShoppingCar'}"
+              >购物车</el-menu-item>
             </el-submenu>
             <el-submenu index="2">
               <template slot="title">
                 <span>我的钱包</span>
               </template>
               <el-menu-item
+                :index="`/MyIntegral`"
+                :class="{'is_active' : $route.path=='/MyIntegral'}"
+              >我的积分</el-menu-item>
+              <el-menu-item
                 :index="`/myCoupon`"
                 :class="{'is_active' : $route.path=='/myCoupon'}"
-              >我的卡券</el-menu-item>
+              >我的优惠券</el-menu-item>
+              <!-- <el-menu-item
+                :index="`/CouponCenter`"
+                :class="{'is_active' : $route.path=='/CouponCenter'}"
+              >卡券中心</el-menu-item> -->
               <el-menu-item
                 :index="`/CouponCenter`"
                 :class="{'is_active' : $route.path=='/CouponCenter'}"
-              >卡券中心</el-menu-item>
+              >我的余额</el-menu-item>
             </el-submenu>
             <el-submenu index="3">
               <template slot="title">
                 <span>会员中心</span>
               </template>
               <el-menu-item
-                :index="`/MyIntegral`"
-                :class="{'is_active' : $route.path=='/MyIntegral'}"
-              >积分</el-menu-item>
-            </el-submenu>
-            <el-submenu index="4">
-              <template slot="title">
-                <span>账户中心</span>
-              </template>
+                :index="`/Membership`"
+                :class="{'is_active' : $route.path=='/Membership'}"
+              >个人信息</el-menu-item>
               <el-menu-item
-                :index="`/ShoppingCar`"
-                :class="{'is_active' : $route.path=='/ShoppingCar'}"
-              >购物车</el-menu-item>
+                :index="`/Membership`"
+                :class="{'is_active' : $route.path=='/Membership'}"
+              >我的会员</el-menu-item>
               <el-menu-item
                 :index="`/ShoppingAdress`"
                 :class="{'is_active' : $route.path=='/ShoppingAdress'}"
@@ -100,15 +85,16 @@
                 :index="`/MyMessage`"
                 :class="{'is_active' : $route.path=='/MyMessage'}"
               >消息管理</el-menu-item>
-              <el-menu-item
-                :index="`/Membership`"
-                :class="{'is_active' : $route.path=='/Membership'}"
-              >会员资料</el-menu-item>
-              <el-menu-item
+              <!-- <el-menu-item
                 :index="`/ChangePwd`"
                 :class="{'is_active' : $route.path=='/ChangePwd'}"
-              >修改密码</el-menu-item>
+              >修改密码</el-menu-item> -->
             </el-submenu>
+            <!-- <el-submenu index="4">
+              <template slot="title">
+                <span>账户中心</span>
+              </template>
+            </el-submenu> -->
           </el-menu>
         </div>
         <div class="content-right floatRight">
@@ -123,7 +109,7 @@
 export default {
   data() {
     return {
-      openeds: ["1", "2", "3", "4"], //展开的菜单导航
+      openeds: ["1", "2", "3", "4"] //展开的菜单导航
     };
   },
   methods: {
@@ -139,88 +125,6 @@ export default {
 <style lang='scss' scoped>
 .main {
   width: 100%;
-
-  .nav {
-    width: 100%;
-    height: 63px;
-    line-height: 63px;
-    font-size: 14px;
-    font-weight: 400;
-    color: rgba(255, 255, 255, 1);
-    background: url(../../assets/img/mine-nav.png) no-repeat 0 0;
-    background-size: 100% 100%;
-
-    .nav-content {
-      width: 1200px;
-      margin: 0 auto;
-
-      a {
-        color: rgba(255, 255, 255, 1);
-      }
-
-      li {
-        .phone-img {
-          display: inline-block;
-          width: 20px;
-          height: 22px;
-          background: url(../../assets/img/mine-phone.png) no-repeat 0 0px;
-          vertical-align: middle;
-          margin-right: 5px;
-        }
-      }
-
-      .phon-type {
-        margin-right: 20px;
-      }
-    }
-  }
-
-  .nav2 {
-    width: 100%;
-    height: 125px;
-    line-height: 125px;
-    background-color: #359af7;
-
-    ul {
-      width: 1200px;
-      margin: 0 auto;
-      height: 125px;
-      line-height: 125px;
-
-      li {
-        font-weight: 400;
-        color: rgba(255, 255, 255, 1);
-
-        img {
-          vertical-align: middle;
-        }
-      }
-
-      .mine-center {
-        height: 45px;
-        line-height: 45px;
-        font-size: 14px;
-        margin-left: 22px;
-        padding-left: 18px;
-        border-left: 1px solid #ffffff;
-        margin-top: 36px;
-      }
-
-      .mine-login {
-        font-size: 14px;
-
-        span {
-          width: 19px;
-          height: 21px;
-          display: inline-block;
-          vertical-align: middle;
-          background: url(../../assets/img/mine-login.png) no-repeat 0 0;
-          margin-right: 5px;
-        }
-      }
-    }
-  }
-
   .mine-bg {
     width: 100%;
     height: 100%;
@@ -271,11 +175,11 @@ export default {
           font-weight: bold;
         }
         .lev {
-			height: 50px;
-			line-height: 50px;
-			*{
-				float: left;
-			}
+          height: 50px;
+          line-height: 50px;
+          * {
+            float: left;
+          }
           img {
             width: 50px;
             height: 50px;

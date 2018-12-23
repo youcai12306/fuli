@@ -88,11 +88,11 @@ export default {
   data() {
     return {
       showLogin: 0,
-      phone: "",
+      phone: 15827140685,
       phoneTip: "",
       code: "",
       codeTip: "",
-      password: "",
+      password: 123456,
       pwdTip: "",
       showPin: "获取验证码",
       isActive: false,
@@ -157,8 +157,7 @@ export default {
     },
     //跳转忘记密码
     jumpForget() {
-      console.log(111);
-      this.$router.push("/mine");
+      this.$router.push("/forget");
     },
     ...mapActions(["setUserData", "setUserInfo"]),
     //登录
@@ -180,7 +179,7 @@ export default {
         };
         this.$post("http://192.168.2.34:5010/tourist/login",data,{headers:{'Content-Type':'application/json;charset=UTF-8'}}).then(res => {
           if (res.code === 200) {
-            console.log(res.data)
+            console.log(res)
             this.setUserInfo(data);
             this.setUserData(res.data);
             this.$router.replace("/index");

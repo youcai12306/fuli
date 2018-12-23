@@ -8,13 +8,60 @@
       </div>
       <div class="floatLeft">
         <ul>
-          <li @mouseover="showNavList(1)" @mouseout="hiddenNavList(1)">主题乐园</li>
-          <li class="hotel">度假酒店</li>
-          <li class="news">新闻中心</li>
-          <li class="trip">计划旅程</li>
-          <li class="discounts">特别优惠</li>
-          <li class="order" @click="jumpOrderTicket">网上订购</li>
-          <li class="risk">冒险之旅</li>
+          <li class="order" @click="jumpOrderTicket">
+            <img src="../assets/img/index-discounts.png" alt>
+            <p>网上订购</p>
+          </li>
+          <li @mouseover="showNavList(1)" @mouseout="hiddenNavList(1)" class="theme">
+            <img src="../assets/img/index-theme.png" alt>
+            <p>主题乐园</p>
+            <div class="nav-list">
+              <div class="lists">
+                <ul>
+                  <li>
+                    <router-link :to="{path:'/waterworld'}">
+                      <p class="list-img">
+                        <img src="../assets/img/header-img1.png" alt>
+                      </p>
+                      <p class="list-title">欢乐海洋世界</p>
+                    </router-link>
+                  </li>
+                  <li>
+                    <router-link :to="{path:'/mcgrady'}">
+                      <p class="list-img">
+                        <img src="../assets/img/header-img2.png" alt>
+                      </p>
+                      <p class="list-title">麦迪斯卡水乐园</p>
+                    </router-link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li class="hotel">
+            <img src="../assets/img/index-hotel.png" alt>
+            <p>度假酒店</p>
+          </li>
+          <router-link to="/news" tag="li" class="news">
+            <img src="../assets/img/index-news.png" alt>
+            <p>新闻中心</p>
+          </router-link>
+          <li class="trip">
+            <img src="../assets/img/index-news.png" alt>
+            <p>游玩指南</p>
+          </li>
+          <router-link to="/specialOffier" tag="li" class="active">
+            <img src="../assets/img/index-theme.png" alt>
+            <p>优惠活动</p>
+          </router-link>
+          <router-link to="/risk" tag="li" class="risk">
+            <img src="../assets/img/index-risk.png" alt>
+            <p>冒险之旅</p>
+          </router-link>
+          <router-link to="/animal" tag="li" class="animal">
+            <img src="../assets/img/index-theme.png" alt>
+            <p>动物百科</p>
+          </router-link>
         </ul>
       </div>
       <div class="nav-right floatLeft">
@@ -41,30 +88,6 @@
             <span>英文</span>
           </div>
         </div>
-        <input type="text">
-      </div>
-    </div>
-
-    <div class="nav-list" v-show="show" @mouseover="showNavList(2)" @mouseout="hiddenNavList(2)">
-      <div class="lists">
-        <ul>
-          <li>
-            <router-link :to="{path:'/waterworld'}">
-              <p class="list-img">
-                <img src="../assets/img/header-img1.png" alt>
-              </p>
-              <p class="list-title">欢乐海洋世界</p>
-            </router-link>
-          </li>
-          <li>
-            <router-link :to="{path:'/mcgrady'}">
-              <p class="list-img">
-                <img src="../assets/img/header-img2.png" alt>
-              </p>
-              <p class="list-title">麦迪斯卡水乐园</p>
-            </router-link>
-          </li>
-        </ul>
       </div>
     </div>
   </div>
@@ -72,6 +95,7 @@
 
 <script>
 import { mapActions } from "vuex";
+import {mapGetters} from 'vuex'
 export default {
   name: "Hearer",
   data() {
@@ -81,14 +105,10 @@ export default {
       loginShow: false
     };
   },
-  watch: {
-    // $route(to){
-    // 	if(!to.path.indexOf('/login')){
-    // 		this.name = '富力会员登录'
-    // 	}else{
-    // 		this.name = this.$store.getters.userInfo.userName+',欢迎您！';
-    // 	}
-    // }
+  computed:{
+    ...mapGetters({
+        user: 'getUserData'
+    }),
   },
   created() {
     if (Object.keys(this.$store.getters.userInfo).length === 0) {
@@ -124,14 +144,12 @@ export default {
     },
     //跳转个人中心
     jumpMine() {
-      console.log(Object.keys(this.$store.getters.userInfo).length);
       if (Object.keys(this.$store.getters.userInfo).length === 0) {
         this.$router.push("/login");
+        this.loginShow = false;
       } else {
-        // this.$router.push("/mine");
         this.loginShow = true;
-      }
-      this.loginShow = true;
+      } 
     },
     //跳转订票页面
     jumpOrderTicket() {
@@ -139,10 +157,12 @@ export default {
     },
     ...mapActions(["setSignOut"]),
     //退出登录
-    setSignOuts(){
-      this.setSignOut()
-      this.$router.replace('/login')
+    setSignOuts() {
+      this.setSignOut();
+      this.$router.go(0)
     }
+  },
+  mounted() {
   }
 };
 </script>
@@ -155,60 +175,77 @@ export default {
     background-color: #f5f9ff;
 
     .logo {
-      padding-top: 36px;
-      margin-left: 441px;
+      padding-top: 26px;
+      margin-left: 180px;
     }
 
     ul {
-      padding-top: 52px;
-      padding-left: 80px;
+      padding-left: 26px;
 
       li {
-        height: 26px;
-        line-height: 26px;
+        height: 97px;
+        padding: 21px 42px 0 42px;
         float: left;
-        font-size: 12px;
-        color: #333333;
-        background: url(../assets/img/index-theme.png) no-repeat 0 0;
-        padding-left: 36px;
-        margin-right: 33px;
+        font-size: 14px;
+        font-weight: bold;
+        color: rgba(51, 51, 51, 1);
+        text-align: center;
+        letter-spacing: 2px;
+        cursor: pointer;
+        &:hover {
+          background: rgba(7, 100, 233, 1);
+          color: rgba(255, 255, 255, 1);
+        }
       }
+      .theme {
+        position: relative;
+        &:hover .nav-list {
+          display: block;
+        }
+        .nav-list {
+          display: none;
+          width: 500px;
+          height: 110px;
+          background: rgba(7, 100, 233, 1);
+          z-index: 10;
+          position: absolute;
+          top: 97px;
+          left: 0;
+          .lists {
+            ul {
+              li {
+                float: left;
+                font-size: 12px;
+                font-weight: 400;
+                color: rgba(245, 249, 255, 1);
+                margin-right: 46px;
 
-      .hotel {
-        background: url(../assets/img/index-hotel.png) no-repeat 0 0;
-        padding-left: 27px;
-      }
+                .list-img {
+                  height: 52px;
+                  line-height: 52px;
+                  text-align: center;
+                  margin-top: 10px;
 
-      .news {
-        background: url(../assets/img/index-news.png) no-repeat 0 0;
-        padding-left: 27px;
-      }
-
-      .trip {
-        background: url(../assets/img/index-trip.png) no-repeat 0 0;
-        padding-left: 27px;
-      }
-
-      .discounts {
-        background: url(../assets/img/index-discounts.png) no-repeat 0 0;
-        padding-left: 27px;
-      }
-
-      .order {
-        background: url(../assets/img/index-order.png) no-repeat 0 3px;
-        padding-left: 27px;
-      }
-
-      .risk {
-        background: url(../assets/img/index-risk.png) no-repeat 0 0;
-        padding-left: 27px;
+                  img {
+                    display: inline-block;
+                    vertical-align: middle;
+                  }
+                }
+                .list-title {
+                  line-height: 30px;
+                  color: #fff;
+                }
+              }
+            }
+          }
+        }
       }
     }
 
     .nav-right {
       font-size: 12px;
-      padding-top: 22px;
-
+      padding-top: 43px;
+      margin-left: 20px;
       .right-info {
         color: #333333;
 
@@ -272,56 +309,12 @@ export default {
           }
         }
       }
-
-      input {
-        width: 199px;
-        height: 32px;
-        border-radius: 16px;
-        border: solid 1px #bfbfbf;
-        background: url(../assets/img/index-search.png) no-repeat 163px center;
-        text-indent: 10px;
-        margin-top: 8px;
-      }
     }
   }
-
-  .nav-list {
-    width: 100%;
-    height: 110px;
-    background: rgba(7, 100, 233, 1);
-    position: absolute;
-    z-index: 10;
-
-    .lists {
-      padding-left: 691px;
-
-      ul {
-        li {
-          float: left;
-          font-size: 12px;
-          font-weight: 400;
-          color: rgba(245, 249, 255, 1);
-          margin-right: 46px;
-
-          .list-img {
-            height: 52px;
-            line-height: 52px;
-            text-align: center;
-            margin-top: 10px;
-
-            img {
-              display: inline-block;
-              vertical-align: middle;
-            }
-          }
-
-          .list-title {
-            line-height: 30px;
-            color: #fff;
-          }
-        }
-      }
-    }
+}
+@media screen and (max-width: 1700px) {
+  .main .main-content ul li {
+    padding: 21px 22px 0 22px !important;
   }
 }
 </style>

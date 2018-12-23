@@ -1,117 +1,64 @@
 <template>
   <div class="main">
-    <Header v-show="!$route.meta.nav"></Header>
+     <Header></Header> 
     <div class="banner">
       <div class="banner-imgs">
-        <img
-          src="../assets/img/index-bg1.png"
-          alt=""
-          v-show="0 === index"
-        >
-        <img
-          src="../assets/img/index-bg2.png"
-          alt=""
-          v-show="1 === index"
-        >
-        <img
-          src="../assets/img/index-bg1.png"
-          alt=""
-          v-show="2 === index"
-        >
-        <img
-          src="../assets/img/index-bg2.png"
-          alt=""
-          v-show="3 === index"
-        >
-        <img
-          src="../assets/img/index-bg1.png"
-          alt=""
-          v-show="4 === index"
-        >
-        <img
-          src="../assets/img/index-bg2.png"
-          alt=""
-          v-show="5 === index"
-        >
-        <img
-          src="../assets/img/index-bg1.png"
-          alt=""
-          v-show="6 === index"
-        >
-        <img
-          src="../assets/img/index-bg2.png"
-          alt=""
-          v-show="7 === index"
-        >
+        <img src="../assets/img/index-bg1.png" alt v-show="0 === index">
+        <img src="../assets/img/index-bg2.png" alt v-show="1 === index">
+        <img src="../assets/img/index-bg1.png" alt v-show="2 === index">
+        <img src="../assets/img/index-bg2.png" alt v-show="3 === index">
+        <img src="../assets/img/index-bg1.png" alt v-show="4 === index">
+        <img src="../assets/img/index-bg2.png" alt v-show="5 === index">
+        <img src="../assets/img/index-bg1.png" alt v-show="6 === index">
+        <img src="../assets/img/index-bg2.png" alt v-show="7 === index">
       </div>
       <div class="banner-content clearDiv">
         <div class="ticket content-list">
           <p class="title">购票</p>
-          <el-select
-            v-model="value"
-            class="select-list"
-          >
+          <el-select v-model="value" class="select-list">
             <el-option
               v-for="item in options"
               :key="item.value"
               :label="item.label"
               :value="item.value"
-            >
-            </el-option>
+            ></el-option>
           </el-select>
         </div>
         <div class="content-list">
           <p class="title">标准票（1.4M以上）</p>
-          <el-date-picker
-            v-model="date"
-            type="date"
-            class="select-list"
-          >
-          </el-date-picker>
+          <el-date-picker v-model="date" type="date" class="select-list"></el-date-picker>
         </div>
         <div class="content-list">
           <p class="title">标准票（1.4M以上）</p>
-          <el-select
-            v-model="value"
-            class="select-list"
-          >
+          <el-select v-model="value" class="select-list">
             <el-option
               v-for="item in options"
               :key="item.value"
               :label="item.label"
               :value="item.value"
-            >
-            </el-option>
+            ></el-option>
           </el-select>
         </div>
         <div class="content-list">
           <p class="title">儿童（1.0-1.4M）</p>
-          <el-select
-            v-model="value"
-            class="select-list"
-          >
+          <el-select v-model="value" class="select-list">
             <el-option
               v-for="item in options"
               :key="item.value"
               :label="item.label"
               :value="item.value"
-            >
-            </el-option>
+            ></el-option>
           </el-select>
         </div>
         <div class="content-list">
           <p class="title">老人（65岁以上）</p>
-          <el-select
-            v-model="value"
-            class="select-list"
-          >
+          <el-select v-model="value" class="select-list">
             <el-option
               v-for="item in options"
               :key="item.value"
               :label="item.label"
               :value="item.value"
-            >
-            </el-option>
+            ></el-option>
           </el-select>
         </div>
         <div class="search">
@@ -122,73 +69,44 @@
     <div class="content">
       <div class="content-list">
         <div class="list-one">
-          <div
-            class="one-change"
-            @mouseover="stopTimes"
-            @mouseout="startTimes"
-          >
-            <swiper
-              :options="swiperOption"
-              ref="mySwiper"
-            >
+          <div class="one-change" @mouseover="stopTimes" @mouseout="startTimes">
+            <swiper :options="swiperOption" ref="mySwiper">
               <!-- slides -->
-              <swiper-slide><img
-                  src="../assets/img/index-item1.png"
-                  alt=""
-                  :class="{imgActive:index === 0}"
-                > </swiper-slide>
-              <swiper-slide><img
-                  src="../assets/img/index-item2.png"
-                  alt=""
-                  :class="{imgActive:index === 1}"
-                ></swiper-slide>
-              <swiper-slide><img
-                  src="../assets/img/index-item3.png"
-                  alt=""
-                  :class="{imgActive:index === 2}"
-                ></swiper-slide>
-              <swiper-slide><img
-                  src="../assets/img/index-item4.png"
-                  alt=""
-                  :class="{imgActive:index === 3}"
-                ></swiper-slide>
-              <swiper-slide><img
-                  src="../assets/img/index-item5.png"
-                  alt=""
-                  :class="{imgActive:index === 4}"
-                > </swiper-slide>
-              <swiper-slide><img
-                  src="../assets/img/index-item6.png"
-                  alt=""
-                  :class="{imgActive:index === 5}"
-                ></swiper-slide>
-              <swiper-slide><img
-                  src="../assets/img/index-item1.png"
-                  alt=""
-                  :class="{imgActive:index === 6}"
-                ></swiper-slide>
-              <swiper-slide><img
-                  src="../assets/img/index-item2.png"
-                  alt=""
-                  :class="{imgActive:index === 7}"
-                ></swiper-slide>
+              <swiper-slide>
+                <img src="../assets/img/index-item1.png" alt :class="{imgActive:index === 0}">
+              </swiper-slide>
+              <swiper-slide>
+                <img src="../assets/img/index-item2.png" alt :class="{imgActive:index === 1}">
+              </swiper-slide>
+              <swiper-slide>
+                <img src="../assets/img/index-item3.png" alt :class="{imgActive:index === 2}">
+              </swiper-slide>
+              <swiper-slide>
+                <img src="../assets/img/index-item4.png" alt :class="{imgActive:index === 3}">
+              </swiper-slide>
+              <swiper-slide>
+                <img src="../assets/img/index-item5.png" alt :class="{imgActive:index === 4}">
+              </swiper-slide>
+              <swiper-slide>
+                <img src="../assets/img/index-item6.png" alt :class="{imgActive:index === 5}">
+              </swiper-slide>
+              <swiper-slide>
+                <img src="../assets/img/index-item1.png" alt :class="{imgActive:index === 6}">
+              </swiper-slide>
+              <swiper-slide>
+                <img src="../assets/img/index-item2.png" alt :class="{imgActive:index === 7}">
+              </swiper-slide>
               <!-- Optional controls -->
             </swiper>
-            <div
-              class="swiper-prev"
-              @click="prev"
-            ></div>
-            <div
-              class="swiper-next"
-              @click="next"
-            ></div>
+            <div class="swiper-prev" @click="prev"></div>
+            <div class="swiper-next" @click="next"></div>
           </div>
         </div>
         <div class="new-active">
           <div class="title">
-            <div class="ch">最新活动<span>/Latest activities</span></div>
-            <div class="title-bottom">
-              <div></div>
+            <div class="ch">
+              最新活动
+              <span>/Latest activities</span>
             </div>
           </div>
           <div class="new-swiper">
@@ -197,93 +115,128 @@
                 :interval="4000"
                 type="card"
                 height="248px"
-                indicator-position="none"
                 :autoplay="false"
                 arrow="never"
                 ref="car"
                 @change="change"
               >
-                <el-carousel-item
-                  v-for="(item,key) in 6"
-                  :key="key"
-                >
+                <el-carousel-item v-for="(item,key) in 6" :key="key">
                   <div class="div">
                     <img
                       src="../assets/img/index-new-img1.png"
-                      alt=""
+                      alt
                       :class="{colorA:key === newSwiperIndex}"
                     >
-                    <p
-                      class="titless"
-                      v-show="newSwiperIndex === key"
-                    >2019精彩活动马上来袭！</p>
+                    <p class="titless" v-show="newSwiperIndex === key">2019精彩活动马上来袭！</p>
                   </div>
                 </el-carousel-item>
               </el-carousel>
-              <div
-                class="prev"
-                @click="prevs"
-              ></div>
-              <div
-                class="next"
-                @click="nexts"
-              ></div>
+              <div class="prev" @click="prevs"></div>
+              <div class="next" @click="nexts"></div>
             </div>
           </div>
         </div>
         <div class="new-hot">
           <div class="title">
-            <img
-              src="../assets/img/index-hot-balloon.png"
-              alt=""
-              class="title-img"
-            >
-            <div class="ch">最新热点<span>/Latest activities</span></div>
-            <div class="title-bottom">
-              <div></div>
+            <div class="ch">
+              最新热点
+              <span>/Latest activities</span>
             </div>
-            <a
-              href="#"
-              class="more"
-            >更多<img
-                src="../assets/img/index-hot-more.png"
-                alt=""
-              ></a>
           </div>
           <div class="hot-content clearDiv">
-            <div class="content-left">
-              <div
-                class="list clearDiv"
-                v-for="item in 3"
-                :key="item.id"
-              >
-                <div class="list-left"><img
-                    src="../assets/img/index-hot-img1.png"
-                    alt=""
-                  ></div>
-                <div class="list-right">
-                  <div class="list-title">世界马戏精英亮相珠海长隆 国际顺准开幕式明...</div>
-                  <div class="list-content">长隆海洋王国的“丛林过山车、沙雕城堡、海鸟世界象龟展区”于2018年11月20日起暂停服务，该区域将会进行升级改造，敬请期待！</div>
+            <ul class="content-left floatLeft">
+              <li>
+                <img src="../assets/img/login-bg.png" alt>
+                <p>在线订票</p>
+              </li>
+              <li class="li2">
+                <img src="../assets/img/login-bg.png" alt>
+                <p>动物保育</p>
+              </li>
+              <li class="li3">
+                <img src="../assets/img/login-bg.png" alt>
+                <p>交通指南</p>
+              </li>
+              <li class="li4">
+                <img src="../assets/img/login-bg.png" alt>
+                <p>园区介绍</p>
+              </li>
+            </ul>
+            <div class="content-main floatLeft">
+              <div class="top clearDiv">
+                <img src="../assets/img/login-bg.png" alt class="floatLeft">
+                <div class="top-box floatLeft">
+                  <div class="clearDiv box-top">
+                    <div class="floatLeft">荟精英，海洋欢乐世界展露头角</div>
+                    <a href="#" class="floatRight">更多>></a>
+                  </div>
+                  <div
+                    class="floatLeft box-bottom"
+                  >2018年11月26日，一场文旅的激情碰撞在海南博鳌国际会议中心拉开序幕，作为2018年（第十九届）海南国际旅游岛欢乐节的重要组成部分，今年已经是博鳌国际旅游传播论坛走过的第三个春秋....</div>
                 </div>
               </div>
+              <ul class="bottom">
+                <li class="clearDiv" v-for="item in 4" :key="item">
+                  《受伤的鲸豚不再无助 海南首个海洋动物保育救护中心挂牌启用》
+                  <a href="#">详情>></a>
+                </li>
+              </ul>
             </div>
-            <div class="content-right">
-              <img
-                src="../assets/img/index-hot-img2.png"
-                alt=""
-              >
+            <div class="content-right floatLeft">
+              <img src="../assets/img/index-hot-img2.png" alt>
             </div>
           </div>
         </div>
+        <el-row class="info-row clearDiv">
+          <el-col :span="12" class="info-col1">
+            <span class="icoe"></span>
+            <span class="time">11.21 星期三</span>
+            <div class="info-img clearDiv">
+              <img src="../assets/img/md-5.png">
+              <p>平日 9.30~17.30</p>
+              <p>周末 9.00~18.00</p>
+            </div>
+            <div class="info-boutton">
+              <a href>详细营业信息>>></a>
+            </div>
+          </el-col>
+          <el-col :span="12" class="info-col1">
+            <span class="icoe"></span>
+            <div class="info-img2 clearDiv">
+              <img src="../assets/img/md-10.png">
+              <div class="info-p">
+                <p>
+                  全价票
+                  <span>240元</span>/人
+                </p>
+                <p>
+                  优惠价
+                  <span>180元</span>/人
+                </p>
+              </div>
+            </div>
+            <div class="info-boutton">
+              <a href>立即购票>>></a>
+            </div>
+          </el-col>
+        </el-row>
       </div>
+    </div>
+    <div class="juedui">
+      <img src="../assets/img/index-juedui-phone.png" alt>
+      <p>电话</p>
+      <img src="../assets/img/index-juedui-code.png" alt>
+      <p>服务号</p>
+      <img src="../assets/img/index-juedui-code.png" alt>
+      <p>订阅号</p>
     </div>
   </div>
 </template>
 
 <script>
-import Header from '@/components/Header' //引入头部
 import "swiper/dist/css/swiper.css";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
+import Header from "@/components/Header"; //引入头部
 export default {
   name: "Index",
   data() {
@@ -430,7 +383,6 @@ export default {
   }
   .content {
     margin-top: -145px;
-    height: 1466px;
     background: url(../assets/img/index-bg3.png) no-repeat 0 0;
     background-size: 1920px 100%;
     .content-list {
@@ -493,7 +445,7 @@ export default {
       margin-top: 72px;
       .title {
         height: 89px;
-        background-color: #6dc426;
+        background-color: rgba(255, 255, 255, 0.18);
         text-align: center;
         color: #ffffff;
         padding: 16px 0;
@@ -505,27 +457,11 @@ export default {
             margin-left: 15px;
           }
         }
-        .title-bottom {
-          margin: 0 auto;
-          width: 388px;
-          height: 10px;
-          background-color: #4e9b0f;
-          position: relative;
-          margin-top: 5px;
-          div {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 262px;
-            height: 10px;
-            background-color: #cdeefd;
-          }
-        }
       }
       .new-swiper {
         padding-bottom: 30px;
         padding-top: 20px;
-        height: 296px;
+        height: 360px;
         background-color: rgba(255, 255, 255, 0.18);
         box-shadow: 5px 6px 7px 0px rgba(51, 75, 179, 0.35);
         .swiper-box {
@@ -566,19 +502,10 @@ export default {
     }
     .new-hot {
       .title {
-        height: 102px;
-        background-color: #0764e9;
         text-align: center;
         color: #ffffff;
-        padding: 16px 0;
-        position: relative;
-        margin-top: 36px;
+        margin-top: 40px;
         letter-spacing: 2px;
-        .title-img {
-          position: absolute;
-          left: -40px;
-          top: -35px;
-        }
         .ch {
           font-size: 35px;
           span {
@@ -586,83 +513,268 @@ export default {
             margin-left: 15px;
           }
         }
-        .title-bottom {
-          margin: 0 auto;
-          width: 388px;
-          height: 10px;
-          background-color: #0552bf;
-          position: relative;
-          margin-top: 5px;
-          div {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 262px;
-            height: 10px;
-            background-color: #cdeefd;
-          }
-        }
-        .more {
-          position: absolute;
-          top: 64px;
-          right: 62px;
-          font-size: 16px;
-          color: #ffffff;
-          display: inline-block;
-          img {
-            width: 11px;
-            height: 13px;
-          }
-        }
       }
       .hot-content {
         background-color: #ffffff;
         box-shadow: 5px 6px 7px 0px rgba(51, 75, 179, 0.35);
+        padding-top: 160px;
+        padding-left: 40px;
         .content-left {
-          float: left;
-          padding-top: 38px;
-          padding-left: 31px;
-          .list {
-            margin-bottom: 43px;
-            .list-left {
-              float: left;
-              img {
-                width: 226px;
-                height: 147px;
+          li {
+            width: 180px;
+            height: 89px;
+            padding-top: 10px;
+            background: linear-gradient(
+              0deg,
+              rgba(12, 109, 206, 1),
+              rgba(68, 165, 210, 1)
+            );
+            text-align: center;
+            img {
+              width: 42px;
+              height: 42px;
+            }
+            p {
+              font-size: 16px;
+              font-weight: 400;
+              color: rgba(255, 255, 255, 1);
+            }
+          }
+          .li2 {
+            background: linear-gradient(
+              0deg,
+              rgba(101, 176, 23, 1),
+              rgba(152, 224, 75, 1)
+            );
+          }
+          .li3 {
+            background: linear-gradient(
+              0deg,
+              rgba(224, 71, 101, 1),
+              rgba(231, 122, 143, 1)
+            );
+          }
+          .li4 {
+            background: linear-gradient(
+              0deg,
+              rgba(247, 131, 17, 1),
+              rgba(241, 172, 73, 1)
+            );
+          }
+        }
+        .content-main {
+          margin-left: 33px;
+          .top {
+            img {
+              width: 179px;
+              height: 137px;
+            }
+            .top-box {
+              margin-left: 14px;
+              .box-top {
+                height: 17px;
+                line-height: 17px;
+                margin-bottom: 18px;
+                div {
+                  font-size: 16px;
+                  font-weight: bold;
+                  color: rgba(51, 51, 51, 1);
+                }
+                a {
+                  font-size: 12px;
+                  font-weight: 400;
+                  color: rgba(7, 104, 248, 1);
+                }
+              }
+              .box-bottom {
+                width: 337px;
+                height: 89px;
+                font-size: 14px;
+                line-height: 24px;
+                font-weight: 400;
+                color: rgba(102, 102, 102, 1);
+                overflow: hidden;
               }
             }
-            .list-right {
-              float: left;
-              margin-left: 26px;
-              margin-right: 20px;
-              .list-title {
-                width: 351px;
-                font-size: 16px;
-                color: #333333;
-                overflow: hidden;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-                -o-text-overflow: ellipsis;
+          }
+          .bottom {
+            li {
+              font-size: 14px;
+              font-weight: 400;
+              color: rgba(51, 51, 51, 1);
+              padding: 20px 0;
+              position: relative;
+              padding-left: 20px;
+              border-bottom: 1px solid rgba(125, 125, 125, 0.1);
+              &::before {
+                content: "";
+                width: 8px;
+                height: 8px;
+                background-color: #ed3f31;
+                border-radius: 50%;
+                position: absolute;
+                left: 0;
+                margin-top: 7px;
               }
-              .list-content {
-                width: 365px;
-                font-size: 14px;
-                line-height: 25px;
-                height: 100px;
-                color: #333333;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                display: -webkit-box;
-                -webkit-line-clamp: 4;
-                -webkit-box-orient: vertical;
+              a {
+                float: right;
+                font-size: 12px;
+                font-weight: 400;
+                color: rgba(153, 153, 153, 1);
               }
             }
           }
         }
         .content-right {
-          padding-top: 23px;
+          margin-top: -10px;
+          margin-left: 23px;
+          img {
+            width: 343px;
+            height: 397px;
+          }
         }
       }
+    }
+    .info-row {
+      width: 1190px;
+      margin: 0 auto;
+      margin-top: 80px;
+      padding-bottom: 385px;
+      background: url(../assets/img/md-11.png) no-repeat;
+      .info-col1 {
+        position: relative;
+        .icoe {
+          display: block;
+          position: absolute;
+          top: 10px;
+          left: -20px;
+          width: 232px;
+          height: 72px;
+          background: url(../assets/img/md-6.png) no-repeat top center;
+        }
+        .time {
+          display: block;
+          position: absolute;
+          top: 42px;
+          right: 66px;
+          font-weight: bold;
+          color: rgba(3, 106, 185, 1);
+          font-size: 18px;
+        }
+        .info-img {
+          margin-top: 120px;
+          margin-left: 120px;
+          height: 80px;
+          img {
+            width: 170px;
+            height: 80px;
+            display: inline-block;
+            margin-right: 22px;
+            float: left;
+          }
+          p {
+            width: 200px;
+            float: left;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 1);
+            font-size: 18px;
+            height: 40px;
+            line-height: 40px;
+          }
+        }
+        .info-boutton {
+          margin-top: 42px;
+          width: 593px;
+          height: 82px;
+          padding: 16px 0;
+          background: rgba(7, 174, 205, 1);
+          a {
+            display: block;
+            width: 236px;
+            height: 51px;
+            background: url(../assets/img/md-7.png) no-repeat;
+            margin: 0 auto;
+            font-size: 22px;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 1);
+            text-align: center;
+            line-height: 51px;
+          }
+        }
+        &:nth-of-type(2) {
+          .icoe {
+            background: url(../assets/img/md-9.png) no-repeat;
+            width: 248px;
+          }
+          .info-img2 {
+            position: absolute;
+            left: 126px;
+            top: 78px;
+            img {
+              display: block;
+              width: 168px;
+              height: 145px;
+              float: left;
+              margin-right: 10px;
+            }
+            .info-p {
+              float: left;
+              padding-top: 20px;
+              p {
+                font-weight: bold;
+                color: rgba(255, 255, 255, 1);
+                font-size: 14px;
+                height: 26px;
+                margin: 10px 0;
+                span {
+                  font-size: 18px;
+                }
+              }
+            }
+          }
+          .info-boutton {
+            margin-top: 242px;
+            width: 596px;
+            margin-left: -2px;
+            height: 82px;
+            padding: 16px 0;
+            background: rgba(72, 154, 5, 1);
+            a {
+              display: block;
+              width: 236px;
+              height: 51px;
+              background: url(../assets/img/md-8.png) no-repeat;
+              margin: 0 auto;
+              font-size: 22px;
+              font-weight: bold;
+              color: rgba(255, 255, 255, 1);
+              text-align: center;
+              line-height: 51px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .juedui {
+    position: fixed;
+    left: 50px;
+    top: 50%;
+    margin-top: -307px;
+    width: 174px;
+    height: 614px;
+    background: url(../assets/img/index-juedui-bg.png) no-repeat;
+    z-index: 999;
+    text-align: center;
+    padding-top:175px;
+    img {
+      margin-top: 30px;
+    }
+    p {
+      height: 17px;
+      font-size: 16px;
+      font-weight: bold;
+      color: rgba(51, 51, 51, 1);
     }
   }
 }
@@ -697,5 +809,16 @@ export default {
 .swiper-box .el-carousel__mask {
   opacity: 0;
   background-color: transparent;
+}
+.swiper-box .el-carousel__indicators {
+  margin-top: 40px;
+  margin-bottom: 28px;
+}
+.swiper-box .el-carousel__indicator .el-carousel__button {
+  width: 13px;
+  height: 13px;
+  background: rgba(99, 99, 99, 1);
+  border-radius: 50%;
+  margin: 0 5px;
 }
 </style>

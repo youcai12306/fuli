@@ -10,7 +10,7 @@
             class="li"
             v-for="(item,keys) in 5"
             :key="keys"
-            @click="chooseAnimal(keys,item.id)"
+            @mouseover="chooseAnimal(keys,item.id)"
             :class="{anActive:actives === keys}"
           >
             哺乳类
@@ -22,7 +22,7 @@
                   v-for="(item,key) in 5"
                   :key="key"
                   :class="{liActive:active === key}"
-                  @click="choosetype(key,item.id)"
+                  @click.stop="choosetype(key,item.id)"
                 >鲸豚类动物</li>
               </ul>
             </div>
@@ -30,7 +30,23 @@
         </ul>
       </div>
       <div class="right floatRight">
-          <div class="box"></div>
+        <div class="box">
+          <div class="box-top">
+            <img src="../../assets/img/login-bg.png" alt class="img">
+            <div class="top">
+              <p class="a-t">动物百科</p>
+              <p class="a-c">珠海长隆海洋王国动物科普大揭秘！同一个世界的另一个角度，这是一个需要你探索求证才能发现的世界，跟着我们来吧！在这里认识聪颖灵敏的 鲸豚类、水陆两生的 鳍脚类、种类繁复多样的 鱼类、依海傍生的 鸟类……</p>
+            </div>
+          </div>
+          <div class="list clearDiv" v-for="item in 4" :key="item">
+            <img src="../../assets/img/login-bg.png" alt class="floatLeft">
+            <div class="rights floatLeft">
+              <div class="t">瓶鼻海豚</div>
+              <div class="p">瓶鼻海豚有一个又短又粗的喙，似水瓶，故得名“瓶鼻”。但这并不是真正的鼻子，其鼻孔已经演化为头顶的换气孔。瓶鼻海豚是最常见的鲸豚....</div>
+              <a href="#">查看详情>></a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -49,6 +65,7 @@ export default {
   methods: {
     chooseAnimal(key, id) {
       this.actives = key;
+      this.active = 0;
     },
     choosetype(key, id) {
       this.active = key;
@@ -107,6 +124,7 @@ export default {
           font-size: 18px;
           font-weight: 400;
           color: rgba(51, 51, 51, 1);
+          cursor: pointer;
           img {
             position: absolute;
             width: 8px;
@@ -122,12 +140,13 @@ export default {
           div {
             display: none;
             left: 230px;
-            top: -30px;
+            top: 0;
             width: 370px;
             height: 114px;
             background: rgba(255, 255, 255, 1);
             box-shadow: 0px 3px 7px 0px rgba(0, 0, 0, 0.35);
             position: absolute;
+            z-index: 10;
             &:after {
               content: "";
               position: absolute;
@@ -167,6 +186,80 @@ export default {
       background: rgba(255, 255, 255, 0.2);
       box-shadow: 0px 9px 18px 3px rgba(0, 0, 0, 0.08);
       border-radius: 0px 0px 10px 10px;
+      padding-bottom: 44px;
+      .box {
+        width: 863px;
+        height: 1600px;
+        background: rgba(255, 255, 255, 1);
+        margin: 0 auto;
+        .box-top {
+          position: relative;
+          .img {
+            width: 863px;
+            height: 400px;
+          }
+          .top {
+            position: absolute;
+            top: 118px;
+            left: 0;
+            width: 422px;
+            height: 184px;
+            background: rgba(0, 0, 0, 0.8);
+            font-weight: 400;
+            color: rgba(255, 255, 255, 1);
+            padding-left: 17px;
+            .a-t {
+              font-size: 18px;
+              margin-top: 20px;
+              margin-bottom: 20px;
+            }
+            .a-c {
+              font-size: 14px;
+              height: 89px;
+              width: 386px;
+              overflow: hidden;
+            }
+          }
+        }
+
+        .list {
+          margin: 30px 0;
+          padding-left: 30px;
+          padding-top: 30px;
+          img {
+            width: 304px;
+            height: 205px;
+            border: 4px solid rgba(255, 255, 255, 1);
+            box-shadow: 0px 3px 7px 0px rgba(0, 0, 0, 0.22);
+            border-radius: 6px;
+          }
+          .rights {
+            margin-left: 30px;
+            .t {
+              font-size: 24px;
+              font-weight: bold;
+              color: rgba(51, 51, 51, 1);
+              margin-bottom: 25px;
+              margin-top: 10px;
+            }
+            .p {
+              font-size: 14px;
+              font-weight: 400;
+              color: rgba(102, 102, 102, 1);
+              width: 420px;
+              height: 66px;
+              margin-bottom: 35px;
+              line-height: 26px;
+              overflow: hidden;
+            }
+            a {
+              font-size: 14px;
+              font-weight: 400;
+              color: rgba(17, 109, 234, 1);
+            }
+          }
+        }
+      }
     }
   }
 }

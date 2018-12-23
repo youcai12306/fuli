@@ -36,7 +36,7 @@
               <button @click="delShopping(item,key)" class="del-btn"></button>
             </td>
           </tr>
-          <tr class="count" v-show="!this.good_list.length === 0">
+          <tr class="count" v-show="!good_list.length === 0">
             <td colspan="6" class="count-all clearDiv">
               <div class="all-choose">
                 <input type="checkbox" @click="slect_all()" v-model="selected_all">全选
@@ -84,7 +84,7 @@ export default {
   mounted() {
     let Uid = this.$store.getters.getUserData.userId;
     this.searchShoppingCar(Uid);
-    console.log(this.good_list);
+    
   },
   methods: {
     aa() {
@@ -100,7 +100,7 @@ export default {
           this.good_list.forEach(val => {
             val.is_selected = false;
           });
-          console.log(this.good_list);
+         console.log(this.good_list.length);
         }
       });
     },

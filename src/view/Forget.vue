@@ -46,11 +46,11 @@
         <!-- 设置新密码 -->
         <div class="fo2" v-else-if="2===this.active">
           <div class="fo4">
-            <input type="text" placeholder="请输入新密码" v-model="password" @blur="checkPwd">
+            <input type="password" placeholder="请输入新密码" v-model="password" @blur="checkPwd">
             <span>{{pwdTip}}</span>
           </div>
           <div class="fo7">
-            <input type="text" placeholder="请再次输入新密码" v-model="confirmPassword" @blur="checkConfirmPwd">
+            <input type="password" placeholder="请再次输入新密码" v-model="confirmPassword" @blur="checkConfirmPwd">
             <span>{{confirmPwdTip}}</span>
           </div>
           <el-button style="margin-top: 34px;" @click="next2">下一步</el-button>
@@ -200,7 +200,7 @@ export default {
       }
       this.$post(
         "http://192.168.2.34:5010/tourist/getBackTouristPassWord",
-        { mobile: this.mobile, passWord: this.password },
+        { mobile: this.phone, passWord: this.password,smsCode:this.code},
         { headers: { "Content-Type": "application/json;charset=UTF-8" } }
       ).then(res => {
          if(res.code === 200){

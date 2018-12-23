@@ -260,10 +260,8 @@
 		},
 		mounted() {
 			if (this.orderId) { //判断是否有订单ID
-				console.log(1)
 				this.PostFindOrderDetail();
 			} else {
-				console.log(2)
 				this.goBack();
 			}
 		},

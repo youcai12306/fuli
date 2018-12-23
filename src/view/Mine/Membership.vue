@@ -39,7 +39,7 @@
         <p class="code" v-show="!showBtn2">
           <label for>&nbsp;</label>
           <input type="text" class="codes" v-model="code" placeholder="请输入验证码">
-          <button class="btn" @click="revision(2)">确认</button>
+          <button class="btn" @click="changePhone">确认</button>
           <span class="tip">{{codeTip}}</span>
         </p>
         <p>
@@ -59,13 +59,13 @@
         <p>
           <label for>登录密码：</label>
           <input
-            type="text"
-            placeholder="请填写旧密码"
+            type="password"
+            :placeholder=dateinit
             v-model="oldPwd"
             :disabled="showBtn5"
             @blur="checkPwd()"
           >
-          <span class="change" @click="chang(4)" v-show="showBtn5">填写</span>
+          <span class="change" @click="chang(4)" v-show="showBtn5">修改密码</span>
           <button class="btn" v-show="!showBtn5" @click="changePwd">确认</button>
           <span class="tip">{{oldPwdTip}}</span>
         </p>
@@ -76,7 +76,12 @@
         </p>
         <p v-show="!showBtn5">
           <label for>&nbsp;</label>
-          <input type="password" placeholder="请确认新密码" v-model="rePassword">
+          <input
+            type="password"
+            placeholder="请确认新密码"
+            v-model="rePassword"
+            @blur="checkConfirmPwd()"
+          >
           <span class="tip">{{rePwdTip}}</span>
         </p>
       </div>
@@ -89,7 +94,7 @@ import VDistpicker from "v-distpicker";
 export default {
   data() {
     return {
-      name: "您还没有昵称",
+      name: "",
       nameTip: "",
       sex: "0",
       phone: "",
@@ -112,17 +117,23 @@ export default {
       showBtn3: true,
       showBtn4: true,
       showBtn5: true,
-      isActive: false
+      isActive: false,
+      isOk: false,
+      isOk1: false,
+      isOk2: false,
+      dateinit:'******'
     };
   },
   mounted() {
     console.log(this.$store.getters.getUserData);
   },
   methods: {
+    //选择性别
     chooseSex(sex) {
       this.sex = sex;
-      this.changeInfo()
+      this.changeInfo();
     },
+    //显示修改框
     chang(id) {
       switch (id) {
         case 0: {
@@ -143,6 +154,7 @@ export default {
         }
         case 4: {
           this.showBtn5 = !this.showBtn5;
+          this.dateinit = "请填写旧密码";
           break;
         }
       }
@@ -157,13 +169,6 @@ export default {
           this.$refs.nameTip.style.color = "red";
           this.nameTip = "请输入正确的昵称";
           return;
-        }
-      } else if (type === 2) {
-        if (!/^\d{4}$/.test(this.code)) {
-          this.codeTip = "请输入正确的验证码";
-          return;
-        } else {
-          this.codeTip = "";
         }
       } else if (type === 3) {
         //检测身份证的合法性
@@ -185,10 +190,10 @@ export default {
           return;
         }
       }
-      this.changeInfo()
+      this.changeInfo(type);
     },
     //修改信息
-    changeInfo(){
+    changeInfo(type) {
       let data = {
         nickName: this.name,
         id: this.$store.getters.getUserData.userId,
@@ -196,19 +201,62 @@ export default {
         email: this.email,
         idCard: this.IdCard
       };
-       this.$post("http://192.168.2.34:5010/tourist/updateTourist", data).then(
+      this.$post("http://192.168.2.34:5010/tourist/updateTourist", data).then(
         res => {
-          console.log(res);
+          if (res.code === 200) {
+            this.$message({
+              message: "修改成功",
+              type: "success"
+            });
+            switch(type){
+              case 1 : this.showBtn1 = !this.showBtn1; break;
+              case 2 : this.showBtn2 = !this.showBtn2; break;
+              case 3 : this.showBtn3 = !this.showBtn3; break;
+              case 4 : this.showBtn4 = !this.showBtn4; break;
+            }
+          } else {
+            this.$message({
+              message: res.message,
+              type: "error"
+            });
+          }
         }
       );
     },
+    //修改手机号
+    changePhone(){
+      if (!/^\d{4}$/.test(this.code)) {
+          this.codeTip = "请输入正确的验证码";
+          return;
+        } else {
+          this.codeTip = "";
+        }
+        this.$post('http://192.168.2.34:5010/tourist/updateTouristMobile ',{
+          id:this.$store.getters.getUserData.userId,
+          mobile:this.phone,
+          smsCode: this.code,
+        }).then((res) =>{
+          if (res.code === 200) {
+            this.showBtn2 = !this.showBtn2;
+            this.$message({
+              message: "修改成功",
+              type: "success"
+            });
+          } else {
+            this.$message({
+              message: res.message,
+              type: "error"
+            });
+          }
+        })
+    },
     //检查老密码
     checkPwd() {
-      if (!/^[a-zA-Z0-9]{6,10}$/.test(this.password)) {
-        this.pwdTip = "请填写6-10位数的英文或数字密码";
+      if (!/^[a-zA-Z0-9]{6,10}$/.test(this.oldPwd)) {
+        this.oldPwdTip = "请填写6-10位数的英文或数字密码";
         this.isOk = false;
       } else {
-        this.pwdTip = "";
+        this.oldPwdTip = "";
         this.isOk = true;
       }
     },
@@ -224,14 +272,14 @@ export default {
     },
     //检查确认密码
     checkConfirmPwd() {
-      if (!/^[a-zA-Z0-9]{6,10}$/.test(this.confirmPassword)) {
-        this.confirmPwdTip = "请填写6-10位数的英文或数字密码";
+      if (!/^[a-zA-Z0-9]{6,10}$/.test(this.rePassword)) {
+        this.rePwdTip = "请填写6-10位数的英文或数字密码";
         this.isOk2 = false;
-      } else if (this.password !== this.confirmPassword) {
-        this.confirmPwdTip = "两次填写的密码不正确";
+      } else if (this.password !== this.rePassword) {
+        this.rePwdTip = "两次填写的密码不正确";
         this.isOk2 = false;
       } else {
-        this.pwdTip = "";
+        this.rePwdTip = "";
         this.isOk2 = true;
       }
     },
@@ -244,9 +292,17 @@ export default {
           oldPassWord: this.oldPwd
         }).then(res => {
           if (res.code === 200) {
+            this.showBtn5 = !this.showBtn5;
+            this.oldPwd = '';
+            this.dateinit = "******";
             this.$message({
               message: "修改成功",
               type: "success"
+            });
+          } else {
+            this.$message({
+              message: res.message,
+              type: "error"
             });
           }
         });
@@ -266,7 +322,7 @@ export default {
       clearInterval(that.setsund);
       this.$fetch("http://192.168.2.34:5010/tourist/getSmsCode", {
         mobile: this.phone,
-        smsFlag: "sms_back"
+        smsFlag: "sms_change_mobile"
       }).then(res => {
         if (res.code === 200) {
           this.isActive = false;
@@ -316,6 +372,9 @@ export default {
           height: 40px;
           text-indent: 14px;
           border: solid 1px #c5c5c5;
+          font-size: 12px;
+          font-weight: 400;
+          color: rgba(84, 84, 84, 1);
           &:disabled {
             background-color: rgba(255, 255, 255, 1);
             border: 0;

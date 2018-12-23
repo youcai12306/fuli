@@ -6,7 +6,7 @@ const Login = r => require.ensure([], () => r(require('@/view/Login')), 'Login')
 //注册
 const Register = r => require.ensure([], () => r(require('@/view/Register')), 'Register')
 //忘记密码
-const Forget = r => require.ensure([], () => r(require('@/view/Login')), 'Forget')
+const Forget = r => require.ensure([], () => r(require('@/view/Forget')), 'Forget')
 //首页
 const Index = r => require.ensure([], () => r(require('@/view/Index')), 'Index')
 //产品列表

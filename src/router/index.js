@@ -114,6 +114,9 @@ export default new Router({
 		{
 			path: '/news',
 			component: News, //新闻
+			meta: {
+				nav: 1
+			},
 			children: [{
 					path: '/',
 					component: NewList,
@@ -166,6 +169,9 @@ export default new Router({
 		{
 			path: '/specialOffier',
 			component: SpecialOffier, //精彩活动
+			meta: {
+				nav: 1
+			},
 			children: [{
 					path: '/',
 					component: Events,

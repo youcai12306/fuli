@@ -1,4 +1,6 @@
 <template>
+	<section>
+		<Header></Header>
   <div class="risk">
     <div class="title">
       <div class="location">当前位置>首页>冒险之旅</div>
@@ -42,11 +44,13 @@
       </div>
     </div>
   </div>
+	</section>
 </template>
 
 <script>
 import "swiper/dist/css/swiper.css";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
+import Header from "@/components/Header"; //引入头部
 export default {
   data() {
     return {
@@ -88,7 +92,8 @@ export default {
 
   components: {
     swiper,
-    swiperSlide
+    swiperSlide,
+		Header
   },
 
   computed: {},

@@ -1,4 +1,6 @@
 <template>
+	<section>
+		<Header></Header>
   <div class="risk">
     <div class="title">
       <div class="location">当前位置>首页>动物百科</div>
@@ -50,9 +52,11 @@
       </div>
     </div>
   </div>
+	</section>
 </template>
 
 <script>
+	import Header from "@/components/Header"; //引入头部
 export default {
   data() {
     return {
@@ -61,7 +65,9 @@ export default {
     };
   },
   computed: {},
-
+	components:{
+		Header
+	},
   methods: {
     chooseAnimal(key, id) {
       this.actives = key;

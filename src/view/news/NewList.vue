@@ -11,8 +11,8 @@
       <div class="hea-img" @click="jumpDetail(list.id)">
         <img src="../../assets/img/new-1.png" alt="图片">
         <div class="bt">
-          <p class="p1">关于“海洋露天剧场围蔽施工”暂停服务的公告</p>
-          <p class="p2">来自长隆海洋王国 | 2018.08.09</p>
+          <p class="p1">{{list.infoTitle}}</p>
+          <p class="p2">来自富力官网 | {{list.createTime}}</p>
         </div>
         <div class="button"></div>
       </div>
@@ -20,8 +20,8 @@
       <ul>
         <li v-for="(item,key) in list1" :key="key" @click="jumpDetail(item.id)">
           <i></i>
-          <span class="li-itme">{{item.title}}</span>
-          <span class="li-span">{{item.span}} | {{item.time}}</span>
+          <span class="li-itme">{{item.infoTitle}}</span>
+          <span class="li-span">来自富力官网 | {{item.createTime}}</span>
         </li>
       </ul>
     </div>
@@ -29,9 +29,10 @@
       <el-pagination
         background
         layout="prev, pager, next"
-        :total="list.length"
-        :page-size="7"
-        @current-change="handleCurrentChange"
+        :total="totle"
+        :current-page.sync="pageIndex"
+        :page-size="pageSize"
+        @current-change="changePage"
       ></el-pagination>
     </div>
   </div>
@@ -42,38 +43,43 @@ export default {
   name: "News",
   data() {
     return {
-      page: 1,
       list: {},
-      list1:[]
+      list1: [],
+      pageSize: 10,
+      pageIndex: 1,
+      totle: 0
     };
   },
   methods: {
-    // 所有新闻分页1
-    handleCurrentChange(val) {
-      console.log(val);
-    },
     // 园区公告
-    // 获取所有新闻數據
-    GetList() {
-      let list = [
-        {
-          id: 1,
-          title:
-            "关于“丛林过山车、沙雕城堡、海鸟世界象龟展区”升级改造暂停服务的公告",
-          span: "来自海洋欢乐世界",
-          time: "2018.08.09"
-        },
-        {
-          id: 2,
-          title:
-            "关于“丛林过山车、沙雕城堡、海鸟世界象龟展区”升级改造暂停服务的公告",
-          span: "来自海洋欢乐世界",
-          time: "2018.08.09"
+    // 获取新闻數據
+    GetList(type, pageSize, pageIndex) {
+      this.$post(
+        "http://192.168.2.61:2670/info/secondary/findpage?type=" +
+          type +
+          "&pageSize=" +
+          pageSize +
+          "&pageNum=" +
+          pageIndex
+      ).then(res => {
+        if (res.code === 200) {
+          console.log(res.data);
+          this.list = res.data.content[0];
+          // this.$fetch("http://192.168.2.61:2600/staticResource/selectFiles", {
+          //   id: this.list.infoPic
+          // }).then(res => {
+          //   console.log(res);
+          // });
+          this.list1 = res.data.content.slice(1);
+          this.totle = res.data.totalElements;
+        } else {
+          this.$message.error("读取新闻列表失败");
         }
-      ];
-      this.list = list[0]
-      console.log(this.list)
-      this.list1 = list.slice(1)
+      });
+    },
+    //分页
+    changePage(val) {
+      this.GetList(0, this.pageSize, val);
     },
     jumpDetail(id) {
       this.$router.push({
@@ -88,7 +94,7 @@ export default {
     document.title = "新闻中心";
   },
   mounted() {
-    this.GetList();
+    this.GetList(0, this.pageSize, this.pageIndex);
   }
 };
 </script>

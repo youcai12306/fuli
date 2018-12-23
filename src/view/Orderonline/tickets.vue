@@ -115,7 +115,7 @@ export default {
       list.forEach((v, k) => {
         this.imgs.forEach(val => {
           if (v.pictureId == val.id) {
-            v.pictureId = "http://192.168.2.34:2600/file/" + val.fileName;
+            v.pictureId = "http://192.168.2.61:2600/file/" + val.fileName;
           }
         });
         str.push(v);
@@ -186,7 +186,7 @@ export default {
     //获取门票信息
     getTicketList(typeId, date, pageSize, pageIndex) {
       //请求后台接口
-      this.$fetch("http://192.168.2.38:5010/product/findProductByStock", {
+      this.$fetch("http://192.168.2.61:5010/product/findProductByStock", {
         playDate: date
       })
         .then(res => {

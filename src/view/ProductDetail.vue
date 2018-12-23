@@ -15,7 +15,7 @@
       <div class="main-one clearDiv">
         <div class="one-left">
           <img
-            src="../assets/img/index-item6.png"
+            :src="img3"
             alt
           >
           <div class="swiper">
@@ -25,7 +25,7 @@
                 ref="mySwiper"
               >
                 <swiper-slide
-                  v-for="(list,key) in imgs"
+                  v-for="(list,key) in img"
                   :key="key"
                 >
                   <img
@@ -121,18 +121,18 @@ export default {
       },
       imgs: [
         "../static/piao-1.png",
+        "../static/le0.png",
         "../static/piao-1.png",
-        "../static/piao-1.png",
-       "../static/piao-1.png",
+        "../static/le0.png",
       ],
       index: 0,
       num1: 1,
       changeA: 0,
       changeB: 0,
-
+      img:[],
+      img3 :"",
       time: "2018.12.09 08.00- 17.30",
       product: {},
-      img: "",
       shopNum: 0
     };
   },
@@ -145,37 +145,48 @@ export default {
     init() {
       let id = this.$route.query.id;
       let stockId = this.$route.query.stockId;
-      this.$fetch("http://192.168.2.38:5010/product/find/" + id, {
+      this.$fetch("http://192.168.2.61:5010/product/find/" + id, {
         stockId: stockId
       }).then(res => {
         console.log(res);
         if (res.code === 200) {
-          console.log(res);
+          console.log(111);
           this.product = res.data;
           //请求图片接口
           this.$fetch(
-            "http://192.168.2.34:2600/staticResource/selectFileById",
+            "http://192.168.2.61:2600/staticResource/selectFileById",
             { id: this.product.pictureId }
           ).then(res => {
             this.img = IMG_Url + res.data.fileName;
           });
         }
       });
+      
     },
     prev() {
       this.swiper.slidePrev();
+      
+
       this.index--;
+      
+      // this.imgs.index = this.img3
+      
       if (this.index <= 0) {
         this.index = 0;
       }
+      console.log(this.index)
+      this.img3 = this.img[this.index]
       // console.log(this.index);
     },
     next() {
       this.swiper.slideNext();
       this.index++;
-      if (this.index >= this.imgs.length) {
-        this.index = this.imgs.length - 1;
+     
+      if (this.index >= this.img.length) {
+        this.index = this.img.length - 1;
+        this.img3 = this.img3[0];
       }
+       this.img3 = this.img[this.index]
     },
 
     handleChange(value) {
@@ -276,6 +287,7 @@ export default {
     let Uid = this.$store.getters.getUserData.userId;
     this.init();
     this.searchShoppingCar(Uid);
+    this.img3 = this.img[0]
   },
   computed: {
     swiper() {

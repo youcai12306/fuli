@@ -96,6 +96,7 @@
 <script>
 import { mapActions } from "vuex";
 import {mapGetters} from 'vuex'
+import { delCookie } from "@/package/cookie";
 export default {
   name: "Hearer",
   data() {
@@ -159,7 +160,9 @@ export default {
     //退出登录
     setSignOuts() {
       this.setSignOut();
-      this.$router.go(0)
+      this.delCookie('userData')
+      this.$router.go(0);
+
     }
   },
   mounted() {

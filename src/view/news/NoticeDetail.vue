@@ -10,12 +10,12 @@
     <div class="main-new">
       <div class="titles clearDiv">
         <div class="title-left floatLeft">
-          <div class="one">荟精英，海洋欢乐世界展露头角 创未来，富力集团即将扬帆启航</div>
-          <div class="two">2018-11-26 来源：富力海洋欢乐世界 浏览次数：65</div>
+          <div class="one">{{data.infoTitle}}</div>
+          <div class="two">{{data.createTime}}&nbsp;&nbsp;来源：富力海洋欢乐世界</div>
         </div>
         <router-link to="/noticeList" tag="div" class="title-right floatRight">返回</router-link>
       </div>
-      <div class="content">2018年11月26日，一场文旅的激情碰撞在海南博鳌国际会议中心拉开序幕，作为2018年（第十九届）海南国际旅游岛欢乐节的重要组成部分，今年已经是博鳌国际旅游传播论坛走过的第三个春秋，是在海南岛国际旅游迎来国家政策利好的又一次绽放。</div>
+      <div class="content">{{data.infoContent}}</div>
     </div>
   </div>
 </template>
@@ -25,11 +25,17 @@ export default {
   name: "News",
   data() {
     return {
+      data:{}
     };
   },
   created() {
     document.title = "公告中心详情";
   },
+  mounted(){
+    this.$post('http://192.168.2.61:2670/info/secondary/getInfo?infoId='+this.$route.query.id).then((res) =>{
+      this.data = res.data
+    })
+  }
 };
 </script>
 

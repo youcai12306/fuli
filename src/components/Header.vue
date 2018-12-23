@@ -19,15 +19,13 @@
               <div class="lists">
                 <ul>
                   <li>
-                    <router-link :to="{path:'/waterworld'}">
                       <p class="list-img">
                         <img src="../assets/img/header-img1.png" alt>
                       </p>
                       <p class="list-title">欢乐海洋世界</p>
-                    </router-link>
                   </li>
                   <li>
-                    <router-link :to="{path:'/mcgrady'}">
+                    <router-link to="/theme">
                       <p class="list-img">
                         <img src="../assets/img/header-img2.png" alt>
                       </p>

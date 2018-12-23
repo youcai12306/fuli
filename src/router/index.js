@@ -22,7 +22,7 @@ const Suborder = r => require.ensure([], () => r(require('@/view/Orderonline/Sub
 const success = r => require.ensure([], () => r(require('@/view/Orderonline/success')), 'success')
 //主题乐园
 const Theme = r => require.ensure([], () => r(require('@/view/theme/Theme')), 'Theme')
-const AnimalTheme = r => require.ensure([], () => r(require('@/view/theme/AnimalTheme')), 'AnimalTheme')
+const ThemeDetail = r => require.ensure([], () => r(require('@/view/theme/ThemeDetail')), 'ThemeDetail')
 // 新闻中心首页
 const News = r => require.ensure([], () => r(require('@/view/news/News')), 'News')
 const NewList = r => require.ensure([], () => r(require('@/view/news/NewList')), 'NewList')
@@ -215,9 +215,9 @@ export default new Router({
 			component: Theme //主题乐园
 		},
 		{
-			path: '/animalTheme',
-			name: 'AnimalTheme',
-			component: AnimalTheme //主题乐园
+			path: '/themeDetail',
+			name: 'ThemeDetail',
+			component: ThemeDetail //主题乐园详情
 		},
 		{
 			path: '/ticketDetail',

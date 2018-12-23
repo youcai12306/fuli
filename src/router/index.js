@@ -1,73 +1,57 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from '@/view/Login'
-import Index from '@/view/Index'
-import Mine from '@/view/Mine/Mine'
-import Forget from '@/view/Forget'
-import Order from '@/view/Orderonline/Order'
-import tickets from '@/view/Orderonline/tickets'
-import Suborder from '@/view/Orderonline/Suborder'
-import Carsuborder from '@/view/Orderonline/Carsuborder'
-import success from '@/view/Orderonline/success'
+
+//登录
+const Login = r => require.ensure([], () => r(require('@/view/Login')), 'Login')
 //注册
 const Register = r => require.ensure([], () => r(require('@/view/Register')), 'Register')
-//麦迪卡斯首页
-const McGrady = r => require.ensure([], () => r(require('@/view/McGrady/McGrady')), 'McGrady')
-
-//欢乐海洋世界首页
-const waterworld = r => require.ensure([], () => r(require('@/view/waterworld')), 'waterworld')
-
+//忘记密码
+const Forget = r => require.ensure([], () => r(require('@/view/Login')), 'Forget')
+//首页
+const Index = r => require.ensure([], () => r(require('@/view/Index')), 'Index')
+//产品列表
+const Order = r => require.ensure([], () => r(require('@/view/Orderonline/Order')), 'Order')
+const Tickets = r => require.ensure([], () => r(require('@/view/Orderonline/Tickets')), 'Tickets')
 //门票商品详情页
 const TicketDetail = r => require.ensure([], () => r(require('@/view/TicketDetail')), 'TicketDetail')
-
 //零售商品详情页
 const ProductDetail = r => require.ensure([], () => r(require('@/view/ProductDetail')), 'ProductDetail')
-
-//购物车页面
-const ShoppingCar1 = r => require.ensure([], () => r(require('@/view/ShoppingCar1')), 'ShoppingCar1')
-
+//下订单页面
+const Suborder = r => require.ensure([], () => r(require('@/view/Orderonline/Suborder')), 'Suborder')
+//支付页面
+const success = r => require.ensure([], () => r(require('@/view/Orderonline/success')), 'success')
 //主题乐园
 const Theme = r => require.ensure([], () => r(require('@/view/theme/Theme')), 'Theme')
-
+const AnimalTheme = r => require.ensure([], () => r(require('@/view/theme/AnimalTheme')), 'AnimalTheme')
 // 新闻中心首页
 const News = r => require.ensure([], () => r(require('@/view/news/News')), 'News')
 const NewList = r => require.ensure([], () => r(require('@/view/news/NewList')), 'NewList')
 const NewDetail = r => require.ensure([], () => r(require('@/view/news/NewDetail')), 'NewDetail')
 const NoticeList = r => require.ensure([], () => r(require('@/view/news/NoticeList')), 'NoticeList')
 const NoticeDetail = r => require.ensure([], () => r(require('@/view/news/NoticeDetail')), 'NoticeDetail')
-const Reset = r => require.ensure([], () => r(require('@/view/Reset')), 'Reset')
+
+// 游玩指南
+const ditu = r => require.ensure([], () => r(require('@/view/Visitguide/ditu')), 'ditu')
 
 //优惠活动
 const SpecialOffier = r => require.ensure([], () => r(require('@/view/specialOffier/SpecialOffier')), 'SpecialOffier')
 const Events = r => require.ensure([], () => r(require('@/view/specialOffier/Events')), 'Events')
-
 //冒险之旅
 const Risk = r => require.ensure([], () => r(require('@/view/risk/Risk')), 'Risk')
-
 //动物百科
 const Animal = r => require.ensure([], () => r(require('@/view/animal/Animal')), 'Animal')
-
-
-// 个人中心-我的卡券
-const MyCoupon = r => require.ensure([], () => r(require('@/view/Mine/MyCoupon')), 'MyCoupon')
-// 个人中心-卡券中心
-const CouponCenter = r => require.ensure([], () => r(require('@/view/Mine/CouponCenter')), 'CouponCenter')
-
 // 个人中心-我的订单
-const MyOrder = r => require.ensure([], () => r(require('@/view/Mine/MyOrder')), 'MyOrder')
-const Invoice = r => require.ensure([], () => r(require('@/view/Mine/Invoice')), 'Invoice')
-const Unpaid = r => require.ensure([], () => r(require('@/view/Mine/Order/Unpaid')), 'Unpaid')
+const Mine = r => require.ensure([], () => r(require('@/view/Mine/Mine')), 'Mine')
 const Prepaid = r => require.ensure([], () => r(require('@/view/Mine/Order/Prepaid')), 'Prepaid')
-const Consumed = r => require.ensure([], () => r(require('@/view/Mine/Order/Consumed')), 'Consumed')
-const Refund = r => require.ensure([], () => r(require('@/view/Mine/Order/Refund')), 'Refund')
-const Audit = r => require.ensure([], () => r(require('@/view/Mine/Order/Audit')), 'Audit')
-const Faudit = r => require.ensure([], () => r(require('@/view/Mine/Order/Faudit')), 'Faudit')
-const Error = r => require.ensure([], () => r(require('@/view/Mine/Order/Error')), 'Error')
 const OrderDetail = r => require.ensure([], () => r(require('@/view/Mine/Order/OrderDetail')), 'OrderDetail')
-// 个人中心-积分
-const MyIntegral = r => require.ensure([], () => r(require('@/view/Mine/MyIntegral')), 'MyIntegral')
 // 个人中心-购物车
 const ShoppingCar = r => require.ensure([], () => r(require('@/view/Mine/ShoppingCar')), 'ShoppingCar')
+// 个人中心-我的积分
+const MyIntegral = r => require.ensure([], () => r(require('@/view/Mine/MyIntegral')), 'MyIntegral')
+// 个人中心-我的优惠券
+const CouponCenter = r => require.ensure([], () => r(require('@/view/Mine/CouponCenter')), 'CouponCenter')
+// 个人中心-个人信息
+const Membership = r => require.ensure([], () => r(require('@/view/Mine/Membership')), 'Membership')
 // 个人中心-收货地址
 const ShoppingAdress = r => require.ensure([], () => r(require('@/view/Mine/ShoppingAdress')), 'ShoppingAdress')
 // 个人中心-消息管理
@@ -75,410 +59,254 @@ const MyMessage = r => require.ensure([], () => r(require('@/view/Mine/MyMessage
 // 个人中心-消息详情
 const MessageDetail = r => require.ensure([], () => r(require('@/view/Mine/MessageDetail')), 'MessageDetail')
 
-// 个人中心-会员资料
-const Membership = r => require.ensure([], () => r(require('@/view/Mine/Membership')), 'Membership')
-// 个人中心-修改密码
-const ChangePwd = r => require.ensure([], () => r(require('@/view/Mine/ChangePwd')), 'ChangePwd')
-
-const CouponReceived = r => require.ensure([], () => r(require('@/view/Mine/coupon/CouponReceived')), 'CouponReceived')
-const CouponUsed = r => require.ensure([], () => r(require('@/view/Mine/coupon/CouponUsed')), 'CouponUsed')
-const CouponUnused = r => require.ensure([], () => r(require('@/view/Mine/coupon/CouponUnused')), 'CouponUnused')
-const CouponStale = r => require.ensure([], () => r(require('@/view/Mine/coupon/CouponStale')), 'CouponStale')
-
 
 Vue.use(Router)
 
 export default new Router({
-  routes: [{
-      path: '*',
-      redirect: '/index' //报错去首页
-    },
-    {
-      path: '/',
-      path: '/',
-      redirect: '/index' //默认首页
-    },
-    {
-      path: '/index',
-      name: 'Index',
-      component: Index, //首页
-      meta: {
-        nav: 1
-      },
-    },
-    {
-      path: '/login',
-      name: 'Login',
-      component: Login //登录
-    },
-    {
-      path: '/forget',
-      name: 'Forget',
-      component: Forget //忘记密码
-    },
+	routes: [{
+			path: '*',
+			redirect: '/index' //报错去首页
+		},
+		{
+			path: '/',
+			path: '/',
+			redirect: '/index' //默认首页
+		},
+		{
+			path: '/index',
+			name: 'Index',
+			component: Index, //首页
+			meta: {
+				nav: 1
+			},
+		},
+		{
+			path: '/login',
+			name: 'Login',
+			component: Login //登录
+		},
+		{
+			path: '/forget',
+			name: 'Forget',
+			component: Forget //忘记密码
+		},
 
-    {
-      path: '/order',
-      name: 'Order',
-      component: Order,
-      children: [{
-        path: '/tickets/:id',
-        name: 'tickets',
-        component: tickets, //订票列表
-        meta: {
-          nav: 1
-        }
-      }]
-    },
-    {
-      path: '/register',
-      name: 'Register',
-      component: Register //注册
-    },
-    {
-      path: '/suborder',
-      name: 'Suborder',
-      component: Suborder
-    },
-    {
-      path: '/carsuborder',
-      name: 'Carsuborder',
-      component: Carsuborder
-    },
-    {
-      path: '/mcgrady',
-      name: 'McGrady',
-      component: McGrady
-    },
-    {
-      path: '/news',
-      component: News, //新闻
-      children: [{
-          path: '/',
-          component: NewList,
-          meta: {
-            nav: 1
-          },
-        },
-        {
-          path: '/newList',
-          name: 'NewList',
-          component: NewList,
-          meta: {
-            nav: 1
-          },
-        },
-        {
-          path: '/noticeList',
-          name: 'NoticeList',
-          component: NoticeList,
-          meta: {
-            nav: 1
-          },
-        },
-        {
-          path: '/newDetail',
-          name: 'NewDetail',
-          component: NewDetail,
-          meta: {
-            nav: 1
-          },
-        },
-        {
-          path: '/noticeDetail',
-          name: 'NoticeDetail',
-          component: NoticeDetail,
-          meta: {
-            nav: 1
-          },
-        },
-      ]
-    },
-    {
-      path: '/specialOffier',
-      component: SpecialOffier, //精彩活动
-      children: [{
-          path: '/',
-          component: Events,
-          meta: {
-            nav: 1
-          },
-        },
-        {
-          path: '/events',
-          component: Events,
-          meta: {
-            nav: 1
-          },
-        }
-      ]
-    },
-    {
-      path: '/risk',
-      name: 'Risk',
-      component: Risk, //冒险之旅
-      meta: {
-        nav: 1
-      },
-    },
-    {
-      path: '/animal',
-      name: 'Animal',
-      component: Animal, //动物百科
-      meta: {
-        nav: 1
-      },
-    },
-    {
-      path: '/success',
-      name: 'success',
-      component: success
-    },
-    {
-      path: '/reset',
-      name: 'Reset',
-      component: Reset
-    },
-    {
-      path: '/waterworld',
-      name: 'waterworld',
-      component: waterworld //水世界
-    },
-    {
-      path: '/theme',
-      name: 'Theme',
-      component: Theme //主题乐园
-    },
-    {
-      path: '/ticketDetail',
-      name: 'TicketDetail',
-      component: TicketDetail, //订单详情
-    },
-    {
-      path: '/productDetail',
-      name: 'ProductDetail',
-      component: ProductDetail
-    },
-    {
-      path: '/shoppingCar1',
-      name: 'ShoppingCar1',
-      component: ShoppingCar1
-    },
-    {
-      path: '/mine',
-      component: Mine,
-      meta: {
-        nav: 3
-      },
-      children: [ //个人中心二级子路由
-        {
-          path: '/',
-          name: 'MyOrder-default',
-          component: MyOrder,
-          meta: {
-            nav: 3
-          }
-        },
-        {
-          path: '/myorder',
-          // name: 'MyOrder',
-          component: MyOrder,
-          meta: {
-            nav: 3
-          },
-          children: [ //我的订单子路由
-            {
-              path: '/',
-              name: 'Unpaid-default',
-              component: Unpaid,
-              meta: {
-                nav: 3
-              }
-            },
-            {
-              path: '/unpaid',
-              name: 'Unpaid',
-              component: Unpaid,
-              meta: {
-                nav: 2
-              }
-            },
-            {
-              path: '/prepaid',
-              name: 'Prepaid',
-              component: Prepaid,
-              meta: {
-                nav: 2
-              }
-            },
-            {
-              path: '/consumed',
-              name: 'Consumed',
-              component: Consumed,
-              meta: {
-                nav: 2
-              }
-            },
-            {
-              path: '/refund',
-              name: 'Refund',
-              component: Refund,
-              meta: {
-                nav: 2
-              }
-            },
-            {
-              path: '/audit',
-              name: 'Audit',
-              component: Audit,
-              meta: {
-                nav: 2
-              }
-            },
-            {
-              path: '/faudit',
-              name: 'Faudit',
-              component: Faudit,
-              meta: {
-                nav: 2
-              }
-            },
-            {
-              path: '/error',
-              name: 'Error',
-              component: Error,
-              meta: {
-                nav: 2
-              }
-            }
-          ]
-        },
-        {
-          path: '/myCoupon',
-          component: MyCoupon,
-          meta: {
-            nav: 2
-          },
-          children: [{
-              path: '/',
-              component: CouponReceived,
-              meta: {
-                nav: 2
-              }
-            },
-            {
-              path: '/couponReceived',
-              name: 'CouponReceived',
-              component: CouponReceived,
-              meta: {
-                nav: 2
-              }
-            },
-            {
-              path: '/couponUsed',
-              name: 'CouponUsed',
-              component: CouponUsed,
-              meta: {
-                nav: 2
-              }
-            },
-            {
-              path: '/couponUnused',
-              name: 'CouponUnused',
-              component: CouponUnused,
-              meta: {
-                nav: 2
-              }
-            },
-            {
-              path: '/couponStale',
-              name: 'CouponStale',
-              component: CouponStale,
-              meta: {
-                nav: 2
-              }
-            }
-          ]
-        },
-        {
-          path: '/couponCenter',
-          name: 'CouponCenter',
-          component: CouponCenter,
-          meta: {
-            nav: 2
-          }
-        },
-        {
-          path: '/Invoice',
-          name: 'Invoice',
-          component: Invoice,
-          meta: {
-            nav: 2
-          }
-        },
-        {
-          path: '/myIntegral',
-          name: 'MyIntegral',
-          component: MyIntegral,
-          meta: {
-            nav: 2
-          }
-        },
-        {
-          path: '/shoppingCar',
-          name: 'ShoppingCar',
-          component: ShoppingCar,
-          meta: {
-            nav: 2
-          }
-        },
-        {
-          path: '/shoppingAdress',
-          name: 'ShoppingAdress',
-          component: ShoppingAdress,
-          meta: {
-            nav: 2
-          }
-        },
-        {
-          path: '/myMessage',
-          name: 'MyMessage',
-          component: MyMessage,
-          meta: {
-            nav: 2
-          }
-        },
-        {
-          path: '/messageDetail',
-          name: 'MessageDetail',
-          component: MessageDetail,
-          meta: {
-            nav: 2
-          }
-        },
-        {
-          path: '/membership',
-          name: 'Membership',
-          component: Membership,
-          meta: {
-            nav: 2
-          }
-        },
-        {
-          path: '/changePwd',
-          name: 'ChangePwd',
-          component: ChangePwd,
-          meta: {
-            nav: 2
-          }
-        }
-
-      ]
-    },
-    {
-      path: '/orderDetail',
-      name: 'OrderDetail',
-      component: OrderDetail
-    },
-  ]
+		{
+			path: '/order',
+			name: 'Order',
+			component: Order,
+			children: [{
+				path: '/tickets/:id',
+				name: 'Tickets',
+				component: Tickets, //订票列表
+			}]
+		},
+		{
+			path: '/register',
+			name: 'Register',
+			component: Register //注册
+		},
+		{
+			path: '/suborder',
+			name: 'Suborder',
+			component: Suborder //下订单页面
+		},
+		{
+			path: '/news',
+			component: News, //新闻
+			meta: {
+				nav: 1
+			},
+			children: [{
+					path: '/',
+					component: NewList,
+					meta: {
+						nav: 1
+					},
+				},
+				{
+					path: '/newList',
+					name: 'NewList',
+					component: NewList,
+					meta: {
+						nav: 1
+					},
+				},
+				{
+					path: '/noticeList',
+					name: 'NoticeList',
+					component: NoticeList,
+					meta: {
+						nav: 1
+					},
+				},
+				{
+					path: '/newDetail',
+					name: 'NewDetail',
+					component: NewDetail,
+					meta: {
+						nav: 1
+					},
+				},
+				{
+					path: '/noticeDetail',
+					name: 'NoticeDetail',
+					component: NoticeDetail,
+					meta: {
+						nav: 1
+					},
+				},
+			]
+		},
+		{//游玩指南
+			path: '/ditu',
+			name: 'ditu',
+			component: ditu,
+			meta: {
+				nav: 1
+			}
+		},
+		{
+			path: '/specialOffier',
+			component: SpecialOffier, //精彩活动
+			meta: {
+				nav: 1
+			},
+			children: [{
+					path: '/',
+					component: Events,
+					meta: {
+						nav: 1
+					},
+				},
+				{
+					path: '/events',
+					component: Events,
+					meta: {
+						nav: 1
+					},
+				}
+			]
+		},
+		{
+			path: '/risk',
+			name: 'Risk',
+			component: Risk, //冒险之旅
+			meta: {
+				nav: 1
+			},
+		},
+		{
+			path: '/animal',
+			name: 'Animal',
+			component: Animal, //动物百科
+			meta: {
+				nav: 1
+			},
+		},
+		{
+			path: '/success',
+			name: 'success',
+			component: success //支付页面
+		},
+		{
+			path: '/theme',
+			name: 'Theme',
+			component: Theme //主题乐园
+		},
+		{
+			path: '/animalTheme',
+			name: 'AnimalTheme',
+			component: AnimalTheme //主题乐园
+		},
+		{
+			path: '/ticketDetail',
+			name: 'TicketDetail',
+			component: TicketDetail, //订单详情
+		},
+		{
+			path: '/productDetail',
+			name: 'ProductDetail',
+			component: ProductDetail //零售详情
+		},
+		{
+			path: '/mine',
+			component: Mine,
+			meta: {
+				nav: 3
+			},
+			children: [ //个人中心二级子路由
+				{
+					path: '/',
+					component: Prepaid,
+					meta: {
+						nav: 3
+					}
+				},
+				{
+					path: '/prepaid',
+					name: 'Prepaid',
+					component: Prepaid,
+					meta: {
+						nav: 3
+					}
+				},
+				{
+					path: '/couponCenter',
+					name: 'CouponCenter',
+					component: CouponCenter, //我的优惠券
+				},
+				{
+					path: '/myIntegral',
+					name: 'MyIntegral',
+					component: MyIntegral, //我的积分
+				},
+				{
+					path: '/shoppingCar',
+					name: 'ShoppingCar',
+					component: ShoppingCar, //购物车
+					meta: {
+						nav: 2
+					}
+				},
+				{
+					path: '/shoppingAdress',
+					name: 'ShoppingAdress',
+					component: ShoppingAdress, //收货地址
+					meta: {
+						nav: 2
+					}
+				},
+				{
+					path: '/myMessage',
+					name: 'MyMessage',
+					component: MyMessage, //消息列表
+					meta: {
+						nav: 2
+					}
+				},
+				{
+					path: '/messageDetail',
+					name: 'MessageDetail',
+					component: MessageDetail, //消息详情
+					meta: {
+						nav: 2
+					}
+				},
+				{
+					path: '/membership',
+					name: 'Membership',
+					component: Membership, //个人资料
+					meta: {
+						nav: 2
+					}
+				}
+			]
+		},
+		{
+			path: '/orderDetail',
+			name: 'OrderDetail',
+			component: OrderDetail //订单详情
+		},
+	]
 })

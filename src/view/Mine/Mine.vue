@@ -36,8 +36,8 @@
                 <span>我的交易</span>
               </template>
               <el-menu-item
-                :index="`/myorder`"
-                :class="{'is_active' : $route.path=='/myorder' || $route.path=='/unpaid' || $route.path=='/prepaid' || $route.path=='/consumed' || $route.path=='/refund' || $route.path=='/audit' || $route.path=='/faudit' || $route.path=='/error' || $route.path=='/Invoice'}"
+                :index="`/prepaid`"
+                :class="{'is_active' : $route.path=='/mine' || $route.path=='/myorder' || $route.path=='/prepaid'}"
               >我的订单</el-menu-item>
               <el-menu-item
                 :index="`/ShoppingCar`"
@@ -53,16 +53,16 @@
                 :class="{'is_active' : $route.path=='/MyIntegral'}"
               >我的积分</el-menu-item>
               <el-menu-item
-                :index="`/myCoupon`"
-                :class="{'is_active' : $route.path=='/myCoupon'}"
+                :index="`/couponCenter`"
+                :class="{'is_active' : $route.path=='/couponCenter'}"
               >我的优惠券</el-menu-item>
               <!-- <el-menu-item
                 :index="`/CouponCenter`"
                 :class="{'is_active' : $route.path=='/CouponCenter'}"
               >卡券中心</el-menu-item> -->
               <el-menu-item
-                :index="`/CouponCenter`"
-                :class="{'is_active' : $route.path=='/CouponCenter'}"
+                :index="`/`"
+                :class="{'is_active' : $route.path=='/'}"
               >我的余额</el-menu-item>
             </el-submenu>
             <el-submenu index="3">
@@ -71,19 +71,19 @@
               </template>
               <el-menu-item
                 :index="`/Membership`"
-                :class="{'is_active' : $route.path=='/Membership'}"
+                :class="{'is_active' : $route.path=='/membership'}"
               >个人信息</el-menu-item>
               <el-menu-item
-                :index="`/Membership`"
-                :class="{'is_active' : $route.path=='/Membership'}"
+                :index="`/`"
+                :class="{'is_active' : $route.path=='/'}"
               >我的会员</el-menu-item>
               <el-menu-item
                 :index="`/ShoppingAdress`"
-                :class="{'is_active' : $route.path=='/ShoppingAdress'}"
+                :class="{'is_active' : $route.path=='/shoppingAdress'}"
               >收货地址</el-menu-item>
               <el-menu-item
                 :index="`/MyMessage`"
-                :class="{'is_active' : $route.path=='/MyMessage'}"
+                :class="{'is_active' : $route.path=='/myMessage'}"
               >消息管理</el-menu-item>
               <!-- <el-menu-item
                 :index="`/ChangePwd`"

@@ -36,7 +36,7 @@
 		
 		<!-- 表格 -->
 		<section>
-			<router-view></router-view>
+			<router-view/>
 		</section>
 		
 	</div>

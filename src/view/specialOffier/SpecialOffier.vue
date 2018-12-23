@@ -1,4 +1,6 @@
 <template>
+	<section>
+		<Header></Header>	
   <div class="news">
     <div class="main-contion">
       <!-- 导航 -->
@@ -15,9 +17,11 @@
       </div>
     </div>
   </div>
+	</section>
 </template>
 
 <script>
+	import Header from "@/components/Header"; //引入头部
 export default {
   name: "SpecialOffier",
   data() {
@@ -25,6 +29,9 @@ export default {
       tabs:1
     };
   },
+	components:{
+		Header
+	},
   methods: {
     changeType(type){
        this.tabs = type

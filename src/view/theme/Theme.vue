@@ -37,19 +37,15 @@
         </div>
       </div>
       <div class="shebei">
-        <div class="banner-imgs">
+        <div class="banner-imgs" @mouseover="stopTimes" @mouseout="startTimes">
           <div class="imgList" v-for="(item,key) in 8" :key="item" v-show="key === index">
             <div class="top">
-              <div class="top-imgList">
-                <img src="../../assets/img/index-bg1.png" alt class="img" v-show="true">
-                <img src="../../assets/img/index-bg1.png" alt class="img" v-show="false">
+              <div class="top-imgList" v-for="(item,key) in 2" :key="key" v-show="key === datailIndex">
+                <img src="../../assets/img/index-bg1.png" alt class="img">
               </div>
               <div class="top-imgMinList">
                 <ul>
-                  <li>
-                    <img src="../../assets/img/index-bg1.png" alt class="imgMin">
-                  </li>
-                  <li>
+                  <li v-for="(item,key) in 2" :key="key" @click="showDatail(key)">
                     <img src="../../assets/img/index-bg1.png" alt class="imgMin">
                   </li>
                 </ul>
@@ -71,20 +67,30 @@
           </div>
         </div>
       </div>
+      <ul class="leftNav">
+        <li>园区介绍</li>
+        <li>游玩设施</li>
+        <li @click="jumpColumn('#art')">精彩演绎</li>
+        <li @click="jumpColumn('#animal')">动物场馆</li>
+        <li @click="jumpColumn('#shop')">主题商店</li>
+        <li @click="jumpColumn('#eat')">特色餐厅</li>
+      </ul>
     </div>
-    <div class="art">
+    <!-- 精彩演绎 -->
+    <div class="art" id="art">
       <div class="meng"></div>
     </div>
-    <div class="animal">
+    <!-- 动物场馆 -->
+    <div class="animal" id="animal">
       <img src="../../assets/img/login-bg.png" alt class="img">
       <div class="bottom">
         <swiper :options="swiperOptions" ref="mySwipers">
           <!-- slides -->
           <swiper-slide>
             <div class="venve">
-                <img src="" alt="">
-                <p></p>
-                <p></p>
+              <img src="../../assets/img/footer-logo.png" alt>
+              <h3>海豚馆</h3>
+              <p>总水量2.3万吨，游客不仅能欣赏精彩绝伦的海豚表演，更能与聪明可爱的海豚共同畅游，体验前所未有的互动乐趣。</p>
             </div>
           </swiper-slide>
           <swiper-slide>
@@ -99,6 +105,61 @@
           <!-- Optional controls -->
         </swiper>
         <div class="swiper-paginations" slot="pagination"></div>
+      </div>
+    </div>
+    <!-- 主题商店 -->
+    <div class="shop" id="shop">
+      <div class="shop-box">
+        <img src="../../assets/img/login-bg.png" alt class="img">
+        <div class="bottom">
+          <swiper :options="swiperOptions1" ref="mySwipers1">
+            <!-- slides -->
+            <swiper-slide>
+              <div class="venve"></div>
+            </swiper-slide>
+            <swiper-slide>
+              <div class="venve">
+                <div class="venve-list">
+                  <img src="../../assets/img/footer-logo.png" alt>
+                  <div class="venve-content">
+                    <div>塔瓦那餐厅</div>
+                    <p>希腊风格，地中海西式美食广场及东南亚美食，适合一家大小</p>
+                  </div>
+                </div>
+              </div>
+            </swiper-slide>
+            <swiper-slide>
+              <div class="venve"></div>
+            </swiper-slide>
+            <swiper-slide>
+              <div class="venve"></div>
+            </swiper-slide>
+            <!-- Optional controls -->
+          </swiper>
+          <div class="swiper-paginations1" slot="pagination"></div>
+        </div>
+      </div>
+    </div>
+    <!-- 特色餐厅 -->
+    <div class="eat" id="eat">
+      <div class="eat-box">
+        <img src="../../assets/img/login-bg.png" alt class="img">
+        <div class="eat-lists clearDiv">
+          <div class="eat-list floatLeft">
+            <img src="../../assets/img/footer-logo.png" alt>
+            <div class="eat-content">
+              <div>塔瓦那餐厅</div>
+              <p>希腊风格，地中海西式美食广场及东南亚美食，适合一家大小</p>
+            </div>
+          </div>
+          <div class="eat-list eat-list-two floatLeft">
+            <img src="../../assets/img/footer-logo.png" alt>
+            <div class="eat-content">
+              <div>塔瓦那餐厅</div>
+              <p>希腊风格，地中海西式美食广场及东南亚美食，适合一家大小</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -144,11 +205,11 @@ export default {
         slidesPerView: 3,
         spaceBetween: 60,
         //自动播放
-          autoplay: {
-              delay: 5000,
-              stopOnLastSlide: false,
-              disableOnInteraction: true,
-          },
+        autoplay: {
+          delay: 5000,
+          stopOnLastSlide: false,
+          disableOnInteraction: true
+        },
         // 设置轮播
         //   effect : 'flip',
         //滑动速度
@@ -160,20 +221,56 @@ export default {
         //滑动之后回调函数
         on: {
           slideChangeTransitionEnd: function() {
-            console.log(this.activeIndex);//切换结束时，告诉我现在是第几个slide
+            console.log(this.activeIndex); //切换结束时，告诉我现在是第几个slide
           }
         },
         //分页器设置
         pagination: {
           el: ".swiper-paginations",
-          clickable: true,
+          clickable: true
         }
       },
-      index: 0
+      swiperOptions1: {
+        //   notNextTick: true,
+        //循环
+        loop: true,
+        //设定初始化时slide的索引
+        initialSlide: 0,
+        //放几个
+        slidesPerView: 3,
+        spaceBetween: 60,
+        //自动播放
+        autoplay: {
+          delay: 5000,
+          stopOnLastSlide: false,
+          disableOnInteraction: true
+        },
+        // 设置轮播
+        //   effect : 'flip',
+        //滑动速度
+        //   speed:800,
+        //滑动方向
+        //   direction : 'horizontal',
+        //小手掌抓取滑动
+        // grabCursor : true,
+        //滑动之后回调函数
+        on: {
+          slideChangeTransitionEnd: function() {
+            console.log(this.activeIndex); //切换结束时，告诉我现在是第几个slide
+          }
+        },
+        //分页器设置
+        pagination: {
+          el: ".swiper-paginations1",
+          clickable: true
+        }
+      },
+      index: 0,
+      datailIndex:0
     };
   },
   mounted() {
-    // this.swiperInit();
+    this.swiperInit();
   },
   methods: {
     change(newVal, oldVal) {
@@ -207,6 +304,15 @@ export default {
     },
     nexts() {
       this.$refs.car.next();
+    },
+    //跳转详情图片
+    showDatail(key){
+      this.datailIndex = key;
+    },
+    //跳转到指定位置
+    jumpColumn(col){
+      let top = document.querySelector(col).offsetTop
+       window.scroll(0, top)
     }
   },
   components: {
@@ -244,10 +350,10 @@ export default {
     height: 1660px;
     background: url(../../assets/img/index-bg1.png) no-repeat 0 0;
     background-size: 100% 100%;
-
+    position: relative;
     .list-one {
       width: 100%;
-      padding-top: 635px;
+      padding-top: 561px;
       .one-change {
         width: 971px;
         height: 84px;
@@ -380,6 +486,28 @@ export default {
         }
       }
     }
+    .leftNav {
+      width: 150px;
+      height: 433px;
+      background: rgba(7, 100, 233, 1);
+      border-radius: 15px;
+      position: absolute;
+      left: 114px;
+      top: 696px;
+      padding:40px 0;
+      li {
+        width: 150px;
+        height: 59px;
+        line-height: 59px;
+        text-align: center;
+        font-size: 16px;
+        font-weight: bold;
+        color: rgba(255, 255, 255, 1);
+        &:hover {
+          background: rgba(73, 147, 252, 1);
+        }
+      }
+    }
   }
   .art {
     width: 1920px;
@@ -397,12 +525,13 @@ export default {
       opacity: 0.71;
     }
   }
+  //动物场馆
   .animal {
-    width: 1920px;
+    width: 100%;
     height: 1080px;
     text-align: center;
     background: url(../../assets/img/login-bg.png) no-repeat;
-    background-size: 100% 100%;
+    background-size: 1920px 100%;
     padding-top: 163px;
     .img {
       width: 300px;
@@ -412,16 +541,206 @@ export default {
       position: relative;
       width: 1200px;
       margin: 0 auto;
+      margin-top: 65px;
       .venve {
         width: 360px;
         height: 470px;
         background: rgba(255, 255, 255, 1);
         border: 5px solid rgba(255, 255, 255, 1);
         border-radius: 6px;
+        text-align: center;
+        padding-bottom: 20px;
+        overflow: hidden;
+        img {
+          width: 350px;
+          height: 275px;
+        }
+        h3 {
+          font-size: 22px;
+          font-weight: bold;
+          color: rgba(51, 51, 51, 1);
+          margin-bottom: 30px;
+          margin-top: 30px;
+          position: relative;
+          &::before {
+            position: absolute;
+            content: "";
+            width: 60px;
+            height: 4px;
+            background: rgba(137, 201, 151, 1);
+            position: absolute;
+            left: 70px;
+            top: 14px;
+          }
+          &::after {
+            position: absolute;
+            content: "";
+            width: 60px;
+            height: 4px;
+            background: rgba(137, 201, 151, 1);
+            position: absolute;
+            left: 220px;
+            top: 14px;
+          }
+        }
+        p {
+          margin: 0 auto;
+          width: 306px;
+          font-size: 12px;
+          font-weight: 400;
+          color: rgba(102, 102, 102, 1);
+          line-height: 18px;
+        }
       }
       .swiper-paginations {
-          margin-top: 71px;
+        margin-top: 71px;
         width: 100%;
+      }
+    }
+  }
+  //主题商店
+  .shop {
+    width: 1920px;
+    height: 1080px;
+    background: url(../../assets/img/new-1.png) no-repeat;
+    background-size: 1920px 100%;
+
+    .shop-box {
+      width: 100%;
+      height: 100%;
+      background: rgba(136, 171, 218, 0.9);
+      text-align: center;
+      padding-top: 92px;
+      .img {
+        width: 300px;
+        height: 200px;
+      }
+      .bottom {
+        position: relative;
+        width: 1200px;
+        margin: 0 auto;
+        margin-top: 65px;
+        .venve {
+          width: 360px;
+          height: 470px;
+          background: rgba(255, 255, 255, 1);
+          border: 5px solid rgba(255, 255, 255, 1);
+          border-radius: 6px;
+          .venve-list {
+            img {
+              width: 100%;
+              height: 258px;
+              overflow: hidden;
+            }
+            .venve-content {
+              width: 100%;
+              height: 182px;
+              text-align: left;
+              background-color: #ffffff;
+              padding-top: 30px;
+              margin-top: -5px;
+              div {
+                font-size: 22px;
+                font-weight: bold;
+                color: rgba(236, 80, 19, 1);
+                position: relative;
+
+                padding-left: 20px;
+                &::after {
+                  position: absolute;
+                  content: "";
+                  width: 60px;
+                  height: 4px;
+                  background: rgba(236, 80, 19, 1);
+                  position: absolute;
+                  left: 20px;
+                  top: 35px;
+                }
+              }
+              p {
+                font-size: 14px;
+                font-family: MicrosoftYaHei;
+                font-weight: bold;
+                color: rgba(102, 102, 102, 1);
+                line-height: 18px;
+                padding: 35px 20px 20px 20px;
+                overflow: hidden;
+              }
+            }
+          }
+        }
+        .swiper-paginations1 {
+          margin-top: 71px;
+          width: 100%;
+        }
+      }
+    }
+  }
+  //特色餐厅
+  .eat {
+    width: 1920px;
+    height: 1080px;
+    background: url(../../assets/img/new-1.png) no-repeat;
+    background-size: 1920px 100%;
+
+    .eat-box {
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.1);
+      text-align: center;
+      padding-top: 92px;
+      .img {
+        width: 300px;
+        height: 200px;
+      }
+      .eat-lists {
+        padding-left: 395px;
+        padding-top: 75px;
+        .eat-list {
+          img {
+            width: 500px;
+            height: 309px;
+            overflow: hidden;
+          }
+          .eat-content {
+            width: 500px;
+            height: 190px;
+            text-align: left;
+            background-color: #ffffff;
+            padding-top: 30px;
+            margin-top: -5px;
+            div {
+              font-size: 22px;
+              font-weight: bold;
+              color: rgba(236, 80, 19, 1);
+              position: relative;
+
+              padding-left: 20px;
+              &::after {
+                position: absolute;
+                content: "";
+                width: 60px;
+                height: 4px;
+                background: rgba(236, 80, 19, 1);
+                position: absolute;
+                left: 20px;
+                top: 35px;
+              }
+            }
+            p {
+              font-size: 14px;
+              font-family: MicrosoftYaHei;
+              font-weight: bold;
+              color: rgba(102, 102, 102, 1);
+              line-height: 18px;
+              padding: 35px 20px 20px 20px;
+              overflow: hidden;
+            }
+          }
+        }
+        .eat-list-two {
+          margin-left: 127px;
+        }
       }
     }
   }
@@ -469,14 +788,16 @@ export default {
   border-radius: 50%;
   margin: 0 5px;
 }
-.theme .swiper-paginations .swiper-pagination-bullet {
+.theme .swiper-paginations .swiper-pagination-bullet,
+.theme .swiper-paginations1 .swiper-pagination-bullet {
   margin: 0 10px;
   width: 18px;
   height: 18px;
   border: 2px solid rgba(255, 255, 255, 1);
   border-radius: 50%;
 }
-.theme .swiper-paginations .swiper-pagination-bullet-active{
-    background:rgba(255,255,255,1);
+.theme .swiper-paginations .swiper-pagination-bullet-active,
+.theme .swiper-paginations1 .swiper-pagination-bullet-active {
+  background: rgba(255, 255, 255, 1);
 }
 </style>

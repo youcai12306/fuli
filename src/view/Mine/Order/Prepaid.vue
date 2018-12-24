@@ -155,7 +155,7 @@
 					}
 				}
 				this.loading = true;
-				this.$post(`http://192.168.2.38:5041/orderDetail/findOrderDetail?pageNum=${this.page}&pageSize=${this.pageSize}`,
+				this.$post(`http://192.168.2.38:5041/order-aggregate/findOrderDetail?pageNum=${this.page}&pageSize=${this.pageSize}`,
 					data).then(res => {
 					this.loading = false;
 					if (res.code === 200) {

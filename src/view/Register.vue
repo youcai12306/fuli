@@ -72,7 +72,7 @@
             <p class="clearDiv">
               <label for>密码</label>
               <input
-                type="text"
+                type="password"
                 placeholder="6-16位密码，区分大小写，不能用空格"
                 v-model="password"
                 @blur="checkPwd"
@@ -252,8 +252,12 @@ export default {
           return false;
         } else {
           //注册接口
-          this.$post("http://192.168.2.50:5010/tourist-aggregate/regist",{mobile:this.phone,passWord:this.password,picCode:this.code1},{headers:{'Content-Type':'application/json;charset=UTF-8'}}).then(res => {
+          this.$post("http://192.168.2.50:5010/tourist-aggregate/regist",{mobile:this.phone,passWord:this.password,smsCode:this.code1},{headers:{'Content-Type':'application/json;charset=UTF-8'}}).then(res => {
             if(res.code === 200){
+							this.$message({
+								type:'success',
+								message:'注册成功'
+							})
               this.$router.push('/login')
             }else{
               this.msg1 = res.message;
@@ -411,6 +415,7 @@ export default {
         .btn {
           position: relative;
           .zhuce {
+						cursor: pointer;
             width: 379px;
             height: 47px;
             background: rgba(7, 100, 233, 1);

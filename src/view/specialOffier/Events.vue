@@ -3,7 +3,7 @@
   <div class="r">
     <div class="title clearDiv">
       <div class="floatLeft">精彩活动</div>
-      <div class="floatRight location">当前位置>优惠活动>精彩活动</div>
+      <div class="floatRight location">当前位置>优惠活动</div>
     </div>
 
     <!-- 列表 -->

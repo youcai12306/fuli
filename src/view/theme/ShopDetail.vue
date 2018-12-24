@@ -4,7 +4,7 @@
       <div class="top clearDiv">
         <h3 class="floatLeft">海豚纪念商店</h3>
         <div class="floatRight clearDiv" @click="back()">
-          <img src="../../assets/img/login-qq.png" alt>
+          <img src="../../assets/img/theme-back.png" alt>
           <span>返回</span>
         </div>
       </div>

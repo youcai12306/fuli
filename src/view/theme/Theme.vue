@@ -77,7 +77,7 @@
     </div>
     <!-- 精彩演绎 -->
     <div class="art" id="art">
-      <img src="../../assets/img/theme-animal-img1.png" alt class="img">
+      <img src="../../assets/img/theme-art-img4.png" alt class="img">
       <div class="meng2">
         <swiper :options="certifySwiper1" ref="certifySwiper1">
           <swiper-slide v-for="item in 3" :key="item">

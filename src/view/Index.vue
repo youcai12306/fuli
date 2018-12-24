@@ -145,22 +145,23 @@
           </div>
           <div class="hot-content clearDiv">
             <ul class="content-left floatLeft">
-              <li>
-                <img src="../assets/img/login-bg.png" alt>
-                <p>在线订票</p>
-              </li>
-              <li class="li2">
-                <img src="../assets/img/login-bg.png" alt>
-                <p>动物保育</p>
-              </li>
-              <li class="li3">
-                <img src="../assets/img/login-bg.png" alt>
-                <p>交通指南</p>
-              </li>
-              <li class="li4">
-                <img src="../assets/img/login-bg.png" alt>
-                <p>园区介绍</p>
-              </li>
+							<router-link to="/tickets/1" tag="li">
+								<img src="../assets/img/login-bg.png" alt>
+								<p>在线订票</p>
+							</router-link>
+							<router-link to="/animal" tag="li" class="li2">
+								<img src="../assets/img/login-bg.png" alt>
+								<p>动物保育</p>
+							</router-link>
+							<router-link :to="{path:'/ditu',query:{id:'3'}}" tag="li" class="li3">
+								<img src="../assets/img/login-bg.png" alt>
+								<p>交通指南</p>
+							</router-link>
+							<router-link :to="{path:'/ditu',query:{id:'8'}}" tag="li" class="li4">
+								<img src="../assets/img/login-bg.png" alt>
+								<p>园区介绍</p>
+							</router-link>
+              
             </ul>
             <div class="content-main floatLeft">
               <div class="top clearDiv">
@@ -168,7 +169,7 @@
                 <div class="top-box floatLeft">
                   <div class="clearDiv box-top">
                     <div class="floatLeft">荟精英，海洋欢乐世界展露头角</div>
-                    <a href="#" class="floatRight">更多>></a>
+										<router-link to="/news" class="floatRight">更多>></router-link>
                   </div>
                   <div
                     class="floatLeft box-bottom"
@@ -176,10 +177,12 @@
                 </div>
               </div>
               <ul class="bottom">
-                <li class="clearDiv" v-for="item in 4" :key="item">
-                  《受伤的鲸豚不再无助 海南首个海洋动物保育救护中心挂牌启用》
-                  <a href="#">详情>></a>
-                </li>
+								<template v-for="item in 4">
+									<router-link :to="{path:'/newDetail',query:{id:'5c1f5349f8dac609dd5cd6b7'}}" tag="li" class="clearDiv">
+										《受伤的鲸豚不再无助 海南首个海洋动物保育救护中心挂牌启用》
+										<a>详情>></a>
+									</router-link>
+								</template>
               </ul>
             </div>
             <div class="content-right floatLeft">
@@ -197,7 +200,9 @@
               <p>周末 9.00~18.00</p>
             </div>
             <div class="info-boutton">
-              <a href>详细营业信息>>></a>
+							<router-link :to="{path:'/ditu',query:{id:'2'}}">
+								详细营业信息>>>
+							</router-link>
             </div>
           </el-col>
           <el-col :span="12" class="info-col1">
@@ -216,7 +221,9 @@
               </div>
             </div>
             <div class="info-boutton">
-              <a href>立即购票>>></a>
+							<router-link :to="{path:'/ditu'}">
+								立即购票>>>
+							</router-link>
             </div>
           </el-col>
         </el-row>
@@ -421,6 +428,7 @@ export default {
             border: 3px solid rgba(255, 255, 255, 1);
           }
           .swiper-prev {
+						cursor: pointer;
             width: 13px;
             height: 22px;
             background: url(../assets/img/index-swiper-prev.png) no-repeat 0 0;
@@ -430,6 +438,7 @@ export default {
             margin-top: -11px;
           }
           .swiper-next {
+						cursor: pointer;
             width: 13px;
             height: 22px;
             background: url(../assets/img/index-swiper-next.png) no-repeat 0 0;
@@ -478,11 +487,12 @@ export default {
             width: 38px;
             height: 89px;
             background: rgba(255, 255, 255, 0.59);
+						cursor: pointer;
           }
           .prev {
             position: absolute;
             left: -60px;
-            top: 50%;
+            top: 35%;
             margin-top: -45px;
             background-image: url(../assets/img/index-new-next.png);
             background-repeat: no-repeat;
@@ -491,7 +501,7 @@ export default {
           .next {
             position: absolute;
             right: -60px;
-            top: 50%;
+            top: 35%;
             margin-top: -45px;
             background-image: url(../assets/img/index-new-prev.png);
             background-repeat: no-repeat;

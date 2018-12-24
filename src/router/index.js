@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from '@/vuex/store';
 
 //登录
 const Login = r => require.ensure([], () => r(require('@/view/Login')), 'Login')
@@ -66,7 +67,7 @@ const MessageDetail = r => require.ensure([], () => r(require('@/view/Mine/Messa
 
 Vue.use(Router)
 
-export default new Router({
+let router = new Router({
 	routes: [{
 			path: '*',
 			redirect: '/index' //报错去首页
@@ -177,6 +178,9 @@ export default new Router({
 		{
 			path: '/success',
 			name: 'success',
+			meta:{
+				requireAuth: true
+			},
 			component: success //支付页面
 		},
 		{
@@ -213,14 +217,16 @@ export default new Router({
 			path: '/mine',
 			component: Mine,
 			meta: {
-				nav: 3
+				nav: 3,
+				requireAuth: true
 			},
 			children: [ //个人中心二级子路由
 				{
 					path: '/',
 					component: Prepaid,
 					meta: {
-						nav: 3
+						nav: 3,
+						requireAuth: true
 					}
 				},
 				{
@@ -228,7 +234,8 @@ export default new Router({
 					name: 'Prepaid',
 					component: Prepaid,
 					meta: {
-						nav: 3
+						nav: 3,
+						requireAuth: true
 					}
 				},
 				{
@@ -236,7 +243,8 @@ export default new Router({
 					name: 'CouponCenter',
 					component: CouponCenter, //我的优惠券
 					meta: {
-						nav: 3
+						nav: 3,
+						requireAuth: true
 					},
 				},
 				{
@@ -244,7 +252,8 @@ export default new Router({
 					name: 'MyIntegral',
 					component: MyIntegral, //我的积分
 					meta: {
-						nav: 3
+						nav: 3,
+						requireAuth: true
 					},
 				},
 				{
@@ -252,7 +261,8 @@ export default new Router({
 					name: 'ShoppingCar',
 					component: ShoppingCar, //购物车
 					meta: {
-						nav: 3
+						nav: 3,
+						requireAuth: true
 					}
 				},
 				{
@@ -260,7 +270,8 @@ export default new Router({
 					name: 'ShoppingAdress',
 					component: ShoppingAdress, //收货地址
 					meta: {
-						nav: 3
+						nav: 3,
+						requireAuth: true
 					}
 				},
 				{
@@ -268,7 +279,8 @@ export default new Router({
 					name: 'MyMessage',
 					component: MyMessage, //消息列表
 					meta: {
-						nav: 3
+						nav: 3,
+						requireAuth: true
 					}
 				},
 				{
@@ -276,7 +288,8 @@ export default new Router({
 					name: 'MessageDetail',
 					component: MessageDetail, //消息详情
 					meta: {
-						nav: 3
+						nav: 3,
+						requireAuth: true
 					}
 				},
 				{
@@ -284,7 +297,8 @@ export default new Router({
 					name: 'Membership',
 					component: Membership, //个人资料
 					meta: {
-						nav: 3
+						nav: 3,
+						requireAuth: true
 					}
 				}
 			]
@@ -292,7 +306,32 @@ export default new Router({
 		{
 			path: '/orderDetail',
 			name: 'OrderDetail',
+			meta: {
+				requireAuth: true
+			},
 			component: OrderDetail //订单详情
 		},
 	]
 })
+
+router.beforeEach((to, from, next) => {
+	if (to.matched.some(record => record.meta.requireAuth)) { // 判断该路由是否需要登录权限
+		if (store.getters.userInfo.length) { // 通过vuex state获取当前的token是否存在
+			next();
+		} else {
+			next({
+				path: '/login',
+				query: {
+					redirect: to.fullPath
+				} // 将跳转的路由path作为参数，登录成功后跳转到该路由
+			})
+		}
+	} else {
+		next();
+	}
+})
+// 跳转路由页面置顶
+router.afterEach((to, from, next) => {
+	window.scrollTo(0, 0)
+})
+export default router

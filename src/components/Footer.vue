@@ -5,12 +5,12 @@
                 <img src="../assets/img/footer-logo.png" alt="" class="logo floatLeft">
                 <img src="../assets/img/footer-logo.png" alt="" class="logo floatLeft">
                 <ul>
-                    <li><a href="#">关于富力</a></li>
-                    <li><a href="#">公园守则</a></li>
-                    <li><a href="#">网站地图</a></li>
-                    <li><a href="#">人才招聘</a></li>
-                    <li><a href="#">富力集团</a></li>
-                    <li><a href="#">联系我们</a></li>
+                    <li><a href="javascript:;">关于富力</a></li>
+                    <li><a href="javascript:;">公园守则</a></li>
+                    <li><a href="javascript:;">网站地图</a></li>
+                    <li><a href="javascript:;">人才招聘</a></li>
+                    <li><a href="javascript:;">富力集团</a></li>
+                    <li><a href="javascript:;">联系我们</a></li>
                 </ul>
                 <div class="info floatLeft">
                     <div class="info-one clearDiv">

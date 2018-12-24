@@ -41,15 +41,15 @@
                 <th>数量</th>
                 <th>小计</th>
               </tr>
-              <tr v-for="item in list2" :key="item">
+              <tr v-for="item in list2" :key="item.id">
                  <!-- <tr v-for="item in list2" :key="item"> -->
-                <td>{{productName}}
-                  <p>游玩时间：{{playtime}}</p>
-                  <p>{{canDebook(saleType)}}</p>
+                <td>{{item.product.productName}}
+                  <p>游玩时间：{{item.product.dataBaseDate}}</p>
+                  <p>{{canDebook(item.product.saleType)}}</p>
                 </td>
-                <td>¥{{price1}}元</td>
-                <td>×{{count}}</td>
-                <td class="td">¥{{price2}}元</td>
+                <td>¥{{item.settlementPrice}}元</td>
+                <td>×{{item.productCount}}</td>
+                <td class="td">¥{{item.settlementPrice*item.productCount}}元</td>
               </tr>
               <!-- <tr>
                 <td>富力成人全日票
@@ -217,7 +217,8 @@ export default {
       saleType: "",
       sign: "",
       a1: this.$route.query.a,
-      list2:[]
+      list2:[],
+      price2:0
     };
   },
   mounted() {
@@ -229,10 +230,22 @@ export default {
       let list1 = this.$route.query.list1;
       this.list2 = JSON.parse(list1);
       console.log(this.list2);
-      this.productName =this.list2[0].product.productName;
-      this.playtime = this.list2[0].product.dataBaseDate;
-      this.price1 = this.list2[0].product.settlementPrice;
-      this.count = this.list2[0].productCount;
+        // this.productName =this.product.productName;
+        // this.playtime = this.product.dataBaseDate;
+        // this.price1 = this.product.settlementPrice;
+        // console.log(this.price1);
+        // this.count = this.productCount;
+        for(let item of this.list2){
+          
+          this.price = item.settlementPrice;
+          // console.log(this.price)
+          this.count = item.productCount
+          this.pricetotal = this.price * this.count
+          // console.log(typeOf()this.pricetotal)
+          this.price2 +=this.pricetotal
+        }
+        
+         
     }
   },
   // 监听路由跳转路径，如果是购物车，重新调用购物车接口
@@ -258,12 +271,15 @@ export default {
     },
     //接受产品详情页面的产品ID，库存ID,数量，是否邮寄，调用接口，展示订单信息
     shopmsg() {
-      let id = this.$route.query.id;
+      let id = this.$route.query.id2;
       let stockId = this.$route.query.stockId;
+      console.log(id);
+      console.log(stockId)
       let num1 = this.$route.query.num;
       this.saleType = this.$route.query.saleType;
-      // let list1 = this.$route.query.list1;
-      // let list2 = JSON.parse(list1)
+
+      let list1 = this.$route.query.list1;
+      let list2 = JSON.parse(list1)
       // console.log(list2);
       // console.log(this.saleType);
       // console.log(num1);
@@ -298,10 +314,11 @@ export default {
         touristId: this.$store.getters.getUserData.userId,
         productFormList: [
           {
-            productId: this.$route.query.id,
-            num: this.$route.query.num,
-            stockId: this.$route.query.stockId,
-            saleType: parseInt(this.$route.query.saleType)
+            productId: this.$route.query.id2,
+            num: this.$route.query.totalNum,
+            stockId: this.$route.query.id1,
+            // saleType: parseInt(this.$route.query.saleType)
+            saleType:0
           }
         ],
 
@@ -325,7 +342,7 @@ export default {
           // 读redis，成功创建订单后关闭遮罩层，跳转支付页面
           this.times = setInterval(() => {
             this.$fetch(
-              "http://192.168.2.29:5100/callBack/getOccupation",
+              "http://192.168.2.55:5100/callBack-aggregate/getOccupation",
               data1
             ).then(res => {
               console.log(res);
@@ -355,11 +372,11 @@ export default {
     clearInterval(this.times);
   },
   // 计算产品总价格
-  computed: {
-    price2() {
-      return this.price1 * this.count;
-    }
-  }
+  // computed: {
+  //   price2() {
+  //     return this.pricetotal++;
+  //   }
+  // }
 };
 </script>
 

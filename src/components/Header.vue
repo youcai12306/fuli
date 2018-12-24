@@ -19,7 +19,7 @@
 						<p>网上订购</p>
 					</li>
 					<!-- 主题乐园 -->
-					<li @mouseover="showNavList(1)" @mouseout="hiddenNavList(1)" class="theme" :class="{'actives' : $route.name == 'Theme'}">
+					<li @mouseover="showNavList(1),height='97px'" @mouseout="hiddenNavList(1),height='0px'" class="theme" :class="{'actives' : $route.name == 'Theme'}">
 						<template v-if="$route.name == 'Theme'">
 							<img src="../assets/img/header-2.png" alt>
 						</template>
@@ -27,26 +27,6 @@
 							<img src="../assets/img/header2.png" alt>
 						</template>
 						<p>主题乐园</p>
-						<div class="nav-list">
-							<div class="lists">
-								<ul>
-									<li>
-										<p class="list-img">
-											<img src="../assets/img/header-img1.png" alt>
-										</p>
-										<p class="list-title">欢乐海洋世界</p>
-									</li>
-									<li>
-										<router-link to="/theme">
-											<p class="list-img">
-												<img src="../assets/img/header-img2.png" alt>
-											</p>
-											<p class="list-title">麦迪斯卡水乐园</p>
-										</router-link>
-									</li>
-								</ul>
-							</div>
-						</div>
 					</li>
 					<!-- 度假酒店 -->
 					<li class="hotel" :class="{'actives' : $route.name == ''}">
@@ -110,6 +90,7 @@
 					</router-link>
 				</ul>
 			</div>
+
 			<div class="nav-right floatLeft">
 				<div class="right-info">
 					<div class="login" @click="jumpMine" ref="box">
@@ -136,6 +117,46 @@
 				</div>
 			</div>
 		</div>
+
+		<!-- 主题乐园 -->
+		<div class="nav-list" :style="{height:height}" @mouseover="height='97px'" @mouseout="height='0px'">
+			<div class="lists">
+				<ul>
+					<li>
+						<router-link to="/theme">
+							<p class="list-img">
+								<img src="../assets/img/H1.png" alt>
+							</p>
+							<p class="list-title">麦迪斯卡水乐园</p>
+						</router-link>
+					</li>
+					<li>
+						<p class="list-img">
+							<img src="../assets/img/H2.png" alt>
+						</p>
+						<p class="list-title">冒险海洋</p>
+					</li>
+					<li>
+						<p class="list-img">
+							<img src="../assets/img/H3.png" alt>
+						</p>
+						<p class="list-title">生态海岸</p>
+					</li>
+					<li>
+						<p class="list-img">
+							<img src="../assets/img/H4.png" alt>
+						</p>
+						<p class="list-title">探索港湾</p>
+					</li>
+					<li>
+						<p class="list-img">
+							<img src="../assets/img/H5.png" alt>
+						</p>
+						<p class="list-title">深海之城</p>
+					</li>
+				</ul>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -155,7 +176,8 @@
 			return {
 				show: false,
 				name: "登录/注册",
-				loginShow: false
+				loginShow: false,
+				height:0
 			};
 		},
 		computed: {
@@ -223,6 +245,7 @@
 <style lang='scss' scoped>
 	.main {
 		position: relative;
+		height: 97px;
 
 		.main-content {
 			height: 97px;
@@ -263,46 +286,6 @@
 
 					&:hover .nav-list {
 						display: block;
-					}
-
-					.nav-list {
-						display: none;
-						width: 500px;
-						height: 110px;
-						background: rgba(7, 100, 233, 1);
-						z-index: 10;
-						position: absolute;
-						top: 97px;
-						left: 0;
-
-						.lists {
-							ul {
-								li {
-									float: left;
-									font-size: 12px;
-									font-weight: 400;
-									color: rgba(245, 249, 255, 1);
-									margin-right: 46px;
-
-									.list-img {
-										height: 52px;
-										line-height: 52px;
-										text-align: center;
-										margin-top: 10px;
-
-										img {
-											display: inline-block;
-											vertical-align: middle;
-										}
-									}
-
-									.list-title {
-										line-height: 30px;
-										color: #fff;
-									}
-								}
-							}
-						}
 					}
 				}
 			}
@@ -381,6 +364,52 @@
 						.ch {
 							color: #0764e9;
 							border-right: 1px solid #333333;
+						}
+					}
+				}
+			}
+		}
+
+		.nav-list {
+			width: 100%;
+			/* height: 92px; */
+			height: 0px;
+			overflow: hidden;
+			background: rgba(36, 36, 36, 0.7);
+			position: relative;
+			z-index: 8;
+			transition: 0.3s;
+
+			.lists {
+				width: 1000px;
+				margin: 0 auto;
+				height: 92px;
+				position: relative;
+				z-index: 10;
+
+				ul {
+					li {
+						float: left;
+						font-size: 12px;
+						font-weight: 400;
+						color: rgba(245, 249, 255, 1);
+						margin-right: 100px;
+
+						.list-img {
+							height: 52px;
+							line-height: 52px;
+							text-align: center;
+							margin-top: 10px;
+
+							img {
+								display: inline-block;
+								vertical-align: middle;
+							}
+						}
+
+						.list-title {
+							line-height: 30px;
+							color: #fff;
 						}
 					}
 				}

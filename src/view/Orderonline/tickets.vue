@@ -111,7 +111,7 @@ export default {
   computed: {
     list() {
       let list = this.items;
-      console.log(this.imgs);
+      // console.log(this.imgs);
       let str = [];
       // if(!this.imgs){
       //   return;
@@ -190,7 +190,7 @@ export default {
     //获取门票信息
     getTicketList(typeId, date, pageSize, pageIndex) {
       //请求后台接口
-      this.$fetch("http://192.168.2.38:5001/product-aggregate/findProductByStock", {
+      this.$fetch("http://192.168.2.61:5001/product-aggregate/findProductByStock", {
         playDate: date
       })
         .then(res => {
@@ -250,9 +250,7 @@ export default {
   float: left;
   margin-left: 40px;
 }
-.or9{
-  background-color: red
-}
+
 .ti2 {
   background-color: #fff;
   width: 920px;

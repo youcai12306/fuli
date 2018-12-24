@@ -19,7 +19,7 @@ const TicketDetail = r => require.ensure([], () => r(require('@/view/TicketDetai
 const ProductDetail = r => require.ensure([], () => r(require('@/view/ProductDetail')), 'ProductDetail')
 //下订单页面
 const Suborder = r => require.ensure([], () => r(require('@/view/Orderonline/Suborder')), 'Suborder')
-const Suborder2 = r => require.ensure([], () => r(require('@/view/Orderonline/Suborder')), 'Suborder2')
+const Suborder2 = r => require.ensure([], () => r(require('@/view/Orderonline/Suborder2')), 'Suborder2')
 //支付页面
 const success = r => require.ensure([], () => r(require('@/view/Orderonline/success')), 'success')
 //主题乐园

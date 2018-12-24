@@ -119,6 +119,9 @@ export default {
     .pp1 {
       width: 240px;
       float: left;
+       .oo {
+        background-color: #ffb518;
+      }
     }
     .or8 {
       height: 166px;
@@ -130,9 +133,7 @@ export default {
       padding-top: 55px;
       border-top-left-radius: 12px;
       border-top-right-radius: 12px;
-      .oo {
-        background-color: red;
-      }
+     
     }
     li {
       img {

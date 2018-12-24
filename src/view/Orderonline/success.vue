@@ -128,7 +128,7 @@ export default {
           out_trade_no: this.$route.query.orderId
         };
         this.$post(
-          "http://jwxra.natapp1.cc/weixin/scanpay?out_trade_no=" +
+          "http://jwxra.natapp1.cc/payment-aggregate/scanpay?out_trade_no=" +
             this.$route.query.orderId,
           data,
           { headers: { "Content-Type": "application/json;charset=UTF-8" } }
@@ -142,7 +142,7 @@ export default {
           out_trade_no: this.$route.query.orderId
         };
         this.$post(
-          "http://jwxra.natapp1.cc/ali/aliToPay?out_trade_no=" +
+          "http://jwxra.natapp1.cc/payment-aggregate/aliToPay?out_trade_no=" +
             this.$route.query.orderId,
           data,
           {
@@ -168,7 +168,7 @@ export default {
        let data ={
           guid : this.$route.query.orderId
         }
-        this.$fetch("http://192.168.2.29:5100/callBack/getPay",data).then((res) => {
+        this.$fetch("http://192.168.2.29:5100/callBack-aggregate/getPay",data).then((res) => {
             console.log(res)
         if (res.code === 200) {
           clearInterval(this.times);

@@ -26,7 +26,7 @@
                 ref="mySwiper"
               >
                 <swiper-slide
-                  v-for="(list,key) in img"
+                  v-for="(list,key) in imgs"
                   :key="key"
                 >
                   <img
@@ -149,7 +149,9 @@ export default {
     init() {
       let id = this.$route.query.id;
       let stockId = this.$route.query.stockId;
-      this.$fetch("http://192.168.2.38:5001/product-aggregate/find/" + id, {
+      console.log(id);
+      console.log(stockId);
+      this.$fetch("http://192.168.2.61:5001/product-aggregate/find/" + id, {
         stockId: stockId
       }).then(res => {
         // console.log(res);
@@ -173,24 +175,24 @@ export default {
 
       this.index--;
       
-      // this.imgs.index = this.img3
+      this.imgs.index = this.img3
       
       if (this.index <= 0) {
         this.index = 0;
       }
       console.log(this.index)
-      this.img3 = this.img[this.index]
+      this.img3 = this.imgs[this.index]
       // console.log(this.index);
     },
     next() {
       this.swiper.slideNext();
       this.index++;
      
-      if (this.index >= this.img.length) {
-        this.index = this.img.length - 1;
-        this.img3 = this.img3[0];
-      }
-       this.img3 = this.img[this.index]
+      if (this.index >= this.imgs.length) {
+        this.index = this.imgs.length - 1;
+       }
+       this.img3 = this.imgs[this.index]
+      
     },
 
     handleChange(value) {
@@ -239,6 +241,7 @@ export default {
         this.$router.push({
           path: "/Suborder2",
           query: {
+             saleType:2,
             id: this.product.id,
             stockId: this.$route.query.stockId,
             num: this.num1 //
@@ -262,7 +265,7 @@ export default {
         productCount: this.num1
       };
       this.$post(
-        "http://192.168.2.34:6061/shoppingCart-aggregate/addToshopCart",
+        "http://192.168.2.61:6061/shoppingCart-aggregate/addToshopCart",
         {
           touristId: Uid, 
           productId: this.product.id,
@@ -278,7 +281,7 @@ export default {
     },
     //查询购物车
     searchShoppingCar(Uid) {
-      this.$fetch("http://192.168.2.34:6061/shoppingCart-aggregate/selectShopCarts", {
+      this.$fetch("http://192.168.2.61:6061/shoppingCart-aggregate/selectShopCarts", {
         touristId: Uid 
       }).then(res => {
         if (res.code === 200) {
@@ -301,7 +304,7 @@ export default {
     let Uid = this.$store.getters.getUserData.userId;
     this.init();
     this.searchShoppingCar(Uid);
-    this.img3 = this.img[0]
+    this.img3 = this.imgs[0]
   },
   computed: {
     swiper() {

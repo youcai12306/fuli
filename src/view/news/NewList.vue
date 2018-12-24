@@ -63,7 +63,6 @@ export default {
           pageIndex
       ).then(res => {
         if (res.code === 200) {
-          console.log(res.data);
           this.list = res.data.content[0];
           // this.$fetch("http://192.168.2.61:2600/staticResource/selectFiles", {
           //   id: this.list.infoPic

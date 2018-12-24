@@ -157,6 +157,8 @@ export default {
           font-size: 17px;
           font-weight: 400;
           color: rgba(255, 255, 255, 1);
+					cursor: pointer;
+					margin-top: 10px;
         }
       }
     }

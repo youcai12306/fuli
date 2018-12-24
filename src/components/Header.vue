@@ -123,18 +123,36 @@
 			<div class="lists">
 				<ul>
 					<li>
-						<p class="list-img">
-							<img src="../assets/img/header-img1.png" alt>
-						</p>
-						<p class="list-title">欢乐海洋世界</p>
-					</li>
-					<li>
 						<router-link to="/theme">
 							<p class="list-img">
-								<img src="../assets/img/header-img2.png" alt>
+								<img src="../assets/img/H1.png" alt>
 							</p>
 							<p class="list-title">麦迪斯卡水乐园</p>
 						</router-link>
+					</li>
+					<li>
+						<p class="list-img">
+							<img src="../assets/img/H2.png" alt>
+						</p>
+						<p class="list-title">冒险海洋</p>
+					</li>
+					<li>
+						<p class="list-img">
+							<img src="../assets/img/H3.png" alt>
+						</p>
+						<p class="list-title">生态海岸</p>
+					</li>
+					<li>
+						<p class="list-img">
+							<img src="../assets/img/H4.png" alt>
+						</p>
+						<p class="list-title">探索港湾</p>
+					</li>
+					<li>
+						<p class="list-img">
+							<img src="../assets/img/H5.png" alt>
+						</p>
+						<p class="list-title">深海之城</p>
 					</li>
 				</ul>
 			</div>
@@ -363,10 +381,11 @@
 			transition: 0.3s;
 
 			.lists {
-				width: 800px;
+				width: 1000px;
 				margin: 0 auto;
 				height: 92px;
 				position: relative;
+				z-index: 10;
 
 				ul {
 					li {
@@ -374,7 +393,7 @@
 						font-size: 12px;
 						font-weight: 400;
 						color: rgba(245, 249, 255, 1);
-						margin-right: 46px;
+						margin-right: 100px;
 
 						.list-img {
 							height: 52px;

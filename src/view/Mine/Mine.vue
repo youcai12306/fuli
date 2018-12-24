@@ -3,21 +3,21 @@
     <div class="mine-bg">
       <ul class="mine-info clearDiv">
         <li class="portrait floatLeft">
-          <img src="../../assets/img/mine-icon.png" alt>
+					<img src="../../assets/img/mine-icon.png" alt>
         </li>
         <li class="info-people floatLeft">
-          <p class="people-phone">13888888888，欢迎您！</p>
+          <p class="people-phone">{{$store.getters.userInfo.mobile}}，欢迎您！</p>
           <p class="lev clearDiv">
             <span>我的等级：</span>
-            <img src="../../assets/img/mine-icon.png" alt>
+            <img src="../../assets/img/content-1.png" alt>
           </p>
         </li>
         <li class="coupon floatLeft">
-          <p class="num">2</p>
+          <p class="num">0</p>
           <p class="words">优惠券</p>
         </li>
         <li class="integral floatLeft">
-          <p class="num nums">666</p>
+          <p class="num nums">0</p>
           <p class="words">积分</p>
         </li>
       </ul>
@@ -181,8 +181,8 @@ export default {
             float: left;
           }
           img {
-            width: 50px;
-            height: 50px;
+            width: 67px;
+            /* height: 50px; */
           }
         }
       }

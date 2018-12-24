@@ -9,7 +9,7 @@
     <!-- 所有新闻 -->
     <div class="main-new">
       <div class="hea-img" @click="jumpDetail(list.id)">
-        <img src="../../assets/img/new-1.png" alt="图片">
+        <img src="../../assets/img/new-bg2.png" alt="图片">
         <div class="bt">
           <p class="p1">{{list.infoTitle}}</p>
           <p class="p2">来自富力官网 | {{list.createTime}}</p>

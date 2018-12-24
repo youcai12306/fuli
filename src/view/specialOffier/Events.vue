@@ -9,7 +9,7 @@
     <!-- 列表 -->
     <ul class="content clearDiv">
       <li v-for="item in 4" :key="item">
-        <img src="../../assets/img/login-bg.png" alt>
+        <img src="../../assets/img/specialOffier-bg1.png" alt>
         <div class="box">
           <h3 class="t">富力 · 百变万圣节</h3>
           <hr>
@@ -74,7 +74,7 @@ export default {
 // 主体
 .r {
   position: relative;
-  height: 1200px;
+  height: 1300px;
   width: 920px;
   background-color: rgba(255, 255, 255, 1);
   border-radius: 10px;
@@ -167,7 +167,7 @@ export default {
     margin-top: 60px;
     text-align: center;
     left: 50%;
-    bottom: 30px;
+    bottom: 100px;
     transform: translateX(-50%);
   }
 }

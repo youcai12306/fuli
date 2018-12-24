@@ -18,7 +18,7 @@
       <div class="content">
         <swiper :options="swiperOption">
           <swiper-slide>
-            <img src="../../assets/img/login-bg.png">
+            <img src="../../assets/img/new-bg2.png">
           </swiper-slide>
         </swiper>
         <div class="swiper-button-prev swiper-button-black" slot="button-prev"></div>

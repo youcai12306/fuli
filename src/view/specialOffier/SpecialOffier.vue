@@ -48,7 +48,7 @@ export default {
 .news {
   width: 100%;
   height: 1802px;
-  background: #fff url(../../assets/img/new-1.png) no-repeat top center;
+  background: #fff url(../../assets/img/specialOffier-bg.png) no-repeat top center;
   background-size: 1920px 100%;
 
   .main-contion {
@@ -56,7 +56,7 @@ export default {
     min-height: 1%;
     clear: both;
     margin: 0 auto;
-    padding-top: 454px;
+    padding-top: 434px;
     // 导航
     .l {
       float: left;

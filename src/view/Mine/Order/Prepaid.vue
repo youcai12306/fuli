@@ -155,7 +155,7 @@
 					}
 				}
 				this.loading = true;
-				this.$post(`http://192.168.2.38:5041/order-aggregate/findOrderDetail?pageNum=${this.page}&pageSize=${this.pageSize}`,
+				this.$post(`http://192.168.2.61:5041/order-aggregate/findOrderDetail?pageNum=${this.page}&pageSize=${this.pageSize}`,
 					data).then(res => {
 					this.loading = false;
 					if (res.code === 200) {
@@ -182,7 +182,7 @@
 					cancelButtonText: '取消',
 					type: 'warning'
 				}).then(() => {
-					this.$put(`http://192.168.2.38:5041/orderDetail/canceOrder?orderId=${id}&status=-1`).then(res => {
+					this.$put(`http://192.168.2.61:5041/order-aggregate/canceOrder?orderId=${id}&status=-1`).then(res => {
 						if (res.code === 200) {
 							this.$message({
 								message: `取消订单成功`,
@@ -220,8 +220,7 @@
 						returnCount: obj.productCount,
 						returnContent: val.value
 					}
-					console.log(data);
-					this.$axios.post("http://192.168.2.28:5080/returncash/refund/apply",this.$tool.formatDatas(data)).then(res => {
+					this.$axios.post("http://192.168.2.61:5080/returnCash-aggregate/refund/apply",this.$tool.formatDatas(data)).then(res => {
 						if(res.data.code == 200){
 							this.$message({
 								type: 'success',

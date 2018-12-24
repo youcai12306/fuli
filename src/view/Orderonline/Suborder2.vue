@@ -245,6 +245,7 @@ export default {
   methods: {
     // 验证信息
     submitForm(formName) {
+      console.log(999)
       this.$refs[formName].validate(valid => {
         if (valid) {
           this.flag = true;
@@ -278,7 +279,7 @@ export default {
         if (res.code === 200) {
           console.log(111);
           this.productname = res.data.productName;
-          console.log(productname)
+          console.log(this.productname)
           this.playtime = res.data.dataBaseDate;
           this.price1 = res.data.settlementPrice;
         }
@@ -288,9 +289,10 @@ export default {
     canDebook(type) {
       // return type === 1 ? (this.sign = "邮寄") : (this.sign = "自提");
       if (type == 1) {
-        this.sign = "自提";
-      } else if (type == 2) {
         this.sign = "邮寄";
+        
+      } else if (type == 2) {
+        this.sign = "自提";
       }
       return this.sign;
     },
@@ -328,7 +330,7 @@ export default {
           // 读redis，成功创建订单后关闭遮罩层，跳转支付页面
           this.times = setInterval(() => {
             this.$fetch(
-              "http://192.168.2.29:5100/callBack/getOccupation",
+              "http://192.168.2.55:5100/callBack-aggregate/getOccupation",
               data1
             ).then(res => {
               console.log(res);

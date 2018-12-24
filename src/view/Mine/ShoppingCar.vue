@@ -70,7 +70,9 @@ export default {
       selected_all: false,
       totalPrice: 0,
       totalNum: 0,
-      flag:true
+      flag:true,
+      id1:"",
+      id2:""
     };
   },
   watch: {
@@ -94,9 +96,15 @@ export default {
     },
     //查询购物车
     searchShoppingCar(Uid) {
-      this.$fetch("http://192.168.2.34:6061/shoppingCart-aggregate/selectShopCarts", {
+      this.$fetch("http://192.168.2.61:6061/shoppingCart-aggregate/selectShopCarts", {
         touristId: Uid
       }).then(res => {
+        console.log(res)
+        this.id1 =res.data[0].createDateId;
+        this.id2 = res.data[0].productId;
+        this.totalNum = res.data[0].productCount
+        this.stockId = res.data[0].createDateId
+        // console.log(this.id1)
         if (res.code === 200) {
           // console.log(111)
           this.good_list = res.data;
@@ -122,9 +130,10 @@ export default {
     // },
     //删除购物车商品
     delShopping(item, key) {
-      this.$fetch("http://192.168.2.34:6061/shoppingCart-aggregate/deleteshopCart", {
+      this.$fetch("http://192.168.2.61:6061/shoppingCart-aggregate/deleteshopCart", {
         id: item.id
       }).then(res => {
+        
         if (res.code === 200) {
           this.good_list.splice(key, 1);
           this.flag = true;
@@ -201,7 +210,11 @@ export default {
         path:"/suborder",
         query:{
           list1:list1,
-          a:1
+          a:1,
+          id1:this.id1,
+          id2:this.id2,
+          totalNum:this.totalNum,
+          stockId:this.stockId
         }
       })
     }

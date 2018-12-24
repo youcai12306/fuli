@@ -2,7 +2,7 @@
   <div class="theme">
     <!-- 头部 -->
     <Header></Header>
-	<!-- 第一部分 -->
+    <!-- 第一部分 -->
     <div class="banner">
       <div class="list-one">
         <div class="one-change" @mouseover="stopTimes" @mouseout="startTimes">
@@ -74,14 +74,6 @@
           </div>
         </div>
       </div>
-      <ul class="leftNav">
-        <li>园区介绍</li>
-        <li>游玩设施</li>
-        <li @click="jumpColumn('#art')">精彩演绎</li>
-        <li @click="jumpColumn('#animal')">动物场馆</li>
-        <li @click="jumpColumn('#shop')">主题商店</li>
-        <li @click="jumpColumn('#eat')">特色餐厅</li>
-      </ul>
     </div>
     <!-- 精彩演绎 -->
     <div class="art" id="art">
@@ -210,6 +202,16 @@
         </div>
       </div>
     </div>
+    <!-- 左侧导航 -->
+    <ul class="leftNav">
+      <li>园区介绍</li>
+      <li>游玩设施</li>
+      <li @click="jumpColumn('#art')">精彩演绎</li>
+      <li @click="jumpColumn('#animal')">动物场馆</li>
+      <li @click="jumpColumn('#shop')">主题商店</li>
+      <li @click="jumpColumn('#eat')">特色餐厅</li>
+    </ul>
+    <div class="alert"></div>
   </div>
 </template>
 
@@ -341,7 +343,7 @@ export default {
     this.$nextTick(() => {
       var swiper = this.$refs.certifySwiper.swiper;
       var swiper2 = this.$refs.certifySwiper1.swiper;
-	  swiper.controller.control = swiper2;
+      swiper.controller.control = swiper2;
     });
   },
   methods: {
@@ -429,13 +431,10 @@ export default {
 <style lang='scss' scoped>
 .theme {
   width: 100%;
-
   .banner {
     height: 1660px;
     background: url(../../assets/img/index-bg1.png) no-repeat 0 0;
     background-size: 100% 100%;
-    position: relative;
-
     .list-one {
       width: 100%;
       padding-top: 561px;
@@ -592,31 +591,6 @@ export default {
         }
       }
     }
-
-    .leftNav {
-      width: 150px;
-      height: 433px;
-      background: rgba(7, 100, 233, 1);
-      border-radius: 15px;
-      position: absolute;
-      left: 114px;
-      top: 696px;
-      padding: 40px 0;
-
-      li {
-        width: 150px;
-        height: 59px;
-        line-height: 59px;
-        text-align: center;
-        font-size: 16px;
-        font-weight: bold;
-        color: rgba(255, 255, 255, 1);
-
-        &:hover {
-          background: rgba(73, 147, 252, 1);
-        }
-      }
-    }
   }
 
   .art {
@@ -625,7 +599,6 @@ export default {
     /* background: url(../../assets/img/index-item1.png) no-repeat;
 			background-size: 100% 100%; */
     position: relative;
-
     .meng {
       position: absolute;
       left: 0;
@@ -633,6 +606,7 @@ export default {
       bottom: 0;
       right: 0;
       z-index: 10;
+      background: rgba(15, 57, 119, 0.7);
     }
 
     .meng2 {
@@ -898,6 +872,42 @@ export default {
       }
     }
   }
+}
+.leftNav {
+  width: 150px;
+  height: 433px;
+  background: rgba(7, 100, 233, 1);
+  border-radius: 15px;
+  position: fixed;
+  left: 114px;
+  top: 50%;
+  margin-top: -215px;
+  padding: 40px 0;
+  z-index: 10;
+  li {
+    width: 150px;
+    height: 59px;
+    line-height: 59px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 1);
+
+    &:hover {
+      background: rgba(73, 147, 252, 1);
+    }
+  }
+}
+.alert {
+  position: fixed;
+  z-index: 999;
+  top: 50%;
+  left: 50%;
+  margin-top: -265px;
+  margin-left: -395px;
+  width: 790px;
+  height: 530px;
+  background: rgba(255, 255, 255, 1);
 }
 </style>
 <style>

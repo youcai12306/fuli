@@ -100,3 +100,6 @@
 	background: #FFFFFF url(../img/new-5.png) no-repeat;
 	opacity: 0.71;
 }
+#certify .swiper-button-prev:focus,#certify .swiper-button-next:focus{
+	outline-width: 0;
+}

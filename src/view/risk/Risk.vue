@@ -3,7 +3,7 @@
 		<Header></Header>
   <div class="risk">
     <div class="title">
-      <div class="location">当前位置>首页>冒险之旅</div>
+      <div class="location">当前位置><router-link to="index" tag="span">首页></router-link>冒险之旅</div>
     </div>
     <div class="content">
       <div class="inner-box">
@@ -128,6 +128,7 @@ export default {
       color: rgba(255, 255, 255, 1);
       padding-left: 34px;
       background: url(../../assets/img/new-4.png) no-repeat 15px center;
+      cursor: pointer;
     }
   }
   .content {

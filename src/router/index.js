@@ -23,6 +23,7 @@ const success = r => require.ensure([], () => r(require('@/view/Orderonline/succ
 //主题乐园
 const Theme = r => require.ensure([], () => r(require('@/view/theme/Theme')), 'Theme')
 const ThemeDetail = r => require.ensure([], () => r(require('@/view/theme/ThemeDetail')), 'ThemeDetail')
+const artTheme = r => require.ensure([], () => r(require('@/view/theme/artTheme')), 'artTheme')
 // 新闻中心首页
 const News = r => require.ensure([], () => r(require('@/view/news/News')), 'News')
 const NewList = r => require.ensure([], () => r(require('@/view/news/NewList')), 'NewList')
@@ -76,9 +77,6 @@ export default new Router({
 			path: '/index',
 			name: 'Index',
 			component: Index, //首页
-			meta: {
-				nav: 1
-			},
 		},
 		{
 			path: '/login',
@@ -114,47 +112,29 @@ export default new Router({
 		{
 			path: '/news',
 			component: News, //新闻
-			meta: {
-				nav: 1
-			},
 			children: [{
 					path: '/',
 					component: NewList,
-					meta: {
-						nav: 1
-					},
 				},
 				{
 					path: '/newList',
 					name: 'NewList',
 					component: NewList,
-					meta: {
-						nav: 1
-					},
 				},
 				{
 					path: '/noticeList',
 					name: 'NoticeList',
 					component: NoticeList,
-					meta: {
-						nav: 1
-					},
 				},
 				{
 					path: '/newDetail',
 					name: 'NewDetail',
 					component: NewDetail,
-					meta: {
-						nav: 1
-					},
 				},
 				{
 					path: '/noticeDetail',
 					name: 'NoticeDetail',
 					component: NoticeDetail,
-					meta: {
-						nav: 1
-					},
 				},
 			]
 		},
@@ -162,29 +142,17 @@ export default new Router({
 			path: '/ditu',
 			name: 'ditu',
 			component: ditu,
-			meta: {
-				nav: 1
-			}
 		},
 		{
 			path: '/specialOffier',
 			component: SpecialOffier, //精彩活动
-			meta: {
-				nav: 1
-			},
 			children: [{
 					path: '/',
 					component: Events,
-					meta: {
-						nav: 1
-					},
 				},
 				{
 					path: '/events',
 					component: Events,
-					meta: {
-						nav: 1
-					},
 				}
 			]
 		},
@@ -192,17 +160,11 @@ export default new Router({
 			path: '/risk',
 			name: 'Risk',
 			component: Risk, //冒险之旅
-			meta: {
-				nav: 1
-			},
 		},
 		{
 			path: '/animal',
 			name: 'Animal',
 			component: Animal, //动物百科
-			meta: {
-				nav: 1
-			},
 		},
 		{
 			path: '/success',
@@ -218,6 +180,11 @@ export default new Router({
 			path: '/themeDetail',
 			name: 'ThemeDetail',
 			component: ThemeDetail //主题乐园详情
+		},
+		{
+			path:'/artTheme',
+			name:'artTheme',
+			component:artTheme
 		},
 		{
 			path: '/ticketDetail',
@@ -255,18 +222,24 @@ export default new Router({
 					path: '/couponCenter',
 					name: 'CouponCenter',
 					component: CouponCenter, //我的优惠券
+					meta: {
+						nav: 3
+					},
 				},
 				{
 					path: '/myIntegral',
 					name: 'MyIntegral',
 					component: MyIntegral, //我的积分
+					meta: {
+						nav: 3
+					},
 				},
 				{
 					path: '/shoppingCar',
 					name: 'ShoppingCar',
 					component: ShoppingCar, //购物车
 					meta: {
-						nav: 2
+						nav: 3
 					}
 				},
 				{
@@ -274,7 +247,7 @@ export default new Router({
 					name: 'ShoppingAdress',
 					component: ShoppingAdress, //收货地址
 					meta: {
-						nav: 2
+						nav: 3
 					}
 				},
 				{
@@ -282,7 +255,7 @@ export default new Router({
 					name: 'MyMessage',
 					component: MyMessage, //消息列表
 					meta: {
-						nav: 2
+						nav: 3
 					}
 				},
 				{
@@ -290,7 +263,7 @@ export default new Router({
 					name: 'MessageDetail',
 					component: MessageDetail, //消息详情
 					meta: {
-						nav: 2
+						nav: 3
 					}
 				},
 				{
@@ -298,7 +271,7 @@ export default new Router({
 					name: 'Membership',
 					component: Membership, //个人资料
 					meta: {
-						nav: 2
+						nav: 3
 					}
 				}
 			]

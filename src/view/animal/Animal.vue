@@ -3,7 +3,7 @@
 		<Header></Header>
   <div class="risk">
     <div class="title">
-      <div class="location">当前位置>首页>动物百科</div>
+      <div class="location">当前位置><router-link to="/index" tag="span">首页></router-link><router-link to="animal" tag="span">动物百科</router-link></div>
     </div>
     <div class="content clearDiv">
       <div class="left floatLeft">
@@ -106,6 +106,7 @@ export default {
       color: rgba(255, 255, 255, 1);
       padding-left: 34px;
       background: url(../../assets/img/new-4.png) no-repeat 15px center;
+      cursor: pointer;
     }
   }
   .content {
@@ -253,7 +254,6 @@ export default {
               font-weight: 400;
               color: rgba(102, 102, 102, 1);
               width: 420px;
-              height: 66px;
               margin-bottom: 35px;
               line-height: 26px;
               overflow: hidden;

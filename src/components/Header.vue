@@ -158,7 +158,7 @@ export default {
     //退出登录
     setSignOuts() {
       this.setSignOut();
-      this.delCookie('userData')
+      delCookie('userData')
       this.$router.go(0);
 
     }

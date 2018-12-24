@@ -1,5 +1,6 @@
 <template>
   <div class="main">
+    <Header></Header>
     <div class="content">
       <div class="nav clearDiv">
         <div class="floatLeft">当前位置：网上订购>零售商品详情页</div>
@@ -112,6 +113,7 @@
 import { IMG_Url } from "../package/common.js";
 import "swiper/dist/css/swiper.css";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
+import Header from '@/components/Header'
 export default {
   data() {
     return {
@@ -138,7 +140,8 @@ export default {
   },
   components: {
     swiper,
-    swiperSlide
+    swiperSlide,
+    Header
   },
   methods: {
     //初始化数据

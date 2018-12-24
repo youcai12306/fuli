@@ -65,6 +65,7 @@ export default {
             .content-list {
               border-bottom: 1px solid rgba(238,238,238,1);
               padding: 18px 0 18px 23px;
+              cursor: pointer;
               img {
                 width: 40px;
                 height: 40px;

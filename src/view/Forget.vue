@@ -100,7 +100,6 @@ export default {
           return true;
         }
       }
-      console.log(this.isActive);
       return this.isActive;
     }
   },

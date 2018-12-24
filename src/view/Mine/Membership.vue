@@ -13,9 +13,9 @@
         <p>
           <label for>姓别：</label>
           <input type="radio" value="0" class="sex" v-model="sex" @click="chooseSex(0)">
-          <span>男</span>
+          <span class="men">男</span>
           <input type="radio" value="1" class="sex sex1" v-model="sex" @click="chooseSex(1)">
-          <span>女</span>
+          <span class="men">女</span>
         </p>
         <p>
           <label for>手机号码：</label>
@@ -32,7 +32,8 @@
             @click="setCode"
             class="getcode"
             v-show="!showBtn2"
-            :disabled="isActive"
+            :disabled="can"
+            :class="{colorActive:can}"
           >{{showPin}}</button>
           <span class="tip">{{phoneTip}}</span>
         </p>
@@ -60,13 +61,12 @@
           <label for>登录密码：</label>
           <input
             type="password"
-            :placeholder=dateinit
+            :placeholder="dateinit"
             v-model="oldPwd"
             :disabled="showBtn5"
             @blur="checkPwd()"
           >
           <span class="change" @click="chang(4)" v-show="showBtn5">修改密码</span>
-          <button class="btn" v-show="!showBtn5" @click="changePwd">确认</button>
           <span class="tip">{{oldPwdTip}}</span>
         </p>
         <p v-show="!showBtn5">
@@ -82,6 +82,7 @@
             v-model="rePassword"
             @blur="checkConfirmPwd()"
           >
+          <button class="btn" v-show="!showBtn5" @click="changePwd">确认</button>
           <span class="tip">{{rePwdTip}}</span>
         </p>
       </div>
@@ -96,7 +97,7 @@ export default {
     return {
       name: "",
       nameTip: "",
-      sex: "0",
+      sex: 0,
       phone: "",
       phoneTip: "",
       IdCard: "",
@@ -117,15 +118,30 @@ export default {
       showBtn3: true,
       showBtn4: true,
       showBtn5: true,
-      isActive: false,
+      isActive: true,
       isOk: false,
       isOk1: false,
       isOk2: false,
-      dateinit:'******'
+      dateinit: "******"
     };
   },
   mounted() {
-    console.log(this.$store.getters.getUserData);
+    this.init()
+  },
+  computed: {
+    can() {
+      if (!/^1[34578]\d{9}$/.test(this.phone)) {
+        return true;
+      } else {
+        this.phoneTip = "";
+        if (this.isActive) {
+          return false;
+        } else {
+          return true;
+        }
+      }
+      return this.isActive;
+    }
   },
   methods: {
     //选择性别
@@ -201,54 +217,66 @@ export default {
         email: this.email,
         idCard: this.IdCard
       };
-      this.$post("http://192.168.2.34:5010/tourist/updateTourist", data).then(
-        res => {
-          if (res.code === 200) {
-            this.$message({
-              message: "修改成功",
-              type: "success"
-            });
-            switch(type){
-              case 1 : this.showBtn1 = !this.showBtn1; break;
-              case 2 : this.showBtn2 = !this.showBtn2; break;
-              case 3 : this.showBtn3 = !this.showBtn3; break;
-              case 4 : this.showBtn4 = !this.showBtn4; break;
-            }
-          } else {
-            this.$message({
-              message: res.message,
-              type: "error"
-            });
+      this.$post(
+        "http://192.168.2.50:5010/tourist-aggregate/updateTourist",
+        data
+      ).then(res => {
+        if (res.code === 200) {
+          this.$message({
+            message: "修改成功",
+            type: "success"
+          });
+          switch (type) {
+            case 1:
+              this.showBtn1 = !this.showBtn1;
+              break;
+            case 2:
+              this.showBtn2 = !this.showBtn2;
+              break;
+            case 3:
+              this.showBtn3 = !this.showBtn3;
+              break;
+            case 4:
+              this.showBtn4 = !this.showBtn4;
+              break;
           }
+        } else {
+          this.$message({
+            message: res.message,
+            type: "error"
+          });
         }
-      );
+      });
     },
     //修改手机号
-    changePhone(){
+    changePhone() {
       if (!/^\d{4}$/.test(this.code)) {
-          this.codeTip = "请输入正确的验证码";
-          return;
-        } else {
-          this.codeTip = "";
+        this.codeTip = "请输入正确的验证码";
+        return;
+      } else {
+        this.codeTip = "";
+      }
+      this.$post(
+        "http://192.168.2.50:5010/tourist-aggregate/updateTouristMobile ",
+        {
+          id: this.$store.getters.getUserData.userId,
+          mobile: this.phone,
+          smsCode: this.code
         }
-        this.$post('http://192.168.2.34:5010/tourist/updateTouristMobile ',{
-          id:this.$store.getters.getUserData.userId,
-          mobile:this.phone,
-          smsCode: this.code,
-        }).then((res) =>{
-          if (res.code === 200) {
-            this.showBtn2 = !this.showBtn2;
-            this.$message({
-              message: "修改成功",
-              type: "success"
-            });
-          } else {
-            this.$message({
-              message: res.message,
-              type: "error"
-            });
-          }
-        })
+      ).then(res => {
+        if (res.code === 200) {
+          this.showBtn2 = !this.showBtn2;
+          this.$message({
+            message: "修改成功",
+            type: "success"
+          });
+        } else {
+          this.$message({
+            message: res.message,
+            type: "error"
+          });
+        }
+      });
     },
     //检查老密码
     checkPwd() {
@@ -286,14 +314,17 @@ export default {
     //修改密码
     changePwd() {
       if (this.isOk && this.isOk1 && this.isOk2) {
-        this.$post("http://192.168.2.34:5010/tourist/updateTouristPassword", {
-          id: this.$store.getters.getUserData.userId,
-          passWord: this.password,
-          oldPassWord: this.oldPwd
-        }).then(res => {
+        this.$post(
+          "http://192.168.2.50:5010/tourist-aggregate/updateTouristPassword",
+          {
+            id: this.$store.getters.getUserData.userId,
+            passWord: this.password,
+            oldPassWord: this.oldPwd
+          }
+        ).then(res => {
           if (res.code === 200) {
             this.showBtn5 = !this.showBtn5;
-            this.oldPwd = '';
+            this.oldPwd = "";
             this.dateinit = "******";
             this.$message({
               message: "修改成功",
@@ -320,7 +351,7 @@ export default {
       }
       let that = this;
       clearInterval(that.setsund);
-      this.$fetch("http://192.168.2.34:5010/tourist/getSmsCode", {
+      this.$fetch("http://192.168.2.50:5010/tourist-aggregate/getSmsCode", {
         mobile: this.phone,
         smsFlag: "sms_change_mobile"
       }).then(res => {
@@ -340,6 +371,18 @@ export default {
           this.codeTip1 = res.message;
         }
       });
+    },
+    //获取数据
+    init(){
+      this.$fetch('http://192.168.2.50:5010/tourist-aggregate/selectTourist',{touristId:this.$store.getters.getUserData.userId}).then((res) =>{
+          if(res.code === 200){
+            this.name = res.data.nickName;
+            if(res.data.sex === false) this.sex = 0;
+            this.phone = res.data.mobile;
+            this.idCard = res.data.idCard;
+            this.email = res.data.email;
+          }
+      })
     }
   }
 };
@@ -385,6 +428,7 @@ export default {
           font-size: 14px;
           font-weight: 400;
           color: rgba(7, 100, 233, 1);
+          cursor: pointer;
         }
         .btn {
           width: 63px;
@@ -393,6 +437,7 @@ export default {
           font-size: 14px;
           font-weight: 400;
           color: rgba(255, 255, 255, 1);
+          cursor: pointer;
         }
         .getcode {
           width: 100px;
@@ -401,6 +446,10 @@ export default {
           font-size: 14px;
           font-weight: 400;
           color: rgba(255, 255, 255, 1);
+          cursor: pointer;
+        }
+        .colorActive {
+          background: #cbcbcb;
         }
         .sex {
           width: 10px;
@@ -410,6 +459,11 @@ export default {
         }
         .sex1 {
           margin-left: 34px;
+        }
+        .men {
+          font-size: 12px;
+          font-weight: 400;
+          color: rgba(84, 84, 84, 1);
         }
         select {
           width: 110px;

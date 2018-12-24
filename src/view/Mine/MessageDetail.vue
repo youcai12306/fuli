@@ -64,6 +64,7 @@ export default {
       font-size: 14px;
       font-weight: 400;
       color: rgba(7, 100, 233, 1);
+      cursor: pointer;
     }
   }
   .content {

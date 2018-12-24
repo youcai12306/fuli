@@ -1,33 +1,12 @@
 <template>
   <div class="main">
     <div class="take-address clearDiv">
-      <div class="change-title">
-        收货地址
-        <span class="floatRight add" @click="showMeng">+</span>
-        <div class="floatRight refresh clearDiv">
-          <span class="floatLeft">刷新</span>
-          <img class="floatLeft" src="../../assets/img/mine-refresh.png" alt>
+      <div class="change-title">收货地址
+        <div class="add-dizhi floatRight" @click="showMeng">
+          添加收货地址
+          <span class="floatRight add">+</span>
         </div>
       </div>
-      <!-- <div class="change-content">
-        <div class="list clearDiv" v-for="(item,key) in list" :key="key">
-          <div class="list-left floatLeft">
-            <div class="list-leftOne clearDiv">
-              <div>{{item.name}}</div>
-              <div>{{item.phone}}</div>
-              <div class="moren" v-show="item.type === 0">默认地址</div>
-            </div>
-            <div class="list-leftTwo">地址：湖北省武汉市武昌区717</div>
-          </div>
-          <button class="del floatRight" @click="del(key)">删除</button>
-          <button class="floatRight">修改</button>
-          <button
-            class="set-default floatRight"
-            v-show="item.type !== 0"
-            @click="setDefault(key)"
-          >设为默认</button>
-        </div>
-      </div>-->
       <div class="change-content">
         <el-table
           :data="list"
@@ -72,14 +51,17 @@
         <p class="clearDiv">
           <label for="name">收货人姓名：</label>
           <input type="text" v-model="name" id="name">
+          <span class="tip">{{nameTip}}</span>
         </p>
         <p class="clearDiv">
           <label for="mobile">收货人电话：</label>
-          <input type="text" v-model="mobile" id="mobile">
+          <input type="text" v-model="mobile" id="mobile" @blur="checkPhone">
+          <span class="tip">{{phoneTip}}</span>
         </p>
         <p class="clearDiv">
           <label for="code">邮政编码：</label>
-          <input type="text" v-model="code" id="code">
+          <input type="text" v-model="code" id="code" @blur="checkCode">
+          <span class="tip">{{codeTip}}</span>
         </p>
         <p class="clearDiv address">
           <label for="address">收货地址：</label>
@@ -92,10 +74,12 @@
             :city="select.city"
             :area="select.area"
           ></v-distpicker>
+          <span class="tip">{{adressTip}}</span>
         </p>
         <p class="clearDiv detailAdress-box">
           <label for="detailAdress">详细地址：</label>
           <input type="text" class="detailAdress" v-model="detailAdress" id="detailAdress">
+          <span class="tip">{{detailAdressTip}}</span>
         </p>
         <p class="clearDiv default" v-show="isChange">
           <input type="checkbox" class="setDefault" v-model="type">
@@ -128,7 +112,12 @@ export default {
         area: ""
       },
       mengShow: false,
-      isChange:false
+      isChange: false,
+      nameTip: "",
+      phoneTip: "",
+      codeTip: "",
+      adressTip: "",
+      detailAdressTip: ""
     };
   },
   components: {
@@ -151,9 +140,8 @@ export default {
     //初始化数据
     init() {
       let Uid = this.$store.getters.getUserData.userId;
-      console.log(Uid);
       this.$fetch(
-        "http://192.168.2.34:5010/tourist/address/selectReceiveAddress",
+        "http://192.168.2.50:5010/tourist-aggregate/address/selectReceiveAddress",
         { touristId: Uid }
       ).then(res => {
         this.list = res.data;
@@ -172,7 +160,7 @@ export default {
       })
         .then(() => {
           this.$fetch(
-            "http://192.168.2.34:5010/tourist/address/deleteReceiveAddress",
+            "http://192.168.2.50:5010/tourist-aggregate/address/deleteReceiveAddress",
             { id: id }
           ).then(res => {
             if (res.code === 200) {
@@ -187,7 +175,7 @@ export default {
           });
         });
     },
-    //显示或隐藏蒙版
+    //显示
     showMeng() {
       this.isChange = true;
       if (this.list === null) {
@@ -208,15 +196,69 @@ export default {
         this.mengShow = !this.mengShow;
       }
     },
+    //关闭蒙版
+    close(){
+      this.showMeng = false;
+    },
     //获取地址栏的值
     selected(val) {
       // console.log(val.province.value)
       this.select.province = val.province.value;
       this.select.city = val.city.value;
       this.select.area = val.area.value;
+      this.adressTip = "";
+    },
+    //判断手机号码
+    checkPhone() {
+      if (!/^1[34578]\d{9}$/.test(this.mobile)) {
+        this.phoneTip = "请输入正确的手机号码";
+        this.isOk = false;
+        return false;
+      } else {
+        this.phoneTip = "";
+        this.isOk = true;
+      }
+    },
+    //判断邮编
+    checkCode() {
+      if (!/^\d{6}$/.test(this.code)) {
+        this.codeTip = "请输入正确的验证码";
+        this.isOk1 = false;
+      } else {
+        this.codeTip = "";
+        this.isOk1 = true;
+      }
     },
     //新增收货地址
     addAddress(key) {
+      if (this.name == "") {
+        this.nameTip = "姓名不能为空";
+        return;
+      }
+      if (this.mobile == "") {
+        this.phoneTip = "手机号不能为空";
+        return;
+      }
+      if (this.code == "") {
+        this.codeTip = "邮编不能为空";
+        return;
+      }
+      if (
+        this.select.province == "" ||
+        this.select.city == "" ||
+        this.select.area == ""
+      ) {
+        this.adressTip = "请填写地址";
+        return;
+      } else {
+        this.adressTip = "";
+      }
+      if (this.detailAdress == "") {
+        this.detailAdressTip = "请填写详细地址";
+        return;
+      } else {
+        this.detailAdressTip = "";
+      }
       if (key === 0) {
         let Uid = this.$store.getters.getUserData.userId;
         let data = {
@@ -231,7 +273,7 @@ export default {
           defaultSign: this.checkType
         };
         this.$post(
-          "http://192.168.2.34:5010/tourist/address/addReceiveAddress ",
+          "http://192.168.2.50:5010/tourist-aggregate/address/addReceiveAddress ",
           data,
           { headers: { "Content-Type": "application/json;charset=UTF-8" } }
         ).then(res => {
@@ -252,7 +294,7 @@ export default {
           receiveArea: this.select.area
         };
         this.$post(
-          "http://192.168.2.34:5010/tourist/address/updateReceiveAddress",
+          "http://192.168.2.50:5010/tourist-aggregate/address/updateReceiveAddress",
           data,
           { headers: { "Content-Type": "application/json;charset=UTF-8" } }
         ).then(res => {
@@ -267,7 +309,7 @@ export default {
     setDefault(index, id) {
       let Uid = this.$store.getters.getUserData.userId;
       this.$fetch(
-        "http://192.168.2.34:5010/tourist/address/setDefaultReceiveAddress",
+        "http://192.168.2.50:5010/tourist-aggregate/address/setDefaultReceiveAddress",
         {
           touristId: Uid,
           id: id
@@ -308,31 +350,20 @@ export default {
       padding-top: 48px;
       padding-bottom: 16px;
       border-bottom: 2px solid #eeeeee;
-      .add {
-        display: inline-block;
-        width: 16px;
-        height: 18px;
-        line-height: 18px;
-        text-align: center;
-        color: rgba(45, 122, 228, 1);
-        border: 1px solid rgba(45, 122, 228, 1);
-        border-radius: 4px;
-        margin-right: 36px;
-      }
-      .refresh {
-        height: 18px;
-        line-height: 18px;
-        font-weight: 400;
-        color: rgba(45, 122, 228, 1);
-        margin-right: 24px;
-        span {
-          font-size: 14px;
+      .add-dizhi {
+        font-size: 14px;
+        cursor: pointer;
+        .add {
+          display: inline-block;
+          width: 16px;
           height: 18px;
           line-height: 18px;
-        }
-        img {
-          width: 20px;
-          height: 18px;
+          text-align: center;
+          color: rgba(45, 122, 228, 1);
+          border: 1px solid rgba(45, 122, 228, 1);
+          border-radius: 4px;
+          margin-right: 36px;
+          margin-left: 10px;
         }
       }
     }
@@ -399,6 +430,7 @@ export default {
         height: 34px;
         line-height: 34px;
         margin-top: 20px;
+        position: relative;
         * {
           float: left;
         }
@@ -422,12 +454,22 @@ export default {
           border: 1px solid rgba(191, 191, 191, 1);
           border-radius: 50%;
         }
+        .tip {
+          position: absolute;
+          left: 90px;
+          top: 25px;
+          font-size: 12px;
+          color: red;
+        }
       }
       .detailAdress-box {
         height: 129px;
         .detailAdress {
           height: 129px;
           padding-bottom: 100px;
+        }
+        .tip {
+          top: 122px;
         }
       }
       .default {
@@ -440,6 +482,7 @@ export default {
           width: 114px;
           height: 44px;
           background: rgba(7, 100, 233, 1);
+          cursor: pointer;
         }
         .close {
           margin-left: 20px;

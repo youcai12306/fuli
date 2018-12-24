@@ -49,7 +49,7 @@
 	.news {
 		width: 100%;
 		height: 1802px;
-		background: #fff url(../../assets/img/new-1.png) no-repeat top center;
+		background: #fff url(../../assets/img/new-bg.png) no-repeat top center;
 		background-size: 1920px 100%;
 
 		.main-contion {

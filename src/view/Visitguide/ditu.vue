@@ -1,4 +1,9 @@
 <template>
+	<!--
+    	作者：lixiaoyi
+    	时间：2018-12-24
+    	描述：游玩指南
+    -->
 	<section>
 		<Header></Header>
 		<div class="risk">
@@ -542,6 +547,8 @@
 			width: 1200px;
 			margin: 0 auto;
 			height: 66px;
+			position: relative;
+			z-index: 10;
 			background: linear-gradient(180deg,
 				rgba(15, 107, 234, 1),
 				rgba(52, 142, 240, 1));
@@ -556,6 +563,17 @@
 				color: #fff;
 				padding: 26px 34px;
 				background: url(../../assets/img/new-4.png) no-repeat 15px center;
+			}
+			
+			&:after{
+				position: absolute;
+				left: -105px;
+				top: -227px;
+				z-index: 8;
+				content: " ";
+				width: 529px;
+				height: 227px;
+				background: url(../../assets/img/ditu-qq.png) no-repeat;
 			}
 		}
 

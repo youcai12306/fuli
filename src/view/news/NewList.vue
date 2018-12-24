@@ -9,7 +9,7 @@
     <!-- 所有新闻 -->
     <div class="main-new">
       <div class="hea-img" @click="jumpDetail(list.id)">
-        <img src="../../assets/img/new-1.png" alt="图片">
+        <img src="../../assets/img/new-bg2.png" alt="图片">
         <div class="bt">
           <p class="p1">{{list.infoTitle}}</p>
           <p class="p2">来自富力官网 | {{list.createTime}}</p>
@@ -63,7 +63,6 @@ export default {
           pageIndex
       ).then(res => {
         if (res.code === 200) {
-          console.log(res.data);
           this.list = res.data.content[0];
           // this.$fetch("http://192.168.2.61:2600/staticResource/selectFiles", {
           //   id: this.list.infoPic

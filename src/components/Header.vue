@@ -1,321 +1,396 @@
 <template>
-  <div class="main">
-    <div class="main-content">
-      <div class="logo floatLeft">
-        <router-link tag="div" to="/index">
-          <img src="../assets/img/logo.png" alt>
-        </router-link>
-      </div>
-      <div class="floatLeft">
-        <ul>
-          <li class="order" @click="jumpOrderTicket">
-            <img src="../assets/img/index-discounts.png" alt>
-            <p>网上订购</p>
-          </li>
-          <li @mouseover="showNavList(1)" @mouseout="hiddenNavList(1)" class="theme">
-            <img src="../assets/img/index-theme.png" alt>
-            <p>主题乐园</p>
-            <div class="nav-list">
-              <div class="lists">
-                <ul>
-                  <li>
-                      <p class="list-img">
-                        <img src="../assets/img/header-img1.png" alt>
-                      </p>
-                      <p class="list-title">欢乐海洋世界</p>
-                  </li>
-                  <li>
-                    <router-link to="/theme">
-                      <p class="list-img">
-                        <img src="../assets/img/header-img2.png" alt>
-                      </p>
-                      <p class="list-title">麦迪斯卡水乐园</p>
-                    </router-link>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </li>
-          <li class="hotel">
-            <img src="../assets/img/index-hotel.png" alt>
-            <p>度假酒店</p>
-          </li>
-          <router-link to="/news" tag="li" class="news">
-            <img src="../assets/img/index-news.png" alt>
-            <p>新闻中心</p>
-          </router-link>
-					<router-link to="/ditu" tag="li" class="trip">
-						<img src="../assets/img/index-news.png" alt>
+	<div class="main">
+		<div class="main-content">
+			<div class="logo floatLeft">
+				<router-link to="/index">
+					<img src="../assets/img/logo.png" alt>
+				</router-link>
+			</div>
+			<div class="floatLeft">
+				<ul>
+					<!-- 网上订购 -->
+					<li class="order" @click="jumpOrderTicket" :class="{'actives' : $route.name == 'Tickets'}">
+						<template v-if="$route.name == 'Tickets'">
+							<img src="../assets/img/header-1.png" alt>
+						</template>
+						<template v-else>
+							<img src="../assets/img/header1.png" alt>
+						</template>
+						<p>网上订购</p>
+					</li>
+					<!-- 主题乐园 -->
+					<li @mouseover="showNavList(1)" @mouseout="hiddenNavList(1)" class="theme" :class="{'actives' : $route.name == 'Theme'}">
+						<template v-if="$route.name == 'Theme'">
+							<img src="../assets/img/header-2.png" alt>
+						</template>
+						<template v-else>
+							<img src="../assets/img/header2.png" alt>
+						</template>
+						<p>主题乐园</p>
+						<div class="nav-list">
+							<div class="lists">
+								<ul>
+									<li>
+										<p class="list-img">
+											<img src="../assets/img/header-img1.png" alt>
+										</p>
+										<p class="list-title">欢乐海洋世界</p>
+									</li>
+									<li>
+										<router-link to="/theme">
+											<p class="list-img">
+												<img src="../assets/img/header-img2.png" alt>
+											</p>
+											<p class="list-title">麦迪斯卡水乐园</p>
+										</router-link>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</li>
+					<!-- 度假酒店 -->
+					<li class="hotel" :class="{'actives' : $route.name == ''}">
+						<template v-if="$route.name == ''">
+							<img src="../assets/img/header-3.png" alt>
+						</template>
+						<template v-else>
+							<img src="../assets/img/header3.png" alt>
+						</template>
+						<p>度假酒店</p>
+					</li>
+					<!-- 新闻中心 -->
+					<router-link to="/news" tag="li" class="news" :class="{'actives' : $route.path == '/news' || $route.path == '/newList' || $route.path == '/noticeList' || $route.path == '/newDetail' || $route.path == '/noticeDetail'}">
+						<template v-if="$route.path == '/news' || $route.path == '/newList' || $route.path == '/noticeList' || $route.path == '/newDetail' || $route.path == '/noticeDetail'">
+							<img src="../assets/img/header-4.png" alt>
+						</template>
+						<template v-else>
+							<img src="../assets/img/header4.png" alt>
+						</template>
+						<p>新闻中心</p>
+					</router-link>
+					<!-- 游玩指南 -->
+					<router-link to="/ditu" tag="li" class="trip" :class="{'actives' : $route.name == 'ditu'}">
+						<template v-if="$route.name == 'ditu'">
+							<img src="../assets/img/header-5.png" alt>
+						</template>
+						<template v-else>
+							<img src="../assets/img/header5.png" alt>
+						</template>
 						<p>游玩指南</p>
 					</router-link>
-          <router-link to="/specialOffier" tag="li" class="active">
-            <img src="../assets/img/index-theme.png" alt>
-            <p>优惠活动</p>
-          </router-link>
-          <router-link to="/risk" tag="li" class="risk">
-            <img src="../assets/img/index-risk.png" alt>
-            <p>冒险之旅</p>
-          </router-link>
-          <router-link to="/animal" tag="li" class="animal">
-            <img src="../assets/img/index-theme.png" alt>
-            <p>动物百科</p>
-          </router-link>
-        </ul>
-      </div>
-      <div class="nav-right floatLeft">
-        <div class="right-info">
-          <div class="login" @click="jumpMine" ref="box">
-            <span>{{name}}</span>
-            <div class="person-info" v-show="loginShow">
-              <div class="info-one">
-                <router-link to="/mine" class="mine">个人中心</router-link>
-                <!-- <a href="javascript:;" class="mine" >个人中心</a> -->
-                <a href="javascript:;" class="exit" @click.stop="setSignOuts">退出</a>
-              </div>
-              <div class="clearDiv info-two">
-                <img src="../assets/img/mine-icon.png" alt class="floatLeft">
-                <div class="floatLeft">
-                  <p>{{$store.getters.userInfo.mobile}}</p>
-                  <p>我的等级：2</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="language-change">
-            <span class="ch">中文</span>
-            <span>英文</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+					<!-- 优惠活动 -->
+					<router-link to="/specialOffier" tag="li" class="active" :class="{'actives' : $route.path == '/specialOffier' || $route.path == '/events' || $route.path == '/EventsDetail'}">
+						<template v-if="$route.path == '/specialOffier' || $route.path == '/events' || $route.path == '/EventsDetail'">
+							<img src="../assets/img/header-6.png" alt>
+						</template>
+						<template v-else>
+							<img src="../assets/img/header6.png" alt>
+						</template>
+						<p>优惠活动</p>
+					</router-link>
+					<!-- 冒险之旅 -->
+					<router-link to="/risk" tag="li" class="risk" :class="{'actives' : $route.name == 'Risk'}">
+						<template v-if="$route.name == 'Risk'">
+							<img src="../assets/img/header-7.png" alt>
+						</template>
+						<template v-else>
+							<img src="../assets/img/header7.png" alt>
+						</template>
+						<p>冒险之旅</p>
+					</router-link>
+					<!-- 动物百科 -->
+					<router-link to="/animal" tag="li" class="animal" :class="{'actives' : $route.name == 'Animal'}">
+						<template v-if="$route.name == 'Animal'">
+							<img src="../assets/img/header-8.png" alt>
+						</template>
+						<template v-else>
+							<img src="../assets/img/header8.png" alt>
+						</template>
+						<p>动物百科</p>
+					</router-link>
+				</ul>
+			</div>
+			<div class="nav-right floatLeft">
+				<div class="right-info">
+					<div class="login" @click="jumpMine" ref="box">
+						<span>{{name}}</span>
+						<div class="person-info" v-show="loginShow">
+							<div class="info-one">
+								<router-link to="/mine" class="mine">个人中心</router-link>
+								<!-- <a href="javascript:;" class="mine" >个人中心</a> -->
+								<a href="javascript:;" class="exit" @click.stop="setSignOuts">退出</a>
+							</div>
+							<div class="clearDiv info-two">
+								<img src="../assets/img/mine-icon.png" alt class="floatLeft">
+								<div class="floatLeft">
+									<p>{{$store.getters.userInfo.mobile}}</p>
+									<p>我的等级：2</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="language-change">
+						<span class="ch">中文</span>
+						<span>英文</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import {mapGetters} from 'vuex'
-import { delCookie } from "@/package/cookie";
-export default {
-  name: "Hearer",
-  data() {
-    return {
-      show: false,
-      name: "登录/注册",
-      loginShow: false
-    };
-  },
-  computed:{
-    ...mapGetters({
-        user: 'getUserData'
-    }),
-  },
-  created() {
-    if (Object.keys(this.$store.getters.userInfo).length === 0) {
-      this.name = "登录/注册";
-    } else {
-      this.name = this.$store.getters.userInfo.mobile + ",欢迎您！";
-    }
-    if (this.$refs.box) {
-      document.addEventListener("click", e => {
-        if (!this.$refs.box.contains(e.target)) {
-          this.loginShow = false;
-        }
-      });
-    }
-  },
-  updated() {},
+	import {
+		mapActions
+	} from "vuex";
+	import {
+		mapGetters
+	} from 'vuex'
+	import {
+		delCookie
+	} from "@/package/cookie";
+	export default {
+		name: "Hearer",
+		data() {
+			return {
+				show: false,
+				name: "登录/注册",
+				loginShow: false
+			};
+		},
+		computed: {
+			...mapGetters({
+				user: 'getUserData'
+			}),
+		},
+		created() {
+			if (Object.keys(this.$store.getters.userInfo).length === 0) {
+				this.name = "登录/注册";
+			} else {
+				this.name = this.$store.getters.userInfo.mobile + ",欢迎您！";
+			}
+			if (this.$refs.box) {
+				document.addEventListener("click", e => {
+					if (!this.$refs.box.contains(e.target)) {
+						this.loginShow = false;
+					}
+				});
+			}
+		},
+		updated() {},
 
-  methods: {
-    showNavList(type) {
-      if (type === 2) {
-        clearTimeout(this.time);
-      }
-      this.show = true;
-    },
-    hiddenNavList(type) {
-      if (type === 2) {
-        this.show = false;
-      } else {
-        this.time = setTimeout(() => {
-          this.show = false;
-        }, 2000);
-      }
-    },
-    //跳转个人中心
-    jumpMine() {
-      if (Object.keys(this.$store.getters.userInfo).length === 0) {
-        this.$router.push("/login");
-        this.loginShow = false;
-      } else {
-        this.loginShow = true;
-      } 
-    },
-    //跳转订票页面
-    jumpOrderTicket() {
-      this.$router.push("/tickets/1");
-    },
-    ...mapActions(["setSignOut"]),
-    //退出登录
-    setSignOuts() {
-      this.setSignOut();
-      delCookie('userData')
-      this.$router.go(0);
+		methods: {
+			showNavList(type) {
+				if (type === 2) {
+					clearTimeout(this.time);
+				}
+				this.show = true;
+			},
+			hiddenNavList(type) {
+				if (type === 2) {
+					this.show = false;
+				} else {
+					this.time = setTimeout(() => {
+						this.show = false;
+					}, 2000);
+				}
+			},
+			//跳转个人中心
+			jumpMine() {
+				if (Object.keys(this.$store.getters.userInfo).length === 0) {
+					this.$router.push("/login");
+					this.loginShow = false;
+				} else {
+					this.loginShow = true;
+				}
+			},
+			//跳转订票页面
+			jumpOrderTicket() {
+				this.$router.push("/tickets/1");
+			},
+			...mapActions(["setSignOut"]),
+			//退出登录
+			setSignOuts() {
+				this.setSignOut();
+				delCookie('userData')
+				this.$router.go(0);
 
-    }
-  },
-  mounted() {
-  }
-};
+			}
+		},
+		mounted() {}
+	};
 </script>
 <style lang='scss' scoped>
-.main {
-  position: relative;
+	.main {
+		position: relative;
 
-  .main-content {
-    height: 97px;
-    background-color: #f5f9ff;
+		.main-content {
+			height: 97px;
+			background-color: #f5f9ff;
 
-    .logo {
-      padding-top: 26px;
-      margin-left: 180px;
-    }
+			.logo {
+				padding-top: 26px;
+				margin-left: 180px;
+			}
 
-    ul {
-      padding-left: 26px;
+			ul {
+				padding-left: 26px;
 
-      li {
-        height: 97px;
-        padding: 21px 42px 0 42px;
-        float: left;
-        font-size: 14px;
-        font-weight: bold;
-        color: rgba(51, 51, 51, 1);
-        text-align: center;
-        letter-spacing: 2px;
-        cursor: pointer;
-        &:hover {
-          background: rgba(7, 100, 233, 1);
-          color: rgba(255, 255, 255, 1);
-        }
-      }
-      .theme {
-        position: relative;
-        &:hover .nav-list {
-          display: block;
-        }
-        .nav-list {
-          display: none;
-          width: 500px;
-          height: 110px;
-          background: rgba(7, 100, 233, 1);
-          z-index: 10;
-          position: absolute;
-          top: 97px;
-          left: 0;
-          .lists {
-            ul {
-              li {
-                float: left;
-                font-size: 12px;
-                font-weight: 400;
-                color: rgba(245, 249, 255, 1);
-                margin-right: 46px;
+				li {
+					height: 97px;
+					padding: 21px 42px 0 42px;
+					float: left;
+					font-size: 14px;
+					font-weight: bold;
+					color: rgba(51, 51, 51, 1);
+					text-align: center;
+					letter-spacing: 2px;
+					cursor: pointer;
 
-                .list-img {
-                  height: 52px;
-                  line-height: 52px;
-                  text-align: center;
-                  margin-top: 10px;
+					&.actives {
+						background: rgba(7, 100, 233, 1);
+						color: rgba(255, 255, 255, 1);
+					}
+				}
 
-                  img {
-                    display: inline-block;
-                    vertical-align: middle;
-                  }
-                }
-                .list-title {
-                  line-height: 30px;
-                  color: #fff;
-                }
-              }
-            }
-          }
-        }
-      }
-    }
+				.theme {
+					position: relative;
 
-    .nav-right {
-      font-size: 12px;
-      padding-top: 43px;
-      margin-left: 20px;
-      .right-info {
-        color: #333333;
+					&:hover {
+						background: rgba(7, 100, 233, 1);
+						color: rgba(255, 255, 255, 1);
+					}
 
-        .login {
-          float: left;
-          background: url(../assets/img/index-login.png) no-repeat 0 0;
-          padding-left: 20px;
-          position: relative;
-          &:hover {
-            cursor: pointer;
-          }
-          .person-info {
-            position: absolute;
-            width: 189px;
-            height: 99px;
-            background: rgba(248, 248, 248, 1);
-            border: 1px solid rgba(231, 229, 229, 1);
-            z-index: 11;
-            top: 22px;
-            left: -55px;
-            font-size: 12px;
-            color: rgba(102, 102, 102, 1);
-            .info-one {
-              padding: 5px 0;
-              a {
-                color: rgba(102, 102, 102, 1);
-                margin: 5px 0;
-              }
-              .mine {
-                margin-left: 88px;
-              }
-              .exit {
-                margin-left: 10px;
-              }
-            }
-            .info-two {
-              img {
-                width: 57px;
-                height: 57px;
-                border-radius: 50%;
-                margin: 0 13px;
-              }
-              div {
-                margin-top: 10px;
-              }
-            }
-          }
-        }
-        .language-change {
-          float: left;
-          margin-left: 14px;
+					&:hover .nav-list {
+						display: block;
+					}
 
-          span {
-            padding: 0 10px;
-            letter-spacing: 1px;
-          }
+					.nav-list {
+						display: none;
+						width: 500px;
+						height: 110px;
+						background: rgba(7, 100, 233, 1);
+						z-index: 10;
+						position: absolute;
+						top: 97px;
+						left: 0;
 
-          .ch {
-            color: #0764e9;
-            border-right: 1px solid #333333;
-          }
-        }
-      }
-    }
-  }
-}
-@media screen and (max-width: 1700px) {
-  .main .main-content ul li {
-    padding: 21px 22px 0 22px !important;
-  }
-}
+						.lists {
+							ul {
+								li {
+									float: left;
+									font-size: 12px;
+									font-weight: 400;
+									color: rgba(245, 249, 255, 1);
+									margin-right: 46px;
+
+									.list-img {
+										height: 52px;
+										line-height: 52px;
+										text-align: center;
+										margin-top: 10px;
+
+										img {
+											display: inline-block;
+											vertical-align: middle;
+										}
+									}
+
+									.list-title {
+										line-height: 30px;
+										color: #fff;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+
+			.nav-right {
+				font-size: 12px;
+				padding-top: 43px;
+				margin-left: 20px;
+
+				.right-info {
+					color: #333333;
+
+					.login {
+						float: left;
+						background: url(../assets/img/index-login.png) no-repeat 0 0;
+						padding-left: 20px;
+						position: relative;
+
+						&:hover {
+							cursor: pointer;
+						}
+
+						.person-info {
+							position: absolute;
+							width: 189px;
+							height: 99px;
+							background: rgba(248, 248, 248, 1);
+							border: 1px solid rgba(231, 229, 229, 1);
+							z-index: 11;
+							top: 22px;
+							left: -55px;
+							font-size: 12px;
+							color: rgba(102, 102, 102, 1);
+
+							.info-one {
+								padding: 5px 0;
+
+								a {
+									color: rgba(102, 102, 102, 1);
+									margin: 5px 0;
+								}
+
+								.mine {
+									margin-left: 88px;
+								}
+
+								.exit {
+									margin-left: 10px;
+								}
+							}
+
+							.info-two {
+								img {
+									width: 57px;
+									height: 57px;
+									border-radius: 50%;
+									margin: 0 13px;
+								}
+
+								div {
+									margin-top: 10px;
+								}
+							}
+						}
+					}
+
+					.language-change {
+						float: left;
+						margin-left: 14px;
+
+						span {
+							padding: 0 10px;
+							letter-spacing: 1px;
+						}
+
+						.ch {
+							color: #0764e9;
+							border-right: 1px solid #333333;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	@media screen and (max-width: 1700px) {
+		.main .main-content ul li {
+			padding: 21px 22px 0 22px !important;
+		}
+	}
 </style>

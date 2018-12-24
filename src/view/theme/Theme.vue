@@ -3,7 +3,7 @@
     <!-- 头部 -->
     <Header></Header>
     <!-- 第一部分 -->
-    <div class="banner">
+    <div class="banner" id="banner">
       <div class="list-one">
         <div class="one-change" @mouseover="stopTimes" @mouseout="startTimes">
           <swiper :options="swiperOption" ref="mySwiper">
@@ -137,7 +137,7 @@
         <swiper :options="swiperOptions" ref="mySwipers">
           <!-- slides -->
           <swiper-slide v-for="item in 5" :key="item">
-            <div class="venve" @click.stop="jumpAnimalDetail(item.id,type)">
+            <div class="venve" @click.stop="jumpAnimalDetail(item.id,0)">
               <img src="../../assets/img/footer-logo.png" alt>
               <h3>海豚馆</h3>
               <p>总水量2.3万吨，游客不仅能欣赏精彩绝伦的海豚表演，更能与聪明可爱的海豚共同畅游，体验前所未有的互动乐趣。</p>
@@ -153,12 +153,8 @@
         <img src="../../assets/img/login-bg.png" alt class="img">
         <div class="bottom">
           <swiper :options="swiperOptions1" ref="mySwipers1">
-            <!-- slides -->
-            <swiper-slide>
-              <div class="venve"></div>
-            </swiper-slide>
-            <swiper-slide>
-              <div class="venve">
+            <swiper-slide v-for="item in 5" :key="item">
+              <div class="venve" @click="jumpAnimalDetail(item.id,0)">
                 <div class="venve-list">
                   <img src="../../assets/img/footer-logo.png" alt>
                   <div class="venve-content">
@@ -168,13 +164,6 @@
                 </div>
               </div>
             </swiper-slide>
-            <swiper-slide>
-              <div class="venve"></div>
-            </swiper-slide>
-            <swiper-slide>
-              <div class="venve"></div>
-            </swiper-slide>
-            <!-- Optional controls -->
           </swiper>
           <div class="swiper-paginations1" slot="pagination"></div>
         </div>
@@ -185,14 +174,7 @@
       <div class="eat-box">
         <img src="../../assets/img/login-bg.png" alt class="img">
         <div class="eat-lists clearDiv">
-          <div class="eat-list floatLeft">
-            <img src="../../assets/img/footer-logo.png" alt>
-            <div class="eat-content">
-              <div>塔瓦那餐厅</div>
-              <p>希腊风格，地中海西式美食广场及东南亚美食，适合一家大小</p>
-            </div>
-          </div>
-          <div class="eat-list eat-list-two floatLeft">
+          <div class="eat-list floatLeft" @click="jumpEatDetail(item.id)" v-for="item in 2" :key="item">
             <img src="../../assets/img/footer-logo.png" alt>
             <div class="eat-content">
               <div>塔瓦那餐厅</div>
@@ -204,14 +186,19 @@
     </div>
     <!-- 左侧导航 -->
     <ul class="leftNav">
-      <li>园区介绍</li>
-      <li>游玩设施</li>
+      <li @click="showYuanQu()">园区介绍</li>
+      <li @click="jumpColumn('#banner')">游玩设施</li>
       <li @click="jumpColumn('#art')">精彩演绎</li>
       <li @click="jumpColumn('#animal')">动物场馆</li>
       <li @click="jumpColumn('#shop')">主题商店</li>
       <li @click="jumpColumn('#eat')">特色餐厅</li>
     </ul>
-    <div class="alert"></div>
+    <div class="alert" v-show="alertShow">
+      <img src="../../assets/img/canyin.png" alt class="x" @click="showYuanQu()">
+      <h3>麦迪卡斯水乐园</h3>
+      <img src="../../assets/img/canyin.png" alt class="img">
+      <p>四季全时运营的水乐园，在古希腊神话与现代爱琴海风格一秒切换，无与伦比的海洋冒险世界将生动展示，挑战吧，勇者！燃烧吧，肾上腺！高刺激滑道、高空大喇叭、极限竞速滑道、疯狂巨碗等等，20余套戏水滑道，足够让戏水爱好者为之疯狂。区内还配置有主题餐厅、特色商店及各类功能齐全的游客服务设施，满足游客更多需求。</p>
+    </div>
   </div>
 </template>
 
@@ -223,6 +210,7 @@ export default {
   name: "Index",
   data() {
     return {
+      alertShow:false,
       newSwiperIndex: 0,
       options: [
         {
@@ -347,6 +335,14 @@ export default {
     });
   },
   methods: {
+    //跳转餐厅详情页
+    jumpEatDetail(){
+      this.$router.push({path:'/eatDetail',query:{id:id}})
+    },
+    //显示园区乐园
+    showYuanQu(){
+      this.alertShow = ! this.alertShow;
+    },
     change(newVal, oldVal) {
       this.newSwiperIndex = newVal;
     },
@@ -434,10 +430,10 @@ export default {
   .banner {
     height: 1660px;
     background: url(../../assets/img/index-bg1.png) no-repeat 0 0;
-    background-size: 100% 100%;
+    background-size: 1920px 100%;
     .list-one {
       width: 100%;
-      padding-top: 561px;
+      padding-top: 389px;
 
       .one-change {
         width: 971px;
@@ -820,6 +816,9 @@ export default {
         padding-top: 75px;
 
         .eat-list {
+          &:nth-of-type(2n){
+              margin-left: 127px;
+            }
           img {
             width: 500px;
             height: 309px;
@@ -833,7 +832,6 @@ export default {
             background-color: #ffffff;
             padding-top: 30px;
             margin-top: -5px;
-
             div {
               font-size: 22px;
               font-weight: bold;
@@ -865,10 +863,6 @@ export default {
             }
           }
         }
-
-        .eat-list-two {
-          margin-left: 127px;
-        }
       }
     }
   }
@@ -892,7 +886,7 @@ export default {
     font-size: 16px;
     font-weight: bold;
     color: rgba(255, 255, 255, 1);
-
+    cursor: pointer;
     &:hover {
       background: rgba(73, 147, 252, 1);
     }
@@ -908,6 +902,36 @@ export default {
   width: 790px;
   height: 530px;
   background: rgba(255, 255, 255, 1);
+  padding: 0 45px;
+  h3 {
+    line-height: 24px;
+    font-size: 24px;
+    font-family: MicrosoftYaHei-Bold;
+    font-weight: bold;
+    color: rgba(52, 149, 242, 1);
+    border-bottom: 1px solid rgba(202, 202, 202, 1);
+    padding-bottom: 23px;
+    padding-top: 31px;
+  }
+  .img {
+    width: 697px;
+    height: 220px;
+    margin-top: 5px;
+    margin-bottom: 45px;
+  }
+  p {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(51, 51, 51, 1);
+    line-height: 28px;
+  }
+  .x {
+    width: 35px;
+    height: 36px;
+    position: absolute;
+    right:-50px;
+    top:-25px;
+  }
 }
 </style>
 <style>

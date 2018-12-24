@@ -127,7 +127,7 @@ export default {
   methods: {
     //显示验证码
     getCode() {
-      this.$fetch("http://192.168.2.34:5010/tourist/getKaptcha").then(res => {
+      this.$fetch("http://192.168.2.50:5010/tourist-aggregate/getKaptcha").then(res => {
         this.codeImg = "data:image/png;base64," + res;
       });
     },
@@ -137,7 +137,7 @@ export default {
         this.phoneTip = "请输入正确的手机号码";
         return false;
       } else {
-        this.$fetch("http://192.168.2.34:5050/tourist/checkIsRegist", { mobile: this.phone }).then(
+        this.$fetch("http://192.168.2.50:5010/tourist-aggregate/checkIsRegist", { mobile: this.phone }).then(
           res => {
             if (res.code === 200) {
               this.phoneTip = "";
@@ -157,7 +157,7 @@ export default {
         this.codeTip = "请输入正确的验证码";
         return false;
       } else {
-        this.$fetch("http://192.168.2.34:5050/tourist/checkKaptcha", { picCode: this.code }).then(
+        this.$fetch("http://192.168.2.50:5010/tourist-aggregate/checkKaptcha", { picCode: this.code }).then(
           res => {
             if (res.code === 200) {
               this.codeTip = "";
@@ -189,7 +189,7 @@ export default {
     getCode1() {
       let that = this;
       clearInterval(that.setsund);
-      this.$fetch("http://192.168.2.34:5050/tourist/getSmsCode", { mobile: this.phone,smsFlag:'sms_code'}).then(res => {
+      this.$fetch("http://192.168.2.50:5010/tourist-aggregate/getSmsCode", { mobile: this.phone,smsFlag:'sms_code'}).then(res => {
         if (res.code === 200) {
           this.step = !this.step;
           this.isActive = true;
@@ -216,7 +216,7 @@ export default {
         this.codeTip1 = "请输入正确的验证码";
         return false;
       } else {
-        this.$fetch("http://192.168.2.34:5050/tourist/checkSmsCode", { smsCode: this.code1 }).then(
+        this.$fetch("http://192.168.2.50:5010/tourist-aggregate/checkSmsCode", { smsCode: this.code1 }).then(
           res => {
             if (res.code === 200) {
               this.codeTip1 = "";
@@ -254,7 +254,7 @@ export default {
           return false;
         } else {
           //注册接口
-          this.$post("http://192.168.2.34:5050/tourist/regist",{mobile:this.phone,passWord:this.password,picCode:this.code1},{headers:{'Content-Type':'application/json;charset=UTF-8'}}).then(res => {
+          this.$post("http://192.168.2.50:5010/tourist-aggregate/regist",{mobile:this.phone,passWord:this.password,picCode:this.code1},{headers:{'Content-Type':'application/json;charset=UTF-8'}}).then(res => {
             if(res.code === 200){
               this.$router.push('/login')
             }else{

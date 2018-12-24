@@ -25,13 +25,13 @@
           </swiper>
         </div>
         <div class="right floatRight">
-          <h3>场馆动物</h3>
-          <p>虎鲸/企鹅/中华鲟/海豹/周边</p>
+          <h3>水乐园入口右侧</h3>
+          <p>平均消费：￥60-90</p>
         </div>
       </div>
       <div
         class="content"
-      >总水量2.2万吨，配备海底观光隧道，超大观赏视窗让游客犹如置身海底，近距离领略长达7米的鲸鲨庞大身体游弋的壮观场面。鲸鲨馆放养生物超过1500种，总数量5万余只。</div>
+      >希腊风格，地中海西式美食广场及东南亚美食，适合一家大小</div>
     </div>
   </div>
 </template>
@@ -148,6 +148,7 @@ export default {
           font-size: 14px;
           font-weight: 400;
           padding-top: 12px;
+          color:rgba(227,87,76,1);
         }
       }
     }
@@ -181,6 +182,3 @@ export default {
   }
 }
 </style>
-
-
-

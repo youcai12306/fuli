@@ -25,6 +25,8 @@ const success = r => require.ensure([], () => r(require('@/view/Orderonline/succ
 const Theme = r => require.ensure([], () => r(require('@/view/theme/Theme')), 'Theme')
 const ThemeDetail = r => require.ensure([], () => r(require('@/view/theme/ThemeDetail')), 'ThemeDetail')
 const artTheme = r => require.ensure([], () => r(require('@/view/theme/artTheme')), 'artTheme')
+const EatDetail = r => require.ensure([], () => r(require('@/view/theme/EatDetail')), 'EatDetail')
+
 // 新闻中心首页
 const News = r => require.ensure([], () => r(require('@/view/news/News')), 'News')
 const NewList = r => require.ensure([], () => r(require('@/view/news/NewList')), 'NewList')
@@ -186,6 +188,11 @@ export default new Router({
 			path: '/themeDetail',
 			name: 'ThemeDetail',
 			component: ThemeDetail //主题乐园详情
+		},
+		{
+			path: '/eatDetail',
+			name: 'EatDetail',
+			component: EatDetail //餐厅详情
 		},
 		{
 			path:'/artTheme',

@@ -316,7 +316,7 @@ let router = new Router({
 
 router.beforeEach((to, from, next) => {
 	if (to.matched.some(record => record.meta.requireAuth)) { // 判断该路由是否需要登录权限
-		if (store.getters.userInfo.length) { // 通过vuex state获取当前的token是否存在
+		if (window.localStorage.getItem('loginStatus')) { // 判断是否登录
 			next();
 		} else {
 			next({

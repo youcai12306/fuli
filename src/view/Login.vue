@@ -368,6 +368,7 @@ a {
         border: none;
         color: #fff;
         background-color: #0764e9;
+				cursor: pointer;
       }
     }
     .login {

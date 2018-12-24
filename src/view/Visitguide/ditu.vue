@@ -531,14 +531,11 @@
 <style lang='scss' scoped>
 	.risk {
 		width: 100%;
-		min-height: 1735px;
-		background-image: url(../../assets/img/znbj.png);
-		background-repeat: no-repeat;
-		background-size: cover;
-		/* background-position: center 64px; */
+		height: 100%;
+		background: url(../../assets/img/ditu_bg.png) no-repeat top center;
+		/* background-size: 100%; */
 		background-attachment: fixed;
-		/* background-size: 1920px 100%; */
-		padding-top: 346px;
+		padding-top: 280px;
 		padding-bottom: 50px;
 
 		.title {

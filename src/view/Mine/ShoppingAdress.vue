@@ -3,9 +3,9 @@
     <div class="take-address clearDiv">
       <div class="change-title">
         收货地址
-        <span class="floatRight add" @click="showMeng">+</span>
+				<div class="floatRight address-new" @click="showMeng"><span class="add">+</span>添加新地址</div>
         <div class="floatRight refresh clearDiv">
-          <span class="floatLeft">刷新</span>
+          <span class="floatLeft" @click="init">刷新</span>
           <img class="floatLeft" src="../../assets/img/mine-refresh.png" alt>
         </div>
       </div>
@@ -123,9 +123,9 @@ export default {
       detailAdress: "",
       type: false,
       select: {
-        province: "",
-        city: "",
-        area: ""
+        province: "海南省",
+        city: "三亚市",
+        area: "天涯区"
       },
       mengShow: false,
       isChange:false
@@ -151,9 +151,8 @@ export default {
     //初始化数据
     init() {
       let Uid = this.$store.getters.getUserData.userId;
-      console.log(Uid);
       this.$fetch(
-        "http://192.168.2.34:5010/tourist/address/selectReceiveAddress",
+        "http://192.168.2.50:5010/tourist-aggregate/address/selectReceiveAddress",
         { touristId: Uid }
       ).then(res => {
         this.list = res.data;
@@ -172,7 +171,7 @@ export default {
       })
         .then(() => {
           this.$fetch(
-            "http://192.168.2.34:5010/tourist/address/deleteReceiveAddress",
+            "http://192.168.2.50:5010/tourist-aggregate/address/deleteReceiveAddress",
             { id: id }
           ).then(res => {
             if (res.code === 200) {
@@ -231,7 +230,7 @@ export default {
           defaultSign: this.checkType
         };
         this.$post(
-          "http://192.168.2.34:5010/tourist/address/addReceiveAddress ",
+          "http://192.168.2.50:5010/tourist-aggregate/address/addReceiveAddress ",
           data,
           { headers: { "Content-Type": "application/json;charset=UTF-8" } }
         ).then(res => {
@@ -252,7 +251,7 @@ export default {
           receiveArea: this.select.area
         };
         this.$post(
-          "http://192.168.2.34:5010/tourist/address/updateReceiveAddress",
+          "http://192.168.2.50:5010/tourist-aggregate/address/updateReceiveAddress",
           data,
           { headers: { "Content-Type": "application/json;charset=UTF-8" } }
         ).then(res => {
@@ -267,7 +266,7 @@ export default {
     setDefault(index, id) {
       let Uid = this.$store.getters.getUserData.userId;
       this.$fetch(
-        "http://192.168.2.34:5010/tourist/address/setDefaultReceiveAddress",
+        "http://192.168.2.50:5010/tourist-aggregate/address/setDefaultReceiveAddress",
         {
           touristId: Uid,
           id: id
@@ -308,6 +307,12 @@ export default {
       padding-top: 48px;
       padding-bottom: 16px;
       border-bottom: 2px solid #eeeeee;
+			.address-new{
+				cursor: pointer;
+				color: #2D7AE4;
+				font-size: 14px;
+			}
+			
       .add {
         display: inline-block;
         width: 16px;
@@ -317,9 +322,10 @@ export default {
         color: rgba(45, 122, 228, 1);
         border: 1px solid rgba(45, 122, 228, 1);
         border-radius: 4px;
-        margin-right: 36px;
+        margin-right: 6px;
       }
       .refresh {
+				cursor: pointer;
         height: 18px;
         line-height: 18px;
         font-weight: 400;
@@ -437,6 +443,7 @@ export default {
       .btn {
         margin-top: 40px;
         button {
+					cursor: pointer;
           width: 114px;
           height: 44px;
           background: rgba(7, 100, 233, 1);

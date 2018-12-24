@@ -45,10 +45,10 @@ export default {
 </script>
 <style lang='scss' scoped>
 .message-detail {
-  width: 980px;
+  width: 875px;
   height: 1283px;
   background: rgba(255, 255, 255, 1);
-  padding: 40px 48px 50px 20px;
+  padding: 40px 0 50px 0;
   .nav {
     line-height: 34px;
     border-bottom: 1px solid rgba(153, 153, 153, 1);
@@ -57,6 +57,7 @@ export default {
     font-weight: bold;
     color: rgba(51, 51, 51, 1);
     .back {
+			cursor: pointer;
       width: 76px;
       height: 34px;
       text-align: center;

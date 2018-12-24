@@ -1,57 +1,22 @@
 <template>
   <div class="main">
-     <Header></Header> 
+    <Header></Header>
     <div class="banner">
       <div class="banner-imgs">
-        <img src="../assets/img/index-bg1.png" alt v-show="0 === index">
-        <img src="../assets/img/index-bg2.png" alt v-show="1 === index">
-        <img src="../assets/img/index-bg1.png" alt v-show="2 === index">
-        <img src="../assets/img/index-bg2.png" alt v-show="3 === index">
-        <img src="../assets/img/index-bg1.png" alt v-show="4 === index">
-        <img src="../assets/img/index-bg2.png" alt v-show="5 === index">
-        <img src="../assets/img/index-bg1.png" alt v-show="6 === index">
-        <img src="../assets/img/index-bg2.png" alt v-show="7 === index">
+        <img src="../assets/img/index-banner1.png" alt v-show="0 === index">
+        <img src="../assets/img/index-banner1.png" alt v-show="1 === index">
+        <img src="../assets/img/index-banner1.png" alt v-show="2 === index">
+        <img src="../assets/img/index-banner1.png" alt v-show="3 === index">
+        <img src="../assets/img/index-banner1.png" alt v-show="4 === index">
+        <img src="../assets/img/index-banner1.png" alt v-show="5 === index">
+        <img src="../assets/img/index-banner1.png" alt v-show="6 === index">
+        <img src="../assets/img/index-banner1.png" alt v-show="7 === index">
       </div>
       <div class="banner-content clearDiv">
-        <div class="ticket content-list">
-          <p class="title">购票</p>
-          <el-select v-model="value" class="select-list">
-            <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            ></el-option>
-          </el-select>
-        </div>
-        <div class="content-list">
-          <p class="title">标准票（1.4M以上）</p>
+        <div class="content-list">游玩时间
           <el-date-picker v-model="date" type="date" class="select-list"></el-date-picker>
         </div>
-        <div class="content-list">
-          <p class="title">标准票（1.4M以上）</p>
-          <el-select v-model="value" class="select-list">
-            <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            ></el-option>
-          </el-select>
-        </div>
-        <div class="content-list">
-          <p class="title">儿童（1.0-1.4M）</p>
-          <el-select v-model="value" class="select-list">
-            <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            ></el-option>
-          </el-select>
-        </div>
-        <div class="content-list">
-          <p class="title">老人（65岁以上）</p>
+        <div class="ticket content-list">门票
           <el-select v-model="value" class="select-list">
             <el-option
               v-for="item in options"
@@ -73,28 +38,28 @@
             <swiper :options="swiperOption" ref="mySwiper">
               <!-- slides -->
               <swiper-slide>
-                <img src="../assets/img/index-item1.png" alt :class="{imgActive:index === 0}">
+                <img src="../assets/img/index-img12.png" alt :class="{imgActive:index === 0}">
               </swiper-slide>
               <swiper-slide>
-                <img src="../assets/img/index-item2.png" alt :class="{imgActive:index === 1}">
+                <img src="../assets/img/index-img13.png" alt :class="{imgActive:index === 1}">
               </swiper-slide>
               <swiper-slide>
-                <img src="../assets/img/index-item3.png" alt :class="{imgActive:index === 2}">
+                <img src="../assets/img/index-img14.png" alt :class="{imgActive:index === 2}">
               </swiper-slide>
               <swiper-slide>
-                <img src="../assets/img/index-item4.png" alt :class="{imgActive:index === 3}">
+                <img src="../assets/img/index-img15.png" alt :class="{imgActive:index === 3}">
               </swiper-slide>
               <swiper-slide>
-                <img src="../assets/img/index-item5.png" alt :class="{imgActive:index === 4}">
+                <img src="../assets/img/index-img16.png" alt :class="{imgActive:index === 4}">
               </swiper-slide>
               <swiper-slide>
-                <img src="../assets/img/index-item6.png" alt :class="{imgActive:index === 5}">
+                <img src="../assets/img/index-img17.png" alt :class="{imgActive:index === 5}">
               </swiper-slide>
               <swiper-slide>
-                <img src="../assets/img/index-item1.png" alt :class="{imgActive:index === 6}">
+                <img src="../assets/img/index-img12.png" alt :class="{imgActive:index === 6}">
               </swiper-slide>
               <swiper-slide>
-                <img src="../assets/img/index-item2.png" alt :class="{imgActive:index === 7}">
+                <img src="../assets/img/index-img13.png" alt :class="{imgActive:index === 7}">
               </swiper-slide>
               <!-- Optional controls -->
             </swiper>
@@ -121,9 +86,9 @@
                 @change="change"
               >
                 <el-carousel-item v-for="(item,key) in 6" :key="key">
-                  <div class="div">
+                  <div class="div" @click="jumpHuodongDetail(id)">
                     <img
-                      src="../assets/img/index-new-img1.png"
+                      src="../assets/img/index-img1.png"
                       alt
                       :class="{colorA:key === newSwiperIndex}"
                     >
@@ -145,30 +110,30 @@
           </div>
           <div class="hot-content clearDiv">
             <ul class="content-left floatLeft">
-              <li>
-                <img src="../assets/img/login-bg.png" alt>
+              <router-link to="/tickets/1" tag="li">
+                <img src="../assets/img/index-img4.png" alt>
                 <p>在线订票</p>
-              </li>
-              <li class="li2">
-                <img src="../assets/img/login-bg.png" alt>
+              </router-link>
+              <router-link to="/animal" tag="li" class="li2">
+                <img src="../assets/img/index-img5.png" alt>
                 <p>动物保育</p>
-              </li>
-              <li class="li3">
-                <img src="../assets/img/login-bg.png" alt>
+              </router-link>
+              <router-link :to="{path:'/ditu',query:{id:'3'}}" tag="li" class="li3">
+                <img src="../assets/img/index-img6.png" alt>
                 <p>交通指南</p>
-              </li>
-              <li class="li4">
-                <img src="../assets/img/login-bg.png" alt>
+              </router-link>
+              <router-link :to="{path:'/ditu',query:{id:'8'}}" tag="li" class="li4">
+                <img src="../assets/img/index-img7.png" alt>
                 <p>园区介绍</p>
-              </li>
+              </router-link>
             </ul>
             <div class="content-main floatLeft">
               <div class="top clearDiv">
-                <img src="../assets/img/login-bg.png" alt class="floatLeft">
+                <img src="../assets/img/index-img8.png" alt class="floatLeft">
                 <div class="top-box floatLeft">
                   <div class="clearDiv box-top">
                     <div class="floatLeft">荟精英，海洋欢乐世界展露头角</div>
-                    <a href="#" class="floatRight">更多>></a>
+                    <router-link to="/news" class="floatRight">更多>></router-link>
                   </div>
                   <div
                     class="floatLeft box-bottom"
@@ -176,10 +141,16 @@
                 </div>
               </div>
               <ul class="bottom">
-                <li class="clearDiv" v-for="item in 4" :key="item">
-                  《受伤的鲸豚不再无助 海南首个海洋动物保育救护中心挂牌启用》
-                  <a href="#">详情>></a>
-                </li>
+                <template v-for="item in 4">
+                  <router-link
+                    :to="{path:'/newDetail',query:{id:'5c1f5349f8dac609dd5cd6b7'}}"
+                    tag="li"
+                    class="clearDiv"
+                  >
+                    《受伤的鲸豚不再无助 海南首个海洋动物保育救护中心挂牌启用》
+                    <a>详情>></a>
+                  </router-link>
+                </template>
               </ul>
             </div>
             <div class="content-right floatLeft">
@@ -197,7 +168,7 @@
               <p>周末 9.00~18.00</p>
             </div>
             <div class="info-boutton">
-              <a href>详细营业信息>>></a>
+              <router-link :to="{path:'/ditu',query:{id:'2'}}">详细营业信息>>></router-link>
             </div>
           </el-col>
           <el-col :span="12" class="info-col1">
@@ -216,7 +187,7 @@
               </div>
             </div>
             <div class="info-boutton">
-              <a href>立即购票>>></a>
+              <router-link :to="{path:'/tickets/1'}">立即购票>>></router-link>
             </div>
           </el-col>
         </el-row>
@@ -270,6 +241,10 @@ export default {
     this.swiperInit();
   },
   methods: {
+    //跳转活动详情
+    jumpHuodongDetail(id) {
+      this.$router.push({ path: "/eventsDetail", query: { id: id } });
+    },
     change(newVal, oldVal) {
       this.newSwiperIndex = newVal;
     },
@@ -335,40 +310,37 @@ export default {
 .main {
   width: 100%;
   .banner {
-    height: 719px;
+    height: 864px;
     position: relative;
     .banner-imgs {
       position: absolute;
       z-index: -1;
       img {
-        height: 719px;
+        height: 864px;
         width: 100%;
       }
     }
     .banner-content {
       width: 1049px;
       height: 110px;
+      line-height: 110px;
       margin: 0 auto;
       background: rgba(0, 0, 0, 0.75);
       box-shadow: 2px 2px 7px 0px rgba(0, 0, 0, 0.35);
-      padding-top: 21px;
       padding-left: 61px;
+      font-size: 14px;
+      font-weight: bold;
+      color: rgba(255, 255, 255, 1);
       .content-list {
         float: left;
-        .title {
-          font-size: 14px;
-          font-weight: bold;
-          color: rgba(255, 255, 255, 1);
-        }
         .select-list {
-          margin-top: 11px;
-          margin-right: 23px;
-          width: 152px;
+          margin-left: 35px;
+          margin-right: 35px;
+          width: 267px;
           height: 39px;
         }
       }
       .search {
-        padding-top: 30px;
         button {
           width: 69px;
           height: 39px;
@@ -382,15 +354,15 @@ export default {
     }
   }
   .content {
-    margin-top: -145px;
-    background: url(../assets/img/index-bg3.png) no-repeat 0 0;
+    margin-top: -180px;
+    background: url(../assets/img/index-img9.png) no-repeat 0 0;
     background-size: 1920px 100%;
     .content-list {
       width: 1200px;
       margin: 0 auto;
       .list-one {
         width: 100%;
-        padding-top: 65px;
+        padding-top: 37px;
         .one-change {
           width: 971px;
           height: 84px;
@@ -421,28 +393,32 @@ export default {
             border: 3px solid rgba(255, 255, 255, 1);
           }
           .swiper-prev {
-            width: 13px;
-            height: 22px;
-            background: url(../assets/img/index-swiper-prev.png) no-repeat 0 0;
+            cursor: pointer;
+            width: 21px;
+            height: 36px;
+            background: url(../assets/img/index-img11.png) no-repeat 0 0;
             position: absolute;
             left: -29px;
             top: 50%;
-            margin-top: -11px;
+            margin-top: -18px;
           }
           .swiper-next {
-            width: 13px;
-            height: 22px;
-            background: url(../assets/img/index-swiper-next.png) no-repeat 0 0;
+            cursor: pointer;
+            width: 21px;
+            height: 36px;
+            background: url(../assets/img/index-img10.png) no-repeat 0 0;
             position: absolute;
             right: -29px;
             top: 50%;
-            margin-top: -11px;
+            margin-top: -18px;
           }
         }
       }
     }
     .new-active {
       margin-top: 72px;
+      background: url(../assets/img/index-img2.png) no-repeat;
+      background-size: 100% 100%;
       .title {
         height: 89px;
         background-color: rgba(255, 255, 255, 0.18);
@@ -478,34 +454,40 @@ export default {
             width: 38px;
             height: 89px;
             background: rgba(255, 255, 255, 0.59);
+            cursor: pointer;
           }
           .prev {
+            width: 38px;
+            height: 89px;
             position: absolute;
             left: -60px;
-            top: 50%;
+            top: 35%;
             margin-top: -45px;
-            background-image: url(../assets/img/index-new-next.png);
-            background-repeat: no-repeat;
+            background: rgba(109, 196, 38, 0.6)
+              url(../assets/img/index-new-next.png) no-repeat;
             background-position: center center;
           }
           .next {
             position: absolute;
             right: -60px;
-            top: 50%;
+            top: 35%;
             margin-top: -45px;
-            background-image: url(../assets/img/index-new-prev.png);
-            background-repeat: no-repeat;
+            background: rgba(109, 196, 38, 0.6)
+              url(../assets/img/index-new-prev.png) no-repeat;
             background-position: center center;
           }
         }
       }
     }
     .new-hot {
+      background: url(../assets/img/index-img3.png) no-repeat;
+      background-size: 100% 100%;
       .title {
         text-align: center;
         color: #ffffff;
-        margin-top: 40px;
+        margin-top: 100px;
         letter-spacing: 2px;
+        padding-top: 40px;
         .ch {
           font-size: 35px;
           span {
@@ -515,7 +497,6 @@ export default {
         }
       }
       .hot-content {
-        background-color: #ffffff;
         box-shadow: 5px 6px 7px 0px rgba(51, 75, 179, 0.35);
         padding-top: 160px;
         padding-left: 40px;
@@ -524,6 +505,7 @@ export default {
             width: 180px;
             height: 89px;
             padding-top: 10px;
+            cursor: pointer;
             background: linear-gradient(
               0deg,
               rgba(12, 109, 206, 1),
@@ -588,7 +570,7 @@ export default {
               }
               .box-bottom {
                 width: 337px;
-                height: 89px;
+                height: 94px;
                 font-size: 14px;
                 line-height: 24px;
                 font-weight: 400;
@@ -606,6 +588,7 @@ export default {
               position: relative;
               padding-left: 20px;
               border-bottom: 1px solid rgba(125, 125, 125, 0.1);
+              cursor: pointer;
               &::before {
                 content: "";
                 width: 8px;
@@ -765,7 +748,7 @@ export default {
     background: url(../assets/img/index-juedui-bg.png) no-repeat;
     z-index: 999;
     text-align: center;
-    padding-top:175px;
+    padding-top: 175px;
     img {
       margin-top: 30px;
     }

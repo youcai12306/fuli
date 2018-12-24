@@ -15,7 +15,7 @@
     <div class="nav2">
       <ul class="nav-logo clearDiv">
         <li class="floatLeft">
-          <img src="../assets/img/logo.png" alt>
+          <router-link to="/"><img src="../assets/img/content-bg.png" alt></router-link>
         </li>
         <li class="mine-center floatLeft">会员中心</li>
         <li class="mine-login floatRight" @click="setSignOuts">
@@ -107,14 +107,15 @@ export default {
     .mine-center {
       height: 45px;
       line-height: 45px;
-      font-size: 14px;
+      font-size: 18px;
       margin-left: 22px;
       padding-left: 18px;
       border-left: 1px solid #ffffff;
-      margin-top: 36px;
+      margin-top: 40px;
     }
 
     .mine-login {
+			cursor: pointer;
       font-size: 14px;
 
       span {

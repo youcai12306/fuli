@@ -1,31 +1,24 @@
 <template>
   <div>
-
+    <Header></Header>
     <!-- 当前位置 -->
     <div class="or2">
       <div class="or3 clearDiv">
         <div class="or4 clearDiv">
-          <img
-            src="../../../src/assets/img/dingwei.png"
-            alt=""
-          >
+          <img src="../../../src/assets/img/dingwei.png" alt>
           <p>当前位置 ：首页 > 网上订购</p>
         </div>
         <div class="or5">
           <ul class="clearDiv">
             <li>
-              <a href="">王大锤</a>
-
+              <a href>王大锤</a>
             </li>
             <li class="clearDiv or55">
-              <img
-                src="../../../src/assets/img/gouwuche.png"
-                alt=""
-              >
-              <a href="">购物车（0）</a>
+              <img src="../../../src/assets/img/gouwuche.png" alt>
+              <a href>购物车（0）</a>
             </li>
             <li>
-              <a href="">我的订单</a>
+              <a href>我的订单</a>
             </li>
           </ul>
         </div>
@@ -37,57 +30,40 @@
         <!-- 左边 -->
         <div class="pp1">
           <ul>
-            <li class="or8">
-              网上订购
-            </li>
-            <router-link
-              class="clearDiv or9 oo"
-              tag="li"
-              to="/tickets/1"
-            >
-              <img
-                src="../../../src/assets/img/menpiao.png"
-                alt=""
-              >
+            <li class="or8">网上订购</li>
+            <router-link class="clearDiv or9 oo" tag="li" to="/tickets/1">
+              <img src="../../../src/assets/img/menpiao.png" alt>
               <p>门票</p>
-
             </router-link>
             <li class="clearDiv or9 or10">
-              <img
-                src="../../../src/assets/img/linshou.png"
-                alt=""
-              >
+              <img src="../../../src/assets/img/linshou.png" alt>
               <p>零售</p>
             </li>
             <li class="clearDiv or9 or10">
-              <img
-                src="../../../src/assets/img/canyin.png"
-                alt=""
-              >
+              <img src="../../../src/assets/img/canyin.png" alt>
               <p>餐饮</p>
             </li>
             <li class="clearDiv or9 or10 or11">
-              <img
-                src="../../../src/assets/img/taopiao.png"
-                alt=""
-              >
+              <img src="../../../src/assets/img/taopiao.png" alt>
               <p>套票</p>
             </li>
           </ul>
         </div>
         <!-- 右边 -->
-
         <router-view></router-view>
-
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import Header from '@/components/Header'
 export default {
   data() {
     return {};
+  },
+  components: {
+    Header
   }
 };
 </script>
@@ -135,13 +111,11 @@ export default {
 }
 .or6 {
   background-image: url(../../../src/assets/img/order-1.png);
-
   .or7 {
-    padding-bottom: 1000px;
+    padding-bottom: 100px;
     padding-top: 455px;
     width: 1200px;
-    margin-left: 254px;
-
+    margin:  0 auto;
     .pp1 {
       width: 240px;
       float: left;

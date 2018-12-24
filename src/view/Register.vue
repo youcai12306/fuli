@@ -1,26 +1,24 @@
 <template>
   <div>
     <div class="bac clearDiv">
-      <div class="ban clearDiv">
-        <div class="clearDiv ban1 ban3">
-          <img
-            src="../assets/img/logo.png"
-            alt
-          >
-        </div>
-        <div class="clearDiv ban1 ban2 ban4">
-          <a href>会员登录</a>
-        </div>
-        <div class="clearDiv ban1 ban2 ban5">
-          <a href>
-            我不是会员？立即注册
-            <img
-              src="../assets/img/login.png"
-              alt
-            >
-          </a>
-        </div>
-      </div>
+    	<div class="ban clearDiv">
+    		<div class="clearDiv ban1 ban3">
+    			<router-link to="/index">
+    				<img src="../assets/img/logo.png" alt>
+    			</router-link>
+    		</div>
+    		<div class="clearDiv ban1 ban2 ban4">
+    			<router-link to="/login">
+    				会员登录
+    			</router-link>
+    		</div>
+    		<div class="clearDiv ban1 ban2 ban5">
+    			<router-link to='/register'>
+    				我不是会员？立即注册
+    				<img src="../assets/img/login.png" alt>
+    			</router-link>
+    		</div>
+    	</div>
     </div>
     <div class="bac1">
       <div class="content">
@@ -74,7 +72,7 @@
             <p class="clearDiv">
               <label for>密码</label>
               <input
-                type="text"
+                type="password"
                 placeholder="6-16位密码，区分大小写，不能用空格"
                 v-model="password"
                 @blur="checkPwd"
@@ -127,7 +125,7 @@ export default {
   methods: {
     //显示验证码
     getCode() {
-      this.$fetch("http://192.168.2.34:5010/tourist/getKaptcha").then(res => {
+      this.$fetch("http://192.168.2.50:5010/tourist-aggregate/getKaptcha").then(res => {
         this.codeImg = "data:image/png;base64," + res;
       });
     },
@@ -137,7 +135,7 @@ export default {
         this.phoneTip = "请输入正确的手机号码";
         return false;
       } else {
-        this.$fetch("http://192.168.2.34:5050/tourist/checkIsRegist", { mobile: this.phone }).then(
+        this.$fetch("http://192.168.2.50:5010/tourist-aggregate/checkIsRegist", { mobile: this.phone }).then(
           res => {
             if (res.code === 200) {
               this.phoneTip = "";
@@ -157,7 +155,7 @@ export default {
         this.codeTip = "请输入正确的验证码";
         return false;
       } else {
-        this.$fetch("http://192.168.2.34:5050/tourist/checkKaptcha", { picCode: this.code }).then(
+        this.$fetch("http://192.168.2.50:5010/tourist-aggregate/checkKaptcha", { picCode: this.code }).then(
           res => {
             if (res.code === 200) {
               this.codeTip = "";
@@ -189,7 +187,7 @@ export default {
     getCode1() {
       let that = this;
       clearInterval(that.setsund);
-      this.$fetch("http://192.168.2.34:5050/tourist/getSmsCode", { mobile: this.phone,smsFlag:'sms_code'}).then(res => {
+      this.$fetch("http://192.168.2.50:5010/tourist-aggregate/getSmsCode", { mobile: this.phone,smsFlag:'sms_code'}).then(res => {
         if (res.code === 200) {
           this.step = !this.step;
           this.isActive = true;
@@ -216,7 +214,7 @@ export default {
         this.codeTip1 = "请输入正确的验证码";
         return false;
       } else {
-        this.$fetch("http://192.168.2.34:5050/tourist/checkSmsCode", { smsCode: this.code1 }).then(
+        this.$fetch("http://192.168.2.50:5010/tourist-aggregate/checkSmsCode", { smsCode: this.code1 }).then(
           res => {
             if (res.code === 200) {
               this.codeTip1 = "";
@@ -254,8 +252,12 @@ export default {
           return false;
         } else {
           //注册接口
-          this.$post("http://192.168.2.34:5050/tourist/regist",{mobile:this.phone,passWord:this.password,picCode:this.code1},{headers:{'Content-Type':'application/json;charset=UTF-8'}}).then(res => {
+          this.$post("http://192.168.2.50:5010/tourist-aggregate/regist",{mobile:this.phone,passWord:this.password,smsCode:this.code1},{headers:{'Content-Type':'application/json;charset=UTF-8'}}).then(res => {
             if(res.code === 200){
+							this.$message({
+								type:'success',
+								message:'注册成功'
+							})
               this.$router.push('/login')
             }else{
               this.msg1 = res.message;
@@ -413,6 +415,7 @@ export default {
         .btn {
           position: relative;
           .zhuce {
+						cursor: pointer;
             width: 379px;
             height: 47px;
             background: rgba(7, 100, 233, 1);

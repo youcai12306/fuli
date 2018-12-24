@@ -13,7 +13,7 @@ export function getCookie(name) {
 }
 
 //删除cookie
-export function delCookie (name) {
+export function delCookie(name) {
   var exp = new Date();
   exp.setTime(exp.getTime() - 1);
   var cval = getCookie(name);

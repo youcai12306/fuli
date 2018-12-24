@@ -3,7 +3,7 @@
 		<Header></Header>
   <div class="risk">
     <div class="title">
-      <div class="location">当前位置>首页>动物百科</div>
+      <div class="location">当前位置><router-link to="/index" tag="span">首页></router-link><router-link to="animal" tag="span">动物百科</router-link></div>
     </div>
     <div class="content clearDiv">
       <div class="left floatLeft">
@@ -34,16 +34,21 @@
       <div class="right floatRight">
         <div class="box">
           <div class="box-top">
-            <img src="../../assets/img/login-bg.png" alt class="img">
+            <img src="../../assets/img/theme-animal-bg1.png" alt class="img">
             <div class="top">
               <p class="a-t">动物百科</p>
               <p class="a-c">珠海长隆海洋王国动物科普大揭秘！同一个世界的另一个角度，这是一个需要你探索求证才能发现的世界，跟着我们来吧！在这里认识聪颖灵敏的 鲸豚类、水陆两生的 鳍脚类、种类繁复多样的 鱼类、依海傍生的 鸟类……</p>
             </div>
           </div>
-          <div class="list clearDiv" v-for="item in 4" :key="item">
-            <img src="../../assets/img/login-bg.png" alt class="floatLeft">
+          <div class="list clearDiv" v-for="(item,k) in 4" :key="k">
+            <img :src="`../../../static/theme-animal-bg${k+2}.png`" alt class="floatLeft">
             <div class="rights floatLeft">
-              <div class="t">瓶鼻海豚</div>
+              <div class="t">
+								<template v-if="item == 0">瓶鼻海豚</template>
+								<template v-if="item == 1">中华白海豚</template>
+								<template v-if="item == 2">白鲸</template>
+								<template v-if="item == 3">瓶鼻海豚</template>
+							</div>
               <div class="p">瓶鼻海豚有一个又短又粗的喙，似水瓶，故得名“瓶鼻”。但这并不是真正的鼻子，其鼻孔已经演化为头顶的换气孔。瓶鼻海豚是最常见的鲸豚....</div>
               <a href="#">查看详情>></a>
             </div>
@@ -82,9 +87,9 @@ export default {
 <style lang='scss' scoped>
 .risk {
   width: 100%;
-  background: #fff url(../../assets/img/new-1.png) no-repeat top center;
+  background: #fff url(../../assets/img/theme-animal-bg.png) no-repeat top center;
   background-size: 1920px 100%;
-  padding-top: 440px;
+  padding-top: 454px;
   padding-bottom: 50px;
   .title {
     width: 1200px;
@@ -106,6 +111,7 @@ export default {
       color: rgba(255, 255, 255, 1);
       padding-left: 34px;
       background: url(../../assets/img/new-4.png) no-repeat 15px center;
+      cursor: pointer;
     }
   }
   .content {
@@ -145,7 +151,7 @@ export default {
           }
           div {
             display: none;
-            left: 230px;
+            left: 222px;
             top: 0;
             width: 370px;
             height: 114px;
@@ -153,6 +159,7 @@ export default {
             box-shadow: 0px 3px 7px 0px rgba(0, 0, 0, 0.35);
             position: absolute;
             z-index: 10;
+						padding: 25px;
             &:after {
               content: "";
               position: absolute;
@@ -163,7 +170,7 @@ export default {
               /*此处将左右的边框设置为透明色*/
               border-top: 9px solid transparent;
               border-bottom: 9px solid transparent;
-              margin-top: -5px;
+              margin-top: -32px;
             }
             ul {
               li {
@@ -253,7 +260,6 @@ export default {
               font-weight: 400;
               color: rgba(102, 102, 102, 1);
               width: 420px;
-              height: 66px;
               margin-bottom: 35px;
               line-height: 26px;
               overflow: hidden;

@@ -1,5 +1,6 @@
 <template>
   <div class="main">
+    <Header></Header>
     <div class="content">
       <div class="nav clearDiv">
         <div class="floatLeft">当前位置：网上订购>零售商品详情页</div>
@@ -112,6 +113,7 @@
 import { IMG_Url } from "../package/common.js";
 import "swiper/dist/css/swiper.css";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
+import Header from '@/components/Header'
 export default {
   data() {
     return {
@@ -139,7 +141,8 @@ export default {
   },
   components: {
     swiper,
-    swiperSlide
+    swiperSlide,
+    Header
   },
   methods: {
     //初始化数据
@@ -210,6 +213,11 @@ export default {
     },
     //跳转提交订单页面
     jumpSubmitOrder(id, stockId) {
+			let Uid = this.$store.getters.getUserData.userId;
+			if(Uid == undefined){//判断是否登录
+				this.$router.push("/login");
+				return;
+			}
       // this.$router.push({
       //   path: "/Suborder",
       //   query: {
@@ -245,6 +253,11 @@ export default {
     addShoppingCar() {
       let Uid = this.$store.getters.getUserData.userId;
       let createDateId = this.$route.query.stockId;
+			if(Uid == undefined){//判断是否登录
+				this.$router.push("/login");
+				return;
+			}
+			
       let data = {
         touristId: Uid, 
         productId: this.product.id,
@@ -462,6 +475,7 @@ export default {
             margin-top: 34px;
             width: 146px;
             height: 43px;
+						cursor: pointer;
           }
           .img1 {
             margin-left: 10px;

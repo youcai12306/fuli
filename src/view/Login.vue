@@ -1,20 +1,24 @@
 <template>
   <div>
     <div class="bac clearDiv">
-      <div class="ban clearDiv">
-        <div class="clearDiv ban1 ban3">
-          <img src="../assets/img/logo.png" alt>
-        </div>
-        <div class="clearDiv ban1 ban2 ban4">
-          <a href>会员登录</a>
-        </div>
-        <div class="clearDiv ban1 ban2 ban5">
-          <router-link to='/register'>
-             我不是会员？立即注册
-            <img src="../assets/img/login.png" alt>
-          </router-link>
-        </div>
-      </div>
+    	<div class="ban clearDiv">
+    		<div class="clearDiv ban1 ban3">
+    			<router-link to="/index">
+    				<img src="../assets/img/logo.png" alt>
+    			</router-link>
+    		</div>
+    		<div class="clearDiv ban1 ban2 ban4">
+    			<router-link to="/login">
+    				会员登录
+    			</router-link>
+    		</div>
+    		<div class="clearDiv ban1 ban2 ban5">
+    			<router-link to='/register'>
+    				我不是会员？立即注册
+    				<img src="../assets/img/login.png" alt>
+    			</router-link>
+    		</div>
+    	</div>
     </div>
     <div class="bac1">
       <div class="bac1-content clearDiv">
@@ -177,9 +181,8 @@ export default {
           mobile: this.phone,
           passWord: this.password
         };
-        this.$post("http://192.168.2.34:5010/tourist-aggregate/login",data,{headers:{'Content-Type':'application/json;charset=UTF-8'}}).then(res => {
+        this.$post("http://192.168.2.50:5010/tourist-aggregate/login",data,{headers:{'Content-Type':'application/json;charset=UTF-8'}}).then(res => {
           if (res.code === 200) {
-            console.log(res)
             this.setUserInfo(data);
             this.setUserData(res.data);
             this.$router.replace("/index");
@@ -364,6 +367,7 @@ a {
         border: none;
         color: #fff;
         background-color: #0764e9;
+				cursor: pointer;
       }
     }
     .login {

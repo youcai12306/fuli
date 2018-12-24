@@ -17,7 +17,7 @@
 
 #certify .swiper-slide {
 	width: 900px;
-	height: 700px;
+	height: 700px;	
 }
 
 #certify .swiper-slide img {
@@ -25,6 +25,7 @@
 	width: 100%;
 	height: 580px;
 	padding-bottom: 40px;
+	cursor: pointer;
 }
 
 #certify .swiper-slide .p1{

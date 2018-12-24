@@ -3,8 +3,8 @@
     <div class="box">
       <div class="top clearDiv">
         <h3 class="floatLeft">鲸鲨馆</h3>
-        <div class="floatRight clearDiv">
-          <img src="../../assets/img/login-qq.png" alt>
+        <div class="floatRight clearDiv" @click="back()">
+          <img src="../../assets/img/theme-back.png" alt>
           <span>返回</span>
         </div>
       </div>
@@ -13,13 +13,13 @@
           <swiper :options="swiperOption" ref="mySwiper">
             <!-- slides -->
             <swiper-slide>
-              <img src="../../assets/img/index-item1.png" alt>
+              <img src="../../assets/img/theme-animal-img2.png" alt>
             </swiper-slide>
             <swiper-slide>
-              <img src="../../assets/img/index-item2.png" alt>
+              <img src="../../assets/img/theme-animal-img2.png" alt>
             </swiper-slide>
             <swiper-slide>
-              <img src="../../assets/img/index-item3.png" alt>
+              <img src="../../assets/img/theme-animal-img2.png" alt>
             </swiper-slide>
             <div class="swiper-pagination" slot="pagination"></div>
           </swiper>
@@ -62,13 +62,18 @@ export default {
     swiper,
     swiperSlide,
     Header
+  },
+  methods:{
+    back(){
+      this.$router.go(-1)
+    }
   }
 };
 </script>
 <style lang="scss" scoped>
 .animalTheme {
   width: 100%;
-  background: url(../../assets/img/login-bg.png) no-repeat;
+  background: url(../../assets/img/theme-detail-bg.png) no-repeat;
   background-size: 1920px 100%;
   padding-top: 390px;
   padding-bottom: 204px;

@@ -2,20 +2,24 @@
   <div class="body">
     <!-- 头部 -->
     <div class="bac clearDiv">
-      <div class="ban clearDiv">
-        <div class="clearDiv ban1 ban3">
-          <img src="../assets/img/logo.png" alt>
-        </div>
-        <div class="clearDiv ban1 ban2 ban4">
-          <a href>忘记密码</a>
-        </div>
-        <div class="clearDiv ban1 ban2 ban5">
-          <a href>
-            我不是会员？立即注册
-            <img src="../assets/img/login.png" alt>
-          </a>
-        </div>
-      </div>
+    	<div class="ban clearDiv">
+    		<div class="clearDiv ban1 ban3">
+    			<router-link to="/index">
+    				<img src="../assets/img/logo.png" alt>
+    			</router-link>
+    		</div>
+    		<div class="clearDiv ban1 ban2 ban4">
+    			<router-link to="/login">
+    				会员登录
+    			</router-link>
+    		</div>
+    		<div class="clearDiv ban1 ban2 ban5">
+    			<router-link to='/register'>
+    				我不是会员？立即注册
+    				<img src="../assets/img/login.png" alt>
+    			</router-link>
+    		</div>
+    	</div>
     </div>
     <!-- 忘记密码页面 -->
     <div class="fo1">
@@ -96,7 +100,6 @@ export default {
           return true;
         }
       }
-      console.log(this.isActive);
       return this.isActive;
     }
   },
@@ -116,7 +119,7 @@ export default {
     getCode() {
       let that = this;
       clearInterval(that.setsund);
-      this.$fetch("http://192.168.2.34:5010/tourist/getSmsCode", {
+      this.$fetch("http://192.168.2.50:5010/tourist-aggregate/getSmsCode", {
         mobile: this.phone,
         smsFlag: "sms_passWord_back"
       }).then(res => {
@@ -156,7 +159,7 @@ export default {
       if (!this.checkCode()) {
         return;
       }
-      this.$fetch("http://192.168.2.34:5010/tourist/checkSmsCode", { smsCode: this.code }).then(
+      this.$fetch("http://192.168.2.50:5010/tourist-aggregate/checkSmsCode", { smsCode: this.code }).then(
         res => {
           if (res.code === 200) {
             this.active ++;
@@ -199,7 +202,7 @@ export default {
         return;
       }
       this.$post(
-        "http://192.168.2.34:5010/tourist/getBackTouristPassWord",
+        "http://192.168.2.50:5010/tourist-aggregate/getBackTouristPassWord",
         { mobile: this.phone, passWord: this.password,smsCode:this.code},
         { headers: { "Content-Type": "application/json;charset=UTF-8" } }
       ).then(res => {

@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from '@/vuex/store';
 
 //登录
 const Login = r => require.ensure([], () => r(require('@/view/Login')), 'Login')
@@ -23,8 +24,12 @@ const Suborder2 = r => require.ensure([], () => r(require('@/view/Orderonline/Su
 const success = r => require.ensure([], () => r(require('@/view/Orderonline/success')), 'success')
 //主题乐园
 const Theme = r => require.ensure([], () => r(require('@/view/theme/Theme')), 'Theme')
-const AnimalTheme = r => require.ensure([], () => r(require('@/view/theme/AnimalTheme')), 'AnimalTheme')
+const AnimalDetail = r => require.ensure([], () => r(require('@/view/theme/AnimalDetail')), 'AnimalDetail')
 const artTheme = r => require.ensure([], () => r(require('@/view/theme/artTheme')), 'artTheme')
+const EatDetail = r => require.ensure([], () => r(require('@/view/theme/EatDetail')), 'EatDetail')
+const ShopDetail = r => require.ensure([], () => r(require('@/view/theme/ShopDetail')), 'ShopDetail')
+const ArtDetail = r => require.ensure([], () => r(require('@/view/theme/ArtDetail')), 'ArtDetail')
+
 // 新闻中心首页
 const News = r => require.ensure([], () => r(require('@/view/news/News')), 'News')
 const NewList = r => require.ensure([], () => r(require('@/view/news/NewList')), 'NewList')
@@ -38,6 +43,7 @@ const ditu = r => require.ensure([], () => r(require('@/view/Visitguide/ditu')),
 //优惠活动
 const SpecialOffier = r => require.ensure([], () => r(require('@/view/specialOffier/SpecialOffier')), 'SpecialOffier')
 const Events = r => require.ensure([], () => r(require('@/view/specialOffier/Events')), 'Events')
+const EventsDetail = r => require.ensure([], () => r(require('@/view/specialOffier/EventsDetail')), 'EventsDetail')
 //冒险之旅
 const Risk = r => require.ensure([], () => r(require('@/view/risk/Risk')), 'Risk')
 //动物百科
@@ -64,7 +70,7 @@ const MessageDetail = r => require.ensure([], () => r(require('@/view/Mine/Messa
 
 Vue.use(Router)
 
-export default new Router({
+let router = new Router({
 	routes: [{
 			path: '*',
 			redirect: '/index' //报错去首页
@@ -78,9 +84,6 @@ export default new Router({
 			path: '/index',
 			name: 'Index',
 			component: Index, //首页
-			meta: {
-				nav: 1
-			},
 		},
 		{
 			path: '/login',
@@ -121,47 +124,29 @@ export default new Router({
 		{
 			path: '/news',
 			component: News, //新闻
-			meta: {
-				nav: 1
-			},
 			children: [{
 					path: '/',
 					component: NewList,
-					meta: {
-						nav: 1
-					},
 				},
 				{
 					path: '/newList',
 					name: 'NewList',
 					component: NewList,
-					meta: {
-						nav: 1
-					},
 				},
 				{
 					path: '/noticeList',
 					name: 'NoticeList',
 					component: NoticeList,
-					meta: {
-						nav: 1
-					},
 				},
 				{
 					path: '/newDetail',
 					name: 'NewDetail',
 					component: NewDetail,
-					meta: {
-						nav: 1
-					},
 				},
 				{
 					path: '/noticeDetail',
 					name: 'NoticeDetail',
 					component: NoticeDetail,
-					meta: {
-						nav: 1
-					},
 				},
 			]
 		},
@@ -169,29 +154,21 @@ export default new Router({
 			path: '/ditu',
 			name: 'ditu',
 			component: ditu,
-			meta: {
-				nav: 1
-			}
 		},
 		{
 			path: '/specialOffier',
 			component: SpecialOffier, //精彩活动
-			meta: {
-				nav: 1
-			},
 			children: [{
 					path: '/',
 					component: Events,
-					meta: {
-						nav: 1
-					},
 				},
 				{
 					path: '/events',
 					component: Events,
-					meta: {
-						nav: 1
-					},
+				},
+				{
+					path: '/EventsDetail',
+					component: EventsDetail
 				}
 			]
 		},
@@ -199,21 +176,18 @@ export default new Router({
 			path: '/risk',
 			name: 'Risk',
 			component: Risk, //冒险之旅
-			meta: {
-				nav: 1
-			},
 		},
 		{
 			path: '/animal',
 			name: 'Animal',
 			component: Animal, //动物百科
-			meta: {
-				nav: 1
-			},
 		},
 		{
 			path: '/success',
 			name: 'success',
+			meta:{
+				requireAuth: true
+			},
 			component: success //支付页面
 		},
 		{
@@ -222,9 +196,24 @@ export default new Router({
 			component: Theme //主题乐园
 		},
 		{
-			path: '/animalTheme',
-			name: 'AnimalTheme',
-			component: AnimalTheme //主题乐园
+			path: '/animalDetail',
+			name: 'AnimalDetail',
+			component: AnimalDetail //动物详情
+		},
+		{
+			path: '/eatDetail',
+			name: 'EatDetail',
+			component: EatDetail //餐厅详情
+		},
+		{
+			path: '/artDetail',
+			name: 'ArtDetail',
+			component: ArtDetail // 演绎中心
+		},
+		{
+			path: '/shopDetail',
+			name: 'ShopDetail',
+			component: ShopDetail //主题商店
 		},
 		{
 			path:'/artTheme',
@@ -245,14 +234,16 @@ export default new Router({
 			path: '/mine',
 			component: Mine,
 			meta: {
-				nav: 3
+				nav: 3,
+				requireAuth: true
 			},
 			children: [ //个人中心二级子路由
 				{
 					path: '/',
 					component: Prepaid,
 					meta: {
-						nav: 3
+						nav: 3,
+						requireAuth: true
 					}
 				},
 				{
@@ -260,25 +251,35 @@ export default new Router({
 					name: 'Prepaid',
 					component: Prepaid,
 					meta: {
-						nav: 3
+						nav: 3,
+						requireAuth: true
 					}
 				},
 				{
 					path: '/couponCenter',
 					name: 'CouponCenter',
 					component: CouponCenter, //我的优惠券
+					meta: {
+						nav: 3,
+						requireAuth: true
+					},
 				},
 				{
 					path: '/myIntegral',
 					name: 'MyIntegral',
 					component: MyIntegral, //我的积分
+					meta: {
+						nav: 3,
+						requireAuth: true
+					},
 				},
 				{
 					path: '/shoppingCar',
 					name: 'ShoppingCar',
 					component: ShoppingCar, //购物车
 					meta: {
-						nav: 2
+						nav: 3,
+						requireAuth: true
 					}
 				},
 				{
@@ -286,7 +287,8 @@ export default new Router({
 					name: 'ShoppingAdress',
 					component: ShoppingAdress, //收货地址
 					meta: {
-						nav: 2
+						nav: 3,
+						requireAuth: true
 					}
 				},
 				{
@@ -294,7 +296,8 @@ export default new Router({
 					name: 'MyMessage',
 					component: MyMessage, //消息列表
 					meta: {
-						nav: 2
+						nav: 3,
+						requireAuth: true
 					}
 				},
 				{
@@ -302,7 +305,8 @@ export default new Router({
 					name: 'MessageDetail',
 					component: MessageDetail, //消息详情
 					meta: {
-						nav: 2
+						nav: 3,
+						requireAuth: true
 					}
 				},
 				{
@@ -310,7 +314,8 @@ export default new Router({
 					name: 'Membership',
 					component: Membership, //个人资料
 					meta: {
-						nav: 2
+						nav: 3,
+						requireAuth: true
 					}
 				}
 			]
@@ -318,7 +323,43 @@ export default new Router({
 		{
 			path: '/orderDetail',
 			name: 'OrderDetail',
+			meta: {
+				requireAuth: true
+			},
 			component: OrderDetail //订单详情
 		},
 	]
 })
+
+router.beforeEach((to, from, next) => {
+	if (to.matched.some(record => record.meta.requireAuth)) { // 判断该路由是否需要登录权限
+		if (window.localStorage.getItem('loginStatus')) { // 判断是否登录
+			next();
+		} else {
+			next({
+				path: '/login',
+				query: {
+					redirect: to.fullPath
+				} // 将跳转的路由path作为参数，登录成功后跳转到该路由
+			})
+		}
+	} else {
+		next();
+	}
+})
+// 跳转路由页面置顶
+router.afterEach((to, from, next) => {
+	let timer = null;
+	var scrollTop = document.documentElement.scrollTop;
+	cancelAnimationFrame(timer)
+	timer = requestAnimationFrame(function fn() {
+		if (document.documentElement.scrollTop > 0) {
+			scrollTop -= 50;
+			document.body.scrollTop = document.documentElement.scrollTop = scrollTop;
+			timer = requestAnimationFrame(fn)
+		} else {
+			cancelAnimationFrame(timer);
+		}
+	})
+})
+export default router

@@ -18,6 +18,7 @@ const TicketDetail = r => require.ensure([], () => r(require('@/view/TicketDetai
 const ProductDetail = r => require.ensure([], () => r(require('@/view/ProductDetail')), 'ProductDetail')
 //下订单页面
 const Suborder = r => require.ensure([], () => r(require('@/view/Orderonline/Suborder')), 'Suborder')
+const Suborder2 = r => require.ensure([], () => r(require('@/view/Orderonline/Suborder')), 'Suborder2')
 //支付页面
 const success = r => require.ensure([], () => r(require('@/view/Orderonline/success')), 'success')
 //主题乐园
@@ -108,6 +109,11 @@ export default new Router({
 			path: '/suborder',
 			name: 'Suborder',
 			component: Suborder //下订单页面
+		},
+		{
+			path: '/suborder2',
+			name: 'Suborder2',
+			component: Suborder2 //下订单页面
 		},
 		{
 			path: '/news',

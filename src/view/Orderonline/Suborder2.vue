@@ -41,9 +41,9 @@
                 <th>数量</th>
                 <th>小计</th>
               </tr>
-              <tr v-for="item in list2" :key="item">
+              <tr>
                  <!-- <tr v-for="item in list2" :key="item"> -->
-                <td>{{productName}}
+                <td>{{productname}}
                   <p>游玩时间：{{playtime}}</p>
                   <p>{{canDebook(saleType)}}</p>
                 </td>
@@ -224,16 +224,16 @@ export default {
     this.shopmsg();
     // this.saleType = this.$route.query.saleType
     // 监听路由跳转路径，如果是购物车，标志为a1，直接接受上个页面的参数
-    if (this.a1 === 1) {
+    // if (this.a1 === 1) {
       
-      let list1 = this.$route.query.list1;
-      this.list2 = JSON.parse(list1);
-      console.log(this.list2);
-      this.productName =this.list2[0].product.productName;
-      this.playtime = this.list2[0].product.dataBaseDate;
-      this.price1 = this.list2[0].product.settlementPrice;
-      this.count = this.list2[0].productCount;
-    }
+    //   let list1 = this.$route.query.list1;
+    //   this.list2 = JSON.parse(list1);
+    //   console.log(this.list2);
+    //   this.productName =this.list2[0].product.productName;
+    //   this.playtime = this.list2[0].product.dataBaseDate;
+    //   this.price1 = this.list2[0].product.settlementPrice;
+    //   this.count = this.list2[0].productCount;
+    // }
   },
   // 监听路由跳转路径，如果是购物车，重新调用购物车接口
   // watch :{
@@ -258,7 +258,9 @@ export default {
     },
     //接受产品详情页面的产品ID，库存ID,数量，是否邮寄，调用接口，展示订单信息
     shopmsg() {
+        console.log(111);
       let id = this.$route.query.id;
+      console.log(id)
       let stockId = this.$route.query.stockId;
       let num1 = this.$route.query.num;
       this.saleType = this.$route.query.saleType;
@@ -268,14 +270,15 @@ export default {
       // console.log(this.saleType);
       // console.log(num1);
       this.count = num1;
-
+      
       this.$fetch("http://192.168.2.61:5001/product-aggregate/find/" + id, {
         stockId: stockId,
         saleType: this.saleType
       }).then(res => {
         if (res.code === 200) {
-          // console.log(res);
+          console.log(111);
           this.productname = res.data.productName;
+          console.log(productname)
           this.playtime = res.data.dataBaseDate;
           this.price1 = res.data.settlementPrice;
         }

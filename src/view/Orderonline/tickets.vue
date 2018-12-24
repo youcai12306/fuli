@@ -190,7 +190,7 @@ export default {
     //获取门票信息
     getTicketList(typeId, date, pageSize, pageIndex) {
       //请求后台接口
-      this.$fetch("http://192.168.2.61:5001/product/findProductByStock", {
+      this.$fetch("http://192.168.2.38:5001/product-aggregate/findProductByStock", {
         playDate: date
       })
         .then(res => {
@@ -221,16 +221,16 @@ export default {
           });
           // console.log(xin2);
           let imgs = [];
-          this.$fetch("http://192.168.2.61:2600/staticResource/selectFiles", {
+          this.$fetch("http://192.168.2.61:2600/staticResource-mucon/selectFiles", {
             ids: xin2
           }).then(res => {
-            console.log(res);
+            console.log(res.data);
             // var img = res.data;
             // img.forEach((v,k) => {
             //   imgs[k] = v.fileName;
             //   imgs[k]=v.id;
             // })
-            this.imgs = res.data;
+            this.imgs = res.data || [];
           });
         })
         .catch(error => {

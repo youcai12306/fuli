@@ -18,7 +18,7 @@
 					<router-link to="/prepaid">已支付</router-link>
 				</li>
 				<li :class="{'active' : tabs == '3'}" @click="tabs = 3">
-					<router-link to="/prepaid">已完成</router-link>
+					<router-link to="/prepaid">下单成功</router-link>
 				</li>
 				<li :class="{'active' : tabs == '4'}" @click="tabs = 4">
 					<router-link to="/prepaid">已核销</router-link>
@@ -90,7 +90,7 @@
 							</el-table-column>
 							<el-table-column label="操作">
 								<template slot-scope="scope">
-									<el-button type="text" v-if="tabs == 3 && scope.row.returnSign == 1" @click="refund(scope.row,item.orderId,item.receiveName)">退票申请</el-button>
+									<el-button type="text" v-if="scope.row.singleTicketState == 3 && scope.row.returnSign == 1" @click="refund(scope.row,item.orderId,item.receiveName)">退票申请</el-button>
 								</template>
 							</el-table-column>
 						</el-table>
@@ -268,7 +268,7 @@
 						return '已支付';
 						break;
 					case 3:
-						return '已完成';
+						return '下单成功';
 						break;
 					case 4:
 						return '已核销';

@@ -5,10 +5,10 @@
       <div class="nav clearDiv">
         <div class="floatLeft">当前位置：网上订购>零售商品详情页</div>
         <div class="floatRight">我的订单</div>
-        <div class="floatRight shopping-car">
+        <div class="floatRight shopping-car" @click="jumpShoppingCar">
           <img
             src="../assets/img/shopping-car.png"
-            @click="jumpShoppingCar"
+            
           >购物车(
           <span>{{shopNum}}</span>)
         </div>
@@ -135,7 +135,8 @@ export default {
       img3 :"",
       time: "2018.12.09 08.00- 17.30",
       product: {},
-      shopNum: 0
+      shopNum: 0,
+      list:""
     };
   },
   components: {
@@ -148,16 +149,16 @@ export default {
     init() {
       let id = this.$route.query.id;
       let stockId = this.$route.query.stockId;
-      this.$fetch("http://192.168.2.61:5001/product/find/" + id, {
+      this.$fetch("http://192.168.2.38:5001/product-aggregate/find/" + id, {
         stockId: stockId
       }).then(res => {
-        console.log(res);
+        // console.log(res);
         if (res.code === 200) {
-          console.log(111);
+          // console.log(111);
           this.product = res.data;
           //请求图片接口
           this.$fetch(
-            "http://192.168.2.61:2600/staticResource/selectFileById",
+            "http://192.168.2.61:2600/staticResource-mucon/selectFileById",
             { id: this.product.pictureId }
           ).then(res => {
             this.img = IMG_Url + res.data.fileName;
@@ -221,7 +222,7 @@ export default {
       // 判如果是邮寄，传stockId参数过去
       if (this.changeA === 0) {
         this.$router.push({
-          path: "/Suborder",
+          path: "/Suborder2",
           query: {
             saleType: this.product.saleType,
             id: this.product.id,
@@ -231,7 +232,7 @@ export default {
         });
       } else if (this.changeA === 1) {
         this.$router.push({
-          path: "/Suborder",
+          path: "/Suborder2",
           query: {
             id: this.product.id,
             stockId: this.$route.query.stockId,
@@ -251,7 +252,7 @@ export default {
         productCount: this.num1
       };
       this.$post(
-        "http://192.168.2.34:6061/shopCart/addToshopCart",
+        "http://192.168.2.34:6061/shoppingCart-aggregate/addToshopCart",
         {
           touristId: Uid, 
           productId: this.product.id,
@@ -267,12 +268,12 @@ export default {
     },
     //查询购物车
     searchShoppingCar(Uid) {
-      this.$fetch("http://192.168.2.34:6061/shopCart/selectShopCarts", {
+      this.$fetch("http://192.168.2.34:6061/shoppingCart-aggregate/selectShopCarts", {
         touristId: Uid 
       }).then(res => {
         if (res.code === 200) {
-          console.log(res.data);
-          // let list = res.data;
+          // console.log(res.data);
+          let list = res.data;
           let shopNum = 0;
           for (let item of list) {
             shopNum += item.productCount;
@@ -283,7 +284,7 @@ export default {
     },
     //跳转购物车页面
     jumpShoppingCar() {
-      this.$router.push("/shoppingCar1");
+      this.$router.push("/shoppingCar");
     }
   },
   mounted() {
@@ -305,6 +306,9 @@ export default {
   height: 100%;
   background: url(../assets/img/pdDetail-bg.png) no-repeat 0 0;
   background-size: 1920px 100%;
+  .floatRight{
+    cursor: pointer;
+  }
   .content {
     width: 1200px;
     margin: 0 auto;

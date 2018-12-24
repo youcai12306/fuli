@@ -57,6 +57,7 @@
             <td colspan="6">暂无数据</td>
           </tr>
         </table>
+        <!-- {{flag}} -->
       </div>
     </div>
   </div>
@@ -89,20 +90,20 @@ export default {
   },
   methods: {
     aa() {
-      console.log(11);
+      // console.log(11);
     },
     //查询购物车
     searchShoppingCar(Uid) {
-      this.$fetch("http://192.168.2.34:6061/shopCart/selectShopCarts", {
+      this.$fetch("http://192.168.2.34:6061/shoppingCart-aggregate/selectShopCarts", {
         touristId: Uid
       }).then(res => {
         if (res.code === 200) {
-          console.log(111)
+          // console.log(111)
           this.good_list = res.data;
             if(this.good_list.length === 0){
               this.flag = true
-            }else if(this.good_list.length >= 0){
-              this.flag = false
+            }else {
+              this.flag = false;
             } 
           this.good_list.forEach(val => {
             val.is_selected = false;
@@ -121,11 +122,12 @@ export default {
     // },
     //删除购物车商品
     delShopping(item, key) {
-      this.$fetch("http://192.168.2.34:6061/shopCart/deleteshopCart", {
+      this.$fetch("http://192.168.2.34:6061/shoppingCart-aggregate/deleteshopCart", {
         id: item.id
       }).then(res => {
         if (res.code === 200) {
           this.good_list.splice(key, 1);
+          this.flag = true;
         }
       });
       this.getTotal();
@@ -193,7 +195,15 @@ export default {
       this.getTotal();
     },
     jumpShoppingCarOrder() {
-      this.$router.push("/Carsuborder");
+      this.$router.push("/suborder");
+      let list1 = JSON.stringify(this.good_list)
+      this.$router.push({
+        path:"/suborder",
+        query:{
+          list1:list1,
+          a:1
+        }
+      })
     }
     //计数器方法
     // handleChange() {

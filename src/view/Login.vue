@@ -183,7 +183,6 @@ export default {
         };
         this.$post("http://192.168.2.50:5010/tourist-aggregate/login",data,{headers:{'Content-Type':'application/json;charset=UTF-8'}}).then(res => {
           if (res.code === 200) {
-            console.log(res)
             this.setUserInfo(data);
             this.setUserData(res.data);
             this.$router.replace("/index");

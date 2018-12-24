@@ -344,6 +344,17 @@ router.beforeEach((to, from, next) => {
 })
 // 跳转路由页面置顶
 router.afterEach((to, from, next) => {
-	window.scrollTo(0, 0)
+	let timer = null;
+	var scrollTop = document.documentElement.scrollTop;
+	cancelAnimationFrame(timer)
+	timer = requestAnimationFrame(function fn() {
+		if (document.documentElement.scrollTop > 0) {
+			scrollTop -= 50;
+			document.body.scrollTop = document.documentElement.scrollTop = scrollTop;
+			timer = requestAnimationFrame(fn)
+		} else {
+			cancelAnimationFrame(timer);
+		}
+	})
 })
 export default router

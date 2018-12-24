@@ -63,6 +63,7 @@ export default {
               margin-top: 16px;
             }
             .content-list {
+							cursor: pointer;
               border-bottom: 1px solid rgba(238,238,238,1);
               padding: 18px 0 18px 23px;
               cursor: pointer;

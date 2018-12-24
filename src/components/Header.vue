@@ -75,7 +75,7 @@
               <div class="clearDiv info-two">
                 <img src="../assets/img/mine-icon.png" alt class="floatLeft">
                 <div class="floatLeft">
-                  <p>13800000000</p>
+                  <p>{{$store.getters.userInfo.mobile}}</p>
                   <p>我的等级：2</p>
                 </div>
               </div>

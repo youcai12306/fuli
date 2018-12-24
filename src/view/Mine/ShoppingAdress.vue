@@ -107,9 +107,9 @@ export default {
       detailAdress: "",
       type: false,
       select: {
-        province: "",
-        city: "",
-        area: ""
+        province: "海南省",
+        city: "三亚市",
+        area: "天涯区"
       },
       mengShow: false,
       isChange: false,
@@ -479,6 +479,7 @@ export default {
       .btn {
         margin-top: 40px;
         button {
+					cursor: pointer;
           width: 114px;
           height: 44px;
           background: rgba(7, 100, 233, 1);

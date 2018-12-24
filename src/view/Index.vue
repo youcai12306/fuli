@@ -14,20 +14,26 @@
       </div>
       <div class="banner-content clearDiv">
         <div class="content-list">游玩时间
-          <el-date-picker v-model="date" type="date" class="select-list"></el-date-picker>
+          <el-date-picker  v-model="date"
+            type="date"
+            placeholder="选择日期"
+            @change="getTicketList()"
+            format="yyyy-MM-dd"
+            value-format="yyyy-MM-dd" class="select-list"></el-date-picker>
         </div>
         <div class="ticket content-list">门票
-          <el-select v-model="value" class="select-list">
+          <el-select v-model="key" class="select-list" @change="ab()">
             <el-option
               v-for="item in options"
               :key="item.value"
               :label="item.label"
               :value="item.value"
+              :stockId="item.stockId"
             ></el-option>
           </el-select>
         </div>
         <div class="search">
-          <button>查询</button>
+          <button @click="jumpProductDetail()">查询</button>
         </div>
       </div>
     </div>
@@ -213,18 +219,9 @@ export default {
   data() {
     return {
       newSwiperIndex: 0,
-      options: [
-        {
-          value: "选项1",
-          label: "黄金糕"
-        },
-        {
-          value: "选项2",
-          label: "双皮奶"
-        }
-      ],
-      value: "购票",
-      date: "2018-12-12",
+      options: [],
+      key: "",
+      date: "",
       swiperOption: {
         // notNextTick是一个组件自有属性，如果notNextTick设置为true，组件则不会通过NextTick来实例化swiper，也就意味着你可以在第一时间获取到swiper对象，假如你需要刚加载遍使用获取swiper对象来做什么事，那么这个属性一定要是true
         notNextTick: true,
@@ -234,13 +231,45 @@ export default {
         // },
         // loop:true,
       },
-      index: 0
+      index: 0,
+      skId:"",
+      id:""
     };
   },
   mounted() {
+    let today = new Date();
+    this.date = this.$tool.formatData(today);
+    this.getTicketList()
     this.swiperInit();
   },
   methods: {
+    //获取产品列表
+    getTicketList(){
+      this.options = [];
+      this.$fetch("http://192.168.2.61:5001/product-aggregate/findProductByStock", {
+        playDate: this.date
+      }).then((res) =>{
+          let data = res.data.list
+          for(let item of data){
+            this.options.push({value:item.id,label:item.productName,stockId:item.stockId})
+          }
+      })
+    },
+    ab(){
+      for(let item of this.options){
+        if(this.key == item.value){
+          this.skId = item.stockId;
+          this.id = this.key
+        }
+      }
+    },
+    //点击查询
+    jumpProductDetail(){
+      this.$router.push({path:'/productDetail',query:{
+        id:this.id,
+        stockId: this.skId
+      }})
+    },
     //跳转活动详情
     jumpHuodongDetail(id) {
       this.$router.push({ path: "/eventsDetail", query: { id: id } });
@@ -436,7 +465,7 @@ export default {
       }
       .new-swiper {
         padding-bottom: 30px;
-        padding-top: 20px;
+        padding-top: 40px;
         height: 360px;
         background-color: rgba(255, 255, 255, 0.18);
         box-shadow: 5px 6px 7px 0px rgba(51, 75, 179, 0.35);
@@ -462,7 +491,7 @@ export default {
             position: absolute;
             left: -60px;
             top: 35%;
-            margin-top: -45px;
+            margin-top: -40px;
             background: rgba(109, 196, 38, 0.6)
               url(../assets/img/index-new-next.png) no-repeat;
             background-position: center center;
@@ -471,7 +500,7 @@ export default {
             position: absolute;
             right: -60px;
             top: 35%;
-            margin-top: -45px;
+            margin-top: -40px;
             background: rgba(109, 196, 38, 0.6)
               url(../assets/img/index-new-prev.png) no-repeat;
             background-position: center center;
@@ -793,7 +822,7 @@ export default {
   background-color: transparent;
 }
 .swiper-box .el-carousel__indicators {
-  margin-top: 40px;
+  margin-top: 20px;
   margin-bottom: 28px;
 }
 .swiper-box .el-carousel__indicator .el-carousel__button {

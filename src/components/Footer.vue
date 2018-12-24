@@ -13,7 +13,7 @@
 					<li><a href="javascript:;">公园守则</a></li>
 					<li><a href="javascript:;">网站地图</a></li>
 					<li><a href="javascript:;">人才招聘</a></li>
-					<li><a href="javascript:;">富力集团</a></li>
+					<li><a href="http://www.rfchina.com" target="_blank">富力集团</a></li>
 					<li><a href="javascript:;">联系我们</a></li>
 				</ul>
 				<div class="info floatLeft">

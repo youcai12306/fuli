@@ -194,7 +194,7 @@ export default {
         playDate: date
       })
         .then(res => {
-          // console.log(res);
+          console.log(res);
           if(res.code === 400){
               this.msg = res.message
               this.items = []

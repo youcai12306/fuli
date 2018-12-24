@@ -25,7 +25,7 @@
             活动地址：
             <span>麦迪卡斯水乐园</span>
           </div>
-          <button @click="jumpDetail(item.id)">进入活动</button>
+          <button @click="jumpDetail('5c1f5349f8dac609dd5cd6b7')">进入活动</button>
         </div>
       </li>
     </ul>
@@ -56,7 +56,7 @@ export default {
     },
     jumpDetail(id) {
       this.$router.push({
-        path: "/",
+        path: "/EventsDetail",
         query: {
           id: id
         }

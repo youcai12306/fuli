@@ -79,8 +79,8 @@
 						<p>游玩指南</p>
 					</router-link>
 					<!-- 优惠活动 -->
-					<router-link to="/specialOffier" tag="li" class="active" :class="{'actives' : $route.path == '/specialOffier' || $route.path == '/events'}">
-						<template v-if="$route.path == '/specialOffier' || $route.path == '/events'">
+					<router-link to="/specialOffier" tag="li" class="active" :class="{'actives' : $route.path == '/specialOffier' || $route.path == '/events' || $route.path == '/EventsDetail'}">
+						<template v-if="$route.path == '/specialOffier' || $route.path == '/events' || $route.path == '/EventsDetail'">
 							<img src="../assets/img/header-6.png" alt>
 						</template>
 						<template v-else>

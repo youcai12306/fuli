@@ -43,6 +43,7 @@ const ditu = r => require.ensure([], () => r(require('@/view/Visitguide/ditu')),
 //优惠活动
 const SpecialOffier = r => require.ensure([], () => r(require('@/view/specialOffier/SpecialOffier')), 'SpecialOffier')
 const Events = r => require.ensure([], () => r(require('@/view/specialOffier/Events')), 'Events')
+const EventsDetail = r => require.ensure([], () => r(require('@/view/specialOffier/EventsDetail')), 'EventsDetail')
 //冒险之旅
 const Risk = r => require.ensure([], () => r(require('@/view/risk/Risk')), 'Risk')
 //动物百科
@@ -164,6 +165,10 @@ let router = new Router({
 				{
 					path: '/events',
 					component: Events,
+				},
+				{
+					path: '/EventsDetail',
+					component: EventsDetail
 				}
 			]
 		},

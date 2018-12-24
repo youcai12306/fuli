@@ -104,6 +104,7 @@ export default {
         font-weight: 400;
         color: rgba(102, 102, 102, 1);
         margin-top: 18px;
+				cursor: pointer;
       }
     }
     .content{

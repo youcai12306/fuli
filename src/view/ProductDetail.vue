@@ -211,6 +211,11 @@ export default {
     },
     //跳转提交订单页面
     jumpSubmitOrder(id, stockId) {
+			let Uid = this.$store.getters.getUserData.userId;
+			if(Uid == undefined){//判断是否登录
+				this.$router.push("/login");
+				return;
+			}
       // this.$router.push({
       //   path: "/Suborder",
       //   query: {
@@ -245,6 +250,11 @@ export default {
     addShoppingCar() {
       let Uid = this.$store.getters.getUserData.userId;
       let createDateId = this.$route.query.stockId;
+			if(Uid == undefined){//判断是否登录
+				this.$router.push("/login");
+				return;
+			}
+			
       let data = {
         touristId: Uid, 
         productId: this.product.id,
@@ -462,6 +472,7 @@ export default {
             margin-top: 34px;
             width: 146px;
             height: 43px;
+						cursor: pointer;
           }
           .img1 {
             margin-left: 10px;

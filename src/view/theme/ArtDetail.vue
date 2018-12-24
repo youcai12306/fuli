@@ -2,7 +2,7 @@
   <div class="animalTheme">
     <div class="box">
       <div class="top clearDiv">
-        <h3 class="floatLeft">鲸鲨馆</h3>
+        <h3 class="floatLeft">巡游表演</h3>
         <div class="floatRight clearDiv" @click="back()">
           <img src="../../assets/img/login-qq.png" alt>
           <span>返回</span>
@@ -13,25 +13,25 @@
           <swiper :options="swiperOption" ref="mySwiper">
             <!-- slides -->
             <swiper-slide>
-              <img src="../../assets/img/index-item1.png" alt>
+              <img src="../../assets/img/theme-art-img2.png" alt>
             </swiper-slide>
             <swiper-slide>
-              <img src="../../assets/img/index-item2.png" alt>
+              <img src="../../assets/img/theme-art-img2.png" alt>
             </swiper-slide>
             <swiper-slide>
-              <img src="../../assets/img/index-item3.png" alt>
+              <img src="../../assets/img/theme-art-img2.png" alt>
             </swiper-slide>
             <div class="swiper-pagination" slot="pagination"></div>
           </swiper>
         </div>
         <div class="right floatRight">
-          <h3>场馆动物</h3>
-          <p>虎鲸/企鹅/中华鲟/海豹/周边</p>
+          <h3>售卖商品</h3>
+          <p>纪念品/卡通玩具/衣服帽子周边</p>
+          <h3>表演时长</h3>
+          <p>50分钟</p>
         </div>
       </div>
-      <div
-        class="content"
-      >总水量2.2万吨，配备海底观光隧道，超大观赏视窗让游客犹如置身海底，近距离领略长达7米的鲸鲨庞大身体游弋的壮观场面。鲸鲨馆放养生物超过1500种，总数量5万余只。</div>
+      <div class="content">我们的22个特色人物将带您前往壮丽的海底世界。 通过使用高科技灯光和音频效果，您将永远不会忘记该节目带给您的有趣体验。</div>
     </div>
   </div>
 </template>
@@ -73,7 +73,7 @@ export default {
 <style lang="scss" scoped>
 .animalTheme {
   width: 100%;
-  background: url(../../assets/img/login-bg.png) no-repeat;
+  background: url(../../assets/img/theme-detail-bg.png) no-repeat;
   background-size: 1920px 100%;
   padding-top: 390px;
   padding-bottom: 204px;
@@ -181,6 +181,3 @@ export default {
   }
 }
 </style>
-
-
-

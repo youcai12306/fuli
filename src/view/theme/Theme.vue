@@ -9,28 +9,28 @@
           <swiper :options="swiperOption" ref="mySwiper">
             <!-- slides -->
             <swiper-slide>
-              <img src="../../assets/img/index-item1.png" alt :class="{imgActive:index === 0}">
+              <img src="../../assets/img/theme-banner-list1.png" alt :class="{imgActive:index === 0}">
             </swiper-slide>
             <swiper-slide>
-              <img src="../../assets/img/index-item2.png" alt :class="{imgActive:index === 1}">
+              <img src="../../assets/img/theme-banner-list2.png" alt :class="{imgActive:index === 1}">
             </swiper-slide>
             <swiper-slide>
-              <img src="../../assets/img/index-item3.png" alt :class="{imgActive:index === 2}">
+              <img src="../../assets/img/theme-banner-list3.png" alt :class="{imgActive:index === 2}">
             </swiper-slide>
             <swiper-slide>
-              <img src="../../assets/img/index-item4.png" alt :class="{imgActive:index === 3}">
+              <img src="../../assets/img/theme-banner-list4.png" alt :class="{imgActive:index === 3}">
             </swiper-slide>
             <swiper-slide>
-              <img src="../../assets/img/index-item5.png" alt :class="{imgActive:index === 4}">
+              <img src="../../assets/img/theme-banner-list5.png" alt :class="{imgActive:index === 4}">
             </swiper-slide>
             <swiper-slide>
-              <img src="../../assets/img/index-item6.png" alt :class="{imgActive:index === 5}">
+              <img src="../../assets/img/theme-banner-list6.png" alt :class="{imgActive:index === 5}">
             </swiper-slide>
             <swiper-slide>
-              <img src="../../assets/img/index-item1.png" alt :class="{imgActive:index === 6}">
+              <img src="../../assets/img/theme-banner-list1.png" alt :class="{imgActive:index === 6}">
             </swiper-slide>
             <swiper-slide>
-              <img src="../../assets/img/index-item2.png" alt :class="{imgActive:index === 7}">
+              <img src="../../assets/img/theme-banner-list2.png" alt :class="{imgActive:index === 7}">
             </swiper-slide>
             <!-- Optional controls -->
           </swiper>
@@ -48,12 +48,12 @@
                 :key="key"
                 v-show="key === datailIndex"
               >
-                <img src="../../assets/img/index-bg1.png" alt class="img">
+                <img src="../../assets/img/banner-img2.png" alt class="img">
               </div>
               <div class="top-imgMinList">
                 <ul>
                   <li v-for="(item,key) in 2" :key="key" @click="showDatail(key)">
-                    <img src="../../assets/img/index-bg1.png" alt class="imgMin">
+                    <img src="../../assets/img/banner-img1.png" alt class="imgMin">
                   </li>
                 </ul>
               </div>
@@ -77,16 +77,11 @@
     </div>
     <!-- 精彩演绎 -->
     <div class="art" id="art">
+      <img src="../../assets/img/theme-animal-img1.png" alt class="img">
       <div class="meng2">
         <swiper :options="certifySwiper1" ref="certifySwiper1">
-          <swiper-slide>
-            <img src="../../assets/img/md-14.png" alt>
-          </swiper-slide>
-          <swiper-slide>
-            <img src="../../assets/img/md-15.png" alt>
-          </swiper-slide>
-          <swiper-slide>
-            <img src="../../assets/img/md-16.png" alt>
+          <swiper-slide v-for="item in 3" :key="item">
+            <img src="../../assets/img/theme-art-img3.png" alt>
           </swiper-slide>
         </swiper>
       </div>
@@ -94,32 +89,12 @@
       <div class="meng">
         <div class="certify" id="certify">
           <swiper :options="certifySwiper" ref="certifySwiper">
-            <swiper-slide>
-              <div class="venve">
-                <img src="../../assets/img/md-14.png" alt>
+            <swiper-slide v-for="item in 3" :key="item">
+              <div class="venve" @click="jumpArtDetail(0)">
+                <img src="../../assets/img/theme-art-img1.png" alt>
                 <div class="p1">
                   街头表演
                   <span>表演时间14：00</span>
-                </div>
-                <div class="p2">舞蹈，音乐，表演，互动，这所有的一切都是为了给你一份难忘的体验。</div>
-              </div>
-            </swiper-slide>
-            <swiper-slide>
-              <div class="venve">
-                <img src="../../assets/img/md-15.png" alt>
-                <div class="p1">
-                  街头表演
-                  <span>表演时间16：00</span>
-                </div>
-                <div class="p2">舞蹈，音乐，表演，互动，这所有的一切都是为了给你一份难忘的体验。</div>
-              </div>
-            </swiper-slide>
-            <swiper-slide>
-              <div class="venve">
-                <img src="../../assets/img/md-16.png" alt>
-                <div class="p1">
-                  街头表演
-                  <span>表演时间19：00</span>
                 </div>
                 <div class="p2">舞蹈，音乐，表演，互动，这所有的一切都是为了给你一份难忘的体验。</div>
               </div>
@@ -132,13 +107,13 @@
     </div>
     <!-- 动物场馆 -->
     <div class="animal" id="animal">
-      <img src="../../assets/img/login-bg.png" alt class="img">
+      <img src="../../assets/img/theme-animal-title.png" alt class="img">
       <div class="bottom">
         <swiper :options="swiperOptions" ref="mySwipers">
           <!-- slides -->
           <swiper-slide v-for="item in 5" :key="item">
-            <div class="venve" @click.stop="jumpAnimalDetail(item.id,0)">
-              <img src="../../assets/img/footer-logo.png" alt>
+            <div class="venve" @click.stop="jumpAnimalDetail(item.id)">
+              <img src="../../assets/img/theme-animal-img1.png" alt>
               <h3>海豚馆</h3>
               <p>总水量2.3万吨，游客不仅能欣赏精彩绝伦的海豚表演，更能与聪明可爱的海豚共同畅游，体验前所未有的互动乐趣。</p>
             </div>
@@ -150,16 +125,16 @@
     <!-- 主题商店 -->
     <div class="shop" id="shop">
       <div class="shop-box">
-        <img src="../../assets/img/login-bg.png" alt class="img">
+        <img src="../../assets/img/theme-shop-title.png" alt class="img">
         <div class="bottom">
           <swiper :options="swiperOptions1" ref="mySwipers1">
             <swiper-slide v-for="item in 5" :key="item">
-              <div class="venve" @click="jumpAnimalDetail(item.id,0)">
+              <div class="venve" @click="jumpShopDetail(item.id)">
                 <div class="venve-list">
-                  <img src="../../assets/img/footer-logo.png" alt>
+                  <img src="../../assets/img/theme-shop-img1.png" alt>
                   <div class="venve-content">
-                    <div>塔瓦那餐厅</div>
-                    <p>希腊风格，地中海西式美食广场及东南亚美食，适合一家大小</p>
+                    <div>海豚玩具商店</div>
+                    <p>同一个世界的另一个角度，这是一个需要你探索求证才能发现的世界，跟着我们来吧！在这里认识聪颖灵敏的 鲸豚类、水陆两生的 鳍脚类、种类这是一个需要你探索求证才能发现的世界，跟着我们……</p>
                   </div>
                 </div>
               </div>
@@ -172,10 +147,15 @@
     <!-- 特色餐厅 -->
     <div class="eat" id="eat">
       <div class="eat-box">
-        <img src="../../assets/img/login-bg.png" alt class="img">
+        <img src="../../assets/img/theme-eat-title.png" alt class="img">
         <div class="eat-lists clearDiv">
-          <div class="eat-list floatLeft" @click="jumpEatDetail(item.id)" v-for="item in 2" :key="item">
-            <img src="../../assets/img/footer-logo.png" alt>
+          <div
+            class="eat-list floatLeft"
+            @click="jumpEatDetail(item.id)"
+            v-for="item in 2"
+            :key="item"
+          >
+            <img src="../../assets/img/theme-eat-img1.png" alt>
             <div class="eat-content">
               <div>塔瓦那餐厅</div>
               <p>希腊风格，地中海西式美食广场及东南亚美食，适合一家大小</p>
@@ -194,9 +174,9 @@
       <li @click="jumpColumn('#eat')">特色餐厅</li>
     </ul>
     <div class="alert" v-show="alertShow">
-      <img src="../../assets/img/canyin.png" alt class="x" @click="showYuanQu()">
+      <img src="../../assets/img/theme-quxiao.png" alt class="x" @click="showYuanQu()">
       <h3>麦迪卡斯水乐园</h3>
-      <img src="../../assets/img/canyin.png" alt class="img">
+      <img src="../../assets/img/theme-alert.png" alt class="img">
       <p>四季全时运营的水乐园，在古希腊神话与现代爱琴海风格一秒切换，无与伦比的海洋冒险世界将生动展示，挑战吧，勇者！燃烧吧，肾上腺！高刺激滑道、高空大喇叭、极限竞速滑道、疯狂巨碗等等，20余套戏水滑道，足够让戏水爱好者为之疯狂。区内还配置有主题餐厅、特色商店及各类功能齐全的游客服务设施，满足游客更多需求。</p>
     </div>
   </div>
@@ -210,7 +190,7 @@ export default {
   name: "Index",
   data() {
     return {
-      alertShow:false,
+      alertShow: false,
       newSwiperIndex: 0,
       options: [
         {
@@ -335,13 +315,25 @@ export default {
     });
   },
   methods: {
+    //跳转动物详情
+    jumpAnimalDetail(id) {
+      this.$router.push({ path: "/animalDetail", query: { id: id } });
+    },
+    //跳转主题商店
+    jumpShopDetail(id) {
+      this.$router.push({ path: "/shopDetail", query: { id: id } });
+    },
+    //跳转演绎中心
+    jumpArtDetail(id) {
+      this.$router.push({ path: "/artDetail", query: { id: id } });
+    },
     //跳转餐厅详情页
-    jumpEatDetail(){
-      this.$router.push({path:'/eatDetail',query:{id:id}})
+    jumpEatDetail(id) {
+      this.$router.push({ path: "/eatDetail", query: { id: id } });
     },
     //显示园区乐园
-    showYuanQu(){
-      this.alertShow = ! this.alertShow;
+    showYuanQu() {
+      this.alertShow = !this.alertShow;
     },
     change(newVal, oldVal) {
       this.newSwiperIndex = newVal;
@@ -383,16 +375,6 @@ export default {
     jumpColumn(col) {
       let top = document.querySelector(col).offsetTop;
       window.scroll(0, top);
-    },
-    //跳转动物详情页
-    jumpAnimalDetail(id, type) {
-      this.$router.push({
-        path: "ThemeDetail",
-        query: {
-          id: id,
-          type: type
-        }
-      });
     }
   },
   components: {
@@ -429,7 +411,7 @@ export default {
   width: 100%;
   .banner {
     height: 1660px;
-    background: url(../../assets/img/index-bg1.png) no-repeat 0 0;
+    background: url(../../assets/img/theme-bg1.png) no-repeat 0 0;
     background-size: 1920px 100%;
     .list-one {
       width: 100%;
@@ -515,7 +497,7 @@ export default {
 
             .top-imgMinList {
               position: absolute;
-              bottom: 0;
+              bottom: 3px;
               height: 102px;
               background: rgba(0, 0, 0, 0.6);
               width: 100%;
@@ -529,7 +511,7 @@ export default {
                 li {
                   float: left;
                   margin: 0 30px;
-
+                  cursor: pointer;
                   img {
                     width: 105px;
                     height: 60px;
@@ -591,9 +573,15 @@ export default {
 
   .art {
     width: 100%;
-    height: 1088px;
+    height: 1062px;
     /* background: url(../../assets/img/index-item1.png) no-repeat;
-			background-size: 100% 100%; */
+      background-size: 100% 100%; */
+    text-align: center;
+    padding-top: 60px;
+    .img {
+      width: 456px;
+      height: 93px;
+    }
     position: relative;
     .meng {
       position: absolute;
@@ -602,7 +590,7 @@ export default {
       bottom: 0;
       right: 0;
       z-index: 10;
-      background: rgba(15, 57, 119, 0.7);
+      // background: rgba(15, 57, 119, 0.7);
     }
 
     .meng2 {
@@ -626,13 +614,13 @@ export default {
     width: 100%;
     height: 1080px;
     text-align: center;
-    background: url(../../assets/img/login-bg.png) no-repeat;
+    background: url(../../assets/img/theme-animal.png) no-repeat;
     background-size: 100% 100%;
     padding-top: 163px;
 
     .img {
-      width: 300px;
-      height: 200px;
+      width: 456px;
+      height: 93px;
     }
 
     .bottom {
@@ -650,7 +638,7 @@ export default {
         text-align: center;
         padding-bottom: 20px;
         overflow: hidden;
-
+        cursor: pointer;
         img {
           width: 350px;
           height: 275px;
@@ -708,19 +696,19 @@ export default {
   .shop {
     width: 100%;
     height: 1080px;
-    background: url(../../assets/img/new-1.png) no-repeat;
+    background: url(../../assets/img/theme-shop.png) no-repeat;
     background-size: 100% 100%;
 
     .shop-box {
       width: 100%;
       height: 100%;
-      background: rgba(136, 171, 218, 0.9);
+      // background: rgba(136, 171, 218, 0.9);
       text-align: center;
       padding-top: 92px;
 
       .img {
-        width: 300px;
-        height: 200px;
+        width: 456px;
+        height: 93px;
       }
 
       .bottom {
@@ -735,7 +723,7 @@ export default {
           background: rgba(255, 255, 255, 1);
           border: 5px solid rgba(255, 255, 255, 1);
           border-radius: 6px;
-
+          cursor: pointer;
           .venve-list {
             img {
               width: 100%;
@@ -796,7 +784,7 @@ export default {
   .eat {
     width: 100%;
     height: 1080px;
-    background: url(../../assets/img/new-1.png) no-repeat;
+    background: url(../../assets/img/theme-eat.png) no-repeat;
     background-size: 100% 100%;
 
     .eat-box {
@@ -807,18 +795,18 @@ export default {
       padding-top: 92px;
 
       .img {
-        width: 300px;
-        height: 200px;
+        width: 456px;
+        height: 93px;
       }
 
       .eat-lists {
         padding-left: 395px;
         padding-top: 75px;
-
+        cursor: pointer;
         .eat-list {
-          &:nth-of-type(2n){
-              margin-left: 127px;
-            }
+          &:nth-of-type(2n) {
+            margin-left: 127px;
+          }
           img {
             width: 500px;
             height: 309px;
@@ -929,8 +917,8 @@ export default {
     width: 35px;
     height: 36px;
     position: absolute;
-    right:-50px;
-    top:-25px;
+    right: -50px;
+    top: -25px;
   }
 }
 </style>

@@ -23,9 +23,11 @@ const Suborder2 = r => require.ensure([], () => r(require('@/view/Orderonline/Su
 const success = r => require.ensure([], () => r(require('@/view/Orderonline/success')), 'success')
 //主题乐园
 const Theme = r => require.ensure([], () => r(require('@/view/theme/Theme')), 'Theme')
-const ThemeDetail = r => require.ensure([], () => r(require('@/view/theme/ThemeDetail')), 'ThemeDetail')
+const AnimalDetail = r => require.ensure([], () => r(require('@/view/theme/AnimalDetail')), 'AnimalDetail')
 const artTheme = r => require.ensure([], () => r(require('@/view/theme/artTheme')), 'artTheme')
 const EatDetail = r => require.ensure([], () => r(require('@/view/theme/EatDetail')), 'EatDetail')
+const ShopDetail = r => require.ensure([], () => r(require('@/view/theme/ShopDetail')), 'ShopDetail')
+const ArtDetail = r => require.ensure([], () => r(require('@/view/theme/ArtDetail')), 'ArtDetail')
 
 // 新闻中心首页
 const News = r => require.ensure([], () => r(require('@/view/news/News')), 'News')
@@ -185,14 +187,24 @@ export default new Router({
 			component: Theme //主题乐园
 		},
 		{
-			path: '/themeDetail',
-			name: 'ThemeDetail',
-			component: ThemeDetail //主题乐园详情
+			path: '/animalDetail',
+			name: 'AnimalDetail',
+			component: AnimalDetail //动物详情
 		},
 		{
 			path: '/eatDetail',
 			name: 'EatDetail',
 			component: EatDetail //餐厅详情
+		},
+		{
+			path: '/artDetail',
+			name: 'ArtDetail',
+			component: ArtDetail // 演绎中心
+		},
+		{
+			path: '/shopDetail',
+			name: 'ShopDetail',
+			component: ShopDetail //主题商店
 		},
 		{
 			path:'/artTheme',

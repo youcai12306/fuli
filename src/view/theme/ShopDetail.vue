@@ -2,7 +2,7 @@
   <div class="animalTheme">
     <div class="box">
       <div class="top clearDiv">
-        <h3 class="floatLeft">塔瓦那餐厅</h3>
+        <h3 class="floatLeft">海豚纪念商店</h3>
         <div class="floatRight clearDiv" @click="back()">
           <img src="../../assets/img/login-qq.png" alt>
           <span>返回</span>
@@ -13,25 +13,24 @@
           <swiper :options="swiperOption" ref="mySwiper">
             <!-- slides -->
             <swiper-slide>
-              <img src="../../assets/img/theme-eat-img2.png" alt>
+              <img src="../../assets/img/theme-shop-img2.png" alt>
             </swiper-slide>
             <swiper-slide>
-              <img src="../../assets/img/theme-eat-img2.png" alt>
+              <img src="../../assets/img/theme-shop-img2.png" alt>
             </swiper-slide>
             <swiper-slide>
-              <img src="../../assets/img/theme-eat-img2.png" alt>
+              <img src="../../assets/img/theme-shop-img2.png" alt>
             </swiper-slide>
             <div class="swiper-pagination" slot="pagination"></div>
           </swiper>
         </div>
         <div class="right floatRight">
-          <h3>水乐园入口右侧</h3>
-          <p>平均消费：￥60-90</p>
+          <h3>售卖商品</h3>
+          <p>纪念品/卡通玩具/衣服帽子周边</p>
         </div>
       </div>
-      <div
-        class="content"
-      >希腊风格，地中海西式美食广场及东南亚美食，适合一家大小</div>
+      <div class="content">「海豚岛」是海豚的家，您可以穿梭于岛上的茅草屋栈道，欣赏海豚的美妙泳姿。如果想近距离观赏海豚，更可顺着楼梯往下走到玻璃前观看。活泼的海豚已适应这里的环境，更会不时表演拿手的连滚翻呢！
+ 国家一级保护动物，素有“水上大熊猫”之称，拥有天赐的粉红色皮肤，与生俱来的上扬嘴角，一个浅浅的微笑就能萌化你的心，它们又是驰聘于海洋的精灵，喜爱在海中追波逐浪，追逐一个勇敢而智慧的白海豚传说。国家一级保护动物，素有“水上大熊猫”之称，拥有天赐的粉红色皮肤，与生俱来的上扬嘴角，一个浅浅的微笑就能萌化你的心，它们又是驰聘于海洋的精灵，喜爱在海中追波逐浪，追逐一个勇敢而智慧的白海豚传说。</div>
     </div>
   </div>
 </template>

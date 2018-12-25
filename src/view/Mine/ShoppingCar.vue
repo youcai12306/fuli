@@ -73,13 +73,7 @@ export default {
       flag:true,
       id1:"",
       id2:"",
-			arr:[],
-			productFormList:{
-				productId:'',
-				num:'',
-				stockId:'',
-				saleType:''
-			}
+			arr:[]
 		};
   },
   watch: {

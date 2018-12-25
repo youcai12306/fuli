@@ -73,7 +73,7 @@ export default {
       flag:true,
       id1:"",
       id2:"",
-			arr:[],
+			arr:[]
 		};
   },
   watch: {
@@ -144,18 +144,13 @@ export default {
     },
     // 计算选中商品金额
     getTotal() {
-      this.totalPrice = 0;
-      this.totalNum = 0;
-      for (let i = 0; i < this.good_list.length; i++) {
-        let _d = this.good_list[i];
-				this.arr[i] = this.good_list[i];
-        if (_d.is_selected) {
-          //this.totalPrice += _d["price"] * _d["num"];
-          this.totalNum += _d["productCount"];
-					this.arr[i]['num'] = _d["productCount"];
-					this.arr[i]['price'] = _d["settlementPrice"];
-        }
-      }
+			this.good_list.forEach((v,i) => {
+				this.arr[i] = {};
+				this.arr[i]['productId'] = v.productId;
+				this.arr[i]['num'] = v.productCount;
+				this.arr[i]['stockId'] = v.createDateId;
+				this.arr[i]['saleType'] = v.saleType ? 1 : 0;
+			})
     },
     // 删除选中商品
     // delete_selected() {
@@ -218,7 +213,8 @@ export default {
           id1:this.id1,
           id2:this.id2,
           totalNum:this.totalNum,
-          stockId:this.stockId
+          stockId:this.stockId,
+					arr:this.arr
         }
       })
     }

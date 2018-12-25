@@ -312,16 +312,7 @@ export default {
       // console.log(111);
       let data = {
         touristId: this.$store.getters.getUserData.userId,
-        productFormList: [
-          {
-            productId: this.$route.query.id2,
-            num: this.$route.query.totalNum,
-            stockId: this.$route.query.id1,
-            // saleType: parseInt(this.$route.query.saleType)
-            saleType:0
-          }
-        ],
-
+        productFormList: this.$route.query.arr,
         receiveId: 1111111111, //邮寄ID
         receiveName: this.numberValidateForm.name1,
         receiveMobile: this.numberValidateForm.phone,

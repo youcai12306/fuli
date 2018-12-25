@@ -3,6 +3,10 @@
 		<Header></Header>
 		<div class="risk">
 			<div class="title">
+				<div class="risk-title">
+					<p class="p1">冒险之旅</p>
+					<p class="p2">倘若你徜徉在这片资讯丰富的地带<br>也一定能收获无穷欢乐！</p>
+				</div>
 				<div class="location">当前位置><router-link to="index" tag="span">首页></router-link>冒险之旅</div>
 			</div>
 			<div class="content">
@@ -128,6 +132,31 @@
 				rgba(114, 180, 42, 1),
 				rgba(134, 212, 100, 1));
 			box-shadow: 0px 2px 9px 1px rgba(0, 0, 0, 0.35);
+			position: relative;
+
+			.risk-title {
+				position: absolute;
+				top: -370px;
+				left: 390px;
+				width: 350px;
+				color: #fff;
+
+				.p1 {
+					font-size: 48px;
+					font-family: FZZZHONGJW--GB1-0;
+					font-weight: 400;
+					margin-bottom: 30px;
+					line-height: 48px;
+				}
+
+				.p2 {
+					font-size: 20px;
+					font-family: FZZZHONGJW--GB1-0;
+					font-weight: 400;
+					color: rgba(255, 255, 255, 1);
+					line-height: 30px;
+				}
+			}
 
 			.location {
 				//   height: 22px;

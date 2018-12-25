@@ -3,6 +3,10 @@
 		<Header></Header>
 		<div class="risk">
 			<div class="title">
+				<div class="risk-title">
+					<p class="p1">动物百科</p>
+					<p class="p2">倘若你徜徉在这片资讯丰富的地带<br>也一定能收获无穷欢乐！</p>
+				</div>
 				<div class="location">当前位置><router-link to="/index" tag="span">首页></router-link>
 					<router-link to="animal" tag="span">动物百科</router-link>
 				</div>
@@ -241,7 +245,7 @@
 							</ul>
 							<div class="pages">
 								<el-pagination background layout="prev, pager, next" :total="totle" :current-page.sync="pageIndex" :page-size="pageSize"
-								@current-change="changePage"></el-pagination>
+								 @current-change="changePage"></el-pagination>
 							</div>
 						</div>
 					</template>
@@ -295,6 +299,31 @@
 				rgba(15, 107, 234, 1),
 				rgba(52, 142, 240, 1));
 			box-shadow: 0px 5px 9px 1px rgba(0, 0, 0, 0.35);
+			position: relative;
+
+			.risk-title {
+				position: absolute;
+				top: -330px;
+				right: 215px;
+				width: 350px;
+				color: #fff;
+
+				.p1 {
+					font-size: 48px;
+					font-family: FZZZHONGJW--GB1-0;
+					font-weight: 400;
+					margin-bottom: 30px;
+					line-height: 48px;
+				}
+
+				.p2 {
+					font-size: 20px;
+					font-family: FZZZHONGJW--GB1-0;
+					font-weight: 400;
+					color: rgba(255, 255, 255, 1);
+					line-height: 30px;
+				}
+			}
 
 			.location {
 				//   height: 22px;
@@ -509,6 +538,7 @@
 					padding: 50px 0;
 					background: #fff;
 					margin: 0 auto;
+
 					ul {
 						li {
 							position: relative;
@@ -521,10 +551,11 @@
 							line-height: 70px;
 							padding: 0 40px 0 60px;
 							border-bottom: 1px solid #D7D7D7;
-							&:hover{
+
+							&:hover {
 								background: #D5F1FF;
 							}
-							
+
 							a {
 								color: #333333;
 							}

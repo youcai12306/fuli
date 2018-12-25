@@ -1,24 +1,22 @@
 <template>
   <div>
     <div class="bac clearDiv">
-    	<div class="ban clearDiv">
-    		<div class="clearDiv ban1 ban3">
-    			<router-link to="/index">
-    				<img src="../assets/img/logo.png" alt>
-    			</router-link>
-    		</div>
-    		<div class="clearDiv ban1 ban2 ban4">
-    			<router-link to="/login">
-    				会员登录
-    			</router-link>
-    		</div>
-    		<div class="clearDiv ban1 ban2 ban5">
-    			<router-link to='/register'>
-    				我不是会员？立即注册
-    				<img src="../assets/img/login.png" alt>
-    			</router-link>
-    		</div>
-    	</div>
+      <div class="ban clearDiv">
+        <div class="clearDiv ban1 ban3">
+          <router-link to="/index">
+            <img src="../assets/img/content-bg.png" alt>
+          </router-link>
+        </div>
+        <div class="clearDiv ban1 ban2 ban4">
+          <router-link to="/login">会员登录</router-link>
+        </div>
+        <div class="clearDiv ban1 ban2 ban5">
+          <router-link to="/register">
+            我不是会员？立即注册
+            <img src="../assets/img/login.png" alt>
+          </router-link>
+        </div>
+      </div>
     </div>
     <div class="bac1">
       <div class="content">
@@ -27,7 +25,7 @@
           <div class="step1" v-if="step">
             <p class="clearDiv">
               <label for>手机号</label>
-              <input type="text" v-model="phone" placeholder="请填写您的手机" @blur="checkPhone">
+              <input type="text" v-model="phone" placeholder="请填写您的手机" @blur="checkPhone" @focus="clearInfo">
               <span class="tip">{{phoneTip}}</span>
             </p>
             <p class="clearDiv">
@@ -38,6 +36,7 @@
                 placeholder="请输入验证码"
                 class="code-input"
                 @blur="checkCode"
+                @focus="clearInfo"
               >
               <img :src="codeImg" alt @click="getCode">
               <span class="tip">{{codeTip}}</span>
@@ -84,6 +83,7 @@
               <button class="zhuce" @click="register2">完成</button>
               <span class="msg">{{msg1}}</span>
             </div>
+            <div class="back" @click="back()">返回修改手机号</div>
           </div>
         </div>
       </div>
@@ -95,7 +95,7 @@
 import { mapActions } from "vuex";
 import { setCookie } from "../package/cookie";
 import moveBox from "../components/movebox";
-import axios from 'axios'
+import axios from "axios";
 export default {
   data() {
     return {
@@ -111,6 +111,7 @@ export default {
       msg: "",
       msg1: "",
       agree: true,
+      times:"",
       isActive: false,
       showPin: "获取验证码",
       step: true
@@ -123,50 +124,64 @@ export default {
     this.getCode();
   },
   methods: {
-    //显示验证码
+    //显示图形验证码
     getCode() {
-      this.$fetch("http://192.168.2.50:5010/tourist-aggregate/getKaptcha").then(res => {
-        this.codeImg = "data:image/png;base64," + res;
-      });
+      this.$fetch("http://192.168.2.50:5010/tourist-aggregate/getKaptcha").then(
+        res => {
+          this.codeImg = "data:image/png;base64," + res;
+        }
+      );
     },
     //判断手机号码
     checkPhone() {
       if (!/^1[34578]\d{9}$/.test(this.phone)) {
         this.phoneTip = "请输入正确的手机号码";
+        this.isOk = false;
         return false;
       } else {
-        this.$fetch("http://192.168.2.50:5010/tourist-aggregate/checkIsRegist", { mobile: this.phone }).then(
-          res => {
-            if (res.code === 200) {
-              this.phoneTip = "";
-              this.isOk = true;
-            } else {
-              this.phoneTip = res.message;
-              this.isOk = false;
-              return false;
-            }
+        this.$fetch(
+          "http://192.168.2.50:5010/tourist-aggregate/checkIsRegist",
+          { mobile: this.phone }
+        ).then(res => {
+          if (res.code === 200) {
+            this.phoneTip = "";
+            this.isOk = true;
+          } else {
+            this.phoneTip = res.message;
+            this.isOk = false;
+            return false;
           }
-        );
+        });
       }
+    },
+    //清空提示语
+    clearInfo(){
+      this.msg = ""
+    },
+    //返回上一步
+    back(){
+      clearInterval(this.times);
+      this.step = ! this.step;
     },
     //验证验证码是否正确
     checkCode() {
       if (!/^[a-zA-Z0-9]{4}$/.test(this.code)) {
         this.codeTip = "请输入正确的验证码";
+        this.isOk1 = false;
         return false;
       } else {
-        this.$fetch("http://192.168.2.50:5010/tourist-aggregate/checkKaptcha", { picCode: this.code }).then(
-          res => {
-            if (res.code === 200) {
-              this.codeTip = "";
-              this.isOk1 = true;
-            } else {
-              this.codeTip = res.message;
-              this.isOk1 = false;
-              return false;
-            }
+        this.$fetch("http://192.168.2.50:5010/tourist-aggregate/checkKaptcha", {
+          picCode: this.code
+        }).then(res => {
+          if (res.code === 200) {
+            this.codeTip = "";
+            this.isOk1 = true;
+          } else {
+            this.codeTip = res.message;
+            this.isOk1 = false;
+            return false;
           }
-        );
+        });
       }
     },
     //注册第一步
@@ -180,29 +195,31 @@ export default {
         return false;
       } else {
         //验证通过发起请求
+        this.step = !this.step;
         this.getCode1();
       }
     },
     //获取短信验证码
     getCode1() {
-      let that = this;
-      clearInterval(that.setsund);
-      this.$fetch("http://192.168.2.50:5010/tourist-aggregate/getSmsCode", { mobile: this.phone,smsFlag:'sms_code'}).then(res => {
-        if (res.code === 200) {
-          this.step = !this.step;
-          this.isActive = true;
+      clearInterval(this.times);
+      this.isActive = true;
+      this.$fetch("http://192.168.2.50:5010/tourist-aggregate/getSmsCode", {
+        mobile: this.phone,
+        smsFlag: "sms_code"
+      }).then(res => {
+        if (res.code === 200) { 
           let num = 59;
-          that.setsund = setInterval(() => {
+          this.times = setInterval(() => {
             this.showPin = num + "s后重新发送";
             num--;
             if (num < 0) {
-              clearInterval(that.setsund);
-              this.showPin = "获取验证码";
+              clearInterval(this.times);
+              this.showPin = "重新获取";
               this.isActive = false;
             }
           }, 1000);
         } else {
-          //this.isActive = false;
+          this.isActive = true;
           this.codeTip1 = res.message;
         }
       });
@@ -214,19 +231,19 @@ export default {
         this.codeTip1 = "请输入正确的验证码";
         return false;
       } else {
-        this.$fetch("http://192.168.2.50:5010/tourist-aggregate/checkSmsCode", { smsCode: this.code1 }).then(
-          res => {
-            if (res.code === 200) {
-              this.codeTip1 = "";
-              this.isOk2 = true;
-              return true;
-            } else {
-              this.codeTip1 = res.message;
-              this.isOk2 = false;
-              return false;
-            }
+        this.$fetch("http://192.168.2.50:5010/tourist-aggregate/checkSmsCode", {
+          smsCode: this.code1
+        }).then(res => {
+          if (res.code === 200) {
+            this.codeTip1 = "";
+            this.isOk2 = true;
+            return true;
+          } else {
+            this.codeTip1 = res.message;
+            this.isOk2 = false;
+            return false;
           }
-        );
+        });
       }
     },
     //检查密码
@@ -248,31 +265,35 @@ export default {
         return;
       }
       if (!(this.isOk2 && this.isOk3)) {
-          this.msg1 = "验证码或密码有错";
-          return false;
-        } else {
-          //注册接口
-          this.$post("http://192.168.2.50:5010/tourist-aggregate/regist",{mobile:this.phone,passWord:this.password,smsCode:this.code1},{headers:{'Content-Type':'application/json;charset=UTF-8'}}).then(res => {
-            if(res.code === 200){
-							this.$message({
-								type:'success',
-								message:'注册成功'
-							})
-              this.$router.push('/login')
-            }else{
-              this.msg1 = res.message;
-              return false;
-            }
-          });
-        }
+        this.msg1 = "验证码或密码有错";
+        return false;
+      } else {
+        //注册接口
+        this.$post(
+          "http://192.168.2.50:5010/tourist-aggregate/regist",
+          { mobile: this.phone, passWord: this.password, smsCode: this.code1 },
+          { headers: { "Content-Type": "application/json;charset=UTF-8" } }
+        ).then(res => {
+          if (res.code === 200) {
+            this.$message({
+              type: "success",
+              message: "注册成功"
+            });
+            this.$router.push("/login");
+          } else {
+            this.msg1 = res.message;
+            return false;
+          }
+        });
+      }
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.pp{
-  border: 1px solid  #0764e9;
+.pp {
+  border: 1px solid #0764e9;
 }
 .bac {
   background-color: #0764e9;
@@ -415,7 +436,7 @@ export default {
         .btn {
           position: relative;
           .zhuce {
-						cursor: pointer;
+            cursor: pointer;
             width: 379px;
             height: 47px;
             background: rgba(7, 100, 233, 1);
@@ -517,7 +538,7 @@ export default {
             width: 379px;
             height: 47px;
             background: rgba(7, 100, 233, 1);
-            margin-top: 44px;
+            margin-top: 30px;
             font-size: 16px;
             font-weight: 400;
             color: rgba(255, 255, 255, 1);
@@ -529,6 +550,15 @@ export default {
             left: 10px;
             bottom: -18px;
           }
+        }
+        .back {
+          width: 100%;
+          text-align: center;
+          font-size: 16px;
+          font-weight: 400;
+          color: rgba(102, 102, 102, 1);
+          margin-top: 10px;
+          cursor: pointer;
         }
       }
     }

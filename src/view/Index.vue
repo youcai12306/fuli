@@ -411,7 +411,6 @@ export default {
     .banner-content {
       width: 1049px;
       height: 110px;
-      line-height: 110px;
       margin: 0 auto;
       background: rgba(0, 0, 0, 0.75);
       box-shadow: 2px 2px 7px 0px rgba(0, 0, 0, 0.35);
@@ -422,6 +421,7 @@ export default {
       .content-list {
         float: left;
         .select-list {
+          margin-top: 35px;
           margin-left: 35px;
           margin-right: 35px;
           width: 267px;
@@ -437,6 +437,7 @@ export default {
           font-weight: bold;
           color: rgba(255, 255, 255, 1);
           border-radius: 5px;
+          margin-top: 35px;
         }
       }
     }

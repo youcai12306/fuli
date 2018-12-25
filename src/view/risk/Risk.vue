@@ -35,7 +35,7 @@
 						<div class="swiper-button-next swiper-button-black" slot="button-next"></div>
 					</swiper>
 					<div class="list">
-						<p class="list-t">海洋王国家族成员精灵可爱吉祥物</p>
+						<p class="list-t">海洋王国家族成员<br>精灵可爱吉祥物</p>
 						<ul class="clearDiv">
 							<li v-for="item in 4" :key="item">
 								<img :src="`../../../static/risk-bg${item}.png`" alt>
@@ -253,7 +253,7 @@
 					height: 686px;
 
 					.list-t {
-						width: 144px;
+						width: 100%;
 						font-size: 18px;
 						font-weight: bold;
 						color: rgba(51, 51, 51, 1);

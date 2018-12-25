@@ -10,12 +10,11 @@
 			<div class="content clearDiv">
 				<div class="left floatLeft">
 					<ul class="ul">
-						<li class="li" v-for="(item,keys) in 3" :key="keys" @click="actives = keys" :class="{anActive:actives === keys}">
+						<li class="li" v-for="(item,keys) in 3" :key="keys" @click="actives = keys" :class="{anActive:actives == keys}">
 							<template v-if="keys == 0">动物课堂</template>
 							<template v-if="keys == 1">保育救助</template>
 							<template v-if="keys == 2">科普活动</template>
-							<!-- <img src="../../assets/img/animal-r1.png" alt v-show="!(keys === actives)"> -->
-							<img src="../../assets/img/animal-r.png" alt v-show="keys === actives">
+							<img src="../../assets/img/animal-r.png" alt v-show="keys == actives">
 						</li>
 					</ul>
 				</div>
@@ -272,6 +271,12 @@
 			changePage(val) {
 				this.GetList(0, this.pageSize, val);
 			},
+		},
+		mounted() {
+			let id = this.$route.query.type;
+			if (id != undefined) {
+				this.actives = id;
+			}
 		}
 	};
 </script>

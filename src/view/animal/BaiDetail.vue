@@ -15,11 +15,11 @@
 			<div class="content clearDiv">
 				<div class="left floatLeft">
 					<ul class="ul">
-						<li class="li" v-for="(item,keys) in 3" :key="keys" @click="actives = keys,type='a'" :class="{anActive:actives === keys || type == keys}">
+						<li class="li" v-for="(item,keys) in 3" :key="keys" @click="go" :class="{anActive:actives == keys || type == keys}">
 							<template v-if="keys == 0">动物课堂</template>
 							<template v-if="keys == 1">保育救助</template>
 							<template v-if="keys == 2">科普活动</template>
-							<img src="../../assets/img/animal-r.png" alt v-show="keys === actives">
+							<img src="../../assets/img/animal-r.png" alt v-show="keys == actives">
 						</li>
 					</ul>
 				</div>
@@ -66,16 +66,25 @@
 
 		},
 		mounted() {
-			console.log(this.type)
 			if (!this.type || !this.id) { //没有判断状态和ID
-				this.$router.go(-1);
-			}else{
+				this.$router.push({
+					path: '/animal',
+					query: {
+						type: this.type || '1'
+					}
+				})
+			} else {
 				this.actives = this.type;
 			}
 		},
 		methods: {
 			go() { //返回
-				this.$router.go(-1);
+				this.$router.push({
+					path: '/animal',
+					query: {
+						type: this.type
+					}
+				})
 			}
 		},
 	}

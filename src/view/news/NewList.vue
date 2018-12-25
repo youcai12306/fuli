@@ -166,6 +166,7 @@ export default {
         height: 70px;
         background: rgba(43, 43, 43, 0.82);
         padding-left: 21px;
+				cursor:pointer;
 
         .p1 {
           font-size: 16px;
@@ -205,6 +206,7 @@ export default {
         padding: 20px 0;
         border-top: 1px solid #d7d7d7;
         padding-left: 20px;
+				cursor:pointer;
 
         i {
           position: absolute;

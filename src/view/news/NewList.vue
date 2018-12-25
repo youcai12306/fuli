@@ -9,7 +9,7 @@
     <!-- 所有新闻 -->
     <div class="main-new">
       <div class="hea-img" @click="jumpDetail(list.id)">
-        <img src="../../assets/img/new-bg2.png" alt="图片">
+        <img :src="img" alt="图片" @error="userAvaterError">
         <div class="bt">
           <p class="p1">{{list.infoTitle}}</p>
           <p class="p2">来自富力官网 | {{list.createTime}}</p>
@@ -39,6 +39,8 @@
 </template>
 
 <script>
+import {IMG_Url} from "@/package/common"
+import defaultHead from "../../assets/img/new-bg2.png";
 export default {
   name: "News",
   data() {
@@ -47,10 +49,15 @@ export default {
       list1: [],
       pageSize: 10,
       pageIndex: 1,
-      totle: 0
+      totle: 0,
+      img:''
     };
   },
   methods: {
+    //设置默认图片
+    userAvaterError(e) {
+      e.target.src = defaultHead;
+    },
     // 园区公告
     // 获取新闻數據
     GetList(type, pageSize, pageIndex) {
@@ -64,11 +71,13 @@ export default {
       ).then(res => {
         if (res.code === 200) {
           this.list = res.data.content[0];
-          // this.$fetch("http://192.168.2.61:2600/staticResource/selectFiles", {
-          //   id: this.list.infoPic
-          // }).then(res => {
-          //   console.log(res);
-          // });
+          this.$fetch("http://192.168.2.61:2600/staticResource-mucon/selectFiles", {
+            ids: this.list.infoPic
+          }).then(res => {
+            if(res.code === 200){
+                this.img = IMG_Url+res.data[0].fileName
+            }  
+          });
           this.list1 = res.data.content.slice(1);
           this.totle = res.data.totalElements;
         } else {

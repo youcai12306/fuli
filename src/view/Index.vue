@@ -14,12 +14,15 @@
       </div>
       <div class="banner-content clearDiv">
         <div class="content-list">游玩时间
-          <el-date-picker  v-model="date"
+          <el-date-picker
+            v-model="date"
             type="date"
             placeholder="选择日期"
             @change="getTicketList()"
             format="yyyy-MM-dd"
-            value-format="yyyy-MM-dd" class="select-list"></el-date-picker>
+            value-format="yyyy-MM-dd"
+            class="select-list"
+          ></el-date-picker>
         </div>
         <div class="ticket content-list">门票
           <el-select v-model="key" class="select-list" @change="ab()">
@@ -135,19 +138,17 @@
             </ul>
             <div class="content-main floatLeft">
               <div class="top clearDiv">
-                <img src="../assets/img/index-img8.png" alt class="floatLeft">
+                <img :src="img" alt class="floatLeft" @error="userAvaterError">
                 <div class="top-box floatLeft">
                   <div class="clearDiv box-top">
-                    <div class="floatLeft">荟精英，海洋欢乐世界展露头角</div>
+                    <div class="floatLeft">{{newFirst.infoTitle}}</div>
                     <router-link to="/news" class="floatRight">更多>></router-link>
                   </div>
-                  <div
-                    class="floatLeft box-bottom"
-                  >2018年11月26日，一场文旅的激情碰撞在海南博鳌国际会议中心拉开序幕，作为2018年（第十九届）海南国际旅游岛欢乐节的重要组成部分，今年已经是博鳌国际旅游传播论坛走过的第三个春秋....</div>
+                  <div class="floatLeft box-bottom">{{newFirstContent}}</div>
                 </div>
               </div>
               <ul class="bottom">
-                <template v-for="item in 4">
+                <!-- <template v-for="item in 4">
                   <router-link
                     :to="{path:'/newDetail',query:{id:'5c1f5349f8dac609dd5cd6b7'}}"
                     tag="li"
@@ -156,7 +157,11 @@
                     《受伤的鲸豚不再无助 海南首个海洋动物保育救护中心挂牌启用》
                     <a>详情>></a>
                   </router-link>
-                </template>
+                </template>-->
+                <li class="clearDiv" v-for="(item,key) in newList" :key="key">
+                  {{item.infoTitle}}
+                  <router-link :to="{path:'/newDetail',query:{id:item.id}}">详情>></router-link>
+                </li>
               </ul>
             </div>
             <div class="content-right floatLeft">
@@ -213,7 +218,9 @@
 <script>
 import "swiper/dist/css/swiper.css";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
+import {IMG_Url} from "@/package/common"
 import Header from "@/components/Header"; //引入头部
+import defaultHead from "../assets/img/index-img8.png";
 export default {
   name: "Index",
   data() {
@@ -232,43 +239,95 @@ export default {
         // loop:true,
       },
       index: 0,
-      skId:"",
-      id:""
+      skId: "",
+      id: "",
+      newFirst: "",
+      newFirstContent: "",
+      newList: [],
+      img:""
     };
   },
   mounted() {
     let today = new Date();
     this.date = this.$tool.formatData(today);
-    this.getTicketList()
+    this.getNewList();
+    this.getTicketList();
     this.swiperInit();
   },
   methods: {
-    //获取产品列表
-    getTicketList(){
-      this.options = [];
-      this.$fetch("http://192.168.2.61:5001/product-aggregate/findProductByStock", {
-        playDate: this.date
-      }).then((res) =>{
-          let data = res.data.list
-          for(let item of data){
-            this.options.push({value:item.id,label:item.productName,stockId:item.stockId})
-          }
-      })
+    //设置默认图片
+    userAvaterError(e) {
+      e.target.src = defaultHead;
     },
-    ab(){
-      for(let item of this.options){
-        if(this.key == item.value){
+    //获取新闻列表
+    getNewList() {
+      this.$post(
+        "http://192.168.2.61:2670/info/secondary/findpage?type=0&pageSize=5&pageNum=1"
+      ).then(res => {
+        if (res.code === 200) {
+          let newList = res.data.content;
+          if (newList != null) {
+            this.newFirst = res.data.content[0];
+            this.$fetch("http://192.168.2.61:2600/staticResource-mucon/selectFiles", {
+              ids: this.newFirst.infoPic
+            }).then(res => {
+              if(res.code === 200){
+                this.img = IMG_Url+res.data[0].fileName
+              }   
+            });
+            this.$post(
+              "http://192.168.2.61:2670/info/secondary/getInfo?infoId=" +
+                this.newFirst.id
+            ).then(res => {
+              if(res.code === 200){
+                this.newFirstContent = res.data.infoContent;
+              } 
+            });
+            this.newList = res.data.content.slice(1);
+          }
+        }
+      });
+    },
+    //获取产品列表
+    getTicketList() {
+      this.options = [];
+      this.key = "";
+      this.$fetch(
+        "http://192.168.2.61:5001/product-aggregate/findProductByStock",
+        {
+          playDate: this.date
+        }
+      ).then(res => {
+        let data = res.data.list;
+        if (data != null) {
+          for (let item of data) {
+            this.options.push({
+              value: item.id,
+              label: item.productName,
+              stockId: item.stockId
+            });
+          }
+          this.key = res.data.list[0].id;
+        }
+      });
+    },
+    ab() {
+      for (let item of this.options) {
+        if (this.key == item.value) {
           this.skId = item.stockId;
-          this.id = this.key
+          this.id = this.key;
         }
       }
     },
     //点击查询
-    jumpProductDetail(){
-      this.$router.push({path:'/productDetail',query:{
-        id:this.id,
-        stockId: this.skId
-      }})
+    jumpProductDetail() {
+      this.$router.push({
+        path: "/productDetail",
+        query: {
+          id: this.id,
+          stockId: this.skId
+        }
+      });
     },
     //跳转活动详情
     jumpHuodongDetail(id) {
@@ -626,7 +685,7 @@ export default {
                 border-radius: 50%;
                 position: absolute;
                 left: 0;
-                margin-top: 7px;
+                margin-top: 5px;
               }
               a {
                 float: right;

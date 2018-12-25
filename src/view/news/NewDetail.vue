@@ -16,13 +16,7 @@
         <router-link to="/newList" tag="div" class="title-right floatRight">返回</router-link>
       </div>
       <div class="content">
-        <swiper :options="swiperOption">
-          <swiper-slide>
-            <img src="../../assets/img/new-bg2.png">
-          </swiper-slide>
-        </swiper>
-        <div class="swiper-button-prev swiper-button-black" slot="button-prev"></div>
-        <div class="swiper-button-next swiper-button-black" slot="button-next"></div>
+           <img src="../../assets/img/new-bg2.png">
       </div>
       <div>{{data.infoContent}}</div>
     </div>
@@ -30,43 +24,18 @@
 </template>
 
 <script>
-import "swiper/dist/css/swiper.css";
-import { swiper, swiperSlide } from "vue-awesome-swiper";
 export default {
   name: "News",
   data() {
     return {
-      swiperOption: {
-        notNextTick: true,
-        //循环
-        loop: true,
-        //设定初始化时slide的索引
-        initialSlide: 0,
-        //自动播放
-        autoplay: true,
-        //滑动速度
-        speed: 800,
-        //滑动方向
-        direction: "horizontal",
-        //左右点击
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev"
-        }
-      },
       data:{}
     };
   },
   created() {
     document.title = "新闻中心详情";
   },
-  components: {
-    swiper,
-    swiperSlide
-  },
   mounted(){
      this.$post('http://192.168.2.61:2670/info/secondary/getInfo?infoId='+this.$route.query.id).then((res) =>{
-       console.log(res.data)
       this.data = res.data
     })
   }
@@ -146,33 +115,10 @@ export default {
       position: relative;
       width: 681px;
       height: 315px;
-      .swiper-container {
         img {
           width: 681px;
           height: 315px;
         }
-      }
-
-      .swiper-button-prev {
-        left: -60px;
-        width: 38px;
-        height: 89px;
-        margin-top: -44px;
-        background: url(../../assets/img/new-6.png) no-repeat 0 0;
-        &:focus{
-          outline-width: 0
-        }
-      }
-      .swiper-button-next {
-        right: -60px;
-        width: 38px;
-        height: 89px;
-        margin-top: -44px;
-        background: url(../../assets/img/new-5.png) no-repeat 0 0;
-        &:focus{
-           outline-width: 0
-        }
-      }
     }
   }
 }

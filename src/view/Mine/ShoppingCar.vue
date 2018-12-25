@@ -103,8 +103,10 @@ export default {
         console.log(res)
         this.id1 =res.data[0].createDateId;
         this.id2 = res.data[0].productId;
-        this.totalNum = res.data[0].productCount
-        this.stockId = res.data[0].createDateId
+        this.totalNum = res.data[0].productCount;
+        this.stockId = res.data[0].createDateId;
+        this.saleType = res.data[0].product.saleType;
+        console.log(this.saleType)
         // console.log(this.id1)
         if (res.code === 200) {
           // console.log(111)
@@ -149,7 +151,7 @@ export default {
 				this.arr[i]['productId'] = v.productId;
 				this.arr[i]['num'] = v.productCount;
 				this.arr[i]['stockId'] = v.createDateId;
-				this.arr[i]['saleType'] = v.saleType ? 1 : 0;
+				this.arr[i]['saleType'] = v.saleType ? true : false;
 			})
     },
     // 删除选中商品
@@ -214,7 +216,8 @@ export default {
           id2:this.id2,
           totalNum:this.totalNum,
           stockId:this.stockId,
-					arr:this.arr
+          arr:this.arr,
+          saleType:this.saleType
         }
       })
     }

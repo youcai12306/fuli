@@ -1019,6 +1019,7 @@
 				.box3 {
 					width: 863px;
 					min-height: 1000px;
+					padding-bottom: 20px;
 					background: rgba(255, 255, 255, 1);
 					margin: 0 auto;
 
@@ -1139,7 +1140,8 @@
 
 				.box5 {
 					width: 868px;
-					background: url(../../assets/img/ditu11.png) no-repeat top center;
+					background:#fff url(../../assets/img/ditu11.png) no-repeat top center;
+					background-size: cover;
 					/* background: #fff; */
 					margin: 0 20px;
 					padding-top: 40px;

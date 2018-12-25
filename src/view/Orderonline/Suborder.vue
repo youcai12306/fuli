@@ -41,8 +41,11 @@
                 <th>数量</th>
                 <th>小计</th>
               </tr>
-              <tr v-for="item in list2" :key="item.id">
-                 <!-- <tr v-for="item in list2" :key="item"> -->
+              <tr
+                v-for="item in list2"
+                :key="item.id"
+              >
+                <!-- <tr v-for="item in list2" :key="item"> -->
                 <td>{{item.product.productName}}
                   <p>游玩时间：{{item.product.dataBaseDate}}</p>
                   <p>{{canDebook(item.product.saleType)}}</p>
@@ -154,7 +157,21 @@
                     </el-input>
 
                   </el-form-item>
+                  <!-- 邮寄地址 -->
+                  <div class="su5" v-show="flag1">
 
+                    <span class="su6">邮寄地址</span>
+                    <span class="su7" @click="address()">选择收件地址</span>
+                    
+
+                  </div>
+                  <div class="q1" v-show="flag1">
+                      <div class="q2">
+                        <p>收件人：<span>{{name1}}</span></p>
+                        <p class="q3">手机号：<span>{{phone1}}</span></p>
+                        <p>地址：<span>{{address1}}</span></p>
+                      </div>
+                    </div>
                   <div class="su11">
                     <el-checkbox v-model="checked">同意《购买协议》</el-checkbox>
                   </div>
@@ -208,6 +225,7 @@ export default {
       },
       checked: true,
       flag: false,
+      flag1: false,
       count: 0,
       price1: "",
       productname: "",
@@ -217,8 +235,12 @@ export default {
       saleType: "",
       sign: "",
       a1: this.$route.query.a,
-      list2:[],
-      price2:0
+      list2: [],
+      price2: 0,
+      name1:"",
+      phone1:"",
+      address1:"",
+      receiveId:""
     };
   },
   mounted() {
@@ -226,26 +248,22 @@ export default {
     // this.saleType = this.$route.query.saleType
     // 监听路由跳转路径，如果是购物车，标志为a1，直接接受上个页面的参数
     if (this.a1 === 1) {
-      
       let list1 = this.$route.query.list1;
       this.list2 = JSON.parse(list1);
       console.log(this.list2);
-        // this.productName =this.product.productName;
-        // this.playtime = this.product.dataBaseDate;
-        // this.price1 = this.product.settlementPrice;
-        // console.log(this.price1);
-        // this.count = this.productCount;
-        for(let item of this.list2){
-          
-          this.price = item.settlementPrice;
-          // console.log(this.price)
-          this.count = item.productCount
-          this.pricetotal = this.price * this.count
-          // console.log(typeOf()this.pricetotal)
-          this.price2 +=this.pricetotal
-        }
-        
-         
+      // this.productName =this.product.productName;
+      // this.playtime = this.product.dataBaseDate;
+      // this.price1 = this.product.settlementPrice;
+      // console.log(this.price1);
+      // this.count = this.productCount;
+      for (let item of this.list2) {
+        this.price = item.settlementPrice;
+        // console.log(this.price)
+        this.count = item.productCount;
+        this.pricetotal = this.price * this.count;
+        // console.log(typeOf()this.pricetotal)
+        this.price2 += this.pricetotal;
+      }
     }
   },
   // 监听路由跳转路径，如果是购物车，重新调用购物车接口
@@ -269,17 +287,20 @@ export default {
         }
       });
     },
+    // 选择收货地址
+    address(){
+      this.$router.push("./shoppingadress")
+    },
     //接受产品详情页面的产品ID，库存ID,数量，是否邮寄，调用接口，展示订单信息
     shopmsg() {
       let id = this.$route.query.id2;
       let stockId = this.$route.query.stockId;
-      console.log(id);
-      console.log(stockId)
+      // console.log(id);
+      // console.log(stockId)
       let num1 = this.$route.query.num;
       this.saleType = this.$route.query.saleType;
-
       let list1 = this.$route.query.list1;
-      let list2 = JSON.parse(list1)
+      let list2 = JSON.parse(list1);
       // console.log(list2);
       // console.log(this.saleType);
       // console.log(num1);
@@ -300,10 +321,23 @@ export default {
     // 判断是邮寄或者自提，邮寄需要显示邮寄地址，传邮寄ID到李顺仪
     canDebook(type) {
       // return type === 1 ? (this.sign = "邮寄") : (this.sign = "自提");
-      if (type == 1) {
-        this.sign = "自提";
-      } else if (type == 2) {
+      if (type === true) {
         this.sign = "邮寄";
+        this.flag1 = true;
+        let data2 = {
+           touristId: this.$store.getters.getUserData.userId
+        }
+        // 调用邮寄接口
+        this.$fetch('http://192.168.2.50:5010/tourist-aggregate/address/selectOneReceiveAddress',data2).then((res) =>{
+          // console.log(res);
+          this.name1 = res.data.receivePersonName;
+          this.phone1 = res.data.receivePersonMobile;
+          this.address1 = res.data.receiveProvince + res.data.receiveCity + res.data.receiveArea;
+          this.receiveId = res.data.id
+        })
+      } else if (type === false) {
+        this.sign = "自提";
+        
       }
       return this.sign;
     },
@@ -347,7 +381,8 @@ export default {
                     price2: this.price2
                   }
                 });
-              } else if (res.code === 400) {
+              } else if (res.code === 403) {
+                // this.$router.push("/")0
                 alert("下单失败");
               }
             });
@@ -361,7 +396,7 @@ export default {
   // 销毁定时器
   beforeDestroy() {
     clearInterval(this.times);
-  },
+  }
   // 计算产品总价格
   // computed: {
   //   price2() {
@@ -509,6 +544,25 @@ export default {
       .su7 {
         font-size: 14px;
         color: #333333;
+        cursor: pointer;
+      }
+    }
+    .q1{
+      border:1px solid #E3E3E3;
+      width: 377px;
+      height: 175px;
+      .q2{
+        margin-top:28px;
+        margin-left:30px;
+        p{
+          color:#333333
+        }
+        span{
+          color:#333333
+        }
+        .q3{
+          margin:27px 0;
+        }
       }
     }
     .su8 {

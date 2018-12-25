@@ -261,7 +261,7 @@ export default {
     //获取新闻列表
     getNewList() {
       this.$post(
-        "http://192.168.2.61:2670/info/secondary/findpage?type=0&pageSize=5&pageNum=1"
+        "http://192.168.2.61:2670/mongodb-mucon/info/primary/search?type=0&pageSize=5&pageNum=1"
       ).then(res => {
         if (res.code === 200) {
           let newList = res.data.content;
@@ -278,7 +278,7 @@ export default {
               }
             });
             this.$post(
-              "http://192.168.2.61:2670/info/secondary/getInfo?infoId=" +
+              "http://192.168.2.61:2670/mongodb-mucon/info/primary/get?infoId=" +
                 this.newFirst.id
             ).then(res => {
               if (res.code === 200) {
@@ -479,6 +479,7 @@ export default {
             height: 84px;
             margin: 0 auto;
             box-sizing: border-box;
+            cursor: pointer;
           }
           .imgActive {
             border: 3px solid rgba(255, 255, 255, 1);

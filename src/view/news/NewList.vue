@@ -62,9 +62,7 @@ export default {
     // 获取新闻數據
     GetList(type, pageSize, pageIndex) {
       this.$post(
-        "http://192.168.2.61:2670/info/secondary/findpage?type=" +
-          type +
-          "&pageSize=" +
+        "http://192.168.2.61:2670/mongodb-mucon/info/primary/search?type=0&pageSize=" +
           pageSize +
           "&pageNum=" +
           pageIndex

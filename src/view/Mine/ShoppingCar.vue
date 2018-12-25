@@ -72,8 +72,9 @@ export default {
       totalNum: 0,
       flag:true,
       id1:"",
-      id2:""
-    };
+      id2:"",
+			arr:[],
+		};
   },
   watch: {
     // 侦听商品选中数据的变化
@@ -147,9 +148,12 @@ export default {
       this.totalNum = 0;
       for (let i = 0; i < this.good_list.length; i++) {
         let _d = this.good_list[i];
+				this.arr[i] = this.good_list[i];
         if (_d.is_selected) {
           //this.totalPrice += _d["price"] * _d["num"];
           this.totalNum += _d["productCount"];
+					this.arr[i]['num'] = _d["productCount"];
+					this.arr[i]['price'] = _d["settlementPrice"];
         }
       }
     },

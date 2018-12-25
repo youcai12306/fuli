@@ -48,6 +48,8 @@ const EventsDetail = r => require.ensure([], () => r(require('@/view/specialOffi
 const Risk = r => require.ensure([], () => r(require('@/view/risk/Risk')), 'Risk')
 //动物百科
 const Animal = r => require.ensure([], () => r(require('@/view/animal/Animal')), 'Animal')
+const AnimalDetails = r => require.ensure([], () => r(require('@/view/animal/AnimalDetail')), 'AnimalDetail')
+const BaiDetails = r => require.ensure([], () => r(require('@/view/animal/BaiDetail')), 'BaiDetail')
 // 个人中心-我的订单
 const Mine = r => require.ensure([], () => r(require('@/view/Mine/Mine')), 'Mine')
 const Prepaid = r => require.ensure([], () => r(require('@/view/Mine/Order/Prepaid')), 'Prepaid')
@@ -181,6 +183,16 @@ let router = new Router({
 			path: '/animal',
 			name: 'Animal',
 			component: Animal, //动物百科
+		},
+		{
+			path: '/animalDetails/:id',
+			name: 'AnimalDetails',
+			component: AnimalDetails, //动物百科详情
+		},
+		{
+			path: '/baiDetails/:type/:id',
+			name: 'BaiDetails',
+			component: BaiDetails, //动物百科详情
 		},
 		{
 			path: '/success',

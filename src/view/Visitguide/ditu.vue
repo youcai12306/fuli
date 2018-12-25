@@ -1139,7 +1139,8 @@
 
 				.box5 {
 					width: 868px;
-					background: url(../../assets/img/ditu11.png) no-repeat top center;
+					background:#fff url(../../assets/img/ditu11.png) no-repeat top center;
+					background-size: cover;
 					/* background: #fff; */
 					margin: 0 20px;
 					padding-top: 40px;

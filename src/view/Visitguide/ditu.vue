@@ -1019,6 +1019,7 @@
 				.box3 {
 					width: 863px;
 					min-height: 1000px;
+					padding-bottom: 20px;
 					background: rgba(255, 255, 255, 1);
 					margin: 0 auto;
 

@@ -15,6 +15,7 @@
       <div class="r">
         <router-view/>
       </div>
+			<div class="clearDiv"></div>
     </div>
   </div>
 	</section>
@@ -49,7 +50,6 @@ export default {
   width: 100%;
   height: 1802px;
   background: #fff url(../../assets/img/specialOffier-bg.png) no-repeat top center;
-  background-size: 1920px 100%;
 
   .main-contion {
     width: 1200px;

@@ -420,6 +420,7 @@
 						font-size: 14px;
 						color: rgba(7, 100, 233, 1);
 						margin-right: 221px;
+						cursor: pointer;
 					}
 				}
 

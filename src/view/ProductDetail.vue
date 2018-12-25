@@ -402,9 +402,9 @@ export default {
         }
         .right-pay {
           width: 620px;
-          height: 395px;
+          min-height: 395px;
           background: rgba(247, 247, 247, 1);
-          padding: 12px 38px 0 13px;
+          padding: 12px 38px 20px 13px;
           .title {
             width: 54px;
             height: 23px;

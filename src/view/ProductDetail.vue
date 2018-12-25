@@ -149,8 +149,8 @@ export default {
     init() {
       let id = this.$route.query.id;
       let stockId = this.$route.query.stockId;
-      console.log(id);
-      console.log(stockId);
+      // console.log(id);
+      // console.log(stockId);
       this.$fetch("http://192.168.2.61:5001/product-aggregate/find/" + id, {
         stockId: stockId
       }).then(res => {

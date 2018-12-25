@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from '@/vuex/store';
+import {
+	getCookie
+} from "@/package/cookie";
 
 //登录
 const Login = r => require.ensure([], () => r(require('@/view/Login')), 'Login')
@@ -116,11 +119,17 @@ let router = new Router({
 		{
 			path: '/suborder',
 			name: 'Suborder',
+			meta: {
+				requireAuth: true
+			},
 			component: Suborder //下订单页面
 		},
 		{
 			path: '/suborder2',
 			name: 'Suborder2',
+			meta: {
+				requireAuth: true
+			},
 			component: Suborder2 //下订单页面
 		},
 		{
@@ -152,7 +161,7 @@ let router = new Router({
 				},
 			]
 		},
-		{//游玩指南
+		{ //游玩指南
 			path: '/ditu',
 			name: 'ditu',
 			component: ditu,
@@ -197,7 +206,7 @@ let router = new Router({
 		{
 			path: '/success',
 			name: 'success',
-			meta:{
+			meta: {
 				requireAuth: true
 			},
 			component: success //支付页面
@@ -228,9 +237,9 @@ let router = new Router({
 			component: ShopDetail //主题商店
 		},
 		{
-			path:'/artTheme',
-			name:'artTheme',
-			component:artTheme
+			path: '/artTheme',
+			name: 'artTheme',
+			component: artTheme
 		},
 		{
 			path: '/ticketDetail',
@@ -345,7 +354,8 @@ let router = new Router({
 
 router.beforeEach((to, from, next) => {
 	if (to.matched.some(record => record.meta.requireAuth)) { // 判断该路由是否需要登录权限
-		if (window.localStorage.getItem('loginStatus')) { // 判断是否登录
+	console.log(getCookie('userData'))
+		if (getCookie('userData')) { // 判断是否登录
 			next();
 		} else {
 			next({

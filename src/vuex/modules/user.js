@@ -38,7 +38,7 @@ const actions = {
      */
     setUserData({ commit },res) {
         localStorage.setItem('userData', JSON.stringify(res))
-        setCookie('userData',JSON.stringify(res),60*60*24)
+        setCookie('userData',JSON.stringify(res),60*60*24*1000)
         commit(types.COM_LOADING_STATUS, false)
         commit(types.SET_USER_DATA, res)
     },

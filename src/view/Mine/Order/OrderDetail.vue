@@ -201,18 +201,20 @@
 				this.$router.go(-1);
 			},
 			PostFindOrderDetail() { //订单列表
-				if (this.tabs != 'a') {
-					var data = {
+				var data = {};
+				if (this.status != 'a') {
+					data = {
 						id: this.orderId,
 						orderState: this.status
 					}
 				} else {
-					var data = {
+					data = {
 						id: this.orderId
 					}
 				}
+				console.log(data);
 				
-				this.$post(`http://192.168.2.38:5041/orderDetail/findOrderDetail?pageNum=1&pageSize=10`,
+				this.$post(`http://192.168.2.61:5041/order-aggregate/findOrderDetail?pageNum=1&pageSize=10`,
 					data).then(res => {
 					if (res.code === 200) {
 						this.data = res.data.list[0];
@@ -240,7 +242,7 @@
 					cancelButtonText: '取消',
 					type: 'warning'
 				}).then(() => {
-					this.$put(`http://192.168.2.38:5041/orderDetail/canceOrder?orderId=${id}&status=-1`).then(res => {
+					this.$put(`http://192.168.2.61:5041/order-aggregate/canceOrder?orderId=${id}&status=-1`).then(res => {
 						if (res.code === 200) {
 							this.$message({
 								message: `取消订单成功`,
@@ -418,6 +420,7 @@
 						font-size: 14px;
 						color: rgba(7, 100, 233, 1);
 						margin-right: 221px;
+						cursor: pointer;
 					}
 				}
 

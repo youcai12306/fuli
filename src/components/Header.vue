@@ -20,13 +20,15 @@
 					</li>
 					<!-- 主题乐园 -->
 					<li @mouseover="showNavList(1),height='97px'" @mouseout="hiddenNavList(1),height='0px'" class="theme" :class="{'actives' : $route.name == 'Theme'}">
-						<template v-if="$route.name == 'Theme'">
-							<img src="../assets/img/header-2.png" alt>
-						</template>
-						<template v-else>
-							<img src="../assets/img/header2.png" alt>
-						</template>
-						<p>主题乐园</p>
+						<router-link to="/theme" tag='p'>
+							<template v-if="$route.name == 'Theme'">
+								<img src="../assets/img/header-2.png" alt>
+							</template>
+							<template v-else>
+								<img src="../assets/img/header2.png" alt>
+							</template>
+							<p>主题乐园</p>
+						</router-link>
 					</li>
 					<!-- 度假酒店 -->
 					<li class="hotel" :class="{'actives' : $route.name == ''}">
@@ -375,7 +377,7 @@
 			/* height: 92px; */
 			height: 0px;
 			overflow: hidden;
-			background: rgba(36, 36, 36, 0.7);
+			background: #0764E9;
 			position: relative;
 			z-index: 8;
 			transition: 0.3s;

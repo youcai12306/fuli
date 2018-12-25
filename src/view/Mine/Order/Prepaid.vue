@@ -68,7 +68,7 @@
 									</div>
 									<div class="lookOrder floatRight" @click.stop="jumpDetail(item.orderId)">查看订单</div>
 									<div class="cancelOrder floatRight" @click.stop="delOrder(item.orderId)" v-if="tabs == 0">取消订单</div>
-									<div class="pay floatRight" @click.stop="pay(item.orderId)" v-if="tabs == 0 || tabs == 1">立即支付</div>
+									<div class="pay floatRight" @click.stop="pay(item.orderId,item.payTotalCash)" v-if="tabs == 0 || tabs == 1">立即支付</div>
 								</div>
 							</div>
 						</template>
@@ -125,18 +125,19 @@
 		},
 		methods: {
 			//再次下单
-			pay(id) {
+			pay(id,price) {
 				this.$router.push({
-					path: 'suborder',
+					path: '/success',
 					query: {
-						id: id
+						orderId: id,
+						price2: price
 					}
 				})
 			},
 			//跳转订单详情
 			jumpDetail(id) {
 				this.$router.push({
-					name: 'orderDetail',
+					name: 'OrderDetail',
 					params: {
 						id: id,
 						status: this.tabs

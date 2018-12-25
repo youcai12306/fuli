@@ -1,5 +1,7 @@
 <template>
   <div class="animalTheme">
+     <!-- 头部 -->
+    <Header></Header>
     <div class="box">
       <div class="top clearDiv">
         <h3 class="floatLeft">海豚纪念商店</h3>
@@ -74,7 +76,6 @@ export default {
   width: 100%;
   background: url(../../assets/img/theme-detail-bg.png) no-repeat;
   background-size: 1920px 100%;
-  padding-top: 390px;
   padding-bottom: 204px;
   .box {
     margin: 0 auto;
@@ -82,6 +83,7 @@ export default {
     height: 882px;
     background: rgba(255, 255, 255, 1);
     padding: 0 40px;
+    margin-top: 390px;
     .top {
       padding-top: 37px;
       h3 {

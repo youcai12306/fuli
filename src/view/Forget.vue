@@ -2,33 +2,53 @@
   <div class="body">
     <!-- 头部 -->
     <div class="bac clearDiv">
-    	<div class="ban clearDiv">
-    		<div class="clearDiv ban1 ban3">
-    			<router-link to="/index">
-    				<img src="../assets/img/logo.png" alt>
-    			</router-link>
-    		</div>
-    		<div class="clearDiv ban1 ban2 ban4">
-    			<router-link to="/login">
-    				会员登录
-    			</router-link>
-    		</div>
-    		<div class="clearDiv ban1 ban2 ban5">
-    			<router-link to='/register'>
-    				我不是会员？立即注册
-    				<img src="../assets/img/login.png" alt>
-    			</router-link>
-    		</div>
-    	</div>
+      <div class="ban clearDiv">
+        <div class="clearDiv ban1 ban3">
+          <router-link to="/index">
+            <img src="../assets/img/logo.png" alt>
+          </router-link>
+        </div>
+        <div class="clearDiv ban1 ban2 ban4">
+          <router-link to="/login">会员登录</router-link>
+        </div>
+        <div class="clearDiv ban1 ban2 ban5">
+          <router-link to="/register">
+            我不是会员？立即注册
+            <img src="../assets/img/login.png" alt>
+          </router-link>
+        </div>
+      </div>
     </div>
     <!-- 忘记密码页面 -->
     <div class="fo1">
       <div class="fo3">
-        <el-steps :active="active" finish-status="success">
+        <!-- <el-steps :active="active" finish-status="success">
           <el-step title="填写账户名"></el-step>
           <el-step title="设置新密码"></el-step>
           <el-step title="完成"></el-step>
-        </el-steps>
+        </el-steps>-->
+        <div class="for-liucheng">
+          <div class="liulist forcur1"></div>
+          <div class="liulist" :class="{forcur1:step2}"></div>
+          <div class="liulist" :class="{forcur1:step3}"></div>
+          <div class="liutextbox">
+            <div class="liutext forcur">
+                <em>1</em>
+                <br>
+                <strong>填写账户名</strong> 
+            </div>
+            <div class="liutext" :class="{forcur:step2}">
+                <em>2</em>
+                <br>
+                <strong>设置新密码</strong>
+            </div>
+            <div class="liutext" :class="{forcur:step3}">
+                <em>3</em>
+                <br>
+                <strong>完成</strong>
+            </div>
+          </div>
+        </div>
         <!-- 填写用户名 -->
         <div class="fo2" v-if="1===this.active">
           <div class="fo4">
@@ -54,7 +74,12 @@
             <span>{{pwdTip}}</span>
           </div>
           <div class="fo7">
-            <input type="password" placeholder="请再次输入新密码" v-model="confirmPassword" @blur="checkConfirmPwd">
+            <input
+              type="password"
+              placeholder="请再次输入新密码"
+              v-model="confirmPassword"
+              @blur="checkConfirmPwd"
+            >
             <span>{{confirmPwdTip}}</span>
           </div>
           <el-button style="margin-top: 34px;" @click="next2">下一步</el-button>
@@ -85,7 +110,9 @@ export default {
       password: "",
       pwdTip: "",
       confirmPassword: "",
-      confirmPwdTip: ""
+      confirmPwdTip: "",
+      step2:false,
+      step3:false
     };
   },
   computed: {
@@ -108,6 +135,7 @@ export default {
     checkPhone() {
       if (!/^1[34578]\d{9}$/.test(this.phone)) {
         this.phoneTip = "请输入正确的手机号码";
+        this.isOk = false;
         return false;
       } else {
         this.phoneTip = "";
@@ -152,22 +180,31 @@ export default {
     },
     //第一步
     next1() {
-      if (this.active >= 3) this.active = 0;
+      if(this.phone == ''){
+        this.$message.error('手机号不能为空');
+        return;
+      }
+      if(this.code == ''){
+        this.$message.error('验证码不能为空');
+        return;
+      }
       if (!this.checkPhone()) {
         return;
       }
       if (!this.checkCode()) {
         return;
       }
-      this.$fetch("http://192.168.2.50:5010/tourist-aggregate/checkSmsCode", { smsCode: this.code }).then(
-        res => {
-          if (res.code === 200) {
-            this.active ++;
-          }else{
-            this.codeTip = res.message;
-          }
+      this.$fetch("http://192.168.2.50:5010/tourist-aggregate/checkSmsCode", {
+        smsCode: this.code,
+        smsFlag:'sms_passWord_back'
+      }).then(res => {
+        if (res.code === 200) {
+          this.active ++;
+          this.step2 = true;
+        } else {
+          this.codeTip = res.message;
         }
-      );
+      });
     },
     //检查密码
     checkPwd() {
@@ -194,7 +231,10 @@ export default {
     },
     //第二步
     next2() {
-      if (this.active >= 3) this.active = 1;
+      if(this.password == '' || this.confirmPassword == ''){
+        this.$message.error('密码不能为空');
+        return;
+      }
       if (!this.checkPwd()) {
         return;
       }
@@ -203,17 +243,20 @@ export default {
       }
       this.$post(
         "http://192.168.2.50:5010/tourist-aggregate/getBackTouristPassWord",
-        { mobile: this.phone, passWord: this.password,smsCode:this.code},
+        { mobile: this.phone, passWord: this.password, smsCode: this.code },
         { headers: { "Content-Type": "application/json;charset=UTF-8" } }
       ).then(res => {
-         if(res.code === 200){
-           this.active++;
-         }
+        if (res.code === 200) {
+          this.active++;
+          this.step3 = true;
+        }else{
+           this.$message.error(res.message);
+        }
       });
     },
     //跳转登录页面
-    jumpLogin(){
-      this.$router.replace('/login')
+    jumpLogin() {
+      this.$router.replace("/login");
     }
   }
 };
@@ -222,6 +265,7 @@ export default {
 <style scoped lang="scss">
 .body {
   background-color: #e3e3e3;
+  padding-bottom: 170px;
 }
 input {
   border: 1px solid #d1d1d1;
@@ -414,7 +458,61 @@ a {
   }
 }
 .fo3 {
-  overflow: hidden;
+  .for-liucheng {
+    width: 440px;
+    margin: 30px auto;
+    height: 50px;
+    padding: 50px 0 0 0;
+    position: relative;
+    .liulist {
+      float: left;
+      width: 33.3%;
+      height: 7px;
+      background: #ccc;
+    }
+    .forcur1{
+      background: #77b852;
+    }
+    .liutextbox {
+      position: absolute;
+      width: 100%;
+      left: 0;
+      top: 10px;
+      .liutext {
+        float: left;
+        width: 33.3%;
+        text-align: center;
+        margin-top: 30px;
+        em {
+          display: inline-block;
+          width: 24px;
+          height: 24px;
+          border-radius: 24px;
+          background: #ccc;
+          text-align: center;
+          font-size: 14px;
+          line-height: 24px;
+          font-style: normal;
+          font-weight: bold;
+          color: #fff;
+        }
+        strong {
+          display: inline-block;
+          height: 26px;
+          line-height: 26px;
+          font-weight: 400;
+        }
+      }
+      .forcur {
+        em {
+          background: #77b852;
+        }
+        .strong {
+          color: #77b852;
+        }
+      }
+    }
+  }
 }
 .fo6 {
   text-align: center;
@@ -446,7 +544,14 @@ a {
   color: #0764e9 !important;
 }
 
-.el-button > span {
+.body .el-button > span {
   color: #fff;
+}
+.el-step__title.is-success,
+.el-step__title.is-process {
+  text-align: center;
+}
+.el-step__icon {
+  margin-left: 62px;
 }
 </style>

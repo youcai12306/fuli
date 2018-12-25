@@ -187,17 +187,32 @@ export default {
       } else {
         this.name = "";
         this.mobile = "";
+        this.phoneTip = "";
         this.code = "";
+        this.codeTip = '';
         this.select.province = "";
         this.select.city = "";
         this.select.area = "";
+        this.adressTip = "";
         this.detailAdress = "";
+        this.detailAdressTip = "";
         this.type = false;
         this.mengShow = !this.mengShow;
       }
     },
     //关闭蒙版
     close(){
+       this.name = "";
+        this.mobile = "";
+        this.phoneTip = "";
+        this.code = "";
+        this.codeTip = '';
+        this.select.province = "";
+        this.select.city = "";
+        this.select.area = "";
+        this.adressTip = "";
+        this.detailAdress = "";
+        this.detailAdressTip = "";
       this.showMeng = false;
     },
     //获取地址栏的值
@@ -279,6 +294,10 @@ export default {
         ).then(res => {
           if (res.code === 200) {
             this.mengShow = !this.mengShow;
+            this.$message({
+              type: "success",
+              message: "新增成功"
+            });
             this.init();
           }
         });
@@ -300,6 +319,10 @@ export default {
         ).then(res => {
           if (res.code === 200) {
             this.mengShow = !this.mengShow;
+            this.$message({
+              type: "success",
+              message: "修改成功"
+            });
             this.init();
           }
         });

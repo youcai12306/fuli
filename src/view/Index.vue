@@ -22,6 +22,8 @@
             format="yyyy-MM-dd"
             value-format="yyyy-MM-dd"
             class="select-list"
+            :editable="false"
+            :picker-options="pickerOptions0"
           ></el-date-picker>
         </div>
         <div class="ticket content-list">门票
@@ -47,28 +49,28 @@
             <swiper :options="swiperOption" ref="mySwiper">
               <!-- slides -->
               <swiper-slide>
-                <img src="../assets/img/index-img12.png" alt :class="{imgActive:index === 0}">
+                <img src="../assets/img/index-img12.png" alt :class="{imgActive:index === 0}" @click.stop="jumpImg(0)">
               </swiper-slide>
               <swiper-slide>
-                <img src="../assets/img/index-img13.png" alt :class="{imgActive:index === 1}">
+                <img src="../assets/img/index-img13.png" alt :class="{imgActive:index === 1}" @click.stop="jumpImg(1)">
               </swiper-slide>
               <swiper-slide>
-                <img src="../assets/img/index-img14.png" alt :class="{imgActive:index === 2}">
+                <img src="../assets/img/index-img14.png" alt :class="{imgActive:index === 2}" @click.stop="jumpImg(2)">
               </swiper-slide>
               <swiper-slide>
-                <img src="../assets/img/index-img15.png" alt :class="{imgActive:index === 3}">
+                <img src="../assets/img/index-img15.png" alt :class="{imgActive:index === 3}" @click.stop="jumpImg(3)">
               </swiper-slide>
               <swiper-slide>
-                <img src="../assets/img/index-img16.png" alt :class="{imgActive:index === 4}">
+                <img src="../assets/img/index-img16.png" alt :class="{imgActive:index === 4}" @click.stop="jumpImg(4)">
               </swiper-slide>
               <swiper-slide>
-                <img src="../assets/img/index-img17.png" alt :class="{imgActive:index === 5}">
+                <img src="../assets/img/index-img17.png" alt :class="{imgActive:index === 5}" @click.stop="jumpImg(5)">
               </swiper-slide>
               <swiper-slide>
-                <img src="../assets/img/index-img12.png" alt :class="{imgActive:index === 6}">
+                <img src="../assets/img/index-img12.png" alt :class="{imgActive:index === 6}" @click.stop="jumpImg(6)">
               </swiper-slide>
               <swiper-slide>
-                <img src="../assets/img/index-img13.png" alt :class="{imgActive:index === 7}">
+                <img src="../assets/img/index-img13.png" alt :class="{imgActive:index === 7}" @click.stop="jumpImg(7)">
               </swiper-slide>
               <!-- Optional controls -->
             </swiper>
@@ -101,7 +103,7 @@
                       alt
                       :class="{colorA:key === newSwiperIndex}"
                     >
-                    <p class="titless" v-show="newSwiperIndex === key">2019精彩活动马上来袭！</p>
+                    <p class="titless">2019精彩活动马上来袭！</p>
                   </div>
                 </el-carousel-item>
               </el-carousel>
@@ -148,16 +150,6 @@
                 </div>
               </div>
               <ul class="bottom">
-                <!-- <template v-for="item in 4">
-                  <router-link
-                    :to="{path:'/newDetail',query:{id:'5c1f5349f8dac609dd5cd6b7'}}"
-                    tag="li"
-                    class="clearDiv"
-                  >
-                    《受伤的鲸豚不再无助 海南首个海洋动物保育救护中心挂牌启用》
-                    <a>详情>></a>
-                  </router-link>
-                </template>-->
                 <li class="clearDiv" v-for="(item,key) in newList" :key="key">
                   {{item.infoTitle}}
                   <router-link :to="{path:'/newDetail',query:{id:item.id}}">详情>></router-link>
@@ -166,6 +158,7 @@
             </div>
             <div class="content-right floatLeft">
               <img src="../assets/img/index-hot-img2.png" alt>
+              <router-link class="knowDetail" to="/risk">了解详情></router-link>
             </div>
           </div>
         </div>
@@ -218,7 +211,7 @@
 <script>
 import "swiper/dist/css/swiper.css";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
-import {IMG_Url} from "@/package/common"
+import { IMG_Url } from "@/package/common";
 import Header from "@/components/Header"; //引入头部
 import defaultHead from "../assets/img/index-img8.png";
 export default {
@@ -233,10 +226,6 @@ export default {
         // notNextTick是一个组件自有属性，如果notNextTick设置为true，组件则不会通过NextTick来实例化swiper，也就意味着你可以在第一时间获取到swiper对象，假如你需要刚加载遍使用获取swiper对象来做什么事，那么这个属性一定要是true
         notNextTick: true,
         slidesPerView: 6
-        // autoplay: {
-        //   delay: 3000
-        // },
-        // loop:true,
       },
       index: 0,
       skId: "",
@@ -244,7 +233,12 @@ export default {
       newFirst: "",
       newFirstContent: "",
       newList: [],
-      img:""
+      img: "",
+      pickerOptions0: {
+        disabledDate(time) {
+          return time.getTime() < Date.now() - 8.64e7;
+        }
+      }
     };
   },
   mounted() {
@@ -255,6 +249,11 @@ export default {
     this.swiperInit();
   },
   methods: {
+    //跳转背景
+    jumpImg(index){
+      clearInterval(this.times);
+      this.index = index;
+    },
     //设置默认图片
     userAvaterError(e) {
       e.target.src = defaultHead;
@@ -268,20 +267,23 @@ export default {
           let newList = res.data.content;
           if (newList != null) {
             this.newFirst = res.data.content[0];
-            this.$fetch("http://192.168.2.61:2600/staticResource-mucon/selectFiles", {
-              ids: this.newFirst.infoPic
-            }).then(res => {
-              if(res.code === 200){
-                this.img = IMG_Url+res.data[0].fileName
-              }   
+            this.$fetch(
+              "http://192.168.2.61:2600/staticResource-mucon/selectFiles",
+              {
+                ids: this.newFirst.infoPic
+              }
+            ).then(res => {
+              if (res.code === 200) {
+                this.img = IMG_Url + res.data[0].fileName;
+              }
             });
             this.$post(
               "http://192.168.2.61:2670/info/secondary/getInfo?infoId=" +
                 this.newFirst.id
             ).then(res => {
-              if(res.code === 200){
+              if (res.code === 200) {
                 this.newFirstContent = res.data.infoContent;
-              } 
+              }
             });
             this.newList = res.data.content.slice(1);
           }
@@ -505,7 +507,7 @@ export default {
       }
     }
     .new-active {
-      margin-top: 72px;
+      margin-top: 100px;
       background: url(../assets/img/index-img2.png) no-repeat;
       background-size: 100% 100%;
       .title {
@@ -519,7 +521,6 @@ export default {
           font-size: 35px;
           span {
             font-size: 25px;
-            margin-left: 15px;
           }
         }
       }
@@ -581,14 +582,14 @@ export default {
           font-size: 35px;
           span {
             font-size: 25px;
-            margin-left: 15px;
           }
         }
       }
       .hot-content {
         box-shadow: 5px 6px 7px 0px rgba(51, 75, 179, 0.35);
-        padding-top: 160px;
+        padding-top: 78px;
         padding-left: 40px;
+        padding-bottom: 35px;
         .content-left {
           li {
             width: 180px;
@@ -698,11 +699,28 @@ export default {
           }
         }
         .content-right {
-          margin-top: -10px;
+          margin-top: -35px;
           margin-left: 23px;
+          position: relative;
           img {
             width: 343px;
             height: 397px;
+          }
+          .knowDetail {
+            position: absolute;
+            bottom: 45px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 102px;
+            height: 40px;
+            line-height: 40px;
+            background: rgba(196, 78, 246, 1);
+            border-radius: 20px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 1);
+            cursor: pointer;
           }
         }
       }
@@ -783,10 +801,11 @@ export default {
             top: 78px;
             img {
               display: block;
-              width: 168px;
-              height: 145px;
+              width: 107px;
+              height: 56px;
               float: left;
               margin-right: 10px;
+              margin-top: 34px;
             }
             .info-p {
               float: left;

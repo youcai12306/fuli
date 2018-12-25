@@ -25,7 +25,7 @@
           <div class="step1" v-if="step">
             <p class="clearDiv">
               <label for>手机号</label>
-              <input type="text" v-model="phone" placeholder="请填写您的手机" @blur="checkPhone" @focus="clearInfo">
+              <input type="text" v-model="phone" placeholder="请填写您的手机" @blur="checkPhone" >
               <span class="tip">{{phoneTip}}</span>
             </p>
             <p class="clearDiv">
@@ -36,7 +36,6 @@
                 placeholder="请输入验证码"
                 class="code-input"
                 @blur="checkCode"
-                @focus="clearInfo"
               >
               <img :src="codeImg" alt @click="getCode">
               <span class="tip">{{codeTip}}</span>
@@ -137,7 +136,6 @@ export default {
       if (!/^1[34578]\d{9}$/.test(this.phone)) {
         this.phoneTip = "请输入正确的手机号码";
         this.isOk = false;
-        return false;
       } else {
         this.$fetch(
           "http://192.168.2.50:5010/tourist-aggregate/checkIsRegist",
@@ -149,19 +147,20 @@ export default {
           } else {
             this.phoneTip = res.message;
             this.isOk = false;
-            return false;
           }
         });
       }
-    },
-    //清空提示语
-    clearInfo(){
-      this.msg = ""
     },
     //返回上一步
     back(){
       clearInterval(this.times);
       this.step = ! this.step;
+      this.phone = '';
+      this.phoneTip = '';
+      this.code = '';
+      this.codeTip = '';
+      this.msg = '';
+      this.getCode();
     },
     //验证验证码是否正确
     checkCode() {
@@ -187,15 +186,27 @@ export default {
     //注册第一步
     register() {
       if (!this.agree) {
-        this.msg = "请同意用户注册协议";
+        this.$message.error('"请同意用户注册协议');
+        return false;
+      }
+      if(this.phone == ''){
+        this.$message.error('"手机号不能为空');
+        return false;
+      }
+      if(this.code == ''){
+        this.$message.error('"验证码不能为空');
         return false;
       }
       if (!(this.isOk && this.isOk1)) {
-        this.msg = "请正确填写信息";
         return false;
       } else {
         //验证通过发起请求
         this.step = !this.step;
+        this.code1 = '';
+        this.codeTip1 = '';
+        this.password = '';
+        this.pwdTip = '';
+        this.msg1 = '';
         this.getCode1();
       }
     },
@@ -232,7 +243,8 @@ export default {
         return false;
       } else {
         this.$fetch("http://192.168.2.50:5010/tourist-aggregate/checkSmsCode", {
-          smsCode: this.code1
+          smsCode: this.code1,
+          smsFlag: sms_code
         }).then(res => {
           if (res.code === 200) {
             this.codeTip1 = "";
@@ -261,11 +273,18 @@ export default {
     //注册第二步
     register2() {
       if (!sessionStorage.getItem("move")) {
-        this.msg1 = "请先验证通过";
+        this.$message.error('请滑动滑块到最右侧');
+        return;
+      }
+      if(this.code1 == ''){
+        this.$message.error('验证码不能为空');
+        return;
+      }
+      if(this.password == ''){
+        this.$message.error('密码不能为空');
         return;
       }
       if (!(this.isOk2 && this.isOk3)) {
-        this.msg1 = "验证码或密码有错";
         return false;
       } else {
         //注册接口
@@ -281,8 +300,7 @@ export default {
             });
             this.$router.push("/login");
           } else {
-            this.msg1 = res.message;
-            return false;
+            this.$message.error(res.message);
           }
         });
       }

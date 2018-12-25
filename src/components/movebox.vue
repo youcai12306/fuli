@@ -74,7 +74,7 @@ export default {
     color: #999;
   }
   .movego {
-    background-color: #f37b3a;
+    background-color: rgba(109,196,38,1);
     height: 40px;
     width: 0px;
   }

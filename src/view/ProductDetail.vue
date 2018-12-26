@@ -3,8 +3,8 @@
     <Header></Header>
     <div class="content">
       <div class="nav clearDiv">
-        <div class="floatLeft">当前位置：网上订购>零售商品详情页</div>
-        <div class="floatRight">我的订单</div>
+        <div class="floatLeft" @click="orderr">当前位置：网上订购>零售商品详情页</div>
+        <div class="floatRight" @click="myorder">我的订单</div>
         <div class="floatRight shopping-car" @click="jumpShoppingCar">
           <img
             src="../assets/img/shopping-car.png"
@@ -206,7 +206,14 @@ export default {
     changeType(type) {
       this.changeB = type;
     },
-
+    // 查看我的订单
+    myorder(){
+      this.$router.push("./mine")
+    },
+    // 网上订购
+    orderr(){
+      this.$router.push("./tickets/1")
+    },
     //是否可退订
     canDebook(type) {
       return type === 1 ? (this.sign = "可退订") : (this.sign = "不可退订");

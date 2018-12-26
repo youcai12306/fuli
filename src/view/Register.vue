@@ -244,7 +244,7 @@ export default {
       } else {
         this.$fetch("http://192.168.2.50:5010/tourist-aggregate/checkSmsCode", {
           smsCode: this.code1,
-          smsFlag: sms_code
+          smsFlag: 'sms_code'
         }).then(res => {
           if (res.code === 200) {
             this.codeTip1 = "";

@@ -1,31 +1,29 @@
 <template>
   <div>
     <div class="bac clearDiv">
-    	<div class="ban clearDiv">
-    		<div class="clearDiv ban1 ban3">
-    			<router-link to="/index">
-    				<img src="../assets/img/logo.png" alt>
-    			</router-link>
-    		</div>
-    		<div class="clearDiv ban1 ban2 ban4">
-    			<router-link to="/login">
-    				会员登录
-    			</router-link>
-    		</div>
-    		<div class="clearDiv ban1 ban2 ban5">
-    			<router-link to='/register'>
-    				我不是会员？立即注册
-    				<img src="../assets/img/login.png" alt>
-    			</router-link>
-    		</div>
-    	</div>
+      <div class="ban clearDiv">
+        <div class="clearDiv ban1 ban3">
+          <router-link to="/index">
+            <img src="../assets/img/logo.png" alt>
+          </router-link>
+        </div>
+        <div class="clearDiv ban1 ban2 ban4">
+          <router-link to="/login">会员登录</router-link>
+        </div>
+        <div class="clearDiv ban1 ban2 ban5">
+          <router-link to="/register">
+            我不是会员？立即注册
+            <img src="../assets/img/login.png" alt>
+          </router-link>
+        </div>
+      </div>
     </div>
     <div class="bac1">
       <div class="bac1-content clearDiv">
         <div class="bac2">
           <div class="bac3 clearDiv">
-            <a href class="bac4" @click.prevent="changeLoginType(0)">手机号登录</a>
-            <a href @click.prevent="changeLoginType(1)">账号密码登录</a>
+            <a href="javascript:;" class="bac4">手机号登录</a>
+            <a href @click.prevent="changeLoginType(1)" class="a">账号密码登录</a>
           </div>
           <div class="bac5">
             <div class="phone">
@@ -45,14 +43,7 @@
                 <span>{{codeTip}}</span>
               </div>
               <div v-show="showLogin === 1" class="password">
-                <input
-                  type="password"
-                  placeholder="请输入密码"
-                  class="inp"
-                  v-model="password"
-                  @blur="checkPwd"
-                >
-                <span>{{pwdTip}}</span>
+                <input type="password" placeholder="请输入密码" class="inp" v-model="password">
               </div>
             </div>
             <div class="bac7">
@@ -92,16 +83,14 @@ export default {
   data() {
     return {
       showLogin: 1,
-      phone: '',
-      phoneTip: '',
-      code: '',
-      codeTip: '',
-      password: '',
-      pwdTip: '',
-      showPin: '获取验证码',
+      phone: "",
+      phoneTip: "",
+      code: "",
+      codeTip: "",
+      password: "",
+      showPin: "获取验证码",
       isActive: false,
-      msg: '',
-      img:''
+      msg: ""
     };
   },
   methods: {
@@ -109,12 +98,10 @@ export default {
     checkPhone() {
       if (!/^1[34578]\d{9}$/.test(this.phone)) {
         this.phoneTip = "请输入正确的手机号码";
-        this.isOk = false
-        return false;
+        this.isOk = false;
       } else {
         this.phoneTip = "";
-        this.isOk = true
-        return true;
+        this.isOk = true;
       }
     },
     //判断验证码
@@ -125,24 +112,11 @@ export default {
         this.codeTip = "";
       }
     },
-    //判断密码
-    checkPwd() {
-      if (!/^[a-zA-Z0-9]{6,10}$/.test(this.password)) {
-        this.pwdTip = "密码不正确";
-        this.isOk1 = false
-        return false;
-      } else {
-        this.pwdTip = "";
-        this.isOk1 = true
-        return true;
-      }
-    },
     //清空提示信息
     changeLoginType(type) {
       this.showLogin = type;
       this.phoneTip = "";
       this.codeTip = "";
-      this.pwdTip = "";
     },
     //获取验证码
     getCode() {
@@ -172,22 +146,35 @@ export default {
         //   return false;
         // }
       } else {
-        if (!(this.isOk && this.isOk1)) {
-          this.msg = "手机号或者密码不正确"
-          return false;
+        if (this.phone == "") {
+          this.$message.error('"手机号不能为空');
+          return;
+        }
+        if (this.password == "") {
+          this.$message.error('"密码不能为空');
+          return;
+        }
+        if (!this.isOk) {
+          return;
         }
         //验证通过发起请求
         let data = {
           mobile: this.phone,
           passWord: this.password
         };
-        this.$post("http://192.168.2.50:5010/tourist-aggregate/login",data,{headers:{'Content-Type':'application/json;charset=UTF-8'}}).then(res => {
+        this.$post("http://192.168.2.50:5010/tourist-aggregate/login", data, {
+          headers: { "Content-Type": "application/json;charset=UTF-8" }
+        }).then(res => {
           if (res.code === 200) {
             this.setUserInfo(data);
             this.setUserData(res.data);
+            this.$message({
+              message: "登录成功",
+              type: "success"
+            });
             this.$router.replace("/index");
           } else {
-             this.msg = res.message;
+            this.$message.error(res.message);
           }
         });
       }
@@ -267,6 +254,21 @@ a {
       a {
         float: left;
         padding: 0 18px;
+         font-weight: bold;
+        position: relative;
+      }
+      .a {
+        color: #0764e9;
+        &::after {
+          position: absolute;
+          content: "";
+          width: 60px;
+          height: 4px;
+          background: #0764e9;
+          position: absolute;
+          left: 38px;
+          top: 27px;
+        }
       }
       .bac4 {
         border-right: 1px solid #c3c3c3;
@@ -311,7 +313,7 @@ a {
         color: red;
         font-size: 12px;
         span {
-          padding-left: 10px;
+          left: 10px;
           position: absolute;
           bottom: -32px;
         }
@@ -367,7 +369,7 @@ a {
         border: none;
         color: #fff;
         background-color: #0764e9;
-				cursor: pointer;
+        cursor: pointer;
       }
     }
     .login {

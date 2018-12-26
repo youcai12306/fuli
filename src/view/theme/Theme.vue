@@ -9,28 +9,68 @@
           <swiper :options="swiperOption" ref="mySwiper">
             <!-- slides -->
             <swiper-slide>
-              <img src="../../assets/img/theme-banner-list1.png" alt :class="{imgActive:index === 0}">
+              <img
+                src="../../assets/img/theme-banner-list1.png"
+                alt 
+                @click.stop="jumpImg(0)"
+              >
+              <p :class="{imgActive:index === 0}">双神战车</p>
             </swiper-slide>
             <swiper-slide>
-              <img src="../../assets/img/theme-banner-list2.png" alt :class="{imgActive:index === 1}">
+              <img
+                src="../../assets/img/theme-banner-list2.png"
+                alt   
+                @click.stop="jumpImg(1)"
+              >
+              <p :class="{imgActive:index === 1}">双神战车</p>
             </swiper-slide>
             <swiper-slide>
-              <img src="../../assets/img/theme-banner-list3.png" alt :class="{imgActive:index === 2}">
+              <img
+                src="../../assets/img/theme-banner-list3.png"
+                alt
+                @click.stop="jumpImg(2)"
+              >
+              <p :class="{imgActive:index === 2}">双神战车</p>
             </swiper-slide>
             <swiper-slide>
-              <img src="../../assets/img/theme-banner-list4.png" alt :class="{imgActive:index === 3}">
+              <img
+                src="../../assets/img/theme-banner-list4.png"
+                alt
+                @click.stop="jumpImg(3)"
+              >
+              <p  :class="{imgActive:index === 3}">双神战车</p>
             </swiper-slide>
             <swiper-slide>
-              <img src="../../assets/img/theme-banner-list5.png" alt :class="{imgActive:index === 4}">
+              <img
+                src="../../assets/img/theme-banner-list5.png"
+                alt
+                @click.stop="jumpImg(4)"
+              >
+              <p :class="{imgActive:index === 4}">双神战车</p>
             </swiper-slide>
             <swiper-slide>
-              <img src="../../assets/img/theme-banner-list6.png" alt :class="{imgActive:index === 5}">
+              <img
+                src="../../assets/img/theme-banner-list6.png"
+                alt
+                @click.stop="jumpImg(5)"
+              >
+              <p :class="{imgActive:index === 5}">双神战车</p>
             </swiper-slide>
             <swiper-slide>
-              <img src="../../assets/img/theme-banner-list1.png" alt :class="{imgActive:index === 6}">
+              <img
+                src="../../assets/img/theme-banner-list1.png"
+                alt
+                @click.stop="jumpImg(6)"
+              >
+              <p :class="{imgActive:index === 6}">双神战车</p>
             </swiper-slide>
             <swiper-slide>
-              <img src="../../assets/img/theme-banner-list2.png" alt :class="{imgActive:index === 7}">
+              <img
+                src="../../assets/img/theme-banner-list2.png"
+                alt
+                @click.stop="jumpImg(7)"
+              >
+              <p :class="{imgActive:index === 7}">双神战车</p>
             </swiper-slide>
             <!-- Optional controls -->
           </swiper>
@@ -315,6 +355,11 @@ export default {
     });
   },
   methods: {
+    //跳转对应图片
+    jumpImg(index) {
+      clearInterval(this.times);
+      this.index = index;
+    },
     //跳转动物详情
     jumpAnimalDetail(id) {
       this.$router.push({ path: "/animalDetail", query: { id: id } });
@@ -444,10 +489,24 @@ export default {
           height: 84px;
           margin: 0 auto;
           box-sizing: border-box;
-        }
-
-        .imgActive {
+          cursor: pointer;
           border: 3px solid rgba(255, 255, 255, 1);
+        }
+        p {
+          position: absolute;
+          z-index: 2;
+          bottom: 3px;
+          width: 140px;
+          height: 25px;
+          line-height: 25px;
+          background: rgba(0, 0, 0, 0.8);
+          margin: 0 auto;
+          font-size: 12px;
+          color: rgba(255, 255, 255, 1);
+        }
+        .imgActive {
+          height:78px;
+          line-height: 78px;
         }
 
         .swiper-prev {

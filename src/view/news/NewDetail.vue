@@ -35,7 +35,7 @@ export default {
     document.title = "新闻中心详情";
   },
   mounted(){
-     this.$post('http://192.168.2.61:2670/info/secondary/getInfo?infoId='+this.$route.query.id).then((res) =>{
+     this.$post('http://192.168.2.61:2670/mongodb-mucon/info/primary/get?infoId='+this.$route.query.id).then((res) =>{
       this.data = res.data
     })
   }

@@ -42,6 +42,7 @@ export default {
     //登出
     setSignOuts() {
       this.setSignOut();
+			delCookie('userData');
       this.$router.replace("/index");
     }
   }

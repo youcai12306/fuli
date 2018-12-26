@@ -84,6 +84,9 @@
 					a {
 						color: #ffffff;
 					}
+					&:nth-of-type(3n){
+						border-right:0;
+					}
 				}
 			}
 

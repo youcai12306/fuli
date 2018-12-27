@@ -25,23 +25,194 @@
 				</div>
 				<div class="right floatRight">
 					<div class="box">
-						<div class="title-1">
-							携手 “净滩”，向海洋垃圾宣战 <span @click="go">返回</span>
-						</div>
-						<div class="title-2">
-							<span>海南海洋欢乐世界 9月19日</span>
-						</div>
+						<template v-if="type == 1 && id == 1">
+							<div class="title-1">
+								搁浅领航鲸救助(上)<span @click="go">返回</span>
+							</div>
+							<div class="title-2">
+								<span>海南海洋欢乐世界 2016-05-18</span>
+							</div>
+							<div class="conent-main">
+								<p class="span-3">5月17日下午2点，富力湾海边气温骤升至33度，救援人员已经汗流浃背，鲸鱼也出现不适，物业人员又紧急调配一台潜水泵，抽水给鲸鱼降温。</p>
+								<div class="box-swiper">
+									<img src="../../assets/img/anila/1.png" alt="">
+								</div>
+								<div class="span-3">
+									<p>省救护中心专家及陵水渔政工作人员带担架赶到现场，海洋公园技术人员将领航鲸抬上担架，配合政府部门，准备转运。</p>
+								</div>
+								<div class="box-swiper">
+									<img src="../../assets/img/anila/2.png" alt="">
+								</div>
+								<div class="span-3">
+									<p>救生通道打开，准备船运至分界洲。</p>
+								</div>
+								<div class="box-swiper">
+									<img src="../../assets/img/anila/3.png" alt="">
+								</div>
+								<div class="span-3">
+									<p>风浪太大，船靠不上岸，救援人员给鲸鱼泼水降温，安抚动物。</p>
+								</div>
+								<div class="box-swiper">
+									<img src="../../assets/img/anila/4.png" alt="">
+								</div>
+								<div class="span-3">
+									<p>海浪无情人有情，夜幕降临了，船靠不上来，但救援不能放弃。</p>
+								</div>
+								<div class="box-swiper">
+									<img src="../../assets/img/anila/5.png" alt="">
+								</div>
+								<div class="span-3">
+									<p>当晚7点，海洋公园领导现场研究下一步救援方案。</p>
+								</div>
+								<div class="box-swiper">
+									<img src="../../assets/img/anila/6.png" alt="">
+								</div>
+								<div class="span-3">
+									<p>深夜11点，渔政领导果断采用备用方案，车运。富力湾及海洋公园多部门联动，几十名员工齐心协力，把鲸鱼平稳吊入卡车。</p>
+								</div>
+								<div class="box-swiper">
+									<img src="../../assets/img/anila/7.png" alt="">
+								</div>
+								<div class="span-3">
+									<p>18日0时，鲸鱼转运至省救护中心新村基地，至此，海洋公园技术人员已经连续奋战24小时，完成爱心接力。</p>
+								</div>
+								<div class="box-swiper">
+									<img src="../../assets/img/anila/8.png" alt="">
+								</div>
+								<div class="span-3">
+									<p>本次救助行动得到了富力湾兄弟部门的大力支持，但也暴露出现阶段救援设备不足等问题。相信海洋公园开园后，专业技术团队将会担当起更多的海洋动物救援任务——爱心不会搁浅，救助仍将继续。</p>
+								</div>
+							</div>
+						</template>
+						<template v-if="type ==1 && id == 2">
+							<div class="title-1">
+								搁浅领航鲸救助(下)<span @click="go">返回</span>
+							</div>
+							<div class="title-2">
+								<span>海南海洋欢乐世界 2016-05-18</span>
+							</div>
+							<div class="conent-main">
+								<p class="span-3">5月17日，零点，海南陵水富力湾安保人员在沙滩上发现一头搁浅领航鲸，因缺乏相关技能，在微信群内向海南富力海洋欢乐世界(下称海洋公园)动物专家求助，动物专家陈军、杨晨等立即赶往现场救治。</p>
+								<div class="box-swiper">
+									<img src="../../assets/img/anila2/1.png" alt="">
+								</div>
+								<div class="span-3">
+									<p>风浪太大，鲸鱼体力不支，陈、杨到达现场后，立即协调工程人员加入抢救行动，调用挖机为鲸鱼开辟避风港。</p>
+								</div>
+								<div class="box-swiper">
+									<img src="../../assets/img/anila2/2.png" alt="">
+								</div>
+								<div class="span-3">
+									<p>持续工作到东方渐白，避风港已成型，鲸鱼也稳定下来。</p>
+								</div>
+								<div class="box-swiper">
+									<img src="../../assets/img/anila2/3.png" alt="">
+								</div>
+								<div class="span-3">
+									<p>17日早7点钟，海洋公园主管领导抵达现场，指挥救护工作。</p>
+								</div>
+								<div class="box-swiper">
+									<img src="../../assets/img/anila2/4.png" alt="">
+								</div>
+								<div class="span-3">
+									<p>9点钟，应急采购药品到位，对搁浅的领航鲸完成第一次肌肉注射。</p>
+								</div>
+								<div class="box-swiper">
+									<img src="../../assets/img/anila2/5.png" alt="">
+								</div>
+								<div class="span-3">
+									<p>鲸鱼体表有外伤，动物专家进行了消毒处理。</p>
+								</div>
+								<div class="box-swiper">
+									<img src="../../assets/img/anila2/6.png" alt="">
+								</div>
+								<div class="span-3">
+									<p>因现场情况有限，鲸鱼情况稍有好转，工作人员即联系政府主管部门及海南省救护中心，准备转移。</p>
+								</div>
+								<div class="box-swiper">
+									<img src="../../assets/img/anila2/7.png" alt="">
+								</div>
+								<div class="span-3">
+									<p>省救护中心的专家和海洋局的领导赶到现场，安排动物的转移及后续救治工作。对富力湾及富力海洋公园团队的迅速反应及妥善处置表示认可。</p>
+								</div>
+								<div class="box-swiper">
+									<img src="../../assets/img/anila2/8.png" alt="">
+								</div>
+								<div class="span-3">
+									<p>海洋公园救护中心已经封顶，待设备安装调试后，将肩负更多的海洋生物救护功能。</p>
+								</div>
+								<div class="box-swiper">
+									<img src="../../assets/img/anila2/9.png" alt="">
+								</div>
+								<div class="span-3">
+									<p>海洋公园的救护中心有用于鲸豚类救护的水池，遗憾的是此时此刻还不能使用。</p>
+								</div>
+								<div class="box-swiper">
+									<img src="../../assets/img/anila2/10.png" alt="">
+								</div>
+								<div class="span-3">
+									<p>救护中心整体落成后，专业的保育水池、先进的的救护设施、健全的医疗设备，将会为海洋救护和科研做出应有的贡献！</p>
+								</div>
+								<div class="box-swiper">
+									<img src="../../assets/img/anila2/11.png" alt="">
+								</div>
+							</div>
+						</template>
 
-						<div class="box-swiper">
-							<img src="../../assets/img/ADetail2.png" alt="">
-						</div>
-
-						<div class="span-3">
-							<p>5月17日下午2点，富力湾海边气温骤升至33度，救援人员已经汗流浃背，鲸鱼也出现不适，物业人员又紧急调配一台潜水泵，抽水给鲸鱼降温。省救护中心专家及陵水渔政工作人员带担架赶到现场，海洋公园技术人员将领航鲸抬上担架，配合政府部门，准备转运。</p>
-							<p>救生通道打开，准备船运至分界洲。救生通道打开，准备船运至分界洲。风浪太大，船靠不上岸，救援人员给鲸鱼泼水降温，安抚动物。海浪无情人有情，夜幕降临了，船靠不上来，但救援不能放弃。</p>
-							<p>深夜11点，渔政领导果断采用备用方案，车运。富力湾及海洋公园多部门联动，几十名员工齐心协力，把鲸鱼平稳吊入卡车。</p>
-						</div>
-
+						<template v-if="type ==2 && id == 1">
+							<div class="title-1">
+								携手 “净滩”，向海洋垃圾宣战<span @click="go">返回</span>
+							</div>
+							<div class="title-2">
+								<span>海南海洋欢乐世界 09-19</span>
+							</div>
+							<div class="conent-main">
+								<div class="span-3">
+									<p>近日，海南富力海洋欢乐世界应三亚市蓝丝带海洋保护协会邀请参加 “净滩”公益活动，由运营执行总裁Vincent.r.Pijnenburg带领19人组成的“净滩”小队及水生野生动物救护车前往三亚大东海广场开展活动。</p>
+								</div>
+								<div class="box-swiper">
+									<img src="../../assets/img/anila3/1.png" alt="">
+								</div>
+								<div class="span-3">
+									<p>在领取本次“净滩”活动的统一服装后，海南富力海洋欢乐世界的志愿者队伍拉开了项目及蓝海保育救护中心的旗帜，等待主办方开幕。<br>
+										　　值得一提的是，蓝海保育救护中心是海洋欢乐世界倾力打造的海南省首家功能完善的海洋动物救护繁育基地，配置有专业的养殖及兽医团队，并从国内外厂家引进许多高精尖医疗设备，以承担近海的海洋动物救护任务。</p>
+								</div>
+								<div class="box-swiper">
+									<img src="../../assets/img/anila3/2.png" alt="">
+									<img src="../../assets/img/anila3/3.png" alt="">
+								</div>
+								<div class="span-3">
+									<p>一首《呵护蔚蓝》拉开了此次活动的序幕，配合手语表演昭示出海洋饱受陆地垃圾侵蚀的无声痛苦，希望人类早日警醒，让每个人都行动起来，提高保护海洋的意识。</p>
+								</div>
+								<div class="box-swiper">
+									<img src="../../assets/img/anila3/4.png" alt="">
+									<img src="../../assets/img/anila3/5.png" alt="">
+								</div>
+								<div class="span-3">
+									<p>活动环节从学习海洋生态知识、了解海洋污染的严重情况开始，到志愿者宣誓并在“向海洋垃圾宣战”的宣传板上签字留名后，全员正式开启“净滩”活动。我们每个人用实际行动来保卫我们的海洋母亲，为还海洋一片蔚蓝尽一份力量。</p>
+								</div>
+								<div class="box-swiper">
+									<img src="../../assets/img/anila3/6.png" alt="">
+									<img src="../../assets/img/anila3/7.png" alt="">
+								</div>
+								<div class="span-3">
+									<p>进入沙滩后短短一段路程，志愿者们就捡到许多被丢弃而埋藏在沙滩上的木棍、废纸、塑料、烟头等垃圾。这些影响沙滩容貌甚至存在安全隐患的垃圾多为游客漫步沙滩时随手丢弃的。志愿者们近一个小时的“净滩”行动居然“收获”颇丰。</p>
+								</div>
+								<div class="box-swiper">
+									<img src="../../assets/img/anila3/8.png" alt="">
+								</div>
+								<div class="span-3">
+									<p>“净滩”活动结束后，蓝海保育救护中心团队在三亚大东海的海岸边进行了一场“特殊”的展示——水生哺乳动物救助演练，向人们讲解救助海洋动物的正确操作方法，避免对搁浅动物的二次伤害。</p>
+								</div>
+								<div class="box-swiper">
+									<img src="../../assets/img/anila3/9.png" alt="">
+								</div>
+								<div class="span-3">
+									<p>此次“净滩”活动旨在让海洋环保事业增添新能量，提高人们的海洋环保意识，让更多人参与到“净滩”活动中，做到真正的身体力行，也让大家看到海洋欢乐世界对海洋环保事业的恒心与决心，从而获得更多人的理解和支持。<br>
+										　　当然 “净滩”不是一日之功，它更需要我们所有人一同携手对抗海洋垃圾，与海洋垃圾战斗到底！</p>
+								</div>
+							</div>
+						</template>
 					</div>
 				</div>
 			</div>
@@ -265,8 +436,6 @@
 
 					.box-swiper {
 						width: 100%;
-						height: 459px;
-						margin-top: 20px;
 						overflow: hidden;
 						position: relative;
 
@@ -277,8 +446,8 @@
 						line-height: 24px;
 						font-size: 14px;
 						color: #333;
-						margin-bottom: 50px;
-						margin-top: 40px;
+						margin-bottom: 20px;
+						margin-top: 20px;
 
 						* {
 							text-indent: 2em;
@@ -287,6 +456,34 @@
 
 				}
 			}
+		}
+	}
+
+	.conent-main {
+		margin-top: 20px;
+		width: 100%;
+		height: 667px;
+		overflow-y: auto;
+
+		&::-webkit-scrollbar {
+			/*滚动条整体样式*/
+			width: 10px;
+			/*高宽分别对应横竖滚动条的尺寸*/
+			height: 1px;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			/*滚动条里面小方块*/
+			border-radius: 10px;
+			background-color: #F90;
+			background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent);
+		}
+
+		&::-webkit-scrollbar-track {
+			/*滚动条里面轨道*/
+			-webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+			/* border-radius: 10px; */
+			background: #EDEDED;
 		}
 	}
 </style>

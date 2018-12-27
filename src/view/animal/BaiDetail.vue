@@ -213,6 +213,114 @@
 								</div>
 							</div>
 						</template>
+
+						<template v-if="type == 2 && id == 2">
+							<div class="title-1">
+								“海洋欢乐世界”科普进校园暨世界海洋日系列活动<span @click="go">返回</span>
+							</div>
+							<div class="title-2">
+								<span>海南海洋欢乐世界 6月11日</span>
+							</div>
+							<div class="conent-main">
+								<div class="span-3">
+									<p>如果没有海洋，地球上就不可能拥有这么瑰丽多彩的生命世界，海洋是生命的摇篮，是需要我们共同守护的蓝色家园。</p>
+								</div>
+								<div class="span-3">
+									<p>6月11日，由陵水县海洋与渔业局、陵水县教科局联合主办，海南富力海洋欢乐世界承办的为期一个月的世界海洋日“科普进校园”系列宣传活动，在北斗小学隆重揭幕。</p>
+								</div>
+								<div class="box-swiper">
+									<img src="../../assets/img/anila4/1.png" alt="">
+									<img src="../../assets/img/anila4/2.png" alt="">
+									<span>图：全校师生在校园内共同参加宣传活动</span>
+								</div>
+								<div class="span-3">
+									<p>活动中上千名师生共同观看了关于海洋动物保护的宣传视频，视频中刘烨作为全国水生野生动物保护的形象大使，向大家宣扬保护海龟，保护海洋环境的深刻意义。</p>
+								</div>
+								<div class="box-swiper">
+									<img src="../../assets/img/anila4/3.png" alt="">
+									<span>图：数千名师生一同观看海洋保护宣传视频</span>
+								</div>
+								<div class="span-3">
+									<p>陵水县海洋局符方尧副局长在开幕式上致辞，符局长表示，海洋是人类的共同家园，是人类可持续发展的资源宝库。我县把开发和保护海洋，作为推动全县经济发展的一项重大措施，今天的海洋宣传进校园活动必将对我县海洋开发与保护工作产生深远的影响。</p>
+								</div>
+								<div class="box-swiper">
+									<img src="../../assets/img/anila4/4.png" alt="">
+									<span>图：符方尧副局长致辞</span>
+								</div>
+								<div class="span-3">
+									<p>开幕式结束后，全体学生有序参观了此次设置小型水族馆，本次展出动物有绿海龟、玳瑁、鲎、海苹果等动物，正与小学课文中《美丽富饶的西沙群岛》中提及的内容相贴近。</p>
+								</div>
+								<div class="box-swiper">
+									<img src="../../assets/img/anila4/5.png" alt="">
+									<span>图：经救助的海龟</span>
+								</div>
+								<div class="span-3">
+									<p>在专业人员的指导及看护下，学生们还与海星、海参等海洋动物进行了零距离接触，通过这种方式可更直观了解海洋动物的特点、生活习性等知识，寓教于乐。</p>
+								</div>
+								<div class="box-swiper">
+									<img src="../../assets/img/anila4/6.png" alt="">
+									<span>图：工作人员讲解海星</span>
+									<img src="../../assets/img/anila4/7.png" alt="">
+									<span>图：尝试触摸感受黑海参</span>
+									<img src="../../assets/img/anila4/8.png" alt="">
+									<span>图：正在参观展出生物的同学们</span>
+								</div>
+								<div class="span-3">
+									<p>值得一提的是，我项目作为此次活动承办方，将将海洋救护水车开进校园。隶属于项目的蓝海保育救护中心已于近期投入使用，并成立了专业救护队，面向全省免费救援水生野生动物，标志着我省海洋动物救护工作迈入了崭新阶段。</p>
+								</div>
+								<div class="box-swiper">
+									<img src="../../assets/img/anila4/9.png" alt="">
+									<span>图：蓝海保育救护中心负责人杨经理接受访问</span>
+								</div>
+								<div class="span-3">
+									<p>在搁浅动物需要救助的时候，水车将担起救援生命线，车身有联系电话及二维码，热心群众发现搁浅动物，请尽量避免人群围观，保持其体表湿润，第一时间拨打救援电话（0898-8336 2777）</p>
+								</div>
+							</div>
+						</template>
+						<template v-if="type == 2 && id == 3">
+							<div class="title-1">
+								行动吧！海洋小卫士！<span @click="go">返回</span>
+							</div>
+							<div class="title-2">
+								<span>海南海洋欢乐世界 6月28日</span>
+							</div>
+							<div class="conent-main">
+								<div class="span-3">
+									<p>海洋欢乐世界的“科普进校园”系列活动已举办三场，这一次，我们的蓝海保育救护中心专业救护队将“移动水族馆”开到了三亚，走进三亚外国语学校。对同学们而言，这些小动物不仅是突然来临的惊喜，也是最贴切的科普大使。</p>
+								</div>
+								<div class="span-3">
+									<p>听君一言，惠及你我</p>
+								</div>
+								<div class="box-swiper">
+									<img src="../../assets/img/anila4/9.png" alt="">
+									<img src="../../assets/img/anila4/9.png" alt="">
+									<img src="../../assets/img/anila4/9.png" alt="">
+								</div>
+								<div class="span-3">
+									<p>活动最开始，同学们通过观看简短的科普视频进行学习。</p>
+									<p>我不丑，我很温柔</p>
+								</div>
+								<div class="box-swiper">
+									<img src="../../assets/img/anila4/9.png" alt="">
+								</div>
+								<div class="span-3">
+									<p>随后，同学们来到室外设置的小小水族馆前参观。</p>
+								</div>
+								<div class="box-swiper">
+									<img src="../../assets/img/anila4/9.png" alt="">
+								</div>
+								<div class="span-3">
+									<p>长相最为奇特的鲎，从4亿多年前至今仍保留其原始而古老的样貌，有“活化石”之称，目前在我国因为滥捕滥捞而濒临灭绝。</p>
+								</div>
+								<div class="box-swiper">
+									<img src="../../assets/img/anila4/9.png" alt="">
+								</div>
+								<div class="span-3">
+									<p>　海苹果的身体呈卵形，有呈管状的管足。它们是滤食性动物，用他们树枝状的触手滤食水中的浮游生物，然后将被触手粘住的食物送入口中。</p>
+								</div>
+							</div>
+						</template>
+
 					</div>
 				</div>
 			</div>
@@ -398,7 +506,11 @@
 					.title-1 {
 						position: relative;
 						width: 100%;
+						padding-right: 80px;
 						height: 35px;
+						overflow: hidden;
+						text-overflow: ellipsis;
+						white-space: nowrap;
 						font-size: 24px;
 						line-height: 35px;
 						font-weight: bold;
@@ -438,6 +550,20 @@
 						width: 100%;
 						overflow: hidden;
 						position: relative;
+						text-align: center;
+
+						* {
+							max-width: 100%;
+							display: inline-block;
+							;
+						}
+
+						span {
+							margin-top: 20px;
+							margin-bottom: 20px;
+							display: block;
+							color: #666666;
+						}
 
 					}
 

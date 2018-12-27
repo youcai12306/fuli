@@ -133,10 +133,11 @@
 
       <div class="nav-right floatLeft">
         <div class="right-info">
-          <div class="login" @click="jumpMine" ref="box">
-            <span v-if="!showMineInfo">登录/注册</span>
-            <span v-else>{{name}}</span>
-            <div class="person-info">
+          <div class="login"  ref="box">
+            <span v-if="!showMineInfo" @click.stop="jumpMine()">登录/注册</span>
+            <span v-else class="mine-mengbox">
+              {{name}}
+              <div class="person-info">
               <div class="info-one">
                 <router-link to="/mine" class="mine">个人中心</router-link>
                 <!-- <a href="javascript:;" class="mine" >个人中心</a> -->
@@ -150,6 +151,7 @@
                 </div>
               </div>
             </div>
+            </span>
           </div>
           <div class="language-change">
             <span class="ch">中文</span>
@@ -249,7 +251,7 @@ export default {
         }, 2000);
       }
     },
-    //跳转个人中心
+    //跳转登录
     jumpMine() {
         this.$router.push("/login");
     },
@@ -334,8 +336,13 @@ export default {
           &:hover {
             cursor: pointer;
           }
-          &:hover .person-info{
-            display: block;
+          // &:hover .person-info{
+          //   display: block;
+          // }
+          .mine-mengbox{
+             &:hover .person-info{
+                display: block;
+             }
           }
           .person-info {
             display: none;

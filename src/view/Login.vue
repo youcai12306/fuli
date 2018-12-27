@@ -4,7 +4,7 @@
       <div class="ban clearDiv">
         <div class="clearDiv ban1 ban3">
           <router-link to="/index">
-            <img src="../assets/img/logo.png" alt>
+            <img src="../assets/img/content-bg.png" alt>
           </router-link>
         </div>
         <div class="clearDiv ban1 ban2 ban4">

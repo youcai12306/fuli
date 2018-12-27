@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header1></Header1>
+    <Header></Header>
     <div class="sc1">
       <div class="sc2">
         <div class="sc3">
@@ -79,16 +79,16 @@
 
 <script>
 import QRCode from "qrcodejs2";
-import Header1 from "../../components/Header1";
+import Header from "../../components/Header";
 export default {
   components: {
-    Header1,
+    Header,
     QRCode
   },
   data() {
     return {
       isActive: "",
-      minutes: 30,
+      minutes:29,
       seconds: 59,
       flag: false
     };
@@ -168,7 +168,7 @@ export default {
        let data ={
           guid : this.$route.query.orderId
         }
-        this.$fetch("http://192.168.2.29:5100/callBack-aggregate/getPay",data).then((res) => {
+        this.$fetch("http://192.168.2.55:5100/callBack-aggregate/getPay",data).then((res) => {
             console.log(res)
         if (res.code === 200) {
           clearInterval(this.times);

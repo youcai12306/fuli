@@ -11,7 +11,11 @@
             <td class="title-num">数量</td>
             <td class="title-do">操作</td>
           </tr>
-          <tr v-for="(item,key) in good_list" :key="key" class="list">
+          <tr
+            v-for="(item,key) in good_list"
+            :key="key"
+            class="list"
+          >
             <td class="checkbox-choose">
               <input
                 type="checkbox"
@@ -30,18 +34,34 @@
             </td>
             <td class="num">
               {{item.productCount}}
-              <span class="tip">注：一个手机号最多可购买5张票</span>
+              <!-- <span class="tip">注：一个手机号最多可购买5张票</span> -->
             </td>
             <td class="del">
-              <button @click="delShopping(item,key)" class="del-btn"></button>
+              <button
+                @click="delShopping(item,key)"
+                class="del-btn"
+              ></button>
             </td>
           </tr>
-          <tr class="count" v-show="!flag">
-            <td colspan="6" class="count-all clearDiv">
+          <tr
+            class="count"
+            v-show="!flag"
+          >
+            <td
+              colspan="6"
+              class="count-all clearDiv"
+            >
               <div class="all-choose">
-                <input type="checkbox" @click="slect_all()" v-model="selected_all">全选
+                <input
+                  type="checkbox"
+                  @click="slect_all()"
+                  v-model="selected_all"
+                >全选
               </div>
-              <div class="delAll" @click="delAll">清空购物车</div>
+              <div
+                class="delAll"
+                @click="delAll"
+              >清空购物车</div>
               <div class="choosed">
                 已选商品
                 <span>{{totalNum}}</span>件
@@ -50,10 +70,13 @@
                 合计：
                 <span>{{totalPrice}}.00</span>元
               </div>-->
-              <button @click="jumpShoppingCarOrder"></button>
+              <button @click="jumpShoppingCarOrder" :disabled="dis"></button>
             </td>
           </tr>
-          <tr class="empty" v-show="flag">
+          <tr
+            class="empty"
+            v-show="flag"
+          >
             <td colspan="6">暂无数据</td>
           </tr>
         </table>
@@ -70,12 +93,14 @@ export default {
       selected_all: false,
       totalPrice: 0,
       totalNum: 0,
-      flag:true,
-      id1:"",
-      id2:"",
-      arr:[],
-      // dis:""
-		};
+      // totalNum1: 0,
+      flag: true,
+      id1: "",
+      id2: "",
+      arr: [],
+      arr1: [],
+      dis:true
+    };
   },
   watch: {
     // 侦听商品选中数据的变化
@@ -90,7 +115,6 @@ export default {
   mounted() {
     let Uid = this.$store.getters.getUserData.userId;
     this.searchShoppingCar(Uid);
-    
   },
   methods: {
     aa() {
@@ -98,29 +122,32 @@ export default {
     },
     //查询购物车
     searchShoppingCar(Uid) {
-      this.$fetch("http://192.168.2.61:6061/shoppingCart-aggregate/selectShopCarts", {
-        touristId: Uid
-      }).then(res => {
-        console.log(res)
-        this.id1 =res.data[0].createDateId;
+      this.$fetch(
+        "http://192.168.2.61:6061/shoppingCart-aggregate/selectShopCarts",
+        {
+          touristId: Uid
+        }
+      ).then(res => {
+        console.log(res);
+        this.id1 = res.data[0].createDateId;
         this.id2 = res.data[0].productId;
-        this.totalNum = res.data[0].productCount;
+        // this.totalNum = res.data[0].productCount;
         this.stockId = res.data[0].createDateId;
         this.saleType = res.data[0].product.saleType;
-        console.log(this.saleType)
+        // console.log(this.saleType);
         // console.log(this.id1)
         if (res.code === 200) {
           // console.log(111)
           this.good_list = res.data;
-            if(this.good_list.length === 0){
-              this.flag = true
-            }else {
-              this.flag = false;
-            } 
+          if (this.good_list.length === 0) {
+            this.flag = true;
+          } else {
+            this.flag = false;
+          }
           this.good_list.forEach(val => {
             val.is_selected = false;
           });
-         console.log(this.good_list.length);
+          // console.log(this.good_list.length);
         }
       });
     },
@@ -134,26 +161,38 @@ export default {
     // },
     //删除购物车商品
     delShopping(item, key) {
-      this.$fetch("http://192.168.2.61:6061/shoppingCart-aggregate/deleteshopCart", {
-        id: item.id
-      }).then(res => {
-        
+      this.$fetch(
+        "http://192.168.2.61:6061/shoppingCart-aggregate/deleteshopCart",
+        {
+          id: item.id
+        }
+      ).then(res => {
         if (res.code === 200) {
           this.good_list.splice(key, 1);
-          this.flag = true;
+          // this.flag = true;
+          if (this.good_list.length == 0) {
+            this.flag = true;
+          }
         }
       });
       this.getTotal();
     },
     // 计算选中商品金额
     getTotal() {
-			this.good_list.forEach((v,i) => {
-				this.arr[i] = {};
-				this.arr[i]['productId'] = v.productId;
-				this.arr[i]['num'] = v.productCount;
-				this.arr[i]['stockId'] = v.createDateId;
-				this.arr[i]['saleType'] = v.saleType ? '1' : '0';
-			})
+      this.totalNum = 0;
+      this.good_list.forEach((v, i) => {
+        if (v.is_selected) {
+          this.dis = false;
+          this.arr[i] = {};
+          this.arr[i]["id"] = v.id;
+          this.arr[i]["productId"] = v.productId;
+          this.arr[i]["num"] = v.productCount;
+          // console.log(this.arr[i]["num"]);
+          this.totalNum += this.arr[i]["num"];
+          this.arr[i]["stockId"] = v.createDateId;
+          this.arr[i]["saleType"] = v.saleType ? "1" : "0";
+        }
+      });
     },
     // 删除选中商品
     // delete_selected() {
@@ -191,6 +230,8 @@ export default {
       if (this.selected_all) {
         for (let i = 0; i < this.good_list.length; i++) {
           this.good_list[i].is_selected = false;
+          // this.good_list[i].is_selected.length == this.totalNum1
+          // console.log(this.good_list[i].is_selected.length);
         }
         this.selected_all = false;
       } else {
@@ -203,25 +244,53 @@ export default {
     },
     //清空购物车
     delAll() {
-      this.good_list = {};
-      this.getTotal();
+      // this.good_list = {};
+      this.good_list.forEach((v, i) => {
+        this.arr[i] = {};
+        this.arr[i]["id"] = v.id;
+        console.log(this.arr[i]["id"]);
+        this.arr1.push(this.arr[i]["id"]);
+        console.log(this.arr1);
+
+        console.log(ids);
+      });
+      let ids = this.arr1.join(",");
+
+      this.$fetch(
+        "http://192.168.2.61:6061/shoppingCart-aggregate/bathDeleteShopCarts?ids=" +
+          ids
+      ).then(res => {
+        console.log(11);
+        if (res.code === 200) {
+          this.good_list = {};
+          this.flag = true;
+        }
+      });
     },
     jumpShoppingCarOrder() {
-      this.$router.push("/suborder");
-      let list1 = JSON.stringify(this.good_list)
-      this.$router.push({
-        path:"/suborder",
-        query:{
-          list1:list1,
-          a:1,
-          id1:this.id1,
-          id2:this.id2,
-          totalNum:this.totalNum,
-          stockId:this.stockId,
-          arr:this.arr,
-          saleType:this.saleType
+      // this.$router.push("/suborder");
+      let list1 = [];
+      this.good_list.forEach((v, k) => {
+        if (v.is_selected) {
+          list1.push(v);
+          console.log(v);
+          // this.delShopping(v,k)
         }
-      })
+      });
+
+      this.$router.push({
+        path: "/suborder",
+        query: {
+          list1: JSON.stringify(list1),
+          a: 1,
+          id1: this.id1,
+          id2: this.id2,
+          totalNum: this.totalNum,
+          stockId: this.stockId,
+          arr: this.arr,
+          saleType: this.saleType
+        }
+      });
     }
     //计数器方法
     // handleChange() {

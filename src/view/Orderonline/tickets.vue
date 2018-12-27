@@ -140,7 +140,7 @@ export default {
     //跳转详情页面
     jumpDetail(id, stockId) {
       this.$router.push({
-        path: "/ProductDetail",
+        path: "/TicketDetail",
         query: {
           id: id,
           stockId: stockId
@@ -230,7 +230,8 @@ export default {
             //   imgs[k] = v.fileName;
             //   imgs[k]=v.id;
             // })
-            this.imgs = res.data || [];
+            // this.imgs = res.data || [];
+            this.imgs = res.data;
           });
         })
         .catch(error => {

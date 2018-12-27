@@ -1,11 +1,11 @@
 <template>
   <div class="suborder">
-    <Header1></Header1>
+    <Header></Header>
     <div class="su1">
 
       <!-- 订单详情 -->
       <div class="su2 clearDiv">
-        <div class="su22">
+        <div class="su22" @click="jumpdetail">
           当前位置：网上订购>详情页>提交订单
         </div>
         <!-- 弹出框遮罩内容 -->
@@ -45,7 +45,7 @@
                 <!-- <tr v-for="item in list2" :key="item"> -->
                 <td>{{item.product.productName}}
                   <p>游玩时间：{{item.product.dataBaseDate}}</p>
-                  <p>{{item.product.saleType}}{{canDebook(item.product.saleType)}}</p>
+                  <!-- <p>{{canDebook(item.product.saleType)}}</p> -->
                 </td>
                 <td>¥{{item.settlementPrice}}元</td>
                 <td>×{{item.productCount}}</td>
@@ -101,7 +101,11 @@
                     prop="name1"
                     :rules="[
                           { required: true, message: '姓名不能为空'},
-                          { type: 'string', message: '姓名必须为中文'}
+                          { type: 'string', message: '姓名必须为中文'},
+                          {
+                            pattern:/^[\u4E00-\u9FA5]+$/,
+                            message: '用户名只能为中文'
+                          }
                       ]"
                   >
 
@@ -120,7 +124,7 @@
                     class="el2"
                     prop="phone"
                     :rules="[
-                          { required: true, message: '手机号不能为空'},
+                          { required: true, message: '手机号不能为空',trigger:'blur'},
                           { type: 'number', message: '手机号必须为数字'}
                       ]"
                   >
@@ -198,10 +202,10 @@
 </template>
 
 <script>
-import Header1 from "../../components/Header1";
+import Header from "../../components/Header";
 export default {
   components: {
-    Header1
+    Header
   },
   data() {
     return {
@@ -237,7 +241,10 @@ export default {
       name1:"",
       phone1:"",
       address1:"",
-      receiveId:""
+      receiveId:"",
+      arr2:[],
+      arr3:[],
+      ids:""
     };
   },
   mounted() {
@@ -283,6 +290,20 @@ export default {
           return false;
         }
       });
+    //  将购物车 已提交的订单清空，
+      this.$fetch(
+        "http://192.168.2.61:6061/shoppingCart-aggregate/bathDeleteShopCarts?ids=" +
+          this.ids
+      ).then(res => {
+        console.log(11);
+        if (res.code === 200) {
+          this.good_list = {};
+          this.flag = true;
+        }
+      });
+    },
+    jumpdetail(){
+      this.$router.push("./productdetail")
     },
     // 选择收货地址
     address(){
@@ -298,7 +319,16 @@ export default {
       this.saleType = this.$route.query.saleType;
       let list1 = this.$route.query.list1;
       let list2 = JSON.parse(list1);
-      // console.log(list2);
+      list2.forEach((v,i) =>{
+         this.arr2[i] = {};
+         this.arr2[i]["id"] = v.id;
+         console.log(this.arr2[i]["id"]);
+         this.arr3.push(this.arr2[i]["id"]);
+         console.log(this.arr3)
+      })
+      
+      this.ids = this.arr3.join(",");
+      console.log(this.ids)
       // console.log(this.saleType);
       // console.log(num1);
       this.count = num1;
@@ -318,7 +348,7 @@ export default {
     // 判断是邮寄或者自提，邮寄需要显示邮寄地址，传邮寄ID到李顺仪
     canDebook(type) {
       // return type === 1 ? (this.sign = "邮寄") : (this.sign = "自提");
-      if (type === 1) {
+      if (type == true) {
         this.sign = "邮寄";
         this.flag1 = true;
         let data2 = {
@@ -332,7 +362,7 @@ export default {
           this.address1 = res.data.receiveProvince + res.data.receiveCity + res.data.receiveArea;
           this.receiveId = res.data.id
         })
-      } else if (type === 2) {
+      } else if (type == false) {
         this.sign = "自提";
         
       }
@@ -353,8 +383,9 @@ export default {
       this.$post("http://192.168.2.61:5041/order-aggregate/save", data, {
         headers: { "Content-Type": "application/json;charset=UTF-8" }
       }).then(res => {
+        console.log(res)
         if (res.code === 200) {
-          console.log(res);
+          // console.log(res);
           this.orderId = res.data.orderId;
           let data1 = {
             guid: res.data.guid,
@@ -378,7 +409,7 @@ export default {
                     price2: this.price2
                   }
                 });
-              } else if (res.code === 403) {
+              } else if (res.code === 400) {
                 this.$router.push("/mine")
                 alert("下单失败");
               }
@@ -386,8 +417,15 @@ export default {
           }, 3000);
 
           ///
+        }else if(res.code === 400){
+          this.$router.push("/mine")
+           console.log(res);
+           alert("下单失败");
         }
-      });
+      }).catch((error)=>{
+        console.log(error)
+      })
+      
     }
   },
   // 销毁定时器
@@ -416,6 +454,7 @@ export default {
       font-size: 12px;
       margin-top: 33px;
       margin-left: 48px;
+      cursor: pointer;
     }
     .su21 {
       height: 100%;

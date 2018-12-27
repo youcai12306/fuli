@@ -286,7 +286,7 @@ export default {
 
   .main-content {
     height: 97px;
-    background-color: #f5f9ff;
+    background-color: #ffffff;
 
     .logo {
       padding-top: 26px;

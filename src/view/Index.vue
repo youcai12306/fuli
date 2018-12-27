@@ -49,28 +49,68 @@
             <swiper :options="swiperOption" ref="mySwiper">
               <!-- slides -->
               <swiper-slide>
-                <img src="../assets/img/index-img12.png" alt :class="{imgActive:index === 0}" @click.stop="jumpImg(0)">
+                <img
+                  src="../assets/img/index-img12.png"
+                  alt
+                  :class="{imgActive:index === 0}"
+                  @click.stop="jumpImg(0)"
+                >
               </swiper-slide>
               <swiper-slide>
-                <img src="../assets/img/index-img13.png" alt :class="{imgActive:index === 1}" @click.stop="jumpImg(1)">
+                <img
+                  src="../assets/img/index-img13.png"
+                  alt
+                  :class="{imgActive:index === 1}"
+                  @click.stop="jumpImg(1)"
+                >
               </swiper-slide>
               <swiper-slide>
-                <img src="../assets/img/index-img14.png" alt :class="{imgActive:index === 2}" @click.stop="jumpImg(2)">
+                <img
+                  src="../assets/img/index-img14.png"
+                  alt
+                  :class="{imgActive:index === 2}"
+                  @click.stop="jumpImg(2)"
+                >
               </swiper-slide>
               <swiper-slide>
-                <img src="../assets/img/index-img15.png" alt :class="{imgActive:index === 3}" @click.stop="jumpImg(3)">
+                <img
+                  src="../assets/img/index-img15.png"
+                  alt
+                  :class="{imgActive:index === 3}"
+                  @click.stop="jumpImg(3)"
+                >
               </swiper-slide>
               <swiper-slide>
-                <img src="../assets/img/index-img16.png" alt :class="{imgActive:index === 4}" @click.stop="jumpImg(4)">
+                <img
+                  src="../assets/img/index-img16.png"
+                  alt
+                  :class="{imgActive:index === 4}"
+                  @click.stop="jumpImg(4)"
+                >
               </swiper-slide>
               <swiper-slide>
-                <img src="../assets/img/index-img17.png" alt :class="{imgActive:index === 5}" @click.stop="jumpImg(5)">
+                <img
+                  src="../assets/img/index-img17.png"
+                  alt
+                  :class="{imgActive:index === 5}"
+                  @click.stop="jumpImg(5)"
+                >
               </swiper-slide>
               <swiper-slide>
-                <img src="../assets/img/index-img12.png" alt :class="{imgActive:index === 6}" @click.stop="jumpImg(6)">
+                <img
+                  src="../assets/img/index-img12.png"
+                  alt
+                  :class="{imgActive:index === 6}"
+                  @click.stop="jumpImg(6)"
+                >
               </swiper-slide>
               <swiper-slide>
-                <img src="../assets/img/index-img13.png" alt :class="{imgActive:index === 7}" @click.stop="jumpImg(7)">
+                <img
+                  src="../assets/img/index-img13.png"
+                  alt
+                  :class="{imgActive:index === 7}"
+                  @click.stop="jumpImg(7)"
+                >
               </swiper-slide>
               <!-- Optional controls -->
             </swiper>
@@ -103,7 +143,7 @@
                       alt
                       :class="{colorA:key === newSwiperIndex}"
                     >
-                    <p class="titless">2019精彩活动马上来袭！</p>
+                    <p class="titless" :class="{colorB:key != newSwiperIndex}">2019精彩活动马上来袭！</p>
                   </div>
                 </el-carousel-item>
               </el-carousel>
@@ -157,6 +197,7 @@
               </ul>
             </div>
             <div class="content-right floatLeft">
+              <p class="right-yule">娱乐专区</p>
               <img src="../assets/img/index-hot-img2.png" alt>
               <router-link class="knowDetail" to="/risk">了解详情></router-link>
             </div>
@@ -250,7 +291,7 @@ export default {
   },
   methods: {
     //跳转背景
-    jumpImg(index){
+    jumpImg(index) {
       clearInterval(this.times);
       this.index = index;
     },
@@ -519,7 +560,7 @@ export default {
         padding: 16px 0;
         letter-spacing: 2px;
         .ch {
-          font-size: 35px;
+          font-size: 26px;
           span {
             font-size: 25px;
           }
@@ -580,7 +621,7 @@ export default {
         letter-spacing: 2px;
         padding-top: 40px;
         .ch {
-          font-size: 35px;
+          font-size: 26px;
           span {
             font-size: 25px;
           }
@@ -703,6 +744,14 @@ export default {
           margin-top: -35px;
           margin-left: 23px;
           position: relative;
+          p {
+            position: absolute;
+            top: 12px;
+            left: 140px;
+            font-size: 16px;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 1);
+          }
           img {
             width: 343px;
             height: 397px;
@@ -871,6 +920,9 @@ export default {
 }
 </style>
 <style>
+.swiper-box .el-carousel__item .colorB {
+  bottom: 0;
+}
 .colorA {
   border: 5px solid rgba(255, 237, 40, 1);
   box-shadow: 0px 8px 7px 0px rgba(94, 94, 94, 0.52);
@@ -879,11 +931,11 @@ export default {
   width: 429px;
   height: 100%;
 }
-.swiper-box .el-carousel__item .titless {
-  width: 463px;
+.titless {
   position: absolute;
   bottom: 5px;
   left: 5px;
+  right: 5px;
   height: 70px;
   line-height: 70px;
   background: rgba(27, 27, 27, 0.78);

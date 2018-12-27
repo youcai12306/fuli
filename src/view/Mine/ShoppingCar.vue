@@ -347,7 +347,7 @@ export default {
             width: 250px;
           }
           .title-do {
-            width: 150px;
+            width: 200px;
           }
         }
         .list {
@@ -428,7 +428,7 @@ export default {
               margin-left: 50px;
             }
             .choosed {
-              margin-left: 650px;
+              margin-left: 520px;
               //   margin-right: 45px;
               color: rgba(238, 50, 35, 1);
               span {

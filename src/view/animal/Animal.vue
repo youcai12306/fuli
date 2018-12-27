@@ -39,7 +39,7 @@
 									<template v-if="k == 1">
 										<div class="p">躯体粗壮，呈白色或黄色，头圆、喙短，没有背鳍。体长平均3-5米，可达5.5米。体重雄性可达1500千克；雌性可达1350千克...</div>
 									</template>
-									<router-link :to="{name:'AnimalDetails',params:{id:'1'}}">查看详情>></router-link>
+									<router-link :to="{name:'AnimalDetails',params:{id:k+1}}">查看详情>></router-link>
 								</div>
 							</div>
 
@@ -58,7 +58,7 @@
 										<div class="p">雄性2-2.5米，雌性平均2米。体重雄性200-350千克，雌性140-150千克......</div>
 									</template>
 
-									<router-link :to="{name:'AnimalDetails',params:{id:'1'}}">查看详情>></router-link>
+									<router-link :to="{name:'AnimalDetails',params:{id:k+3}}">查看详情>></router-link>
 								</div>
 							</div>
 
@@ -70,7 +70,7 @@
 										<template v-if="k == 0">西非海牛</template>
 									</div>
 									<div class="p">体型呈纺锤状，背部宽阔无背鳍，头部比例小。体长可达4.5米，体重200-500公斤......</div>
-									<router-link :to="{name:'AnimalDetails',params:{id:'1'}}">查看详情>></router-link>
+									<router-link :to="{name:'AnimalDetails',params:{id:k+5}}">查看详情>></router-link>
 								</div>
 							</div>
 						</div>
@@ -79,86 +79,23 @@
 						<div class="box2">
 							<ul>
 								<li>
-									<router-link :to="{name:'BaiDetails',params:{type:'1',id:'1'}}" title="受伤的鲸豚不再无助 海南首个海洋动物保育救护中心挂牌启用">
+									<router-link :to="{name:'BaiDetails',params:{type:'1',id:'1'}}" title="搁浅领航鲸救助(上)">
 										<i></i>
-										<span class="p1">《受伤的鲸豚不再无助 海南首个海洋动物保育救护中心挂牌启用》</span>
-										<span class="p2">来自海洋欢乐世界 | 2018.08.09</span>
+										<span class="p1">搁浅领航鲸救助(上)</span>
+										<span class="p2">海南海洋欢乐世界 | 2016-05-18</span>
 									</router-link>
 								</li>
 								<li>
-									<router-link :to="{name:'BaiDetails',params:{type:'1',id:'1'}}" title="拯救搁浅领航鲸——海洋公园在行动">
+									<router-link :to="{name:'BaiDetails',params:{type:'1',id:'2'}}" title="搁浅领航鲸救助(下)">
 										<i></i>
-										<span class="p1">拯救搁浅领航鲸——海洋公园在行动</span>
-										<span class="p2">来自麦迪卡斯水乐园 | 2018.07.08</span>
-									</router-link>
-								</li>
-								<li>
-									<router-link :to="{name:'BaiDetails',params:{type:'1',id:'1'}}" title="123米 -- 就是爱与欢乐的高度">
-										<i></i>
-										<span class="p1">123米 -- 就是爱与欢乐的高度</span>
-										<span class="p2">来自海洋欢乐世界 | 2018.06.09</span>
-									</router-link>
-								</li>
-								<li>
-									<router-link :to="{name:'BaiDetails',params:{type:'1',id:'1'}}" title="大事件|我们的极地馆封顶啦！">
-										<i></i>
-										<span class="p1">大事件|我们的极地馆封顶啦！</span>
-										<span class="p2">来自麦迪卡斯水乐园 | 2018.05.12</span>
-									</router-link>
-								</li>
-								<li>
-									<router-link :to="{name:'BaiDetails',params:{type:'1',id:'1'}}" title="海南富力海洋欢乐世界水公园进入设备安装阶段！">
-										<i></i>
-										<span class="p1">海南富力海洋欢乐世界水公园进入设备安装阶段！</span>
-										<span class="p2">来自海洋欢乐世界 | 2018.04.09</span>
-									</router-link>
-								</li>
-								<li>
-									<router-link :to="{name:'BaiDetails',params:{type:'1',id:'1'}}" title="02搁浅领航鲸救助(下)">
-										<i></i>
-										<span class="p1">02搁浅领航鲸救助(下)</span>
-										<span class="p2">来自麦迪卡斯水乐园 | 2018.03.09</span>
-									</router-link>
-								</li>
-								<li>
-									<router-link :to="{name:'BaiDetails',params:{type:'1',id:'1'}}" title="02搁浅领航鲸救助(上)">
-										<i></i>
-										<span class="p1">02搁浅领航鲸救助(上)</span>
-										<span class="p2">来自麦迪卡斯水乐园 | 2018.03.09</span>
-									</router-link>
-								</li>
-								<li>
-									<router-link :to="{name:'BaiDetails',params:{type:'1',id:'1'}}" title="海南富力海洋欢乐世界水公园进入设备安装阶段！">
-										<i></i>
-										<span class="p1">海南富力海洋欢乐世界水公园进入设备安装阶段！</span>
-										<span class="p2">来自麦迪卡斯水乐园 | 2018.02.09</span>
-									</router-link>
-								</li>
-								<li>
-									<router-link :to="{name:'BaiDetails',params:{type:'1',id:'1'}}" title="海南富力海洋欢乐世界水公园进入设备安装阶段！">
-										<i></i>
-										<span class="p1">海南富力海洋欢乐世界水公园进入设备安装阶段！</span>
-										<span class="p2">来自麦迪卡斯水乐园 | 2018.02.09</span>
-									</router-link>
-								</li>
-								<li>
-									<router-link :to="{name:'BaiDetails',params:{type:'1',id:'1'}}" title="海南富力海洋欢乐世界水公园进入设备安装阶段！">
-										<i></i>
-										<span class="p1">海南富力海洋欢乐世界水公园进入设备安装阶段！</span>
-										<span class="p2">来自麦迪卡斯水乐园 | 2018.02.09</span>
-									</router-link>
-								</li>
-								<li>
-									<router-link :to="{name:'BaiDetails',params:{type:'1',id:'1'}}" title="海南富力海洋欢乐世界水公园进入设备安装阶段！">
-										<i></i>
-										<span class="p1">海南富力海洋欢乐世界水公园进入设备安装阶段！</span>
-										<span class="p2">来自麦迪卡斯水乐园 | 2018.02.09</span>
+										<span class="p1">搁浅领航鲸救助(下)</span>
+										<span class="p2">海南海洋欢乐世界 | 2016-05-18</span>
 									</router-link>
 								</li>
 							</ul>
 							<div class="pages">
-								<el-pagination background layout="prev, pager, next" :total="totle" :current-page.sync="pageIndex" :page-size="pageSize"
-								 @current-change="changePage"></el-pagination>
+								<!-- <el-pagination background layout="prev, pager, next" :total="totle" :current-page.sync="pageIndex" :page-size="pageSize"
+								 @current-change="changePage"></el-pagination> -->
 							</div>
 						</div>
 					</template>
@@ -169,83 +106,27 @@
 									<router-link :to="{name:'BaiDetails',params:{type:'2',id:'1'}}" title="携手 “净滩”，向海洋垃圾宣战">
 										<i></i>
 										<span class="p1">携手 “净滩”，向海洋垃圾宣战</span>
-										<span class="p2">来自海洋欢乐世界 | 2018.08.09</span>
+										<span class="p2">海南海洋欢乐世界 | 09.19</span>
 									</router-link>
 								</li>
 								<li>
-									<router-link :to="{name:'BaiDetails',params:{type:'2',id:'1'}}" title="海洋日系列活动-科普进校园暨世界">
+									<router-link :to="{name:'BaiDetails',params:{type:'2',id:'2'}}" title="海洋日系列活动-科普进校园暨世界">
 										<i></i>
 										<span class="p1">海洋日系列活动-科普进校园暨世界</span>
-										<span class="p2">来自麦迪卡斯水乐园 | 2018.07.08</span>
+										<span class="p2">海南海洋欢乐世界 | 2018.07.08</span>
 									</router-link>
 								</li>
 								<li>
-									<router-link :to="{name:'BaiDetails',params:{type:'2',id:'1'}}" title="行动吧海洋小卫士">
+									<router-link :to="{name:'BaiDetails',params:{type:'2',id:'3'}}" title="行动吧海洋小卫士">
 										<i></i>
 										<span class="p1">行动吧海洋小卫士</span>
-										<span class="p2">来自海洋欢乐世界 | 2018.06.09</span>
-									</router-link>
-								</li>
-								<li>
-									<router-link :to="{name:'BaiDetails',params:{type:'2',id:'1'}}" title="大事件|我们的极地馆封顶啦！">
-										<i></i>
-										<span class="p1">大事件|我们的极地馆封顶啦！</span>
-										<span class="p2">来自麦迪卡斯水乐园 | 2018.05.12</span>
-									</router-link>
-								</li>
-								<li>
-									<router-link :to="{name:'BaiDetails',params:{type:'2',id:'1'}}" title="海南富力海洋欢乐世界水公园进入设备安装阶段！">
-										<i></i>
-										<span class="p1">海南富力海洋欢乐世界水公园进入设备安装阶段！</span>
-										<span class="p2">来自海洋欢乐世界 | 2018.04.09</span>
-									</router-link>
-								</li>
-								<li>
-									<router-link :to="{name:'BaiDetails',params:{type:'2',id:'1'}}" title="02搁浅领航鲸救助(下)">
-										<i></i>
-										<span class="p1">02搁浅领航鲸救助(下)</span>
-										<span class="p2">来自麦迪卡斯水乐园 | 2018.03.09</span>
-									</router-link>
-								</li>
-								<li>
-									<router-link :to="{name:'BaiDetails',params:{type:'2',id:'1'}}" title="02搁浅领航鲸救助(上)">
-										<i></i>
-										<span class="p1">02搁浅领航鲸救助(上)</span>
-										<span class="p2">来自麦迪卡斯水乐园 | 2018.03.09</span>
-									</router-link>
-								</li>
-								<li>
-									<router-link :to="{name:'BaiDetails',params:{type:'2',id:'1'}}" title="海南富力海洋欢乐世界水公园进入设备安装阶段！">
-										<i></i>
-										<span class="p1">海南富力海洋欢乐世界水公园进入设备安装阶段！</span>
-										<span class="p2">来自麦迪卡斯水乐园 | 2018.02.09</span>
-									</router-link>
-								</li>
-								<li>
-									<router-link :to="{name:'BaiDetails',params:{type:'2',id:'1'}}" title="海南富力海洋欢乐世界水公园进入设备安装阶段！">
-										<i></i>
-										<span class="p1">海南富力海洋欢乐世界水公园进入设备安装阶段！</span>
-										<span class="p2">来自麦迪卡斯水乐园 | 2018.02.09</span>
-									</router-link>
-								</li>
-								<li>
-									<router-link :to="{name:'BaiDetails',params:{type:'2',id:'1'}}" title="海南富力海洋欢乐世界水公园进入设备安装阶段！">
-										<i></i>
-										<span class="p1">海南富力海洋欢乐世界水公园进入设备安装阶段！</span>
-										<span class="p2">来自麦迪卡斯水乐园 | 2018.02.09</span>
-									</router-link>
-								</li>
-								<li>
-									<router-link :to="{name:'BaiDetails',params:{type:'2',id:'1'}}" title="海南富力海洋欢乐世界水公园进入设备安装阶段！">
-										<i></i>
-										<span class="p1">海南富力海洋欢乐世界水公园进入设备安装阶段！</span>
-										<span class="p2">来自麦迪卡斯水乐园 | 2018.02.09</span>
+										<span class="p2">海南海洋欢乐世界 | 2018.06.09</span>
 									</router-link>
 								</li>
 							</ul>
 							<div class="pages">
-								<el-pagination background layout="prev, pager, next" :total="totle" :current-page.sync="pageIndex" :page-size="pageSize"
-								 @current-change="changePage"></el-pagination>
+								<!-- <el-pagination background layout="prev, pager, next" :total="totle" :current-page.sync="pageIndex" :page-size="pageSize"
+								 @current-change="changePage"></el-pagination> -->
 							</div>
 						</div>
 					</template>
@@ -535,6 +416,7 @@
 
 				.box2 {
 					width: 863px;
+					min-height: 1000px;
 					padding: 50px 0;
 					background: #fff;
 					margin: 0 auto;

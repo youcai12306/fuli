@@ -3,7 +3,7 @@
     <div class="mine-bg">
       <ul class="mine-info clearDiv">
         <li class="portrait floatLeft">
-					<img src="../../assets/img/mine-icon.png" alt>
+					<img src="../../assets/img/touxiang1.png" alt>
         </li>
         <li class="info-people floatLeft">
           <p class="people-phone">{{$store.getters.userInfo.mobile}}，欢迎您！</p>
@@ -71,7 +71,7 @@
               </template>
               <el-menu-item
                 :index="`/Membership`"
-                :class="{'is_active' : $route.path=='/membership'}"
+                :class="{'is_active' : $route.path=='/Membership'}"
               >个人信息</el-menu-item>
               <el-menu-item
                 :index="`/`"
@@ -79,11 +79,11 @@
               >我的会员</el-menu-item>
               <el-menu-item
                 :index="`/ShoppingAdress`"
-                :class="{'is_active' : $route.path=='/shoppingAdress'}"
+                :class="{'is_active' : $route.path=='/ShoppingAdress'}"
               >收货地址</el-menu-item>
               <el-menu-item
                 :index="`/MyMessage`"
-                :class="{'is_active' : $route.path=='/myMessage'}"
+                :class="{'is_active' : $route.path=='/MyMessage'}"
               >消息管理</el-menu-item>
               <!-- <el-menu-item
                 :index="`/ChangePwd`"
@@ -107,6 +107,7 @@
 
 <script>
 export default {
+	inject:['reload'],
   data() {
     return {
       openeds: ["1", "2", "3", "4"] //展开的菜单导航
@@ -119,13 +120,22 @@ export default {
     handleClose(key, keyPath) {
       console.log(key, keyPath);
     }
-  }
+  },
+	mounted() {
+		
+	},
+	watch:{
+		$route(){
+			this.reload();
+		}
+	}
 };
 </script>
 <style lang='scss' scoped>
 .main {
   width: 100%;
   .mine-bg {
+    padding-top: 20px;
     width: 100%;
     height: 100%;
     background: #084c99 url(../../assets/img/mine-bg.png) no-repeat top center;
@@ -140,7 +150,7 @@ export default {
       }
 
       .portrait {
-        margin-left: 44px;
+        margin-left: 130px;
 
         img {
           width: 141px;
@@ -154,7 +164,7 @@ export default {
         height: 139px;
         line-height: normal;
         margin-top: 72px;
-        padding: 10px 149px 0 38px;
+        padding: 10px 195px 0 38px;
         border-right: 2px solid #cccccc;
 
         p {
@@ -223,7 +233,7 @@ export default {
       margin: 20px auto 0 auto;
 
       .content-left {
-        width: 249px;
+        width: 198px;
         height: 1244px;
         background: rgba(255, 255, 255, 1);
         text-align: center;
@@ -255,7 +265,7 @@ export default {
       }
 
       .content-right {
-        width: 935px;
+        width: 980px;
         min-height: 1244px;
         background: rgba(255, 255, 255, 1);
         padding: 0 30px;
@@ -290,19 +300,28 @@ export default {
     font-family: MicrosoftYaHei;
     font-weight: bold;
     color: rgba(51, 51, 51, 1);
+    text-align:left;
+    padding:0 !important;
+    padding-left:60px !important;
   }
 
   .el-submenu__icon-arrow {
     right: 60px;
     font-size: 20px;
     color: #666666;
+    &::before{
+      content:" "
+    }
   }
 
   .el-submenu .el-menu-item {
     font-size: 14px;
     font-family: MicrosoftYaHei;
-    font-weight: 400;
+    font-weight: bold;
     color: rgba(51, 51, 51, 1);
+    text-align:left;
+    padding:0 !important;
+    padding-left:60px !important;
   }
 
   .el-menu-item:focus,

@@ -68,7 +68,7 @@
 									</div>
 									<div class="lookOrder floatRight" @click.stop="jumpDetail(item.orderId)">查看订单</div>
 									<div class="cancelOrder floatRight" @click.stop="delOrder(item.orderId)" v-if="tabs == 0">取消订单</div>
-									<div class="pay floatRight" @click.stop="pay(item.orderId,item.payTotalCash)" v-if="tabs == 0 || tabs == 1">立即支付</div>
+									<div class="pay floatRight" @click.stop="pay(item.orderId,item.payTotalCash)" v-if="tabs == 1">立即支付</div>
 								</div>
 							</div>
 						</template>
@@ -120,19 +120,50 @@
 				count: 0,
 				id: this.$store.getters.getUserData.userId,
 				list: [],
-				loading: true
+				loading: true,
+				times:"",
+				orderId:""
 			};
 		},
 		methods: {
 			//再次下单
-			pay(id,price) {
-				this.$router.push({
-					path: '/success',
-					query: {
-						orderId: id,
-						price2: price
+			pay(id, price) {
+				// 拿到guid以及订单号
+				this.$post(`http://192.168.2.61:5041/order-aggregate/reSaveOrder?orderId=${id}`, {
+					headers: {
+						"Content-Type": "application/json;charset=UTF-8"
 					}
-				})
+				}).then(res => {
+					if (res.code === 200) {
+						this.orderId = res.data.orderId;
+						let data1 = {
+							guid: res.data.guid,
+							userId: this.$store.getters.getUserData.userId
+						};
+						// console.log(111);
+						// 读redis，成功创建订单后关闭遮罩层，跳转支付页面
+						this.times = setInterval(() => {
+							this.$fetch(
+								"http://192.168.2.55:5100/callBack-aggregate/getOccupation",
+								data1
+							).then(res => {
+								if (res.code === 200) {
+									clearInterval(this.times);
+									this.$router.push({
+										path: "./success",
+										query: {
+											orderId: id,
+											price2: price
+										}
+									});
+								} else if (res.code === 403) {
+									this.$router.push("/mine")
+									this.$message.error("下单失败");
+								}
+							});
+						}, 3000);
+					}
+				});
 			},
 			//跳转订单详情
 			jumpDetail(id) {
@@ -156,7 +187,8 @@
 					}
 				}
 				this.loading = true;
-				this.$post(`http://192.168.2.61:5041/order-aggregate/findOrderDetail?pageNum=${this.page}&pageSize=${this.pageSize}`,
+				this.$post(
+					`http://192.168.2.61:5041/order-aggregate/findOrderDetail?pageNum=${this.page}&pageSize=${this.pageSize}`,
 					data).then(res => {
 					this.loading = false;
 					if (res.code === 200) {
@@ -204,7 +236,7 @@
 				this.$prompt('请输入退票原因', '退票', {
 					confirmButtonText: '确定',
 					cancelButtonText: '取消',
-					inputValidator:(val) => {
+					inputValidator: (val) => {
 						if (val === null) {
 							return true; //初始化的值为null，不做处理的话，刚打开MessageBox就会校验出错，影响用户体验
 						}
@@ -221,17 +253,17 @@
 						returnCount: obj.productCount,
 						returnContent: val.value
 					}
-					this.$axios.post("http://192.168.2.61:5080/returnCash-aggregate/refund/apply",this.$tool.formatDatas(data)).then(res => {
-						if(res.data.code == 200){
+					this.$post("http://192.168.2.61:5080/returnCash-aggregate/refund/apply", this.$tool.formatDatas(data)).then(res => {
+						if (res.code == 200) {
 							this.$message({
 								type: 'success',
 								message: '申请成功'
 							});
 							this.PostFindOrderDetail();
-						}else{
+						} else {
 							this.$message({
 								type: 'error',
-								message: '申请失败'
+								message: res.message
 							});
 						}
 					}).catch(error => {
@@ -252,8 +284,13 @@
 		},
 		watch: {
 			tabs(val) { //订单状态改变
+				this.page = 1;
 				this.PostFindOrderDetail();
 			}
+		},
+		// 销毁定时器
+		beforeDestroy() {
+			clearInterval(this.times);
 		},
 		filters: {
 			status(value) {
@@ -293,9 +330,10 @@
 </script>
 <style scoped="scoped" lang="scss" src="../../../assets/scss/MyOrder.scss"></style>
 <style lang="scss" scoped>
-	.pt40{
+	.pt40 {
 		padding-top: 40px;
 	}
+
 	.tab-s {
 		width: 100%;
 		// height: 40px;

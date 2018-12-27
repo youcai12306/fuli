@@ -354,7 +354,6 @@ let router = new Router({
 
 router.beforeEach((to, from, next) => {
 	if (to.matched.some(record => record.meta.requireAuth)) { // 判断该路由是否需要登录权限
-	console.log(getCookie('userData'))
 		if (getCookie('userData')) { // 判断是否登录
 			next();
 		} else {

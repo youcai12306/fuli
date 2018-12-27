@@ -12,7 +12,7 @@
 			<div class="content">
 				<div class="inner-box">
 					<swiper :options="swiperOption">
-						<swiper-slide :style="{background:'#F6B37F',width:'1200px',height:'686px'}">
+						<swiper-slide :style="{background:'rgba(246,179,127,.65)',width:'1200px',height:'686px'}">
 							<div class="clearDiv">
 								<div class="left floatLeft">
 									<img src="../../assets/img/risk-bg5.png" alt="图片">
@@ -190,13 +190,17 @@
 						height: 98px;
 						background: rgba(255, 255, 255, 0.6) url(../../assets/img/md-l.png) no-repeat center center;
 						border-radius: 10px;
+						left: 50px;
+						top:220px;
 					}
 
 					.swiper-button-next {
 						width: 39px;
 						height: 98px;
-						background: rgba(255, 255, 255, 0.6) url(../../assets/img/md-r.png) no-repeat center center;
+						background: rgba(255, 255, 255, 0.6) url(../../assets/img/md-r.png) no-repeat center center ;
 						border-radius: 10px;
+						right: 50px;
+						top:220px;
 					}
 
 					.left {
@@ -222,6 +226,9 @@
 							color: rgba(255, 255, 255, 1);
 							margin-left: 34px;
 							margin-right: 24px;
+							&:hover{
+								background: #f8d651;
+							}
 						}
 
 						.btn2 {
@@ -234,6 +241,9 @@
 							font-size: 14px;
 							font-weight: 400;
 							color: rgba(255, 255, 255, 1);
+							&:hover{
+								background: #f8857c;
+							}
 						}
 					}
 
@@ -279,7 +289,7 @@
 				.list {
 					padding-top: 100px;
 					padding-left: 90px;
-					height: 686px;
+					height: 560px;
 
 					.list-t {
 						width: 100%;
@@ -290,7 +300,7 @@
 					}
 
 					ul {
-						margin-top: 113px;
+						margin-top: 40px;
 
 						li {
 							float: left;

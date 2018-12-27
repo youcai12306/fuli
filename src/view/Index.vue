@@ -49,28 +49,68 @@
             <swiper :options="swiperOption" ref="mySwiper">
               <!-- slides -->
               <swiper-slide>
-                <img src="../assets/img/index-img12.png" alt :class="{imgActive:index === 0}" @click.stop="jumpImg(0)">
+                <img
+                  src="../assets/img/index-img12.png"
+                  alt
+                  :class="{imgActive:index === 0}"
+                  @click.stop="jumpImg(0)"
+                >
               </swiper-slide>
               <swiper-slide>
-                <img src="../assets/img/index-img13.png" alt :class="{imgActive:index === 1}" @click.stop="jumpImg(1)">
+                <img
+                  src="../assets/img/index-img13.png"
+                  alt
+                  :class="{imgActive:index === 1}"
+                  @click.stop="jumpImg(1)"
+                >
               </swiper-slide>
               <swiper-slide>
-                <img src="../assets/img/index-img14.png" alt :class="{imgActive:index === 2}" @click.stop="jumpImg(2)">
+                <img
+                  src="../assets/img/index-img14.png"
+                  alt
+                  :class="{imgActive:index === 2}"
+                  @click.stop="jumpImg(2)"
+                >
               </swiper-slide>
               <swiper-slide>
-                <img src="../assets/img/index-img15.png" alt :class="{imgActive:index === 3}" @click.stop="jumpImg(3)">
+                <img
+                  src="../assets/img/index-img15.png"
+                  alt
+                  :class="{imgActive:index === 3}"
+                  @click.stop="jumpImg(3)"
+                >
               </swiper-slide>
               <swiper-slide>
-                <img src="../assets/img/index-img16.png" alt :class="{imgActive:index === 4}" @click.stop="jumpImg(4)">
+                <img
+                  src="../assets/img/index-img16.png"
+                  alt
+                  :class="{imgActive:index === 4}"
+                  @click.stop="jumpImg(4)"
+                >
               </swiper-slide>
               <swiper-slide>
-                <img src="../assets/img/index-img17.png" alt :class="{imgActive:index === 5}" @click.stop="jumpImg(5)">
+                <img
+                  src="../assets/img/index-img17.png"
+                  alt
+                  :class="{imgActive:index === 5}"
+                  @click.stop="jumpImg(5)"
+                >
               </swiper-slide>
               <swiper-slide>
-                <img src="../assets/img/index-img12.png" alt :class="{imgActive:index === 6}" @click.stop="jumpImg(6)">
+                <img
+                  src="../assets/img/index-img12.png"
+                  alt
+                  :class="{imgActive:index === 6}"
+                  @click.stop="jumpImg(6)"
+                >
               </swiper-slide>
               <swiper-slide>
-                <img src="../assets/img/index-img13.png" alt :class="{imgActive:index === 7}" @click.stop="jumpImg(7)">
+                <img
+                  src="../assets/img/index-img13.png"
+                  alt
+                  :class="{imgActive:index === 7}"
+                  @click.stop="jumpImg(7)"
+                >
               </swiper-slide>
               <!-- Optional controls -->
             </swiper>
@@ -103,7 +143,7 @@
                       alt
                       :class="{colorA:key === newSwiperIndex}"
                     >
-                    <p class="titless">2019精彩活动马上来袭！</p>
+                    <p class="titless" :class="{colorB:key != newSwiperIndex}">2019精彩活动马上来袭！</p>
                   </div>
                 </el-carousel-item>
               </el-carousel>
@@ -157,6 +197,7 @@
               </ul>
             </div>
             <div class="content-right floatLeft">
+              <p class="right-yule">娱乐专区</p>
               <img src="../assets/img/index-hot-img2.png" alt>
               <router-link class="knowDetail" to="/risk">了解详情></router-link>
             </div>
@@ -169,7 +210,7 @@
             <div class="info-img clearDiv">
               <img src="../assets/img/md-5.png">
               <p>平日 9.30~17.30</p>
-              <p>周末 9.00~18.00</p>
+              <p class="p">周末 9.00~18.00</p>
             </div>
             <div class="info-boutton">
               <router-link :to="{path:'/ditu',query:{id:'2'}}">详细营业信息>>></router-link>
@@ -184,7 +225,7 @@
                   全价票
                   <span>240元</span>/人
                 </p>
-                <p>
+                <p class="p">
                   优惠价
                   <span>180元</span>/人
                 </p>
@@ -250,7 +291,7 @@ export default {
   },
   methods: {
     //跳转背景
-    jumpImg(index){
+    jumpImg(index) {
       clearInterval(this.times);
       this.index = index;
     },
@@ -411,26 +452,27 @@ export default {
       }
     }
     .banner-content {
-      width: 1049px;
-      height: 110px;
+      width: 882px;
+      height: 94px;
       margin: 0 auto;
       background: rgba(0, 0, 0, 0.75);
       box-shadow: 2px 2px 7px 0px rgba(0, 0, 0, 0.35);
-      padding-left: 61px;
+      padding-left: 37px;
       font-size: 14px;
       font-weight: bold;
       color: rgba(255, 255, 255, 1);
       .content-list {
         float: left;
         .select-list {
-          margin-top: 35px;
-          margin-left: 35px;
+          margin-top: 29px;
+          margin-left: 19px;
           margin-right: 35px;
           width: 267px;
           height: 39px;
         }
       }
       .search {
+        float: left;
         button {
           width: 69px;
           height: 39px;
@@ -439,7 +481,7 @@ export default {
           font-weight: bold;
           color: rgba(255, 255, 255, 1);
           border-radius: 5px;
-          margin-top: 35px;
+          margin-top: 29px;
         }
       }
     }
@@ -519,7 +561,7 @@ export default {
         padding: 16px 0;
         letter-spacing: 2px;
         .ch {
-          font-size: 35px;
+          font-size: 26px;
           span {
             font-size: 25px;
           }
@@ -580,7 +622,7 @@ export default {
         letter-spacing: 2px;
         padding-top: 40px;
         .ch {
-          font-size: 35px;
+          font-size: 26px;
           span {
             font-size: 25px;
           }
@@ -703,6 +745,14 @@ export default {
           margin-top: -35px;
           margin-left: 23px;
           position: relative;
+          p {
+            position: absolute;
+            top: 12px;
+            left: 140px;
+            font-size: 16px;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 1);
+          }
           img {
             width: 343px;
             height: 397px;
@@ -753,12 +803,12 @@ export default {
           font-size: 18px;
         }
         .info-img {
-          margin-top: 120px;
-          margin-left: 120px;
+          margin-top: 128px;
+          margin-left: 131px;
           height: 80px;
           img {
-            width: 170px;
-            height: 80px;
+            width: 119px;
+            height: 70px;
             margin-right: 22px;
             float: left;
           }
@@ -768,12 +818,15 @@ export default {
             font-weight: bold;
             color: rgba(255, 255, 255, 1);
             font-size: 18px;
-            height: 40px;
-            line-height: 40px;
+            height: 24px;
+            line-height: 24px;
+          }
+          .p {
+            margin-top: 16px;
           }
         }
         .info-boutton {
-          margin-top: 42px;
+          margin-top: 34px;
           width: 593px;
           height: 82px;
           padding: 16px 0;
@@ -782,13 +835,24 @@ export default {
             display: block;
             width: 236px;
             height: 51px;
-            background: url(../assets/img/md-7.png) no-repeat;
-            margin: 0 auto;
+            line-height: 51px;
+            text-align: center;
+            background: rgba(56, 183, 246, 1);
+            box-shadow: 0px 6px 7px 0px rgba(42, 91, 2, 0.22);
+            border-radius: 26px;
             font-size: 22px;
             font-weight: bold;
             color: rgba(255, 255, 255, 1);
-            text-align: center;
-            line-height: 51px;
+            // background: url(../assets/img/md-7.png) no-repeat;
+            margin: 0 auto;
+            &:hover {
+              background: #0093fb;
+            }
+            // font-size: 22px;
+            // font-weight: bold;
+            // color: rgba(255, 255, 255, 1);
+            // text-align: center;
+            // line-height: 51px;
           }
         }
         &:nth-of-type(2) {
@@ -798,14 +862,14 @@ export default {
           }
           .info-img2 {
             position: absolute;
-            left: 126px;
+            left: 145px;
             top: 78px;
             img {
               display: block;
               width: 107px;
               height: 56px;
               float: left;
-              margin-right: 10px;
+              margin-right: 37px;
               margin-top: 34px;
             }
             .info-p {
@@ -816,10 +880,13 @@ export default {
                 color: rgba(255, 255, 255, 1);
                 font-size: 14px;
                 height: 26px;
-                margin: 10px 0;
+                // margin: 10px 0;
                 span {
-                  font-size: 18px;
+                  font-size: 28px;
                 }
+              }
+              .p {
+                margin-top: 20px;
               }
             }
           }
@@ -834,13 +901,19 @@ export default {
               display: block;
               width: 236px;
               height: 51px;
-              background: url(../assets/img/md-8.png) no-repeat;
-              margin: 0 auto;
+              line-height: 51px;
+              text-align: center;
+              background: rgba(154, 218, 16, 1);
+              box-shadow: 0px 6px 7px 0px rgba(42, 91, 2, 0.22);
+              border-radius: 26px;
               font-size: 22px;
               font-weight: bold;
               color: rgba(255, 255, 255, 1);
-              text-align: center;
-              line-height: 51px;
+              // background: url(../assets/img/md-7.png) no-repeat;
+              margin: 0 auto;
+              &:hover {
+                background: #6dc30c;
+              }
             }
           }
         }
@@ -871,6 +944,9 @@ export default {
 }
 </style>
 <style>
+.swiper-box .el-carousel__item .colorB {
+  bottom: 0;
+}
 .colorA {
   border: 5px solid rgba(255, 237, 40, 1);
   box-shadow: 0px 8px 7px 0px rgba(94, 94, 94, 0.52);
@@ -879,11 +955,11 @@ export default {
   width: 429px;
   height: 100%;
 }
-.swiper-box .el-carousel__item .titless {
-  width: 463px;
+.titless {
   position: absolute;
   bottom: 5px;
   left: 5px;
+  right: 5px;
   height: 70px;
   line-height: 70px;
   background: rgba(27, 27, 27, 0.78);

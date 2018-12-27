@@ -140,17 +140,17 @@
 							<tr class="bodys">
 								<td class="td-1">1</td>
 								<td class="td-2">A</td>
-								<td class="td-3">1000</td>
+								<td class="td-3">{{data.orderTotalCash}}</td>
 								<td class="td-4">支付宝</td>
 								<td class="td-5">支付</td>
 								<td class="td-6">2018/12/05 14:30:00</td>
 							</tr>
 							<tr>
 								<td class="td-1 td-bottom" colspan="2">合计</td>
-								<td class="td-6 td-bottom" colspan="4">1000</td>
+								<td class="td-6 td-bottom" colspan="4">{{data.orderTotalCash}}</td>
 							</tr>
 						</table>
-						<table cellspacing="0" cellpadding="0" class="five-table" v-show="type === 1">
+						<table cellspacing="0" cellpadding="0" class="five-table" v-show="type === 1 && data.status == 6">
 							<tr class="titles">
 								<td class="td-1">序号</td>
 								<td class="td-2">子单编码</td>
@@ -163,7 +163,7 @@
 								<td class="td-1 td-bottom">1</td>
 								<td class="td-2 td-bottom">A</td>
 								<td class="td-3 td-bottom">2018/12/05 14:30:00</td>
-								<td class="td-4 td-bottom">100</td>
+								<td class="td-4 td-bottom">1</td>
 								<td class="td-5 td-bottom">退款审核中</td>
 								<td class="td-6 td-bottom">2018/12/05 14:30:00</td>
 							</tr>

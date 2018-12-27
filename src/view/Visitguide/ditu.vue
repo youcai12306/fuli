@@ -51,7 +51,7 @@
 				<div class="right floatRight">
 					<div class="box7 box0" v-if="actives == 0">
 						<div class="info">
-							<div class="info-1">富力海洋欢乐世界——门票<i></i></div>
+							<div class="info-1">富力海洋欢乐世界——门票<router-link tag="i" to="/tickets/1"></router-link></div>
 							<div class="info-title-2">有效期：2018年1月1日~2019年1月1日<span>单位：每人/元</span></div>
 							<div class="info-2">
 								<div class="info-2-tr">

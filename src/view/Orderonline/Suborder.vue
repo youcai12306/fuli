@@ -41,14 +41,11 @@
                 <th>数量</th>
                 <th>小计</th>
               </tr>
-              <tr
-                v-for="item in list2"
-                :key="item.id"
-              >
+              <tr v-for="item in list2" :key="item.id">
                 <!-- <tr v-for="item in list2" :key="item"> -->
                 <td>{{item.product.productName}}
                   <p>游玩时间：{{item.product.dataBaseDate}}</p>
-                  <p>{{canDebook(item.product.saleType)}}</p>
+                  <p>{{item.product.saleType}}{{canDebook(item.product.saleType)}}</p>
                 </td>
                 <td>¥{{item.settlementPrice}}元</td>
                 <td>×{{item.productCount}}</td>
@@ -247,7 +244,7 @@ export default {
     this.shopmsg();
     // this.saleType = this.$route.query.saleType
     // 监听路由跳转路径，如果是购物车，标志为a1，直接接受上个页面的参数
-    if (this.a1 === 1) {
+    if (this.a1 == 1) {
       let list1 = this.$route.query.list1;
       this.list2 = JSON.parse(list1);
       console.log(this.list2);
@@ -321,7 +318,7 @@ export default {
     // 判断是邮寄或者自提，邮寄需要显示邮寄地址，传邮寄ID到李顺仪
     canDebook(type) {
       // return type === 1 ? (this.sign = "邮寄") : (this.sign = "自提");
-      if (type === true) {
+      if (type === 1) {
         this.sign = "邮寄";
         this.flag1 = true;
         let data2 = {
@@ -335,7 +332,7 @@ export default {
           this.address1 = res.data.receiveProvince + res.data.receiveCity + res.data.receiveArea;
           this.receiveId = res.data.id
         })
-      } else if (type === false) {
+      } else if (type === 2) {
         this.sign = "自提";
         
       }
@@ -343,7 +340,7 @@ export default {
     },
     //   提交
     onSubmit() {
-      // console.log(111);
+      console.log(this.$route.query.arr);
       let data = {
         touristId: this.$store.getters.getUserData.userId,
         productFormList: this.$route.query.arr,
@@ -377,12 +374,12 @@ export default {
                 this.$router.push({
                   path: "./success",
                   query: {
-                    orderId: this.orderId,
+                    orderId: this.orderId,  
                     price2: this.price2
                   }
                 });
               } else if (res.code === 403) {
-                // this.$router.push("/")0
+                this.$router.push("/mine")
                 alert("下单失败");
               }
             });

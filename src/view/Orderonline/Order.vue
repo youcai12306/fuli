@@ -13,9 +13,9 @@
             <li>
               <a href>王大锤</a>
             </li>
-            <li class="clearDiv or55">
+            <li class="clearDiv or55" @click="jumpShoppingCar">
               <img src="../../../src/assets/img/gouwuche.png" alt>
-              <a href>购物车（0）</a>
+              <a href>购物车 <span>{{shopNum}}</span>)</a>
             </li>
             <li>
               <a href>我的订单</a>
@@ -60,11 +60,16 @@
 import Header from '@/components/Header'
 export default {
   data() {
-    return {};
+    return {
+      shopNum:0
+    };
   },
   components: {
     Header
-  }
+  },
+  methods: {
+    
+  },
 };
 </script>
 

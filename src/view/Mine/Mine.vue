@@ -71,7 +71,7 @@
               </template>
               <el-menu-item
                 :index="`/Membership`"
-                :class="{'is_active' : $route.path=='/membership'}"
+                :class="{'is_active' : $route.path=='/Membership'}"
               >个人信息</el-menu-item>
               <el-menu-item
                 :index="`/`"
@@ -79,11 +79,11 @@
               >我的会员</el-menu-item>
               <el-menu-item
                 :index="`/ShoppingAdress`"
-                :class="{'is_active' : $route.path=='/shoppingAdress'}"
+                :class="{'is_active' : $route.path=='/ShoppingAdress'}"
               >收货地址</el-menu-item>
               <el-menu-item
                 :index="`/MyMessage`"
-                :class="{'is_active' : $route.path=='/myMessage'}"
+                :class="{'is_active' : $route.path=='/MyMessage'}"
               >消息管理</el-menu-item>
               <!-- <el-menu-item
                 :index="`/ChangePwd`"
@@ -107,6 +107,7 @@
 
 <script>
 export default {
+	inject:['reload'],
   data() {
     return {
       openeds: ["1", "2", "3", "4"] //展开的菜单导航
@@ -119,7 +120,15 @@ export default {
     handleClose(key, keyPath) {
       console.log(key, keyPath);
     }
-  }
+  },
+	mounted() {
+		
+	},
+	watch:{
+		$route(){
+			this.reload();
+		}
+	}
 };
 </script>
 <style lang='scss' scoped>

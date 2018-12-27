@@ -414,7 +414,7 @@ export default {
     overflow: hidden;
     background: #0764e9;
     position: relative;
-    z-index: 8;
+    z-index: 12;
     transition: 0.3s;
 
     .lists {

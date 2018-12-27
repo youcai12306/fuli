@@ -73,7 +73,8 @@ export default {
       flag:true,
       id1:"",
       id2:"",
-			arr:[]
+      arr:[],
+      // dis:""
 		};
   },
   watch: {
@@ -151,7 +152,7 @@ export default {
 				this.arr[i]['productId'] = v.productId;
 				this.arr[i]['num'] = v.productCount;
 				this.arr[i]['stockId'] = v.createDateId;
-				this.arr[i]['saleType'] = v.saleType ? true : false;
+				this.arr[i]['saleType'] = v.saleType ? '1' : '0';
 			})
     },
     // 删除选中商品
@@ -179,6 +180,7 @@ export default {
       }
       if (this.good_list.some(v => v.is_selected === false)) {
         this.selected_all = false;
+        // this.dis = false
       } else {
         this.selected_all = true;
       }

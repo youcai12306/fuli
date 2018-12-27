@@ -28,6 +28,7 @@
 
 <script>
 import { mapActions } from "vuex";
+import { delCookie } from "@/package/cookie";
 export default {
   data() {
     return {};

@@ -418,6 +418,7 @@ export default {
     },
     //跳转到指定位置
     jumpColumn(col) {
+			this.alertShow = false;
       let top = document.querySelector(col).offsetTop;
       window.scroll(0, top);
     }

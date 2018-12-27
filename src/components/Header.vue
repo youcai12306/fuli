@@ -134,8 +134,9 @@
       <div class="nav-right floatLeft">
         <div class="right-info">
           <div class="login" @click="jumpMine" ref="box">
-            <span>{{name}}</span>
-            <div class="person-info" v-show="loginShow">
+            <span v-if="!showMineInfo">登录/注册</span>
+            <span v-else>{{name}}</span>
+            <div class="person-info">
               <div class="info-one">
                 <router-link to="/mine" class="mine">个人中心</router-link>
                 <!-- <a href="javascript:;" class="mine" >个人中心</a> -->
@@ -214,8 +215,7 @@ export default {
   data() {
     return {
       show: false,
-      name: "登录/注册",
-      loginShow: false,
+      name: "",
       height: 0
     };
   },
@@ -226,19 +226,12 @@ export default {
   },
   created() {
     if (Object.keys(this.$store.getters.userInfo).length === 0) {
-      this.name = "登录/注册";
+      this.showMineInfo = false;
+      this.name = "";
     } else {
+      this.showMineInfo = true;
       this.name = this.$store.getters.userInfo.mobile + ",欢迎您！";
     }
-    this.$nextTick(() => {
-      if (this.$refs.box) {
-        document.addEventListener("click", e => {
-          if (!this.$refs.box.contains(e.target)) {
-            this.loginShow = false;
-          }
-        });
-      }
-    });
   },
   methods: {
     showNavList(type) {
@@ -258,12 +251,7 @@ export default {
     },
     //跳转个人中心
     jumpMine() {
-      if (Object.keys(this.$store.getters.userInfo).length === 0) {
         this.$router.push("/login");
-        this.loginShow = false;
-      } else {
-        this.loginShow = true;
-      }
     },
     //跳转订票页面
     jumpOrderTicket() {
@@ -340,12 +328,17 @@ export default {
           background: url(../assets/img/index-login.png) no-repeat 0 0;
           padding-left: 20px;
           position: relative;
-
+          span{
+            padding: 20px 0;
+          }
           &:hover {
             cursor: pointer;
           }
-
+          &:hover .person-info{
+            display: block;
+          }
           .person-info {
+            display: none;
             position: absolute;
             width: 189px;
             height: 99px;

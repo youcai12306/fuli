@@ -210,7 +210,7 @@
             <div class="info-img clearDiv">
               <img src="../assets/img/md-5.png">
               <p>平日 9.30~17.30</p>
-              <p>周末 9.00~18.00</p>
+              <p class="p">周末 9.00~18.00</p>
             </div>
             <div class="info-boutton">
               <router-link :to="{path:'/ditu',query:{id:'2'}}">详细营业信息>>></router-link>
@@ -225,7 +225,7 @@
                   全价票
                   <span>240元</span>/人
                 </p>
-                <p>
+                <p class="p">
                   优惠价
                   <span>180元</span>/人
                 </p>
@@ -452,26 +452,27 @@ export default {
       }
     }
     .banner-content {
-      width: 1049px;
-      height: 110px;
+      width: 882px;
+      height: 94px;
       margin: 0 auto;
       background: rgba(0, 0, 0, 0.75);
       box-shadow: 2px 2px 7px 0px rgba(0, 0, 0, 0.35);
-      padding-left: 61px;
+      padding-left: 37px;
       font-size: 14px;
       font-weight: bold;
       color: rgba(255, 255, 255, 1);
       .content-list {
         float: left;
         .select-list {
-          margin-top: 35px;
-          margin-left: 35px;
+          margin-top: 29px;
+          margin-left: 19px;
           margin-right: 35px;
           width: 267px;
           height: 39px;
         }
       }
       .search {
+        float: left;
         button {
           width: 69px;
           height: 39px;
@@ -480,7 +481,7 @@ export default {
           font-weight: bold;
           color: rgba(255, 255, 255, 1);
           border-radius: 5px;
-          margin-top: 35px;
+          margin-top: 29px;
         }
       }
     }
@@ -802,12 +803,12 @@ export default {
           font-size: 18px;
         }
         .info-img {
-          margin-top: 120px;
-          margin-left: 120px;
+          margin-top: 128px;
+          margin-left: 131px;
           height: 80px;
           img {
-            width: 170px;
-            height: 80px;
+            width: 119px;
+            height: 70px;
             margin-right: 22px;
             float: left;
           }
@@ -817,12 +818,15 @@ export default {
             font-weight: bold;
             color: rgba(255, 255, 255, 1);
             font-size: 18px;
-            height: 40px;
-            line-height: 40px;
+            height: 24px;
+            line-height: 24px;
+          }
+          .p {
+            margin-top: 16px;
           }
         }
         .info-boutton {
-          margin-top: 42px;
+          margin-top: 34px;
           width: 593px;
           height: 82px;
           padding: 16px 0;
@@ -831,13 +835,24 @@ export default {
             display: block;
             width: 236px;
             height: 51px;
-            background: url(../assets/img/md-7.png) no-repeat;
-            margin: 0 auto;
+            line-height: 51px;
+            text-align: center;
+            background: rgba(56, 183, 246, 1);
+            box-shadow: 0px 6px 7px 0px rgba(42, 91, 2, 0.22);
+            border-radius: 26px;
             font-size: 22px;
             font-weight: bold;
             color: rgba(255, 255, 255, 1);
-            text-align: center;
-            line-height: 51px;
+            // background: url(../assets/img/md-7.png) no-repeat;
+            margin: 0 auto;
+            &:hover {
+              background: #0093fb;
+            }
+            // font-size: 22px;
+            // font-weight: bold;
+            // color: rgba(255, 255, 255, 1);
+            // text-align: center;
+            // line-height: 51px;
           }
         }
         &:nth-of-type(2) {
@@ -847,14 +862,14 @@ export default {
           }
           .info-img2 {
             position: absolute;
-            left: 126px;
+            left: 145px;
             top: 78px;
             img {
               display: block;
               width: 107px;
               height: 56px;
               float: left;
-              margin-right: 10px;
+              margin-right: 37px;
               margin-top: 34px;
             }
             .info-p {
@@ -865,10 +880,13 @@ export default {
                 color: rgba(255, 255, 255, 1);
                 font-size: 14px;
                 height: 26px;
-                margin: 10px 0;
+                // margin: 10px 0;
                 span {
-                  font-size: 18px;
+                  font-size: 28px;
                 }
+              }
+              .p {
+                margin-top: 20px;
               }
             }
           }
@@ -883,13 +901,19 @@ export default {
               display: block;
               width: 236px;
               height: 51px;
-              background: url(../assets/img/md-8.png) no-repeat;
-              margin: 0 auto;
+              line-height: 51px;
+              text-align: center;
+              background: rgba(154, 218, 16, 1);
+              box-shadow: 0px 6px 7px 0px rgba(42, 91, 2, 0.22);
+              border-radius: 26px;
               font-size: 22px;
               font-weight: bold;
               color: rgba(255, 255, 255, 1);
-              text-align: center;
-              line-height: 51px;
+              // background: url(../assets/img/md-7.png) no-repeat;
+              margin: 0 auto;
+              &:hover {
+                background: #6dc30c;
+              }
             }
           }
         }

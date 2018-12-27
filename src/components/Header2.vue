@@ -89,8 +89,7 @@ export default {
   width: 100%;
   height: 125px;
   line-height: 125px;
-  background-color: #359af7;
-
+  background-color: rgba(7,100,233,1); 
   ul {
     width: 1200px;
     margin: 0 auto;

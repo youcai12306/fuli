@@ -70,7 +70,7 @@ export default {
         width: 90px;
         height: 73px;
         padding-top: 66px;
-        margin-right: 80px;
+        margin-right: 60px;
       }
       .info {
         padding-top: 58px;

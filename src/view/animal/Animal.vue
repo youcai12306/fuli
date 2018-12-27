@@ -39,7 +39,7 @@
 									<template v-if="k == 1">
 										<div class="p">躯体粗壮，呈白色或黄色，头圆、喙短，没有背鳍。体长平均3-5米，可达5.5米。体重雄性可达1500千克；雌性可达1350千克...</div>
 									</template>
-									<router-link :to="{name:'AnimalDetails',params:{id:'1'}}">查看详情>></router-link>
+									<router-link :to="{name:'AnimalDetails',params:{id:k+1}}">查看详情>></router-link>
 								</div>
 							</div>
 
@@ -58,7 +58,7 @@
 										<div class="p">雄性2-2.5米，雌性平均2米。体重雄性200-350千克，雌性140-150千克......</div>
 									</template>
 
-									<router-link :to="{name:'AnimalDetails',params:{id:'1'}}">查看详情>></router-link>
+									<router-link :to="{name:'AnimalDetails',params:{id:k+3}}">查看详情>></router-link>
 								</div>
 							</div>
 
@@ -70,7 +70,7 @@
 										<template v-if="k == 0">西非海牛</template>
 									</div>
 									<div class="p">体型呈纺锤状，背部宽阔无背鳍，头部比例小。体长可达4.5米，体重200-500公斤......</div>
-									<router-link :to="{name:'AnimalDetails',params:{id:'1'}}">查看详情>></router-link>
+									<router-link :to="{name:'AnimalDetails',params:{id:k+5}}">查看详情>></router-link>
 								</div>
 							</div>
 						</div>

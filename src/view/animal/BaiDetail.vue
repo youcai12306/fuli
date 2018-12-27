@@ -292,31 +292,64 @@
 									<p>听君一言，惠及你我</p>
 								</div>
 								<div class="box-swiper">
-									<img src="../../assets/img/anila4/9.png" alt="">
-									<img src="../../assets/img/anila4/9.png" alt="">
-									<img src="../../assets/img/anila4/9.png" alt="">
+									<img src="../../assets/img/anila5/1.png" alt="">
+									<img src="../../assets/img/anila5/2.png" alt="">
+									<img src="../../assets/img/anila5/3.png" alt="">
 								</div>
 								<div class="span-3">
 									<p>活动最开始，同学们通过观看简短的科普视频进行学习。</p>
 									<p>我不丑，我很温柔</p>
 								</div>
 								<div class="box-swiper">
-									<img src="../../assets/img/anila4/9.png" alt="">
+									<img src="../../assets/img/anila5/4.png" alt="">
 								</div>
 								<div class="span-3">
 									<p>随后，同学们来到室外设置的小小水族馆前参观。</p>
 								</div>
 								<div class="box-swiper">
-									<img src="../../assets/img/anila4/9.png" alt="">
+									<img src="../../assets/img/anila5/5.png" alt="">
 								</div>
 								<div class="span-3">
 									<p>长相最为奇特的鲎，从4亿多年前至今仍保留其原始而古老的样貌，有“活化石”之称，目前在我国因为滥捕滥捞而濒临灭绝。</p>
 								</div>
 								<div class="box-swiper">
-									<img src="../../assets/img/anila4/9.png" alt="">
+									<img src="../../assets/img/anila5/6.png" alt="">
 								</div>
 								<div class="span-3">
-									<p>　海苹果的身体呈卵形，有呈管状的管足。它们是滤食性动物，用他们树枝状的触手滤食水中的浮游生物，然后将被触手粘住的食物送入口中。</p>
+									<p>海苹果的身体呈卵形，有呈管状的管足。它们是滤食性动物，用他们树枝状的触手滤食水中的浮游生物，然后将被触手粘住的食物送入口中。</p>
+								</div>
+								<div class="box-swiper">
+									<img src="../../assets/img/anila5/7.png" alt="">
+								</div>
+								<div class="span-3">
+									<p>海星与海参、海胆等同属棘皮动物，一般有五个腕，是肉食性动物，以贝类、虾蟹、蠕虫、甚至鱼类等为食。广泛分布于砂质海底、软泥海底、珊瑚礁及各种深度的海洋中。</p>
+									<p>手绘我心，手写我意</p>
+								</div>
+								<div class="box-swiper">
+									<img src="../../assets/img/anila5/8.png" alt="">
+									<img src="../../assets/img/anila5/9.png" alt="">
+									<img src="../../assets/img/anila5/10.png" alt="">
+								</div>
+								<div class="span-3">
+									<p>将自己的奇思妙想与刚习得的海洋保护知识相结合，用彩色水笔在空白的纸袋上描绘，亲手绘制属于自己的特别环保手袋。</p>
+									<p>以我之名，保护你</p>
+								</div>
+								<div class="box-swiper">
+									<img src="../../assets/img/anila5/11.png" alt="">
+									<img src="../../assets/img/anila5/12.png" alt="">
+									<img src="../../assets/img/anila5/13.png" alt="">
+								</div>
+								<div class="span-3">
+									<p>活动现场派发了环保手带，每个人签下自己的姓名，成为蓝海小卫士，保护海洋需要你我一点一滴的力量，所以行动吧！蓝海小卫士们！</p>
+									<p>海洋保护，义无反顾</p>
+								</div>
+								<div class="box-swiper">
+									<img src="../../assets/img/anila5/14.png" alt="">
+									<img src="../../assets/img/anila5/15.png" alt="">
+								</div>
+								<div class="span-3">
+									<p>蓝海保育救护中心是海洋欢乐世界下以公益与海洋救助为主的场馆，总投资约4000万元，占地面积逾5000平米，已于近期投入使用，保育中心内设置有检疫隔离区和兽医院区，并从国内外厂家引进许多高精尖医疗设备，以承担动物进口过程的隔离检疫任务及近海的海洋动物救护任务，面向全省免费救援水生野生动物，标志着我省海洋动物救护工作迈入了崭新阶段。<br>
+										　　热心群众发现搁浅动物，请尽量避免人群围观，保持其体表湿润，第一时间拨打救援电话（0898-8336 2777）</p>
 								</div>
 							</div>
 						</template>

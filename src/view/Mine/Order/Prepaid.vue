@@ -252,6 +252,7 @@
 		},
 		watch: {
 			tabs(val) { //订单状态改变
+				this.page = 1;
 				this.PostFindOrderDetail();
 			}
 		},

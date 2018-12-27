@@ -221,8 +221,8 @@
 						returnCount: obj.productCount,
 						returnContent: val.value
 					}
-					this.$axios.post("http://192.168.2.61:5080/returnCash-aggregate/refund/apply",this.$tool.formatDatas(data)).then(res => {
-						if(res.data.code == 200){
+					this.$post("http://192.168.2.61:5080/returnCash-aggregate/refund/apply",this.$tool.formatDatas(data)).then(res => {
+						if(res.code == 200){
 							this.$message({
 								type: 'success',
 								message: '申请成功'
@@ -231,7 +231,7 @@
 						}else{
 							this.$message({
 								type: 'error',
-								message: '申请失败'
+								message: res.message
 							});
 						}
 					}).catch(error => {

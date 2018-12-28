@@ -2,18 +2,18 @@
   <div>
     <Header></Header>
     <!-- 当前位置 -->
-    <div class="or2">
-      <div class="or3 clearDiv">
-        <div class="or4 clearDiv">
+    <!-- <div class="or2">
+      <div class="or3 clearDiv"> -->
+        <!-- <div class="or4 clearDiv">
           <img src="../../../src/assets/img/dingwei.png" alt>
           <p>当前位置 ：首页 > 网上订购</p>
-        </div>
-        <div class="or5">
+        </div> -->
+        <!-- <div class="or5">
           <ul class="clearDiv">
             <li>
               <a href>王大锤</a>
             </li>
-            <li class="clearDiv or55" @click="jumpShoppingCar">
+            <li class="clearDiv or55">
               <img src="../../../src/assets/img/gouwuche.png" alt>
               <a href>购物车 <span>{{shopNum}}</span>)</a>
             </li>
@@ -21,9 +21,9 @@
               <a href>我的订单</a>
             </li>
           </ul>
-        </div>
-      </div>
-    </div>
+        </div> -->
+      <!-- </div>
+    </div> -->
     <!-- 网上订购 -->
     <div class="or6">
       <div class="or7 clearDiv">

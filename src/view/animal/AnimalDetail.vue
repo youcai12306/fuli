@@ -25,49 +25,235 @@
 				</div>
 				<div class="right floatRight">
 					<div class="box">
-						<div class="title-1">
-							哺乳类-鲸豚类 <span @click="go">返回</span>
-						</div>
-						<div class="title-2">
-							瓶鼻海豚<span>中文名 宽吻海豚 拉丁学名 Tursiops truncatus (Montagu, 1821)</span>
-						</div>
+						<template v-if="type == 1">
+							<div class="title-1">
+								哺乳类-鲸豚类 <span @click="go">返回</span>
+							</div>
+							<div class="title-2">
+								瓶鼻海豚<span>中文名 宽吻海豚 拉丁学名 Tursiops truncatus (Montagu, 1821)</span>
+							</div>
 
-						<div class="box-swiper">
-							<swiper :options="swiperOption" ref="mySwiper">
-								<swiper-slide>
-									<img src="../../assets/img/ADetail2.png" alt="">
-								</swiper-slide>
-								<swiper-slide>
-									<img src="../../assets/img/ADetail2.png" alt="">
-								</swiper-slide>
-								<swiper-slide>
-									<img src="../../assets/img/ADetail2.png" alt="">
-								</swiper-slide>
-							</swiper>
-							<div class="swiper-button-prev"></div>
-							<div class="swiper-button-next"></div>
-						</div>
+							<div class="box-swiper">
+								<swiper :options="swiperOption" ref="mySwiper">
+									<swiper-slide>
+										<img src="../../assets/img/anila6/1.png" alt="">
+									</swiper-slide>
+									<swiper-slide>
+										<img src="../../assets/img/anila6/1.png" alt="">
+									</swiper-slide>
+									<swiper-slide>
+										<img src="../../assets/img/anila6/1.png" alt="">
+									</swiper-slide>
+								</swiper>
+								<div class="swiper-button-prev"></div>
+								<div class="swiper-button-next"></div>
+							</div>
 
-						<div class="span-1">
-							保护现状 CITES附录II,中国国家二级保护野生动物,列入《世界自然保护联盟》(IUCN) 2012年濒危物种红色名录无威物种(LC)
-						</div>
+							<div class="span-1">
+								保护现状 CITES附录II,中国国家二级保护野生动物,列入《世界自然保护联盟》(IUCN) 2012年濒危物种红色名录无威物种(LC)
+							</div>
 
-						<div class="span-2">
-							体型——身体为流线型，雌性身长为1.9-2.1米，体重为170-200千克，雄性体长为2.5-3.9米，体重为300-650千克。 <br>
-							寿命——雌性宽吻海豚的寿命在80年左右，而雄性宽吻海豚由于生活压力更大，不容易过50年。<br>
-							食性——食物主要包括带鱼、鲅鱼、鲻鱼、沙丁鱼等群栖性的鱼类，偶尔也吃乌贼或蟹类，以及其他一些小动物。<br>
-							繁殖——胎生哺乳，雌性宽吻海豚在5-12岁时性成熟，雄性稍迟，在10-12岁。<br>
-							分布——分布于大西洋、印度洋、南太平洋、地中海<br>
-						</div>
-						
-						<div class="div-video" @click="status=true">
-							<img src="../../assets/img/Adetail1.png" alt="图片" v-if="!status">
-							<template v-if="status">
-								<video controls="" autoplay="" name="media">
-									<source src="http://220.164.101.233/6972ABA05563D7189138F285D/03000A17005A6D6FDD431E055EEB3ED1C172E0-9A6B-0F5C-3683-71EB5632A884.mp4?ccode=050F&amp;duration=392&amp;expire=18000&amp;psid=9de947e6e0e2165a511f0bbaaa3a0f24&amp;ups_client_netip=77629cc8&amp;ups_ts=1545639349&amp;ups_userid=&amp;utid=P2yiFEgDlTgCAXdinMiUZGFx&amp;vid=XMzEyMjcxNjAw&amp;vkey=A424309d5ad1aaba3737f078c6d9fdae9&amp;sp=&amp;ali_redirect_domain=ykugc.cp31.ott.cibntv.net&amp;ali_redirect_ex_ftag=95670d958d49197e342f1df4ea06b2766aaef08cf8811e3d&amp;ali_redirect_ex_tmining_ts=1545639355&amp;ali_redirect_ex_tmining_expire=3600&amp;ali_redirect_ex_hot=0"
-									type="video/mp4"></video>
-							</template>
-						</div>
+							<div class="span-2">
+								体型——身体为流线型，雌性身长为1.9-2.1米，体重为170-200千克，雄性体长为2.5-3.9米，体重为300-650千克。 <br>
+								寿命——雌性宽吻海豚的寿命在80年左右，而雄性宽吻海豚由于生活压力更大，不容易过50年。<br>
+								食性——食物主要包括带鱼、鲅鱼、鲻鱼、沙丁鱼等群栖性的鱼类，偶尔也吃乌贼或蟹类，以及其他一些小动物。<br>
+								繁殖——胎生哺乳，雌性宽吻海豚在5-12岁时性成熟，雄性稍迟，在10-12岁。<br>
+								分布——分布于大西洋、印度洋、南太平洋、地中海<br>
+							</div>
+
+							<div class="div-video" @click="status=true">
+								<img src="../../assets/img/Adetail1.png" alt="图片" v-if="!status">
+								<template v-if="status">
+									<video controls="" autoplay="" name="media">
+										<source src="http://220.164.101.233/6972ABA05563D7189138F285D/03000A17005A6D6FDD431E055EEB3ED1C172E0-9A6B-0F5C-3683-71EB5632A884.mp4?ccode=050F&amp;duration=392&amp;expire=18000&amp;psid=9de947e6e0e2165a511f0bbaaa3a0f24&amp;ups_client_netip=77629cc8&amp;ups_ts=1545639349&amp;ups_userid=&amp;utid=P2yiFEgDlTgCAXdinMiUZGFx&amp;vid=XMzEyMjcxNjAw&amp;vkey=A424309d5ad1aaba3737f078c6d9fdae9&amp;sp=&amp;ali_redirect_domain=ykugc.cp31.ott.cibntv.net&amp;ali_redirect_ex_ftag=95670d958d49197e342f1df4ea06b2766aaef08cf8811e3d&amp;ali_redirect_ex_tmining_ts=1545639355&amp;ali_redirect_ex_tmining_expire=3600&amp;ali_redirect_ex_hot=0"
+										 type="video/mp4"></video>
+								</template>
+							</div>
+						</template>
+
+						<template v-if="type == 2">
+							<div class="title-1">
+								哺乳类-鲸豚类 <span @click="go">返回</span>
+							</div>
+							<div class="title-2">
+								白鲸<span>中文名 白鲸 拉丁学名 Delphinapterus leucas (Pallas，1776) </span>
+							</div>
+
+							<div class="box-swiper">
+								<swiper :options="swiperOption" ref="mySwiper">
+									<swiper-slide>
+										<img src="../../assets/img/anila6/2.png" alt="">
+									</swiper-slide>
+									<swiper-slide>
+										<img src="../../assets/img/anila6/2.png" alt="">
+									</swiper-slide>
+									<swiper-slide>
+										<img src="../../assets/img/anila6/2.png" alt="">
+									</swiper-slide>
+								</swiper>
+								<div class="swiper-button-prev"></div>
+								<div class="swiper-button-next"></div>
+							</div>
+
+							<div class="span-1">
+								保护现状 CITES附录Ⅱ；中国国家二级保护野生动物；列入《世界自然保护联盟》（IUCN）濒危物种红色名录近危物种（NT）。
+							</div>
+
+							<div class="span-2">
+								体型 躯体粗壮，呈白色或黄色，头圆、喙短，没有背鳍。体长平均3-5米，可达5.5米。体重雄性可达1500千克；雌性可达1350千克。<br>
+								寿命 32-40年（野外）。<br>
+								食性 以鱼类为主，也食用无脊椎动物，如蟹、虾、蛤蚌、蠕虫、章鱼、鱿鱼以及其它海洋底栖生物。<br>
+								繁殖 胎生，繁殖季一般在2月末到4月初，妊娠期持续14个月。<br>
+								分布 北极、亚北极水域。<br>
+							</div>
+
+							<div class="div-video" @click="status=true">
+								<img src="../../assets/img/Adetail1.png" alt="图片" v-if="!status">
+								<template v-if="status">
+									<video controls="" autoplay="" name="media">
+										<source src="http://220.164.101.233/6972ABA05563D7189138F285D/03000A17005A6D6FDD431E055EEB3ED1C172E0-9A6B-0F5C-3683-71EB5632A884.mp4?ccode=050F&amp;duration=392&amp;expire=18000&amp;psid=9de947e6e0e2165a511f0bbaaa3a0f24&amp;ups_client_netip=77629cc8&amp;ups_ts=1545639349&amp;ups_userid=&amp;utid=P2yiFEgDlTgCAXdinMiUZGFx&amp;vid=XMzEyMjcxNjAw&amp;vkey=A424309d5ad1aaba3737f078c6d9fdae9&amp;sp=&amp;ali_redirect_domain=ykugc.cp31.ott.cibntv.net&amp;ali_redirect_ex_ftag=95670d958d49197e342f1df4ea06b2766aaef08cf8811e3d&amp;ali_redirect_ex_tmining_ts=1545639355&amp;ali_redirect_ex_tmining_expire=3600&amp;ali_redirect_ex_hot=0"
+										 type="video/mp4"></video>
+								</template>
+							</div>
+						</template>
+
+						<template v-if="type == 3">
+							<div class="title-1">
+								鳍脚类 <span @click="go">返回</span>
+							</div>
+							<div class="title-2">
+								海象<span>中文名 海象 拉丁学名 Odobenus rosmarus（Linnaeus，1758）</span>
+							</div>
+
+							<div class="box-swiper">
+								<swiper :options="swiperOption" ref="mySwiper">
+									<swiper-slide>
+										<img src="../../assets/img/anila6/3.png" alt="">
+									</swiper-slide>
+									<swiper-slide>
+										<img src="../../assets/img/anila6/3.png" alt="">
+									</swiper-slide>
+									<swiper-slide>
+										<img src="../../assets/img/anila6/3.png" alt="">
+									</swiper-slide>
+								</swiper>
+								<div class="swiper-button-prev"></div>
+								<div class="swiper-button-next"></div>
+							</div>
+
+							<div class="span-1">
+								保护现状 《世界自然保护联盟濒危物种红色名录》（The IUCN Red List）易危（VU）
+							</div>
+
+							<div class="span-2">
+								体型 身体呈圆筒形，粗壮而肥胖，雄兽体长3.3-4.5米，体重1200-3000千克，雌兽较小，体长一般为2.9-3.3米，体重600-900千克。<br>
+								寿命 30-40年<br>
+								食性 肉食性<br>
+								繁殖 胎生，雌兽每3年产一胎，妊娠期为11-13个月，每胎只产1仔。<br>
+								分布 环北极圈海域<br>
+							</div>
+
+							<div class="div-video" @click="status=true">
+								<img src="../../assets/img/Adetail1.png" alt="图片" v-if="!status">
+								<template v-if="status">
+									<video controls="" autoplay="" name="media">
+										<source src="http://220.164.101.233/6972ABA05563D7189138F285D/03000A17005A6D6FDD431E055EEB3ED1C172E0-9A6B-0F5C-3683-71EB5632A884.mp4?ccode=050F&amp;duration=392&amp;expire=18000&amp;psid=9de947e6e0e2165a511f0bbaaa3a0f24&amp;ups_client_netip=77629cc8&amp;ups_ts=1545639349&amp;ups_userid=&amp;utid=P2yiFEgDlTgCAXdinMiUZGFx&amp;vid=XMzEyMjcxNjAw&amp;vkey=A424309d5ad1aaba3737f078c6d9fdae9&amp;sp=&amp;ali_redirect_domain=ykugc.cp31.ott.cibntv.net&amp;ali_redirect_ex_ftag=95670d958d49197e342f1df4ea06b2766aaef08cf8811e3d&amp;ali_redirect_ex_tmining_ts=1545639355&amp;ali_redirect_ex_tmining_expire=3600&amp;ali_redirect_ex_hot=0"
+										 type="video/mp4"></video>
+								</template>
+							</div>
+						</template>
+
+						<template v-if="type == 4">
+							<div class="title-1">
+								鳍脚类 <span @click="go">返回</span>
+							</div>
+							<div class="title-2">
+								南美海狮<span>中文名 南美海狮 拉丁学名 Otaria flavescens </span>
+							</div>
+
+							<div class="box-swiper">
+								<swiper :options="swiperOption" ref="mySwiper">
+									<swiper-slide>
+										<img src="../../assets/img/anila6/4.png" alt="">
+									</swiper-slide>
+									<swiper-slide>
+										<img src="../../assets/img/anila6/4.png" alt="">
+									</swiper-slide>
+									<swiper-slide>
+										<img src="../../assets/img/anila6/4.png" alt="">
+									</swiper-slide>
+								</swiper>
+								<div class="swiper-button-prev"></div>
+								<div class="swiper-button-next"></div>
+							</div>
+
+							<div class="span-1">
+								保护现状 《世界自然保护联盟濒危物种红色名录》（The IUCN Red List）无危（LC）
+							</div>
+
+							<div class="span-2">
+								体型 雄性2-2.5米，雌性平均2米。体重雄性200-350千克，雌性140-150千克。<br>
+								寿命 16-20年<br>
+								食性 肉食性<br>
+								繁殖 胎生，8月到12月间为南海狮的交配季节，12月到2月间幼崽出生。<br>
+								分布 南美洲的海岸线和沿海的小岛上<br>
+							</div>
+
+							<div class="div-video" @click="status=true">
+								<img src="../../assets/img/Adetail1.png" alt="图片" v-if="!status">
+								<template v-if="status">
+									<video controls="" autoplay="" name="media">
+										<source src="http://220.164.101.233/6972ABA05563D7189138F285D/03000A17005A6D6FDD431E055EEB3ED1C172E0-9A6B-0F5C-3683-71EB5632A884.mp4?ccode=050F&amp;duration=392&amp;expire=18000&amp;psid=9de947e6e0e2165a511f0bbaaa3a0f24&amp;ups_client_netip=77629cc8&amp;ups_ts=1545639349&amp;ups_userid=&amp;utid=P2yiFEgDlTgCAXdinMiUZGFx&amp;vid=XMzEyMjcxNjAw&amp;vkey=A424309d5ad1aaba3737f078c6d9fdae9&amp;sp=&amp;ali_redirect_domain=ykugc.cp31.ott.cibntv.net&amp;ali_redirect_ex_ftag=95670d958d49197e342f1df4ea06b2766aaef08cf8811e3d&amp;ali_redirect_ex_tmining_ts=1545639355&amp;ali_redirect_ex_tmining_expire=3600&amp;ali_redirect_ex_hot=0"
+										 type="video/mp4"></video>
+								</template>
+							</div>
+						</template>
+
+						<template v-if="type == 5">
+							<div class="title-1">
+								海牛类 <span @click="go">返回</span>
+							</div>
+							<div class="title-2">
+								西非海牛<span>中文名 西非海牛 拉丁学名 Trichechus senegalensis</span>
+							</div>
+
+							<div class="box-swiper">
+								<swiper :options="swiperOption" ref="mySwiper">
+									<swiper-slide>
+										<img src="../../assets/img/anila6/5.png" alt="">
+									</swiper-slide>
+									<swiper-slide>
+										<img src="../../assets/img/anila6/5.png" alt="">
+									</swiper-slide>
+									<swiper-slide>
+										<img src="../../assets/img/anila6/5.png" alt="">
+									</swiper-slide>
+								</swiper>
+								<div class="swiper-button-prev"></div>
+								<div class="swiper-button-next"></div>
+							</div>
+
+							<div class="span-1">
+								保护现状 CITES附录Ⅰ；中国国家二级保护野生动物；列入《世界自然保护联盟》（IUCN）2015年濒危物种红色名录易危物种（UV）。
+							</div>
+
+							<div class="span-2">
+								体型 体型呈纺锤状，背部宽阔无背鳍，头部比例小。体长可达4.5米，体重200-500公斤。<br>
+								寿命 约30年<br>
+								食性 草食性，以多种浮水、半水生与挺水植物以及浅滩植物为食。<br>
+								繁殖 胎生，怀孕期约1年，通常1胎产1仔。<br>
+								分布 非洲西部海岸与河流水域<br>
+							</div>
+
+							<div class="div-video" @click="status=true">
+								<img src="../../assets/img/Adetail1.png" alt="图片" v-if="!status">
+								<template v-if="status">
+									<video controls="" autoplay="" name="media">
+										<source src="http://220.164.101.233/6972ABA05563D7189138F285D/03000A17005A6D6FDD431E055EEB3ED1C172E0-9A6B-0F5C-3683-71EB5632A884.mp4?ccode=050F&amp;duration=392&amp;expire=18000&amp;psid=9de947e6e0e2165a511f0bbaaa3a0f24&amp;ups_client_netip=77629cc8&amp;ups_ts=1545639349&amp;ups_userid=&amp;utid=P2yiFEgDlTgCAXdinMiUZGFx&amp;vid=XMzEyMjcxNjAw&amp;vkey=A424309d5ad1aaba3737f078c6d9fdae9&amp;sp=&amp;ali_redirect_domain=ykugc.cp31.ott.cibntv.net&amp;ali_redirect_ex_ftag=95670d958d49197e342f1df4ea06b2766aaef08cf8811e3d&amp;ali_redirect_ex_tmining_ts=1545639355&amp;ali_redirect_ex_tmining_expire=3600&amp;ali_redirect_ex_hot=0"
+										 type="video/mp4"></video>
+								</template>
+							</div>
+						</template>
 					</div>
 				</div>
 			</div>
@@ -85,7 +271,7 @@
 	export default {
 		data() {
 			return {
-				status:false,
+				status: false,
 				active: 0,
 				actives: 0,
 				swiperOption: { //轮播图配置
@@ -94,7 +280,8 @@
 						nextEl: ".swiper-button-next",
 						prevEl: ".swiper-button-prev"
 					},
-				}
+				},
+				type: this.$route.params.id
 			}
 		},
 		components: {
@@ -109,7 +296,7 @@
 
 		},
 		methods: {
-			go(){//返回
+			go() { //返回
 				this.$router.push({
 					path: '/animal',
 					query: {
@@ -136,6 +323,7 @@
 				rgba(15, 107, 234, 1),
 				rgba(52, 142, 240, 1));
 			box-shadow: 0px 5px 9px 1px rgba(0, 0, 0, 0.35);
+			position: relative;
 
 			.location {
 				//   height: 22px;
@@ -319,13 +507,14 @@
 						color: #666666;
 						margin-bottom: 50px;
 					}
-					
-					.div-video{
+
+					.div-video {
 						width: 778px;
 						height: 435px;
 						overflow: hidden;
 						cursor: pointer;
-						video{
+
+						video {
 							width: 100%;
 							height: 100%;
 						}
@@ -358,6 +547,12 @@
 
 		.swiper-button-next {
 			right: 20px;
+		}
+		.swiper-slide {
+			img{
+				width: 100%;
+				height: 100%;
+			}
 		}
 	}
 </style>

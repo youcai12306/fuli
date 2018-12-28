@@ -1,28 +1,6 @@
 <!--  -->
 <template>
 	<div class="order-detail">
-		<div class="nav">
-			<ul class="nav-content clearDiv">
-				<li class="floatLeft">您好，欢迎登录富力海洋欢乐世界度假区！
-					<router-link to="/">[返回首页]</router-link>
-				</li>
-				<li class="floatRight">
-					<span class="phone-img"></span>客服电话400-xxxx-xxx
-				</li>
-				<li class="floatRight phon-type">手机版</li>
-			</ul>
-		</div>
-		<div class="nav2">
-			<ul class="nav-logo clearDiv">
-				<li class="floatLeft">
-					<img src="../../../assets/img/logo.png" alt>
-				</li>
-				<li class="mine-center floatLeft">会员中心</li>
-				<li class="mine-login floatRight">
-					<span></span>退出登录
-				</li>
-			</ul>
-		</div>
 		<div class="box">
 			<div class="content">
 				<div class="one">
@@ -106,19 +84,19 @@
 					<table class="four-table" cellspacing="0" cellpadding="0">
 						<tr class="title">
 							<td class="td-1">游玩人信息</td>
-							<td class="td-2">收件人信息</td>
+							<td class="td-2" v-if="data.receiveId">收件人信息</td>
 						</tr>
 						<tr>
-							<td class="td-1">姓名：</td>
-							<td class="td-2">姓名：</td>
+							<td class="td-1">姓名：{{data.receiveName}}</td>
+							<td class="td-2" v-if="data.receiveId">姓名：{{item.receivePersonName||'-'}}</td>
 						</tr>
 						<tr>
-							<td class="td-1">电话：</td>
-							<td class="td-2">电话</td>
+							<td class="td-1">电话：{{data.receiveMobile}}</td>
+							<td class="td-2" v-if="data.receiveId">电话：{{item.receivePersonMobile||'-'}}</td>
 						</tr>
 						<tr>
-							<td class="td-1 td-bottom">身份证：</td>
-							<td class="td-2 td-bottom">地址：</td>
+							<td class="td-1 td-bottom">身份证：{{data.receiveIdentityCode}}</td>
+							<td class="td-2 td-bottom" v-if="data.receiveId">地址：{{item.receiveProvince||'-'}}{{item.receiveCity||'-'}}{{item.receiveArea||'-'}}{{item.receiveAddress}}</td>
 						</tr>
 					</table>
 				</div>
@@ -182,9 +160,10 @@
 				type: 0,
 				orderId: this.$route.params.id,
 				id: this.$store.getters.getUserData.userId,
-				status:this.$route.params.status,
+				status: this.$route.params.status,
 				data: [],
-				list: []
+				list: [],
+				item: []
 			};
 		},
 
@@ -213,13 +192,15 @@
 					}
 				}
 				console.log(data);
-				
+
 				this.$post(`http://192.168.2.61:5041/order-aggregate/findOrderDetail?pageNum=1&pageSize=10`,
 					data).then(res => {
 					if (res.code === 200) {
 						this.data = res.data.list[0];
 						this.list = res.data.list[0].orderDetailDTOList || [];
-						console.log(this.list)
+						if (this.data.receiveId) {
+							this.GetAdder();
+						}
 					} else {
 						console.log(res.message);
 					}
@@ -258,6 +239,24 @@
 				}).catch(() => {
 
 				});
+			},
+			GetAdder() { //收件人信息
+				let id = this.data.receiveId;
+				let data = {
+					receiveId:id
+				}
+				console.log(id)
+				this.$fetch("http://192.168.2.50:5010/tourist-aggregate/address/selectReceiveAddressById",data).then(res => {
+					if (res.code == 200) {
+						if(res.data){
+							this.item = res.data;
+						}
+					} else {
+						console.log(res.message);
+					}
+				}).catch(error => {
+					console.log(error)
+				})
 			}
 		},
 		mounted() {
@@ -314,6 +313,7 @@
 			color: rgba(255, 255, 255, 1);
 			background: url(../../../assets/img/mine-nav.png) no-repeat 0 0;
 			background-size: 100% 100%;
+
 
 			.nav-content {
 				width: 1200px;
@@ -391,6 +391,7 @@
 			height: 100%;
 			background: #084c99 url(../../../assets/img/mine-bg.png) no-repeat;
 			font-weight: 400;
+			padding-top: 20px;
 
 			.content {
 				width: 1200px;

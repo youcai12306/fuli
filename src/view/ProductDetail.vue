@@ -62,10 +62,12 @@
                 :min="1"
                 :max="10"
                 label="描述文字"
+                :precision="0"
+                :step="1"
                 class="num-change"
               ></el-input-number>
             </div>
-            <p class="tip">注：一个手机号最多可购买{{product.commitCount}}张票</p>
+            <!-- <p class="tip">注：一个手机号最多可购买{{product.commitCount}}张票</p> -->
             <div class="pay pay-type">
               <span>配送方式：</span>
               <button
@@ -341,6 +343,9 @@ export default {
       font-weight: 400;
       color: rgba(102, 102, 102, 1);
       margin-bottom: 38px;
+      .floatLeft{
+        cursor: pointer;
+      }
       .shopping-car {
         height: 23px;
         line-height: 23px;

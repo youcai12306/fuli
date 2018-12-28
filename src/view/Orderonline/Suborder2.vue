@@ -1,6 +1,6 @@
 <template>
   <div class="suborder">
-    <Header1></Header1>
+    <Header></Header>
     <div class="su1">
 
       <!-- 订单详情 -->
@@ -45,7 +45,7 @@
                  <!-- <tr v-for="item in list2" :key="item"> -->
                 <td>{{productname}}
                   <p>游玩时间：{{playtime}}</p>
-                  <p>{{canDebook(saleType)}}</p>
+                  <!-- <p>{{canDebook(saleType)}}</p> -->
                 </td>
                 <td>¥{{price1}}元</td>
                 <td>×{{count}}</td>
@@ -198,10 +198,10 @@
 </template>
 
 <script>
-import Header1 from "../../components/Header1";
+import Header from "../../components/Header";
 export default {
   components: {
-    Header1
+    Header
   },
   data() {
     return {

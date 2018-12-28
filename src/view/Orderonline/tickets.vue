@@ -281,6 +281,7 @@ export default {
         float: left;
         margin-right: 6px;
         margin-bottom: 60px;
+        cursor: pointer;
         .pp {
           height: 254px;
           img {

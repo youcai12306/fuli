@@ -358,7 +358,7 @@
 					</div>
 
 					<!-- 宾客服务 -->
-					<div class="box5" v-if="actives == 5">
+					<div class="box5" v-if="actives == 5" style="background:#fff url();">
 						<div class="botton" style="margin-bottom: 40px;">宾客服务</div>
 						<div class="box5-title" v-if="status">
 							为了大家的安全着想，我们会依据天气情况开放或关闭部分设施。

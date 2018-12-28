@@ -71,7 +71,9 @@ const ShoppingAdress = r => require.ensure([], () => r(require('@/view/Mine/Shop
 const MyMessage = r => require.ensure([], () => r(require('@/view/Mine/MyMessage')), 'MyMessage')
 // 个人中心-消息详情
 const MessageDetail = r => require.ensure([], () => r(require('@/view/Mine/MessageDetail')), 'MessageDetail')
-
+// 个人中心-反馈
+const Feedback = r => require.ensure([], () => r(require('@/view/Mine/Feedback')), 'Feedback')
+const FeedbackDetail = r => require.ensure([], () => r(require('@/view/Mine/FeedbackDetail')), 'FeedbackDetail')
 
 Vue.use(Router)
 
@@ -334,6 +336,24 @@ let router = new Router({
 					path: '/membership',
 					name: 'Membership',
 					component: Membership, //个人资料
+					meta: {
+						nav: 3,
+						requireAuth: true
+					}
+				},
+				{
+					path: '/Feedback',
+					name: 'Feedback',
+					component: Feedback, //反馈
+					meta: {
+						nav: 3,
+						requireAuth: true
+					}
+				},
+				{
+					path: '/FeedbackDetail',
+					name: 'FeedbackDetail',
+					component: FeedbackDetail, //反馈详情
 					meta: {
 						nav: 3,
 						requireAuth: true

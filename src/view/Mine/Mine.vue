@@ -85,6 +85,10 @@
                 :index="`/MyMessage`"
                 :class="{'is_active' : $route.path=='/MyMessage'}"
               >消息管理</el-menu-item>
+			  <el-menu-item
+			    :index="`/Feedback`"
+			    :class="{'is_active' : $route.path=='/Feedback'}"
+			  >反馈意见</el-menu-item>
               <!-- <el-menu-item
                 :index="`/ChangePwd`"
                 :class="{'is_active' : $route.path=='/ChangePwd'}"

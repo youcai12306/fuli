@@ -68,7 +68,8 @@
 									</div>
 									<div class="lookOrder floatRight" @click.stop="jumpDetail(item.orderId)">查看订单</div>
 									<div class="cancelOrder floatRight" @click.stop="delOrder(item.orderId)" v-if="tabs == 0">取消订单</div>
-									<div class="pay floatRight" @click.stop="pay(item.orderId,item.payTotalCash)" v-if="tabs == 1">立即支付</div>
+									<div class="pay floatRight" @click.stop="pay(item.orderId,item.payTotalCash)" v-if="tabs == 0">立即支付</div>
+									<div class="pay floatRight" @click.stop="pay2(item.orderId,item.payTotalCash)" v-if="tabs == 1">立即支付</div>
 								</div>
 							</div>
 						</template>
@@ -162,6 +163,19 @@
 								}
 							});
 						}, 3000);
+					}else{
+						this.$message.error(res.message)
+					}
+				}).catch(error => {
+					this.$message.error(error.response.data.message)
+				});
+			},
+			pay2(id,price) {//待支付直接去支付页面
+				this.$router.push({
+					path: "./success",
+					query: {
+						orderId: id,
+						price2: price
 					}
 				});
 			},
@@ -202,7 +216,7 @@
 					this.list = [];
 					this.count = 0;
 					this.loading = false;
-					console.log(error)
+					this.$message.error(error.response.data.message)
 				})
 			},
 			handleCurrentChange(val) { //分页
@@ -226,7 +240,7 @@
 							console.log(res.message);
 						}
 					}).catch(error => {
-						console.log(error)
+						this.$message.error(error.response.data.message)
 					})
 				}).catch(() => {
 
@@ -267,7 +281,7 @@
 							});
 						}
 					}).catch(error => {
-						console.log(error)
+						this.$message.error(error.response.data.message)
 					})
 
 				}).catch(() => {

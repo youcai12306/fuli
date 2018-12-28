@@ -102,11 +102,11 @@
 				</div>
 				<div class="five">
 					<div class="title clearDiv">
-						<div :class="{active:type === 0}" @click="changeType(0)">支付信息</div>
-						<div :class="{active:type === 1}" @click="changeType(1)">退订信息</div>
+						<div :class="{active:type === 0}" @click="changeType(0)" v-if="item2.length>0">支付信息</div>
+						<div :class="{active:type === 1}" @click="changeType(1)" v-if="data.status == 6">退订信息</div>
 					</div>
 					<div>
-						<table cellspacing="0" cellpadding="0" class="five-table" v-show="type === 0">
+						<table cellspacing="0" cellpadding="0" class="five-table" v-show="type === 0" v-if="item2.length>0">
 							<tr class="titles">
 								<td class="td-1">序号</td>
 								<td class="td-2">子单编码</td>
@@ -115,13 +115,13 @@
 								<td class="td-5">操作</td>
 								<td class="td-6">支付时间</td>
 							</tr>
-							<tr class="bodys">
-								<td class="td-1">1</td>
-								<td class="td-2">A</td>
-								<td class="td-3">{{data.orderTotalCash}}</td>
-								<td class="td-4">支付宝</td>
+							<tr class="bodys" v-for="(item,index) in item2">
+								<td class="td-1">{{index+1}}</td>
+								<td class="td-2">{{item.ordersubid}}</td>
+								<td class="td-3">{{item.paycash}}</td>
+								<td class="td-4">{{item.paycannel}}</td>
 								<td class="td-5">支付</td>
-								<td class="td-6">2018/12/05 14:30:00</td>
+								<td class="td-6">{{item.createtime}}</td>
 							</tr>
 							<tr>
 								<td class="td-1 td-bottom" colspan="2">合计</td>
@@ -163,7 +163,8 @@
 				status: this.$route.params.status,
 				data: [],
 				list: [],
-				item: []
+				item: [],
+				item2:[]
 			};
 		},
 
@@ -201,6 +202,7 @@
 						if (this.data.receiveId) {
 							this.GetAdder();
 						}
+						this.GetfindPayMentreByOrderId();
 					} else {
 						console.log(res.message);
 					}
@@ -250,6 +252,22 @@
 					if (res.code == 200) {
 						if(res.data){
 							this.item = res.data;
+						}
+					} else {
+						console.log(res.message);
+					}
+				}).catch(error => {
+					console.log(error)
+				})
+			},
+			GetfindPayMentreByOrderId(){//根据订单id查询订单流水
+				let data = {
+					orderSubId: this.orderId
+				}
+				this.$fetch("http://jwxra.natapp1.cc/payment-aggregate/findPayMentreByOrderId",data).then(res => {
+					if (res.code == 200) {
+						if(res.data){
+							this.item2 = res.data;
 						}
 					} else {
 						console.log(res.message);
@@ -667,10 +685,11 @@
 
 						.td-2 {
 							width: 150px;
+							padding: 0 10px;
 						}
 
 						.td-3 {
-							width: 150px;
+							width: 100px;
 						}
 
 						.td-4 {

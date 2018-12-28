@@ -4,7 +4,7 @@
     <div class="banner">
       <div class="banner-imgs">
         <img src="../assets/img/index-banner1.png" alt v-show="0 === index">
-        <img src="../assets/img/index-banner1.png" alt v-show="1 === index">
+        <img src="../assets/img/img102.png" alt v-show="1 === index">
         <img src="../assets/img/index-banner1.png" alt v-show="2 === index">
         <img src="../assets/img/index-banner1.png" alt v-show="3 === index">
         <img src="../assets/img/index-banner1.png" alt v-show="4 === index">
@@ -58,7 +58,7 @@
               </swiper-slide>
               <swiper-slide>
                 <img
-                  src="../assets/img/index-img13.png"
+                  src="../assets/img/img101.png"
                   alt
                   :class="{imgActive:index === 1}"
                   @click.stop="jumpImg(1)"
@@ -240,7 +240,8 @@
     </div>
     <div class="juedui">
       <img src="../assets/img/index-juedui-phone.png" alt>
-      <p>电话</p>
+      <p>客服电话</p>
+      <p style="margin-top:10px">400-xxxxxx</p>
       <img src="../assets/img/index-juedui-code.png" alt>
       <p>服务号</p>
       <img src="../assets/img/index-juedui-code.png" alt>
@@ -441,13 +442,21 @@ export default {
 .main {
   width: 100%;
   .banner {
-    height: 864px;
+    // height: 864px;
+    padding-top: 45%;
     position: relative;
+    overflow: hidden;
+    height: 0;
     .banner-imgs {
       position: absolute;
+      left: 0;
+      top:0;
+      height: 100%;
+      width: 100%;
       z-index: -1;
       img {
-        height: 864px;
+        // height: 864px;
+        height: 100%;
         width: 100%;
       }
     }

@@ -2,9 +2,9 @@
   <div class="animalTheme">
      <!-- 头部 -->
     <Header></Header>
-    <div class="box">
+    <div class="box" v-if="id == 0">
       <div class="top clearDiv">
-        <h3 class="floatLeft">海豚纪念商店</h3>
+        <h3 class="floatLeft">阳光回忆</h3>
         <div class="floatRight clearDiv" @click="back()">
           <img src="../../assets/img/theme-back.png" alt>
           <span>返回</span>
@@ -26,13 +26,43 @@
             <div class="swiper-pagination" slot="pagination"></div>
           </swiper>
         </div>
-        <div class="right floatRight">
+        <!-- <div class="right floatRight">
           <h3>售卖商品</h3>
           <p>纪念品/卡通玩具/衣服帽子周边</p>
+        </div> -->
+      </div>
+      <div class="content">想在水的世界尽情嬉戏？那让我们先补齐装备吧！这里会有各式各样的水上用品补给</div>
+    </div>
+    <div class="box">
+      <div class="top clearDiv">
+        <h3 class="floatLeft">木马奇珍坊</h3>
+        <div class="floatRight clearDiv" @click="back()">
+          <img src="../../assets/img/theme-back.png" alt>
+          <span>返回</span>
         </div>
       </div>
-      <div class="content">「海豚岛」是海豚的家，您可以穿梭于岛上的茅草屋栈道，欣赏海豚的美妙泳姿。如果想近距离观赏海豚，更可顺着楼梯往下走到玻璃前观看。活泼的海豚已适应这里的环境，更会不时表演拿手的连滚翻呢！
- 国家一级保护动物，素有“水上大熊猫”之称，拥有天赐的粉红色皮肤，与生俱来的上扬嘴角，一个浅浅的微笑就能萌化你的心，它们又是驰聘于海洋的精灵，喜爱在海中追波逐浪，追逐一个勇敢而智慧的白海豚传说。国家一级保护动物，素有“水上大熊猫”之称，拥有天赐的粉红色皮肤，与生俱来的上扬嘴角，一个浅浅的微笑就能萌化你的心，它们又是驰聘于海洋的精灵，喜爱在海中追波逐浪，追逐一个勇敢而智慧的白海豚传说。</div>
+      <div class="img-box clearDiv">
+        <div class="left floatLeft">
+          <swiper :options="swiperOption" ref="mySwiper">
+            <!-- slides -->
+            <swiper-slide>
+              <img src="../../assets/img/theme-shop-img2.png" alt>
+            </swiper-slide>
+            <swiper-slide>
+              <img src="../../assets/img/theme-shop-img2.png" alt>
+            </swiper-slide>
+            <swiper-slide>
+              <img src="../../assets/img/theme-shop-img2.png" alt>
+            </swiper-slide>
+            <div class="swiper-pagination" slot="pagination"></div>
+          </swiper>
+        </div>
+        <!-- <div class="right floatRight">
+          <h3>售卖商品</h3>
+          <p>纪念品/卡通玩具/衣服帽子周边</p>
+        </div> -->
+      </div>
+      <div class="content">集结了与海洋息息相关的纪念品，包括海豚、海龟、海狮等各种造型玩偶。让海洋朋友时刻伴您身边，这里你定能找到心水之选！</div>
     </div>
   </div>
 </template>
@@ -56,7 +86,8 @@ export default {
           el: ".swiper-pagination",
           clickable: true
         }
-      }
+      },
+      id:0
     };
   },
   components: {
@@ -68,6 +99,9 @@ export default {
     back(){
       this.$router.go(-1)
     }
+  },
+  mounted(){
+    this.id = this.$route.query.id;
   }
 };
 </script>
@@ -121,7 +155,7 @@ export default {
     .img-box {
       margin-top: 44px;
       .left {
-        width: 670px;
+        width: 100%;
         height: 400px;
         overflow: hidden;
         img {
@@ -159,6 +193,7 @@ export default {
       color: rgba(51, 51, 51, 1);
       line-height: 28px;
       padding: 40px 10px 0 10px;
+      text-indent: 20px;
     }
   }
 }

@@ -237,7 +237,7 @@ export default {
     //判断邮编
     checkCode() {
       if (!/^\d{6}$/.test(this.code)) {
-        this.codeTip = "请输入正确的验证码";
+        this.codeTip = "请输入正确的邮政编码";
         this.isOk1 = false;
       } else {
         this.codeTip = "";

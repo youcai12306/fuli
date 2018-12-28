@@ -324,10 +324,110 @@
 									<b>铁路路线：</b>海口开往陵水的动车共有22趟次，到达陵水站后，可搭乘91路公交车，在海洋公园站下车即可<br />
 									<b>长途客车路线：</b>海口开往陵水的长途客车共有25趟次，到达陵水车站后，可选择：<br /><br />
 									（1）搭乘91路公交车，汽车站站点上车，海洋公园站点下车即可。<br /><br />
-									（2）搭乘92路公交车，步行至椰林中心农贸市场站上车，海洋公园站下车。
+									（2）搭乘92路公交车，步行至椰林中心农贸市场站上车，海洋公园站下车。<br />
 								</div>
 							</div>
-
+							
+							<div class="tr">
+								<div class="l1 floatLeft">
+									<p>琼海</p>
+								</div>
+								<div class="l1 floatLeft">
+									<p>自驾<br /><br /><img src="../../assets/img/ditu4.png" alt=""></p>
+								</div>
+								<div class="l2 floatLeft">
+									<b>路线1：</b>由琼海市区驶入海南环线高速，向南行驶进入陵水，沿陵水文黎大道行驶即可。总行程125.3公里。<br /><br />
+									<b>路线2：</b>由琼海市区驶入海榆（东）线，向南行驶进入陵水，沿陵水文黎大道行驶即可。总行程141.6公里。
+								</div>
+								<div class="l1 floatLeft">
+									<p>公共交通<br /><br /><img src="../../assets/img/ditu5.png" alt=""></p>
+								</div>
+								<div class="l2 floatLeft">
+									<b>铁路路线：</b>琼海开往陵水的动车共有21趟次，到达陵水站后，可搭乘91路公交车，在海洋公园站下车即可。<br />
+									<b>长途客车路线：</b>琼海开往陵水的长途客车共有15趟次，到达陵水路口后，可选择：<br /><br />
+									（1）步行至文化广场，搭乘8路公交车，县中医院站下车。转乘91路公交车，海洋公园站下车。<br /><br />
+									（2）步行至文化广场，搭乘80路公交车，北斗派出所站下车。转乘91路公交车，海洋公园站下车。<br /><br />
+									（3）步行至文化广场，搭乘9路公交车，汽车站站点下车。转乘91路公交车，海洋公园站下车。<br /><br />
+									（4）步行至文化广场，搭乘9路公交车，华北村站下车。转乘92路公交车，海洋公园站下车。<br /><br />
+									（5）步行至文化广场，搭乘8路公交车，县中医院站下车。转乘91路公交车，海洋公园站下车。<br /><br />
+									（6）步行至海韵广场站，搭乘90路公交车，海风小镇站下车。（全程需步行2.6公里）<br /><br />
+								</div>
+							</div>
+							
+							<div class="tr">
+								<div class="l1 floatLeft">
+									<p>文昌</p>
+								</div>
+								<div class="l1 floatLeft">
+									<p>自驾<br /><br /><img src="../../assets/img/ditu4.png" alt=""></p>
+								</div>
+								<div class="l2 floatLeft">
+									<b>路线1：</b>从文昌市区出发，进入省道S201，沿S201驶入海南环线高速，进入陵水。沿陵水文黎大道行驶即可。全程181公里。<br /><br />
+									<b>路线2：</b>从文昌市区出发，进入省道S201，沿S201驶入海榆（东）线，进入陵水。沿陵水文黎大道行驶即可。全程196.7公里。
+								</div>
+								<div class="l1 floatLeft">
+									<p>公共交通<br /><br /><img src="../../assets/img/ditu5.png" alt=""></p>
+								</div>
+								<div class="l2 floatLeft">
+									<b>铁路路线：</b>文昌开往陵水的动车共有17趟次，到达陵水站后，可搭乘91路公交车，在海洋公园站下车即可。<br />
+									<b>长途客车路线：</b>文昌开往陵水的长途客车共有5趟次，到达陵水路口后，可选择：<br /><br />
+									（1）步行至文化广场，搭乘8路公交车，县中医院站下车。转乘91路公交车，海洋公园站下车。<br /><br />
+									（2）步行至文化广场，搭乘80路公交车，北斗派出所站下车。转乘91路公交车，海洋公园站下车。<br /><br />
+									（3）步行至文化广场，搭乘9路公交车，汽车站站点下车。转乘91路公交车，海洋公园站下车。<br /><br />
+									（4）步行至文化广场，搭乘9路公交车，华北村站下车。转乘92路公交车，海洋公园站下车。<br /><br />
+									（5）步行至文化广场，搭乘8路公交车，县中医院站下车。转乘91路公交车，海洋公园站下车。<br /><br />
+									（6）步行至海韵广场站，搭乘90路公交车，海风小镇站下车。（全程需步行2.6公里）<br /><br />
+								</div>
+							</div>
+							
+							<div class="tr">
+								<div class="l1 floatLeft">
+									<p>五指山市</p>
+								</div>
+								<div class="l1 floatLeft">
+									<p>自驾<br /><br /><img src="../../assets/img/ditu4.png" alt=""></p>
+								</div>
+								<div class="l2 floatLeft">
+									<b>路线：</b>从五指山市区出发，进入海榆（中）线，后驶入海南环线高速进入陵水，沿陵水文黎大道行驶即可。全程107.5公里。<br /><br />
+								</div>
+								<div class="l1 floatLeft">
+									<p>公共交通<br /><br /><img src="../../assets/img/ditu5.png" alt=""></p>
+								</div>
+								<div class="l2 floatLeft">
+									<b>无铁路路线。</b><br />
+									<b>长途客车路线：</b>从五指山开往陵水的长途客车共有26趟次，其中开往陵水路口24趟次，陵水车站2趟次。<br /><b>到达陵水路口后，可选择：</b><br /><br />
+									（1）步行至文化广场，搭乘8路公交车，县中医院站下车。转乘91路公交车，海洋公园站下车。<br /><br />
+									（2）步行至文化广场，搭乘80路公交车，北斗派出所站下车。转乘91路公交车，海洋公园站下车。<br /><br />
+									（3）步行至文化广场，搭乘9路公交车，汽车站站点下车。转乘91路公交车，海洋公园站下车。<br /><br />
+									（4）步行至文化广场，搭乘9路公交车，华北村站下车。转乘92路公交车，海洋公园站下车。<br /><br />
+									（5）步行至文化广场，搭乘8路公交车，县中医院站下车。转乘91路公交车，海洋公园站下车。<br /><br />
+									（6）步行至海韵广场站，搭乘90路公交车，海风小镇站下车。（全程需步行2.6公里）<br /><br />
+									<b>到达陵水车站后，可选择：</b><br>
+									（1）搭乘91路公交车，汽车站站点上车，海洋公园站点下车即可。<br /><br />
+									（2）搭乘92路公交车，步行至椰林中心农贸市场站上车，海洋公园站下车。<br /><br />
+								</div>
+							</div>
+							
+							<div class="tr">
+								<div class="l1 floatLeft">
+									<p>儋州</p>
+								</div>
+								<div class="l1 floatLeft">
+									<p>自驾<br /><br /><img src="../../assets/img/ditu4.png" alt=""></p>
+								</div>
+								<div class="l2 floatLeft">
+									<b>路线：</b>从儋州市区出发，进入省道S307，后经由海榆（中）线进入省道S304，由省道S304驶入海榆（东）线，进入陵水，沿陵水文黎大道行驶即可。全程202公里。
+								</div>
+								<div class="l1 floatLeft">
+									<p>公共交通<br /><br /><img src="../../assets/img/ditu5.png" alt=""></p>
+								</div>
+								<div class="l2 floatLeft">
+									<b>无铁路路线。</b><br />
+									<b>长途客车路线：</b>从儋州开往陵水的长途客车共有2趟次，到达陵水车站后，可选择：<br /><br />
+									（1）搭乘91路公交车，汽车站站点上车，海洋公园站点下车即可。<br /><br />
+									（2）搭乘92路公交车，步行至椰林中心农贸市场站上车，海洋公园站下车。<br /><br />
+								</div>
+							</div>
 						</div>
 					</div>
 
@@ -358,7 +458,7 @@
 					</div>
 
 					<!-- 宾客服务 -->
-					<div class="box5" v-if="actives == 5">
+					<div class="box5" v-if="actives == 5" style="background:#fff url();">
 						<div class="botton" style="margin-bottom: 40px;">宾客服务</div>
 						<div class="box5-title" v-if="status">
 							为了大家的安全着想，我们会依据天气情况开放或关闭部分设施。
@@ -1133,6 +1233,27 @@
 
 								&:nth-of-type(5) {
 									height: 228px;
+									overflow-y: auto;
+									&::-webkit-scrollbar {
+										/*滚动条整体样式*/
+										width: 10px;
+										/*高宽分别对应横竖滚动条的尺寸*/
+										height: 1px;
+									}
+									
+									&::-webkit-scrollbar-thumb {
+										/*滚动条里面小方块*/
+										border-radius: 10px;
+										background-color: #F90;
+										background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent);
+									}
+									
+									&::-webkit-scrollbar-track {
+										/*滚动条里面轨道*/
+										-webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+										/* border-radius: 10px; */
+										background: #EDEDED;
+									}
 								}
 							}
 

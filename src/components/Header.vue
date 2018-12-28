@@ -165,7 +165,7 @@
                   <a href="javascript:;" class="exit" @click.stop="setSignOuts">退出</a>
                 </div>
                 <div class="clearDiv info-two">
-                  <img src="../assets/img/mine-icon.png" alt class="floatLeft">
+                  <img src="../assets/img/touxiang123.png" alt class="floatLeft">
                   <div class="floatLeft">
                     <p>{{$store.getters.userInfo.mobile}}</p>
                     <p>我的等级：2</p>
@@ -379,7 +379,8 @@ export default {
             position: absolute;
             width: 189px;
             height: 99px;
-            background: rgba(248, 248, 248, 1);
+            // background: rgba(248, 248, 248, 1);
+            background: #ffffff;
             border: 1px solid rgba(231, 229, 229, 1);
             z-index: 11;
             top: 22px;

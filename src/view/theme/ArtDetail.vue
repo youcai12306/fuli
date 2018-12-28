@@ -96,6 +96,7 @@ export default {
         color: rgba(52, 149, 242, 1);
       }
       div {
+				cursor: pointer;
         width: 113px;
         height: 46px;
         line-height: 46px;

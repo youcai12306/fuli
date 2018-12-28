@@ -9,67 +9,35 @@
           <swiper :options="swiperOption" ref="mySwiper">
             <!-- slides -->
             <swiper-slide>
-              <img
-                src="../../assets/img/theme-banner-list1.png"
-                alt 
-                @click.stop="jumpImg(0)"
-              >
+              <img src="../../assets/img/theme-banner-list1.png" alt @click.stop="jumpImg(0)">
               <p :class="{imgActive:index === 0}">双神战车</p>
             </swiper-slide>
             <swiper-slide>
-              <img
-                src="../../assets/img/theme-banner-list2.png"
-                alt   
-                @click.stop="jumpImg(1)"
-              >
+              <img src="../../assets/img/theme-banner-list2.png" alt @click.stop="jumpImg(1)">
               <p :class="{imgActive:index === 1}">双神战车</p>
             </swiper-slide>
             <swiper-slide>
-              <img
-                src="../../assets/img/theme-banner-list3.png"
-                alt
-                @click.stop="jumpImg(2)"
-              >
+              <img src="../../assets/img/theme-banner-list3.png" alt @click.stop="jumpImg(2)">
               <p :class="{imgActive:index === 2}">双神战车</p>
             </swiper-slide>
             <swiper-slide>
-              <img
-                src="../../assets/img/theme-banner-list4.png"
-                alt
-                @click.stop="jumpImg(3)"
-              >
-              <p  :class="{imgActive:index === 3}">双神战车</p>
+              <img src="../../assets/img/theme-banner-list4.png" alt @click.stop="jumpImg(3)">
+              <p :class="{imgActive:index === 3}">双神战车</p>
             </swiper-slide>
             <swiper-slide>
-              <img
-                src="../../assets/img/theme-banner-list5.png"
-                alt
-                @click.stop="jumpImg(4)"
-              >
+              <img src="../../assets/img/theme-banner-list5.png" alt @click.stop="jumpImg(4)">
               <p :class="{imgActive:index === 4}">双神战车</p>
             </swiper-slide>
             <swiper-slide>
-              <img
-                src="../../assets/img/theme-banner-list6.png"
-                alt
-                @click.stop="jumpImg(5)"
-              >
+              <img src="../../assets/img/theme-banner-list6.png" alt @click.stop="jumpImg(5)">
               <p :class="{imgActive:index === 5}">双神战车</p>
             </swiper-slide>
             <swiper-slide>
-              <img
-                src="../../assets/img/theme-banner-list1.png"
-                alt
-                @click.stop="jumpImg(6)"
-              >
+              <img src="../../assets/img/theme-banner-list1.png" alt @click.stop="jumpImg(6)">
               <p :class="{imgActive:index === 6}">双神战车</p>
             </swiper-slide>
             <swiper-slide>
-              <img
-                src="../../assets/img/theme-banner-list2.png"
-                alt
-                @click.stop="jumpImg(7)"
-              >
+              <img src="../../assets/img/theme-banner-list2.png" alt @click.stop="jumpImg(7)">
               <p :class="{imgActive:index === 7}">双神战车</p>
             </swiper-slide>
             <!-- Optional controls -->
@@ -214,10 +182,12 @@
       <li @click="jumpColumn('#eat')">特色餐厅</li>
     </ul>
     <div class="alert" v-show="alertShow">
-      <img src="../../assets/img/theme-quxiao.png" alt class="x" @click="showYuanQu()">
-      <h3>麦迪卡斯水乐园</h3>
-      <img src="../../assets/img/theme-alert.png" alt class="img">
-      <p>四季全时运营的水乐园，在古希腊神话与现代爱琴海风格一秒切换，无与伦比的海洋冒险世界将生动展示，挑战吧，勇者！燃烧吧，肾上腺！高刺激滑道、高空大喇叭、极限竞速滑道、疯狂巨碗等等，20余套戏水滑道，足够让戏水爱好者为之疯狂。区内还配置有主题餐厅、特色商店及各类功能齐全的游客服务设施，满足游客更多需求。</p>
+      <div class="alert-box">
+        <img src="../../assets/img/theme-quxiao.png" alt class="x" @click="showYuanQu()">
+        <h3>麦迪卡斯水乐园</h3>
+        <img src="../../assets/img/theme-alert.png" alt class="img">
+        <p>四季全时运营的水乐园，在古希腊神话与现代爱琴海风格一秒切换，无与伦比的海洋冒险世界将生动展示，挑战吧，勇者！燃烧吧，肾上腺！高刺激滑道、高空大喇叭、极限竞速滑道、疯狂巨碗等等，20余套戏水滑道，足够让戏水爱好者为之疯狂。区内还配置有主题餐厅、特色商店及各类功能齐全的游客服务设施，满足游客更多需求。</p>
+      </div>
     </div>
   </div>
 </template>
@@ -232,16 +202,6 @@ export default {
     return {
       alertShow: false,
       newSwiperIndex: 0,
-      options: [
-        {
-          value: "选项1",
-          label: "黄金糕"
-        },
-        {
-          value: "选项2",
-          label: "双皮奶"
-        }
-      ],
       value: "购票",
       date: "2018-12-12",
       swiperOption: {
@@ -418,7 +378,7 @@ export default {
     },
     //跳转到指定位置
     jumpColumn(col) {
-			this.alertShow = false;
+      this.alertShow = false;
       let top = document.querySelector(col).offsetTop;
       window.scroll(0, top);
     }
@@ -504,9 +464,10 @@ export default {
           margin: 0 auto;
           font-size: 12px;
           color: rgba(255, 255, 255, 1);
+          cursor: pointer;
         }
         .imgActive {
-          height:78px;
+          height: 78px;
           line-height: 78px;
         }
 
@@ -943,42 +904,50 @@ export default {
 .alert {
   position: fixed;
   z-index: 999;
-  top: 50%;
-  left: 50%;
-  margin-top: -265px;
-  margin-left: -395px;
-  width: 790px;
-  height: 530px;
-  background: rgba(255, 255, 255, 1);
-  padding: 0 45px;
-  h3 {
-    line-height: 24px;
-    font-size: 24px;
-    font-family: MicrosoftYaHei-Bold;
-    font-weight: bold;
-    color: rgba(52, 149, 242, 1);
-    border-bottom: 1px solid rgba(202, 202, 202, 1);
-    padding-bottom: 23px;
-    padding-top: 31px;
-  }
-  .img {
-    width: 697px;
-    height: 220px;
-    margin-top: 5px;
-    margin-bottom: 45px;
-  }
-  p {
-    font-size: 14px;
-    font-weight: 400;
-    color: rgba(51, 51, 51, 1);
-    line-height: 28px;
-  }
-  .x {
-    width: 35px;
-    height: 36px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  .alert-box {
     position: absolute;
-    right: -50px;
-    top: -25px;
+    top: 50%;
+    left: 50%;
+    margin-top: -265px;
+    margin-left: -395px;
+    width: 790px;
+    height: 530px;
+    background: rgba(255, 255, 255, 1);
+    padding: 0 45px;
+    h3 {
+      line-height: 24px;
+      font-size: 24px;
+      font-family: MicrosoftYaHei-Bold;
+      font-weight: bold;
+      color: rgba(52, 149, 242, 1);
+      border-bottom: 1px solid rgba(202, 202, 202, 1);
+      padding-bottom: 23px;
+      padding-top: 31px;
+    }
+    .img {
+      width: 697px;
+      height: 220px;
+      margin-top: 5px;
+      margin-bottom: 45px;
+    }
+    p {
+      font-size: 14px;
+      font-weight: 400;
+      color: rgba(51, 51, 51, 1);
+      line-height: 28px;
+    }
+    .x {
+      width: 35px;
+      height: 36px;
+      position: absolute;
+      right: -50px;
+      top: -25px;
+    }
   }
 }
 </style>

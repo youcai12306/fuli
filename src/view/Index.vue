@@ -492,6 +492,7 @@ export default {
     background-size: 1920px 100%;
     .content-list {
       width: 1200px;
+      min-width: 1200px;
       margin: 0 auto;
       .list-one {
         width: 100%;
@@ -615,6 +616,7 @@ export default {
     .new-hot {
       background: url(../assets/img/index-img3.png) no-repeat;
       background-size: 100% 100%;
+      min-width: 1200px;
       .title {
         text-align: center;
         color: #ffffff;
@@ -778,6 +780,7 @@ export default {
     }
     .info-row {
       width: 1190px;
+      min-width: 1190px;
       margin: 0 auto;
       margin-top: 80px;
       padding-bottom: 385px;

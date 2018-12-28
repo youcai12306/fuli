@@ -88,7 +88,7 @@
         <div class="btn">
           <button @click="addAddress(0)" v-show="isChange">保存</button>
           <button @click="addAddress(1)" v-show="!isChange">保存</button>
-          <button class="close" @click="showMeng">关闭</button>
+          <button class="close" @click="close()">关闭</button>
         </div>
       </div>
     </div>
@@ -213,7 +213,7 @@ export default {
         this.adressTip = "";
         this.detailAdress = "";
         this.detailAdressTip = "";
-      this.showMeng = false;
+        this.mengShow = false;
     },
     //获取地址栏的值
     selected(val) {
@@ -247,15 +247,15 @@ export default {
     //新增收货地址
     addAddress(key) {
       if (this.name == "") {
-        this.nameTip = "姓名不能为空";
+        this.$message.error('姓名不能为空');
         return;
       }
       if (this.mobile == "") {
-        this.phoneTip = "手机号不能为空";
+        this.$message.error('手机号不能为空');
         return;
       }
       if (this.code == "") {
-        this.codeTip = "邮编不能为空";
+        this.$message.error('邮编不能为空');
         return;
       }
       if (
@@ -263,16 +263,14 @@ export default {
         this.select.city == "" ||
         this.select.area == ""
       ) {
-        this.adressTip = "请填写地址";
+        this.$message.error('请选择地址');
         return;
       } else {
         this.adressTip = "";
       }
       if (this.detailAdress == "") {
-        this.detailAdressTip = "请填写详细地址";
+        this.$message.error('请填写详细地址');
         return;
-      } else {
-        this.detailAdressTip = "";
       }
       if (key === 0) {
         let Uid = this.$store.getters.getUserData.userId;
@@ -400,6 +398,7 @@ export default {
           display: inline-block;
           background-color: #2d7ae4;
           color: #ffffff;
+          cursor: pointer;
         }
         .del-address {
           height: 26px;
@@ -408,6 +407,7 @@ export default {
           display: inline-block;
           background-color: #c0c0c0;
           color: #ffffff;
+          cursor: pointer;
         }
         .default-address {
           display: inline-block;
@@ -417,6 +417,7 @@ export default {
           background-color: #8cbbff;
           color: #ffffff;
           border: 1px dotted #9b9b9b;
+          cursor: pointer;
         }
         .set-default {
           display: inline-block;
@@ -424,6 +425,7 @@ export default {
           height: 34px;
           line-height: 34px;
           border: 1px dotted #9b9b9b;
+          cursor: pointer;
         }
       }
     }

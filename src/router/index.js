@@ -368,5 +368,9 @@ router.beforeEach((to, from, next) => {
 		next();
 	}
 })
+// 跳转页面的时候滚动条在最上面
+router.afterEach((to,from,next) => {
+	window.scrollTo(0,0);
+})
 
 export default router

@@ -112,6 +112,7 @@ export default {
           _this.minutes -= 1;
         } else if (_this.minutes === 0 && _this.seconds === 0) {
           _this.seconds = 0;
+          this.$router.push("./mine");
           window.clearInterval(time);
         } else {
           _this.seconds -= 1;
@@ -171,7 +172,7 @@ export default {
         this.$fetch("http://192.168.2.55:5100/callBack-aggregate/getPay",data).then((res) => {
             console.log(res)
         if (res.code === 200) {
-          clearInterval(this.times);
+          window.clearInterval(this.times);
           this.$router.push("./ok");
            
         }else if(res.code === 400){

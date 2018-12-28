@@ -522,6 +522,9 @@ export default {
         }
       }
     }
+    .swiper-container-horizontal{
+      cursor: pointer;
+    }
   }
 }
 </style>

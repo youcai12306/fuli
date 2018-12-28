@@ -240,7 +240,8 @@
     </div>
     <div class="juedui">
       <img src="../assets/img/index-juedui-phone.png" alt>
-      <p>电话</p>
+      <p>客服电话</p>
+      <p style="margin-top:10px">400-xxxxxx</p>
       <img src="../assets/img/index-juedui-code.png" alt>
       <p>服务号</p>
       <img src="../assets/img/index-juedui-code.png" alt>

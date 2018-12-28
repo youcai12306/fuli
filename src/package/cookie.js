@@ -1,10 +1,11 @@
+// 设置cookie,增加到vue实例方便全局调用
 export function setCookie(c_name, value, expiredays) {
   var exdate = new Date();
   exdate.setTime(exdate.getTime() + expiredays);
 	console.log(exdate)
   document.cookie = c_name + "=" + escape(value) + ((expiredays == null) ? "" : ";expires=" + exdate.toGMTString());
 };
-
+// 获取cookie
 export function getCookie(name) {
   var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
   if (arr = document.cookie.match(reg))

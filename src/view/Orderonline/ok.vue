@@ -34,7 +34,7 @@ export default {
           this.$router.push("./tickets/1")
       },
       chakan(){
-        //   this.$router.push("./tickets/1")
+          this.$router.push("./mine")
       }
   }
 };

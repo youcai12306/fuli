@@ -3,7 +3,7 @@
     <Header></Header>
     <div class="content">
       <div class="nav clearDiv">
-        <div class="floatLeft" @click="orderr">当前位置：网上订购>零售商品详情页</div>
+        <div class="floatLeft" @click="orderr">当前位置：网上订购>门票详情页</div>
         <div class="floatRight" @click="myorder">我的订单</div>
         <div class="floatRight shopping-car" @click="jumpShoppingCar">
           <img
@@ -64,6 +64,7 @@
                 label="描述文字"
                 :precision="0"
                 :step="1"
+               
                 class="num-change"
               ></el-input-number>
             </div>
@@ -121,7 +122,10 @@ export default {
     return {
       swiperOption: {
         slidesPerView: 3,
-        notNextTick: true
+        notNextTick: true,
+        slideToClickedSlide: true,//点击下面的小图片修改上面的大图
+        preventClicks : false,//用于防止触摸时触发链接跳转
+        preventLinksPropagation : false,//阻止click冒泡。拖动Swiper时阻止click事件
       },
       imgs: [
         "../static/piao-1.png",
@@ -189,6 +193,7 @@ export default {
     next() {
       this.swiper.slideNext();
       this.index++;
+      //  this.swiper.slideTo(this.index, 500, false);
      
       if (this.index >= this.imgs.length) {
         this.index = this.imgs.length - 1;
@@ -198,7 +203,11 @@ export default {
     },
 
     handleChange(value) {
+      // console.log(value)
       // console.log(typeof value);
+      // if(typeof(value) == "undefined"){
+      //     this.num1 == 1
+      // }
     },
     //配送方式切换
     changeGiveType(type) {
@@ -307,6 +316,16 @@ export default {
     //跳转购物车页面
     jumpShoppingCar() {
       this.$router.push("/shoppingCar");
+    }
+  },
+  watch:{
+    num1(val){
+      console.log(val);
+      if(typeof(val) == "undefined"){
+        typeof(this.val) == "number" ;
+         this.num1 = 1;
+      }
+      
     }
   },
   mounted() {

@@ -15,7 +15,7 @@
             <div>
             失败原因：网络繁忙
         </div>
-            <button class="okk6">查看订单</button>
+            <button class="okk6" @click="chakan()">查看订单</button>
         </div>
       </div>
 
@@ -31,6 +31,11 @@ export default {
   },
   data() {
     return {};
+  },
+   methods:{
+      chakan(){
+          this.$router.push("./mine")
+      }
   }
 };
 </script>

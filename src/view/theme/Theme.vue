@@ -308,6 +308,7 @@ export default {
   },
   mounted() {
     this.swiperInit();
+    // 轮播图双向控制
     this.$nextTick(() => {
       var swiper = this.$refs.certifySwiper.swiper;
       var swiper2 = this.$refs.certifySwiper1.swiper;

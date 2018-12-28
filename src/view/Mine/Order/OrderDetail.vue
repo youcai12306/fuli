@@ -13,13 +13,13 @@
 							<td class="td-1 td-title">订单金额</td>
 							<td class="td-2 td-title">订单信息</td>
 							<td rowspan="5" class="td-3 td-bottom">
-								<template v-if="data.status == 0 || data.status == 1">
+								<template>
 									<div>
 										订单状态：
 										<span>{{data.status|status}}</span>
 									</div>
-									<div class="now-pay" @click="pay(data.orderId)">立即支付</div>
-									<div class="cancel-pay" @click="delOrder(data.orderId)" v-if="data.status == 0">取消支付</div>
+									<div class="now-pay" @click="pay(data.orderId)" v-if="data.status == 1">立即支付</div>
+									<div class="cancel-pay" @click="delOrder(data.orderId)" v-if="data.status == 1">取消支付</div>
 								</template>
 							</td>
 						</tr>
@@ -294,7 +294,7 @@
 						return '已取消';
 						break;
 					default:
-						return '';
+						return '-';
 						break;
 				}
 

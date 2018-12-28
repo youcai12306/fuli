@@ -51,8 +51,8 @@
 				<div class="right floatRight">
 					<div class="box7 box0" v-if="actives == 0">
 						<div class="info">
-							<div class="info-1">富力海洋欢乐世界——门票<router-link tag="i" to="/tickets/1"></router-link></div>
-							<div class="info-title-2">有效期：2018年1月1日~2019年1月1日<span>单位：每人/元</span></div>
+							<div class="info-1">海洋欢乐世界度假区——门票<router-link tag="i" to="/tickets/1"></router-link></div>
+							<div class="info-title-2" v-if="status">有效期：2018年1月1日~2019年1月1日<span>单位：每人/元</span></div>
 							<div class="info-2">
 								<div class="info-2-tr">
 									<div class="info-2-td">门票类别</div>
@@ -60,43 +60,43 @@
 									<div class="info-2-td">特定日</div>
 								</div>
 								<div class="info-2-tr">
-									<div class="info-2-td">全票</div>
-									<div class="info-2-td color">260元/人</div>
-									<div class="info-2-td color">260元/人</div>
+									<div class="info-2-td">成人票（示例）</div>
+									<div class="info-2-td color">XXX元/人</div>
+									<div class="info-2-td color">XXX元/人</div>
 								</div>
-								<div class="info-2-tr">
+								<div class="info-2-tr" v-if="status">
 									<div class="info-2-td">儿童票</div>
 									<div class="info-2-td color">260元/人</div>
 									<div class="info-2-td color">260元/人</div>
 								</div>
-								<div class="info-2-tr">
+								<div class="info-2-tr" v-if="status">
 									<div class="info-2-td">长者票</div>
 									<div class="info-2-td color">260元/人</div>
 									<div class="info-2-td color">260元/人</div>
 								</div>
-								<div class="info-2-tr">
+								<div class="info-2-tr" v-if="status">
 									<div class="info-2-td">优待票</div>
 									<div class="info-2-td color">260元/人</div>
 									<div class="info-2-td color">260元/人</div>
 								</div>
-								<div class="info-2-tr">
+								<div class="info-2-tr" v-if="status">
 									<div class="info-2-td">两天全票</div>
 									<div class="info-2-td color">260元/人</div>
 									<div class="info-2-td color">260元/人</div>
 								</div>
-								<div class="info-2-tr">
+								<div class="info-2-tr" v-if="status">
 									<div class="info-2-td">两天儿童票</div>
 									<div class="info-2-td color">260元/人</div>
 									<div class="info-2-td color">260元/人</div>
 								</div>
-								<div class="info-2-tr">
+								<div class="info-2-tr" v-if="status">
 									<div class="info-2-td">两天长者票</div>
 									<div class="info-2-td color">260元/人</div>
 									<div class="info-2-td color">260元/人</div>
 								</div>
 							</div>
 
-							<div class="info-2">
+							<div class="info-2" v-if="status">
 								<div class="info-2-tr">
 									<div class="info-2-td">门票类别</div>
 									<div class="info-2-td">平日</div>
@@ -113,10 +113,10 @@
 									<div class="info-2-td color">不含门票</div>
 								</div>
 							</div>
-							<div class="a">
+							<div class="a" v-if="status">
 								家庭票适用对象：两名成人及一名儿童或一名成人及两名儿童【其中每张套票必须含一名1.5米（不含）以下儿童】<br /> 说明：详情请阅活动链<a href="http://zh.chimelong.com/Oceankingdom/science/dolphin.shtml">http://zh.chimelong.com/Oceankingdom/science/dolphin.shtml</a>
 							</div>
-							<div class="info-2">
+							<div class="info-2" v-if="status">
 								<div class="info-2-tr">
 									<div class="info-2-td">门票类别</div>
 									<div class="info-2-td">平日</div>
@@ -148,20 +148,21 @@
 									<div class="info-2-td color">含门票</div>
 								</div>
 							</div>
-							<div class="a">
+							<div class="a" v-if="status">
 								家庭票适用对象：两名成人及一名儿童或一名成人及两名儿童【其中每张套票必须含一名1.5米（不含）以下儿童】<br /> 说明：详情请阅活动链<a href="http://zh.chimelong.com/Oceankingdom/science/dolphin.shtml">http://zh.chimelong.com/Oceankingdom/science/dolphin.shtml</a>
 							</div>
 
 							<div class="info-p">
 								<b>温馨提示：</b><br>
-								1、购票前请仔细阅读乐园《游客须知》、服务说明和相关公告，游客购票即被视为已认可乐园的相关规定。<br>
+								1、等待上传
+								<!-- 1、购票前请仔细阅读乐园《游客须知》、服务说明和相关公告，游客购票即被视为已认可乐园的相关规定。<br>
 								2、身高1.2米（不含1.2米）以下的儿童免票；身高1.2米（含1.2米）—1.5米（不含1.5米）之间的需购儿童票；身高1.5米以上（含1.5米）的游客需购全价票。<br>
 								3、免票：身高1.2米（不含1.2米）以下儿童；70岁以上的老人需出事老年证或身份证；持有国家残联颁发《一、二级残疾证》的残障人士均需一名持全价票具有监护能力的成人陪同方可入园（监护人需出示有效身份证件登记）。导游证（非带团导游）、军官证、记者证、残疾证均不属于免票人士。<br>
 								以上免票和优惠票价人士均须有一名具有监护能力的成人陪同，且每名全价票人士限带一名免票人士和优惠票人士入园。<br>
 								4、本票为入园门票，门票一经售出，概不退换，涂改无效，在有效期内使用一次有效（一人一票），副券撕下作废。<br>
 								5、假票无效，发现即没收，本乐园保留追究相关法律责任的权利；乐园对门票丢失、失窃、过期概不负责。<br>
 								6、导游票持有人必须出示本人的导游证，如证件与本人不符，一经发现，立即没收该导游票。<br>
-								7、乐园不保证游客一次入园可游览到园内所有项目，乐园可能由于恶劣天气、特殊活动、设备更新或例行检修。<br>
+								7、乐园不保证游客一次入园可游览到园内所有项目，乐园可能由于恶劣天气、特殊活动、设备更新或例行检修。<br> -->
 							</div>
 
 						</div>
@@ -175,17 +176,17 @@
 					<!-- 营业时间 -->
 					<div class="box2" v-if="actives == 2">
 						<el-row class="row1">
-							<el-col>海洋世界营业时间</el-col>
+							<el-col>海洋欢乐世界度假区营业时间</el-col>
 						</el-row>
 
 						<el-row class="row2">
-							<el-col class="col1">园区开放时间：9:00-22:00</el-col>
-							<el-col class="col2">富力海洋欢乐世界游玩设施场馆时间表</el-col>
+							<el-col class="col1">平日 9.30~17.30  &nbsp;&nbsp;&nbsp;&nbsp; 周末 9.00~18.00</el-col>
+							<el-col class="col2">设施开放时间表</el-col>
 							<el-col class="col3">（当日设备开放情况将根据天气情况动态调整，请以现场公告为准，或提前咨询景区客服中心：010-67389898或010-67383333转）</el-col>
 							<el-col class="col4">
 								<span class="span1" :class="{active:tab==0}" @click="tab=0">游玩设施开放时间<i></i></span>
 								<span :class="{active:tab==1}" @click="tab=1">动物场馆开放时间<i></i></span>
-								<span :class="{active:tab==2}" @click="tab=2">演艺表演时间<i></i></span>
+								<span :class="{active:tab==2}" @click="tab=2">精彩演艺表演时间<i></i></span>
 							</el-col>
 						</el-row>
 
@@ -211,7 +212,8 @@
 								</div>
 								<div class="footer">
 									<p>备注：</p>
-									<p>1、如果气温不能满足开放要求,设备开放时间另行通知。</p>
+									<p>等待上传</p>
+									<!-- <p>1、如果气温不能满足开放要求,设备开放时间另行通知。</p>
 									<p>2、甜品王国区果冻历险记每周一开放至17:00。</p>
 									<p>3、大型游乐设施属于特种设备，应国家质检总局相关规定要求，需进行定期维护。</p>
 									<p>4、受降水、大风等天气影响，部分设备可能临时暂停开放，以现场工作人员通知为准。</p>
@@ -219,53 +221,56 @@
 									<p>6、当日设备开放具体情况可拨打客服电话010-67389898或010-67383333转8004进行咨询。
 										根据国家安全和技术监督部门的规定，在不能满足设备运行安全的恶劣天气及其它自然灾害等情况下（如:雷电、风沙、雨雪、
 										冰雹、大雾等）园内设施、表演将关闭或部分关闭，公园项目明日开放情况以当天显示为准，实时开放情况以项目现场告知为
-										准。也请您关注天气变化合理安排游玩时间。</p>
+										准。也请您关注天气变化合理安排游玩时间。</p> -->
 								</div>
 							</div>
-							<div class="tab1" v-if="tab==1">
+							<div class="tab0" v-if="tab==1">
 								<div class="th">
 									<div class="td">序号</div>
-									<div class="td">场馆名称</div>
+									<div class="td">分区</div>
+									<div class="td">动物场馆名称</div>
 									<div class="td">开放时间</div>
 								</div>
 								<div class="tr">
 									<div class="td">1</div>
+									<div class="td">麦迪卡斯水乐园</div>
 									<div class="td">梦幻转马</div>
 									<div class="td">10:30-17:00</div>
 								</div>
 								<div class="tr">
 									<div class="td">2</div>
+									<div class="td">冒险海洋</div>
 									<div class="td">水手秋千</div>
 									<div class="td">10:30-17:00</div>
 								</div>
+								<div class="footer">
+									<p>备注：</p>
+									<p>等待上传</p>
+								</div>
 							</div>
-							<div class="tab2" v-if="tab==2">
-								<div class="theader">2018年11月30日-2019年1月1日演出时间表</div>
-								<div class="tr hea">
-									<div class="td">区域</div>
-									<div class="td">表演地点</div>
-									<div class="td">表演内容</div>
-									<div class="td">周一至周五</div>
-									<div class="td">周末</div>
-									<div class="td">备注</div>
+							<div class="tab0" v-if="tab==2">
+								<div class="th">
+									<div class="td">序号</div>
+									<div class="td">分区</div>
+									<div class="td">精彩演艺名称</div>
+									<div class="td">开放时间</div>
 								</div>
 								<div class="tr">
-									<div class="td">峡湾森林区</div>
-									<div class="td">华侨城大剧院</div>
-									<div class="td">《金面王朝》--大型舞蹈诗剧</div>
-									<div class="td">17:30</div>
-									<div class="td">17:30/19:30</div>
-									<div class="td"> </div>
+									<div class="td">1</div>
+									<div class="td">麦迪卡斯水乐园</div>
+									<div class="td">梦幻转马</div>
+									<div class="td">10:30-17:00</div>
 								</div>
 								<div class="tr">
-									<div class="td">峡湾森林区</div>
-									<div class="td">华侨城大剧院</div>
-									<div class="td">《金面王朝》--大型舞蹈诗剧</div>
-									<div class="td">17:30</div>
-									<div class="td">17:30/19:30</div>
-									<div class="td">周一、周二停</div>
+									<div class="td">2</div>
+									<div class="td">冒险海洋</div>
+									<div class="td">水手秋千</div>
+									<div class="td">10:30-17:00</div>
 								</div>
-								<div class="p">注：室外表演如遇大风、雨雪天气，部分演出停止。</div>
+								<div class="footer">
+									<p>备注：</p>
+									<p>等待上传</p>
+								</div>
 							</div>
 						</el-row>
 					</div>
@@ -273,7 +278,7 @@
 					<!-- 交通指南 -->
 					<div class="box3" v-if="actives == 3">
 						<div class="box_header">交通指南</div>
-						<div class="map"><img src="../../assets/img/ditu10.png" alt=""></div>
+						<div class="map"><a href="https://j.map.baidu.com/WC0L2" target="_blank"><img src="../../assets/img/ditu10.png" alt=""></a></div>
 						<div class="table">
 							<el-row class="th">
 								<el-col :span="4">出发地</el-col>
@@ -333,7 +338,7 @@
 							<el-collapse accordion>
 								<el-collapse-item>
 									<template slot="title">
-										<span class="span">1</span>富力海洋公园在哪里？
+										<span class="span">1</span>海洋公园在哪里？
 									</template>
 									<div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
 									<div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
@@ -341,7 +346,7 @@
 								<template v-for="(item,k) in 10">
 									<el-collapse-item>
 										<template slot="title">
-											<span class="span">{{k+2}}</span>富力海洋公园票价节假日打不打折？
+											<span class="span">{{k+2}}</span>海洋公园票价节假日打不打折？
 										</template>
 										<div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
 										<div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
@@ -354,8 +359,8 @@
 
 					<!-- 宾客服务 -->
 					<div class="box5" v-if="actives == 5">
-						<div class="botton">宾客服务</div>
-						<div class="box5-title">
+						<div class="botton" style="margin-bottom: 40px;">宾客服务</div>
+						<div class="box5-title" v-if="status">
 							为了大家的安全着想，我们会依据天气情况开放或关闭部分设施。
 						</div>
 						<div class="Dbox mt-10">
@@ -408,9 +413,6 @@
 						</div>
 
 						<div class="Fbox">
-							<p class="p1">扫描二维码</p>
-							<p class="p2"><img src="../../assets/img/ditu8.png" alt=""></p>
-							<p class="p3">即可轻松获取海洋王国表演时间> 导览地图、动物百科、尊享体验> 美食攻略等丰富资讯</p>
 						</div>
 
 					</div>
@@ -422,13 +424,11 @@
 							为了大家的安全着想，我们会依据天气情况开放或关闭部分设施。
 						</div>
 						<div class="box6">
-							<p><b>恶劣天气时行程安排</b></p>
-							<p>无论天气如何，富力海洋欢乐世界致力于为您提供最佳游客体验。园内的多数游乐设施、餐厅和商店将保持正常运营，向公众开放。<br /><br />乐园开放时间和个别游乐设施可能会因少数恶劣天气条件而受到影响，尤其是在六月至九月的雨季期间。请随时查看，以了解风暴警报、乐园封闭情况及更多信息。</p>
+							<p>等待上传</p>
+							<!-- <p><b>恶劣天气时行程安排</b></p>
+							<p>无论天气如何，富力海洋欢乐世界致力于为您提供最佳游客体验。园内的多数游乐设施、餐厅和商店将保持正常运营，向公众开放。<br /><br />乐园开放时间和个别游乐设施可能会因少数恶劣天气条件而受到影响，尤其是在六月至九月的雨季期间。请随时查看，以了解风暴警报、乐园封闭情况及更多信息。</p> -->
 						</div>
 						<div class="Fbox">
-							<p class="p1">扫描二维码</p>
-							<p class="p2"><img src="../../assets/img/ditu8.png" alt=""></p>
-							<p class="p3">即可轻松获取海洋王国表演时间> 导览地图、动物百科、尊享体验> 美食攻略等丰富资讯</p>
 						</div>
 					</div>
 
@@ -436,8 +436,9 @@
 					<div class="box7" v-if="actives == 7">
 						<div class="info-title">年卡/会员卡</div>
 						<div class="info">
-							<div class="info-1">富力海洋欢乐世界——年卡<i></i></div>
-							<div class="info-2">
+							<div class="info-1">海洋欢乐世界度假区——年卡<i></i></div>
+							<div style="margin-bottom: 150px;">年卡介绍信息等待上传</div>
+							<div class="info-2" v-if="status">
 								<div class="info-2-tr">
 									<div class="info-2-td">人群类别</div>
 									<div class="info-2-td">平日年卡</div>
@@ -457,8 +458,9 @@
 						</div>
 
 						<div class="info">
-							<div class="info-1">富力海洋欢乐世界——会员卡<i></i></div>
-							<div class="info-2">
+							<div class="info-1">海洋欢乐世界度假区——会员卡<i></i></div>
+							<div style="margin-bottom: 150px;padding-bottom: 200px;">会员卡介绍信息等待上传</div>
+							<div class="info-2" v-if="status">
 								<div class="info-2-tr">
 									<div class="info-2-td">人群类别</div>
 									<div class="info-2-td">平日年卡</div>
@@ -477,7 +479,7 @@
 							</div>
 						</div>
 
-						<div class="info-p">
+						<div class="info-p" v-if="status">
 							<b>温馨提示：</b><br>
 							1、购票前请仔细阅读乐园《游客须知》、服务说明和相关公告，游客购票即被视为已认可乐园的相关规定。<br>
 							2、身高1.2米（不含1.2米）以下的儿童免票；身高1.2米（含1.2米）—1.5米（不含1.5米）之间的需购儿童票；身高1.5米以上（含1.5米）的游客需购全价票。<br>
@@ -516,7 +518,8 @@
 			return {
 				tab: 0,
 				actives: 0,
-				imgs: ['../../../static/ditu9.png']
+				imgs: ['../../../static/ditu9.png'],
+				status:false
 			};
 		},
 		components: {

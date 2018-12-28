@@ -117,7 +117,7 @@ export default {
   margin-top: 20px;
   .title {
     text-align: center;
-    font-size: 35px;
+    font-size: 26px;
     font-weight: bold;
     color: rgba(238, 238, 238, 1);
     width: 100%;
@@ -135,7 +135,7 @@ export default {
       line-height: 22px;
       padding-left: 40px;
       background: url(../../assets/img/new-4.png) no-repeat 15px 0;
-      margin-top: 50px;
+      margin-top: 40px;
       margin-right: 34px;
     }
   }

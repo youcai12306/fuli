@@ -62,8 +62,8 @@
 			// 导航
 			.l {
 				float: left;
-				width: 240px;
-				height: 460px;
+				width: 180px;
+				height: 410px;
 				background: rgba(77, 175, 236, 1);
 				margin-right: 40px;
 				margin-top: 20px;
@@ -71,13 +71,13 @@
 				border-radius: 10px;
 
 				.header-title {
-					font-size: 35px;
+					font-size: 26px;
 					font-family: MicrosoftYaHei-Bold;
 					font-weight: bold;
 					color: rgba(238, 238, 238, 1);
-					width: 240px;
-					height: 180px;
-					line-height: 180px;
+					width: 180px;
+					height: 130px;
+					line-height: 130px;
 					text-align: center;
 				}
 

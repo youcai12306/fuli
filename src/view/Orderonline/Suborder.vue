@@ -295,7 +295,7 @@ export default {
         "http://192.168.2.61:6061/shoppingCart-aggregate/bathDeleteShopCarts?ids=" +
           this.ids
       ).then(res => {
-        console.log(11);
+        // console.log(11);
         if (res.code === 200) {
           this.good_list = {};
           this.flag = true;

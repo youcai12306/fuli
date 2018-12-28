@@ -40,8 +40,8 @@
                 :class="{'is_active' : $route.path=='/mine' || $route.path=='/myorder' || $route.path=='/prepaid'}"
               >我的订单</el-menu-item>
               <el-menu-item
-                :index="`/ShoppingCar`"
-                :class="{'is_active' : $route.path=='/ShoppingCar'}"
+                :index="`/shoppingCar`"
+                :class="{'is_active' : $route.path=='/shoppingCar'}"
               >购物车</el-menu-item>
             </el-submenu>
             <el-submenu index="2">

@@ -306,7 +306,7 @@ export default {
     },
     //跳转购物车页面
     jumpShoppingCar() {
-      this.$router.push("/ShoppingCar");
+      this.$router.push("/shoppingCar");
     }
   },
   mounted() {

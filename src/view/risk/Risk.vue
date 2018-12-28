@@ -33,8 +33,28 @@
 								</div>
 							</div>
 						</swiper-slide>
-						<swiper-slide :style="{background:'#F6B37F',width:'1200px',height:'686px'}"></swiper-slide>
-						<swiper-slide :style="{background:'#F6B37F',width:'1200px',height:'686px'}"></swiper-slide>
+						<swiper-slide :style="{background:'rgba(246,179,127,.65)',width:'1200px',height:'686px'}">
+							<div class="clearDiv">
+								<div class="left floatLeft">
+									<img src="../../assets/img/img103.png" alt="图片" class="img1">
+									<button class="btn1">同款商品</button>
+									<button class="btn2">游戏互动</button>
+								</div>
+								<div class="right floatRight">
+									<p class="p1">你们好我是北极熊帕克</p>
+									<p class="p2">内柔外刚，自尊心很强。他特别爱惜自己的白毛，容不得其他人碰！但其实内心非常善良。</p>
+									<div class="video" @click="status=true">
+										<img src="../../assets/img/risk-bg6.png" alt="视频背景图片" v-if="!status">
+										<template v-if="status">
+											<video controls="" autoplay="" name="media">
+												<source src="http://220.164.101.233/6972ABA05563D7189138F285D/03000A17005A6D6FDD431E055EEB3ED1C172E0-9A6B-0F5C-3683-71EB5632A884.mp4?ccode=050F&amp;duration=392&amp;expire=18000&amp;psid=9de947e6e0e2165a511f0bbaaa3a0f24&amp;ups_client_netip=77629cc8&amp;ups_ts=1545639349&amp;ups_userid=&amp;utid=P2yiFEgDlTgCAXdinMiUZGFx&amp;vid=XMzEyMjcxNjAw&amp;vkey=A424309d5ad1aaba3737f078c6d9fdae9&amp;sp=&amp;ali_redirect_domain=ykugc.cp31.ott.cibntv.net&amp;ali_redirect_ex_ftag=95670d958d49197e342f1df4ea06b2766aaef08cf8811e3d&amp;ali_redirect_ex_tmining_ts=1545639355&amp;ali_redirect_ex_tmining_expire=3600&amp;ali_redirect_ex_hot=0"
+												 type="video/mp4"></video>
+										</template>
+									</div>
+								</div>
+							</div>
+						</swiper-slide>
+						<!-- <swiper-slide :style="{background:'#F6B37F',width:'1200px',height:'686px'}"></swiper-slide> -->
 						<div class="swiper-button-prev swiper-button-black" slot="button-prev"></div>
 						<div class="swiper-button-next swiper-button-black" slot="button-next"></div>
 					</swiper>
@@ -213,7 +233,10 @@
 							display: block;
 							margin-bottom: 50px;
 						}
-
+						.img1{
+							width: 194px;
+							height: 359px;
+						}
 						.btn1 {
 							cursor: pointer;
 							width: 100px;

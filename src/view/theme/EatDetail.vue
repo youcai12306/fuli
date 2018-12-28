@@ -1,8 +1,8 @@
 <template>
   <div class="animalTheme">
-     <!-- 头部 -->
+    <!-- 头部 -->
     <Header></Header>
-    <div class="box">
+    <div class="box" v-if="id == 0">
       <div class="top clearDiv">
         <h3 class="floatLeft">塔瓦那餐厅</h3>
         <div class="floatRight clearDiv" @click="back()">
@@ -26,14 +26,45 @@
             <div class="swiper-pagination" slot="pagination"></div>
           </swiper>
         </div>
-        <div class="right floatRight">
+        <!-- <div class="right floatRight">
           <h3>水乐园入口右侧</h3>
           <p>平均消费：￥60-90</p>
+        </div>-->
+      </div>
+      <div class="content">希腊风格，地中海西式美食广场及东南亚美食，适合一家大小</div>
+      <div class="price">平均消费：￥60-90</div>
+    </div>
+    <div class="box" v-else>
+      <div class="top clearDiv">
+        <h3 class="floatLeft">迈泽美食</h3>
+        <div class="floatRight clearDiv" @click="back()">
+          <img src="../../assets/img/theme-back.png" alt>
+          <span>返回</span>
         </div>
       </div>
-      <div
-        class="content"
-      >希腊风格，地中海西式美食广场及东南亚美食，适合一家大小</div>
+      <div class="img-box clearDiv">
+        <div class="left floatLeft">
+          <swiper :options="swiperOption" ref="mySwiper">
+            <!-- slides -->
+            <swiper-slide>
+              <img src="../../assets/img/theme-eat-img2.png" alt>
+            </swiper-slide>
+            <swiper-slide>
+              <img src="../../assets/img/theme-eat-img2.png" alt>
+            </swiper-slide>
+            <swiper-slide>
+              <img src="../../assets/img/theme-eat-img2.png" alt>
+            </swiper-slide>
+            <div class="swiper-pagination" slot="pagination"></div>
+          </swiper>
+        </div>
+        <!-- <div class="right floatRight">
+          <h3>水乐园入口右侧</h3>
+          <p>平均消费：￥60-90</p>
+        </div>-->
+      </div>
+      <div class="content">地中海风格，西式快餐美食，提供炸鸡，汉堡包</div>
+      <div class="price">平均消费：￥50-80</div>
     </div>
   </div>
 </template>
@@ -57,7 +88,8 @@ export default {
           el: ".swiper-pagination",
           clickable: true
         }
-      }
+      },
+      id:0
     };
   },
   components: {
@@ -65,10 +97,13 @@ export default {
     swiperSlide,
     Header
   },
-  methods:{
-    back(){
-      this.$router.go(-1)
+  methods: {
+    back() {
+      this.$router.go(-1);
     }
+  },
+  mounted(){
+    this.id = this.$route.query.id
   }
 };
 </script>
@@ -122,7 +157,7 @@ export default {
     .img-box {
       margin-top: 44px;
       .left {
-        width: 670px;
+        width: 864px;
         height: 400px;
         overflow: hidden;
         img {
@@ -150,7 +185,7 @@ export default {
           font-size: 14px;
           font-weight: 400;
           padding-top: 12px;
-          color:rgba(227,87,76,1);
+          color: rgba(227, 87, 76, 1);
         }
       }
     }
@@ -161,6 +196,12 @@ export default {
       line-height: 28px;
       padding: 40px 10px 0 10px;
     }
+    .price {
+      font-size: 16px;
+      font-weight: bold;
+      color: rgba(51, 51, 51, 1);
+      padding-left: 10px;
+    }
   }
 }
 </style>
@@ -168,6 +209,7 @@ export default {
 .animalTheme {
   .swiper-container {
     height: 100%;
+    width: 100%;
     .swiper-pagination {
       bottom: 0;
       .swiper-pagination-bullet {
@@ -177,8 +219,8 @@ export default {
         border: 2px solid rgba(255, 255, 255, 1);
         border-radius: 50%;
       }
-      .swiper-pagination-bullet-active{
-          background: rgba(255, 255, 255, 1);
+      .swiper-pagination-bullet-active {
+        background: rgba(255, 255, 255, 1);
       }
     }
   }

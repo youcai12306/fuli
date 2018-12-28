@@ -114,11 +114,10 @@
       </div>
     </div>
     <!-- 动物场馆 -->
-    <div class="animal" id="animal">
+    <!-- <div class="animal" id="animal">
       <img src="../../assets/img/theme-animal-title.png" alt class="img">
       <div class="bottom">
         <swiper :options="swiperOptions" ref="mySwipers">
-          <!-- slides -->
           <swiper-slide v-for="item in 5" :key="item">
             <div class="venve" @click.stop="jumpAnimalDetail(item.id)">
               <img src="../../assets/img/theme-animal-img1.png" alt>
@@ -129,26 +128,37 @@
         </swiper>
         <div class="swiper-paginations" slot="pagination"></div>
       </div>
-    </div>
+    </div> -->
     <!-- 主题商店 -->
     <div class="shop" id="shop">
       <div class="shop-box">
         <img src="../../assets/img/theme-shop-title.png" alt class="img">
         <div class="bottom">
           <swiper :options="swiperOptions1" ref="mySwipers1">
-            <swiper-slide v-for="item in 5" :key="item">
-              <div class="venve" @click="jumpShopDetail(item.id)">
+            <swiper-slide>
+              <div class="venve venve1" @click="jumpShopDetail(0)">
                 <div class="venve-list">
                   <img src="../../assets/img/theme-shop-img1.png" alt>
                   <div class="venve-content">
-                    <div>海豚玩具商店</div>
-                    <p>同一个世界的另一个角度，这是一个需要你探索求证才能发现的世界，跟着我们来吧！在这里认识聪颖灵敏的 鲸豚类、水陆两生的 鳍脚类、种类这是一个需要你探索求证才能发现的世界，跟着我们……</p>
+                    <div>阳光回忆</div>
+                    <p>想在水的世界尽情嬉戏？那让我们先补齐装备吧！这里会有各式各样的水上用品补给</p>
+                  </div>
+                </div>
+              </div>
+            </swiper-slide>
+            <swiper-slide>
+              <div class="venve" @click="jumpShopDetail(1)">
+                <div class="venve-list">
+                  <img src="../../assets/img/theme-shop-img1.png" alt>
+                  <div class="venve-content">
+                    <div>木马奇珍坊</div>
+                    <p>集结了与海洋息息相关的纪念品，包括海豚、海龟、海狮等各种造型玩偶。让海洋朋友时刻伴您身边，这里你定能找到心水之选！</p>
                   </div>
                 </div>
               </div>
             </swiper-slide>
           </swiper>
-          <div class="swiper-paginations1" slot="pagination"></div>
+          <!-- <div class="swiper-paginations1" slot="pagination"></div> -->
         </div>
       </div>
     </div>
@@ -158,15 +168,21 @@
         <img src="../../assets/img/theme-eat-title.png" alt class="img">
         <div class="eat-lists clearDiv">
           <div
-            class="eat-list floatLeft"
-            @click="jumpEatDetail(item.id)"
-            v-for="item in 2"
-            :key="item"
-          >
+            class="eat-list floatLeft" @click="jumpEatDetail(0)">
             <img src="../../assets/img/theme-eat-img1.png" alt>
             <div class="eat-content">
               <div>塔瓦那餐厅</div>
               <p>希腊风格，地中海西式美食广场及东南亚美食，适合一家大小</p>
+              <p class="p1">平均消费：￥60-90</p>
+            </div>
+          </div>
+          <div
+            class="eat-list floatLeft" @click="jumpEatDetail(1)">
+            <img src="../../assets/img/theme-eat-img1.png" alt>
+            <div class="eat-content">
+              <div>迈泽美食</div>
+              <p>地中海风格，西式快餐美食，提供炸鸡，汉堡包</p>
+              <p class="p1">平均消费：￥50-80</p>
             </div>
           </div>
         </div>
@@ -177,7 +193,7 @@
       <li @click="showYuanQu()">园区介绍</li>
       <li @click="jumpColumn('#banner')">游玩设施</li>
       <li @click="jumpColumn('#art')">精彩演绎</li>
-      <li @click="jumpColumn('#animal')">动物场馆</li>
+      <!-- <li @click="jumpColumn('#animal')">动物场馆</li> -->
       <li @click="jumpColumn('#shop')">主题商店</li>
       <li @click="jumpColumn('#eat')">特色餐厅</li>
     </ul>
@@ -239,14 +255,14 @@ export default {
         //设定初始化时slide的索引
         initialSlide: 0,
         //放几个
-        slidesPerView: 3,
+        slidesPerView: 2,
         spaceBetween: 60,
         //自动播放
-        autoplay: {
-          delay: 5000,
-          stopOnLastSlide: false,
-          disableOnInteraction: true
-        },
+        // autoplay: {
+        //   delay: 5000,
+        //   stopOnLastSlide: false,
+        //   disableOnInteraction: true
+        // },
         //分页器设置
         pagination: {
           el: ".swiper-paginations1",
@@ -737,7 +753,11 @@ export default {
         width: 1200px;
         margin: 0 auto;
         margin-top: 65px;
-
+        // margin-left: 210px;
+        // margin-right: 210px;
+        .venve1{
+           margin-left: 210px;
+        }
         .venve {
           width: 360px;
           height: 470px;
@@ -870,6 +890,9 @@ export default {
               padding: 35px 20px 20px 20px;
               overflow: hidden;
             }
+            .p1{
+              padding: 0 20px 20px 20px;
+            }
           }
         }
       }
@@ -878,7 +901,7 @@ export default {
 }
 .leftNav {
   width: 150px;
-  height: 433px;
+  height: 374px;
   background: rgba(7, 100, 233, 1);
   border-radius: 15px;
   position: fixed;

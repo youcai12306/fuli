@@ -54,7 +54,6 @@
 								</div>
 							</div>
 						</swiper-slide>
-						<!-- <swiper-slide :style="{background:'#F6B37F',width:'1200px',height:'686px'}"></swiper-slide> -->
 						<div class="swiper-button-prev swiper-button-black" slot="button-prev"></div>
 						<div class="swiper-button-next swiper-button-black" slot="button-next"></div>
 					</swiper>

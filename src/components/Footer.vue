@@ -38,7 +38,7 @@
           <p>扫码二维码下载客户端</p>
         </div>
       </div>
-	  <div class="copy">Copyright ©浙ICP备16007586号-1 浙公网安备 33010902001056号 版权声明</div>
+      <div class="copy">Copyright ©浙ICP备16007586号-1 浙公网安备 33010902001056号 版权声明</div>
     </div>
   </div>
 </template>
@@ -58,14 +58,13 @@ export default {
   background-color: #0764e9;
 
   .footer {
-    // width: 1200px;
+    width: 1200px;
+    min-width: 1200px;
     margin: 0 auto;
     font-size: 14px;
     color: #ffffff;
     .footer-top {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
+      margin-left: 200px;
       .logo {
         width: 90px;
         height: 73px;
@@ -131,7 +130,7 @@ export default {
       .code {
         padding-top: 33px;
         text-align: center;
-		margin-left: 80px;
+        margin-left: 80px;
         img {
           width: 120px;
           height: 120px;
@@ -160,8 +159,7 @@ export default {
     // }
   }
   .copy {
-        padding-top: 203px;
-        text-align: center;
-      }
+    text-align: center;
+  }
 }
 </style>

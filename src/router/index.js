@@ -345,6 +345,7 @@ let router = new Router({
 			path: '/orderDetail',
 			name: 'OrderDetail',
 			meta: {
+				nav: 3,
 				requireAuth: true
 			},
 			component: OrderDetail //订单详情

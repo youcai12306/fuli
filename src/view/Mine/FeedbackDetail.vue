@@ -6,14 +6,14 @@
 	-->
 	<div class="feedback">
 		<div class="box-titles">我要反馈 <span>返回</span></div>
-		<el-form ref="form" :model="form" label-width="100px" class="form">
-			<el-form-item label="反馈类型：">
+		<el-form ref="formRules" :model="form" label-width="100px" class="form">
+			<el-form-item label="反馈类型：" prop="region" :rules="[{ required: true, message: '反馈类型不能为空'}]">
 				<el-select v-model="form.region" placeholder="请选择反馈类型">
 					<el-option label="门票" value="shanghai"></el-option>
 					<el-option label="礼品" value="beijing"></el-option>
 				</el-select>
 			</el-form-item>
-			<el-form-item label="反馈内容：">
+			<el-form-item label="反馈内容：" prop="desc" :rules="[{ required: true, message: '反馈内容不能为空'}]">
 				<el-input type="textarea" v-model="form.desc" placeholder="最多输入500字"></el-input>
 			</el-form-item>
 			<el-form-item label="上传图片：">
@@ -25,10 +25,10 @@
 					<img width="100%" :src="dialogImageUrl" alt="">
 				</el-dialog>
 			</el-form-item>
-			<el-form-item label="姓名：">
+			<el-form-item label="姓名：" prop="name" :rules="[{ required: true, message: '姓名不能为空'}]">
 				<el-input v-model="form.name" placeholder="请输入姓名"></el-input>
 			</el-form-item>
-			<el-form-item label="手机：">
+			<el-form-item label="手机：" prop="iPhone" :rules="[{ required: true, message: '手机号不能为空',trigger:'blur'}]">
 				<el-input v-model="form.iPhone" placeholder="请输入手机号码"></el-input>
 			</el-form-item>
 			<el-form-item>
@@ -43,6 +43,12 @@
 		data() {
 			return {
 				form: {
+					region: '',
+					desc: '',
+					name: '',
+					iPhone: ''
+				},
+				formRules:{
 					region: '',
 					desc: '',
 					name: '',
@@ -63,7 +69,17 @@
 		},
 		methods: {
 			onSubmit() {
-				console.log('submit!');
+				this.$refs['formRules'].validate(valid => {
+				  if (valid) {
+				    this.$message({
+				    	type: "success",
+				    	message: "反馈成功！"
+				    })
+				  } else {
+				    console.log("error submit!!");
+				    return false;
+				  }
+				});
 			},
 			handleRemove(file, fileList) {
 				console.log(file, fileList);
@@ -78,7 +94,7 @@
 					type: 'warning'
 				});
 			},
-			go(){
+			go() {
 				this.$route.go(-1);
 			}
 		},

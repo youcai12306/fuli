@@ -22,6 +22,8 @@
             @change="chooseDate(1)"
             format="yyyy-MM-dd"
             value-format="yyyy-MM-dd"
+            :editable="false"
+            :picker-options="pickerOptions0"
           ></el-date-picker>
         </div>
       </div>
@@ -104,7 +106,12 @@ export default {
       totle: 0,
       date: "",
       imgs: [],
-      msg:''
+      msg:'',
+      pickerOptions0: {
+        disabledDate(time) {
+          return time.getTime() < Date.now() - 8.64e7;
+        }
+      }
     };
   },
   //将图片base64位拼接为图片地址

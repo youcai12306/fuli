@@ -194,7 +194,7 @@
 				}
 				console.log(data);
 
-				this.$post(`http://192.168.2.61:5041/order-aggregate/findOrderDetail?pageNum=1&pageSize=10`,
+				this.$post(`${this.$url1}:5041/order-aggregate/findOrderDetail?pageNum=1&pageSize=10`,
 					data).then(res => {
 					if (res.code === 200) {
 						this.data = res.data.list[0];
@@ -225,7 +225,7 @@
 					cancelButtonText: '取消',
 					type: 'warning'
 				}).then(() => {
-					this.$put(`http://192.168.2.61:5041/order-aggregate/canceOrder?orderId=${id}&status=-1`).then(res => {
+					this.$put(`${this.$url1}:5041/order-aggregate/canceOrder?orderId=${id}&status=-1`).then(res => {
 						if (res.code === 200) {
 							this.$message({
 								message: `取消订单成功`,
@@ -248,7 +248,7 @@
 					receiveId:id
 				}
 				console.log(id)
-				this.$fetch("http://192.168.2.50:5010/tourist-aggregate/address/selectReceiveAddressById",data).then(res => {
+				this.$fetch(`${this.$url}:5010/tourist-aggregate/address/selectReceiveAddressById`,data).then(res => {
 					if (res.code == 200) {
 						if(res.data){
 							this.item = res.data;
@@ -264,7 +264,7 @@
 				let data = {
 					orderSubId: this.orderId
 				}
-				this.$fetch("http://jwxra.natapp1.cc/payment-aggregate/findPayMentreByOrderId",data).then(res => {
+				this.$fetch(`${this.$url1}:2130/payment-aggregate/findPayMentreByOrderId`,data).then(res => {
 					if (res.code == 200) {
 						if(res.data){
 							this.item2 = res.data;

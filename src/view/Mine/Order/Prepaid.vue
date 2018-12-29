@@ -130,7 +130,7 @@
 			//再次下单
 			pay(id, price) {
 				// 拿到guid以及订单号
-				this.$post(`http://192.168.2.61:5041/order-aggregate/reSaveOrder?orderId=${id}`, {
+				this.$post(`${this.$url1}:5041/order-aggregate/reSaveOrder?orderId=${id}`, {
 					headers: {
 						"Content-Type": "application/json;charset=UTF-8"
 					}
@@ -145,7 +145,7 @@
 						// 读redis，成功创建订单后关闭遮罩层，跳转支付页面
 						this.times = setInterval(() => {
 							this.$fetch(
-								"http://192.168.2.55:5100/callBack-aggregate/getOccupation",
+								`${this.$url1}:5100/callBack-aggregate/getOccupation`,
 								data1
 							).then(res => {
 								if (res.code === 200) {
@@ -202,7 +202,7 @@
 				}
 				this.loading = true;
 				this.$post(
-					`http://192.168.2.61:5041/order-aggregate/findOrderDetail?pageNum=${this.page}&pageSize=${this.pageSize}`,
+					`${this.$url1}:5041/order-aggregate/findOrderDetail?pageNum=${this.page}&pageSize=${this.pageSize}`,
 					data).then(res => {
 					this.loading = false;
 					if (res.code === 200) {
@@ -229,7 +229,7 @@
 					cancelButtonText: '取消',
 					type: 'warning'
 				}).then(() => {
-					this.$put(`http://192.168.2.61:5041/order-aggregate/canceOrder?orderId=${id}&status=-1`).then(res => {
+					this.$put(`${this.$url1}:5041/order-aggregate/canceOrder?orderId=${id}&status=-1`).then(res => {
 						if (res.code === 200) {
 							this.$message({
 								message: `取消订单成功`,
@@ -267,7 +267,7 @@
 						returnCount: obj.productCount,
 						returnContent: val.value
 					}
-					this.$post("http://192.168.2.61:5080/returnCash-aggregate/refund/apply", this.$tool.formatDatas(data)).then(res => {
+					this.$post(`${this.$url1}:5080/returnCash-aggregate/refund/apply`, this.$tool.formatDatas(data)).then(res => {
 						if (res.code == 200) {
 							this.$message({
 								type: 'success',

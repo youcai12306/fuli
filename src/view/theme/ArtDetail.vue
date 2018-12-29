@@ -26,12 +26,6 @@
             <div class="swiper-pagination" slot="pagination"></div>
           </swiper>
         </div>
-        <div class="right floatRight">
-          <h3>售卖商品</h3>
-          <p>纪念品/卡通玩具/衣服帽子周边</p>
-          <h3>表演时长</h3>
-          <p>50分钟</p>
-        </div>
       </div>
       <div class="content">我们的22个特色人物将带您前往壮丽的海底世界。 通过使用高科技灯光和音频效果，您将永远不会忘记该节目带给您的有趣体验。</div>
     </div>
@@ -124,7 +118,7 @@ export default {
     .img-box {
       margin-top: 44px;
       .left {
-        width: 670px;
+        width: 100%;
         height: 400px;
         overflow: hidden;
         img {
@@ -168,6 +162,7 @@ export default {
 <style lang="scss">
 .animalTheme {
   .swiper-container {
+		width: 100%;
     height: 100%;
     .swiper-pagination {
       bottom: 0;

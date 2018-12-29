@@ -414,7 +414,7 @@ export default {
                     price2: this.price2
                   }
                 });
-              } else if (res.code === 403) {
+              } else if (res.code === 400) {
                 this.open();//订单占用失败调用提示信息方法
                 this.$router.push("./mine")
                
@@ -426,10 +426,8 @@ export default {
         }else if(res.code === 403){
           this.$router.push("./mine")
            console.log(res);
-           alert("下单失败");
+          
         }
-      }).catch((error)=>{
-        console.log(error)
       })
       
     }
@@ -724,6 +722,8 @@ export default {
   background-color: #fff;
   border-color: transparent;
   color: transparent;
+  /* 改变提交订单悬浮样式 */
+  background-image: url(../../assets/img/but1.png);
 }
 .el-form > span {
   position: relative;

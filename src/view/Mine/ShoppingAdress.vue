@@ -141,7 +141,7 @@ export default {
     init() {
       let Uid = this.$store.getters.getUserData.userId;
       this.$fetch(
-        "http://192.168.2.50:5010/tourist-aggregate/address/selectReceiveAddress",
+        `${this.$url}:5010/tourist-aggregate/address/selectReceiveAddress`,
         { touristId: Uid }
       ).then(res => {
         this.list = res.data;
@@ -160,7 +160,7 @@ export default {
       })
         .then(() => {
           this.$fetch(
-            "http://192.168.2.50:5010/tourist-aggregate/address/deleteReceiveAddress",
+            `${this.$url}:5010/tourist-aggregate/address/deleteReceiveAddress`,
             { id: id }
           ).then(res => {
             if (res.code === 200) {
@@ -286,7 +286,7 @@ export default {
           defaultSign: this.checkType
         };
         this.$post(
-          "http://192.168.2.50:5010/tourist-aggregate/address/addReceiveAddress ",
+          `${this.$url}:5010/tourist-aggregate/address/addReceiveAddress`,
           data,
           { headers: { "Content-Type": "application/json;charset=UTF-8" } }
         ).then(res => {
@@ -311,7 +311,7 @@ export default {
           receiveArea: this.select.area
         };
         this.$post(
-          "http://192.168.2.50:5010/tourist-aggregate/address/updateReceiveAddress",
+          `${this.$url}:5010/tourist-aggregate/address/updateReceiveAddress`,
           data,
           { headers: { "Content-Type": "application/json;charset=UTF-8" } }
         ).then(res => {
@@ -330,7 +330,7 @@ export default {
     setDefault(index, id) {
       let Uid = this.$store.getters.getUserData.userId;
       this.$fetch(
-        "http://192.168.2.50:5010/tourist-aggregate/address/setDefaultReceiveAddress",
+        `${this.$url}:5010/tourist-aggregate/address/setDefaultReceiveAddress`,
         {
           touristId: Uid,
           id: id

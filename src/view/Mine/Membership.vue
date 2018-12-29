@@ -218,7 +218,7 @@ export default {
         idCard: this.IdCard
       };
       this.$post(
-        "http://192.168.2.50:5010/tourist-aggregate/updateTourist",
+        `${this.$url}:5010/tourist-aggregate/updateTourist`,
         data
       ).then(res => {
         if (res.code === 200) {
@@ -257,7 +257,7 @@ export default {
         this.codeTip = "";
       }
       this.$post(
-        "http://192.168.2.50:5010/tourist-aggregate/updateTouristMobile ",
+        `${this.$url}:5010/tourist-aggregate/updateTouristMobile`,
         {
           id: this.$store.getters.getUserData.userId,
           mobile: this.phone,
@@ -315,7 +315,7 @@ export default {
     changePwd() {
       if (this.isOk && this.isOk1 && this.isOk2) {
         this.$post(
-          "http://192.168.2.50:5010/tourist-aggregate/updateTouristPassword",
+          `${this.$url}:5010/tourist-aggregate/updateTouristPassword`,
           {
             id: this.$store.getters.getUserData.userId,
             passWord: this.password,
@@ -351,7 +351,7 @@ export default {
       }
       let that = this;
       clearInterval(that.setsund);
-      this.$fetch("http://192.168.2.50:5010/tourist-aggregate/getSmsCode", {
+      this.$fetch(`${this.$url}:5010/tourist-aggregate/getSmsCode`, {
         mobile: this.phone,
         smsFlag: "sms_change_mobile"
       }).then(res => {
@@ -374,7 +374,7 @@ export default {
     },
     //获取数据
     init(){
-      this.$fetch('http://192.168.2.50:5010/tourist-aggregate/selectTourist',{touristId:this.$store.getters.getUserData.userId}).then((res) =>{
+      this.$fetch(`${this.$url}:5010/tourist-aggregate/selectTourist`,{touristId:this.$store.getters.getUserData.userId}).then((res) =>{
           if(res.code === 200){
             this.name = res.data.nickName;
             if(res.data.sex === false) this.sex = 0;

@@ -123,7 +123,7 @@ export default {
     //查询购物车
     searchShoppingCar(Uid) {
       this.$fetch(
-        "http://101.201.101.138:6061/shoppingCart-aggregate/selectShopCarts",
+        `${this.$url1}:6061/shoppingCart-aggregate/selectShopCarts`,
         {
           touristId: Uid
         }
@@ -162,7 +162,7 @@ export default {
     //删除购物车商品
     delShopping(item, key) {
       this.$fetch(
-        "http://101.201.101.138:6061/shoppingCart-aggregate/deleteshopCart",
+        `${this.$url1}:6061/shoppingCart-aggregate/deleteshopCart`,
         {
           id: item.id
         }
@@ -257,7 +257,7 @@ export default {
       let ids = this.arr1.join(",");
 
       this.$fetch(
-        "http://101.201.101.138:6061/shoppingCart-aggregate/bathDeleteShopCarts?ids=" +
+        `${this.$url1}:6061/shoppingCart-aggregate/bathDeleteShopCarts?ids=` +
           ids
       ).then(res => {
         console.log(11);

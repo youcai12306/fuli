@@ -23,7 +23,7 @@
           <router-link :to="{path:'/'}">
             <i></i>
             <span class="li-itme">{{item.infoTitle}}</span>
-            <span class="li-span">来自富力官网 | {{item.createTime}}</span>
+            <span class="li-span">{{item.createTime}}</span>
           </router-link>
         </li>
       </ul>

@@ -15,7 +15,7 @@
         </div>
         <router-link to="/noticeList" tag="div" class="title-right floatRight">返回</router-link>
       </div>
-      <div class="content">{{data.infoContent}}</div>
+      <div class="content" v-html="data.infoContent"></div>
     </div>
   </div>
 </template>

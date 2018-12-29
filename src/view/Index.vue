@@ -173,7 +173,7 @@
                 <img src="../assets/img/index-img6.png" alt>
                 <p>交通指南</p>
               </router-link>
-              <router-link :to="{path:'/ditu',query:{id:'8'}}" tag="li" class="li4">
+              <router-link :to="{path:'/Park'}" tag="li" class="li4">
                 <img src="../assets/img/index-img7.png" alt>
                 <p>园区介绍</p>
               </router-link>

@@ -140,7 +140,7 @@
 		width: 100%;
 		background: #fff url(../../assets/img/risk-bg.png) no-repeat top center;
 		background-size: 1920px 100%;
-		padding-top: 408px;
+		padding-top: 376px;
 		padding-bottom: 50px;
 
 		.title {
@@ -155,7 +155,7 @@
 
 			.risk-title {
 				position: absolute;
-				top: -370px;
+				top: -345px;
 				left: 390px;
 				width: 350px;
 				color: #fff;

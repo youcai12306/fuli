@@ -14,6 +14,8 @@ const Register = r => require.ensure([], () => r(require('@/view/Register')), 'R
 const Forget = r => require.ensure([], () => r(require('@/view/Forget')), 'Forget')
 //首页
 const Index = r => require.ensure([], () => r(require('@/view/Index')), 'Index')
+//园区介绍
+const Park = r => require.ensure([], () => r(require('@/view/Park/Park')), 'Park')
 //产品列表
 const Order = r => require.ensure([], () => r(require('@/view/Orderonline/Order')), 'Order')
 const Tickets = r => require.ensure([], () => r(require('@/view/Orderonline/Tickets')), 'Tickets')
@@ -94,6 +96,11 @@ let router = new Router({
 			path: '/index',
 			name: 'Index',
 			component: Index, //首页
+		},
+		{
+			path: '/park',
+			name: 'Park',
+			component: Park, //园区介绍
 		},
 		{
 			path: '/login',

@@ -256,6 +256,7 @@ import { swiper, swiperSlide } from "vue-awesome-swiper";
 import { IMG_Url } from "@/package/common";
 import Header from "@/components/Header"; //引入头部
 import defaultHead from "../assets/img/index-img8.png";
+import {HTTP_DETAIL} from '@/package/common'
 export default {
   name: "Index",
   data() {
@@ -303,7 +304,7 @@ export default {
     //获取新闻列表
     getNewList() {
       this.$post(
-        "http://192.168.2.61:2670/mongodb-mucon/info/primary/search?type=0&pageSize=5&pageNum=1"
+        this.$url1+":2670/mongodb-mucon/info/primary/search?type=1&pageSize=5&pageNum=1"
       ).then(res => {
         if (res.code === 200) {
           let newList = res.data.content;
@@ -320,7 +321,7 @@ export default {
               }
             });
             this.$post(
-              "http://192.168.2.61:2670/mongodb-mucon/info/primary/get?infoId=" +
+              ":2670/mongodb-mucon/info/primary/get?infoId=" +
                 this.newFirst.id
             ).then(res => {
               if (res.code === 200) {
@@ -711,6 +712,10 @@ export default {
                   font-size: 16px;
                   font-weight: bold;
                   color: rgba(51, 51, 51, 1);
+                  max-width: 280px;
+                  overflow: hidden;
+                  white-space: nowrap;
+                  text-overflow: ellipsis;
                 }
                 a {
                   font-size: 12px;

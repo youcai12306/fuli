@@ -10,6 +10,8 @@ import tool from './package/tool'
 import {post,fetch,patch,put} from './package/http'
 import store from './vuex/store'
 
+import {HTTP_DETAIL1,HTTP_DETAIL} from '@/package/common'
+
 Vue.use(ElementUI);
 
 //工具类
@@ -20,6 +22,8 @@ Vue.prototype.$post=post;
 Vue.prototype.$fetch=fetch;
 Vue.prototype.$patch=patch;
 Vue.prototype.$put=put;
+Vue.prototype.$url1 = HTTP_DETAIL1;
+Vue.prototype.$url = HTTP_DETAIL;
 
 
 //vue点击图片预览放大 https://github.com/fengyuanchen/viewerjs

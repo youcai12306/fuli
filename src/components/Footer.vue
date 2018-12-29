@@ -67,7 +67,7 @@ export default {
       margin-left: 200px;
       .logo {
         width: 90px;
-        height: 73px;
+        height: 94px;
         padding-top: 66px;
         margin-right: 60px;
       }

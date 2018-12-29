@@ -3,14 +3,14 @@
     <Header></Header>
     <div class="banner">
       <div class="banner-imgs">
-        <img src="../assets/img/index-banner1.png" alt v-show="0 === index">
-        <img src="../assets/img/img102.png" alt v-show="1 === index">
-        <img src="../assets/img/index-banner1.png" alt v-show="2 === index">
-        <img src="../assets/img/index-banner1.png" alt v-show="3 === index">
-        <img src="../assets/img/index-banner1.png" alt v-show="4 === index">
-        <img src="../assets/img/index-banner1.png" alt v-show="5 === index">
-        <img src="../assets/img/index-banner1.png" alt v-show="6 === index">
-        <img src="../assets/img/index-banner1.png" alt v-show="7 === index">
+        <img src="../assets/img/index-banner1.png" alt v-show="0 === index" @click="jumpHuodongDetail(0)">
+        <img src="../assets/img/img102.png" alt v-show="1 === index" @click="jumpHuodongDetail(0)">
+        <img src="../assets/img/index-banner1.png" alt v-show="2 === index" @click="jumpHuodongDetail(0)">
+        <img src="../assets/img/index-banner1.png" alt v-show="3 === index" @click="jumpHuodongDetail(0)">
+        <img src="../assets/img/index-banner1.png" alt v-show="4 === index" @click="jumpHuodongDetail(0)">
+        <img src="../assets/img/img102.png" alt v-show="5 === index" @click="jumpHuodongDetail(0)">
+        <img src="../assets/img/index-banner1.png" alt v-show="6 === index" @click="jumpHuodongDetail(0)">
+        <img src="../assets/img/index-banner1.png" alt v-show="7 === index" @click="jumpHuodongDetail(0)">
       </div>
       <div class="banner-content clearDiv">
         <div class="content-list">游玩时间
@@ -82,7 +82,7 @@
               </swiper-slide>
               <swiper-slide>
                 <img
-                  src="../assets/img/index-img16.png"
+                  src="../assets/img/index-img12.png"
                   alt
                   :class="{imgActive:index === 4}"
                   @click.stop="jumpImg(4)"
@@ -90,7 +90,7 @@
               </swiper-slide>
               <swiper-slide>
                 <img
-                  src="../assets/img/index-img17.png"
+                  src="../assets/img/img101.png"
                   alt
                   :class="{imgActive:index === 5}"
                   @click.stop="jumpImg(5)"
@@ -98,7 +98,7 @@
               </swiper-slide>
               <swiper-slide>
                 <img
-                  src="../assets/img/index-img12.png"
+                  src="../assets/img/index-img14.png"
                   alt
                   :class="{imgActive:index === 6}"
                   @click.stop="jumpImg(6)"
@@ -106,7 +106,7 @@
               </swiper-slide>
               <swiper-slide>
                 <img
-                  src="../assets/img/index-img13.png"
+                  src="../assets/img/index-img15.png"
                   alt
                   :class="{imgActive:index === 7}"
                   @click.stop="jumpImg(7)"
@@ -453,11 +453,12 @@ export default {
       top:0;
       height: 100%;
       width: 100%;
-      z-index: -1;
+     // z-index: -1;
       img {
         // height: 864px;
         height: 100%;
         width: 100%;
+        cursor: pointer;
       }
     }
     .banner-content {
@@ -470,6 +471,10 @@ export default {
       font-size: 14px;
       font-weight: bold;
       color: rgba(255, 255, 255, 1);
+      position: absolute;
+      top:0;
+      left:50%;
+      transform: translateX(-50%);
       .content-list {
         float: left;
         .select-list {

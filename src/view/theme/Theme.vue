@@ -502,6 +502,7 @@
 			//切换下一张
 			next() {
 				this.index++;
+				console.log(this.index)
 				this.swiper.slideTo(this.index, 500, false);
 			},
 			prevs() {
@@ -536,13 +537,14 @@
 		},
 		watch: {
 			index: function(newVal, oldVal) {
-				if (newVal === 6) {
-					this.swiper.slideTo(newVal + 1, 500, false); //切换到看不见的slide，速度为.5秒
-				} else if (newVal === 12) {
+				//console.log(newVal)
+				if (newVal >= 7 && newVal<= 12 ) {
+					this.swiper.slideTo(newVal+1, 500, false); //切换到看不见的slide，速度为.5秒
+				} else if (newVal === 13) {
 					this.index = 0;
 					this.swiper.slideTo(this.index, 500, false); //切换到第一个slide，速度为.5秒
 				} else if (newVal === -1) {
-					this.index = 7;
+					this.index = 11;
 					this.swiper.slideTo(this.index, 500, false); //切换到最后一个slide，速度为.5秒
 				}
 			}

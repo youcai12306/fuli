@@ -16,7 +16,7 @@
 				<div class="titles clearDiv">
 					<div class="title-left floatLeft">
 						<div class="one">{{data.infoTitle}}</div>
-						<div class="two">{{data.createTime}}&nbsp;&nbsp; 来源：富力海洋欢乐世界 浏览次数：65</div>
+						<div class="two">{{data.createTime}}&nbsp;&nbsp; 来源：海洋欢乐世界</div>
 					</div>
 					<router-link to="/specialOffier" tag="div" class="title-right floatRight">返回</router-link>
 				</div>

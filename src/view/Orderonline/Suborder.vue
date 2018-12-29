@@ -297,7 +297,7 @@ export default {
       });
     //  将购物车 已提交的订单清空，
       this.$fetch(
-        "http://192.168.2.61:6061/shoppingCart-aggregate/bathDeleteShopCarts?ids=" +
+        "http://101.201.101.138:6061/shoppingCart-aggregate/bathDeleteShopCarts?ids=" +
           this.ids
       ).then(res => {
         // console.log(11);
@@ -338,7 +338,7 @@ export default {
       // console.log(num1);
       this.count = num1;
 
-      this.$fetch("http://192.168.2.61:5001/product-aggregate/find/" + id, {
+      this.$fetch("http://101.201.101.138:5001/product-aggregate/find/" + id, {
         stockId: stockId,
         saleType: this.saleType
       }).then(res => {
@@ -360,7 +360,7 @@ export default {
            touristId: this.$store.getters.getUserData.userId
         }
         // 调用邮寄接口
-        this.$fetch('http://192.168.2.50:5010/tourist-aggregate/address/selectOneReceiveAddress',data2).then((res) =>{
+        this.$fetch('http://101.201.101.138:5010/tourist-aggregate/address/selectOneReceiveAddress',data2).then((res) =>{
           // console.log(res);
           this.name1 = res.data.receivePersonName;
           this.phone1 = res.data.receivePersonMobile;
@@ -385,7 +385,7 @@ export default {
         receiveIdentityCode: this.numberValidateForm.name2
       };
       // 拿到guid以及订单号
-      this.$post("http://192.168.2.61:5041/order-aggregate/save", data, {
+      this.$post("http://101.201.101.138:5041/order-aggregate/save", data, {
         headers: { "Content-Type": "application/json;charset=UTF-8" }
       }).then(res => {
         console.log(res)
@@ -400,7 +400,7 @@ export default {
           // 读redis，成功创建订单后关闭遮罩层，跳转支付页面
           this.times = setInterval(() => {
             this.$fetch(
-              "http://192.168.2.55:5100/callBack-aggregate/getOccupation",
+              "http://101.201.101.138:5100/callBack-aggregate/getOccupation",
               data1
             ).then(res => {
               console.log(res);
@@ -423,8 +423,8 @@ export default {
           }, 3000);
 
           ///
-        }else if(res.code === 400){
-          this.$router.push("/mine")
+        }else if(res.code === 403){
+          this.$router.push("./mine")
            console.log(res);
            alert("下单失败");
         }

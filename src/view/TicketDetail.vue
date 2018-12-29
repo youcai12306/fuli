@@ -172,7 +172,7 @@ export default {
       let stockId = this.$route.query.stockId;
       // console.log(id);
       // console.log(stockId);
-      this.$fetch("http://192.168.2.61:5001/product-aggregate/find/" + id, {
+      this.$fetch("http://101.201.101.138:5001/product-aggregate/find/" + id, {
         stockId: stockId
       }).then(res => {
         // console.log(res);
@@ -181,7 +181,7 @@ export default {
           this.product = res.data;
           //请求图片接口
           this.$fetch(
-            "http://192.168.2.61:2600/staticResource-mucon/selectFileById",
+            "http://101.201.101.138:2600/staticResource-mucon/selectFileById",
             { id: this.product.pictureId }
           ).then(res => {
             this.img = IMG_Url + res.data.fileName;
@@ -298,7 +298,7 @@ export default {
         productCount: this.num1
       };
       this.$post(
-        "http://192.168.2.61:6061/shoppingCart-aggregate/addToshopCart",
+        "http://101.201.101.138:6061/shoppingCart-aggregate/addToshopCart",
         {
           touristId: Uid,
           productId: this.product.id,
@@ -315,7 +315,7 @@ export default {
     //查询购物车
     searchShoppingCar(Uid) {
       this.$fetch(
-        "http://192.168.2.61:6061/shoppingCart-aggregate/selectShopCarts",
+        "http://101.201.101.138:6061/shoppingCart-aggregate/selectShopCarts",
         {
           touristId: Uid
         }

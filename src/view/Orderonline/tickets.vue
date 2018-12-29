@@ -126,7 +126,7 @@ export default {
       list.forEach((v, k) => {
         this.imgs.forEach(val => {
           if (v.pictureId == val.id) {
-            v.pictureId = "http://192.168.2.61:2600/file/" + val.fileName;
+            v.pictureId = "http://101.201.101.138:2600/file/" + val.fileName;
           }
         });
         str.push(v);
@@ -197,7 +197,7 @@ export default {
     //获取门票信息
     getTicketList(typeId, date, pageSize, pageIndex) {
       //请求后台接口
-      this.$fetch("http://192.168.2.61:5001/product-aggregate/findProductByStock", {
+      this.$fetch("http://101.201.101.138:5001/product-aggregate/findProductByStock", {
         playDate: date
       })
         .then(res => {
@@ -228,7 +228,7 @@ export default {
           });
           // console.log(xin2);
           let imgs = [];
-          this.$fetch("http://192.168.2.61:2600/staticResource-mucon/selectFiles", {
+          this.$fetch("http://101.201.101.138:2600/staticResource-mucon/selectFiles", {
             ids: xin2
           }).then(res => {
             console.log(res.data);

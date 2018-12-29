@@ -186,7 +186,7 @@
                     <div class="floatLeft">{{newFirst.infoTitle}}</div>
                     <router-link to="/news" class="floatRight">更多>></router-link>
                   </div>
-                  <div class="floatLeft box-bottom">{{newFirstContent}}</div>
+                  <div class="floatLeft box-bottom" v-html='newFirstContent'></div>
                 </div>
               </div>
               <ul class="bottom">

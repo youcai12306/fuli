@@ -311,16 +311,15 @@ export default {
           if (newList != null) {
             this.newFirst = res.data.content[0];
             this.$fetch(
-              "http://192.168.2.61:2600/staticResource-mucon/selectFiles",
-              {
-                ids: this.newFirst.infoPic
-              }
+              this.$url1+
+              ":2600/staticResource-mucon/selectFileById?id="+this.newFirst.infoPic[0].picid,
             ).then(res => {
               if (res.code === 200) {
-                this.img = IMG_Url + res.data[0].fileName;
+                this.img = IMG_Url + res.data.fileName;
               }
             });
             this.$post(
+              this.$url1+
               ":2670/mongodb-mucon/info/primary/get?infoId=" +
                 this.newFirst.id
             ).then(res => {
@@ -338,7 +337,8 @@ export default {
       this.options = [];
       this.key = "";
       this.$fetch(
-        "http://192.168.2.61:5001/product-aggregate/findProductByStock",
+        this.$url1+
+        ":5001/product-aggregate/findProductByStock",
         {
           playDate: this.date
         }

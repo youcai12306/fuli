@@ -11,14 +11,14 @@
       <div class="titles clearDiv">
         <div class="title-left floatLeft">
           <div class="one">{{data.infoTitle}}</div>
-          <div class="two">{{data.createTime}}&nbsp;&nbsp; 来源：富力海洋欢乐世界 浏览次数：65</div>
+          <div class="two">{{data.createTime}}&nbsp;&nbsp; 来源：海洋欢乐世界</div>
         </div>
         <router-link to="/newList" tag="div" class="title-right floatRight">返回</router-link>
       </div>
-      <div class="content">
+      <!-- <div class="content">
            <img src="../../assets/img/new-bg2.png">
-      </div>
-      <div>{{data.infoContent}}</div>
+      </div> -->
+      <div v-html="data.infoContent" class="aa"></div>
     </div>
   </div>
 </template>
@@ -35,7 +35,8 @@ export default {
     document.title = "新闻中心详情";
   },
   mounted(){
-     this.$post('http://192.168.2.61:2670/mongodb-mucon/info/primary/get?infoId='+this.$route.query.id).then((res) =>{
+     this.$post(this.$url1+':2670/mongodb-mucon/info/primary/get?infoId='+this.$route.query.id).then((res) =>{
+      //  console.log(res)
       this.data = res.data
     })
   }
@@ -119,6 +120,9 @@ export default {
           width: 681px;
           height: 315px;
         }
+    }
+    .aa{
+      text-align: center;
     }
   }
 }

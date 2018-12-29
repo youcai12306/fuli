@@ -32,7 +32,7 @@ export default {
     document.title = "公告中心详情";
   },
   mounted(){
-    this.$post('http://192.168.2.61:2670/mongodb-mucon/info/primary/get?infoId='+this.$route.query.id).then((res) =>{
+    this.$post(this.$url+'/mongodb-mucon/info/primary/get?infoId='+this.$route.query.id).then((res) =>{
       this.data = res.data
     })
   }

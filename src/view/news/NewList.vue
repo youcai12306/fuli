@@ -12,7 +12,7 @@
         <img :src="img" alt="图片" @error="userAvaterError">
         <div class="bt">
           <p class="p1">{{list.infoTitle}}</p>
-          <p class="p2">来自富力官网 | {{list.createTime}}</p>
+          <p class="p2">{{list.createTime}}</p>
         </div>
         <div class="button"></div>
       </div>
@@ -21,7 +21,7 @@
         <li v-for="(item,key) in list1" :key="key" @click="jumpDetail(item.id)">
           <i></i>
           <span class="li-itme">{{item.infoTitle}}</span>
-          <span class="li-span">来自富力官网 | {{item.createTime}}</span>
+          <span class="li-span">{{item.createTime}}</span>
         </li>
       </ul>
     </div>
@@ -62,14 +62,15 @@ export default {
     // 获取新闻數據
     GetList(type, pageSize, pageIndex) {
       this.$post(
-        "http://192.168.2.61:2670/mongodb-mucon/info/primary/search?type=0&pageSize=" +
+        this.$url1+
+        ":2670/mongodb-mucon/info/primary/search?type=1&pageSize=" +
           pageSize +
           "&pageNum=" +
           pageIndex
       ).then(res => {
         if (res.code === 200) {
           this.list = res.data.content[0];
-          this.$fetch("http://192.168.2.61:2600/staticResource-mucon/selectFiles", {
+          this.$fetch(this.$url+":2600/staticResource-mucon/selectFiles", {
             ids: this.list.infoPic
           }).then(res => {
             if(res.code === 200){

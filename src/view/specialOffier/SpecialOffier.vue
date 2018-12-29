@@ -53,7 +53,7 @@
 <style scoped="" lang="scss">
 	.news {
 		width: 100%;
-		height: 1802px;
+		height: 1800px;
 		background: #fff url(../../assets/img/specialOffier-bg.png) no-repeat top center;
 
 		.main-contion {

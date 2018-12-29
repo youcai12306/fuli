@@ -156,7 +156,7 @@
         <div class="right-info">
           <div class="login" ref="box">
             <span v-if="!showMineInfo" @click.stop="jumpMine()">登录/注册</span>
-            <span v-else class="mine-mengbox">
+            <span v-else class="mine-mengbox span">
               {{name}}
               <div class="person-info">
                 <div class="info-one">
@@ -357,11 +357,16 @@ export default {
 
         .login {
           float: left;
-          background: url(../assets/img/index-login.png) no-repeat 0 0;
-          padding-left: 20px;
+         // background: url(../assets/img/index-login.png) no-repeat 0 0;
+         // padding-left: 20px;
           position: relative;
           span {
+            background: url(../assets/img/index-login.png) no-repeat 0 center;
             padding: 20px 0;
+            padding-left: 20px;
+          }
+          .span{
+             background: url(../assets/img/index-login1.png) no-repeat 0 center;
           }
           &:hover {
             cursor: pointer;

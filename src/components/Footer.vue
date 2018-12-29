@@ -3,7 +3,7 @@
     <div class="footer">
       <div class="clearDiv footer-top">
         <router-link to="/">
-          <img src="../assets/img/footer-logo.png" alt class="logo floatLeft">
+          <img src="../assets/img/footer-logo1.png" alt class="logo floatLeft">
         </router-link>
         <router-link to="/">
           <img src="../assets/img/footer-logo.png" alt class="logo floatLeft">
@@ -27,7 +27,7 @@
               <p class="phone">400-XXXXXXXXXX</p>
             </div>
           </div>
-          <div>地址：海南XXXXXXXXXXX富力海洋欢乐世界</div>
+          <div>地址：海南省陵水黎族自治县黎安镇富力海洋欢乐世界</div>
         </div>
         <!-- <div class="down clearDiv">
 					<div class="iphone">iphone下载</div>

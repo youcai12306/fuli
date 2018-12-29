@@ -242,9 +242,9 @@
       <img src="../assets/img/index-juedui-phone.png" alt>
       <p>客服电话</p>
       <p style="margin-top:10px">400-xxxxxx</p>
-      <img src="../assets/img/index-juedui-code.png" alt>
+      <img src="../assets/img/index-sever.jpg" alt>
       <p>服务号</p>
-      <img src="../assets/img/index-juedui-code.png" alt>
+      <img src="../assets/img/index-dingyue.jpg" alt>
       <p>订阅号</p>
     </div>
   </div>
@@ -951,6 +951,8 @@ export default {
     padding-top: 175px;
     img {
       margin-top: 30px;
+      width: 75px;
+      height: 75px;
     }
     p {
       height: 17px;

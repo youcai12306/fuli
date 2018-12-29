@@ -8,7 +8,7 @@
 
 		<!-- 列表 -->
 		<ul class="content clearDiv">
-			<template v-for="item in 6">
+			<template v-for="item in 2">
 				<router-link tag="li" :to="{path:'/EventsDetail',query:{id:'5c1f5349f8dac609dd5cd6b7'}}">
 					<img src="../../assets/img/specialOffier-bg1.png" alt>
 					<div class="box">

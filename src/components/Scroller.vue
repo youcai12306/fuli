@@ -1,4 +1,5 @@
 <template>
+<!-- 公告滚动 -->
 	<div class="wrap">
 		<div id="box">
 			<div id="marquee">{{text}}</div>

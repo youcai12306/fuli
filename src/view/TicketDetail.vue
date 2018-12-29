@@ -3,13 +3,19 @@
     <Header></Header>
     <div class="content">
       <div class="nav clearDiv">
-        <div class="floatLeft" @click="orderr">当前位置：网上订购>零售商品详情页</div>
-        <div class="floatRight" @click="myorder">我的订单</div>
-        <div class="floatRight shopping-car" @click="jumpShoppingCar">
-          <img
-            src="../assets/img/shopping-car.png"
-            
-          >购物车(
+        <div
+          class="floatLeft"
+          @click="orderr"
+        >当前位置：网上订购>门票详情页</div>
+        <div
+          class="floatRight"
+          @click="myorder"
+        >我的订单</div>
+        <div
+          class="floatRight shopping-car"
+          @click="jumpShoppingCar"
+        >
+          <img src="../assets/img/shopping-car.png">购物车(
           <span>{{shopNum}}</span>)
         </div>
       </div>
@@ -65,7 +71,8 @@
                 :precision="0"
                 :step="1"
                 class="num-change"
-              ></el-input-number>
+              >
+              </el-input-number>
             </div>
             <!-- <p class="tip">注：一个手机号最多可购买{{product.commitCount}}张票</p> -->
             <!-- <div class="pay pay-type">
@@ -115,30 +122,33 @@
 import { IMG_Url } from "../package/common.js";
 import "swiper/dist/css/swiper.css";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
-import Header from '@/components/Header'
+import Header from "@/components/Header";
 export default {
   data() {
     return {
       swiperOption: {
         slidesPerView: 3,
-        notNextTick: true
+        notNextTick: true,
+        slideToClickedSlide: true, //点击下面的小图片修改上面的大图
+        preventClicks: false, //用于防止触摸时触发链接跳转
+        preventLinksPropagation: false //阻止click冒泡。拖动Swiper时阻止click事件
       },
       imgs: [
         "../static/piao-1.png",
         "../static/le0.png",
         "../static/piao-1.png",
-        "../static/le0.png",
+        "../static/le0.png"
       ],
       index: 0,
       num1: 1,
       changeA: 0,
       changeB: 0,
-      img:[],
-      img3 :"",
+      img: [],
+      img3: "",
       time: "2018.12.09 08.00- 17.30",
       product: {},
       shopNum: 0,
-      list:""
+      list: ""
     };
   },
   components: {
@@ -169,36 +179,39 @@ export default {
           });
         }
       });
-      
     },
+    
     prev() {
       this.swiper.slidePrev();
-      
 
       this.index--;
-      
-      this.imgs.index = this.img3
-      
+
+      this.imgs.index = this.img3;
+
       if (this.index <= 0) {
         this.index = 0;
       }
-      console.log(this.index)
-      this.img3 = this.imgs[this.index]
+      console.log(this.index);
+      this.img3 = this.imgs[this.index];
       // console.log(this.index);
     },
     next() {
       this.swiper.slideNext();
       this.index++;
-     
+      //  this.swiper.slideTo(this.index, 500, false);
+
       if (this.index >= this.imgs.length) {
         this.index = this.imgs.length - 1;
-       }
-       this.img3 = this.imgs[this.index]
-      
+      }
+      this.img3 = this.imgs[this.index];
     },
 
     handleChange(value) {
+      // console.log(value)
       // console.log(typeof value);
+      // if(typeof(value) == "undefined"){
+      //     this.num1 == 1
+      // }
     },
     //配送方式切换
     changeGiveType(type) {
@@ -209,12 +222,12 @@ export default {
       this.changeB = type;
     },
     // 查看我的订单
-    myorder(){
-      this.$router.push("./mine")
+    myorder() {
+      this.$router.push("./mine");
     },
     // 网上订购
-    orderr(){
-      this.$router.push("./tickets/1")
+    orderr() {
+      this.$router.push("./tickets/1");
     },
     //是否可退订
     canDebook(type) {
@@ -222,11 +235,12 @@ export default {
     },
     //跳转提交订单页面
     jumpSubmitOrder(id, stockId) {
-			let Uid = this.$store.getters.getUserData.userId;
-			if(Uid == undefined){//判断是否登录
-				this.$router.push("/login");
-				return;
-			}
+      let Uid = this.$store.getters.getUserData.userId;
+      if (Uid == undefined) {
+        //判断是否登录
+        this.$router.push("/login");
+        return;
+      }
       // this.$router.push({
       //   path: "/Suborder",
       //   query: {
@@ -243,14 +257,14 @@ export default {
             saleType: this.product.saleType,
             id: this.product.id,
             stockId: this.$route.query.stockId,
-            num: this.num1 
+            num: this.num1
           }
         });
       } else if (this.changeA === 1) {
         this.$router.push({
           path: "/Suborder2",
           query: {
-             saleType:2,
+            saleType: 2,
             id: this.product.id,
             stockId: this.$route.query.stockId,
             num: this.num1 //
@@ -262,13 +276,14 @@ export default {
     addShoppingCar() {
       let Uid = this.$store.getters.getUserData.userId;
       let createDateId = this.$route.query.stockId;
-			if(Uid == undefined){//判断是否登录
-				this.$router.push("/login");
-				return;
-			}
-			
+      if (Uid == undefined) {
+        //判断是否登录
+        this.$router.push("/login");
+        return;
+      }
+
       let data = {
-        touristId: Uid, 
+        touristId: Uid,
         productId: this.product.id,
         createDateId: createDateId,
         productCount: this.num1
@@ -276,7 +291,7 @@ export default {
       this.$post(
         "http://192.168.2.61:6061/shoppingCart-aggregate/addToshopCart",
         {
-          touristId: Uid, 
+          touristId: Uid,
           productId: this.product.id,
           createDateId: createDateId,
           productCount: this.num1
@@ -290,9 +305,12 @@ export default {
     },
     //查询购物车
     searchShoppingCar(Uid) {
-      this.$fetch("http://192.168.2.61:6061/shoppingCart-aggregate/selectShopCarts", {
-        touristId: Uid 
-      }).then(res => {
+      this.$fetch(
+        "http://192.168.2.61:6061/shoppingCart-aggregate/selectShopCarts",
+        {
+          touristId: Uid
+        }
+      ).then(res => {
         if (res.code === 200) {
           // console.log(res.data);
           let list = res.data;
@@ -309,11 +327,20 @@ export default {
       this.$router.push("/shoppingCar");
     }
   },
+  watch: {
+    num1(val) {
+      console.log(val);
+      if (typeof val == "undefined") {
+        typeof this.val == "number";
+        this.num1 = 1;
+      }
+    }
+  },
   mounted() {
     let Uid = this.$store.getters.getUserData.userId;
     this.init();
     this.searchShoppingCar(Uid);
-    this.img3 = this.imgs[0]
+    this.img3 = this.imgs[0];
   },
   computed: {
     swiper() {
@@ -328,7 +355,7 @@ export default {
   height: 100%;
   background: url(../assets/img/pdDetail-bg.png) no-repeat 0 0;
   background-size: 1920px 100%;
-  .floatRight{
+  .floatRight {
     cursor: pointer;
   }
   .content {
@@ -343,7 +370,7 @@ export default {
       font-weight: 400;
       color: rgba(102, 102, 102, 1);
       margin-bottom: 38px;
-      .floatLeft{
+      .floatLeft {
         cursor: pointer;
       }
       .shopping-car {
@@ -487,7 +514,7 @@ export default {
             margin-top: 34px;
             width: 146px;
             height: 43px;
-						cursor: pointer;
+            cursor: pointer;
           }
           .img1 {
             margin-left: 10px;
@@ -522,7 +549,7 @@ export default {
         }
       }
     }
-    .swiper-container-horizontal{
+    .swiper-container-horizontal {
       cursor: pointer;
     }
   }

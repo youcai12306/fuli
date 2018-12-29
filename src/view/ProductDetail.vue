@@ -64,7 +64,7 @@
                 label="描述文字"
                 :precision="0"
                 :step="1"
-                class="num-change"
+                class="num-change" @blur="isNull"
               ></el-input-number>
             </div>
             <!-- <p class="tip">注：一个手机号最多可购买{{product.commitCount}}张票</p> -->
@@ -147,6 +147,13 @@ export default {
     Header
   },
   methods: {
+		isNull(){
+			if(this.num1 == undefined){
+				this.$nextTick(function(){
+					this.num1 = 1;
+				})
+			}
+		},
     //初始化数据
     init() {
       let id = this.$route.query.id;

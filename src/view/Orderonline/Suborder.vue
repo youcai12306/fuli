@@ -186,6 +186,7 @@
                     <el-button
                       type="primary"
                       @click="submitForm('numberValidateForm')"
+                      :plain="true"
                     ></el-button>
 
                   </el-form-item>
@@ -279,6 +280,9 @@ export default {
   // },
   methods: {
     // 验证信息
+    open(){
+      this.$message('网络异常，下单失败')
+    },
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
@@ -409,9 +413,10 @@ export default {
                     price2: this.price2
                   }
                 });
-              } else if (res.code === 400) {
-                this.$router.push("/mine")
-                alert("下单失败");
+              } else if (res.code === 403) {
+                this.open();
+                this.$router.push("./mine")
+               
               }
             });
           }, 3000);

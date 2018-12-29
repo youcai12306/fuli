@@ -8,11 +8,14 @@ import {
 //登录
 const Login = r => require.ensure([], () => r(require('@/view/Login')), 'Login')
 //注册
+
 const Register = r => require.ensure([], () => r(require('@/view/Register')), 'Register')
 //忘记密码
 const Forget = r => require.ensure([], () => r(require('@/view/Forget')), 'Forget')
 //首页
 const Index = r => require.ensure([], () => r(require('@/view/Index')), 'Index')
+//园区介绍
+const Park = r => require.ensure([], () => r(require('@/view/Park/Park')), 'Park')
 //产品列表
 const Order = r => require.ensure([], () => r(require('@/view/Orderonline/Order')), 'Order')
 const Tickets = r => require.ensure([], () => r(require('@/view/Orderonline/Tickets')), 'Tickets')
@@ -25,6 +28,8 @@ const Suborder = r => require.ensure([], () => r(require('@/view/Orderonline/Sub
 const Suborder2 = r => require.ensure([], () => r(require('@/view/Orderonline/Suborder2')), 'Suborder2')
 //支付页面
 const success = r => require.ensure([], () => r(require('@/view/Orderonline/success')), 'success')
+const ok = r => require.ensure([], () => r(require('@/view/Orderonline/ok')), 'ok')
+const error1 = r => require.ensure([], () => r(require('@/view/Orderonline/error1')), 'error1')
 //主题乐园
 const Theme = r => require.ensure([], () => r(require('@/view/theme/Theme')), 'Theme')
 const AnimalDetail = r => require.ensure([], () => r(require('@/view/theme/AnimalDetail')), 'AnimalDetail')
@@ -91,6 +96,11 @@ let router = new Router({
 			path: '/index',
 			name: 'Index',
 			component: Index, //首页
+		},
+		{
+			path: '/park',
+			name: 'Park',
+			component: Park, //园区介绍
 		},
 		{
 			path: '/login',
@@ -212,6 +222,22 @@ let router = new Router({
 				requireAuth: true
 			},
 			component: success //支付页面
+		},
+		{
+			path: '/ok',
+			name: 'ok',
+			meta: {
+				requireAuth: true
+			},
+			component: ok //支付成功
+		},
+		{
+			path: '/error1',
+			name: 'error1',
+			meta: {
+				requireAuth: true
+			},
+			component: error1 //支付失败
 		},
 		{
 			path: '/theme',

@@ -575,6 +575,7 @@ export default {
         color: #ffffff;
         padding: 16px 0;
         letter-spacing: 2px;
+        padding-top: 40px;
         .ch {
           font-size: 26px;
           span {

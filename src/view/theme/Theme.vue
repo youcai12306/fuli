@@ -1095,7 +1095,7 @@
 				font-family: MicrosoftYaHei-Bold;
 				font-weight: bold;
 				color: rgba(52, 149, 242, 1);
-				border-bottom: 1px solid rgba(202, 202, 202, 1);
+				// border-bottom: 1px solid rgba(202, 202, 202, 1);
 				padding-bottom: 23px;
 				padding-top: 31px;
 			}
@@ -1112,6 +1112,7 @@
 				font-weight: 400;
 				color: rgba(51, 51, 51, 1);
 				line-height: 28px;
+				text-indent: 30px;
 			}
 
 			.x {

@@ -3,14 +3,44 @@
     <Header></Header>
     <div class="banner">
       <div class="banner-imgs">
-        <img src="../assets/img/index-banner1.png" alt v-show="0 === index" @click="jumpHuodongDetail(0)">
+        <img
+          src="../assets/img/index-banner1.png"
+          alt
+          v-show="0 === index"
+          @click="jumpHuodongDetail(0)"
+        >
         <img src="../assets/img/img102.png" alt v-show="1 === index" @click="jumpHuodongDetail(0)">
-        <img src="../assets/img/index-banner1.png" alt v-show="2 === index" @click="jumpHuodongDetail(0)">
-        <img src="../assets/img/index-banner1.png" alt v-show="3 === index" @click="jumpHuodongDetail(0)">
-        <img src="../assets/img/index-banner1.png" alt v-show="4 === index" @click="jumpHuodongDetail(0)">
+        <img
+          src="../assets/img/index-banner1.png"
+          alt
+          v-show="2 === index"
+          @click="jumpHuodongDetail(0)"
+        >
+        <img
+          src="../assets/img/index-banner1.png"
+          alt
+          v-show="3 === index"
+          @click="jumpHuodongDetail(0)"
+        >
+        <img
+          src="../assets/img/index-banner1.png"
+          alt
+          v-show="4 === index"
+          @click="jumpHuodongDetail(0)"
+        >
         <img src="../assets/img/img102.png" alt v-show="5 === index" @click="jumpHuodongDetail(0)">
-        <img src="../assets/img/index-banner1.png" alt v-show="6 === index" @click="jumpHuodongDetail(0)">
-        <img src="../assets/img/index-banner1.png" alt v-show="7 === index" @click="jumpHuodongDetail(0)">
+        <img
+          src="../assets/img/index-banner1.png"
+          alt
+          v-show="6 === index"
+          @click="jumpHuodongDetail(0)"
+        >
+        <img
+          src="../assets/img/index-banner1.png"
+          alt
+          v-show="7 === index"
+          @click="jumpHuodongDetail(0)"
+        >
       </div>
       <div class="banner-content clearDiv">
         <div class="content-list">游玩时间
@@ -186,7 +216,7 @@
                     <div class="floatLeft">{{newFirst.infoTitle}}</div>
                     <router-link to="/news" class="floatRight">更多>></router-link>
                   </div>
-                  <div class="floatLeft box-bottom" v-html='newFirstContent'></div>
+                  <div class="floatLeft box-bottom" v-html="newFirstContent"></div>
                 </div>
               </div>
               <ul class="bottom">
@@ -206,7 +236,7 @@
         <el-row class="info-row clearDiv">
           <el-col :span="12" class="info-col1">
             <span class="icoe"></span>
-            <span class="time">11.21 星期三</span>
+            <span class="time">{{showTime()}}</span>
             <div class="info-img clearDiv">
               <img src="../assets/img/md-5.png">
               <p>平日 9.30~17.30</p>
@@ -256,7 +286,7 @@ import { swiper, swiperSlide } from "vue-awesome-swiper";
 import { IMG_Url } from "@/package/common";
 import Header from "@/components/Header"; //引入头部
 import defaultHead from "../assets/img/index-img8.png";
-import {HTTP_DETAIL} from '@/package/common'
+import { HTTP_DETAIL } from "@/package/common";
 export default {
   name: "Index",
   data() {
@@ -304,23 +334,25 @@ export default {
     //获取新闻列表
     getNewList() {
       this.$post(
-        this.$url1+":2670/mongodb-mucon/info/primary/search?type=1&pageSize=5&pageNum=1"
+        this.$url1 +
+          ":2670/mongodb-mucon/info/primary/search?type=1&pageSize=5&pageNum=1"
       ).then(res => {
         if (res.code === 200) {
           let newList = res.data.content;
           if (newList != null) {
             this.newFirst = res.data.content[0];
             this.$fetch(
-              this.$url1+
-              ":2600/staticResource-mucon/selectFileById?id="+this.newFirst.infoPic[0].picid,
+              this.$url1 +
+                ":2600/staticResource-mucon/selectFileById?id=" +
+                this.newFirst.infoPic[0].picid
             ).then(res => {
               if (res.code === 200) {
                 this.img = IMG_Url + res.data.fileName;
               }
             });
             this.$post(
-              this.$url1+
-              ":2670/mongodb-mucon/info/primary/get?infoId=" +
+              this.$url1 +
+                ":2670/mongodb-mucon/info/primary/get?infoId=" +
                 this.newFirst.id
             ).then(res => {
               if (res.code === 200) {
@@ -336,13 +368,9 @@ export default {
     getTicketList() {
       this.options = [];
       this.key = "";
-      this.$fetch(
-        this.$url1+
-        ":5001/product-aggregate/findProductByStock",
-        {
-          playDate: this.date
-        }
-      ).then(res => {
+      this.$fetch(this.$url1 + ":5001/product-aggregate/findProductByStock", {
+        playDate: this.date
+      }).then(res => {
         let data = res.data.list;
         if (data != null) {
           for (let item of data) {
@@ -409,6 +437,30 @@ export default {
     },
     nexts() {
       this.$refs.car.next();
+    },
+    showTime() {
+      let show_day = new Array(
+        "星期日",
+        "星期一",
+        "星期二",
+        "星期三",
+        "星期四",
+        "星期五",
+        "星期六"
+      );
+      let time = new Date();
+      let year = time.getFullYear();
+      let month = time.getMonth() + 1;
+      let date = time.getDate();
+      let day = time.getDay();
+      let hour = time.getHours();
+      let minutes = time.getMinutes();
+      let second = time.getSeconds();
+      hour < 10 ? (hour = "0" + hour) : hour;
+      minutes < 10 ? (minutes = "0" + minutes) : minutes;
+      second < 10 ? (second = "0" + second) : second;
+      let now_time = month + "月" + date + "日" + " " + show_day[day] + "";
+      return now_time;
     }
   },
   components: {
@@ -451,10 +503,10 @@ export default {
     .banner-imgs {
       position: absolute;
       left: 0;
-      top:0;
+      top: 0;
       height: 100%;
       width: 100%;
-     // z-index: -1;
+      // z-index: -1;
       img {
         // height: 864px;
         height: 100%;
@@ -473,8 +525,8 @@ export default {
       font-weight: bold;
       color: rgba(255, 255, 255, 1);
       position: absolute;
-      top:0;
-      left:50%;
+      top: 0;
+      left: 50%;
       transform: translateX(-50%);
       .content-list {
         float: left;
@@ -1002,7 +1054,7 @@ export default {
   opacity: 0;
   background-color: transparent;
 }
-.swiper-box .el-carousel__indicators {
+.new-active .swiper-box .el-carousel__indicators {
   margin-top: 20px;
   margin-bottom: 28px;
 }

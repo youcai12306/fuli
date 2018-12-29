@@ -71,6 +71,7 @@
                 :precision="0"
                 :step="1"
                 class="num-change"
+                @blur="isNull"
               >
               </el-input-number>
             </div>
@@ -157,6 +158,14 @@ export default {
     Header
   },
   methods: {
+    // 计数器不能输入为空
+    isNull(){
+			if(this.num1 == undefined){
+				this.$nextTick(function(){
+					this.num1 = 1;
+				})
+			}
+		},
     //初始化数据
     init() {
       let id = this.$route.query.id;
@@ -327,15 +336,7 @@ export default {
       this.$router.push("/shoppingCar");
     }
   },
-  watch: {
-    num1(val) {
-      console.log(val);
-      if (typeof val == "undefined") {
-        typeof this.val == "number";
-        this.num1 = 1;
-      }
-    }
-  },
+
   mounted() {
     let Uid = this.$store.getters.getUserData.userId;
     this.init();

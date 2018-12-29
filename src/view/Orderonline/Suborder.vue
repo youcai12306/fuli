@@ -279,10 +279,11 @@ export default {
   //   }
   // },
   methods: {
-    // 验证信息
+    // 提示信息
     open(){
       this.$message('网络异常，下单失败')
     },
+    // 验证信息
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
@@ -414,7 +415,7 @@ export default {
                   }
                 });
               } else if (res.code === 403) {
-                this.open();
+                this.open();//订单占用失败调用提示信息方法
                 this.$router.push("./mine")
                
               }

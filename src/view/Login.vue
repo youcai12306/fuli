@@ -79,7 +79,6 @@
 
 <script>
 import { mapActions } from "vuex";
-import {HTTP_DETAIL} from '@/package/common'
 export default {
   data() {
     return {
@@ -163,7 +162,7 @@ export default {
           mobile: this.phone,
           passWord: this.password
         };
-        this.$post(HTTP_DETAIL+":5010/tourist-aggregate/login", data, 
+        this.$post(this.$url+":5010/tourist-aggregate/login", data, 
         {                                                                                                                              
           headers: { "Content-Type": "application/json;charset=UTF-8" }
         }).then(res => {

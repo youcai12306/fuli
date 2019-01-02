@@ -164,7 +164,7 @@
 
                     <el-input
                       type="name2"
-                      v-model.number="numberValidateForm.name2"
+                      v-model.text="numberValidateForm.name2"
                       autocomplete="off"
                     >
 
@@ -234,7 +234,8 @@ export default {
       numberValidateForm: {
         name1: "",
         name2: "",
-        phone: ""
+        phone: "",
+        text:''
       },
       form: {
         name: "",

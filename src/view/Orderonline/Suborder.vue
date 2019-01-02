@@ -5,7 +5,10 @@
 
       <!-- 订单详情 -->
       <div class="su2 clearDiv">
-        <div class="su22" @click="jumpdetail">
+        <div
+          class="su22"
+          @click="jumpdetail"
+        >
           当前位置：网上订购>详情页>提交订单
         </div>
         <!-- 弹出框遮罩内容 -->
@@ -41,7 +44,10 @@
                 <th>数量</th>
                 <th>小计</th>
               </tr>
-              <tr v-for="item in list2" :key="item.id">
+              <tr
+                v-for="item in list2"
+                :key="item.id"
+              >
                 <!-- <tr v-for="item in list2" :key="item"> -->
                 <td>{{item.product.productName}}
                   <p>游玩时间：{{item.product.dataBaseDate}}</p>
@@ -125,7 +131,10 @@
                     prop="phone"
                     :rules="[
                           { required: true, message: '手机号不能为空',trigger:'blur'},
-                          { type: 'number', message: '手机号必须为数字'}
+                          { 
+            validator: (rule, value, callback)=>{validateSku(rule, value, callback)}, 
+            trigger: ['blur', 'change'] 
+        }
                       ]"
                   >
                     <el-input
@@ -145,7 +154,11 @@
                     prop="name2"
                     :rules="[
                           { required: true, message: '身份证不能为空'},
-                          { type: 'number', message: '身份证必须为数字'}
+                          
+                          {
+                            pattern:/^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/,
+                            message: '身份证号码不正确'
+                            },
                       ]"
                   >
 
@@ -159,20 +172,28 @@
 
                   </el-form-item>
                   <!-- 邮寄地址 -->
-                  <div class="su5" v-show="flag1">
+                  <div
+                    class="su5"
+                    v-show="flag1"
+                  >
 
                     <span class="su6">邮寄地址</span>
-                    <span class="su7" @click="address()">选择收件地址</span>
-                    
+                    <span
+                      class="su7"
+                      @click="address()"
+                    >选择收件地址</span>
 
                   </div>
-                  <div class="q1" v-show="flag1">
-                      <div class="q2">
-                        <p>收件人：<span>{{name1}}</span></p>
-                        <p class="q3">手机号：<span>{{phone1}}</span></p>
-                        <p>地址：<span>{{address1}}</span></p>
-                      </div>
+                  <div
+                    class="q1"
+                    v-show="flag1"
+                  >
+                    <div class="q2">
+                      <p>收件人：<span>{{name1}}</span></p>
+                      <p class="q3">手机号：<span>{{phone1}}</span></p>
+                      <p>地址：<span>{{address1}}</span></p>
                     </div>
+                  </div>
                   <div class="su11">
                     <el-checkbox v-model="checked">同意《购买协议》</el-checkbox>
                   </div>
@@ -239,13 +260,13 @@ export default {
       a1: this.$route.query.a,
       list2: [],
       price2: 0,
-      name1:"",
-      phone1:"",
-      address1:"",
-      receiveId:"",
-      arr2:[],
-      arr3:[],
-      ids:""
+      name1: "",
+      phone1: "",
+      address1: "",
+      receiveId: "",
+      arr2: [],
+      arr3: [],
+      ids: ""
     };
   },
   mounted() {
@@ -280,9 +301,17 @@ export default {
   // },
   methods: {
     // 提示信息
-    open(){
-      this.$message('网络异常，下单失败')
+    open() {
+      this.$message("网络异常，下单失败");
     },
+    validateSku: function(rule, value, callback) {
+      if (/^1[34578]\d{9}$/.test(value) == false) {
+        callback(new Error("请输入正确的手机号"));
+      } else {
+        callback();
+      }
+    },
+
     // 验证信息
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
@@ -295,7 +324,7 @@ export default {
           return false;
         }
       });
-    //  将购物车 已提交的订单清空，
+      //  将购物车 已提交的订单清空，
       this.$fetch(
         "http://101.201.101.138:6061/shoppingCart-aggregate/bathDeleteShopCarts?ids=" +
           this.ids
@@ -307,12 +336,12 @@ export default {
         }
       });
     },
-    jumpdetail(){
-      this.$router.push("./productdetail")
+    jumpdetail() {
+      this.$router.push("./productdetail");
     },
     // 选择收货地址
-    address(){
-      this.$router.push("./shoppingadress")
+    address() {
+      this.$router.push("./shoppingadress");
     },
     //接受产品详情页面的产品ID，库存ID,数量，是否邮寄，调用接口，展示订单信息
     shopmsg() {
@@ -324,16 +353,16 @@ export default {
       this.saleType = this.$route.query.saleType;
       let list1 = this.$route.query.list1;
       let list2 = JSON.parse(list1);
-      list2.forEach((v,i) =>{
-         this.arr2[i] = {};
-         this.arr2[i]["id"] = v.id;
-         console.log(this.arr2[i]["id"]);
-         this.arr3.push(this.arr2[i]["id"]);
-         console.log(this.arr3)
-      })
-      
+      list2.forEach((v, i) => {
+        this.arr2[i] = {};
+        this.arr2[i]["id"] = v.id;
+        console.log(this.arr2[i]["id"]);
+        this.arr3.push(this.arr2[i]["id"]);
+        console.log(this.arr3);
+      });
+
       this.ids = this.arr3.join(",");
-      console.log(this.ids)
+      console.log(this.ids);
       // console.log(this.saleType);
       // console.log(num1);
       this.count = num1;
@@ -357,19 +386,24 @@ export default {
         this.sign = "邮寄";
         this.flag1 = true;
         let data2 = {
-           touristId: this.$store.getters.getUserData.userId
-        }
+          touristId: this.$store.getters.getUserData.userId
+        };
         // 调用邮寄接口
-        this.$fetch('http://101.201.101.138:5010/tourist-aggregate/address/selectOneReceiveAddress',data2).then((res) =>{
+        this.$fetch(
+          "http://101.201.101.138:5010/tourist-aggregate/address/selectOneReceiveAddress",
+          data2
+        ).then(res => {
           // console.log(res);
           this.name1 = res.data.receivePersonName;
           this.phone1 = res.data.receivePersonMobile;
-          this.address1 = res.data.receiveProvince + res.data.receiveCity + res.data.receiveArea;
-          this.receiveId = res.data.id
-        })
+          this.address1 =
+            res.data.receiveProvince +
+            res.data.receiveCity +
+            res.data.receiveArea;
+          this.receiveId = res.data.id;
+        });
       } else if (type == false) {
         this.sign = "自提";
-        
       }
       return this.sign;
     },
@@ -388,7 +422,7 @@ export default {
       this.$post("http://101.201.101.138:5041/order-aggregate/save", data, {
         headers: { "Content-Type": "application/json;charset=UTF-8" }
       }).then(res => {
-        console.log(res)
+        console.log(res);
         if (res.code === 200) {
           // console.log(res);
           this.orderId = res.data.orderId;
@@ -410,26 +444,23 @@ export default {
                 this.$router.push({
                   path: "./success",
                   query: {
-                    orderId: this.orderId,  
+                    orderId: this.orderId,
                     price2: this.price2
                   }
                 });
               } else if (res.code === 400) {
-                this.open();//订单占用失败调用提示信息方法
-                this.$router.push("./mine")
-               
+                this.open(); //订单占用失败调用提示信息方法
+                this.$router.push("./mine");
               }
             });
           }, 3000);
 
           ///
-        }else if(res.code === 403){
-          this.$router.push("./mine")
-           console.log(res);
-          
+        } else if (res.code === 403) {
+          this.$router.push("./mine");
+          console.log(res);
         }
-      })
-      
+      });
     }
   },
   // 销毁定时器
@@ -587,21 +618,21 @@ export default {
         cursor: pointer;
       }
     }
-    .q1{
-      border:1px solid #E3E3E3;
+    .q1 {
+      border: 1px solid #e3e3e3;
       width: 377px;
       height: 175px;
-      .q2{
-        margin-top:28px;
-        margin-left:30px;
-        p{
-          color:#333333
+      .q2 {
+        margin-top: 28px;
+        margin-left: 30px;
+        p {
+          color: #333333;
         }
-        span{
-          color:#333333
+        span {
+          color: #333333;
         }
-        .q3{
-          margin:27px 0;
+        .q3 {
+          margin: 27px 0;
         }
       }
     }

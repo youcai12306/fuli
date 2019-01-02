@@ -54,7 +54,8 @@ export default {
     };
   },
   methods: {
-    //设置默认图片
+    //设置默认图片111
+    
     userAvaterError(e) {
       e.target.src = defaultHead;
     },

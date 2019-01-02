@@ -162,7 +162,7 @@ export default {
           mobile: this.phone,
           passWord: this.password
         };
-        this.$post(this.$url+":5010/tourist-aggregate/login", data, 
+        this.$post(this.$url+":2060/user-aggregate/login", data, 
         {                                                                                                                              
           headers: { "Content-Type": "application/json;charset=UTF-8" }
         }).then(res => {

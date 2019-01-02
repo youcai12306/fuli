@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import {IMG_Url} from "@/package/common"
+import { IMG_Url } from "@/package/common";
 import defaultHead from "../../assets/img/new-bg2.png";
 export default {
   name: "News",
@@ -50,7 +50,7 @@ export default {
       pageSize: 10,
       pageIndex: 1,
       totle: 0,
-      img:''
+      img: ""
     };
   },
   methods: {
@@ -62,24 +62,29 @@ export default {
     // 获取新闻數據
     GetList(type, pageSize, pageIndex) {
       this.$post(
-        this.$url1+
-        ":2670/mongodb-mucon/info/primary/search?type=1&pageSize=" +
+        this.$url1 +
+          ":2670/mongodb-mucon/info/primary/search?type=1&pageSize=" +
           pageSize +
           "&pageNum=" +
           pageIndex
       ).then(res => {
         console.log(res);
         if (res.code === 200) {
-          this.list = res.data.content[0];
-          this.$fetch(this.$url+":2600/staticResource-mucon/selectFiles", {
-            ids: this.list.infoPic
-          }).then(res => {
-            // console.log(res.data);
-            if(res.code === 200){
-                this.img = IMG_Url+res.data[0].fileName
-            }  
-          });
-          this.list1 = res.data.content.slice(1);
+          if (pageIndex == 1) {
+            this.list = res.data.content[0];
+            if (this.list.infoPic.length) {
+              this.$fetch(
+                this.$url1 +
+                  ":2600/staticResource-mucon/selectFileById?id=" +
+                  this.list.infoPic[0].picid
+              ).then(res => {
+                if (res.code === 200) {
+                  this.img = IMG_Url + res.data.fileName;
+                }
+              });
+            }
+          }
+          this.list1 = res.data.content;
           this.totle = res.data.totalElements;
         } else {
           this.$message.error("读取新闻列表失败");
@@ -167,7 +172,7 @@ export default {
         height: 70px;
         background: rgba(43, 43, 43, 0.82);
         padding-left: 21px;
-				cursor:pointer;
+        cursor: pointer;
 
         .p1 {
           font-size: 16px;
@@ -207,7 +212,7 @@ export default {
         padding: 20px 0;
         border-top: 1px solid #d7d7d7;
         padding-left: 20px;
-				cursor:pointer;
+        cursor: pointer;
 
         i {
           position: absolute;

@@ -146,7 +146,7 @@
               <template v-else>
                 <img src="../assets/img/header8.png" alt>
               </template>
-              <p>动物百科</p>
+              <p>海洋百科</p>
             </router-link>
           </li>
         </ul>

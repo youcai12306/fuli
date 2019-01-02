@@ -341,15 +341,17 @@ export default {
           let newList = res.data.content;
           if (newList != null) {
             this.newFirst = res.data.content[0];
-            this.$fetch(
-              this.$url1 +
-                ":2600/staticResource-mucon/selectFileById?id=" +
-                this.newFirst.infoPic[0].picid
-            ).then(res => {
-              if (res.code === 200) {
-                this.img = IMG_Url + res.data.fileName;
-              }
-            });
+            if (this.newFirst.infoPic) {
+              this.$fetch(
+                this.$url1 +
+                  ":2600/staticResource-mucon/selectFileById?id=" +
+                  this.newFirst.infoPic[0].picid
+              ).then(res => {
+                if (res.code === 200) {
+                  this.img = IMG_Url + res.data.fileName;
+                }
+              });
+            }
             this.$post(
               this.$url1 +
                 ":2670/mongodb-mucon/info/primary/get?infoId=" +
@@ -412,7 +414,7 @@ export default {
     swiperInit() {
       this.times = setInterval(() => {
         this.index++;
-      }, 2000);
+      }, 4000);
     },
     //停止定时器
     stopTimes() {

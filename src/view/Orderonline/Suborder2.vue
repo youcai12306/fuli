@@ -354,7 +354,7 @@ export default {
         receiveIdentityCode: this.numberValidateForm.name2
       };
       // 拿到guid以及订单号
-      this.$post("http://101.201.101.138:5041/order-aggregate/save", data, {
+      this.$post("http://101.201.101.138:5001/order-aggregate/save", data, {
         headers: { "Content-Type": "application/json;charset=UTF-8" }
       }).then(res => {
         if (res.code === 200) {

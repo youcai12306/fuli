@@ -54,7 +54,8 @@ export default {
     };
   },
   methods: {
-    //设置默认图片
+    //设置默认图片111
+    
     userAvaterError(e) {
       e.target.src = defaultHead;
     },
@@ -68,6 +69,7 @@ export default {
           "&pageNum=" +
           pageIndex
       ).then(res => {
+        console.log(res);
         if (res.code === 200) {
           if (pageIndex == 1) {
             this.list = res.data.content[0];

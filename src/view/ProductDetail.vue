@@ -281,7 +281,7 @@ export default {
         productCount: this.num1
       };
       this.$post(
-        "http://192.168.2.61:6061/shoppingCart-aggregate/addToshopCart",
+        "http://192.168.2.61:2060/user-aggregate/addToshopCart",
         {
           touristId: Uid, 
           productId: this.product.id,
@@ -297,7 +297,7 @@ export default {
     },
     //查询购物车
     searchShoppingCar(Uid) {
-      this.$fetch("http://192.168.2.61:6061/shoppingCart-aggregate/selectShopCarts", {
+      this.$fetch("http://192.168.2.61:2060/user-aggregate/selectShopCarts", {
         touristId: Uid 
       }).then(res => {
         if (res.code === 200) {

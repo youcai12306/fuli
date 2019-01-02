@@ -130,7 +130,7 @@
 			//再次下单
 			pay(id, price) {
 				// 拿到guid以及订单号
-				this.$post(`${this.$url1}:5041/order-aggregate/reSaveOrder?orderId=${id}`, {
+				this.$post(`${this.$url1}:5001/order-aggregate/reSaveOrder?orderId=${id}`, {
 					headers: {
 						"Content-Type": "application/json;charset=UTF-8"
 					}
@@ -202,7 +202,7 @@
 				}
 				this.loading = true;
 				this.$post(
-					`${this.$url1}:5041/order-aggregate/findOrderDetail?pageNum=${this.page}&pageSize=${this.pageSize}`,
+					`${this.$url1}:5001/order-aggregate/findOrderDetail?pageNum=${this.page}&pageSize=${this.pageSize}`,
 					data).then(res => {
 					this.loading = false;
 					if (res.code === 200) {
@@ -229,7 +229,7 @@
 					cancelButtonText: '取消',
 					type: 'warning'
 				}).then(() => {
-					this.$put(`${this.$url1}:5041/order-aggregate/canceOrder?orderId=${id}&status=-1`).then(res => {
+					this.$put(`${this.$url1}:5001/order-aggregate/canceOrder?orderId=${id}&status=-1`).then(res => {
 						if (res.code === 200) {
 							this.$message({
 								message: `取消订单成功`,

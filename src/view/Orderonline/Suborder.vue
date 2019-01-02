@@ -208,6 +208,7 @@
                       type="primary"
                       @click="submitForm('numberValidateForm')"
                       :plain="true"
+                      
                     ></el-button>
 
                   </el-form-item>
@@ -235,7 +236,7 @@ export default {
         name1: "",
         name2: "",
         phone: "",
-        text:''
+        text:""
       },
       form: {
         name: "",
@@ -247,7 +248,7 @@ export default {
         resource: "",
         desc: ""
       },
-      checked: true,
+      checked: true,  
       flag: false,
       flag1: false,
       count: 0,
@@ -267,7 +268,8 @@ export default {
       receiveId: "",
       arr2: [],
       arr3: [],
-      ids: ""
+      ids: "",
+      // dis:false
     };
   },
   mounted() {
@@ -319,6 +321,7 @@ export default {
         if (valid) {
           this.flag = true;
           // alert("submit!");
+          
           this.onSubmit();
         } else {
           console.log("error submit!!");
@@ -410,6 +413,9 @@ export default {
     },
     //   提交
     onSubmit() {
+      // if(this.checked === true){
+      //       this.dis = false
+      //     }
       console.log(this.$route.query.arr);
       let data = {
         touristId: this.$store.getters.getUserData.userId,
@@ -420,7 +426,7 @@ export default {
         receiveIdentityCode: this.numberValidateForm.name2
       };
       // 拿到guid以及订单号
-      this.$post("http://101.201.101.138:5041/order-aggregate/save", data, {
+      this.$post("http://101.201.101.138:5001/order-aggregate/save", data, {
         headers: { "Content-Type": "application/json;charset=UTF-8" }
       }).then(res => {
         console.log(res);

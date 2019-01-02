@@ -441,7 +441,7 @@ export default {
           // 读redis，成功创建订单后关闭遮罩层，跳转支付页面
           this.times = setInterval(() => {
             this.$fetch(
-              "http://101.201.101.138:5100/callBack-aggregate/getOccupation",
+              "http://101.201.101.138:6110/callBack-mucon/getOccupation",
               data1
             ).then(res => {
               console.log(res);

@@ -335,13 +335,13 @@ export default {
     getNewList() {
       this.$post(
         this.$url1 +
-          ":2670/mongodb-mucon/info/primary/search?type=1&pageSize=5&pageNum=1"
+          ":6110/mongodb-mucon/info/primary/search?type=1&pageSize=5&pageNum=1"
       ).then(res => {
         if (res.code === 200) {
           let newList = res.data.content;
           if (newList != null) {
             this.newFirst = res.data.content[0];
-            if (this.newFirst.infoPic) {
+            if (this.newFirst.infoPic.length) {
               this.$fetch(
                 this.$url1 +
                   ":2600/staticResource-mucon/selectFileById?id=" +
@@ -354,7 +354,7 @@ export default {
             }
             this.$post(
               this.$url1 +
-                ":2670/mongodb-mucon/info/primary/get?infoId=" +
+                ":6110/mongodb-mucon/info/primary/get?infoId=" +
                 this.newFirst.id
             ).then(res => {
               if (res.code === 200) {

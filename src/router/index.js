@@ -47,6 +47,9 @@ const NoticeDetail = r => require.ensure([], () => r(require('@/view/news/Notice
 
 // 游玩指南
 const ditu = r => require.ensure([], () => r(require('@/view/Visitguide/ditu')), 'ditu')
+// 游玩指南
+const Hotel = r => require.ensure([], () => r(require('@/view/hotel/Hotel')), 'Hotel')
+
 
 //优惠活动
 const SpecialOffier = r => require.ensure([], () => r(require('@/view/specialOffier/SpecialOffier')), 'SpecialOffier')
@@ -268,6 +271,11 @@ let router = new Router({
 			path: '/artTheme',
 			name: 'artTheme',
 			component: artTheme
+		},
+		{
+			path: '/hotel',
+			name: 'Hotel',
+			component: Hotel
 		},
 		{
 			path: '/ticketDetail',

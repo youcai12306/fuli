@@ -63,7 +63,7 @@ export default {
     GetList(type, pageSize, pageIndex) {
       this.$post(
         this.$url1 +
-          ":2670/mongodb-mucon/info/primary/search?type=1&pageSize=" +
+          ":6110/mongodb-mucon/info/primary/search?type=1&pageSize=" +
           pageSize +
           "&pageNum=" +
           pageIndex

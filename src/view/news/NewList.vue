@@ -68,11 +68,13 @@ export default {
           "&pageNum=" +
           pageIndex
       ).then(res => {
+        console.log(res);
         if (res.code === 200) {
           this.list = res.data.content[0];
           this.$fetch(this.$url+":2600/staticResource-mucon/selectFiles", {
             ids: this.list.infoPic
           }).then(res => {
+            // console.log(res.data);
             if(res.code === 200){
                 this.img = IMG_Url+res.data[0].fileName
             }  

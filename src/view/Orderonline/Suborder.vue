@@ -235,7 +235,7 @@ export default {
         name1: "",
         name2: "",
         phone: "",
-        text:''
+        text:""
       },
       form: {
         name: "",

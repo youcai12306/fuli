@@ -292,17 +292,17 @@
 					<div class="eat-list floatLeft" @click="jumpEatDetail(0)">
 						<img src="../../assets/img/theme-eat-img1.png" alt>
 						<div class="eat-content">
-							<div>塔瓦那餐厅</div>
-							<p>希腊风格，地中海西式美食广场及东南亚美食，适合一家大小</p>
+							<div>北极圈餐厅</div>
+							<p>极地海洋风格，国际美食广场，适合一家大小</p>
 							<p class="p1">平均消费：￥60-90</p>
 						</div>
 					</div>
 					<div class="eat-list floatLeft" @click="jumpEatDetail(1)">
 						<img src="../../assets/img/theme-eat-img1.png" alt>
 						<div class="eat-content">
-							<div>迈泽美食</div>
-							<p>地中海风格，西式快餐美食，提供炸鸡，汉堡包</p>
-							<p class="p1">平均消费：￥50-80</p>
+							<div>海星咖啡</div>
+							<p>欧洲小镇装式，提供特色咖啡及轻食</p>
+							<p class="p1">平均消费：￥40-70</p>
 						</div>
 					</div>
 				</div>
@@ -320,7 +320,7 @@
 		<div class="alert" v-show="alertShow" @click="closeYuanQu()">
 			<div class="alert-box" @click.stop>
 				<img src="../../assets/img/theme-quxiao.png" alt class="x" @click="showYuanQu()">
-				<h3>麦迪卡斯水乐园</h3>
+				<h3>冒险海洋</h3>
 				<img src="../../assets/img/theme-alert.png" alt class="img">
 				<p>四季全时运营的水乐园，在古希腊神话与现代爱琴海风格一秒切换，无与伦比的海洋冒险世界将生动展示，挑战吧，勇者！燃烧吧，肾上腺！高刺激滑道、高空大喇叭、极限竞速滑道、疯狂巨碗等等，20余套戏水滑道，足够让戏水爱好者为之疯狂。区内还配置有主题餐厅、特色商店及各类功能齐全的游客服务设施，满足游客更多需求。</p>
 			</div>

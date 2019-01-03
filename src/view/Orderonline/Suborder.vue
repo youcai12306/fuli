@@ -208,7 +208,6 @@
                       type="primary"
                       @click="submitForm('numberValidateForm')"
                       :plain="true"
-                      
                     ></el-button>
 
                   </el-form-item>
@@ -236,7 +235,7 @@ export default {
         name1: "",
         name2: "",
         phone: "",
-        text:""
+        text: ""
       },
       form: {
         name: "",
@@ -248,7 +247,7 @@ export default {
         resource: "",
         desc: ""
       },
-      checked: true,  
+      checked: true,
       flag: false,
       flag1: false,
       count: 0,
@@ -268,7 +267,7 @@ export default {
       receiveId: "",
       arr2: [],
       arr3: [],
-      ids: "",
+      ids: ""
       // dis:false
     };
   },
@@ -321,7 +320,7 @@ export default {
         if (valid) {
           this.flag = true;
           // alert("submit!");
-          
+
           this.onSubmit();
         } else {
           console.log("error submit!!");
@@ -330,7 +329,7 @@ export default {
       });
       //  将购物车 已提交的订单清空，
       this.$fetch(
-        "http://101.201.101.138:6061/shoppingCart-aggregate/bathDeleteShopCarts?ids=" +
+        `${this.$url1}:2060/user-aggregate/bathDeleteShopCarts?ids=` +
           this.ids
       ).then(res => {
         // console.log(11);

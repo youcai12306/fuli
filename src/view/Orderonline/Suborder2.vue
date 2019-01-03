@@ -101,7 +101,11 @@
                     prop="name1"
                     :rules="[
                           { required: true, message: '姓名不能为空'},
-                          { type: 'string', message: '姓名必须为中文'}
+                          { type: 'string', message: '姓名必须为中文'},
+                          {
+                            pattern:/^[\u4E00-\u9FA5]+$/,
+                            message: '用户名只能为中文'
+                          }
                       ]"
                   >
 
@@ -120,8 +124,11 @@
                     class="el2"
                     prop="phone"
                     :rules="[
-                          { required: true, message: '手机号不能为空'},
-                          { type: 'number', message: '手机号必须为数字'}
+                          { required: true, message: '手机号不能为空',trigger:'blur'},
+                          { 
+            validator: (rule, value, callback)=>{validateSku(rule, value, callback)}, 
+            trigger: ['blur', 'change'] 
+        }
                       ]"
                   >
                     <el-input
@@ -141,34 +148,46 @@
                     prop="name2"
                     :rules="[
                           { required: true, message: '身份证不能为空'},
-                          { type: 'number', message: '身份证必须为数字'}
+                          
+                          {
+                            pattern:/^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/,
+                            message: '身份证号码不正确'
+                            },
                       ]"
                   >
 
                     <el-input
                       type="name2"
-                      v-model.number="numberValidateForm.name2"
+                      v-model.text="numberValidateForm.name2"
                       autocomplete="off"
                     >
 
                     </el-input>
 
                   </el-form-item>
-                   <!-- 邮寄地址 -->
-                  <div class="su5" v-show="flag1">
+                  <!-- 邮寄地址 -->
+                  <div
+                    class="su5"
+                    v-show="flag1"
+                  >
 
                     <span class="su6">邮寄地址</span>
-                    <span class="su7" @click ="address()">选择收件地址</span>
-                    
+                    <span
+                      class="su7"
+                      @click="address()"
+                    >选择收件地址</span>
 
                   </div>
-                  <div class="q1" v-show="flag1">
-                      <div class="q2">
-                        <p>收件人：<span>{{name1}}</span></p>
-                        <p class="q3">手机号：<span>{{phone1}}</span></p>
-                        <p>地址：<span>{{address1}}</span></p>
-                      </div>
+                  <div
+                    class="q1"
+                    v-show="flag1"
+                  >
+                    <div class="q2">
+                      <p>收件人：<span>{{name1}}</span></p>
+                      <p class="q3">手机号：<span>{{phone1}}</span></p>
+                      <p>地址：<span>{{address1}}</span></p>
                     </div>
+                  </div>
                   <div class="su11">
                     <el-checkbox v-model="checked">同意《购买协议》</el-checkbox>
                   </div>
@@ -182,6 +201,7 @@
                     <el-button
                       type="primary"
                       @click="submitForm('numberValidateForm')"
+                      :plain="true"
                     ></el-button>
 
                   </el-form-item>
@@ -191,6 +211,7 @@
             </div>
 
           </div>
+        </div>
         </div>
       </div>
     </div>
@@ -208,7 +229,8 @@ export default {
       numberValidateForm: {
         name1: "",
         name2: "",
-        phone: ""
+        phone: "",
+         text: ""
       },
       form: {
         name: "",
@@ -265,6 +287,13 @@ export default {
     // 提示信息
     open(){
       this.$message('网络异常，下单失败')
+    },
+    validateSku: function(rule, value, callback) {
+      if (/^1[34578]\d{9}$/.test(value) == false) {
+        callback(new Error("请输入正确的手机号"));
+      } else {
+        callback();
+      }
     },
     // 验证信息
     submitForm(formName) {
@@ -368,7 +397,7 @@ export default {
           // 读redis，成功创建订单后关闭遮罩层，跳转支付页面
           this.times = setInterval(() => {
             this.$fetch(
-              "http://101.201.101.138:5100/callBack-aggregate/getOccupation",
+              "http://101.201.101.138:6110/callBack-mucon/getOccupation",
               data1
             ).then(res => {
               console.log(res);
@@ -683,6 +712,7 @@ export default {
   background-color: #fff;
   border-color: transparent;
   color: transparent;
+  background-image: url(../../assets/img/but1.png);
 }
 .el-form > span {
   position: relative;

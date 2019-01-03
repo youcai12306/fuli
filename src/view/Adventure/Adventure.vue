@@ -210,7 +210,7 @@
 			<div class="meng2">
 				<swiper :options="certifySwiper1" ref="certifySwiper1">
 					<swiper-slide v-for="item in 1" :key="item">
-						<img src="../../assets/img/theme-art-img40.png" alt>
+						<img src="../../assets/img/Adventure1.png" alt>
 					</swiper-slide>
 				</swiper>
 			</div>
@@ -220,11 +220,11 @@
 					<swiper :options="certifySwiper" ref="certifySwiper">
 						<swiper-slide v-for="item in 1" :key="item">
 							<div class="venve" @click="jumpArtDetail(0)">
-								<img src="../../assets/img/theme-art-img40.png" alt>
-								<div class="p1">水舞台表演
+								<img src="../../assets/img/Adventure1.png" alt>
+								<div class="p1">海狮剧场
 									<!-- <span>表演时间14：00</span> -->
 								</div>
-								<div class="p2">水中的舞台，热情洋溢的舞蹈，美妙的音乐，梦幻般的空中杂技表演，将在炎炎夏日里带来清凉的同时，点燃你内心隐藏的激情。
+								<div class="p2">码头上有个鱼店，老板以卖鱼为生，最近来了一群海狮，每天都会到码头上捣乱偷店里的鱼吃，鱼店老板为了赶走海狮用了各种办法，由此引起的一系列滑稽搞笑的场景
 									<br>
 								</div>
 							</div>
@@ -258,12 +258,12 @@
 				<div class="bottom">
 					<swiper :options="swiperOptions1" ref="mySwipers1">
 						<swiper-slide>
-							<div class="venve venve1" @click="jumpShopDetail(0)">
+							<div class="venve" @click="jumpShopDetail(0)">
 								<div class="venve-list">
 									<img src="../../assets/img/theme-shop-img1.png" alt>
 									<div class="venve-content">
-										<div>阳光回忆</div>
-										<p>想在水的世界尽情嬉戏？那让我们先补齐装备吧！这里会有各式各样的水上用品补给</p>
+										<div>荣德押</div>
+										<p></p>
 									</div>
 								</div>
 							</div>
@@ -273,8 +273,19 @@
 								<div class="venve-list">
 									<img src="../../assets/img/theme-shop-img1.png" alt>
 									<div class="venve-content">
-										<div>木马奇珍坊</div>
-										<p>集结了与海洋息息相关的纪念品，包括海豚、海龟、海狮等各种造型玩偶。让海洋朋友时刻伴您身边，这里你定能找到心水之选！</p>
+										<div>奔流</div>
+										<p>穿上抵御大浪的盔甲，迎接浪花淋漓的挑战，让照片记录你或兴奋或夸张或惊恐的一刻，让我们把不经意的瞬间珍藏</p>
+									</div>
+								</div>
+							</div>
+						</swiper-slide>
+						<swiper-slide>
+							<div class="venve" @click="jumpShopDetail(2)">
+								<div class="venve-list">
+									<img src="../../assets/img/theme-shop-img1.png" alt>
+									<div class="venve-content">
+										<div>极地馆礼品店</div>
+										<p>各位喜欢北极珍贵动物的朋友，快来选购一系列以极地动物作主题的礼品及特色玩偶，再继续您的探索旅程</p>
 									</div>
 								</div>
 							</div>
@@ -380,14 +391,14 @@ import "swiper/dist/css/swiper.css";
 					//设定初始化时slide的索引
 					initialSlide: 0,
 					//放几个
-					slidesPerView: 2,
+					slidesPerView: 3,
 					spaceBetween: 60,
 					//自动播放
-					// autoplay: {
-					//   delay: 5000,
-					//   stopOnLastSlide: false,
-					//   disableOnInteraction: true
-					// },
+// 					autoplay: {
+// 					  delay: 5000,
+// 					  stopOnLastSlide: false,
+// 					  disableOnInteraction: true
+// 					},
 					//分页器设置
 					pagination: {
 						el: ".swiper-paginations1",

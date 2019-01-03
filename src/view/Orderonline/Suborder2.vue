@@ -9,17 +9,11 @@
           当前位置：网上订购>详情页>提交订单
         </div>
         <!-- 弹出框遮罩内容 -->
-        <div
-          class="su21 clearDiv"
-          v-show="flag"
-        >
+        <div class="su21 clearDiv" v-show="flag">
           <div class="bg clearDiv"></div>
           <div class="show clearDiv">
             <div class="su22">
-              <img
-                src="../../assets/img/dengdai.png"
-                alt=""
-              >
+              <img src="../../assets/img/dengdai.png" alt="">
               <p class="su23">订单创建中，请稍后...</p>
               <p class="su24">预计等待时间为3秒</p>
             </div>
@@ -30,11 +24,7 @@
             <span>订单详情</span>
           </div>
           <div class="su4">
-            <table
-              cellspacing="0"
-              width="1078"
-              height="353"
-            >
+            <table cellspacing="0" width="1078" height="353">
               <tr>
                 <th>商品信息</th>
                 <th>单价</th>
@@ -42,7 +32,7 @@
                 <th>小计</th>
               </tr>
               <tr>
-                 <!-- <tr v-for="item in list2" :key="item"> -->
+                <!-- <tr v-for="item in list2" :key="item"> -->
                 <td>{{productname}}
                   <p>游玩时间：{{playtime}}</p>
                   <!-- <p>{{canDebook(saleType)}}</p> -->
@@ -89,99 +79,59 @@
             </div>
             <div class="su10 clearDiv">
               <div>
-                <el-form
-                  ref="numberValidateForm"
-                  :model="numberValidateForm"
-                  label-width="85px"
-                >
+                <el-form ref="numberValidateForm" :model="numberValidateForm" label-width="85px">
 
-                  <el-form-item
-                    label="姓名 ："
-                    class="el1"
-                    prop="name1"
-                    :rules="[
+                  <el-form-item label="姓名 ：" class="el1" prop="name1" :rules="[
                           { required: true, message: '姓名不能为空'},
                           { type: 'string', message: '姓名必须为中文'},
                           {
                             pattern:/^[\u4E00-\u9FA5]+$/,
                             message: '用户名只能为中文'
                           }
-                      ]"
-                  >
+                      ]">
 
-                    <el-input
-                      type="name1"
-                      v-model.number="numberValidateForm.name1"
-                      autocomplete="off"
-                    >
+                    <el-input type="name1" v-model.number="numberValidateForm.name1" autocomplete="off">
 
                     </el-input>
 
                   </el-form-item>
 
-                  <el-form-item
-                    label="手机号 ："
-                    class="el2"
-                    prop="phone"
-                    :rules="[
+                  <el-form-item label="手机号 ：" class="el2" prop="phone" :rules="[
                           { required: true, message: '手机号不能为空',trigger:'blur'},
                           { 
             validator: (rule, value, callback)=>{validateSku(rule, value, callback)}, 
             trigger: ['blur', 'change'] 
         }
-                      ]"
-                  >
-                    <el-input
-                      type="phone"
-                      v-model.number="numberValidateForm.phone"
-                      autocomplete="off"
-                    >
+                      ]">
+                    <el-input type="phone" v-model.number="numberValidateForm.phone" autocomplete="off">
 
                     </el-input>
 
                     <p>此手机号用于接受入园短信</p>
                   </el-form-item>
 
-                  <el-form-item
-                    label="身份证 ："
-                    class="el1"
-                    prop="name2"
-                    :rules="[
+                  <el-form-item label="身份证 ：" class="el1" prop="name2" :rules="[
                           { required: true, message: '身份证不能为空'},
                           
                           {
                             pattern:/^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/,
                             message: '身份证号码不正确'
                             },
-                      ]"
-                  >
+                      ]">
 
-                    <el-input
-                      type="name2"
-                      v-model.text="numberValidateForm.name2"
-                      autocomplete="off"
-                    >
+                    <el-input type="name2" v-model.text="numberValidateForm.name2" autocomplete="off">
 
                     </el-input>
 
                   </el-form-item>
                   <!-- 邮寄地址 -->
-                  <div
-                    class="su5"
-                    v-show="flag1"
-                  >
+                  <div class="su5" v-show="flag1">
 
                     <span class="su6">邮寄地址</span>
-                    <span
-                      class="su7"
-                      @click="address()"
-                    >选择收件地址</span>
+                    <span class="su7" @click="address()">选择收件地址</span>
 
                   </div>
-                  <div
-                    class="q1"
-                    v-show="flag1"
-                  >
+                  <div class="q1" v-show="flag1">
                     <div class="q2">
                       <p>收件人：<span>{{name1}}</span></p>
                       <p class="q3">手机号：<span>{{phone1}}</span></p>
@@ -198,12 +148,7 @@
                   </div>
 
                   <el-form-item>
-                    <el-button
-                      type="primary"
-                      @click="submitForm('numberValidateForm')"
-                      :plain="true"
-                      :disabled="dis"
-                    ></el-button>
+                    <el-button type="primary" @click="submitForm('numberValidateForm')" :plain="true" :disabled="dis"></el-button>
 
                   </el-form-item>
                 </el-form>
@@ -213,9 +158,9 @@
 
           </div>
         </div>
-        </div>
       </div>
     </div>
+  </div>
   </div>
 </template>
 
@@ -231,7 +176,7 @@ export default {
         name1: "",
         name2: "",
         phone: "",
-         text: ""
+        text: ""
       },
       form: {
         name: "",
@@ -255,21 +200,21 @@ export default {
       saleType: "",
       sign: "",
       a1: this.$route.query.a,
-      list2:[],
-      name1:"",
-      phone1:"",
-      address1:"",
-      receiveId:"",
-      dis:true
+      list2: [],
+      name1: "",
+      phone1: "",
+      address1: "",
+      receiveId: "",
+      dis: true
     };
   },
   mounted() {
-    this. changeType();
+    this.changeType();
     this.shopmsg();
     // this.saleType = this.$route.query.saleType
     // 监听路由跳转路径，如果是购物车，标志为a1，直接接受上个页面的参数
     // if (this.a1 === 1) {
-      
+
     //   let list1 = this.$route.query.list1;
     //   this.list2 = JSON.parse(list1);
     //   console.log(this.list2);
@@ -287,17 +232,17 @@ export default {
   //   }
   // },
   methods: {
-     changeType(){
-      console.log(this.checked)
-      if(this.checked == true){
+    changeType() {
+      console.log(this.checked);
+      if (this.checked == true) {
         this.dis = false;
-      }else{
+      } else {
         this.dis = true;
       }
     },
     // 提示信息
-    open(){
-      this.$message('网络异常，下单失败')
+    open() {
+      this.$message("网络异常，下单失败");
     },
     validateSku: function(rule, value, callback) {
       if (/^1[34578]\d{9}$/.test(value) == false) {
@@ -308,7 +253,7 @@ export default {
     },
     // 验证信息
     submitForm(formName) {
-      console.log(999)
+      console.log(999);
       this.$refs[formName].validate(valid => {
         if (valid) {
           this.flag = true;
@@ -321,14 +266,14 @@ export default {
       });
     },
     // 选择收货地址
-    address(){
-      this.$router.push("./shoppingadress")
+    address() {
+      this.$router.push("./shoppingadress");
     },
     //接受产品详情页面的产品ID，库存ID,数量，是否邮寄，调用接口，展示订单信息
     shopmsg() {
-        console.log(111);
+      console.log(111);
       let id = this.$route.query.id;
-      console.log(id)
+      console.log(id);
       let stockId = this.$route.query.stockId;
       let num1 = this.$route.query.num;
       this.saleType = this.$route.query.saleType;
@@ -338,7 +283,7 @@ export default {
       // console.log(this.saleType);
       // console.log(num1);
       this.count = num1;
-      
+
       this.$fetch("http://101.201.101.138:5001/product-aggregate/find/" + id, {
         stockId: stockId,
         saleType: this.saleType
@@ -346,7 +291,7 @@ export default {
         if (res.code === 200) {
           console.log(111);
           this.productname = res.data.productName;
-          console.log(this.productname)
+          console.log(this.productname);
           this.playtime = res.data.dataBaseDate;
           this.price1 = res.data.settlementPrice;
         }
@@ -359,16 +304,22 @@ export default {
         this.sign = "邮寄";
         this.flag1 = true;
         let data2 = {
-           touristId: this.$store.getters.getUserData.userId
-        }
+          touristId: this.$store.getters.getUserData.userId
+        };
         // 调用邮寄接口
-        this.$fetch('http://101.201.101.138:5010/tourist-aggregate/address/selectOneReceiveAddress',data2).then((res) =>{
+        this.$fetch(
+          "http://101.201.101.138:5010/tourist-aggregate/address/selectOneReceiveAddress",
+          data2
+        ).then(res => {
           console.log(res);
           this.name1 = res.data.receivePersonName;
           this.phone1 = res.data.receivePersonMobile;
-          this.address1 = res.data.receiveProvince + res.data.receiveCity + res.data.receiveArea;
-          this.receiveId = res.data.id
-        })
+          this.address1 =
+            res.data.receiveProvince +
+            res.data.receiveCity +
+            res.data.receiveArea;
+          this.receiveId = res.data.id;
+        });
       } else if (type == 2) {
         this.sign = "自提";
       }
@@ -423,8 +374,8 @@ export default {
                   }
                 });
               } else if (res.code === 400) {
-                 this.open();//订单占用失败调用提示信息方法
-                this.$router.push("./mine")
+                this.open(); //订单占用失败调用提示信息方法
+                this.$router.push("./mine");
               }
             });
           }, 3000);
@@ -588,21 +539,21 @@ export default {
         cursor: pointer;
       }
     }
-    .q1{
-      border:1px solid #E3E3E3;
+    .q1 {
+      border: 1px solid #e3e3e3;
       width: 377px;
       height: 175px;
-      .q2{
-        margin-top:28px;
-        margin-left:30px;
-        p{
-          color:#333333
+      .q2 {
+        margin-top: 28px;
+        margin-left: 30px;
+        p {
+          color: #333333;
         }
-        span{
-          color:#333333
+        span {
+          color: #333333;
         }
-        .q3{
-          margin:27px 0;
+        .q3 {
+          margin: 27px 0;
         }
       }
     }

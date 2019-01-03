@@ -603,6 +603,7 @@ export default {
         document.documentElement.scrollTop ||
         document.body.scrollTop;
       this.topShow = scrollTop;
+      console.log(scrollTop);
       if (scrollTop >= 0 && scrollTop < 1757) {
         this.abc = 0;
       } else if (scrollTop >= 1757 && scrollTop < 2819) {

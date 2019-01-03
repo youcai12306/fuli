@@ -204,10 +204,12 @@
             </router-link>
           </li>
           <li>
-            <p class="list-img">
-              <img src="../assets/img/H2.png" alt>
-            </p>
-            <p class="list-title">冒险海洋</p>
+						<router-link to="/Adventure">
+							<p class="list-img">
+								<img src="../assets/img/H2.png" alt>
+							</p>
+							<p class="list-title">冒险海洋</p>
+						</router-link>
           </li>
           <li>
             <p class="list-img">

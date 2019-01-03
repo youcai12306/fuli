@@ -189,7 +189,7 @@
                     </div>
                   </div>
                   <div class="su11">
-                    <el-checkbox v-model="checked">同意《购买协议》</el-checkbox>
+                    <el-checkbox v-model="checked" @change="changeType">同意《购买协议》</el-checkbox>
                   </div>
 
                   <div class="su14">
@@ -202,6 +202,7 @@
                       type="primary"
                       @click="submitForm('numberValidateForm')"
                       :plain="true"
+                      :disabled="dis"
                     ></el-button>
 
                   </el-form-item>
@@ -258,10 +259,12 @@ export default {
       name1:"",
       phone1:"",
       address1:"",
-      receiveId:""
+      receiveId:"",
+      dis:true
     };
   },
   mounted() {
+    this. changeType();
     this.shopmsg();
     // this.saleType = this.$route.query.saleType
     // 监听路由跳转路径，如果是购物车，标志为a1，直接接受上个页面的参数
@@ -284,6 +287,14 @@ export default {
   //   }
   // },
   methods: {
+     changeType(){
+      console.log(this.checked)
+      if(this.checked == true){
+        this.dis = false;
+      }else{
+        this.dis = true;
+      }
+    },
     // 提示信息
     open(){
       this.$message('网络异常，下单失败')

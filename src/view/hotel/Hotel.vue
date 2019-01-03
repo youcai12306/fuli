@@ -14,8 +14,24 @@
     <div class="bottom">
       <h3>度假酒店/Resort Hotel</h3>
       <ul class="clearDiv">
-        <li v-for="item in 5" :key="item.id" @click="jumpDetail(0)">
+        <li @click="jumpDetail(0)">
           <img src="../../assets/img/hotel-img4.png" alt>
+          <p>凯悦酒店</p>
+        </li>
+        <li @click="jumpDetail(1)">
+          <img src="../../assets/img/hotel-img5.png" alt>
+          <p>凯悦酒店</p>
+        </li>
+        <li @click="jumpDetail(2)">
+          <img src="../../assets/img/hotel-img6.png" alt>
+          <p>凯悦酒店</p>
+        </li>
+        <li @click="jumpDetail(3)">
+          <img src="../../assets/img/hotel-img7.png" alt>
+          <p>凯悦酒店</p>
+        </li>
+        <li @click="jumpDetail(4)">
+          <img src="../../assets/img/hotel-img8.png" alt>
           <p>凯悦酒店</p>
         </li>
       </ul>

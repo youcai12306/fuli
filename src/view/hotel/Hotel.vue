@@ -1,6 +1,7 @@
 <!-- 度假酒店 -->
 <template>
   <div class="hotel">
+    <Header></Header>
     <div class="top">
       <img src="../../assets/img/hotel-img1.png" alt>
       <div class="top-box">
@@ -12,31 +13,39 @@
     </div>
     <div class="bottom">
       <h3>度假酒店/Resort Hotel</h3>
-      <ul>
-        <li>
+      <ul class="clearDiv">
+        <li v-for="item in 5" :key="item.id" @click="jumpDetail(0)">
           <img src="../../assets/img/hotel-img1.png" alt>
           <p>凯悦酒店</p>
         </li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
       </ul>
     </div>
   </div>
 </template>
 
 <script>
+import Header from "@/components/Header"; //引入头部
 export default {
   data() {
     return {};
   },
 
-  components: {},
+  components: {
+    Header
+  },
 
   computed: {},
 
-  methods: {}
+  methods: {
+    jumpDetail(id) {
+      this.$router.push({
+        path: "/hotelDetail",
+        query: {
+          id: id
+        }
+      });
+    }
+  }
 };
 </script>
 <style lang='scss' scoped>
@@ -79,30 +88,44 @@ export default {
     width: 1200px;
     margin: 0 auto;
     h3 {
-    //   height: 26px;
+      //   height: 26px;
       line-height: 26px;
       font-size: 26px;
       font-weight: bold;
       color: rgba(51, 51, 51, 1);
       padding-bottom: 14px;
-      padding-top:78px;
+      padding-top: 78px;
+      border-bottom: 2px solid rgba(191, 191, 191, 1);
     }
     ul {
+      padding-bottom: 195px;
       li {
+        float: left;
+        margin-top: 80px;
         width: 378px;
         height: 231px;
         position: relative;
+        margin-right: 33px;
+        cursor: pointer;
+        &:nth-of-type(3n) {
+          margin-right: 0;
+        }
         img {
           width: 378px;
           height: 231px;
         }
         p {
-            bottom: 0;
-            left: 0;
+          padding-left: 20px;
+          bottom: 0;
+          left: 0;
           position: absolute;
           width: 100%;
           height: 58px;
+          line-height: 58px;
           background: rgba(0, 0, 0, 0.77);
+          font-size: 16px;
+          font-weight: bold;
+          color: rgba(255, 255, 255, 1);
         }
       }
     }

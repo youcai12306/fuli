@@ -44,17 +44,21 @@
           <!-- 度假酒店 -->
           <li
             class="hotel"
-            :class="{'actives' : $route.name == ''}"
+            :class="{'actives' : $route.name == 'Hotel' ||  $route.name == 'HotelDetail'}"
             @mouseover="overHover('a')"
             @mouseout="outHover('')"
           >
-            <template v-if="$route.name == '' || hover == 'a'">
-              <img src="../assets/img/header-3.png" alt>
-            </template>
-            <template v-else>
-              <img src="../assets/img/header3.png" alt>
-            </template>
-            <p>度假酒店</p>
+            <router-link to="/hotel" tag="p">
+              <template
+                v-if="$route.name == 'Hotel' || $route.name == 'HotelDetail' || hover == 'a'"
+              >
+                <img src="../assets/img/header-3.png" alt>
+              </template>
+              <template v-else>
+                <img src="../assets/img/header3.png" alt>
+              </template>
+              <p>度假酒店</p>
+            </router-link>
           </li>
           <!-- 新闻中心 -->
           <li
@@ -357,16 +361,16 @@ export default {
 
         .login {
           float: left;
-         // background: url(../assets/img/index-login.png) no-repeat 0 0;
-         // padding-left: 20px;
+          // background: url(../assets/img/index-login.png) no-repeat 0 0;
+          // padding-left: 20px;
           position: relative;
           span {
             background: url(../assets/img/index-login.png) no-repeat 0 center;
             padding: 20px 0;
             padding-left: 20px;
           }
-          .span{
-             background: url(../assets/img/index-login1.png) no-repeat 0 center;
+          .span {
+            background: url(../assets/img/index-login1.png) no-repeat 0 center;
           }
           &:hover {
             cursor: pointer;
@@ -498,28 +502,25 @@ export default {
 @media screen and (max-width: 1550px) {
   .main .main-content ul li {
     padding: 21px 15px 0 15px !important;
-    
   }
-  .main .main-content .logo{
+  .main .main-content .logo {
     margin-left: 160px !important;
   }
 }
 @media screen and (max-width: 1400px) {
   .main .main-content ul li {
     padding: 21px 15px 0 15px !important;
-    
   }
-  .main .main-content .logo{
+  .main .main-content .logo {
     margin-left: 70px !important;
   }
 }
 @media screen and (max-width: 1300px) {
   .main .main-content ul li {
     padding: 21px 10px 0 10px !important;
-    
   }
-  .main .main-content .logo{
-    margin-left:20px !important;
+  .main .main-content .logo {
+    margin-left: 20px !important;
   }
 }
 </style>

@@ -47,9 +47,9 @@ const NoticeDetail = r => require.ensure([], () => r(require('@/view/news/Notice
 
 // 游玩指南
 const ditu = r => require.ensure([], () => r(require('@/view/Visitguide/ditu')), 'ditu')
-// 游玩指南
+// 主题酒店
 const Hotel = r => require.ensure([], () => r(require('@/view/hotel/Hotel')), 'Hotel')
-
+const HotelDetail = r => require.ensure([], () => r(require('@/view/hotel/HotelDetail')), 'HotelDetail')
 
 //优惠活动
 const SpecialOffier = r => require.ensure([], () => r(require('@/view/specialOffier/SpecialOffier')), 'SpecialOffier')
@@ -275,7 +275,12 @@ let router = new Router({
 		{
 			path: '/hotel',
 			name: 'Hotel',
-			component: Hotel
+			component: Hotel //主题酒店
+		},
+		{
+			path: '/hotelDetail',
+			name: 'HotelDetail',
+			component: HotelDetail //主题酒店
 		},
 		{
 			path: '/ticketDetail',

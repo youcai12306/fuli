@@ -172,7 +172,7 @@
 						</div>
 					</template>
 					<template v-if="actives == 2">
-						<div class="box2">
+						<div class="box2 box-shadow">
 							<!-- <ul>
                 <li>
                   <router-link
@@ -207,7 +207,7 @@
               </div> -->
 							<template v-for="item in 4">
 								<router-link tag="li" :to="{path:'/EventsDetail',query:{id:'5c1f5349f8dac609dd5cd6b7'}}">
-									<img src="../../assets/img/specialOffier-bg1.png" alt>
+									<img src="../../assets/img/specialOffier-bg201.png" alt>
 									<div class="box3">
 										<h3 class="t">百变万圣节</h3>
 										<p>2018-11-11</p>
@@ -237,8 +237,8 @@
 				pageIndex: 1,
 				totle: 100,
 				centerDialogVisible: false,
-				title:"提示",
-				url:""
+				title: "提示",
+				url: ""
 			};
 		},
 		computed: {},
@@ -255,9 +255,10 @@
 				this.url = "";
 				done();
 			},
-			handleOpen(title,url){
+			handleOpen(title, url) {
 				this.title = title;
-				this.url = url || "http://1.193.217.86/657248386D83E718FD97C341D/03001201005C272BC3EDF784F483AB6D146CAF-A7C5-4A26-9198-6BF30CFBA061.mp4?ccode=050F&duration=210&expire=18000&psid=c29bfef98e764b2f54cd6e8a41ad948e&ups_client_netip=6fafa990&ups_ts=1546497446&ups_userid=&utid=P2yiFEgDlTgCAXdinMiUZGFx&vid=XMzk4OTIwNTMwOA%3D%3D&vkey=Aaf59e348471e335f57107983201e1d8c&sp=&ali_redirect_domain=ykugc.cp31.ott.cibntv.net&ali_redirect_ex_ftag=003a300d1e2b623e20946ba931ca9d3844326089170f166a&ali_redirect_ex_tmining_ts=1546497456&ali_redirect_ex_tmining_expire=3600&ali_redirect_ex_hot=0";
+				this.url = url ||
+					"http://1.193.217.86/657248386D83E718FD97C341D/03001201005C272BC3EDF784F483AB6D146CAF-A7C5-4A26-9198-6BF30CFBA061.mp4?ccode=050F&duration=210&expire=18000&psid=c29bfef98e764b2f54cd6e8a41ad948e&ups_client_netip=6fafa990&ups_ts=1546497446&ups_userid=&utid=P2yiFEgDlTgCAXdinMiUZGFx&vid=XMzk4OTIwNTMwOA%3D%3D&vkey=Aaf59e348471e335f57107983201e1d8c&sp=&ali_redirect_domain=ykugc.cp31.ott.cibntv.net&ali_redirect_ex_ftag=003a300d1e2b623e20946ba931ca9d3844326089170f166a&ali_redirect_ex_tmining_ts=1546497456&ali_redirect_ex_tmining_expire=3600&ali_redirect_ex_hot=0";
 				this.centerDialogVisible = !this.centerDialogVisible;
 			}
 		},
@@ -359,6 +360,8 @@
 						color: rgba(51, 51, 51, 1);
 						cursor: pointer;
 
+
+
 						img {
 							position: absolute;
 							width: 8px;
@@ -436,6 +439,10 @@
 					background: rgba(255, 255, 255, 1);
 					margin: 0 auto;
 					padding-top: 50px;
+
+					&.box-shadow {
+						box-shadow: 0px 2px 7px 0px rgba(0, 0, 0, 0.16);
+					}
 
 					.ani-title {
 						font-size: 24px;
@@ -564,18 +571,22 @@
 							padding-left: 20px;
 
 							h3 {
-								//text-align: center;
-								font-size: 20px;
+								height: 80px;
+								line-height: 18px;
+								font-size: 18px;
+								font-family: MicrosoftYaHei-Bold;
 								font-weight: bold;
-								color: rgba(51, 51, 51, 1);
-								padding: 15px 0;
+								padding: 42px 0 20px 0;
 							}
 
 							p {
+								height: 14px;
+								line-height: 14px;
 								font-size: 14px;
-								font-weight: 500;
-								color: rgba(51, 51, 51, 1);
-								padding: 10px 0;
+								font-family: MicrosoftYaHei;
+								font-weight: 400;
+								color: rgba(102, 102, 102, 1);
+								padding-bottom: 36px;
 							}
 
 							hr {
@@ -696,8 +707,9 @@
 			}
 		}
 	}
-	.videos{
-		video{
+
+	.videos {
+		video {
 			width: 100%;
 			height: 100%;
 		}

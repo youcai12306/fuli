@@ -195,7 +195,7 @@
                     </div>
                   </div>
                   <div class="su11">
-                    <el-checkbox v-model="checked">同意《购买协议》</el-checkbox>
+                    <el-checkbox v-model="checked" @change="changeType">同意《购买协议》</el-checkbox>
                   </div>
 
                   <div class="su14">
@@ -208,6 +208,7 @@
                       type="primary"
                       @click="submitForm('numberValidateForm')"
                       :plain="true"
+                      :disabled="dis"
                     ></el-button>
 
                   </el-form-item>
@@ -267,11 +268,12 @@ export default {
       receiveId: "",
       arr2: [],
       arr3: [],
-      ids: ""
-      // dis:false
+      ids: "",
+      dis:true
     };
   },
   mounted() {
+    this. changeType();
     this.shopmsg();
     // this.saleType = this.$route.query.saleType
     // 监听路由跳转路径，如果是购物车，标志为a1，直接接受上个页面的参数
@@ -302,6 +304,14 @@ export default {
   //   }
   // },
   methods: {
+    changeType(){
+      console.log(this.checked)
+      if(this.checked == true){
+        this.dis = false;
+      }else{
+        this.dis = true;
+      }
+    },
     // 提示信息
     open() {
       this.$message("网络异常，下单失败");
@@ -320,7 +330,7 @@ export default {
         if (valid) {
           this.flag = true;
           // alert("submit!");
-
+          
           this.onSubmit();
         } else {
           console.log("error submit!!");
@@ -412,6 +422,7 @@ export default {
     },
     //   提交
     onSubmit() {
+      
       // if(this.checked === true){
       //       this.dis = false
       //     }
@@ -454,7 +465,7 @@ export default {
                     price2: this.price2
                   }
                 });
-              } else if (res.code === 400) {
+              } else if (res.code === 403 && res.code === 400) {
                 this.open(); //订单占用失败调用提示信息方法
                 this.$router.push("./mine");
               }
@@ -462,7 +473,7 @@ export default {
           }, 3000);
 
           ///
-        } else if (res.code === 403) {
+        } else if (res.code === 403 && res.code === 400) {
           this.$router.push("./mine");
           console.log(res);
         }

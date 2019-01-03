@@ -621,3 +621,8 @@ export default {
 }
 </style>
 <style src="@/assets/scss/certify.css" scoped="scoped"></style>
+<style scoped="scoped">
+	.leftNav{
+		height: 420px;
+	}
+</style>

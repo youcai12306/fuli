@@ -602,7 +602,8 @@ export default {
         window.pageYOffset ||
         document.documentElement.scrollTop ||
         document.body.scrollTop;
-      this.topShow = scrollTop;
+	  this.topShow = scrollTop;
+	  
       if (scrollTop >= 0 && scrollTop < 1757) {
         this.abc = 0;
       } else if (scrollTop >= 1757 && scrollTop < 2819) {
@@ -611,7 +612,7 @@ export default {
         this.abc = 2;
       } else {
         this.abc = 3;
-      }
+	  }
     }
   },
   components: {

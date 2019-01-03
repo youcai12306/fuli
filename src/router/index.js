@@ -37,6 +37,8 @@ const artTheme = r => require.ensure([], () => r(require('@/view/theme/artTheme'
 const EatDetail = r => require.ensure([], () => r(require('@/view/theme/EatDetail')), 'EatDetail')
 const ShopDetail = r => require.ensure([], () => r(require('@/view/theme/ShopDetail')), 'ShopDetail')
 const ArtDetail = r => require.ensure([], () => r(require('@/view/theme/ArtDetail')), 'ArtDetail')
+//冒险海洋
+const Adventure = r => require.ensure([], () => r(require('@/view/Adventure/Adventure')), 'Adventure')
 
 // 新闻中心首页
 const News = r => require.ensure([], () => r(require('@/view/news/News')), 'News')
@@ -246,6 +248,11 @@ let router = new Router({
 			path: '/theme',
 			name: 'Theme',
 			component: Theme //主题乐园
+		},
+		{
+			path: '/Adventure',
+			name: 'Adventure',
+			component: Adventure
 		},
 		{
 			path: '/animalDetail',

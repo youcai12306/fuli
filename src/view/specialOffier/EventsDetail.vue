@@ -62,7 +62,7 @@
 			document.title = "活动详情";
 		},
 		mounted() {
-			this.GetList();
+			// this.GetList();
 		},
 		methods: {
 			// 			GetList() {

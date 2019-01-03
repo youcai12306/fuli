@@ -630,7 +630,7 @@
 			return {
 				tab: 0,
 				actives: 0,
-				imgs: ['../../../static/ditu9.png'],
+				imgs: ['../../../static/ditu9.jpg'],
 				status:false
 			};
 		},

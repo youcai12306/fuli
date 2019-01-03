@@ -115,7 +115,7 @@ export default {
   }
 }
 .or6 {
-  background-image: url(../../../src/assets/img/order-1.png);
+  background-image: url(../../../src/assets/img/order-1.jpg);
   .or7 {
     padding-bottom: 100px;
     padding-top: 455px;

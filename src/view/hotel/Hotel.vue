@@ -3,7 +3,7 @@
   <div class="hotel">
     <Header></Header>
     <div class="top">
-      <img src="../../assets/img/hotel-img1.png" alt>
+      <img src="../../assets/img/hotel-img1.jpg" alt>
       <div class="top-box">
         <h3>元旦特惠
           <br>在旅途中温暖跨年
@@ -15,7 +15,7 @@
       <h3>度假酒店/Resort Hotel</h3>
       <ul class="clearDiv">
         <li v-for="item in 5" :key="item.id" @click="jumpDetail(0)">
-          <img src="../../assets/img/hotel-img1.png" alt>
+          <img src="../../assets/img/hotel-img4.png" alt>
           <p>凯悦酒店</p>
         </li>
       </ul>

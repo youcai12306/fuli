@@ -84,7 +84,7 @@
 	.risk {
 		width: 100%;
 		height: 2169px;
-		background: url(../../assets/img/park2.png) no-repeat top center;
+		background: url(../../assets/img/park2.jpg) no-repeat top center;
 		padding-top: 446px;
 		padding-bottom: 50px;
 

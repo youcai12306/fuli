@@ -201,7 +201,7 @@
 <style lang='scss' scoped>
 	.risk {
 		width: 100%;
-		background: #fff url(../../assets/img/risk-bg.png) no-repeat top center;
+		background: #fff url(../../assets/img/risk-bg.jpg) no-repeat top center;
 		background-size: 1920px 100%;
 		padding-top: 376px;
 		padding-bottom: 50px;

@@ -54,7 +54,7 @@
 	.news {
 		width: 100%;
 		height: 1800px;
-		background: #fff url(../../assets/img/specialOffier-bg.png) no-repeat top center;
+		background: #fff url(../../assets/img/specialOffier-bg.jpg) no-repeat top center;
 
 		.main-contion {
 			position: relative;

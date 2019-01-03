@@ -508,7 +508,7 @@ export default {
       top: 0;
       height: 100%;
       width: 100%;
-      // z-index: -1;
+      z-index: -1;
       img {
         // height: 864px;
         height: 100%;

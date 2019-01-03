@@ -70,7 +70,7 @@ export default {
 .hotel-detail {
   width: 100%;
   height: 100%;
-  background: url(../../assets/img/hotel-img2.png) no-repeat;
+  background: url(../../assets/img/hotel-img2.jpg) no-repeat;
   background-size: 1920px 100%;
   .nav {
     background-color: #ffffff;
@@ -82,6 +82,7 @@ export default {
     font-size: 14px;
     font-weight: 400;
     color: rgba(51, 51, 51, 1);
+    border-top:1px solid rgba(227, 227, 227, 1);
     a {
       color: rgba(51, 51, 51, 1);
     }

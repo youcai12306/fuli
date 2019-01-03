@@ -652,7 +652,7 @@
 	.risk {
 		width: 100%;
 		height: 100%;
-		background: url(../../assets/img/ditu_bg.png) no-repeat top center;
+		background: url(../../assets/img/ditu_bg.jpg) no-repeat top center;
 		/* background-size: 100%; */
 		background-attachment: fixed;
 		padding-top: 280px;

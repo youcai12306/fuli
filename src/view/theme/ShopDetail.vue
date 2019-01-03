@@ -33,7 +33,7 @@
       </div>
       <div class="content">想在水的世界尽情嬉戏？那让我们先补齐装备吧！这里会有各式各样的水上用品补给</div>
     </div>
-    <div class="box">
+    <div class="box" v-else>
       <div class="top clearDiv">
         <h3 class="floatLeft">木马奇珍坊</h3>
         <div class="floatRight clearDiv" @click="back()">

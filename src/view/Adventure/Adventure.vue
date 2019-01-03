@@ -272,7 +272,7 @@
 						<swiper-slide>
 							<div class="venve" @click="jumpShopDetail(0)">
 								<div class="venve-list">
-									<img src="../../assets/img/theme-shop-img1.png" alt>
+									<img src="../../assets/img/Adventere2.png" alt>
 									<div class="venve-content">
 										<div>荣德押</div>
 										<p></p>
@@ -283,7 +283,7 @@
 						<swiper-slide>
 							<div class="venve" @click="jumpShopDetail(1)">
 								<div class="venve-list">
-									<img src="../../assets/img/theme-shop-img1.png" alt>
+									<img src="../../assets/img/Adventere3.png" alt>
 									<div class="venve-content">
 										<div>奔流</div>
 										<p>穿上抵御大浪的盔甲，迎接浪花淋漓的挑战，让照片记录你或兴奋或夸张或惊恐的一刻，让我们把不经意的瞬间珍藏</p>
@@ -294,7 +294,7 @@
 						<swiper-slide>
 							<div class="venve" @click="jumpShopDetail(2)">
 								<div class="venve-list">
-									<img src="../../assets/img/theme-shop-img1.png" alt>
+									<img src="../../assets/img/Adventere2.png" alt>
 									<div class="venve-content">
 										<div>极地馆礼品店</div>
 										<p>各位喜欢北极珍贵动物的朋友，快来选购一系列以极地动物作主题的礼品及特色玩偶，再继续您的探索旅程</p>
@@ -313,7 +313,7 @@
 				<img src="../../assets/img/theme-eat-title.png" alt class="img">
 				<div class="eat-lists clearDiv">
 					<div class="eat-list floatLeft" @click="jumpEatDetail(0)">
-						<img src="../../assets/img/theme-eat-img1.png" alt>
+						<img src="../../assets/img/Adventere1.png" alt>
 						<div class="eat-content">
 							<div>北极圈餐厅</div>
 							<p>极地海洋风格，国际美食广场，适合一家大小</p>
@@ -321,7 +321,7 @@
 						</div>
 					</div>
 					<div class="eat-list floatLeft" @click="jumpEatDetail(1)">
-						<img src="../../assets/img/theme-eat-img1.png" alt>
+						<img src="../../assets/img/Adventere1.png" alt>
 						<div class="eat-content">
 							<div>海星咖啡</div>
 							<p>欧洲小镇装式，提供特色咖啡及轻食</p>

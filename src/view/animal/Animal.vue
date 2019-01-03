@@ -271,7 +271,7 @@
 </script>
 <style lang='scss' scoped>
 	.risk {
-		background: #fff url(../../assets/img/theme-animal-bg.png) no-repeat top center;
+		background: #fff url(../../assets/img/theme-animal-bg.jpg) no-repeat top center;
 		padding-top: 438px;
 		padding-bottom: 50px;
 

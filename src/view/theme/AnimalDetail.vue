@@ -75,7 +75,7 @@ export default {
 <style lang="scss" scoped>
 .animalTheme {
   width: 100%;
-  background: url(../../assets/img/theme-detail-bg.png) no-repeat;
+  background: url(../../assets/img/theme-detail-bg.jpg) no-repeat;
   background-size: 1920px 100%;
   padding-bottom: 204px;
   .box {

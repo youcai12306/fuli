@@ -10,28 +10,19 @@
 		.theme-title {
 			position: absolute;
 			left: 50%;
-			top: 80px;
+			top: 68px;
 			transform: translateX(-50%);
-			width: 142px;
-			height: 50px;
-			line-height: 50px;
-			background: rgba(232, 159, 57, 0.32);
-			font-size: 16px;
-			font-family: MicrosoftYaHei-Bold;
-			font-weight: bold;
-			color: rgba(197, 95, 17, 1);
+			width:268px;
+			height:56px;
+			line-height: 56px;
+			background:rgba(246,179,127,0.41);
+			font-size:32px;
+			font-family:MicrosoftYaHei-Bold;
+			font-weight:bold;
+			color:rgba(252,139,6,1);
 			padding-left: 8px;
-			margin-left: -180px;
+			margin-left: -370px;
 
-			&:before {
-				content: " ";
-				width: 16px;
-				height: 50px;
-				background: rgba(239, 174, 67, 1);
-				display: inline-block;
-				margin-left: -24px;
-				float: left;
-			}
 		}
 
 		.list-one {

@@ -214,7 +214,7 @@
 					</swiper-slide>
 				</swiper>
 			</div>
-		
+
 			<div class="meng">
 				<div class="certify" id="certify">
 					<swiper :options="certifySwiper" ref="certifySwiper">
@@ -236,21 +236,33 @@
 			</div>
 		</div>
 		<!-- 动物场馆 -->
-		<!-- <div class="animal" id="animal">
-		  <img src="../../assets/img/theme-animal-title.png" alt class="img">
-		  <div class="bottom">
-		    <swiper :options="swiperOptions" ref="mySwipers">
-		      <swiper-slide v-for="item in 5" :key="item">
-		        <div class="venve" @click.stop="jumpAnimalDetail(item.id)">
-		          <img src="../../assets/img/theme-animal-img1.png" alt>
-		          <h3>海豚馆</h3>
-		          <p>总水量2.3万吨，游客不仅能欣赏精彩绝伦的海豚表演，更能与聪明可爱的海豚共同畅游，体验前所未有的互动乐趣。</p>
-		        </div>
-		      </swiper-slide>
-		    </swiper>
-		    <div class="swiper-paginations" slot="pagination"></div>
-		  </div>
-		</div>-->
+		<div class="animal" id="animal">
+			<img src="../../assets/img/theme-animal-title.png" alt class="img">
+			<div class="bottom">
+				<swiper :options="swiperOptions" ref="mySwipers">
+					<swiper-slide v-for="item in 3" :key="item">
+						<div class="venve" @click.stop="jumpAnimalDetail(item.id)">
+							<template v-if="item == 1">
+								<img src="../../assets/img/theme-animal-img1.png" alt>
+								<h3>鳐鱼馆</h3>
+								<p>场馆占地面积超2千平米，总水体量1298吨，馆内饲养多种鳐鱼，可让游客零距离触摸海中飞翼，带来前所未有的奇妙体验。</p>
+							</template>
+							<template v-if="item == 2">
+								<img src="../../assets/img/theme-animal-img1.png" alt>
+								<h3>海狮馆</h3>
+								<p>建筑面积约4千平米，是园区主打的特色场馆之一，游客们除了可以欣赏到精彩绝伦的海狮表演，还可以与海狮近距离互动，与家人一同分享欢乐。</p>
+							</template>
+							<template v-if="item == 3">
+								<img src="../../assets/img/theme-animal-img1.png" alt>
+								<h3>敬请期待</h3>
+								<p>敬请期待开放</p>
+							</template>
+						</div>
+					</swiper-slide>
+				</swiper>
+				<div class="swiper-paginations" slot="pagination"></div>
+			</div>
+		</div>
 		<!-- 主题商店 -->
 		<div class="shop" id="shop">
 			<div class="shop-box">
@@ -324,7 +336,7 @@
 			<li @click="showYuanQu()">园区介绍</li>
 			<li @click="jumpColumn('#banner')">游玩设施</li>
 			<li @click="jumpColumn('#art')">精彩演艺</li>
-			<!-- <li @click="jumpColumn('#animal')">动物场馆</li> -->
+			<li @click="jumpColumn('#animal')">动物场馆</li>
 			<li @click="jumpColumn('#shop')">主题商店</li>
 			<li @click="jumpColumn('#eat')">特色餐厅</li>
 		</ul>
@@ -342,7 +354,7 @@
 </template>
 
 <script>
-import "swiper/dist/css/swiper.css";
+	import "swiper/dist/css/swiper.css";
 	import {
 		swiper,
 		swiperSlide
@@ -367,7 +379,7 @@ import "swiper/dist/css/swiper.css";
 				},
 				swiperOptions: {
 					//循环
-					loop: true,
+					// loop: true,
 					//设定初始化时slide的索引
 					initialSlide: 0,
 					//放几个
@@ -394,11 +406,11 @@ import "swiper/dist/css/swiper.css";
 					slidesPerView: 3,
 					spaceBetween: 60,
 					//自动播放
-// 					autoplay: {
-// 					  delay: 5000,
-// 					  stopOnLastSlide: false,
-// 					  disableOnInteraction: true
-// 					},
+					// 					autoplay: {
+					// 					  delay: 5000,
+					// 					  stopOnLastSlide: false,
+					// 					  disableOnInteraction: true
+					// 					},
 					//分页器设置
 					pagination: {
 						el: ".swiper-paginations1",
@@ -688,3 +700,8 @@ import "swiper/dist/css/swiper.css";
 	}
 </style>
 <style src="@/assets/scss/certify.css" scoped="scoped"></style>
+<style scoped="scoped">
+	.leftNav{
+		height: 420px;
+	}
+</style>

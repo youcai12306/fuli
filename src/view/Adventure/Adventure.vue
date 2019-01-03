@@ -1,11 +1,16 @@
 <template>
-	<div class="theme">
+	<!--
+		作者：lixiaoyi
+		时间：2019-01-03
+		描述：冒险海洋
+	-->
+	<div class="theme Adventure" id="Adventure">
 		<!-- 头部 -->
 		<Header></Header>
 		<!-- 第一部分 -->
 		<div class="banner" id="banner">
 			<div class="theme-title">
-				<p>麦迪卡斯水乐园</p>
+				<p>冒险海洋</p>
 			</div>
 			<div class="list-one">
 				<div class="one-change" @mouseover="stopTimes" @mouseout="startTimes">
@@ -209,7 +214,7 @@
 					</swiper-slide>
 				</swiper>
 			</div>
-
+		
 			<div class="meng">
 				<div class="certify" id="certify">
 					<swiper :options="certifySwiper" ref="certifySwiper">
@@ -226,26 +231,26 @@
 						</swiper-slide>
 					</swiper>
 					<!-- <div class="swiper-button-prev"></div>
-          <div class="swiper-button-next"></div>-->
+		      <div class="swiper-button-next"></div>-->
 				</div>
 			</div>
 		</div>
 		<!-- 动物场馆 -->
 		<!-- <div class="animal" id="animal">
-      <img src="../../assets/img/theme-animal-title.png" alt class="img">
-      <div class="bottom">
-        <swiper :options="swiperOptions" ref="mySwipers">
-          <swiper-slide v-for="item in 5" :key="item">
-            <div class="venve" @click.stop="jumpAnimalDetail(item.id)">
-              <img src="../../assets/img/theme-animal-img1.png" alt>
-              <h3>海豚馆</h3>
-              <p>总水量2.3万吨，游客不仅能欣赏精彩绝伦的海豚表演，更能与聪明可爱的海豚共同畅游，体验前所未有的互动乐趣。</p>
-            </div>
-          </swiper-slide>
-        </swiper>
-        <div class="swiper-paginations" slot="pagination"></div>
-      </div>
-    </div>-->
+		  <img src="../../assets/img/theme-animal-title.png" alt class="img">
+		  <div class="bottom">
+		    <swiper :options="swiperOptions" ref="mySwipers">
+		      <swiper-slide v-for="item in 5" :key="item">
+		        <div class="venve" @click.stop="jumpAnimalDetail(item.id)">
+		          <img src="../../assets/img/theme-animal-img1.png" alt>
+		          <h3>海豚馆</h3>
+		          <p>总水量2.3万吨，游客不仅能欣赏精彩绝伦的海豚表演，更能与聪明可爱的海豚共同畅游，体验前所未有的互动乐趣。</p>
+		        </div>
+		      </swiper-slide>
+		    </swiper>
+		    <div class="swiper-paginations" slot="pagination"></div>
+		  </div>
+		</div>-->
 		<!-- 主题商店 -->
 		<div class="shop" id="shop">
 			<div class="shop-box">
@@ -326,7 +331,7 @@
 </template>
 
 <script>
-	import "swiper/dist/css/swiper.css";
+import "swiper/dist/css/swiper.css";
 	import {
 		swiper,
 		swiperSlide

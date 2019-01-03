@@ -222,7 +222,7 @@
 
 		<!-- 播放器 -->
 		<el-dialog :title="title" :visible.sync="centerDialogVisible" width="40%" center class="videos" :before-close="handleClose">
-			<video ref="plays" :src="url" autoplay></video>
+			<video ref="plays" :src="url" controls></video>
 		</el-dialog>
 	</section>
 </template>

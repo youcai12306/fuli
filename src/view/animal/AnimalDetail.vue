@@ -60,15 +60,6 @@
 								繁殖——胎生哺乳，雌性宽吻海豚在5-12岁时性成熟，雄性稍迟，在10-12岁。<br>
 								分布——分布于大西洋、印度洋、南太平洋、地中海<br>
 							</div>
-
-							<div class="div-video" @click="status=true">
-								<img src="../../assets/img/Adetail1.png" alt="图片" v-if="!status">
-								<template v-if="status">
-									<video controls="" autoplay="" name="media">
-										<source src="http://220.164.101.233/6972ABA05563D7189138F285D/03000A17005A6D6FDD431E055EEB3ED1C172E0-9A6B-0F5C-3683-71EB5632A884.mp4?ccode=050F&amp;duration=392&amp;expire=18000&amp;psid=9de947e6e0e2165a511f0bbaaa3a0f24&amp;ups_client_netip=77629cc8&amp;ups_ts=1545639349&amp;ups_userid=&amp;utid=P2yiFEgDlTgCAXdinMiUZGFx&amp;vid=XMzEyMjcxNjAw&amp;vkey=A424309d5ad1aaba3737f078c6d9fdae9&amp;sp=&amp;ali_redirect_domain=ykugc.cp31.ott.cibntv.net&amp;ali_redirect_ex_ftag=95670d958d49197e342f1df4ea06b2766aaef08cf8811e3d&amp;ali_redirect_ex_tmining_ts=1545639355&amp;ali_redirect_ex_tmining_expire=3600&amp;ali_redirect_ex_hot=0"
-										 type="video/mp4"></video>
-								</template>
-							</div>
 						</template>
 
 						<template v-if="type == 2">
@@ -105,15 +96,6 @@
 								食性 以鱼类为主，也食用无脊椎动物，如蟹、虾、蛤蚌、蠕虫、章鱼、鱿鱼以及其它海洋底栖生物。<br>
 								繁殖 胎生，繁殖季一般在2月末到4月初，妊娠期持续14个月。<br>
 								分布 北极、亚北极水域。<br>
-							</div>
-
-							<div class="div-video" @click="status=true">
-								<img src="../../assets/img/Adetail1.png" alt="图片" v-if="!status">
-								<template v-if="status">
-									<video controls="" autoplay="" name="media">
-										<source src="http://220.164.101.233/6972ABA05563D7189138F285D/03000A17005A6D6FDD431E055EEB3ED1C172E0-9A6B-0F5C-3683-71EB5632A884.mp4?ccode=050F&amp;duration=392&amp;expire=18000&amp;psid=9de947e6e0e2165a511f0bbaaa3a0f24&amp;ups_client_netip=77629cc8&amp;ups_ts=1545639349&amp;ups_userid=&amp;utid=P2yiFEgDlTgCAXdinMiUZGFx&amp;vid=XMzEyMjcxNjAw&amp;vkey=A424309d5ad1aaba3737f078c6d9fdae9&amp;sp=&amp;ali_redirect_domain=ykugc.cp31.ott.cibntv.net&amp;ali_redirect_ex_ftag=95670d958d49197e342f1df4ea06b2766aaef08cf8811e3d&amp;ali_redirect_ex_tmining_ts=1545639355&amp;ali_redirect_ex_tmining_expire=3600&amp;ali_redirect_ex_hot=0"
-										 type="video/mp4"></video>
-								</template>
 							</div>
 						</template>
 
@@ -152,15 +134,6 @@
 								繁殖 胎生，雌兽每3年产一胎，妊娠期为11-13个月，每胎只产1仔。<br>
 								分布 环北极圈海域<br>
 							</div>
-
-							<div class="div-video" @click="status=true">
-								<img src="../../assets/img/Adetail1.png" alt="图片" v-if="!status">
-								<template v-if="status">
-									<video controls="" autoplay="" name="media">
-										<source src="http://220.164.101.233/6972ABA05563D7189138F285D/03000A17005A6D6FDD431E055EEB3ED1C172E0-9A6B-0F5C-3683-71EB5632A884.mp4?ccode=050F&amp;duration=392&amp;expire=18000&amp;psid=9de947e6e0e2165a511f0bbaaa3a0f24&amp;ups_client_netip=77629cc8&amp;ups_ts=1545639349&amp;ups_userid=&amp;utid=P2yiFEgDlTgCAXdinMiUZGFx&amp;vid=XMzEyMjcxNjAw&amp;vkey=A424309d5ad1aaba3737f078c6d9fdae9&amp;sp=&amp;ali_redirect_domain=ykugc.cp31.ott.cibntv.net&amp;ali_redirect_ex_ftag=95670d958d49197e342f1df4ea06b2766aaef08cf8811e3d&amp;ali_redirect_ex_tmining_ts=1545639355&amp;ali_redirect_ex_tmining_expire=3600&amp;ali_redirect_ex_hot=0"
-										 type="video/mp4"></video>
-								</template>
-							</div>
 						</template>
 
 						<template v-if="type == 4">
@@ -197,15 +170,6 @@
 								食性 肉食性<br>
 								繁殖 胎生，8月到12月间为南海狮的交配季节，12月到2月间幼崽出生。<br>
 								分布 南美洲的海岸线和沿海的小岛上<br>
-							</div>
-
-							<div class="div-video" @click="status=true">
-								<img src="../../assets/img/Adetail1.png" alt="图片" v-if="!status">
-								<template v-if="status">
-									<video controls="" autoplay="" name="media">
-										<source src="http://220.164.101.233/6972ABA05563D7189138F285D/03000A17005A6D6FDD431E055EEB3ED1C172E0-9A6B-0F5C-3683-71EB5632A884.mp4?ccode=050F&amp;duration=392&amp;expire=18000&amp;psid=9de947e6e0e2165a511f0bbaaa3a0f24&amp;ups_client_netip=77629cc8&amp;ups_ts=1545639349&amp;ups_userid=&amp;utid=P2yiFEgDlTgCAXdinMiUZGFx&amp;vid=XMzEyMjcxNjAw&amp;vkey=A424309d5ad1aaba3737f078c6d9fdae9&amp;sp=&amp;ali_redirect_domain=ykugc.cp31.ott.cibntv.net&amp;ali_redirect_ex_ftag=95670d958d49197e342f1df4ea06b2766aaef08cf8811e3d&amp;ali_redirect_ex_tmining_ts=1545639355&amp;ali_redirect_ex_tmining_expire=3600&amp;ali_redirect_ex_hot=0"
-										 type="video/mp4"></video>
-								</template>
 							</div>
 						</template>
 
@@ -244,15 +208,6 @@
 								繁殖 胎生，怀孕期约1年，通常1胎产1仔。<br>
 								分布 非洲西部海岸与河流水域<br>
 							</div>
-
-							<div class="div-video" @click="status=true">
-								<img src="../../assets/img/Adetail1.png" alt="图片" v-if="!status">
-								<template v-if="status">
-									<video controls="" autoplay="" name="media">
-										<source src="http://220.164.101.233/6972ABA05563D7189138F285D/03000A17005A6D6FDD431E055EEB3ED1C172E0-9A6B-0F5C-3683-71EB5632A884.mp4?ccode=050F&amp;duration=392&amp;expire=18000&amp;psid=9de947e6e0e2165a511f0bbaaa3a0f24&amp;ups_client_netip=77629cc8&amp;ups_ts=1545639349&amp;ups_userid=&amp;utid=P2yiFEgDlTgCAXdinMiUZGFx&amp;vid=XMzEyMjcxNjAw&amp;vkey=A424309d5ad1aaba3737f078c6d9fdae9&amp;sp=&amp;ali_redirect_domain=ykugc.cp31.ott.cibntv.net&amp;ali_redirect_ex_ftag=95670d958d49197e342f1df4ea06b2766aaef08cf8811e3d&amp;ali_redirect_ex_tmining_ts=1545639355&amp;ali_redirect_ex_tmining_expire=3600&amp;ali_redirect_ex_hot=0"
-										 type="video/mp4"></video>
-								</template>
-							</div>
 						</template>
 					</div>
 				</div>
@@ -271,7 +226,6 @@
 	export default {
 		data() {
 			return {
-				status: false,
 				active: 0,
 				actives: 0,
 				swiperOption: { //轮播图配置

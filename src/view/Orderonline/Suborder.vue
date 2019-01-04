@@ -5,24 +5,15 @@
 
       <!-- 订单详情 -->
       <div class="su2 clearDiv">
-        <div
-          class="su22"
-          @click="jumpdetail"
-        >
+        <div class="su22" @click="jumpdetail">
           当前位置：网上订购>详情页>提交订单
         </div>
         <!-- 弹出框遮罩内容 -->
-        <div
-          class="su21 clearDiv"
-          v-show="flag"
-        >
+        <div class="su21 clearDiv" v-show="flag">
           <div class="bg clearDiv"></div>
           <div class="show clearDiv">
             <div class="su22">
-              <img
-                src="../../assets/img/dengdai.png"
-                alt=""
-              >
+              <img src="../../assets/img/dengdai.png" alt="">
               <p class="su23">订单创建中，请稍后...</p>
               <p class="su24">预计等待时间为3秒</p>
             </div>
@@ -33,21 +24,14 @@
             <span>订单详情</span>
           </div>
           <div class="su4">
-            <table
-              cellspacing="0"
-              width="1078"
-              height="353"
-            >
+            <table cellspacing="0" width="1078" height="353">
               <tr>
                 <th>商品信息</th>
                 <th>单价</th>
                 <th>数量</th>
                 <th>小计</th>
               </tr>
-              <tr
-                v-for="item in list2"
-                :key="item.id"
-              >
+              <tr v-for="item in list2" :key="item.id">
                 <!-- <tr v-for="item in list2" :key="item"> -->
                 <td>{{item.product.productName}}
                   <p>游玩时间：{{item.product.dataBaseDate}}</p>
@@ -95,99 +79,59 @@
             </div>
             <div class="su10 clearDiv">
               <div>
-                <el-form
-                  ref="numberValidateForm"
-                  :model="numberValidateForm"
-                  label-width="85px"
-                >
+                <el-form ref="numberValidateForm" :model="numberValidateForm" label-width="85px">
 
-                  <el-form-item
-                    label="姓名 ："
-                    class="el1"
-                    prop="name1"
-                    :rules="[
+                  <el-form-item label="姓名 ：" class="el1" prop="name1" :rules="[
                           { required: true, message: '姓名不能为空'},
                           { type: 'string', message: '姓名必须为中文'},
                           {
                             pattern:/^[\u4E00-\u9FA5]+$/,
                             message: '用户名只能为中文'
                           }
-                      ]"
-                  >
+                      ]">
 
-                    <el-input
-                      type="name1"
-                      v-model.number="numberValidateForm.name1"
-                      autocomplete="off"
-                    >
+                    <el-input type="name1" v-model.number="numberValidateForm.name1" autocomplete="off">
 
                     </el-input>
 
                   </el-form-item>
 
-                  <el-form-item
-                    label="手机号 ："
-                    class="el2"
-                    prop="phone"
-                    :rules="[
+                  <el-form-item label="手机号 ：" class="el2" prop="phone" :rules="[
                           { required: true, message: '手机号不能为空',trigger:'blur'},
                           { 
             validator: (rule, value, callback)=>{validateSku(rule, value, callback)}, 
             trigger: ['blur', 'change'] 
         }
-                      ]"
-                  >
-                    <el-input
-                      type="phone"
-                      v-model.number="numberValidateForm.phone"
-                      autocomplete="off"
-                    >
+                      ]">
+                    <el-input type="phone" v-model.number="numberValidateForm.phone" autocomplete="off">
 
                     </el-input>
 
                     <p>此手机号用于接受入园短信</p>
                   </el-form-item>
 
-                  <el-form-item
-                    label="身份证 ："
-                    class="el1"
-                    prop="name2"
-                    :rules="[
+                  <el-form-item label="身份证 ：" class="el1" prop="name2" :rules="[
                           { required: true, message: '身份证不能为空'},
                           
                           {
                             pattern:/^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/,
                             message: '身份证号码不正确'
                             },
-                      ]"
-                  >
+                      ]">
 
-                    <el-input
-                      type="name2"
-                      v-model.text="numberValidateForm.name2"
-                      autocomplete="off"
-                    >
+                    <el-input type="name2" v-model.text="numberValidateForm.name2" autocomplete="off">
 
                     </el-input>
 
                   </el-form-item>
                   <!-- 邮寄地址 -->
-                  <div
-                    class="su5"
-                    v-show="flag1"
-                  >
+                  <div class="su5" v-show="flag1">
 
                     <span class="su6">邮寄地址</span>
-                    <span
-                      class="su7"
-                      @click="address()"
-                    >选择收件地址</span>
+                    <span class="su7" @click="address()">选择收件地址</span>
 
                   </div>
-                  <div
-                    class="q1"
-                    v-show="flag1"
-                  >
+                  <div class="q1" v-show="flag1">
                     <div class="q2">
                       <p>收件人：<span>{{name1}}</span></p>
                       <p class="q3">手机号：<span>{{phone1}}</span></p>
@@ -204,12 +148,7 @@
                   </div>
 
                   <el-form-item>
-                    <el-button
-                      type="primary"
-                      @click="submitForm('numberValidateForm')"
-                      :plain="true"
-                      :disabled="dis"
-                    ></el-button>
+                    <el-button type="primary" @click="submitForm('numberValidateForm')" :plain="true" :disabled="dis"></el-button>
 
                   </el-form-item>
                 </el-form>
@@ -269,11 +208,11 @@ export default {
       arr2: [],
       arr3: [],
       ids: "",
-      dis:true
+      dis: true
     };
   },
   mounted() {
-    this. changeType();
+    this.changeType();
     this.shopmsg();
     // this.saleType = this.$route.query.saleType
     // 监听路由跳转路径，如果是购物车，标志为a1，直接接受上个页面的参数
@@ -304,11 +243,11 @@ export default {
   //   }
   // },
   methods: {
-    changeType(){
-      console.log(this.checked)
-      if(this.checked == true){
+    changeType() {
+      console.log(this.checked);
+      if (this.checked == true) {
         this.dis = false;
-      }else{
+      } else {
         this.dis = true;
       }
     },
@@ -330,7 +269,7 @@ export default {
         if (valid) {
           this.flag = true;
           // alert("submit!");
-          
+
           this.onSubmit();
         } else {
           console.log("error submit!!");
@@ -339,8 +278,7 @@ export default {
       });
       //  将购物车 已提交的订单清空，
       this.$fetch(
-        `${this.$url1}:2060/user-aggregate/bathDeleteShopCarts?ids=` +
-          this.ids
+        `${this.$url1}:2060/user-aggregate/bathDeleteShopCarts?ids=` + this.ids
       ).then(res => {
         // console.log(11);
         if (res.code === 200) {
@@ -422,7 +360,6 @@ export default {
     },
     //   提交
     onSubmit() {
-      
       // if(this.checked === true){
       //       this.dis = false
       //     }

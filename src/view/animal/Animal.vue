@@ -160,12 +160,13 @@
 							<div class="pages">
 								
               </div>-->
-							<template v-for="item in 4">
-								<router-link tag="li" :to="{path:'/EventsDetail',query:{id:'5c1f5349f8dac609dd5cd6b7'}}">
-									<img src="../../assets/img/specialOffier-bg1.png" alt>
+							<template v-for="item in 2">
+								<router-link tag="li" :to="{name:'BaiDetails',params:{type:'1',id:item}}">
+									<img src="../../assets/img/specialOffier-bg201.png" alt>
 									<div class="box3">
-										<h3 class="t">百变万圣节</h3>
-										<p>2018-11-11</p>
+										<template v-if="item == 1"><h3 class="t">搁浅领航鲸救助(上)</h3></template>
+										<template v-if="item == 2"><h3 class="t">搁浅领航鲸救助(下)</h3></template>
+										<p>2016-05-18</p>
 									</div>
 								</router-link>
 							</template>
@@ -205,11 +206,13 @@
 							<!-- <div class="pages">
                
               </div> -->
-							<template v-for="item in 4">
-								<router-link tag="li" :to="{path:'/EventsDetail',query:{id:'5c1f5349f8dac609dd5cd6b7'}}">
+							<template v-for="item in 3">
+								<router-link tag="li" :to="{name:'BaiDetails',params:{type:'2',id:item}}">
 									<img src="../../assets/img/specialOffier-bg201.png" alt>
 									<div class="box3">
-										<h3 class="t">百变万圣节</h3>
+										<template v-if="item == 1"><h3 class="t">携手 “净滩”，向海洋垃圾宣战</h3></template>
+										<template v-if="item == 2"><h3 class="t">海洋日系列活动-科普进校园暨世界</h3></template>
+										<template v-if="item == 3"><h3 class="t">行动吧海洋小卫士</h3></template>
 										<p>2018-11-11</p>
 									</div>
 								</router-link>
@@ -545,15 +548,15 @@
 				.box2 {
 					width: 863px;
 					min-height: 1000px;
-					padding: 50px 0;
+					/* padding: 50px 0; */
 					background: #fff;
 					margin: 0 auto;
-
+					
 					li {
 						cursor: pointer;
 						float: left;
-						margin-left: 50px;
-						margin-top: 30px;
+						margin-left: 52px;
+						margin-top: 60px;
 						list-style: none;
 
 						img {
@@ -576,7 +579,10 @@
 								font-size: 18px;
 								font-family: MicrosoftYaHei-Bold;
 								font-weight: bold;
-								padding: 42px 0 20px 0;
+								padding: 42px 20px 20px 0;
+								overflow: hidden;
+								text-overflow: ellipsis;
+								white-space: nowrap;
 							}
 
 							p {

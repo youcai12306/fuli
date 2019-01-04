@@ -154,7 +154,7 @@
 				swiperOption: {
 					notNextTick: true,
 					//循环
-					// loop: true,
+					loop: true,
 					//设定初始化时slide的索引
 					initialSlide: 0,
 					//自动播放

@@ -2,7 +2,6 @@
 export function setCookie(c_name, value, expiredays) {
   var exdate = new Date();
   exdate.setTime(exdate.getTime() + expiredays);
-	console.log(exdate)
   document.cookie = c_name + "=" + escape(value) + ((expiredays == null) ? "" : ";expires=" + exdate.toGMTString());
 };
 // 获取cookie

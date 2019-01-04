@@ -51,16 +51,16 @@
 					<div class="imgList" v-for="(item,i) in 6" :key="item" v-show="i === index">
 						<div class="top">
 							<div class="top-imgList" v-for="(item,key) in 2" :key="key" v-show="key === datailIndex">
-								<img :src="`../../../static/theme/${i+1}.png`" alt class="img" v-show="changeImg == 0">
-								<img :src="`../../../static/theme/${i+2}.png`" alt class="img" v-show="changeImg == 1">
+								<img :src="`../../../static/adventrue/${i+1}.jpg`" alt class="img" v-show="changeImg == 0">
+								<img :src="`../../../static/adventrue/${i+2}.jpg`" alt class="img" v-show="changeImg == 1">
 							</div>
 							<div class="top-imgMinList">
 								<ul>
 									<li @click="showDatail(0)">
-										<img src="../../assets/img/adventrue-img7.png" alt class="imgMin">
+										<img src="../../assets/img/adventrue-img8.png" alt class="imgMin">
 									</li>
 									<li @click="showDatail(1)">
-										<img src="../../assets/img/adventrue-img8.png" alt class="imgMin">
+										<img src="../../assets/img/adventrue-img7.png" alt class="imgMin">
 									</li>
 								</ul>
 							</div>

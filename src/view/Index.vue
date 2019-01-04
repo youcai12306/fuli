@@ -4,39 +4,39 @@
     <div class="banner">
       <div class="banner-imgs">
         <img
-          src="../assets/img/index-banner1.png"
+          src="../assets/img/index-banner1.jpg"
           alt
           v-show="0 === index"
           @click="jumpHuodongDetail(0)"
         >
-        <img src="../assets/img/img102.png" alt v-show="1 === index" @click="jumpHuodongDetail(0)">
+        <img src="../assets/img/img102.jpg" alt v-show="1 === index" @click="jumpHuodongDetail(0)">
         <img
-          src="../assets/img/index-banner1.png"
+          src="../assets/img/index-banner1.jpg"
           alt
           v-show="2 === index"
           @click="jumpHuodongDetail(0)"
         >
         <img
-          src="../assets/img/index-banner1.png"
+          src="../assets/img/index-banner1.jpg"
           alt
           v-show="3 === index"
           @click="jumpHuodongDetail(0)"
         >
         <img
-          src="../assets/img/index-banner1.png"
+          src="../assets/img/index-banner1.jpg"
           alt
           v-show="4 === index"
           @click="jumpHuodongDetail(0)"
         >
-        <img src="../assets/img/img102.png" alt v-show="5 === index" @click="jumpHuodongDetail(0)">
+        <img src="../assets/img/img102.jpg" alt v-show="5 === index" @click="jumpHuodongDetail(0)">
         <img
-          src="../assets/img/index-banner1.png"
+          src="../assets/img/index-banner1.jpg"
           alt
           v-show="6 === index"
           @click="jumpHuodongDetail(0)"
         >
         <img
-          src="../assets/img/index-banner1.png"
+          src="../assets/img/index-banner1.jpg"
           alt
           v-show="7 === index"
           @click="jumpHuodongDetail(0)"

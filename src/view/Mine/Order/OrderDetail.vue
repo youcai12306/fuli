@@ -194,7 +194,7 @@
 				}
 				console.log(data);
 
-				this.$post(`${this.$url1}:5041/order-aggregate/findOrderDetail?pageNum=1&pageSize=10`,
+				this.$post(`${this.$url1}:5001/order-aggregate/findOrderDetail?pageNum=1&pageSize=10`,
 					data).then(res => {
 					if (res.code === 200) {
 						this.data = res.data.list[0];

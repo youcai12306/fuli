@@ -267,7 +267,7 @@
 						returnCount: obj.productCount,
 						returnContent: val.value
 					}
-					this.$post(`${this.$url1}:5080/returnCash-aggregate/refund/apply`, this.$tool.formatDatas(data)).then(res => {
+					this.$post(`${this.$url1}:5070/cashInterface-aggregate/refund/apply`, this.$tool.formatDatas(data)).then(res => {
 						if (res.code == 200) {
 							this.$message({
 								type: 'success',

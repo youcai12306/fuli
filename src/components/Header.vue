@@ -164,7 +164,7 @@
               {{name}},{{$t('header.huan')}}
               <div class="person-info">
                 <div class="info-one">
-                  <router-link to="/mine" class="mine" :class="{ml60:chs == 'en'}">{{$t('Center.Center')}}</router-link>
+                  <router-link to="/prepaid" class="mine" :class="{ml60:chs == 'en'}">{{$t('Center.Center')}}</router-link>
                   <!-- <a href="javascript:;" class="mine" >个人中心</a> -->
                   <a href="javascript:;" class="exit" @click.stop="setSignOuts">{{$t('Center.Exit')}}</a>
                 </div>

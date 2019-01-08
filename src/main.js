@@ -9,10 +9,16 @@ import axios from 'axios'
 import tool from './package/tool'
 import {post,fetch,patch,put} from './package/http'
 import store from './vuex/store'
+import i18n from './lang'
+import {something,translate} from "@/package/language"
 
 import {HTTP_DETAIL1,HTTP_DETAIL} from '@/package/common'
 
 Vue.use(ElementUI);
+Vue.use(ElementUI, {
+  size: 'medium', // set element-ui default size
+  i18n: (key, value) => i18n.t(key, value)
+});
 
 //工具类
 Vue.prototype.$tool = tool
@@ -24,7 +30,8 @@ Vue.prototype.$patch=patch;
 Vue.prototype.$put=put;
 Vue.prototype.$url1 = HTTP_DETAIL1;
 Vue.prototype.$url = HTTP_DETAIL;
-
+Vue.prototype.$translate = translate;
+something();
 
 //vue点击图片预览放大 https://github.com/fengyuanchen/viewerjs
 import Viewer from 'v-viewer'
@@ -41,6 +48,7 @@ new Vue({
   el: '#app',
   router,
   store,
+  i18n,
   components: { App },
   template: '<App/>'
 })

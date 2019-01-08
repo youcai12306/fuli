@@ -48,7 +48,9 @@ export default {
   name: "Footer",
   data() {
     return {};
-  }
+  },
+	mounted() {
+	}
 };
 </script>
 <style lang='scss' scoped>
@@ -73,6 +75,8 @@ export default {
       }
       .info {
         padding-top: 58px;
+				width: 390px;
+				overflow: hidden;
 
         .info-one {
           margin-bottom: 10px;
@@ -130,7 +134,7 @@ export default {
       .code {
         padding-top: 33px;
         text-align: center;
-        margin-left: 80px;
+        margin-left: 20px;
         img {
           width: 120px;
           height: 120px;

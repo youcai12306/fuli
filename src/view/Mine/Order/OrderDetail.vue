@@ -18,7 +18,7 @@
 										订单状态：
 										<span>{{data.status|status}}</span>
 									</div>
-									<div class="now-pay" @click="pay(data.orderId)" v-if="data.status == 1">立即支付</div>
+									<div class="now-pay" @click="pay(data.orderId,data.payTotalCash)" v-if="data.status == 1">立即支付</div>
 									<div class="cancel-pay" @click="delOrder(data.orderId)" v-if="data.status == 1">取消支付</div>
 								</template>
 							</td>
@@ -211,13 +211,14 @@
 				})
 			},
 			//再次下单
-			pay(id) {
+			pay(id,price) {
 				this.$router.push({
-					path: 'suborder',
+					path: "./success",
 					query: {
-						id: id
+						orderId: id,
+						price2: price
 					}
-				})
+				});
 			},
 			delOrder(id) { //取消订单
 				this.$confirm('此操作将取消订单, 是否继续?', '提示', {
@@ -225,7 +226,7 @@
 					cancelButtonText: '取消',
 					type: 'warning'
 				}).then(() => {
-					this.$put(`${this.$url1}:5041/order-aggregate/canceOrder?orderId=${id}&status=-1`).then(res => {
+					this.$put(`${this.$url1}:5001/order-aggregate/canceOrder?orderId=${id}&status=-1`).then(res => {
 						if (res.code === 200) {
 							this.$message({
 								message: `取消订单成功`,
@@ -236,10 +237,10 @@
 							console.log(res.message);
 						}
 					}).catch(error => {
-						console.log(error)
+						this.$message.error(error.response.data.message)
 					})
 				}).catch(() => {
-
+				
 				});
 			},
 			GetAdder() { //收件人信息

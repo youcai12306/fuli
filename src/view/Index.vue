@@ -4,39 +4,39 @@
     <div class="banner">
       <div class="banner-imgs">
         <img
-          src="../assets/img/index-banner1.png"
+          src="../assets/img/index-banner1.jpg"
           alt
           v-show="0 === index"
           @click="jumpHuodongDetail(0)"
         >
-        <img src="../assets/img/img102.png" alt v-show="1 === index" @click="jumpHuodongDetail(0)">
+        <img src="../assets/img/img102.jpg" alt v-show="1 === index" @click="jumpHuodongDetail(0)">
         <img
-          src="../assets/img/index-banner1.png"
+          src="../assets/img/index-banner1.jpg"
           alt
           v-show="2 === index"
           @click="jumpHuodongDetail(0)"
         >
         <img
-          src="../assets/img/index-banner1.png"
+          src="../assets/img/index-banner1.jpg"
           alt
           v-show="3 === index"
           @click="jumpHuodongDetail(0)"
         >
         <img
-          src="../assets/img/index-banner1.png"
+          src="../assets/img/index-banner1.jpg"
           alt
           v-show="4 === index"
           @click="jumpHuodongDetail(0)"
         >
-        <img src="../assets/img/img102.png" alt v-show="5 === index" @click="jumpHuodongDetail(0)">
+        <img src="../assets/img/img102.jpg" alt v-show="5 === index" @click="jumpHuodongDetail(0)">
         <img
-          src="../assets/img/index-banner1.png"
+          src="../assets/img/index-banner1.jpg"
           alt
           v-show="6 === index"
           @click="jumpHuodongDetail(0)"
         >
         <img
-          src="../assets/img/index-banner1.png"
+          src="../assets/img/index-banner1.jpg"
           alt
           v-show="7 === index"
           @click="jumpHuodongDetail(0)"
@@ -373,16 +373,20 @@ export default {
       this.$fetch(this.$url1 + ":5001/product-aggregate/findProductByStock", {
         playDate: this.date
       }).then(res => {
-        let data = res.data.list;
-        if (data != null) {
-          for (let item of data) {
-            this.options.push({
-              value: item.id,
-              label: item.productName,
-              stockId: item.stockId
-            });
+        if (res.code == 200) {
+          let data = res.data.list;
+          if (data != null) {
+            for (let item of data) {
+              this.options.push({
+                value: item.id,
+                label: item.productName,
+                stockId: item.stockId
+              });
+            }
+            this.key = res.data.list[0].id;
+            this.id = this.key;
+            this.skId = res.data.list[0].stockId;
           }
-          this.key = res.data.list[0].id;
         }
       });
     },
@@ -397,7 +401,7 @@ export default {
     //点击查询
     jumpProductDetail() {
       this.$router.push({
-        path: "/productDetail",
+        path: "/TicketDetail",
         query: {
           id: this.id,
           stockId: this.skId

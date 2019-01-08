@@ -5,7 +5,7 @@
     <div class="box" v-if="id == 0">
       <div class="top clearDiv">
         <h3 class="floatLeft">塔瓦那餐厅</h3>
-        <div class="floatRight clearDiv" @click="back()">
+        <div class="floatRight clearDiv cursor" @click="back()">
           <img src="../../assets/img/theme-back.png" alt>
           <span>返回</span>
         </div>
@@ -122,6 +122,9 @@ export default {
     margin-top: 390px;
     .top {
       padding-top: 37px;
+			.cursor{
+				cursor: pointer;
+			}
       h3 {
         height: 46px;
         line-height: 46px;

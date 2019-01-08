@@ -167,7 +167,7 @@ export default {
           headers: { "Content-Type": "application/json;charset=UTF-8" }
         }).then(res => {
           if (res.code === 200) {
-            this.setUserInfo(data);
+            this.setUserInfo({mobile: this.phone});
             this.setUserData(res.data);
             this.$message({
               message: "登录成功",

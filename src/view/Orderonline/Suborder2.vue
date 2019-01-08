@@ -342,7 +342,8 @@ export default {
         receiveId: this.receiveId, //邮寄ID
         receiveName: this.numberValidateForm.name1,
         receiveMobile: this.numberValidateForm.phone,
-        receiveIdentityCode: this.numberValidateForm.name2
+        receiveIdentityCode: this.numberValidateForm.name2,
+        createCannel:1   //官网下单为1
       };
       // 拿到guid以及订单号
       this.$post("http://101.201.101.138:5001/order-aggregate/save", data, {

@@ -2,7 +2,7 @@ export default {
 	// 导航栏
 	Chinese: "Chinese",
 	English: "English",
-	header: {
+	header: {//头部导航
 		title1: 'Online Ordering',
 		title2: 'Theme parks',
 		title3: 'Resort Hotels',
@@ -13,26 +13,26 @@ export default {
 		title8: 'Ocean Encyclopedia',
 		huan: 'Welcome to YOU!'
 	},
-	Themes: {
+	Themes: {//主题乐园下导航
 		title1: "Madiska Paradise",
 		title2: "Adventure Ocean",
 		title3: "Eco-Coast",
 		title4: "Explore the Harbor",
 		title5: "City of the Deep sea",
 	},
-	Center: {
+	Center: {//登录hover框
 		Center: "Personal Center",
 		Exit: "Exit",
 		my: "My rating."
 	},
-	Footer: {
+	Footer: {//底部
 		time: "Park Opening Hours",
 		tel: "Customer Service Phone",
 		Address: "Address: Hainan Province Lingshuix County Town Fuli Ocean Happy World",
 		notice: "Copyright© Zhejiang ICP No. 16,007,586th-1 Zhejiang public network abate No. 33010902001056 copyright notice",
 		code: "Scan QR code download client"
 	},
-	index: {
+	index: {//首页
 		date: "Playing hours",
 		Tickets: "Tickets",
 		Inquire: "Inquire",
@@ -45,14 +45,80 @@ export default {
 		day1: "Weekday 9.30~17.30",
 		day2: "Weekend 9.00~18.00",
 		Ticket1: "Full price ticket",
-		Ticket1_yuan:"240 RMB",
+		Ticket1_yuan: "240 RMB",
 		Ticket2: "Discount price",
-		Ticket2_yuan:"180 RMB",
-		person:"person",
+		Ticket2_yuan: "180 RMB",
+		person: "person",
 		button1: "Business Info",
 		button2: "Buy Tickets Now",
-		Layer1:"Customer",
-		Layer2:"Service",
-		Layer3:"Subscription",
+		Layer1: "Customer",
+		Layer2: "Service",
+		Layer3: "Subscription",
+	},
+	Position: "Current Location",
+	Home: "Home",
+	risk: {//冒险之旅
+		title: "Adventure Tours",
+		description: "If you wander through this informative area,<br>must also be able to harvest endless joy!",
+		btn1: "Same product",
+		btn2: "Game interaction",
+		h2_title: "Member of the Ocean Kingdom family<br>Elf Cute mascot",
+		name1: "Dr. Walrus.",
+		name2: "Dolphin Denny",
+		name3: "Turtle Terry",
+		name4: "Penguin Patsy",
+	},
+	animal: {//动物百科
+		title: "Animal Encyclopedia",
+		description: "If you wander through this informative area,<br>must also be able to harvest endless joy!",
+		navName1: "Animal Classroom",
+		navName2: "Conservation assistance",
+		navName3: "Popular Science activities",
+	},
+	mine: {//个人中心
+		navNmae1: "My deal.",
+		navNmae2: "My order.",
+		navNmae3: "Shopping Cart",
+		navNmae4: "My wallet.",
+		navNmae5: "My points.",
+		navNmae6: "My coupon.",
+		navNmae7: "My balance.",
+		navNmae8: "Member Center",
+		navNmae9: "Personal information",
+		navNmae10: "My members.",
+		navNmae11: "Shipping Address",
+		navNmae12: "Message",
+		navNmae13: "Feedback",
+		Coupons: "Coupons",
+		Integral: "Integral"
+	},
+	Order:{//我的订单
+		OrderStatus:"Order Status",
+		Status1:"All",
+		Status2:"Pre-order",
+		Status3:"Pending payment",
+		Status4:"Have paid",
+		Status5:"Order succeeded",
+		Status6:"has been written off",
+		Status7:"In the refund audit",
+		Status8:"Refunds have been made",
+		Status9:"has been canceled",
+		orderId: "Order number",
+		createTime: "Creation time",
+		orderTotalCash: "Order Amount",
+		couponCash: "Offer Amount",
+		payTotalCash: "Actual Payment amount",
+		selectOrder: "View Orders",
+		exitOrder: "Cancel an Order",
+		payOrder: "Pay Now",
+		date: "Commodity",
+		useBeginDateTime: "Date of Visit",
+		ecode: "Write-Off code",
+		settlementPrice: "Price",
+		productCount: "Number",
+		smallTotalCash: "Subtotal",
+		Operation: "Operation",
+		exit: "Refund Application",
+		text: "There are no eligible babies, please try other search criteria."
 	}
 }

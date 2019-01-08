@@ -4,14 +4,12 @@
 		<div class="risk">
 			<div class="title">
 				<div class="risk-title">
-					<p class="p1">动物百科</p>
-					<p class="p2">倘若你徜徉在这片资讯丰富的地带
-						<br>也一定能收获无穷欢乐！
-					</p>
+					<p class="p1">{{$t('animal.title')}}</p>
+					<p class="p2" v-html="$t('animal.description')"></p>
 				</div>
-				<div class="location">当前位置>
-					<router-link to="/index" tag="span">首页></router-link>
-					<router-link to="animal" tag="span">动物百科</router-link>
+				<div class="location">{{$t('Position')}}>
+					<router-link to="/index" tag="span">{{$t('Home')}}></router-link>
+					<router-link to="animal" tag="span">{{$t('animal.title')}}</router-link>
 					<div class="ditu-img"></div>
 				</div>
 			</div>
@@ -19,10 +17,10 @@
 				<div class="left floatLeft">
 					<ul class="ul">
 						<li class="li" v-for="(item,keys) in 3" :key="keys" @click="actives = keys" :class="{anActive:actives == keys}">
-							<template v-if="keys == 0">动物课堂</template>
-							<template v-if="keys == 1">保育救助</template>
-							<template v-if="keys == 2">科普活动</template>
-							<img src="../../assets/img/animal-r.png" alt v-show="keys == actives">
+							<template v-if="keys == 0">{{$t('animal.navName1')}}</template>
+							<template v-if="keys == 1">{{$t('animal.navName2')}}</template>
+							<template v-if="keys == 2">{{$t('animal.navName3')}}</template>
+							<!-- <img src="../../assets/img/animal-r.png" alt v-show="keys == actives"> -->
 						</li>
 					</ul>
 				</div>

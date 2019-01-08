@@ -5,15 +5,15 @@
 			<div class="main-contion">
 				<!-- 标题 -->
 				<div class="spec-title">
-					<p class="p1">优惠活动</p>
-					<p class="p2">倘若你徜徉在这片资讯丰富的地带<br>也一定能收获无穷欢乐！</p>
+					<p class="p1">{{$t('specialOffier.navTitle1')}}</p>
+					<p class="p2" v-html="$t('specialOffier.description')"></p>
 				</div>
 				<!-- 导航 -->
 				<div class="l">
-					<div class="header-title">优惠活动</div>
+					<div class="header-title" :title="$t('specialOffier.navTitle1')">{{$t('specialOffier.navTitle1')}}</div>
 					<ul>
-						<li :class="{hover:tabs==1}" @click="changeType(1)">精彩活动</li>
-						<li :class="{hover:tabs==2}" @click="changeType(2)">优惠信息</li>
+						<li :class="{hover:tabs==1}" @click="changeType(1)">{{$t('specialOffier.navTitle2')}}</li>
+						<li :class="{hover:tabs==2}" @click="changeType(2)">{{$t('specialOffier.navTitle3')}}</li>
 					</ul>
 				</div>
 				<!-- 园区新闻 -->
@@ -27,6 +27,8 @@
 </template>
 
 <script>
+	import specialOffier from './specialOffier';
+	const viewName = 'i18nView';
 	import Header from "@/components/Header"; //引入头部
 	export default {
 		name: "SpecialOffier",
@@ -46,6 +48,10 @@
 		},
 		created() {
 			document.title = "优惠活动";
+			if (!this.$i18n.getLocaleMessage('en')[viewName]) {
+				this.$i18n.mergeLocaleMessage('en', specialOffier.en)
+				this.$i18n.mergeLocaleMessage('zh', specialOffier.zh)
+			}
 		},
 	};
 </script>
@@ -69,7 +75,7 @@
 				top: 145px;
 				left: 338px;
 				color: #2583BB;
-				width: 350px;
+				width: 600px;
 				.p1 {
 					height: 48px;
 					line-height: 48px;
@@ -108,6 +114,9 @@
 					width: 180px;
 					height: 130px;
 					line-height: 130px;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap;
 					text-align: center;
 				}
 

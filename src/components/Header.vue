@@ -178,14 +178,14 @@
               </div>
             </span>
           </div>
-          <div class="language-change" @click="$translate">
+          <!-- <div class="language-change" @click="$translate">
             <span :class="{ch:ch == 0}">中文</span>
             <span :class="{en:ch == 1}">英文</span>
-          </div>
-					<!-- <div class="language-change">
+          </div> -->
+					<div class="language-change">
 					  <span :class="{ch:chs == 'zh'}" @click.stop="handleSetLanguage('zh'),chs='zh'">{{$t('Chinese')}}</span>
 					  <span :class="{en:chs == 'en'}" @click.stop="handleSetLanguage('en'),chs='en'">{{$t('English')}}</span>
-					</div> -->
+					</div>
         </div>
       </div>
     </div>

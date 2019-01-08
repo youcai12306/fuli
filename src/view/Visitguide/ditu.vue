@@ -10,41 +10,41 @@
 			<div class="title">
 				<div class="location">
 					<el-breadcrumb separator=">">
-						<el-breadcrumb-item>当前位置</el-breadcrumb-item>
-						<el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-						<el-breadcrumb-item>游玩指南</el-breadcrumb-item>
+						<el-breadcrumb-item>{{$t('ditu.Position')}}</el-breadcrumb-item>
+						<el-breadcrumb-item :to="{ path: '/' }">{{$t('ditu.Home')}}</el-breadcrumb-item>
+						<el-breadcrumb-item>{{$t('ditu.Title')}}</el-breadcrumb-item>
 					</el-breadcrumb>
 				</div>
 			</div>
 			<div class="content clearDiv">
 				<div class="left floatLeft">
 					<ul class="ul">
-						<li class="li" @click="actives = 0" :class="{anActive:actives == 0}">
-							门票价格
+						<li class="li" @click="actives = 0" :class="{anActive:actives == 0}" :title="$t('ditu.navTitle1')">
+							{{$t('ditu.navTitle1')}}
 						</li>
 						<!-- <li class="li" @click="actives = 1" :class="{anActive:actives === 1}">
 						酒店预定
 					</li> -->
-						<li class="li" @click="actives = 2" :class="{anActive:actives == 2}">
-							营业时间
+						<li class="li" @click="actives = 2" :class="{anActive:actives == 2}" :title="$t('ditu.navTitle2')">
+							{{$t('ditu.navTitle2')}}
 						</li>
-						<li class="li" @click="actives = 3" :class="{anActive:actives == 3}">
-							交通指南
+						<li class="li" @click="actives = 3" :class="{anActive:actives == 3}" :title="$t('ditu.navTitle3')">
+							{{$t('ditu.navTitle3')}}
 						</li>
-						<li class="li" @click="actives = 4" :class="{anActive:actives == 4}">
-							常见问题
+						<li class="li" @click="actives = 4" :class="{anActive:actives == 4}" :title="$t('ditu.navTitle4')">
+							{{$t('ditu.navTitle4')}}
 						</li>
-						<li class="li" @click="actives = 5" :class="{anActive:actives == 5}">
-							宾客服务
+						<li class="li" @click="actives = 5" :class="{anActive:actives == 5}" :title="$t('ditu.navTitle5')">
+							{{$t('ditu.navTitle5')}}
 						</li>
-						<li class="li" @click="actives = 6" :class="{anActive:actives == 6}">
-							恶劣天气预案
+						<li class="li" @click="actives = 6" :class="{anActive:actives == 6}" :title="$t('ditu.navTitle6')">
+							{{$t('ditu.navTitle6')}}
 						</li>
-						<li class="li" @click="actives = 7" :class="{anActive:actives == 7}">
-							年卡/会员卡
+						<li class="li" @click="actives = 7" :class="{anActive:actives == 7}" :title="$t('ditu.navTitle7')">
+							{{$t('ditu.navTitle7')}}
 						</li>
-						<li class="li" @click="actives = 8" :class="{anActive:actives == 8}">
-							园区地图
+						<li class="li" @click="actives = 8" :class="{anActive:actives == 8}" :title="$t('ditu.navTitle8')">
+							{{$t('ditu.navTitle8')}}
 						</li>
 					</ul>
 				</div>
@@ -624,6 +624,8 @@
 </template>
 
 <script>
+	import ditu from './ditu';
+	const viewName = 'i18nView';
 	import Header from "@/components/Header"; //引入头部
 	export default {
 		data() {
@@ -639,6 +641,13 @@
 		},
 		methods: {
 
+		},
+		created() {
+			document.title = "游玩指南";
+			if (!this.$i18n.getLocaleMessage('en')[viewName]) {
+				this.$i18n.mergeLocaleMessage('en', ditu.en)
+				this.$i18n.mergeLocaleMessage('zh', ditu.zh)
+			}
 		},
 		mounted() {
 			let id = this.$route.query.id;
@@ -713,6 +722,10 @@
 						position: relative;
 						height: 70px;
 						line-height: 70px;
+						overflow: hidden;
+						text-overflow: ellipsis;
+						white-space: nowrap;
+						padding: 0 10px;
 						text-align: center;
 						font-size: 18px;
 						font-weight: 400;

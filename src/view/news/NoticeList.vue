@@ -2,8 +2,8 @@
   <!-- 园区新闻 -->
   <div class="r">
     <div class="title clearDiv">
-      <div class="floatLeft">新闻中心</div>
-      <div class="floatRight location">当前位置：新闻中心>园区公告</div>
+      <div class="floatLeft">{{$t('i18nView.navTitle1')}}</div>
+      <div class="floatRight location">{{$t('i18nView.Position')}}：{{$t('i18nView.navTitle1')}}>{{$t('i18nView.navTitle3')}}</div>
     </div>
 
     <!-- 所有新闻 -->

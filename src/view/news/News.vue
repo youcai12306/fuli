@@ -1,14 +1,14 @@
 <template>
 	<section>
-		<Header></Header> 
+		<Header></Header>
 		<div class="news">
 			<div class="main-contion">
 				<!-- 导航 -->
 				<div class="l">
-					<div class="header-title">新闻中心</div>
+					<div class="header-title">{{$t('i18nView.navTitle1')}}</div>
 					<ul>
-						<li :class="{hover:tabs==1}" @click="changeType(1)">园区新闻</li>
-						<li :class="{hover:tabs==2}" @click="changeType(2)">园区公告</li>
+						<li :class="{hover:tabs==1}" @click="changeType(1)">{{$t('i18nView.navTitle2')}}</li>
+						<li :class="{hover:tabs==2}" @click="changeType(2)">{{$t('i18nView.navTitle3')}}</li>
 					</ul>
 				</div>
 				<!-- 园区新闻 -->
@@ -21,6 +21,8 @@
 </template>
 
 <script>
+	import local from './local';
+	const viewName = 'i18nView';
 	import Header from "@/components/Header"; //引入头部
 	export default {
 		name: "News",
@@ -41,6 +43,10 @@
 		},
 		created() {
 			document.title = "新闻中心";
+			if (!this.$i18n.getLocaleMessage('en')[viewName]) {
+				this.$i18n.mergeLocaleMessage('en', local.en)
+				this.$i18n.mergeLocaleMessage('zh', local.zh)
+			}
 		},
 	};
 </script>

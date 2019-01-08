@@ -19,15 +19,15 @@
         <div class="info floatLeft">
           <div class="info-one clearDiv">
             <div class="open-time">
-              <p class="title">园区开放时间</p>
+              <p class="title">{{$t('Footer.time')}}</p>
               <p class="time">9：00—22：00</p>
             </div>
             <div class="server-phone">
-              <p>客服电话</p>
+              <p>{{$t('Footer.tel')}}</p>
               <p class="phone">400-XXXXXXXXXX</p>
             </div>
           </div>
-          <div>地址：海南省陵水黎族自治县黎安镇富力海洋欢乐世界</div>
+          <div>{{$t('Footer.Address')}}</div>
         </div>
         <!-- <div class="down clearDiv">
 					<div class="iphone">iphone下载</div>
@@ -35,10 +35,10 @@
         </div>-->
         <div class="code floatLeft">
           <img src="../assets/img/footer-code.png" alt>
-          <p>扫码二维码下载客户端</p>
+          <p>{{$t('Footer.code')}}</p>
         </div>
       </div>
-      <div class="copy">Copyright ©浙ICP备16007586号-1 浙公网安备 33010902001056号 版权声明</div>
+      <div class="copy">{{$t('Footer.notice')}}</div>
     </div>
   </div>
 </template>

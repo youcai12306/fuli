@@ -164,28 +164,28 @@
               {{name}},{{$t('header.huan')}}
               <div class="person-info">
                 <div class="info-one">
-                  <router-link to="/mine" class="mine">个人中心</router-link>
+                  <router-link to="/mine" class="mine" :class="{ml60:chs == 'en'}">{{$t('Center.Center')}}</router-link>
                   <!-- <a href="javascript:;" class="mine" >个人中心</a> -->
-                  <a href="javascript:;" class="exit" @click.stop="setSignOuts">退出</a>
+                  <a href="javascript:;" class="exit" @click.stop="setSignOuts">{{$t('Center.Exit')}}</a>
                 </div>
                 <div class="clearDiv info-two">
                   <img src="../assets/img/touxiang123.png" alt class="floatLeft">
                   <div class="floatLeft">
                     <p>{{$store.getters.userInfo.mobile}}</p>
-                    <p>我的等级：2</p>
+                    <p>{{$t('Center.my')}}：2</p>
                   </div>
                 </div>
               </div>
             </span>
           </div>
-          <!-- <div class="language-change" @click="$translate">
-            <span :class="{ch:chs == 0}">中文</span>
-            <span :class="{en:chs == 1}">英文</span>
-          </div> -->
-					<div class="language-change">
-					  <span :class="{ch:chs == 'zh'}" @click="handleSetLanguage('zh'),chs='zh'">中文</span>
-					  <span :class="{en:chs == 'en'}" @click="handleSetLanguage('en'),chs='en'">英文</span>
-					</div>
+          <div class="language-change" @click="$translate">
+            <span :class="{ch:ch == 0}">中文</span>
+            <span :class="{en:ch == 1}">英文</span>
+          </div>
+					<!-- <div class="language-change">
+					  <span :class="{ch:chs == 'zh'}" @click.stop="handleSetLanguage('zh'),chs='zh'">{{$t('Chinese')}}</span>
+					  <span :class="{en:chs == 'en'}" @click.stop="handleSetLanguage('en'),chs='en'">{{$t('English')}}</span>
+					</div> -->
         </div>
       </div>
     </div>
@@ -252,7 +252,8 @@ export default {
       name: "",
       height: 0,
       hover: "",
-			chs:Cookies.get('language') || 'zh'
+			chs:Cookies.get('language') || 'zh',
+			ch:sessionStorage.getItem("language") || '0'
     };
   },
   computed: {
@@ -373,7 +374,7 @@ export default {
     .nav-right {
       font-size: 12px;
       padding-top: 43px;
-      margin-left: 20px;
+      margin-left: 10px;
 
       .right-info {
         color: #333333;
@@ -426,6 +427,9 @@ export default {
 
               .mine {
                 margin-left: 88px;
+								&.ml60{
+									margin-left: 60px;
+								}
               }
 
               .exit {
@@ -450,11 +454,13 @@ export default {
 
         .language-change {
           float: left;
-          margin-left: 14px;
+          margin-left: 10px;
+					font-size: 0;
 
           span {
 						cursor: pointer;
             padding: 0 10px;
+						font-size: 12px;
             /* letter-spacing: 1px; */
 						display: inline-block;
 						position: relative;

@@ -182,10 +182,11 @@
 			//跳转订单详情
 			jumpDetail(id) {
 				this.$router.push({
-					name: 'OrderDetail',
-					params: {
+					path: '/orderDetail',
+					query: {
 						id: id,
-						status: this.tabs
+						status: this.tabs,
+						time:new Date()
 					}
 				})
 			},

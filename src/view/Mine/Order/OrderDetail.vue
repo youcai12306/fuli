@@ -4,7 +4,7 @@
 		<div class="box">
 			<div class="content">
 				<div class="one">
-					<div class="one-left">您的位置：个人中心 > 订单信息</div>
+					<div class="one-left" @click="$translate">您的位置：个人中心 > 订单信息</div>
 					<div class="one-right" @click="goBack">返回</div>
 				</div>
 				<div class="two">
@@ -158,9 +158,9 @@
 		data() {
 			return {
 				type: 0,
-				orderId: this.$route.params.id,
+				orderId: this.$route.query.id,
 				id: this.$store.getters.getUserData.userId,
-				status: this.$route.params.status,
+				status: this.$route.query.status,
 				data: [],
 				list: [],
 				item: [],
@@ -192,7 +192,6 @@
 						id: this.orderId
 					}
 				}
-				console.log(data);
 
 				this.$post(`${this.$url1}:5001/order-aggregate/findOrderDetail?pageNum=1&pageSize=10`,
 					data).then(res => {

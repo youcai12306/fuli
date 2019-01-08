@@ -1,16 +1,16 @@
 const something = function() {
 	// do something 
-// 	var script = document.createElement("script");
-// 	script.type = "text/javascript";
-// 	script.src = "http://www.microsoftTranslator.com/ajax/v3/WidgetV3.ashx?siteData=ueOIGRSKkd965FeEGM5JtQ**";
-// 	document.getElementsByTagName('head')[0].appendChild(script);
+	var script = document.createElement("script");
+	script.type = "text/javascript";
+	script.src = "http://www.microsoftTranslator.com/ajax/v3/WidgetV3.ashx?siteData=ueOIGRSKkd965FeEGM5JtQ**";
+	document.getElementsByTagName('head')[0].appendChild(script);
 
 
 	var value = sessionStorage.getItem("language");
 	document.onreadystatechange = function() {
 		if (document.readyState == 'complete') {
 			if (value === "1") {
-				Microsoft.Translator.Widget.Translate('zh-CHS', 'en', onProgress, onError, onComplete, onRestoreOriginal, 1000);
+				Microsoft.Translator.Widget.Translate('zh-CHS', 'en', onProgress, onError, onComplete, onRestoreOriginal, 2000);
 			}
 		}
 	}
@@ -22,7 +22,7 @@ const something = function() {
 	}
 
 	function onComplete() {
-		sessionStorage.setItem("language", "0");
+		// sessionStorage.setItem("language", "0");
 		document.getElementById("WidgetFloaterPanels").style.display = "none";
 		document.getElementById("MicrosoftTranslatorCommunity").style.display = "none";
 	}

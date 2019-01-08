@@ -169,7 +169,7 @@ export default {
        let data ={
           guid : this.$route.query.orderId
         }
-        this.$fetch("http://101.201.101.138:5100/callBack-aggregate/getPay",data).then((res) => {
+        this.$fetch("http://101.201.101.138:6110/callBack-mucon/getPay",data).then((res) => {
             console.log(res)
         if (res.code === 200) {
           window.clearInterval(this.times);

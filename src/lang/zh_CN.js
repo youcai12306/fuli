@@ -54,5 +54,25 @@ export default {
 		Layer1:"客服电话",
 		Layer2:"服务号",
 		Layer3:"订阅号",
+	},
+	Position: "当前位置",
+	Home:"首页",
+	risk:{
+		title:"冒险之旅",
+		description:"倘若你徜徉在这片资讯丰富的地带<br>也一定能收获无穷欢乐！",
+		btn1:"同款商品",
+		btn2:"游戏互动",
+		h2_title:"海洋王国家族成员<br>精灵可爱吉祥物",
+		name1:"海象博士",
+		name2:"海豚丹妮",
+		name3:"海龟泰利",
+		name4:"企鹅帕西",
+	},
+	animal:{
+		title:"动物百科",
+		description:"倘若你徜徉在这片资讯丰富的地带<br>也一定能收获无穷欢乐！",
+		navName1:"动物课堂",
+		navName2:"保育救助",
+		navName3:"科普活动",
 	}
 }

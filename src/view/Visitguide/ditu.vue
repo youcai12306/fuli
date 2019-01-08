@@ -10,41 +10,41 @@
 			<div class="title">
 				<div class="location">
 					<el-breadcrumb separator=">">
-						<el-breadcrumb-item>{{$t('i18nView.Position')}}</el-breadcrumb-item>
-						<el-breadcrumb-item :to="{ path: '/' }">{{$t('i18nView.Home')}}</el-breadcrumb-item>
-						<el-breadcrumb-item>{{$t('i18nView.Title')}}</el-breadcrumb-item>
+						<el-breadcrumb-item>{{$t('ditu.Position')}}</el-breadcrumb-item>
+						<el-breadcrumb-item :to="{ path: '/' }">{{$t('ditu.Home')}}</el-breadcrumb-item>
+						<el-breadcrumb-item>{{$t('ditu.Title')}}</el-breadcrumb-item>
 					</el-breadcrumb>
 				</div>
 			</div>
 			<div class="content clearDiv">
 				<div class="left floatLeft">
 					<ul class="ul">
-						<li class="li" @click="actives = 0" :class="{anActive:actives == 0}" :title="$t('i18nView.navTitle1')">
-							{{$t('i18nView.navTitle1')}}
+						<li class="li" @click="actives = 0" :class="{anActive:actives == 0}" :title="$t('ditu.navTitle1')">
+							{{$t('ditu.navTitle1')}}
 						</li>
 						<!-- <li class="li" @click="actives = 1" :class="{anActive:actives === 1}">
 						酒店预定
 					</li> -->
-						<li class="li" @click="actives = 2" :class="{anActive:actives == 2}" :title="$t('i18nView.navTitle2')">
-							{{$t('i18nView.navTitle2')}}
+						<li class="li" @click="actives = 2" :class="{anActive:actives == 2}" :title="$t('ditu.navTitle2')">
+							{{$t('ditu.navTitle2')}}
 						</li>
-						<li class="li" @click="actives = 3" :class="{anActive:actives == 3}" :title="$t('i18nView.navTitle3')">
-							{{$t('i18nView.navTitle3')}}
+						<li class="li" @click="actives = 3" :class="{anActive:actives == 3}" :title="$t('ditu.navTitle3')">
+							{{$t('ditu.navTitle3')}}
 						</li>
-						<li class="li" @click="actives = 4" :class="{anActive:actives == 4}" :title="$t('i18nView.navTitle4')">
-							{{$t('i18nView.navTitle4')}}
+						<li class="li" @click="actives = 4" :class="{anActive:actives == 4}" :title="$t('ditu.navTitle4')">
+							{{$t('ditu.navTitle4')}}
 						</li>
-						<li class="li" @click="actives = 5" :class="{anActive:actives == 5}" :title="$t('i18nView.navTitle5')">
-							{{$t('i18nView.navTitle5')}}
+						<li class="li" @click="actives = 5" :class="{anActive:actives == 5}" :title="$t('ditu.navTitle5')">
+							{{$t('ditu.navTitle5')}}
 						</li>
-						<li class="li" @click="actives = 6" :class="{anActive:actives == 6}" :title="$t('i18nView.navTitle6')">
-							{{$t('i18nView.navTitle6')}}
+						<li class="li" @click="actives = 6" :class="{anActive:actives == 6}" :title="$t('ditu.navTitle6')">
+							{{$t('ditu.navTitle6')}}
 						</li>
-						<li class="li" @click="actives = 7" :class="{anActive:actives == 7}" :title="$t('i18nView.navTitle7')">
-							{{$t('i18nView.navTitle7')}}
+						<li class="li" @click="actives = 7" :class="{anActive:actives == 7}" :title="$t('ditu.navTitle7')">
+							{{$t('ditu.navTitle7')}}
 						</li>
-						<li class="li" @click="actives = 8" :class="{anActive:actives == 8}" :title="$t('i18nView.navTitle8')">
-							{{$t('i18nView.navTitle8')}}
+						<li class="li" @click="actives = 8" :class="{anActive:actives == 8}" :title="$t('ditu.navTitle8')">
+							{{$t('ditu.navTitle8')}}
 						</li>
 					</ul>
 				</div>
@@ -624,7 +624,7 @@
 </template>
 
 <script>
-	import local from './ditu';
+	import ditu from './ditu';
 	const viewName = 'i18nView';
 	import Header from "@/components/Header"; //引入头部
 	export default {
@@ -645,8 +645,8 @@
 		created() {
 			document.title = "游玩指南";
 			if (!this.$i18n.getLocaleMessage('en')[viewName]) {
-				this.$i18n.mergeLocaleMessage('en', local.en)
-				this.$i18n.mergeLocaleMessage('zh', local.zh)
+				this.$i18n.mergeLocaleMessage('en', ditu.en)
+				this.$i18n.mergeLocaleMessage('zh', ditu.zh)
 			}
 		},
 		mounted() {

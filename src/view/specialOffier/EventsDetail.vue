@@ -7,8 +7,8 @@
 	<div class="even" id="even">
 		<div class="r">
 			<div class="title clearDiv">
-				<div class="floatLeft">精彩活动</div>
-				<div class="floatRight location">当前位置>优惠活动</div>
+				<div class="floatLeft">{{$t('specialOffier.navTitle1')}}</div>
+				<div class="floatRight location">{{$t('specialOffier.Position')}}>{{$t('specialOffier.navTitle1')}}</div>
 			</div>
 
 			<!-- 所有新闻 -->

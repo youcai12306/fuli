@@ -54,5 +54,25 @@ export default {
 		Layer1:"Customer",
 		Layer2:"Service",
 		Layer3:"Subscription",
+	},
+	Position: "Current Location",
+	Home:"Home",
+	risk:{
+		title:"Adventure Tours",
+		description:"If you wander through this informative area,<br>must also be able to harvest endless joy!",
+		btn1:"Same product",
+		btn2:"Game interaction",
+		h2_title:"Member of the Ocean Kingdom family<br>Elf Cute mascot",
+		name1:"Dr. Walrus.",
+		name2:"Dolphin Denny",
+		name3:"Turtle Terry",
+		name4:"Penguin Patsy",
+	},
+	animal:{
+		title:"Animal Encyclopedia",
+		description:"If you wander through this informative area,<br>must also be able to harvest endless joy!",
+		navName1:"Animal Classroom",
+		navName2:"Conservation assistance",
+		navName3:"Popular Science activities",
 	}
 }

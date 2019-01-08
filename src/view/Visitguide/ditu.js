@@ -1,7 +1,7 @@
 // lixiaoyi 2019-01-08
 export default {
 	zh: {
-		i18nView: {
+		ditu: {
 			navTitle1: '门票价格',
 			navTitle2: '营业时间',
 			navTitle3: '交通指南',
@@ -11,12 +11,12 @@ export default {
 			navTitle7: '年卡/会员卡',
 			navTitle8: '园区地图',
 			Position: "当前位置",
-			Home:"首页",
-			Title:"游玩指南"
+			Home: "首页",
+			Title: "游玩指南"
 		}
 	},
 	en: {
-		i18nView: {
+		ditu: {
 			navTitle1: 'Ticket price',
 			navTitle2: 'Opening hours',
 			navTitle3: 'Transportation Guide',
@@ -26,8 +26,8 @@ export default {
 			navTitle7: 'Annual Card/Membership card',
 			navTitle8: 'Map of the park',
 			Position: "Current Location",
-			Home:"Home",
-			Title:"Play Guide"
+			Home: "Home",
+			Title: "Play Guide"
 		}
 	}
 }

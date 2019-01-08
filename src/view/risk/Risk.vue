@@ -4,10 +4,10 @@
 		<div class="risk">
 			<div class="title">
 				<div class="risk-title">
-					<p class="p1">冒险之旅</p>
-					<p class="p2">倘若你徜徉在这片资讯丰富的地带<br>也一定能收获无穷欢乐！</p>
+					<p class="p1">{{$t('risk.title')}}</p>
+					<p class="p2" v-html="$t('risk.description')"></p>
 				</div>
-				<div class="location">当前位置><router-link to="index" tag="span">首页></router-link>冒险之旅</div>
+				<div class="location">{{$t('Position')}}><router-link to="index" tag="span">{{$t('Home')}}></router-link>{{$t('risk.title')}}</div>
 			</div>
 			<div class="content">
 				<div class="inner-box">
@@ -16,8 +16,8 @@
 							<div class="clearDiv">
 								<div class="left floatLeft">
 									<img src="../../assets/img/risk-bg5.png" alt="图片">
-									<button class="btn1">同款商品</button>
-									<button class="btn2">游戏互动</button>
+									<button class="btn1">{{$t('risk.btn1')}}</button>
+									<button class="btn2">{{$t('risk.btn2')}}</button>
 								</div>
 								<div class="right floatRight">
 									<p class="p1">你们好我是杰克船长</p>
@@ -37,8 +37,8 @@
 							<div class="clearDiv">
 								<div class="left floatLeft">
 									<img src="../../assets/img/img103.png" alt="图片" class="img1">
-									<button class="btn1">同款商品</button>
-									<button class="btn2">游戏互动</button>
+									<button class="btn1">{{$t('risk.btn1')}}</button>
+									<button class="btn2">{{$t('risk.btn2')}}</button>
 								</div>
 								<div class="right floatRight">
 									<p class="p1">你们好我是北极熊帕克</p>
@@ -58,8 +58,8 @@
 							<div class="clearDiv">
 								<div class="left floatLeft">
 									<img src="../../assets/img/img104.png" alt="图片" class="img2">
-									<button class="btn1">同款商品</button>
-									<button class="btn2">游戏互动</button>
+									<button class="btn1">{{$t('risk.btn1')}}</button>
+									<button class="btn2">{{$t('risk.btn2')}}</button>
 								</div>
 								<div class="right floatRight">
 									<p class="p1">你们好我是海龟泰利</p>
@@ -79,8 +79,8 @@
 							<div class="clearDiv">
 								<div class="left floatLeft">
 									<img src="../../assets/img/img105.png" alt="图片" class="img3">
-									<button class="btn1">同款商品</button>
-									<button class="btn2">游戏互动</button>
+									<button class="btn1">{{$t('risk.btn1')}}</button>
+									<button class="btn2">{{$t('risk.btn2')}}</button>
 								</div>
 								<div class="right floatRight">
 									<p class="p1">你们好我是安迪</p>
@@ -100,8 +100,8 @@
 							<div class="clearDiv">
 								<div class="left floatLeft">
 									<img src="../../assets/img/img106.png" alt="图片" class="img4">
-									<button class="btn1">同款商品</button>
-									<button class="btn2">游戏互动</button>
+									<button class="btn1">{{$t('risk.btn1')}}</button>
+									<button class="btn2">{{$t('risk.btn2')}}</button>
 								</div>
 								<div class="right floatRight">
 									<p class="p1">你们好我是鲸鲨惠特尼</p>
@@ -121,15 +121,15 @@
 						<div class="swiper-button-next swiper-button-black" slot="button-next"></div>
 					</swiper>
 					<div class="list">
-						<p class="list-t">海洋王国家族成员<br>精灵可爱吉祥物</p>
+						<p class="list-t" v-html="$t('risk.h2_title')"></p>
 						<ul class="clearDiv">
 							<li v-for="item in 4" :key="item">
 								<img :src="`../../../static/risk-bg${item}.png`" alt>
 								<p>
-									<template v-if="item == 1">海象博士</template>
-									<template v-if="item == 2">海豚丹妮</template>
-									<template v-if="item == 3">海龟泰利</template>
-									<template v-if="item == 4">企鹅帕西</template>
+									<template v-if="item == 1">{{$t('risk.name1')}}</template>
+									<template v-if="item == 2">{{$t('risk.name2')}}</template>
+									<template v-if="item == 3">{{$t('risk.name3')}}</template>
+									<template v-if="item == 4">{{$t('risk.name4')}}</template>
 								</p>
 							</li>
 						</ul>

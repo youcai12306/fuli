@@ -48,13 +48,13 @@ const NoticeList = r => require.ensure([], () => r(require('@/view/news/NoticeLi
 const NoticeDetail = r => require.ensure([], () => r(require('@/view/news/NoticeDetail')), 'NoticeDetail')
 
 // 游玩指南
-const ditu = r => require.ensure([], () => r(require('@/view/Visitguide/ditu')), 'ditu')
+const ditu = r => require.ensure([], () => r(require('@/view/Visitguide/ditu.vue')), 'ditu')
 // 主题酒店
 const Hotel = r => require.ensure([], () => r(require('@/view/hotel/Hotel')), 'Hotel')
 const HotelDetail = r => require.ensure([], () => r(require('@/view/hotel/HotelDetail')), 'HotelDetail')
 
 //优惠活动
-const SpecialOffier = r => require.ensure([], () => r(require('@/view/specialOffier/SpecialOffier')), 'SpecialOffier')
+const SpecialOffier = r => require.ensure([], () => r(require('@/view/specialOffier/SpecialOffier.vue')), 'SpecialOffier')
 const Events = r => require.ensure([], () => r(require('@/view/specialOffier/Events')), 'Events')
 const EventsDetail = r => require.ensure([], () => r(require('@/view/specialOffier/EventsDetail')), 'EventsDetail')
 //冒险之旅

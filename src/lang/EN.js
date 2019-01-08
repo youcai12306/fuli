@@ -2,7 +2,7 @@ export default {
 	// 导航栏
 	Chinese: "Chinese",
 	English: "English",
-	header: {
+	header: {//头部导航
 		title1: 'Online Ordering',
 		title2: 'Theme parks',
 		title3: 'Resort Hotels',
@@ -13,26 +13,26 @@ export default {
 		title8: 'Ocean Encyclopedia',
 		huan: 'Welcome to YOU!'
 	},
-	Themes: {
+	Themes: {//主题乐园下导航
 		title1: "Madiska Paradise",
 		title2: "Adventure Ocean",
 		title3: "Eco-Coast",
 		title4: "Explore the Harbor",
 		title5: "City of the Deep sea",
 	},
-	Center: {
+	Center: {//登录hover框
 		Center: "Personal Center",
 		Exit: "Exit",
 		my: "My rating."
 	},
-	Footer: {
+	Footer: {//底部
 		time: "Park Opening Hours",
 		tel: "Customer Service Phone",
 		Address: "Address: Hainan Province Lingshuix County Town Fuli Ocean Happy World",
 		notice: "Copyright© Zhejiang ICP No. 16,007,586th-1 Zhejiang public network abate No. 33010902001056 copyright notice",
 		code: "Scan QR code download client"
 	},
-	index: {
+	index: {//首页
 		date: "Playing hours",
 		Tickets: "Tickets",
 		Inquire: "Inquire",
@@ -57,7 +57,7 @@ export default {
 	},
 	Position: "Current Location",
 	Home: "Home",
-	risk: {
+	risk: {//冒险之旅
 		title: "Adventure Tours",
 		description: "If you wander through this informative area,<br>must also be able to harvest endless joy!",
 		btn1: "Same product",
@@ -68,14 +68,14 @@ export default {
 		name3: "Turtle Terry",
 		name4: "Penguin Patsy",
 	},
-	animal: {
+	animal: {//动物百科
 		title: "Animal Encyclopedia",
 		description: "If you wander through this informative area,<br>must also be able to harvest endless joy!",
 		navName1: "Animal Classroom",
 		navName2: "Conservation assistance",
 		navName3: "Popular Science activities",
 	},
-	mine: {
+	mine: {//个人中心
 		navNmae1: "My deal.",
 		navNmae2: "My order.",
 		navNmae3: "Shopping Cart",
@@ -92,7 +92,7 @@ export default {
 		Coupons: "Coupons",
 		Integral: "Integral"
 	},
-	Order:{
+	Order:{//我的订单
 		OrderStatus:"Order Status",
 		Status1:"All",
 		Status2:"Pre-order",
@@ -103,5 +103,22 @@ export default {
 		Status7:"In the refund audit",
 		Status8:"Refunds have been made",
 		Status9:"has been canceled",
+		orderId: "Order number",
+		createTime: "Creation time",
+		orderTotalCash: "Order Amount",
+		couponCash: "Offer Amount",
+		payTotalCash: "Actual Payment amount",
+		selectOrder: "View Orders",
+		exitOrder: "Cancel an Order",
+		payOrder: "Pay Now",
+		date: "Commodity",
+		useBeginDateTime: "Date of Visit",
+		ecode: "Write-Off code",
+		settlementPrice: "Price",
+		productCount: "Number",
+		smallTotalCash: "Subtotal",
+		Operation: "Operation",
+		exit: "Refund Application",
+		text: "There are no eligible babies, please try other search criteria."
 	}
 }

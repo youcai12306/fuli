@@ -49,49 +49,49 @@
 						<template slot="title">
 							<div class="w100">
 								<div class="order-one clearDiv">
-									<div class="floatLeft">订单号：{{item.orderId}}</div>
-									<div class="creatTime floatLeft">创建时间：{{item.createTime}}</div>
+									<div class="floatLeft">{{$t('Order.orderId')}}：{{item.orderId}}</div>
+									<div class="creatTime floatLeft">{{$t('Order.createTime')}}：{{item.createTime}}</div>
 									<div class="par-type floatRight red" v-if="tabs != 'a'">{{item.status|status}}</div>
 								</div>
 								<div class="order-two">
 									<div class="floatLeft">
-										订单金额：￥
+										{{$t('Order.orderTotalCash')}}：￥
 										<span>{{item.orderTotalCash}}</span>
 									</div>
 									<div class="coupon floatLeft">
-										优惠金额：
+										{{$t('Order.couponCash')}}：
 										<span>{{item.couponCash}}</span>
 									</div>
 									<div class="realPay floatLeft">
-										实际支付金额：￥
+										{{$t('Order.payTotalCash')}}：￥
 										<span>{{item.payTotalCash}}</span>
 									</div>
-									<div class="lookOrder floatRight" @click.stop="jumpDetail(item.orderId)">查看订单</div>
-									<div class="cancelOrder floatRight" @click.stop="delOrder(item.orderId)" v-if="tabs == 0">取消订单</div>
-									<div class="pay floatRight" @click.stop="pay(item.orderId,item.payTotalCash)" v-if="tabs == 0">立即支付</div>
-									<div class="pay floatRight" @click.stop="pay2(item.orderId,item.payTotalCash)" v-if="tabs == 1">立即支付</div>
+									<div class="lookOrder floatRight" @click.stop="jumpDetail(item.orderId)">{{$t('Order.selectOrder')}}</div>
+									<div class="cancelOrder floatRight" @click.stop="delOrder(item.orderId)" v-if="tabs == 0">{{$t('Order.exitOrder')}}</div>
+									<div class="pay floatRight" @click.stop="pay(item.orderId,item.payTotalCash)" v-if="tabs == 0">{{$t('Order.payOrder')}}</div>
+									<div class="pay floatRight" @click.stop="pay2(item.orderId,item.payTotalCash)" v-if="tabs == 1">{{$t('Order.payOrder')}}</div>
 								</div>
 							</div>
 						</template>
 						<el-table :data="item.orderDetailDTOList" stripe style="width: 100%">
-							<el-table-column prop="date" label="商品" width="300">
+							<el-table-column prop="date" :label="$t('Order.date')" width="300">
 								<template slot-scope="scope">
 									<div class="ticket-title">{{scope.row.productName}}</div>
-									<div class="ticket-time">游玩日期：{{scope.row.useBeginDateTime}}</div>
-									<div class="ticket-code">核销码：{{scope.row.ecode || '无'}}</div>
+									<div class="ticket-time">{{$t('Order.useBeginDateTime')}}：{{scope.row.useBeginDateTime}}</div>
+									<div class="ticket-code">{{$t('Order.ecode')}}：{{scope.row.ecode || '无'}}</div>
 								</template>
 							</el-table-column>
-							<el-table-column prop="settlementPrice" label="单价" align="center"></el-table-column>
-							<el-table-column prop="productCount" label="数量" align="center"></el-table-column>
-							<el-table-column prop="smallTotalCash" label="小计" align="center"></el-table-column>
-							<el-table-column prop="singleTicketState" label="订单状态" align="center">
+							<el-table-column prop="settlementPrice" :label="$t('Order.settlementPrice')" align="center"></el-table-column>
+							<el-table-column prop="productCount" :label="$t('Order.productCount')" align="center"></el-table-column>
+							<el-table-column prop="smallTotalCash" :label="$t('Order.smallTotalCash')" align="center"></el-table-column>
+							<el-table-column prop="singleTicketState" :label="$t('Order.OrderStatus')" align="center">
 								<template slot-scope="scope">
 									{{scope.row.singleTicketState|status}}
 								</template>
 							</el-table-column>
-							<el-table-column label="操作">
+							<el-table-column :label="$t('Order.Operation')">
 								<template slot-scope="scope">
-									<el-button type="text" v-if="scope.row.singleTicketState == 3 && scope.row.returnSign == 1" @click="refund(scope.row,item.orderId,item.receiveName)">退票申请</el-button>
+									<el-button type="text" v-if="scope.row.singleTicketState == 3 && scope.row.returnSign == 1" @click="refund(scope.row,item.orderId,item.receiveName)">{{$t('Order.exit')}}</el-button>
 								</template>
 							</el-table-column>
 						</el-table>
@@ -100,7 +100,7 @@
 			</template>
 			<template v-else>
 				<div class="false">
-					<el-button class="el-icon-search" type="text" @click="tabs = 'a'">没有符合条件的宝贝，请尝试其他搜索条件。</el-button>
+					<el-button class="el-icon-search" type="text" @click="tabs = 'a'">{{$t('Order.text')}}</el-button>
 				</div>
 			</template>
 		</section>

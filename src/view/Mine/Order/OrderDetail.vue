@@ -36,11 +36,11 @@
 							<td class="td-2">支付时间：</td>
 						</tr>
 						<tr>
-							<td class="td-1 td-bottom" colspan="2">
+							<td class="td-1 td-bottom">
 								实付金额：
 								<span>￥{{data.payTotalCash}}</span>
 							</td>
-							<!-- <td class="td-2 td-bottom">下单渠道：</td> -->
+							<td class="td-1 td-2 td-bottom">下单渠道：<span>{{data.createCannel|$createCannel}}</span></td>
 						</tr>
 					</table>
 				</div>
@@ -316,7 +316,34 @@
 						return '-';
 						break;
 				}
-
+			},
+			$createCannel(val){
+				switch (val) {
+					case 0:
+						return '未知';
+						break;
+					case 1:
+						return '官网';
+						break;
+					case 2:
+						return '微信';
+						break;
+					case 3:
+						return '小程序';
+						break;
+					case 4:
+						return 'AndroId';
+						break;
+					case 5:
+						return 'IOS';
+						break;
+					case 6:
+						return '客户端';
+						break;
+					default:
+						return '未知';
+						break;
+				}
 			}
 		}
 	};

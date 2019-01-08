@@ -370,13 +370,14 @@ export default {
         receiveId: 1111111111, //邮寄ID
         receiveName: this.numberValidateForm.name1,
         receiveMobile: this.numberValidateForm.phone,
-        receiveIdentityCode: this.numberValidateForm.name2
+        receiveIdentityCode: this.numberValidateForm.name2,
+        createCannel:1   //官网下单为1
       };
       // 拿到guid以及订单号
       this.$post("http://101.201.101.138:5001/order-aggregate/save", data, {
         headers: { "Content-Type": "application/json;charset=UTF-8" }
       }).then(res => {
-        console.log(res);
+        console.log(res.data.createCannel);
         if (res.code === 200) {
           // console.log(res);
           this.orderId = res.data.orderId;

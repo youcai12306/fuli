@@ -22,7 +22,7 @@
             <template v-else>
               <img src="../assets/img/header1.png" alt>
             </template>
-            <p>网上订购</p>
+            <p>{{$t('header.title1')}}</p>
           </li>
           <!-- 主题乐园 -->
           <li
@@ -38,7 +38,7 @@
               <template v-else>
                 <img src="../assets/img/header2.png" alt>
               </template>
-              <p>主题乐园</p>
+              <p>{{$t('header.title2')}}</p>
             </router-link>
           </li>
           <!-- 度假酒店 -->
@@ -57,7 +57,7 @@
               <template v-else>
                 <img src="../assets/img/header3.png" alt>
               </template>
-              <p>度假酒店</p>
+              <p>{{$t('header.title3')}}</p>
             </router-link>
           </li>
           <!-- 新闻中心 -->
@@ -76,7 +76,7 @@
               <template v-else>
                 <img src="../assets/img/header4.png" alt>
               </template>
-              <p>新闻中心</p>
+              <p>{{$t('header.title4')}}</p>
             </router-link>
           </li>
 
@@ -94,7 +94,7 @@
               <template v-else>
                 <img src="../assets/img/header5.png" alt>
               </template>
-              <p>游玩指南</p>
+              <p>{{$t('header.title5')}}</p>
             </router-link>
           </li>
 
@@ -114,7 +114,7 @@
               <template v-else>
                 <img src="../assets/img/header6.png" alt>
               </template>
-              <p>优惠活动</p>
+              <p>{{$t('header.title6')}}</p>
             </router-link>
           </li>
 
@@ -132,7 +132,7 @@
               <template v-else>
                 <img src="../assets/img/header7.png" alt>
               </template>
-              <p>冒险之旅</p>
+              <p>{{$t('header.title7')}}</p>
             </router-link>
           </li>
 
@@ -150,7 +150,7 @@
               <template v-else>
                 <img src="../assets/img/header8.png" alt>
               </template>
-              <p>海洋百科</p>
+              <p>{{$t('header.title8')}}</p>
             </router-link>
           </li>
         </ul>
@@ -161,7 +161,7 @@
           <div class="login" ref="box">
             <span v-if="!showMineInfo" @click.stop="jumpMine()">登录/注册</span>
             <span v-else class="mine-mengbox span">
-              {{name}}
+              {{name}},{{$t('header.huan')}}
               <div class="person-info">
                 <div class="info-one">
                   <router-link to="/mine" class="mine">个人中心</router-link>
@@ -178,10 +178,14 @@
               </div>
             </span>
           </div>
-          <div class="language-change">
-            <span class="ch">中文</span>
-            <span>英文</span>
-          </div>
+          <!-- <div class="language-change" @click="$translate">
+            <span :class="{ch:chs == 0}">中文</span>
+            <span :class="{en:chs == 1}">英文</span>
+          </div> -->
+					<div class="language-change">
+					  <span :class="{ch:chs == 'zh'}" @click="handleSetLanguage('zh'),chs='zh'">中文</span>
+					  <span :class="{en:chs == 'en'}" @click="handleSetLanguage('en'),chs='en'">英文</span>
+					</div>
         </div>
       </div>
     </div>
@@ -200,7 +204,7 @@
               <p class="list-img">
                 <img src="../assets/img/H1.png" alt>
               </p>
-              <p class="list-title">麦迪斯卡水乐园</p>
+              <p class="list-title">{{$t('Themes.title1')}}</p>
             </router-link>
           </li>
           <li>
@@ -208,26 +212,26 @@
 							<p class="list-img">
 								<img src="../assets/img/H2.png" alt>
 							</p>
-							<p class="list-title">冒险海洋</p>
+							<p class="list-title">{{$t('Themes.title2')}}</p>
 						</router-link>
           </li>
           <li>
             <p class="list-img">
               <img src="../assets/img/H3.png" alt>
             </p>
-            <p class="list-title">生态海岸</p>
+            <p class="list-title">{{$t('Themes.title3')}}</p>
           </li>
           <li>
             <p class="list-img">
               <img src="../assets/img/H4.png" alt>
             </p>
-            <p class="list-title">探索港湾</p>
+            <p class="list-title">{{$t('Themes.title4')}}</p>
           </li>
           <li>
             <p class="list-img">
               <img src="../assets/img/H5.png" alt>
             </p>
-            <p class="list-title">深海之城</p>
+            <p class="list-title">{{$t('Themes.title5')}}</p>
           </li>
         </ul>
       </div>
@@ -239,6 +243,7 @@
 import { mapActions } from "vuex";
 import { mapGetters } from "vuex";
 import { delCookie } from "@/package/cookie";
+import Cookies from 'js-cookie'
 export default {
   name: "Hearer",
   data() {
@@ -246,7 +251,8 @@ export default {
       show: false,
       name: "",
       height: 0,
-      hover: ""
+      hover: "",
+			chs:Cookies.get('language') || 'zh'
     };
   },
   computed: {
@@ -260,7 +266,7 @@ export default {
       this.name = "";
     } else {
       this.showMineInfo = true;
-      this.name = this.$store.getters.userInfo.mobile + ",欢迎您！";
+      this.name = this.$store.getters.userInfo.mobile;
     }
   },
   methods: {
@@ -300,7 +306,15 @@ export default {
       this.setSignOut();
       delCookie("userData");
       this.$router.go(0);
-    }
+    },
+		handleSetLanguage(lang){
+			this.$i18n.locale = lang;
+			this.$store.dispatch("setLanguage",lang);
+			this.$message({
+				message:"success",
+				type:'success'
+			})
+		}
   }
 };
 </script>
@@ -311,8 +325,10 @@ export default {
 
   .main-content {
     height: 97px;
+		/* overflow: hidden; */
     background-color: #ffffff;
     min-width: 1200px;
+		
     .logo {
       padding-top: 26px;
       margin-left: 180px;
@@ -323,7 +339,8 @@ export default {
 
       li {
         height: 97px;
-        padding: 21px 42px 0 42px;
+				padding-top: 20px;
+				width: 150px;
         float: left;
         font-size: 14px;
         font-weight: bold;
@@ -436,14 +453,29 @@ export default {
           margin-left: 14px;
 
           span {
+						cursor: pointer;
             padding: 0 10px;
-            letter-spacing: 1px;
+            /* letter-spacing: 1px; */
+						display: inline-block;
+						position: relative;
+						&:nth-of-type(1):after{
+							display: block;
+							position: absolute;
+							top: 0;
+							right: 0;
+							content: "";
+							width: 1px;
+							height: 100%;
+							background: #333;
+						}
           }
 
           .ch {
             color: #0764e9;
-            border-right: 1px solid #333333;
           }
+					.en {
+						color: #0764e9;
+					}
         }
       }
     }

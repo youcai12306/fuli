@@ -43,7 +43,7 @@
         >
       </div>
       <div class="banner-content clearDiv">
-        <div class="content-list">游玩时间
+        <div class="content-list">{{$t('index.date')}}
           <el-date-picker
             v-model="date"
             type="date"
@@ -56,7 +56,7 @@
             :picker-options="pickerOptions0"
           ></el-date-picker>
         </div>
-        <div class="ticket content-list">门票
+        <div class="ticket content-list">{{$t('index.Tickets')}}
           <el-select v-model="key" class="select-list" @change="ab()">
             <el-option
               v-for="item in options"
@@ -68,7 +68,7 @@
           </el-select>
         </div>
         <div class="search">
-          <button @click="jumpProductDetail()">查询</button>
+          <button @click="jumpProductDetail()">{{$t('index.Inquire')}}</button>
         </div>
       </div>
     </div>
@@ -193,19 +193,19 @@
             <ul class="content-left floatLeft">
               <router-link to="/tickets/1" tag="li">
                 <img src="../assets/img/index-img4.png" alt>
-                <p>在线订票</p>
+                <p>{{$t('index.Latest1')}}</p>
               </router-link>
               <router-link to="/animal" tag="li" class="li2">
                 <img src="../assets/img/index-img5.png" alt>
-                <p>动物保育</p>
+                <p>{{$t('index.Latest2')}}</p>
               </router-link>
               <router-link :to="{path:'/ditu',query:{id:'3'}}" tag="li" class="li3">
                 <img src="../assets/img/index-img6.png" alt>
-                <p>交通指南</p>
+                <p>{{$t('index.Latest3')}}</p>
               </router-link>
               <router-link :to="{path:'/Park'}" tag="li" class="li4">
                 <img src="../assets/img/index-img7.png" alt>
-                <p>园区介绍</p>
+                <p>{{$t('index.Latest4')}}</p>
               </router-link>
             </ul>
             <div class="content-main floatLeft">
@@ -227,9 +227,9 @@
               </ul>
             </div>
             <div class="content-right floatLeft">
-              <p class="right-yule">娱乐专区</p>
+              <p class="right-yule">{{$t('index.Latest5')}}</p>
               <img src="../assets/img/index-hot-img2.png" alt>
-              <router-link class="knowDetail" to="/risk">了解详情></router-link>
+              <router-link class="knowDetail" to="/risk">{{$t('index.Latest6')}}</router-link>
             </div>
           </div>
         </div>
@@ -239,11 +239,11 @@
             <span class="time">{{showTime()}}</span>
             <div class="info-img clearDiv">
               <img src="../assets/img/md-5.png">
-              <p>平日 9.30~17.30</p>
-              <p class="p">周末 9.00~18.00</p>
+              <p>{{$t('index.day1')}}</p>
+              <p class="p">{{$t('index.day2')}}</p>
             </div>
             <div class="info-boutton">
-              <router-link :to="{path:'/ditu',query:{id:'2'}}">详细营业信息>>></router-link>
+              <router-link :to="{path:'/ditu',query:{id:'2'}}">{{$t('index.button1')}}</router-link>
             </div>
           </el-col>
           <el-col :span="12" class="info-col1">
@@ -252,17 +252,17 @@
               <img src="../assets/img/md-10.png">
               <div class="info-p">
                 <p>
-                  全价票
-                  <span>240元</span>/人
+                  {{$t('index.Ticket1')}}
+                  <span>{{$t('index.Ticket1_yuan')}}</span>/{{$t('index.person')}}
                 </p>
                 <p class="p">
-                  优惠价
-                  <span>180元</span>/人
+                  {{$t('index.Ticket2')}}
+                  <span>{{$t('index.Ticket2_yuan')}}</span>/{{$t('index.person')}}
                 </p>
               </div>
             </div>
             <div class="info-boutton">
-              <router-link :to="{path:'/tickets/1'}">立即购票>>></router-link>
+              <router-link :to="{path:'/tickets/1'}">{{$t('index.button2')}}</router-link>
             </div>
           </el-col>
         </el-row>
@@ -270,12 +270,12 @@
     </div>
     <div class="juedui">
       <img src="../assets/img/index-juedui-phone.png" alt>
-      <p>客服电话</p>
+      <p>{{$t('index.Layer1')}}</p>
       <p style="margin-top:10px">400-xxxxxx</p>
       <img src="../assets/img/index-sever.jpg" alt>
-      <p>服务号</p>
+      <p>{{$t('index.Layer2')}}</p>
       <img src="../assets/img/index-dingyue.jpg" alt>
-      <p>订阅号</p>
+      <p>{{$t('index.Layer3')}}</p>
     </div>
   </div>
 </template>

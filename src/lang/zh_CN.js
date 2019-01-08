@@ -13,6 +13,13 @@ export default {
 		title8: '海洋百科',
 		huan: '欢迎您！'
 	},
+	header2:{//个人中心头部
+		Text:"您好，欢迎登录富力海洋欢乐世界度假区！",
+		Text2:"返回首页",
+		Text3:"退出登录",
+		Tel:"客服电话",
+		Phone:"手机版"
+	},
 	Themes: { //主题乐园下导航
 		title1: "麦迪斯卡水乐园",
 		title2: "冒险海洋",

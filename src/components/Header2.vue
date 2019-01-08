@@ -3,13 +3,13 @@
   <div>
     <div class="nav">
       <ul class="nav-content clearDiv">
-        <li class="floatLeft">您好，欢迎登录富力海洋欢乐世界度假区！
-          <router-link to="/">[返回首页]</router-link>
+        <li class="floatLeft">{{$t('header2.Text')}}
+          <router-link to="/">[{{$t('header2.Text2')}}]</router-link>
         </li>
         <li class="floatRight">
-          <span class="phone-img"></span>客服电话400-xxxx-xxx
+          <span class="phone-img"></span>{{$t('header2.Tel')}}400-xxxx-xxx
         </li>
-        <li class="floatRight phon-type">手机版</li>
+        <li class="floatRight phon-type">{{$t('header2.Phone')}}</li>
       </ul>
     </div>
     <div class="nav2">
@@ -17,9 +17,9 @@
         <li class="floatLeft">
           <router-link to="/"><img src="../assets/img/content-bg.png" alt></router-link>
         </li>
-        <li class="mine-center floatLeft">会员中心</li>
+        <li class="mine-center floatLeft">{{$t('mine.navNmae8')}}</li>
         <li class="mine-login floatRight" @click="setSignOuts">
-          <span></span>退出登录
+          <span></span>{{$t('header2.Text3')}}
         </li>
       </ul>
     </div>

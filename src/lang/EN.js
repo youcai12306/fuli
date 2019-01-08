@@ -13,6 +13,13 @@ export default {
 		title8: 'Ocean Encyclopedia',
 		huan: 'Welcome to YOU!'
 	},
+	header2:{//个人中心头部
+		Text:"Hello, welcome to visit Fuli Ocean Joy World Resort!",
+		Text2:"Back to Home",
+		Text3:"Exit Login",
+		Tel:"Customer Service Phone",
+		Phone:"Mobile Edition"
+	},
 	Themes: {//主题乐园下导航
 		title1: "Madiska Paradise",
 		title2: "Adventure Ocean",

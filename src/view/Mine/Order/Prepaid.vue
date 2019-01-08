@@ -4,33 +4,33 @@
 		<!-- 头部tab -->
 		<section class="tab-s">
 			<ul>
-				<li class="tabs-title">订单状态：</li>
+				<li class="tabs-title">{{$t('Order.OrderStatus')}}：</li>
 				<li :class="{'active' : tabs == 'a'}" @click="tabs = 'a'">
-					<router-link to="/prepaid">全部</router-link>
+					<router-link to="/prepaid">{{$t('Order.Status1')}}</router-link>
 				</li>
 				<li :class="{'active' : tabs == '0'}" @click="tabs = 0">
-					<router-link to="/prepaid">预下单</router-link>
+					<router-link to="/prepaid">{{$t('Order.Status2')}}</router-link>
 				</li>
 				<li :class="{'active' : tabs == '1'}" @click="tabs = 1">
-					<router-link to="/prepaid">待支付</router-link>
+					<router-link to="/prepaid">{{$t('Order.Status3')}}</router-link>
 				</li>
 				<li :class="{'active' : tabs == '2'}" @click="tabs = 2">
-					<router-link to="/prepaid">已支付</router-link>
+					<router-link to="/prepaid">{{$t('Order.Status4')}}</router-link>
 				</li>
 				<li :class="{'active' : tabs == '3'}" @click="tabs = 3">
-					<router-link to="/prepaid">下单成功</router-link>
+					<router-link to="/prepaid">{{$t('Order.Status5')}}</router-link>
 				</li>
 				<li :class="{'active' : tabs == '4'}" @click="tabs = 4">
-					<router-link to="/prepaid">已核销</router-link>
+					<router-link to="/prepaid">{{$t('Order.Status6')}}</router-link>
 				</li>
 				<li :class="{'active' : tabs == '5'}" @click="tabs = 5">
-					<router-link to="/prepaid">退票审核中</router-link>
+					<router-link to="/prepaid">{{$t('Order.Status7')}}</router-link>
 				</li>
 				<li :class="{'active' : tabs == '6'}" @click="tabs = 6">
-					<router-link to="/prepaid">已退票</router-link>
+					<router-link to="/prepaid">{{$t('Order.Status8')}}</router-link>
 				</li>
 				<li :class="{'active' : tabs == '-1'}" @click="tabs = -1">
-					<router-link to="/prepaid">已取消</router-link>
+					<router-link to="/prepaid">{{$t('Order.Status9')}}</router-link>
 				</li>
 				<!-- <li :class="{'active' : tabs == '-1'}" @click="tabs = -1">
 					<router-link to="/prepaid">已取消</router-link>

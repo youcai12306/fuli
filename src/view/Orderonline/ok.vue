@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header1></Header1>
+    <Header></Header>
     <div class="ok1">
       <div class="okk2">
         <div class="okk3">
@@ -21,10 +21,10 @@
 </template>
 
 <script>
-import Header1 from "../../components/Header1";
+import Header from "../../components/Header";
 export default {
   components: {
-    Header1
+    Header
   },
   data() {
     return {};

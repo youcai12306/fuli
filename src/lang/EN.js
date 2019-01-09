@@ -2,7 +2,7 @@ export default {
 	// 导航栏
 	Chinese: "Chinese",
 	English: "English",
-	header: {//头部导航
+	header: { //头部导航
 		title1: 'Online Ordering',
 		title2: 'Theme parks',
 		title3: 'Resort Hotels',
@@ -13,33 +13,33 @@ export default {
 		title8: 'Ocean Encyclopedia',
 		huan: 'Welcome to YOU!'
 	},
-	header2:{//个人中心头部
-		Text:"Hello, welcome to visit Fuli Ocean Joy World Resort!",
-		Text2:"Back to Home",
-		Text3:"Exit Login",
-		Tel:"Customer Service Phone",
-		Phone:"Mobile Edition"
+	header2: { //个人中心头部
+		Text: "Hello, welcome to visit Fuli Ocean Joy World Resort!",
+		Text2: "Back to Home",
+		Text3: "Exit Login",
+		Tel: "Customer Service Phone",
+		Phone: "Mobile Edition"
 	},
-	Themes: {//主题乐园下导航
+	Themes: { //主题乐园下导航
 		title1: "Madiska Paradise",
 		title2: "Adventure Ocean",
 		title3: "Eco-Coast",
 		title4: "Explore the Harbor",
 		title5: "City of the Deep sea",
 	},
-	Center: {//登录hover框
+	Center: { //登录hover框
 		Center: "Personal Center",
 		Exit: "Exit",
 		my: "My rating."
 	},
-	Footer: {//底部
+	Footer: { //底部
 		time: "Park Opening Hours",
 		tel: "Customer Service Phone",
 		Address: "Address: Hainan Province Lingshuix County Town Fuli Ocean Happy World",
 		notice: "Copyright© Zhejiang ICP No. 16,007,586th-1 Zhejiang public network abate No. 33010902001056 copyright notice",
 		code: "Scan QR code download client"
 	},
-	index: {//首页
+	index: { //首页
 		date: "Playing hours",
 		Tickets: "Tickets",
 		Inquire: "Inquire",
@@ -65,7 +65,7 @@ export default {
 	Position: "Current Location",
 	Home: "Home",
 	Return: "Return",
-	risk: {//冒险之旅
+	risk: { //冒险之旅
 		title: "Adventure Tours",
 		description: "If you wander through this informative area,<br>must also be able to harvest endless joy!",
 		btn1: "Same product",
@@ -76,14 +76,14 @@ export default {
 		name3: "Turtle Terry",
 		name4: "Penguin Patsy",
 	},
-	animal: {//动物百科
+	animal: { //动物百科
 		title: "Animal Encyclopedia",
 		description: "If you wander through this informative area,<br>must also be able to harvest endless joy!",
 		navName1: "Animal Classroom",
 		navName2: "Conservation assistance",
 		navName3: "Popular Science activities",
 	},
-	mine: {//个人中心
+	mine: { //个人中心
 		navNmae1: "My deal.",
 		navNmae2: "My order.",
 		navNmae3: "Shopping Cart",
@@ -100,17 +100,17 @@ export default {
 		Coupons: "Coupons",
 		Integral: "Integral"
 	},
-	Order:{//我的订单
-		OrderStatus:"Order Status",
-		Status1:"All",
-		Status2:"Pre-order",
-		Status3:"Pending payment",
-		Status4:"Have paid",
-		Status5:"Order succeeded",
-		Status6:"has been written off",
-		Status7:"In the refund audit",
-		Status8:"Refunds have been made",
-		Status9:"has been canceled",
+	Order: { //我的订单
+		OrderStatus: "Order Status",
+		Status1: "All",
+		Status2: "Pre-order",
+		Status3: "Pending payment",
+		Status4: "Have paid",
+		Status5: "Order succeeded",
+		Status6: "has been written off",
+		Status7: "In the refund audit",
+		Status8: "Refunds have been made",
+		Status9: "has been canceled",
 		orderId: "Order number",
 		createTime: "Creation time",
 		orderTotalCash: "Order Amount",
@@ -129,39 +129,60 @@ export default {
 		exit: "Refund Application",
 		text: "There are no eligible babies, please try other search criteria."
 	},
-	OrderDetail: {//订单详情
+	OrderDetail: { //订单详情
 		Text1: "Your location: Personal Center > order information",
-		Text2:"Order Info",
-		Text3:"Total Order Amount",
-		Text4:"Trading Orders",
-		Text5:"Total coupon Amount",
-		Text6:"Order Time",
-		Text7:"Total amount of refund",
-		Text8:"Payment Time",
-		Text9:"Amount paid",
-		Text10:"Order channels",
-		Text11:"Child single Number",
-		Text12:"Click on the link to get the QR code",
-		RecName1:"Playing people information",
-		RecName2:"Name",
-		RecName3:"Phone",
-		RecName4:"Id",
-		RecName5:"Address",
-		RecName6:"Payment information",
-		RecName7:"Unsubscribe Information",
-		RecName8:"Recipient information",
-		PayName1:"Serial number",
-		PayName2:"Amount paid",
-		PayName3:"Payment Channels",
-		PayName4:"Payment Time",
-		PayName5:"Application hours",
-		PayName6:"Unsubscribe Quantity",
-		PayName7:"Audit identity",
-		PayName8:"Audit time",
-		sum:"Total"
+		Text2: "Order Info",
+		Text3: "Total Order Amount",
+		Text4: "Trading Orders",
+		Text5: "Total coupon Amount",
+		Text6: "Order Time",
+		Text7: "Total amount of refund",
+		Text8: "Payment Time",
+		Text9: "Amount paid",
+		Text10: "Order channels",
+		Text11: "Child single Number",
+		Text12: "Click on the link to get the QR code",
+		RecName1: "Playing people information",
+		RecName2: "Name",
+		RecName3: "Phone",
+		RecName4: "Id",
+		RecName5: "Address",
+		RecName6: "Payment information",
+		RecName7: "Unsubscribe Information",
+		RecName8: "Recipient information",
+		PayName1: "Serial number",
+		PayName2: "Amount paid",
+		PayName3: "Payment Channels",
+		PayName4: "Payment Time",
+		PayName5: "Application hours",
+		PayName6: "Unsubscribe Quantity",
+		PayName7: "Audit identity",
+		PayName8: "Audit time",
+		sum: "Total"
 	},
-	Hotel:{//度假酒店
-		Text1:"New Year's Day offer<br>Warm across the year on the journey",
-		Text2:"Come with me and meet the New Year in the new landscape",
+	Hotel: { //度假酒店
+		Text1: "New Year's Day offer<br>Warm across the year on the journey",
+		Text2: "Come with me and meet the New Year in the new landscape",
+	},
+	Tickets: { //网上订购
+		Text1: "Online Ordering",
+		Text2: "Tickets",
+		Text3: "Retail",
+		Text4: "Catering",
+		Text5: "Package",
+		Text6: "Select a Play Date",
+		Text7: "Today",
+		Text8: "Tomorrow",
+		Text9: "Acquired",
+	},
+	TicketDetail: { //门票详情
+		Text: "Current location: Online ordering > retail product Details page",
+		Text1: "Current location: Online ordering > ticket details page",
+		Text2: "My order.",
+		Text3: "Shopping Cart",
+		Text4: "Price",
+		Text5: "Quantity purchased",
+		Text6: "Product Details",
+		Text7: "Booking instructions"
 	}
 }

@@ -2,16 +2,16 @@
   <div class="clearDiv ti1">
     <div class="ti2 clearDiv">
       <!-- 选择游玩日期 -->
-      <p class="ti3">选择游玩日期：</p>
+      <p class="ti3">{{$t('Tickets.Text6')}}：</p>
 
       <div class="clearDiv">
         <el-radio-group
           v-model="radio2"
           @change="chooseDate(0)"
         >
-          <el-radio :label="1">今天</el-radio>
-          <el-radio :label="2">明天</el-radio>
-          <el-radio :label="3">后天</el-radio>
+          <el-radio :label="1">{{$t('Tickets.Text7')}}</el-radio>
+          <el-radio :label="2">{{$t('Tickets.Text8')}}</el-radio>
+          <el-radio :label="3">{{$t('Tickets.Text9')}}</el-radio>
         </el-radio-group>
 
         <div class="block">

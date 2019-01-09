@@ -3,13 +3,13 @@
     <Header></Header>
     <div class="content">
       <div class="nav clearDiv">
-        <div class="floatLeft" @click="orderr">当前位置：网上订购>零售商品详情页</div>
-        <div class="floatRight" @click="myorder">我的订单</div>
+        <div class="floatLeft" @click="orderr">{{$t('TicketDetail.Text')}}</div>
+        <div class="floatRight" @click="myorder">{{$t('TicketDetail.Text2')}}</div>
         <div class="floatRight shopping-car" @click="jumpShoppingCar">
           <img
             src="../assets/img/shopping-car.png"
             
-          >购物车(
+          >{{$t('TicketDetail.Text3')}}(
           <span>{{shopNum}}</span>)
         </div>
       </div>
@@ -52,10 +52,10 @@
             <div class="title">{{canDebook(product.returnSign)}}</div>
             <div class="new-price">
               ￥{{product.settlementPrice}}
-              <span class="old-price">原价¥{{product.originalPrice}}</span>
+              <span class="old-price">{{$t('TicketDetail.Text4')}}¥{{product.originalPrice}}</span>
             </div>
             <div class="pay pay-num">
-              <span>购买数量:</span>
+              <span>{{$t('TicketDetail.Text5')}}:</span>
               <el-input-number
                 v-model="num1"
                 @change="handleChange"
@@ -100,11 +100,11 @@
           <li
             :class="{li:changeB === 0}"
             @click="changeType(0)"
-          >商品详情</li>
+          >{{$t('TicketDetail.Text6')}}</li>
           <li
             :class="{li:changeB === 1}"
             @click="changeType(1)"
-          >预定须知</li>
+          >{{$t('TicketDetail.Text7')}}</li>
         </ul>
       </div>
     </div>
@@ -514,12 +514,13 @@ export default {
       ul {
         li {
           float: left;
-          width: 125px;
+          min-width: 125px;
           height: 56px;
           line-height: 56px;
           text-align: center;
           background: rgba(244, 244, 244, 1);
           font-size: 16px;
+					padding: 0 10px;
           font-weight: 400;
           color: rgba(51, 51, 51, 1);
         }

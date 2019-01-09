@@ -30,22 +30,22 @@
         <!-- 左边 -->
         <div class="pp1">
           <ul>
-            <li class="or8">网上订购</li>
+            <li class="or8">{{$t('Tickets.Text1')}}</li>
             <router-link class="clearDiv or9 oo" tag="li" to="/tickets/1">
               <img src="../../../src/assets/img/menpiao.png" alt>
-              <p>门票</p>
+              <p>{{$t('Tickets.Text2')}}</p>
             </router-link>
             <li class="clearDiv or9 or10">
               <img src="../../../src/assets/img/linshou.png" alt>
-              <p>零售</p>
+              <p>{{$t('Tickets.Text3')}}</p>
             </li>
             <li class="clearDiv or9 or10">
               <img src="../../../src/assets/img/canyin.png" alt>
-              <p>餐饮</p>
+              <p>{{$t('Tickets.Text4')}}</p>
             </li>
             <li class="clearDiv or9 or10 or11">
               <img src="../../../src/assets/img/taopiao.png" alt>
-              <p>套票</p>
+              <p>{{$t('Tickets.Text5')}}</p>
             </li>
           </ul>
         </div>

@@ -159,7 +159,7 @@
       <div class="nav-right floatLeft">
         <div class="right-info">
           <div class="login" ref="box">
-            <span v-if="!showMineInfo" @click.stop="jumpMine()">登录/注册</span>
+            <span v-if="!showMineInfo" @click.stop="jumpMine()">{{$t('header2.Login')}}</span>
             <span v-else class="mine-mengbox span">
               {{name}},{{$t('header.huan')}}
               <div class="person-info">

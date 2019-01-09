@@ -540,7 +540,7 @@ export default {
           margin-top: 29px;
           margin-left: 19px;
           margin-right: 35px;
-          width: 267px;
+          width: 255px;
           height: 39px;
         }
       }

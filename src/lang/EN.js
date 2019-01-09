@@ -18,7 +18,8 @@ export default {
 		Text2: "Back to Home",
 		Text3: "Exit Login",
 		Tel: "Customer Service Phone",
-		Phone: "Mobile Edition"
+		Phone: "Mobile Edition",
+		Login: "Login/Registration"
 	},
 	Themes: { //主题乐园下导航
 		title1: "Madiska Paradise",
@@ -65,6 +66,7 @@ export default {
 	Position: "Current Location",
 	Home: "Home",
 	Return: "Return",
+	Yuan: "Yuan",
 	risk: { //冒险之旅
 		title: "Adventure Tours",
 		description: "If you wander through this informative area,<br>must also be able to harvest endless joy!",
@@ -184,5 +186,59 @@ export default {
 		Text5: "Quantity purchased",
 		Text6: "Product Details",
 		Text7: "Booking instructions"
+	},
+	Login: { //登陆注册方面
+		Text: "Member Login",
+		Text1: "I'm not a member? Register Now",
+		Text2: "Mobile phone Number Login",
+		Text3: "Hand account Password Login",
+		Text4: "Mobile phone number",
+		Text5: "SMS Verification Code",
+		Text6: "Please enter your password",
+		Text7: "Forgot your password?",
+		Text8: "Login",
+		Text9: "WeChat Login",
+		Text10: "QQ Login",
+	},
+	Register: { //登陆注册方面
+		Text: "Member Registration",
+		Text1: "phone",
+		Text2: "Please fill in your mobile phone",
+		Text3: "Code",
+		Text4: "Please enter a verification code",
+		Text5: "I have read and agree to the user registration agreement",
+		Text6: "Register Now",
+		Text7: "Fill in the SMS Verification code password to complete the registration",
+		Text8: "Please enter a SMS verification code",
+		Text9: "Password",
+		Text10: "6-16-bit password, case sensitive, cannot be used with spaces",
+		Text11: "Complete",
+		Text12: "Back to modify phone number",
+		Text13: "The SMS verification code has been sent to"
+	},
+	Suborder: { //网上订购>详情页>提交订单
+		Text: "Current location: Online ordering > Details page > submit an order",
+		Text1: "order creation, please later ...",
+		Text2: "Estimated wait time is 3 seconds",
+		Text3: "Order Details",
+		Text4: "Product Info",
+		Text5: "Price",
+		Text6: "Number",
+		Text7: "Subtotal",
+		Text8: "Playing hours",
+		Text9: "Coupon Information",
+		Text10: "No coupons",
+		Text11: "Visitor Information",
+		Text12: "Visitor information: You need to fill in 1 guest information",
+		Text13: "Name",
+		Text14: "Phone",
+		Text15: "This phone number is used to receive admission text messages",
+		Text16: "ID",
+		Text17: "Mailing Address",
+		Text18: "Select your pickup address",
+		Text19: "Recipient",
+		Text20: "Address",
+		Text21: "Agree to the purchase agreement",
+		Text22: "Total Amount"
 	}
 }

@@ -8,11 +8,11 @@
           </router-link>
         </div>
         <div class="clearDiv ban1 ban2 ban4">
-          <router-link to="/login">会员登录</router-link>
+          <router-link to="/login">{{$t('Login.Text')}}</router-link>
         </div>
         <div class="clearDiv ban1 ban2 ban5">
           <router-link to="/register">
-            我不是会员？立即注册
+            {{$t('Login.Text1')}}
             <img src="../assets/img/login.png" alt>
           </router-link>
         </div>
@@ -21,19 +21,19 @@
     <div class="bac1">
       <div class="content">
         <div class="box">
-          <h3>会员注册</h3>
+          <h3>{{$t('Register.Text')}}</h3>
           <div class="step1" v-if="step">
             <p class="clearDiv">
-              <label for>手机号</label>
-              <input type="text" v-model="phone" placeholder="请填写您的手机" @blur="checkPhone" >
+              <label for>{{$t('Register.Text1')}}</label>
+              <input type="text" v-model="phone" :placeholder="$t('Register.Text2')" @blur="checkPhone" >
               <span class="tip">{{phoneTip}}</span>
             </p>
             <p class="clearDiv">
-              <label for>验证码</label>
+              <label for>{{$t('Register.Text3')}}</label>
               <input
                 type="text"
                 v-model="code"
-                placeholder="请输入验证码"
+                :placeholder="$t('Register.Text4')"
                 class="code-input"
                 @blur="checkCode"
               >
@@ -41,21 +41,21 @@
               <span class="tip">{{codeTip}}</span>
             </p>
             <div class="deal">
-              <input type="checkbox" v-model="agree">我已阅读并同意用户注册协议
+              <input type="checkbox" v-model="agree">{{$t('Register.Text5')}}
             </div>
             <div class="btn">
-              <button class="zhuce" @click="register">立即注册</button>
+              <button class="zhuce" @click="register">{{$t('Register.Text6')}}</button>
               <span class="msg">{{msg}}</span>
             </div>
           </div>
           <div class="step2" v-else>
-            <h4 class="title1">填写短信验证码密码完成注册</h4>
-            <h4 class="title2">短信验证码已发送至{{this.phone}}</h4>
+            <h4 class="title1">{{$t('Register.Text7')}}</h4>
+            <h4 class="title2">{{$t('Register.Text13')}}{{this.phone}}</h4>
             <p class="clearDiv">
-              <label for>验证码</label>
+              <label for>{{$t('Register.Text3')}}</label>
               <input
                 type="text"
-                placeholder="请输入短信验证码"
+                :placeholder="$t('Register.Text8')"
                 class="code-input"
                 v-model="code1"
                 @blur="checkCode1"
@@ -68,10 +68,10 @@
               <span class="codeTip1">{{codeTip1}}</span>
             </p>
             <p class="clearDiv">
-              <label for>密码</label>
+              <label for>{{$t('Register.Text9')}}</label>
               <input
                 type="password"
-                placeholder="6-16位密码，区分大小写，不能用空格"
+                :placeholder="$t('Register.Text10')"
                 v-model="password"
                 @blur="checkPwd"
               >
@@ -79,10 +79,10 @@
             </p>
             <moveBox></moveBox>
             <div class="btn">
-              <button class="zhuce" @click="register2">完成</button>
+              <button class="zhuce" @click="register2">{{$t('Register.Text11')}}</button>
               <span class="msg">{{msg1}}</span>
             </div>
-            <div class="back" @click="back()">返回修改手机号</div>
+            <div class="back" @click="back()">{{$t('Register.Text12')}}</div>
           </div>
         </div>
       </div>

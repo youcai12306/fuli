@@ -6,7 +6,7 @@
       <!-- 订单详情 -->
       <div class="su2 clearDiv">
         <div class="su22">
-          当前位置：网上订购>详情页>提交订单
+          {{$t('Suborder.Text')}}
         </div>
         <!-- 弹出框遮罩内容 -->
         <div class="su21 clearDiv" v-show="flag">
@@ -14,32 +14,32 @@
           <div class="show clearDiv">
             <div class="su22">
               <img src="../../assets/img/dengdai.png" alt="">
-              <p class="su23">订单创建中，请稍后...</p>
-              <p class="su24">预计等待时间为3秒</p>
+              <p class="su23">{{$t('Suborder.Text1')}}</p>
+              <p class="su24">{{$t('Suborder.Text2')}}</p>
             </div>
           </div>
         </div>
         <div class="suu">
           <div class="su3">
-            <span>订单详情</span>
+            <span>{{$t('Suborder.Text3')}}</span>
           </div>
           <div class="su4">
             <table cellspacing="0" width="1078" height="353">
               <tr>
-                <th>商品信息</th>
-                <th>单价</th>
-                <th>数量</th>
-                <th>小计</th>
+                <th>{{$t('Suborder.Text4')}}</th>
+                <th>{{$t('Suborder.Text5')}}</th>
+                <th>{{$t('Suborder.Text6')}}</th>
+                <th>{{$t('Suborder.Text7')}}</th>
               </tr>
               <tr>
                 <!-- <tr v-for="item in list2" :key="item"> -->
                 <td>{{productname}}
-                  <p>游玩时间：{{playtime}}</p>
+                  <p>{{$t('Suborder.Text8')}}：{{playtime}}</p>
                   <!-- <p>{{canDebook(saleType)}}</p> -->
                 </td>
-                <td>¥{{price1}}元</td>
+                <td>¥{{price1}}{{$t('Yuan')}}</td>
                 <td>×{{count}}</td>
-                <td class="td">¥{{price2}}元</td>
+                <td class="td">¥{{price2}}{{$t('Yuan')}}</td>
               </tr>
               <!-- <tr>
                 <td>富力成人全日票
@@ -67,21 +67,21 @@
           <!-- 优惠券信息 -->
           <div class="su5">
 
-            <span class="su6">优惠券信息</span>
-            <span class="su7">暂无优惠券</span>
+            <span class="su6">{{$t('Suborder.Text9')}}</span>
+            <span class="su7">{{$t('Suborder.Text10')}}</span>
 
           </div>
           <!-- 游客信息 -->
           <div class="su8">
             <div class="su9">
-              <span class="su91">游客信息</span>
-              <span class="su92">游客信息：您需要填写1位游客信息</span>
+              <span class="su91">{{$t('Suborder.Text11')}}</span>
+              <span class="su92">{{$t('Suborder.Text12')}}</span>
             </div>
             <div class="su10 clearDiv">
               <div>
                 <el-form ref="numberValidateForm" :model="numberValidateForm" label-width="85px">
 
-                  <el-form-item label="姓名 ：" class="el1" prop="name1" :rules="[
+                  <el-form-item :label="$t('Suborder.Text13')" class="el1" prop="name1" :rules="[
                           { required: true, message: '姓名不能为空'},
                           { type: 'string', message: '姓名必须为中文'},
                           {
@@ -96,7 +96,7 @@
 
                   </el-form-item>
 
-                  <el-form-item label="手机号 ：" class="el2" prop="phone" :rules="[
+                  <el-form-item :label="$t('Suborder.Text14')" class="el2" prop="phone" :rules="[
                           { required: true, message: '手机号不能为空',trigger:'blur'},
                           { 
             validator: (rule, value, callback)=>{validateSku(rule, value, callback)}, 
@@ -107,10 +107,10 @@
 
                     </el-input>
 
-                    <p>此手机号用于接受入园短信</p>
+                    <p>{{$t('Suborder.Text15')}}</p>
                   </el-form-item>
 
-                  <el-form-item label="身份证 ：" class="el1" prop="name2" :rules="[
+                  <el-form-item :label="$t('Suborder.Text16')" class="el1" prop="name2" :rules="[
                           { required: true, message: '身份证不能为空'},
                           
                           {
@@ -127,24 +127,24 @@
                   <!-- 邮寄地址 -->
                   <div class="su5" v-show="flag1">
 
-                    <span class="su6">邮寄地址</span>
-                    <span class="su7" @click="address()">选择收件地址</span>
+                    <span class="su6">{{$t('Suborder.Text17')}}</span>
+                    <span class="su7" @click="address()">{{$t('Suborder.Text18')}}</span>
 
                   </div>
                   <div class="q1" v-show="flag1">
                     <div class="q2">
-                      <p>收件人：<span>{{name1}}</span></p>
-                      <p class="q3">手机号：<span>{{phone1}}</span></p>
-                      <p>地址：<span>{{address1}}</span></p>
+                      <p>{{$t('Suborder.Text19')}}：<span>{{name1}}</span></p>
+                      <p class="q3">{{$t('Suborder.Text14')}}：<span>{{phone1}}</span></p>
+                      <p>{{$t('Suborder.Text20')}}：<span>{{address1}}</span></p>
                     </div>
                   </div>
                   <div class="su11">
-                    <el-checkbox v-model="checked" @change="changeType">同意《购买协议》</el-checkbox>
+                    <el-checkbox v-model="checked" @change="changeType">{{$t('Suborder.Text21')}}</el-checkbox>
                   </div>
 
                   <div class="su14">
-                    <span class="su15">总计金额：</span>
-                    <span class="su16">¥{{price2}}元</span>
+                    <span class="su15">{{$t('Suborder.Text22')}}：</span>
+                    <span class="su16">¥{{price2}}{{$t('Yuan')}}</span>
                   </div>
 
                   <el-form-item>

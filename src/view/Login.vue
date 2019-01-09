@@ -8,11 +8,11 @@
           </router-link>
         </div>
         <div class="clearDiv ban1 ban2 ban4">
-          <router-link to="/login">会员登录</router-link>
+          <router-link to="/login">{{$t('Login.Text')}}</router-link>
         </div>
         <div class="clearDiv ban1 ban2 ban5">
           <router-link to="/register">
-            我不是会员？立即注册
+            {{$t('Login.Text1')}}
             <img src="../assets/img/login.png" alt>
           </router-link>
         </div>
@@ -22,19 +22,19 @@
       <div class="bac1-content clearDiv">
         <div class="bac2">
           <div class="bac3 clearDiv">
-            <a href="javascript:;" class="bac4">手机号登录</a>
-            <a href @click.prevent="changeLoginType(1)" class="a">账号密码登录</a>
+            <a href="javascript:;" class="bac4">{{$t('Login.Text2')}}</a>
+            <a href @click.prevent="changeLoginType(1)" class="a">{{$t('Login.Text3')}}</a>
           </div>
           <div class="bac5">
             <div class="phone">
-              <input type="text" placeholder="手机号" class="inp" v-model="phone" @blur="checkPhone">
+              <input type="text" :placeholder="$t('Login.Text4')" class="inp" v-model="phone" @blur="checkPhone">
               <span>{{phoneTip}}</span>
             </div>
             <div class="bac66">
               <div v-show="showLogin === 0" class="code">
                 <input
                   type="text"
-                  placeholder="短信验证码"
+                  :placeholder="$t('Login.Text5')"
                   class="inp2"
                   v-model="code"
                   @blur="checkCode"
@@ -43,14 +43,14 @@
                 <span>{{codeTip}}</span>
               </div>
               <div v-show="showLogin === 1" class="password">
-                <input type="password" placeholder="请输入密码" class="inp" v-model="password">
+                <input type="password" :placeholder="$t('Login.Text6')" class="inp" v-model="password">
               </div>
             </div>
             <div class="bac7">
-              <a href="javascript:;" @click="jumpForget">忘记密码?</a>
+              <a href="javascript:;" @click="jumpForget">{{$t('Login.Text7')}}</a>
             </div>
             <div class="bac6 login">
-              <button class="bac9" @click="login">登录</button>
+              <button class="bac9" @click="login">{{$t('Login.Text8')}}</button>
               <span>{{msg}}</span>
             </div>
             <div>
@@ -61,13 +61,13 @@
             <div class="bac11">
               <a href>
                 <img src="../assets/img/login-wexin.png" alt>
-                <p>微信登录</p>
+                <p>{{$t('Login.Text9')}}</p>
               </a>
             </div>
             <div class="bac12">
               <a href>
                 <img src="../assets/img/login-qq.png" alt>
-                <p>QQ登录</p>
+                <p>{{$t('Login.Text10')}}</p>
               </a>
             </div>
           </div>

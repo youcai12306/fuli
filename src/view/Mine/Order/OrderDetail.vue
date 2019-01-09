@@ -109,7 +109,7 @@
 						<table cellspacing="0" cellpadding="0" class="five-table" v-show="type === 0" v-if="item2.length>0">
 							<tr class="titles">
 								<td class="td-1">{{$t('OrderDetail.PayName1')}}</td>
-								<td class="td-2">{{$t('OrderDetail.Text11')}}</td>
+								<td class="td-2">{{$t('OrderDetail.Text4')}}</td>
 								<td class="td-3">{{$t('OrderDetail.PayName2')}}</td>
 								<td class="td-4">{{$t('OrderDetail.PayName3')}}</td>
 								<td class="td-5">{{$t('Order.Operation')}}</td>
@@ -131,7 +131,7 @@
 						<table cellspacing="0" cellpadding="0" class="five-table" v-show="type === 1 && data.status == 6">
 							<tr class="titles">
 								<td class="td-1">{{$t('OrderDetail.PayName1')}}</td>
-								<td class="td-2">{{$t('OrderDetail.Text11')}}</td>
+								<td class="td-2">{{$t('OrderDetail.Text4')}}</td>
 								<td class="td-3">{{$t('OrderDetail.PayName5')}}</td>
 								<td class="td-4">{{$t('OrderDetail.PayName6')}}</td>
 								<td class="td-5">{{$t('OrderDetail.PayName7')}}</td>

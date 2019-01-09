@@ -2,7 +2,7 @@
   <div class="main">
     <div class="integration">
       <div class="title clearDiv">
-        <p class="change-title floatLeft">我的积分：<span>666</span></p>
+        <p class="change-title floatLeft">{{$t('Integral.Text')}}：<span>666</span></p>
         <img
           src="../../assets/img/mine-duihuan1.png"
           alt=""
@@ -19,14 +19,14 @@
         >
           <el-table-column
             prop="in"
-            label="积分来源"
+            :label="$t('Integral.Text1')"
             width="200"
             align="center"
           >
           </el-table-column>
           <el-table-column
             prop="change"
-            label="积分变化"
+            :label="$t('Integral.Text2')"
             width="200"
             align="center"
           >
@@ -43,14 +43,14 @@
           </el-table-column>
           <el-table-column
             prop="time"
-            label="日期"
+            :label="$t('Integral.Text3')"
             width="140"
             align="center"
           >
           </el-table-column>
           <el-table-column
             prop="tip"
-            label="备注"
+            :label="$t('Integral.Text4')"
             align="center"
             fixed="right"
           >

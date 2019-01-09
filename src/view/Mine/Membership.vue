@@ -1,33 +1,33 @@
 <template>
   <div class="main">
     <div class="member-info">
-      <p class="change-title clearDiv">个人信息</p>
+      <p class="change-title clearDiv">{{$t('Personal.Text')}}</p>
       <div class="change-content">
         <p>
-          <label for>姓名：</label>
-          <input type="text" v-model="name" placeholder="请输入您的姓名" :disabled="showBtn1">
-          <span class="change" @click="chang(0)" v-show="showBtn1">修改</span>
-          <button class="btn" v-show="!showBtn1" @click="revision(1)">确认</button>
+          <label for>{{$t('Personal.Text1')}}：</label>
+          <input type="text" v-model="name" :placeholder="$t('Personal.Text2')" :disabled="showBtn1">
+          <span class="change" @click="chang(0)" v-show="showBtn1">{{$t('Personal.Text3')}}</span>
+          <button class="btn" v-show="!showBtn1" @click="revision(1)">{{$t('Personal.Text4')}}</button>
           <span class="tip">{{nameTip}}</span>
         </p>
         <p>
-          <label for>姓别：</label>
+          <label for>{{$t('Personal.Text5')}}：</label>
           <input type="radio" value="0" class="sex" v-model="sex" @click="chooseSex(0)">
-          <span class="men">男</span>
+          <span class="men">{{$t('Personal.Text6')}}</span>
           <input type="radio" value="1" class="sex sex1" v-model="sex" @click="chooseSex(1)">
-          <span class="men">女</span>
+          <span class="men">{{$t('Personal.Text7')}}</span>
         </p>
         <p>
-          <label for>手机号码：</label>
+          <label for>{{$t('Personal.Text8')}}：</label>
           <input
             type="text"
             class="phone"
             v-model="phone"
             maxlength="11"
-            placeholder="请输入11位手机号码"
+            :placeholder="$t('Personal.Text9')"
             :disabled="showBtn2"
           >
-          <span class="change" @click="chang(1)" v-show="showBtn2">更改绑定手机</span>
+          <span class="change" @click="chang(1)" v-show="showBtn2">{{$t('Personal.Text10')}}</span>
           <button
             @click="setCode"
             class="getcode"
@@ -39,26 +39,26 @@
         </p>
         <p class="code" v-show="!showBtn2">
           <label for>&nbsp;</label>
-          <input type="text" class="codes" v-model="code" placeholder="请输入验证码">
-          <button class="btn" @click="changePhone">确认</button>
+          <input type="text" class="codes" v-model="code" :placeholder="$t('Personal.Text11')">
+          <button class="btn" @click="changePhone">{{$t('Personal.Text4')}}</button>
           <span class="tip">{{codeTip}}</span>
         </p>
         <p>
-          <label for>身份证号：</label>
-          <input type="text" placeholder="请填写身份证号" v-model="IdCard" :disabled="showBtn3">
-          <span class="change" @click="chang(2)" v-show="showBtn3">填写</span>
-          <button class="btn" v-show="!showBtn3" @click="revision(3)">确认</button>
+          <label for>{{$t('Personal.Text13')}}：</label>
+          <input type="text" :placeholder="$t('Personal.Text14')" v-model="IdCard" :disabled="showBtn3">
+          <span class="change" @click="chang(2)" v-show="showBtn3">{{$t('Personal.Text15')}}</span>
+          <button class="btn" v-show="!showBtn3" @click="revision(3)">{{$t('Personal.Text4')}}</button>
           <span class="tip" ref="IdCardTip">{{IdCardTip}}</span>
         </p>
         <p>
-          <label for>联系邮箱：</label>
-          <input type="text" placeholder="请填写邮箱" v-model="email" :disabled="showBtn4">
-          <span class="change" @click="chang(3)" v-show="showBtn4">填写</span>
-          <button class="btn" v-show="!showBtn4" @click="revision(4)">确认</button>
+          <label for>{{$t('Personal.Text16')}}：</label>
+          <input type="text" :placeholder="$t('Personal.Text17')" v-model="email" :disabled="showBtn4">
+          <span class="change" @click="chang(3)" v-show="showBtn4">{{$t('Personal.Text15')}}</span>
+          <button class="btn" v-show="!showBtn4" @click="revision(4)">{{$t('Personal.Text4')}}</button>
           <span class="tip" ref="emailTip">{{emailTip}}</span>
         </p>
         <p>
-          <label for>登录密码：</label>
+          <label for>{{$t('Personal.Text18')}}：</label>
           <input
             type="password"
             :placeholder="dateinit"
@@ -66,23 +66,23 @@
             :disabled="showBtn5"
             @blur="checkPwd()"
           >
-          <span class="change" @click="chang(4)" v-show="showBtn5">修改密码</span>
+          <span class="change" @click="chang(4)" v-show="showBtn5">{{$t('Personal.Text19')}}</span>
           <span class="tip">{{oldPwdTip}}</span>
         </p>
         <p v-show="!showBtn5">
           <label for>&nbsp;</label>
-          <input type="password" placeholder="请填写新密码" v-model="password" @blur="checkPwd1()">
+          <input type="password" :placeholder="$t('Personal.Text20')" v-model="password" @blur="checkPwd1()">
           <span class="tip">{{pwdTip}}</span>
         </p>
         <p v-show="!showBtn5">
           <label for>&nbsp;</label>
           <input
             type="password"
-            placeholder="请确认新密码"
+            :placeholder="$t('Personal.Text21')"
             v-model="rePassword"
             @blur="checkConfirmPwd()"
           >
-          <button class="btn" v-show="!showBtn5" @click="changePwd">确认</button>
+          <button class="btn" v-show="!showBtn5" @click="changePwd">{{$t('Personal.Text4')}}</button>
           <span class="tip">{{rePwdTip}}</span>
         </p>
       </div>

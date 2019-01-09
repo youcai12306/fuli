@@ -1,15 +1,15 @@
 <template>
   <div class="main">
     <div class="shopping-car">
-      <p class="change-title">购物车</p>
-      <p class="tip">温馨提示：商品金额以实际下单金额为准</p>
+      <p class="change-title">{{$t('Car.Text')}}</p>
+      <p class="tip">{{$t('Car.Text1')}}</p>
       <div class="change-content">
         <table>
           <tr class="title">
-            <td class="selectAll">全选</td>
-            <td class="info">商品信息</td>
-            <td class="title-num">数量</td>
-            <td class="title-do">操作</td>
+            <td class="selectAll">{{$t('Car.Text2')}}</td>
+            <td class="info">{{$t('Car.Text3')}}</td>
+            <td class="title-num">{{$t('Car.Text4')}}</td>
+            <td class="title-do">{{$t('Car.Text5')}}</td>
           </tr>
           <tr
             v-for="(item,key) in good_list"
@@ -28,7 +28,7 @@
               <div class="name">{{item.product.productName}}</div>
               <div class="tui">{{canDebook(item.product.returnSign)}}</div>
               <div class="timeslot">
-                游玩时间：
+                {{$t('Car.Text6')}}：
                 <span>{{item.product.dataBaseDate}}</span>
               </div>
             </td>
@@ -56,15 +56,15 @@
                   type="checkbox"
                   @click="slect_all()"
                   v-model="selected_all"
-                >全选
+                >{{$t('Car.Text2')}}
               </div>
               <div
                 class="delAll"
                 @click="delAll"
-              >清空购物车</div>
+              >{{$t('Car.Text7')}}</div>
               <div class="choosed">
-                已选商品
-                <span>{{totalNum}}</span>件
+                {{$t('Car.Text8')}}
+                <span>{{totalNum}}</span>{{$t('Car.Text9')}}
               </div>
               <!-- <div class="totles">
                 合计：
@@ -77,7 +77,7 @@
             class="empty"
             v-show="flag"
           >
-            <td colspan="6">暂无数据</td>
+            <td colspan="6">{{$t('Car.Text10')}}</td>
           </tr>
         </table>
         <!-- {{flag}} -->

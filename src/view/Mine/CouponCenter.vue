@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <div class="coupon">
-      <p>优惠券</p>
+      <p>{{$t('mine.Coupons')}}</p>
       <div class="content">
         <ul class="clearDiv">
           <li><img src="../../assets/img/mine-couponCenter20-use.png" alt=""><img src="../../assets/img/mine-couponCenter20.png" alt="" v-show="false"></li>

@@ -8,11 +8,11 @@
             src="../../assets/img/okk.png"
             alt=""
           >
-          <p>订单支付成功</p>
+          <p>{{$t('Success.Text9')}}</p>
         </div>
         <div class="okk4">
-            <button class="okk5" @click="jixu()">继续购买</button>
-            <button class="okk6" @click="chakan()">查看订单</button>
+            <button class="okk5" @click="jixu()">{{$t('Success.Text10')}}</button>
+            <button class="okk6" @click="chakan()">{{$t('Success.Text11')}}</button>
         </div>
       </div>
 

@@ -240,5 +240,23 @@ export default {
 		Text20: "Address",
 		Text21: "Agree to the purchase agreement",
 		Text22: "Total Amount"
+	},
+	Success: { //支付页面
+		Text: "WeChat payment",
+		Text1: "Amount paid",
+		Text2: "If payment has been completed, please click",
+		Text3: "order creation successful, order number",
+		Text4: "Amount paid",
+		Text5: "Choosing a Payment method",
+		Text6: "This feature is not yet open",
+		Text7: "Please complete the payment within 30 minutes, if the outstanding order is automatically closed",
+		Text8: "Remaining time",
+		Text9: "Successful order Payment",
+		Text10: "Continue to buy",
+		Text11: "View Orders",
+		Text12: "Unfortunately, your order creation failed",
+		Text13: "Cause of failure: Busy network",
+		minutes: "minutes",
+		seconds: "seconds"
 	}
 }

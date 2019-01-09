@@ -8,14 +8,14 @@
             src="../../assets/img/error.png"
             alt=""
           >
-          <p>很遗憾，您的订单创建失败</p>
+          <p>{{$t('Success.Text12')}}</p>
         </div>
         
         <div class="okk4">
             <div>
-            失败原因：网络繁忙
+            {{$t('Success.Text13')}}
         </div>
-            <button class="okk6" @click="chakan()">查看订单</button>
+            <button class="okk6" @click="chakan()">{{$t('Success.Text11')}}</button>
         </div>
       </div>
 

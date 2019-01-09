@@ -11,31 +11,31 @@
           >
             <div class="bg clearDiv"></div>
             <div class="show clearDiv">
-              <div class="su22">微信支付</div>
+              <div class="su22">{{$t('Success.Text')}}</div>
               <div class="su23">
                 <div class="su24">
-                  <p>支付金额：<span>{{this.$route.query.price2}}</span></p>
+                  <p>{{$t('Success.Text1')}}：<span>{{this.$route.query.price2}}</span></p>
                 </div>
                 <div class="su25">
                   <!-- <img src="../../assets/img/erweima.png" alt=""> -->
                   <div id='qrcode'></div>
                 </div>
                 <div class="su26">
-                  <button @click="success()">若已完成支付，请点击</button>
+                  <button @click="success()">{{$t('Success.Text2')}}</button>
                 </div>
               </div>
             </div>
           </div>
           <div class="sc4">
             <p>
-              订单创建成功，订单号：<span>{{this.$route.query.orderId}}</span>
+              {{$t('Success.Text3')}}：<span>{{this.$route.query.orderId}}</span>
             </p>
           </div>
           <div class="sc5">
             <div class="sc6">
-              <p class="sc61">支付金额： <span class="sc7">{{this.$route.query.price2}}元</span></p>
+              <p class="sc61">{{$t('Success.Text4')}}： <span class="sc7">{{this.$route.query.price2}}{{$t('Yuan')}}</span></p>
 
-              <span class="sc62">选择支付方式：</span>
+              <span class="sc62">{{$t('Success.Text5')}}：</span>
               <img
                 class="m1"
                 src="../../assets/img/zhifubao.png"
@@ -58,9 +58,9 @@
                 :class="{active:isActive==2}"
                 @click="change(2)"
               >
-              <p class="scc">此功能暂未开通</p>
-              <p class="sc63">请在30分钟内完成支付，如未完成订单自动关闭</p>
-              <p class="sc64">剩余时间 <span>{{minute}}分{{second}}秒</span></p>
+              <p class="scc">{{$t('Success.Text6')}}</p>
+              <p class="sc63">{{$t('Success.Text7')}}</p>
+              <p class="sc64">{{$t('Success.Text8')}} <span>{{minute}} {{$t('Success.minutes')}} {{second}} {{$t('Success.seconds')}}</span></p>
 
             </div>
           </div>

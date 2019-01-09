@@ -129,7 +129,7 @@ export default {
 		exit: "退票申请",
 		text: "没有符合条件的宝贝，请尝试其他搜索条件。"
 	},
-	OrderDetail: {
+	OrderDetail: {//订单详情
 		Text1: "您的位置：个人中心 > 订单信息",
 		Text2:"订单信息",
 		Text3:"订单总金额",
@@ -159,5 +159,9 @@ export default {
 		PayName7:"审核标识",
 		PayName8:"审核时间",
 		sum:"合计"
+	},
+	Hotel:{//度假酒店
+		Text1:"元旦特惠<br>在旅途中温暖跨年",
+		Text2:"和我一起，在新的风景中迎接新的一年",
 	}
 }

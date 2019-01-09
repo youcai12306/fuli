@@ -5,10 +5,8 @@
     <div class="top">
       <img src="../../assets/img/hotel-img1.jpg" alt>
       <div class="top-box">
-        <h3>元旦特惠
-          <br>在旅途中温暖跨年
-        </h3>
-        <p>和我一起，在新的风景中迎接新的一年</p>
+        <h3 v-html="$t('Hotel.Text1')"></h3>
+        <p>{{$t('Hotel.Text2')}}</p>
       </div>
     </div>
     <div class="bottom">
@@ -78,7 +76,7 @@ export default {
       top: 0;
     }
     .top-box {
-      width: 411px;
+      /* width: 411px; */
       height: 171px;
       background: rgba(10, 10, 10, 0.78);
       position: absolute;
@@ -86,6 +84,7 @@ export default {
       top: 15%;
       padding-top: 25px;
       padding-left: 30px;
+			padding-right: 100px;
       h3 {
         font-size: 30px;
         font-weight: bold;

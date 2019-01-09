@@ -129,7 +129,7 @@ export default {
 		exit: "Refund Application",
 		text: "There are no eligible babies, please try other search criteria."
 	},
-	OrderDetail: {
+	OrderDetail: {//订单详情
 		Text1: "Your location: Personal Center > order information",
 		Text2:"Order Info",
 		Text3:"Total Order Amount",
@@ -159,5 +159,9 @@ export default {
 		PayName7:"Audit identity",
 		PayName8:"Audit time",
 		sum:"Total"
+	},
+	Hotel:{//度假酒店
+		Text1:"New Year's Day offer<br>Warm across the year on the journey",
+		Text2:"Come with me and meet the New Year in the new landscape",
 	}
 }

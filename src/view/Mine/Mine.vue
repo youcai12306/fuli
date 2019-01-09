@@ -132,7 +132,11 @@
 				}
 
 				.info-people {
+					width: 435px;
 					height: 139px;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap;
 					line-height: normal;
 					margin-top: 72px;
 					padding: 10px 195px 0 38px;

@@ -13,12 +13,12 @@ export default {
 		title8: '海洋百科',
 		huan: '欢迎您！'
 	},
-	header2:{//个人中心头部
-		Text:"您好，欢迎登录富力海洋欢乐世界度假区！",
-		Text2:"返回首页",
-		Text3:"退出登录",
-		Tel:"客服电话",
-		Phone:"手机版"
+	header2: { //个人中心头部
+		Text: "您好，欢迎登录富力海洋欢乐世界度假区！",
+		Text2: "返回首页",
+		Text3: "退出登录",
+		Tel: "客服电话",
+		Phone: "手机版"
 	},
 	Themes: { //主题乐园下导航
 		title1: "麦迪斯卡水乐园",
@@ -64,6 +64,7 @@ export default {
 	},
 	Position: "当前位置",
 	Home: "首页",
+	Return: "返回",
 	risk: { //冒险之旅
 		title: "冒险之旅",
 		description: "倘若你徜徉在这片资讯丰富的地带<br>也一定能收获无穷欢乐！",
@@ -127,5 +128,36 @@ export default {
 		Operation: "操作",
 		exit: "退票申请",
 		text: "没有符合条件的宝贝，请尝试其他搜索条件。"
+	},
+	OrderDetail: {
+		Text1: "您的位置：个人中心 > 订单信息",
+		Text2:"订单信息",
+		Text3:"订单总金额",
+		Text4:"交易订单",
+		Text5:"优惠券总金额",
+		Text6:"订单时间",
+		Text7:"退款总金额",
+		Text8:"支付时间",
+		Text9:"实付金额",
+		Text10:"下单渠道",
+		Text11:"子单编号",
+		Text12:"点击链接获取二维码",
+		RecName1:"游玩人信息",
+		RecName2:"姓名",
+		RecName3:"电话",
+		RecName4:"身份证",
+		RecName5:"地址",
+		RecName6:"支付信息",
+		RecName7:"退订信息",
+		RecName8:"收件人信息",
+		PayName1:"序号",
+		PayName2:"支付金额",
+		PayName3:"支付渠道",
+		PayName4:"支付时间",
+		PayName5:"申请时间",
+		PayName6:"退订数量",
+		PayName7:"审核标识",
+		PayName8:"审核时间",
+		sum:"合计"
 	}
 }

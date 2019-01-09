@@ -4,66 +4,66 @@
 		<div class="box">
 			<div class="content">
 				<div class="one">
-					<div class="one-left" @click="$translate">您的位置：个人中心 > 订单信息</div>
-					<div class="one-right" @click="goBack">返回</div>
+					<div class="one-left">{{$t('OrderDetail.Text1')}}</div>
+					<div class="one-right" @click="goBack">{{$t('Return')}}</div>
 				</div>
 				<div class="two">
 					<table class="two-table" cellspacing="0" cellpadding="0">
 						<tr>
-							<td class="td-1 td-title">订单金额</td>
-							<td class="td-2 td-title">订单信息</td>
+							<td class="td-1 td-title">{{$t('Order.orderTotalCash')}}</td>
+							<td class="td-2 td-title">{{$t('OrderDetail.Text2')}}</td>
 							<td rowspan="5" class="td-3 td-bottom">
 								<template>
 									<div>
-										订单状态：
+										{{$t('Order.OrderStatus')}}：
 										<span>{{data.status|status}}</span>
 									</div>
-									<div class="now-pay" @click="pay(data.orderId,data.payTotalCash)" v-if="data.status == 1">立即支付</div>
-									<div class="cancel-pay" @click="delOrder(data.orderId)" v-if="data.status == 1">取消支付</div>
+									<div class="now-pay" @click="pay(data.orderId,data.payTotalCash)" v-if="data.status == 1">{{$t('Order.payOrder')}}</div>
+									<div class="cancel-pay" @click="delOrder(data.orderId)" v-if="data.status == 1">{{$t('Order.exitOrder')}}</div>
 								</template>
 							</td>
 						</tr>
 						<tr>
-							<td class="td-1">订单总金额：{{data.orderTotalCash}}</td>
-							<td class="td-2">交易订单：{{data.orderId}}</td>
+							<td class="td-1">{{$t('OrderDetail.Text3')}}：{{data.orderTotalCash}}</td>
+							<td class="td-2">{{$t('OrderDetail.Text4')}}：{{data.orderId}}</td>
 						</tr>
 						<tr>
-							<td class="td-1">优惠券总金额：{{data.couponCash}}</td>
-							<td class="td-2">订单时间：{{data.createTime}}</td>
+							<td class="td-1">{{$t('OrderDetail.Text5')}}：{{data.couponCash}}</td>
+							<td class="td-2">{{$t('OrderDetail.Text6')}}：{{data.createTime}}</td>
 						</tr>
 						<tr>
-							<td class="td-1">退款总金额：{{data.refundCash}}</td>
-							<td class="td-2">支付时间：</td>
+							<td class="td-1">{{$t('OrderDetail.Text7')}}：{{data.refundCash}}</td>
+							<td class="td-2">{{$t('OrderDetail.Text8')}}：</td>
 						</tr>
 						<tr>
 							<td class="td-1 td-bottom">
-								实付金额：
+								{{$t('OrderDetail.Text9')}}：
 								<span>￥{{data.payTotalCash}}</span>
 							</td>
-							<td class="td-1 td-2 td-bottom">下单渠道：<span>{{data.createCannel|$createCannel}}</span></td>
+							<td class="td-1 td-2 td-bottom">{{$t('OrderDetail.Text10')}}：<span>{{data.createCannel|$createCannel}}</span></td>
 						</tr>
 					</table>
 				</div>
 				<div class="three">
 					<table class="three-table" cellspacing="0" cellpadding="0">
 						<tr class="title">
-							<td class="td-1">商品</td>
-							<td class="td-2">单价</td>
-							<td class="td-3">数量</td>
-							<td class="td-4">小计</td>
-							<td class="td-5">订单状态</td>
-							<td class="td-6">操作</td>
+							<td class="td-1">{{$t('Order.date')}}</td>
+							<td class="td-2">{{$t('Order.settlementPrice')}}</td>
+							<td class="td-3">{{$t('Order.productCount')}}</td>
+							<td class="td-4">{{$t('Order.smallTotalCash')}}</td>
+							<td class="td-5">{{$t('Order.OrderStatus')}}</td>
+							<td class="td-6">{{$t('Order.Operation')}}</td>
 						</tr>
 						<tbody>
 							<template v-for="(item,k) in list">
 								<tr>
-									<td colspan="6" class="td-7">子单编号：{{item.orderDetailId}}</td>
+									<td colspan="6" class="td-7">{{$t('OrderDetail.Text11')}}：{{item.orderDetailId}}</td>
 								</tr>
 								<tr class="tr">
 									<td colspan="6" class="td-8">{{item.productName}}</td>
 								</tr>
 								<tr class="tr">
-									<td class="td-1">游玩时间：{{item.useBeginDateTime}}</td>
+									<td class="td-1">{{$t('Order.useBeginDateTime')}}：{{item.useBeginDateTime}}</td>
 									<td class="td-2">￥{{item.settlementPrice}}</td>
 									<td class="td-3">X{{item.productCount}}</td>
 									<td class="td-4">￥{{item.smallTotalCash}}</td>
@@ -72,8 +72,8 @@
 								</tr>
 								<tr class="tr">
 									<td colspan="6">
-										核销码：
-										<a href="#">{{item.ecode}}</a>(点击链接获取二维码)
+										{{$t('Order.ecode')}}：
+										<a href="#">{{item.ecode}}</a>({{$t('OrderDetail.Text12')}})
 									</td>
 								</tr>
 							</template>
@@ -83,37 +83,37 @@
 				<div class="four">
 					<table class="four-table" cellspacing="0" cellpadding="0">
 						<tr class="title">
-							<td class="td-1">游玩人信息</td>
-							<td class="td-2" v-if="data.receiveId">收件人信息</td>
+							<td class="td-1">{{$t('OrderDetail.RecName1')}}</td>
+							<td class="td-2" v-if="data.receiveId">{{$t('OrderDetail.RecName8')}}</td>
 						</tr>
 						<tr>
-							<td class="td-1">姓名：{{data.receiveName}}</td>
-							<td class="td-2" v-if="data.receiveId">姓名：{{item.receivePersonName||'-'}}</td>
+							<td class="td-1">{{$t('OrderDetail.RecName2')}}：{{data.receiveName}}</td>
+							<td class="td-2" v-if="data.receiveId">{{$t('OrderDetail.RecName2')}}：{{item.receivePersonName||'-'}}</td>
 						</tr>
 						<tr>
-							<td class="td-1">电话：{{data.receiveMobile}}</td>
-							<td class="td-2" v-if="data.receiveId">电话：{{item.receivePersonMobile||'-'}}</td>
+							<td class="td-1">{{$t('OrderDetail.RecName3')}}：{{data.receiveMobile}}</td>
+							<td class="td-2" v-if="data.receiveId">{{$t('OrderDetail.RecName3')}}：{{item.receivePersonMobile||'-'}}</td>
 						</tr>
 						<tr>
-							<td class="td-1 td-bottom">身份证：{{data.receiveIdentityCode}}</td>
-							<td class="td-2 td-bottom" v-if="data.receiveId">地址：{{item.receiveProvince||'-'}}{{item.receiveCity||'-'}}{{item.receiveArea||'-'}}{{item.receiveAddress}}</td>
+							<td class="td-1 td-bottom">{{$t('OrderDetail.RecName4')}}：{{data.receiveIdentityCode}}</td>
+							<td class="td-2 td-bottom" v-if="data.receiveId">{{$t('OrderDetail.RecName5')}}：{{item.receiveProvince||'-'}}{{item.receiveCity||'-'}}{{item.receiveArea||'-'}}{{item.receiveAddress}}</td>
 						</tr>
 					</table>
 				</div>
 				<div class="five">
 					<div class="title clearDiv">
-						<div :class="{active:type === 0}" @click="changeType(0)" v-if="item2.length>0">支付信息</div>
-						<div :class="{active:type === 1}" @click="changeType(1)" v-if="data.status == 6">退订信息</div>
+						<div :class="{active:type === 0}" @click="changeType(0)" v-if="item2.length>0">{{$t('OrderDetail.RecName6')}}</div>
+						<div :class="{active:type === 1}" @click="changeType(1)" v-if="data.status == 6">{{$t('OrderDetail.RecName7')}}</div>
 					</div>
 					<div>
 						<table cellspacing="0" cellpadding="0" class="five-table" v-show="type === 0" v-if="item2.length>0">
 							<tr class="titles">
-								<td class="td-1">序号</td>
-								<td class="td-2">子单编码</td>
-								<td class="td-3">支付金额</td>
-								<td class="td-4">支付渠道</td>
-								<td class="td-5">操作</td>
-								<td class="td-6">支付时间</td>
+								<td class="td-1">{{$t('OrderDetail.PayName1')}}</td>
+								<td class="td-2">{{$t('OrderDetail.Text11')}}</td>
+								<td class="td-3">{{$t('OrderDetail.PayName2')}}</td>
+								<td class="td-4">{{$t('OrderDetail.PayName3')}}</td>
+								<td class="td-5">{{$t('Order.Operation')}}</td>
+								<td class="td-6">{{$t('OrderDetail.PayName4')}}</td>
 							</tr>
 							<tr class="bodys" v-for="(item,index) in item2">
 								<td class="td-1">{{index+1}}</td>
@@ -124,18 +124,18 @@
 								<td class="td-6">{{item.createtime}}</td>
 							</tr>
 							<tr>
-								<td class="td-1 td-bottom" colspan="2">合计</td>
+								<td class="td-1 td-bottom" colspan="2">{{$t('OrderDetail.sum')}}</td>
 								<td class="td-6 td-bottom" colspan="4">{{data.orderTotalCash}}</td>
 							</tr>
 						</table>
 						<table cellspacing="0" cellpadding="0" class="five-table" v-show="type === 1 && data.status == 6">
 							<tr class="titles">
-								<td class="td-1">序号</td>
-								<td class="td-2">子单编码</td>
-								<td class="td-3">申请时间</td>
-								<td class="td-4">退订数量</td>
-								<td class="td-5">审核标识</td>
-								<td class="td-6">审核时间</td>
+								<td class="td-1">{{$t('OrderDetail.PayName1')}}</td>
+								<td class="td-2">{{$t('OrderDetail.Text11')}}</td>
+								<td class="td-3">{{$t('OrderDetail.PayName5')}}</td>
+								<td class="td-4">{{$t('OrderDetail.PayName6')}}</td>
+								<td class="td-5">{{$t('OrderDetail.PayName7')}}</td>
+								<td class="td-6">{{$t('OrderDetail.PayName8')}}</td>
 							</tr>
 							<tr class="bodys">
 								<td class="td-1 td-bottom">1</td>
@@ -173,6 +173,10 @@
 		computed: {},
 
 		methods: {
+			translate(){
+				sessionStorage.setItem("language", "1");
+				window.location.reload();
+			},
 			//切换类型
 			changeType(type) {
 				this.type = type;
@@ -284,6 +288,10 @@
 				this.goBack();
 			}
 		},
+		beforeDestroy() {
+			sessionStorage.setItem("language", "0");
+			window.location.reload();
+		},
 		filters: {
 			status(value) {
 				switch (value) {
@@ -344,7 +352,8 @@
 						break;
 				}
 			}
-		}
+		},
+		
 	};
 </script>
 <style lang='scss' scoped>

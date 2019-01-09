@@ -624,8 +624,6 @@
 </template>
 
 <script>
-	import ditu from './ditu';
-	const viewName = 'i18nView';
 	import Header from "@/components/Header"; //引入头部
 	export default {
 		data() {
@@ -644,10 +642,6 @@
 		},
 		created() {
 			document.title = "游玩指南";
-			if (!this.$i18n.getLocaleMessage('en')[viewName]) {
-				this.$i18n.mergeLocaleMessage('en', ditu.en)
-				this.$i18n.mergeLocaleMessage('zh', ditu.zh)
-			}
 		},
 		mounted() {
 			let id = this.$route.query.id;

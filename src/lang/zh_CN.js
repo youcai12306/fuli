@@ -258,5 +258,25 @@ export default {
 		Text13: "失败原因：网络繁忙",
 		minutes: "分",
 		seconds: "秒"
+	},
+	specialOffier: { //优惠活动
+		navTitle1: '优惠活动',
+		navTitle2: '精彩活动',
+		navTitle3: '优惠信息',
+		Position: "当前位置",
+		description: "倘若你徜徉在这片资讯丰富的地带<br>也一定能收获无穷欢乐！"
+	},
+	ditu: { //游玩指南
+		navTitle1: '门票价格',
+		navTitle2: '营业时间',
+		navTitle3: '交通指南',
+		navTitle4: '常见问题',
+		navTitle5: '宾客服务',
+		navTitle6: '恶劣天气预案',
+		navTitle7: '年卡/会员卡',
+		navTitle8: '园区地图',
+		Position: "当前位置",
+		Home: "首页",
+		Title: "游玩指南"
 	}
 }

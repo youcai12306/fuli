@@ -27,8 +27,6 @@
 </template>
 
 <script>
-	import specialOffier from './specialOffier';
-	const viewName = 'i18nView';
 	import Header from "@/components/Header"; //引入头部
 	export default {
 		name: "SpecialOffier",
@@ -48,10 +46,6 @@
 		},
 		created() {
 			document.title = "优惠活动";
-			if (!this.$i18n.getLocaleMessage('en')[viewName]) {
-				this.$i18n.mergeLocaleMessage('en', specialOffier.en)
-				this.$i18n.mergeLocaleMessage('zh', specialOffier.zh)
-			}
 		},
 	};
 </script>

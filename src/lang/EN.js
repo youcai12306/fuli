@@ -258,5 +258,25 @@ export default {
 		Text13: "Cause of failure: Busy network",
 		minutes: "minutes",
 		seconds: "seconds"
+	},
+	specialOffier: { //优惠活动
+		navTitle1: 'Promotional activities',
+		navTitle2: 'Wonderful events',
+		navTitle3: 'Offer info',
+		Position: "Current Location",
+		description: "If you wander through this informative area,<br>must also be able to harvest endless joy!"
+	},
+	ditu: { //游玩指南
+		navTitle1: 'Ticket price',
+		navTitle2: 'Opening hours',
+		navTitle3: 'Transportation Guide',
+		navTitle4: 'Problems',
+		navTitle5: 'Guest Services',
+		navTitle6: 'Severe Weather Plan',
+		navTitle7: 'Annual Card/Membership card',
+		navTitle8: 'Map of the park',
+		Position: "Current Location",
+		Home: "Home",
+		Title: "Play Guide"
 	}
 }

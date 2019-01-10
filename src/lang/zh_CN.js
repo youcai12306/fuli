@@ -292,7 +292,7 @@ export default {
 		Text9: "件",
 		Text10: "暂无数据",
 	},
-	Integral: {//积分
+	Integral: { //积分
 		Text: "我的积分",
 		Text1: "积分来源",
 		Text2: "积分变化",
@@ -322,6 +322,42 @@ export default {
 		Text19: "修改密码",
 		Text20: "请填写新密码",
 		Text21: "请确认新密码"
+	},
+	Adress: { //收货地址
+		Text: "收货地址",
+		Text1: "添加收货地址",
+		Text2: "收货人",
+		Text3: "所在地区",
+		Text4: "详细地址",
+		Text5: "邮编",
+		Text6: "电话",
+		Text7: "操作",
+		Text8: "修改",
+		Text9: "删除",
+		Text10: "默认地址",
+		Text11: "设为默认",
+		Text12: "收货人姓名",
+		Text13: "收货人电话",
+		Text14: "邮政编码",
+		Text15: "收货地址",
+		Text16: "详细地址",
+		Text17: "设为默认地址",
+		Text18: "保存",
+		Text19: "关闭"
+	},
+	Message: "消息管理",
+	Feedback: "我要反馈",
+	Feedback2: "我要反馈",
+	FeedbackDetail: {
+		Text:"反馈类型",
+		Text1:"请选择反馈类型",
+		Text2:"反馈内容",
+		Text3:"最多输入500字",
+		Text4:"上传图片",
+		Text5:"姓名",
+		Text6:"请输入姓名",
+		Text7:"手机",
+		Text8:"请输入手机号码",
+		Text9:"提 交"
 	}
-
 }

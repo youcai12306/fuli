@@ -6,8 +6,8 @@
   -->
   <div class="feedback">
     <div class="box-titles">
-      我要反馈
-      <router-link class="span1" to="/FeedbackDetail">我要反馈</router-link>
+      {{$t('Feedback')}}
+      <router-link class="span1" to="/FeedbackDetail">{{$t('Feedback2')}}</router-link>
     </div>
     <div class="title clearDiv">
       <div class="floatLeft left">反馈问题：</div>

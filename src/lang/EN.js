@@ -322,5 +322,42 @@ export default {
 		Text19: "Modify password",
 		Text20: "Please fill in the new password",
 		Text21: "Please confirm the new password"
+	},
+	Adress: { //收货地址
+		Text: "Shipping Address",
+		Text1: "Add a shipping address",
+		Text2: "Consignee",
+		Text3: "Area",
+		Text4: "Detail Address",
+		Text5: "Zip code",
+		Text6: "Phone",
+		Text7: "Operation",
+		Text8: "Modify",
+		Text9: "Delete",
+		Text10: "Default Address",
+		Text11: "Set as Default",
+		Text12: "Name",
+		Text13: "Phone",
+		Text14: "Zip code",
+		Text15: "Address",
+		Text16: "Detail Address",
+		Text17: "Set as default address",
+		Text18: "Save",
+		Text19: "Close"
+	},
+	Message: "Message Management",
+	Feedback: "I want feedback.",
+	Feedback2: "Feedback",
+	FeedbackDetail: {
+		Text:"Feedback type",
+		Text1:"Please select a feedback type",
+		Text2:"Feedback content",
+		Text3:"Enter up to 500 words",
+		Text4:"Upload Images",
+		Text5:"Name",
+		Text6:"Please enter your name",
+		Text7:"Phone",
+		Text8:"Please enter your mobile phone number",
+		Text9:"Submitted"
 	}
 }

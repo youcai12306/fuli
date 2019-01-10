@@ -5,18 +5,18 @@
 		描述：反馈详情
 	-->
 	<div class="feedback">
-		<div class="box-titles">我要反馈 <span>返回</span></div>
+		<div class="box-titles">{{$t('Feedback')}} <span>{{$t('Return')}}</span></div>
 		<el-form ref="formRules" :model="form" label-width="100px" class="form">
-			<el-form-item label="反馈类型：" prop="region" :rules="[{ required: true, message: '反馈类型不能为空'}]">
-				<el-select v-model="form.region" placeholder="请选择反馈类型">
+			<el-form-item :label="$t('FeedbackDetail.Text')" prop="region" :rules="[{ required: true, message: '反馈类型不能为空'}]">
+				<el-select v-model="form.region" :placeholder="$t('FeedbackDetail.Text1')">
 					<el-option label="门票" value="shanghai"></el-option>
 					<el-option label="礼品" value="beijing"></el-option>
 				</el-select>
 			</el-form-item>
-			<el-form-item label="反馈内容：" prop="desc" :rules="[{ required: true, message: '反馈内容不能为空'}]">
-				<el-input type="textarea" v-model="form.desc" placeholder="最多输入500字"></el-input>
+			<el-form-item :label="$t('FeedbackDetail.Text2')" prop="desc" :rules="[{ required: true, message: '反馈内容不能为空'}]">
+				<el-input type="textarea" v-model="form.desc" :placeholder="$t('FeedbackDetail.Text3')"></el-input>
 			</el-form-item>
-			<el-form-item label="上传图片：">
+			<el-form-item :label="$t('FeedbackDetail.Text4')">
 				<el-upload action="https://jsonplaceholder.typicode.com/posts/" list-type="picture-card" :on-preview="handlePictureCardPreview"
 				 :on-remove="handleRemove" :multiple="true" :limit='3' :on-exceed="exceed">
 					<i class="el-icon-plus"></i>
@@ -25,14 +25,14 @@
 					<img width="100%" :src="dialogImageUrl" alt="">
 				</el-dialog>
 			</el-form-item>
-			<el-form-item label="姓名：" prop="name" :rules="[{ required: true, message: '姓名不能为空'}]">
-				<el-input v-model="form.name" placeholder="请输入姓名"></el-input>
+			<el-form-item :label="$t('FeedbackDetail.Text5')" prop="name" :rules="[{ required: true, message: '姓名不能为空'}]">
+				<el-input v-model="form.name" :placeholder="$t('FeedbackDetail.Text6')"></el-input>
 			</el-form-item>
-			<el-form-item label="手机：" prop="iPhone" :rules="[{ required: true, message: '手机号不能为空',trigger:'blur'}]">
-				<el-input v-model="form.iPhone" placeholder="请输入手机号码"></el-input>
+			<el-form-item :label="$t('FeedbackDetail.Text7')" prop="iPhone" :rules="[{ required: true, message: '手机号不能为空',trigger:'blur'}]">
+				<el-input v-model="form.iPhone" :placeholder="$t('FeedbackDetail.Text8')"></el-input>
 			</el-form-item>
 			<el-form-item>
-				<el-button type="primary" @click="onSubmit" class="submit">提 交</el-button>
+				<el-button type="primary" @click="onSubmit" class="submit">{{$t('FeedbackDetail.Text9')}}</el-button>
 			</el-form-item>
 		</el-form>
 	</div>

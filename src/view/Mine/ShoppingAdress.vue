@@ -1,9 +1,9 @@
 <template>
   <div class="main">
     <div class="take-address clearDiv">
-      <div class="change-title">收货地址
+      <div class="change-title">{{$t('Adress.Text')}}
         <div class="add-dizhi floatRight" @click="showMeng">
-          添加收货地址
+          {{$t('Adress.Text1')}}
           <span class="floatRight add">+</span>
         </div>
       </div>
@@ -15,32 +15,32 @@
           :header-cell-style="{background:'#CDE2FF'}"
           class="table-address"
         >
-          <el-table-column prop="receivePersonName" label="收货人" width="96" align="center"></el-table-column>
-          <el-table-column label="所在地区" width="123" align="center">
+          <el-table-column prop="receivePersonName" :label="$t('Adress.Text2')" width="96" align="center"></el-table-column>
+          <el-table-column :label="$t('Adress.Text3')" width="123" align="center">
             <template
               slot-scope="scope"
             >{{scope.row.receiveProvince}}{{scope.row.receiveCity}}{{scope.row.receiveArea}}</template>
           </el-table-column>
-          <el-table-column prop="receiveAddress" label="详细地址" width="136" align="center"></el-table-column>
-          <el-table-column prop="receieveCode" label="邮编" width="99" align="center"></el-table-column>
-          <el-table-column prop="receivePersonMobile" label="电话" width="136" align="center"></el-table-column>
-          <el-table-column label="操作" width="167" align="center">
+          <el-table-column prop="receiveAddress" :label="$t('Adress.Text4')" width="136" align="center"></el-table-column>
+          <el-table-column prop="receieveCode" :label="$t('Adress.Text5')" width="99" align="center"></el-table-column>
+          <el-table-column prop="receivePersonMobile" :label="$t('Adress.Text6')" width="136" align="center"></el-table-column>
+          <el-table-column :label="$t('Adress.Text7')" width="167" align="center">
             <template slot-scope="scope">
-              <span class="change-address" @click="changeAddress(scope.$index,list)">修改</span>
+              <span class="change-address" @click="changeAddress(scope.$index,list)">{{$t('Adress.Text8')}}</span>
               <span
                 @click.prevent="deleteRow(scope.$index,list,scope.row.id)"
                 class="del-address"
-              >删除</span>
+              >{{$t('Adress.Text9')}}</span>
             </template>
           </el-table-column>
-          <el-table-column prop="name" label="默认地址" align="center" fixed="right">
+          <el-table-column prop="name" :label="$t('Adress.Text10')" align="center" fixed="right">
             <template slot-scope="scope">
-              <span v-show="scope.row.defaultSign === true" class="default-address">默认地址</span>
+              <span v-show="scope.row.defaultSign === true" class="default-address">{{$t('Adress.Text10')}}</span>
               <span
                 @click.prevent="setDefault(scope.$index,scope.row.id)"
                 v-show="scope.row.defaultSign === false"
                 class="set-default"
-              >设为默认</span>
+              >{{$t('Adress.Text11')}}</span>
             </template>
           </el-table-column>
         </el-table>
@@ -49,22 +49,22 @@
     <div class="meng" v-show="mengShow">
       <div class="box">
         <p class="clearDiv">
-          <label for="name">收货人姓名：</label>
+          <label for="name">{{$t('Adress.Text12')}}：</label>
           <input type="text" v-model="name" id="name">
           <span class="tip">{{nameTip}}</span>
         </p>
         <p class="clearDiv">
-          <label for="mobile">收货人电话：</label>
+          <label for="mobile">{{$t('Adress.Text13')}}：</label>
           <input type="text" v-model="mobile" id="mobile" @blur="checkPhone">
           <span class="tip">{{phoneTip}}</span>
         </p>
         <p class="clearDiv">
-          <label for="code">邮政编码：</label>
+          <label for="code">{{$t('Adress.Text14')}}：</label>
           <input type="text" v-model="code" id="code" @blur="checkCode">
           <span class="tip">{{codeTip}}</span>
         </p>
         <p class="clearDiv address">
-          <label for="address">收货地址：</label>
+          <label for="address">{{$t('Adress.Text15')}}：</label>
           <v-distpicker
             :placeholders="{province: '省', city: '市', area: '区'}"
             @selected="selected"
@@ -77,18 +77,18 @@
           <span class="tip">{{adressTip}}</span>
         </p>
         <p class="clearDiv detailAdress-box">
-          <label for="detailAdress">详细地址：</label>
+          <label for="detailAdress">{{$t('Adress.Text16')}}：</label>
           <input type="text" class="detailAdress" v-model="detailAdress" id="detailAdress">
           <span class="tip">{{detailAdressTip}}</span>
         </p>
         <p class="clearDiv default" v-show="isChange">
           <input type="checkbox" class="setDefault" v-model="type">
-          <span>设为默认地址</span>
+          <span>{{$t('Adress.Text17')}}</span>
         </p>
         <div class="btn">
-          <button @click="addAddress(0)" v-show="isChange">保存</button>
-          <button @click="addAddress(1)" v-show="!isChange">保存</button>
-          <button class="close" @click="close()">关闭</button>
+          <button @click="addAddress(0)" v-show="isChange">{{$t('Adress.Text18')}}</button>
+          <button @click="addAddress(1)" v-show="!isChange">{{$t('Adress.Text18')}}</button>
+          <button class="close" @click="close()">{{$t('Adress.Text19')}}</button>
         </div>
       </div>
     </div>

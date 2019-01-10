@@ -1,7 +1,7 @@
 <template>
   <div class="main">
        <div class="message-manage">
-            <p class="change-title">消息管理</p>
+            <p class="change-title">{{$t('Message')}}</p>
             <div class="change-content">
               <div class="content-list clearDiv" @click="jumpDetail(1)">
                 <img src="../../assets/img/mine-message.png" alt="" class="floatLeft">

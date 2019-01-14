@@ -67,7 +67,7 @@
 									<td class="td-2">￥{{item.settlementPrice}}</td>
 									<td class="td-3">X{{item.productCount}}</td>
 									<td class="td-4">￥{{item.smallTotalCash}}</td>
-									<td class="td-5">{{item.singleTicketState}}</td>
+									<td class="td-5">{{item.singleTicketState|status}}</td>
 									<td class="td-6"></td>
 								</tr>
 								<tr class="tr">
@@ -173,10 +173,6 @@
 		computed: {},
 
 		methods: {
-			translate(){
-				sessionStorage.setItem("language", "1");
-				window.location.reload();
-			},
 			//切换类型
 			changeType(type) {
 				this.type = type;
@@ -287,10 +283,6 @@
 			} else {
 				this.goBack();
 			}
-		},
-		beforeDestroy() {
-			sessionStorage.setItem("language", "0");
-			window.location.reload();
 		},
 		filters: {
 			status(value) {

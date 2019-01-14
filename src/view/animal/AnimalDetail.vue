@@ -235,7 +235,9 @@
 						prevEl: ".swiper-button-prev"
 					},
 				},
-				type: this.$route.params.id
+				type: this.$route.params.id,
+				list: '',
+				id: 1
 			}
 		},
 		components: {
@@ -247,7 +249,7 @@
 
 		},
 		mounted() {
-
+			this.getList();
 		},
 		methods: {
 			go() { //返回
@@ -256,6 +258,18 @@
 					query: {
 						type: '0'
 					}
+				})
+			},
+			getList() { //根据id获取内容
+				let data = {
+					id: this.id
+				}
+				this.$fetch(`${this.$url1}:2130/payment-aggregate/findPayMentreByOrderId`,data).then(res => {
+					if(res.code == 200) {
+						this.list = res.data.data || '';
+					}
+				}).catch(error => {
+					console.log(error.response)
 				})
 			}
 		},

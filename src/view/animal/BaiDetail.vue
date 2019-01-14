@@ -368,7 +368,8 @@
 			return {
 				actives: 0,
 				type: this.$route.params.type,
-				id: this.$route.params.id
+				id: this.$route.params.id,
+				list: ''
 			}
 		},
 		components: {
@@ -388,6 +389,7 @@
 			} else {
 				this.actives = this.type;
 			}
+			this.getList();
 		},
 		methods: {
 			go() { //返回
@@ -396,6 +398,18 @@
 					query: {
 						type: this.type
 					}
+				})
+			},
+			getList() { //根据id获取内容
+				let data = {
+					id: this.id
+				}
+				this.$fetch(`${this.$url1}:2130/payment-aggregate/findPayMentreByOrderId`,data).then(res => {
+					if(res.code == 200) {
+						this.list = res.data.data || '';
+					}
+				}).catch(error => {
+					console.log(error.response)
 				})
 			}
 		},

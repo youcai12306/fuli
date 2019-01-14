@@ -79,7 +79,7 @@ export default {
 		name4: "企鹅帕西",
 	},
 	animal: { //动物百科
-		title: "动物百科",
+		title: "海洋百科",
 		description: "倘若你徜徉在这片资讯丰富的地带<br>也一定能收获无穷欢乐！",
 		navName1: "动物课堂",
 		navName2: "保育救助",

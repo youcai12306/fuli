@@ -250,7 +250,7 @@
 				color: rgba(255, 255, 255, 1);
 				padding-left: 34px;
 				background: url(../../assets/img/new-4.png) no-repeat 15px center;
-				cursor: pointer;
+				/* cursor: pointer; */
 			}
 		}
 

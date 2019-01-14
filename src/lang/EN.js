@@ -79,7 +79,7 @@ export default {
 		name4: "Penguin Patsy",
 	},
 	animal: { //动物百科
-		title: "Animal Encyclopedia",
+		title: "Ocean Encyclopedia",
 		description: "If you wander through this informative area,<br>must also be able to harvest endless joy!",
 		navName1: "Animal Classroom",
 		navName2: "Conservation assistance",

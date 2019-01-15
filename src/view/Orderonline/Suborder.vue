@@ -367,7 +367,7 @@ export default {
       let data = {
         touristId: this.$store.getters.getUserData.userId,
         productFormList: this.$route.query.arr,
-        receiveId: 1111111111, //邮寄ID
+        receiveId: this.receiveId, //邮寄ID
         receiveName: this.numberValidateForm.name1,
         receiveMobile: this.numberValidateForm.phone,
         receiveIdentityCode: this.numberValidateForm.name2,

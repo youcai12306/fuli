@@ -123,7 +123,7 @@ let router = new Router({
 			name: 'Order',
 			component: Order,
 			children: [{
-				path: '/tickets/:id',
+				path: '/tickets/:typeId',
 				name: 'Tickets',
 				component: Tickets, //订票列表
 			}]

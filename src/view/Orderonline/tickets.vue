@@ -5,43 +5,23 @@
       <p class="ti3">{{$t('Tickets.Text6')}}：</p>
 
       <div class="clearDiv">
-        <el-radio-group
-          v-model="radio2"
-          @change="chooseDate(0)"
-        >
+        <el-radio-group v-model="radio2" @change="chooseDate(0)">
           <el-radio :label="1">{{$t('Tickets.Text7')}}</el-radio>
           <el-radio :label="2">{{$t('Tickets.Text8')}}</el-radio>
           <el-radio :label="3">{{$t('Tickets.Text9')}}</el-radio>
         </el-radio-group>
 
         <div class="block">
-          <el-date-picker
-            v-model="value1"
-            type="date"
-            placeholder="选择日期"
-            @change="chooseDate(1)"
-            format="yyyy-MM-dd"
-            value-format="yyyy-MM-dd"
-            :editable="false"
-            :picker-options="pickerOptions0"
-          ></el-date-picker>
+          <el-date-picker v-model="value1" type="date" placeholder="选择日期" @change="chooseDate(1)" format="yyyy-MM-dd"
+            value-format="yyyy-MM-dd" :editable="false" :picker-options="pickerOptions0"></el-date-picker>
         </div>
       </div>
       <!-- 产品 -->
       <div class="pro">
         <ul class="pro1 clearDiv">
-          <li
-            v-for="(item,index) in list"
-            :key="index"
-          >
-            <div
-              @click="jumpDetail(item.id,item.stockId)"
-              class="pp"
-            >
-              <img
-                :src="item.pictureId"
-                alt
-              >
+          <li v-for="(item,index) in list" :key="index">
+            <div @click="jumpDetail(item.id,item.stockId)" class="pp">
+              <img :src="item.pictureId" alt>
             </div>
             <div class="clearDiv ti4">
               <p>{{item.productName}}</p>
@@ -77,18 +57,9 @@
         </ul>
       </div>
       <div>{{msg}}</div>
-      <section
-        class="page"
-        id="page"
-      >
-        <el-pagination
-          background
-          layout="prev, pager, next"
-          :total="totle"
-          :current-page.sync="pageIndex"
-          :page-size="pageSize"
-          @current-change="changePage"
-        ></el-pagination>
+      <section class="page" id="page">
+        <el-pagination background layout="prev, pager, next" :total="totle" :current-page.sync="pageIndex" :page-size="pageSize"
+          @current-change="changePage"></el-pagination>
       </section>
     </div>
   </div>
@@ -105,8 +76,9 @@ export default {
       pageIndex: 1,
       totle: 0,
       date: "",
+      typeId: "",
       imgs: [],
-      msg:'',
+      msg: "",
       pickerOptions0: {
         disabledDate(time) {
           return time.getTime() < Date.now() - 8.64e7;
@@ -143,18 +115,22 @@ export default {
     //请求数据接口
     this.getTicketList(id, this.value2, this.pageSize, this.pageIndex);
   },
+
   methods: {
     //跳转详情页面
-    jumpDetail(id, stockId) {
+    
+    jumpDetail(id, stockId,typeId) {
+      
       this.$router.push({
         path: "/TicketDetail",
         query: {
           id: id,
-          stockId: stockId
+          stockId: stockId,
+          typeId:this.$route.params.typeId
         }
       });
     },
-     //是否可退订
+    //是否可退订
     canDebook(type) {
       return type === 1 ? (this.sign = "可退订") : (this.sign = "不可退订");
     },
@@ -197,19 +173,24 @@ export default {
     //获取门票信息
     getTicketList(typeId, date, pageSize, pageIndex) {
       //请求后台接口
-      this.$fetch("http://101.201.101.138:5001/product-aggregate/findProductByStock", {
-        playDate: date
-      })
+
+      this.$fetch(
+        "http://101.201.101.138:5001/product-aggregate/findProductByStock",
+        {
+          playDate: date,
+          typeId: this.$route.params.typeId
+        }
+      )
         .then(res => {
           console.log(res);
-          if(res.code === 400){
-              this.msg = res.message
-              this.items = []
+          if (res.code === 400) {
+            this.msg = res.message;
+            this.items = [];
           }
-          if(res.code === 200){
-            this.msg = ''
+          if (res.code === 200) {
+            this.msg = "";
           }
-          
+
           // console.log(res.data.list);
           this.items = res.data.list;
           // console.log(this.items)
@@ -228,9 +209,12 @@ export default {
           });
           // console.log(xin2);
           let imgs = [];
-          this.$fetch("http://101.201.101.138:2600/staticResource-mucon/selectFiles", {
-            ids: xin2
-          }).then(res => {
+          this.$fetch(
+            "http://101.201.101.138:2600/staticResource-mucon/selectFiles",
+            {
+              ids: xin2
+            }
+          ).then(res => {
             console.log(res.data);
             // var img = res.data;
             // img.forEach((v,k) => {
@@ -248,6 +232,15 @@ export default {
       // this.items = list;
       //此处要获取总条数
       this.totle = this.items.length;
+    }
+  },
+  watch: {
+    // typeId(val, oldVal){
+    //   console.log("typeId = " + val + " , oldValue = " + oldVal)
+    // },
+    $route() {
+      console.log(this.$route.params.typeId);
+     this.getTicketList(this.$route.params.typeId, this.value2, this.pageSize, this.pageIndex);
     }
   }
 };
@@ -304,14 +297,14 @@ export default {
 }
 .ti4 {
   margin-top: 16px;
-  .can{
-    border:1px solid #f27373;
+  .can {
+    border: 1px solid #f27373;
     width: 54px;
     height: 23px;
     border-radius: 5px;
     font-weight: 400px;
-    color:#f27373;
-    font-size:12px;
+    color: #f27373;
+    font-size: 12px;
     line-height: 23px;
     text-align: center;
     margin-bottom: 8px;

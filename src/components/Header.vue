@@ -299,7 +299,7 @@ export default {
     },
     //跳转订票页面
     jumpOrderTicket() {
-      this.$router.push("/tickets/1");
+      this.$router.push("/tickets/0");
     },
     ...mapActions(["setSignOut"]),
     //退出登录

@@ -3,53 +3,26 @@
     <Header></Header>
     <div class="content">
       <div class="nav clearDiv">
-        <div
-          class="floatLeft"
-          @click="orderr"
-        >{{$t('TicketDetail.Text1')}}</div>
-        <div
-          class="floatRight"
-          @click="myorder"
-        >{{$t('TicketDetail.Text2')}}</div>
-        <div
-          class="floatRight shopping-car"
-          @click="jumpShoppingCar"
-        >
+        <div class="floatLeft" @click="orderr">{{$t('TicketDetail.Text1')}}</div>
+        <div class="floatRight" @click="myorder">{{$t('TicketDetail.Text2')}}</div>
+        <div class="floatRight shopping-car" @click="jumpShoppingCar">
           <img src="../assets/img/shopping-car.png">{{$t('TicketDetail.Text3')}}(
           <span>{{shopNum}}</span>)
         </div>
       </div>
       <div class="main-one clearDiv">
         <div class="one-left">
-          <img
-            :src="img3"
-            alt
-          >
+          <img :src="img3" alt>
           <div class="swiper">
             <div class="swiper-contents">
-              <swiper
-                :options="swiperOption"
-                ref="mySwiper"
-              >
-                <swiper-slide
-                  v-for="(list,key) in imgs"
-                  :key="key"
-                >
-                  <img
-                    :src="list"
-                    :class="{borderImg:key === index}"
-                  >
+              <swiper :options="swiperOption" ref="mySwiper">
+                <swiper-slide v-for="(list,key) in imgs" :key="key">
+                  <img :src="list" :class="{borderImg:key === index}">
                 </swiper-slide>
               </swiper>
             </div>
-            <div
-              class="swiper-prev"
-              @click="prev"
-            ></div>
-            <div
-              class="swiper-next"
-              @click="next"
-            ></div>
+            <div class="swiper-prev" @click="prev"></div>
+            <div class="swiper-next" @click="next"></div>
           </div>
         </div>
         <div class="one-right">
@@ -62,17 +35,8 @@
             </div>
             <div class="pay pay-num">
               <span>{{$t('TicketDetail.Text5')}}:</span>
-              <el-input-number
-                v-model="num1"
-                @change="handleChange"
-                :min="1"
-                :max="10"
-                label="描述文字"
-                :precision="0"
-                :step="1"
-                class="num-change"
-                @blur="isNull"
-              >
+              <el-input-number v-model="num1" @change="handleChange" :min="1" :max="10" label="描述文字" :precision="0"
+                :step="1" class="num-change" @blur="isNull">
               </el-input-number>
             </div>
             <!-- <p class="tip">注：一个手机号最多可购买{{product.commitCount}}张票</p> -->
@@ -88,31 +52,15 @@
               >自提</button>
             </div>
             <p class="tip">注：请选择邮寄方式</p> -->
-            <img
-              src="../assets/img/add-shoppingcar.png"
-              alt
-              class="img1"
-              @click="addShoppingCar"
-            >
-            <img
-              src="../assets/img/nowbuy.png"
-              alt
-              class="img2"
-              @click="jumpSubmitOrder()"
-            >
+            <img src="../assets/img/add-shoppingcar.png" alt class="img1" @click="addShoppingCar">
+            <img src="../assets/img/nowbuy.png" alt class="img2" @click="jumpSubmitOrder()">
           </div>
         </div>
       </div>
       <div class="details">
         <ul class="clearDiv">
-          <li
-            :class="{li:changeB === 0}"
-            @click="changeType(0)"
-          >{{$t('TicketDetail.Text6')}}</li>
-          <li
-            :class="{li:changeB === 1}"
-            @click="changeType(1)"
-          >{{$t('TicketDetail.Text7')}}</li>
+          <li :class="{li:changeB === 0}" @click="changeType(0)">{{$t('TicketDetail.Text6')}}</li>
+          <li :class="{li:changeB === 1}" @click="changeType(1)">{{$t('TicketDetail.Text7')}}</li>
         </ul>
       </div>
     </div>
@@ -149,7 +97,8 @@ export default {
       time: "2018.12.09 08.00- 17.30",
       product: {},
       shopNum: 0,
-      list: ""
+      list: "",
+      touristId: ""
     };
   },
   components: {
@@ -159,21 +108,26 @@ export default {
   },
   methods: {
     // 计数器不能输入为空
-    isNull(){
-			if(this.num1 == undefined){
-				this.$nextTick(function(){
-					this.num1 = 1;
-				})
-			}
-		},
+    isNull() {
+      if (this.num1 == undefined) {
+        this.$nextTick(function() {
+          this.num1 = 1;
+        });
+      }
+    },
     //初始化数据
     init() {
       let id = this.$route.query.id;
       let stockId = this.$route.query.stockId;
+      let typeId = this.$route.query.typeId;
+      let touristId = this.$store.getters.getUserData.userId;
+
       // console.log(id);
       // console.log(stockId);
       this.$fetch("http://101.201.101.138:5001/product-aggregate/find/" + id, {
-        stockId: stockId
+        stockId: stockId,
+        touristId,
+        typeId:typeId
       }).then(res => {
         // console.log(res);
         if (res.code === 200) {
@@ -189,7 +143,7 @@ export default {
         }
       });
     },
-    
+
     prev() {
       this.swiper.slidePrev();
 
@@ -266,7 +220,8 @@ export default {
             saleType: this.product.saleType,
             id: this.product.id,
             stockId: this.$route.query.stockId,
-            num: this.num1
+            num: this.num1,
+            typeId:this.$route.query.typeId
           }
         });
       } else if (this.changeA === 1) {
@@ -276,7 +231,8 @@ export default {
             saleType: 2,
             id: this.product.id,
             stockId: this.$route.query.stockId,
-            num: this.num1 //
+            num: this.num1 ,
+             typeId:this.$route.query.typeId
           }
         });
       }
@@ -542,7 +498,7 @@ export default {
           background: rgba(244, 244, 244, 1);
           font-size: 16px;
           font-weight: 400;
-					padding: 0 10px;
+          padding: 0 10px;
           color: rgba(51, 51, 51, 1);
         }
         .li {

@@ -36,6 +36,12 @@
                 <td>{{productname}}
                   <p>{{$t('Suborder.Text8')}}：{{playtime}}</p>
                   <!-- <p>{{canDebook(saleType)}}</p> -->
+                  <p class="type" v-show="flag2">
+                    配送方式：
+                    <span :class="{active:isactive}" @click="toggle()">canDebook(1)</span>
+                    <span :class="{active:!isactive}" @click="toggle()">canDebook(2)</span>
+                  </p>
+
                 </td>
                 <td>¥{{price1}}{{$t('Yuan')}}</td>
                 <td>×{{count}}</td>
@@ -69,8 +75,15 @@
 
             <span class="su6">{{$t('Suborder.Text9')}}</span>
             <span class="su7">{{$t('Suborder.Text10')}}</span>
-
+            
           </div>
+          <div class="jian1">
+                      <div>
+                        <el-radio v-model="radio7" label="1" @change="youhui()">满减</el-radio><span class="jian">-¥40</span> <br>
+                        <el-radio v-model="radio7" label="2" @change="youhui()">满赠</el-radio><span class="jian">-¥40</span><br>
+                        <el-radio v-model="radio7" label="3" @change="youhui()">折扣</el-radio><span class="jian">-¥40</span>
+                      </div>
+                    </div>
           <!-- 游客信息 -->
           <div class="su8">
             <div class="su9">
@@ -129,8 +142,10 @@
 
                     <span class="su6">{{$t('Suborder.Text17')}}</span>
                     <span class="su7" @click="address()">{{$t('Suborder.Text18')}}</span>
+                    
 
                   </div>
+                  
                   <div class="q1" v-show="flag1">
                     <div class="q2">
                       <p>{{$t('Suborder.Text19')}}：<span>{{name1}}</span></p>
@@ -176,7 +191,8 @@ export default {
         name1: "",
         name2: "",
         phone: "",
-        text: ""
+        text: "",
+         
       },
       form: {
         name: "",
@@ -205,12 +221,16 @@ export default {
       phone1: "",
       address1: "",
       receiveId: "",
-      dis: true
+      dis: true,
+      isactive: true,
+      flag2: true,
+      radio7: '1',
     };
   },
   mounted() {
     this.changeType();
     this.shopmsg();
+    this.youhui()
     // this.saleType = this.$route.query.saleType
     // 监听路由跳转路径，如果是购物车，标志为a1，直接接受上个页面的参数
     // if (this.a1 === 1) {
@@ -232,6 +252,44 @@ export default {
   //   }
   // },
   methods: {
+    youhui(){
+      console.log(this.radio7);
+      if(this.radio7 == 1){
+        
+        this.$post('http://101.201.101.138:2060/activity/activityOperation?activityId='+0).then(res =>{
+          console.log(res);
+        })
+      }else if(this.radio7 == 2){
+        this.$post('http://101.201.101.138:2060/activity/activityOperation?activityId='+1).then(res =>{
+          console.log(res);
+        })
+      }else if(this.radio7 == 3){
+        let data ={
+          activityId:3,
+          productList:{
+            productId:111,
+            Cash:100,
+           
+          }
+        }
+        this.$post('http://101.201.101.138:2060/activity/activityOperation',data).then(res =>{
+          console.log(res);
+        })
+      }
+    },
+    active(){
+      this.$fetch('http://101.201.101.138:2060/activity/activityShow',{
+        touristId: this.$store.getters.getUserData.userId,
+        orderCash:this.price2
+      }).then(res =>{
+        console.log(res);
+        console.log(res.data[0].activityType)
+        
+      })
+    },
+    toggle() {
+      this.isactive = !this.isactive;
+    },
     changeType() {
       console.log(this.checked);
       if (this.checked == true) {
@@ -277,16 +335,26 @@ export default {
       let stockId = this.$route.query.stockId;
       let num1 = this.$route.query.num;
       this.saleType = this.$route.query.saleType;
+      let typeId = this.$route.query.typeId; //是门票还是产品，0为门票，1为产品
+      // console.log(typeId)
       // let list1 = this.$route.query.list1;
       // let list2 = JSON.parse(list1)
       // console.log(list2);
       // console.log(this.saleType);
       // console.log(num1);
       this.count = num1;
+      if (typeId == 0) {
+        this.flag2 = false;
+        this.flag1 = false;
+      } else {
+        this.flag2 = true;
+        this.flag1 = true;
+      }
 
       this.$fetch("http://101.201.101.138:5001/product-aggregate/find/" + id, {
         stockId: stockId,
-        saleType: this.saleType
+        saleType: this.saleType,
+        touristId: this.$store.getters.getUserData.userId
       }).then(res => {
         if (res.code === 200) {
           console.log(111);
@@ -294,36 +362,29 @@ export default {
           console.log(this.productname);
           this.playtime = res.data.dataBaseDate;
           this.price1 = res.data.settlementPrice;
+          this.active()
         }
       });
     },
     // 判断是邮寄或者自提，邮寄需要显示邮寄地址，传邮寄ID到李顺仪
     canDebook(type) {
-      // return type === 1 ? (this.sign = "邮寄") : (this.sign = "自提");
-      if (type == 1) {
-        this.sign = "邮寄";
-        this.flag1 = true;
-        let data2 = {
-          touristId: this.$store.getters.getUserData.userId
-        };
-        // 调用邮寄接口
-        this.$fetch(
-          "http://101.201.101.138:5010/tourist-aggregate/address/selectOneReceiveAddress",
-          data2
-        ).then(res => {
-          console.log(res);
-          this.name1 = res.data.receivePersonName;
-          this.phone1 = res.data.receivePersonMobile;
-          this.address1 =
-            res.data.receiveProvince +
-            res.data.receiveCity +
-            res.data.receiveArea;
-          this.receiveId = res.data.id;
-        });
-      } else if (type == 2) {
-        this.sign = "自提";
-      }
-      return this.sign;
+      let data2 = {
+        touristId: this.$store.getters.getUserData.userId
+      };
+      // 调用邮寄接口
+      this.$fetch(
+        "http://101.201.101.138:2060/user-aggregate/address/selectOneReceiveAddress",
+        data2
+      ).then(res => {
+        console.log(res);
+        this.name1 = res.data.receivePersonName;
+        this.phone1 = res.data.receivePersonMobile;
+        this.address1 =
+          res.data.receiveProvince +
+          res.data.receiveCity +
+          res.data.receiveArea;
+        this.receiveId = res.data.id;
+      });
     },
     //   提交
     onSubmit() {
@@ -343,7 +404,7 @@ export default {
         receiveName: this.numberValidateForm.name1,
         receiveMobile: this.numberValidateForm.phone,
         receiveIdentityCode: this.numberValidateForm.name2,
-        createCannel:1   //官网下单为1
+        createCannel: 1 //官网下单为1
       };
       // 拿到guid以及订单号
       this.$post("http://101.201.101.138:5001/order-aggregate/save", data, {
@@ -393,6 +454,7 @@ export default {
   // 计算产品总价格
   computed: {
     price2() {
+      console.log(this.price1 * this.count)
       return this.price1 * this.count;
     }
   }
@@ -495,6 +557,19 @@ export default {
             text-align: center;
             border-bottom: 1px solid #e8f0fc;
             height: 122px;
+            .type {
+              color: #333333;
+              margin-right: 52px;
+              span {
+                border: 1px solid #999999;
+                padding: 5px 14px;
+                cursor: pointer;
+              }
+              .active {
+                color: #e3574c;
+                border-color: #e3574c;
+              }
+            }
             p {
               color: #fd7100;
               margin-top: 22px;
@@ -515,7 +590,7 @@ export default {
     .su5 {
       border-bottom: 1px solid #d8d8d8;
       margin-top: 42px;
-      margin-bottom: 59px;
+      margin-bottom: 20px;
       padding-bottom: 14px;
 
       .su6 {
@@ -682,5 +757,13 @@ export default {
   top: 32px;
   left: 0px;
   color: red;
+}
+.el-radio{
+  font-size: 42px;
+  margin-right:200px;
+ 
+}
+.jian1 .jian{
+  color:#F16B11;
 }
 </style>

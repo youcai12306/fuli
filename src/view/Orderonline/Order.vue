@@ -31,14 +31,14 @@
         <div class="pp1">
           <ul>
             <li class="or8">{{$t('Tickets.Text1')}}</li>
-            <router-link class="clearDiv or9 oo" tag="li" to="/tickets/1">
+            <router-link class="clearDiv or9 oo" tag="li" :to="{ path: '/tickets/'+0}">
               <img src="../../../src/assets/img/menpiao.png" alt>
               <p>{{$t('Tickets.Text2')}}</p>
             </router-link>
-            <li class="clearDiv or9 or10">
+            <router-link class="clearDiv or9 or10" tag="li" :to="{ path: '/tickets/'+1}">
               <img src="../../../src/assets/img/linshou.png" alt>
               <p>{{$t('Tickets.Text3')}}</p>
-            </li>
+            </router-link>
             <li class="clearDiv or9 or10">
               <img src="../../../src/assets/img/canyin.png" alt>
               <p>{{$t('Tickets.Text4')}}</p>
@@ -64,6 +64,7 @@ export default {
       shopNum:0
     };
   },
+  // props:['typeId'],
   components: {
     Header
   },
@@ -141,6 +142,10 @@ export default {
      
     }
     li {
+      cursor: pointer;
+      &:active{
+         background-color: #ffb518;
+      }
       img {
         float: left;
       }

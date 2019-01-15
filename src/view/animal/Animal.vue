@@ -24,111 +24,105 @@
 				<div class="right floatRight">
 					<template v-if="actives == 1">
 						<div class="box">
-							<div class="ani-title">鲸鲨馆的海洋大家庭</div>
+							<div class="ani-title">{{$t('animal.Text')}}</div>
 							<div class="list clearDiv">
 								<el-row :gutter="20">
-									<el-col :span="8">
-										<div class="video" @click="handleOpen('鲸鲨')"><img src="../../assets/img/Moonify 1.0.png" alt="鲸鲨"></div>
-										<div class="video-a">
-											<router-link :to="{name:'AnimalDetails',params:{id:'1'}}" title="【鲸鲨】">【鲸鲨】</router-link>
-										</div>
-									</el-col>
-									<el-col :span="8">
-										<div class="video" @click="handleOpen('水母')"><img src="../../assets/img/Moonify 1.0.png" alt="水母"></div>
-										<div class="video-a">
-											<router-link :to="{name:'AnimalDetails',params:{id:'2'}}" title="【水母】">【水母】</router-link>
-										</div>
-									</el-col>
-									<el-col :span="8">
-										<div class="video" @click="handleOpen('小丑鱼')"><img src="../../assets/img/Moonify 1.0.png" alt="小丑鱼"></div>
-										<div class="video-a">
-											<router-link :to="{name:'AnimalDetails',params:{id:'3'}}" title="【小丑鱼】">【小丑鱼】</router-link>
-										</div>
-									</el-col>
+									<template v-for="(item,k) in data" v-if="k < 3">
+										<el-col :span="8">
+											<div class="video" @click="handleOpen(item.infoTitle)">
+												<img :src="item.picid || img2" :alt="item.infoTitle">
+											</div>
+											<div class="video-a">
+												<router-link :to="{name:'AnimalDetails',params:{id:item.id}}" :title="item.infoTitle">
+													【{{item.infoTitle}}】
+												</router-link>
+											</div>
+										</el-col>
+									</template>
 								</el-row>
 							</div>
 
-							<div class="ani-title mt74">来自极地的客人们</div>
+							<div class="ani-title mt74">{{$t('animal.Text1')}}</div>
 							<div class="list clearDiv">
 								<el-row :gutter="20">
-									<el-col :span="8">
-										<div class="video" @click="handleOpen('北极熊是重大一吨的北极霸龙')"><img src="../../assets/img/Moonify 1.0.png" alt="【北极熊是重大一吨的北极霸龙】"></div>
-										<div class="video-a">
-											<router-link :to="{name:'AnimalDetails',params:{id:'4'}}" title="【北极熊是重大一吨的北极霸龙】">【北极熊是重大一吨的北极霸龙】</router-link>
-										</div>
-									</el-col>
-									<el-col :span="8">
-										<div class="video" @click="handleOpen('白色的海中巨兽')"><img src="../../assets/img/Moonify 1.0.png" alt="【白色的海中巨兽】"></div>
-										<div class="video-a">
-											<router-link :to="{name:'AnimalDetails',params:{id:'5'}}" title="【白色的海中巨兽】">【白色的海中巨兽】</router-link>
-										</div>
-									</el-col>
-									<el-col :span="8">
-										<div class="video" @click="handleOpen('调皮的企业可是难得的好爸爸')"><img src="../../assets/img/Moonify 1.0.png" alt="【调皮的企业可是难得的好爸爸】"></div>
-										<div class="video-a">
-											<router-link :to="{name:'AnimalDetails',params:{id:'1'}}" title="【调皮的企业可是难得的好爸爸】">【调皮的企业可是难得的好爸爸】</router-link>
-										</div>
-									</el-col>
+									<template v-for="(item,k) in data" v-if="k >= 3 && k < 6">
+										<el-col :span="8">
+											<div class="video" @click="handleOpen(item.infoTitle)">
+												<img :src="item.picid || img2" :alt="item.infoTitle">
+											</div>
+											<div class="video-a">
+												<router-link :to="{name:'AnimalDetails',params:{id:item.id}}" :title="item.infoTitle">
+													【{{item.infoTitle}}】
+												</router-link>
+											</div>
+										</el-col>
+									</template>
 								</el-row>
 							</div>
 
 							<div class="list clearDiv mt74 mb0">
 								<el-row :gutter="20">
 									<el-col :span="8">
-										<div class="ani-title">海洋精灵</div>
+										<div class="ani-title">{{$t('animal.Text2')}}</div>
 									</el-col>
 									<el-col :span="8">
-										<div class="ani-title">水中飞翼</div>
+										<div class="ani-title">{{$t('animal.Text3')}}</div>
 									</el-col>
 									<el-col :span="8"></el-col>
 								</el-row>
 							</div>
 							<div class="list clearDiv">
 								<el-row :gutter="20">
-									<el-col :span="8">
-										<div class="video" @click="handleOpen('海豚')"><img src="../../assets/img/Moonify 1.0.png" alt="【海豚】"></div>
-										<div class="video-a">
-											<router-link :to="{name:'AnimalDetails',params:{id:'1'}}" title="【海豚】">【海豚】</router-link>
-										</div>
-									</el-col>
-									<el-col :span="8">
-										<div class="video" @click="handleOpen('鳐鱼')"><img src="../../assets/img/Moonify 1.0.png" alt="【鳐鱼】"></div>
-										<div class="video-a">
-											<router-link :to="{name:'AnimalDetails',params:{id:'1'}}" title="【鳐鱼】">【鳐鱼】</router-link>
-										</div>
-									</el-col>
+									<template v-for="(item,k) in data" v-if="k >= 6 && k < 8">
+										<el-col :span="8">
+											<div class="video" @click="handleOpen(item.infoTitle)">
+												<img :src="item.picid || img2" :alt="item.infoTitle">
+											</div>
+											<div class="video-a">
+												<router-link :to="{name:'AnimalDetails',params:{id:item.id}}" :title="item.infoTitle">
+													【{{item.infoTitle}}】
+												</router-link>
+											</div>
+										</el-col>
+									</template>
 								</el-row>
 							</div>
 
 
 
-							<div class="ani-title mt74">南海之珍</div>
+							<div class="ani-title mt74">{{$t('animal.Text4')}}</div>
 							<div class="list clearDiv">
 								<el-row :gutter="20">
-									<el-col :span="8">
-										<div class="video" @click="handleOpen('绿海龟')"><img src="../../assets/img/Moonify 1.0.png" alt="【绿海龟】"></div>
-										<div class="video-a">
-											<router-link :to="{name:'AnimalDetails',params:{id:'1'}}" title="【绿海龟】">【绿海龟】</router-link>
-										</div>
-									</el-col>
-									<el-col :span="8">
-										<div class="video" @click="handleOpen('玳瑁')"><img src="../../assets/img/Moonify 1.0.png" alt="【玳瑁】"></div>
-										<div class="video-a">
-											<router-link :to="{name:'AnimalDetails',params:{id:'1'}}" title="【玳瑁】">【玳瑁】</router-link>
-										</div>
-									</el-col>
+									<template v-for="(item,k) in data" v-if="k >= 8 && k < 10">
+										<el-col :span="8">
+											<div class="video" @click="handleOpen(item.infoTitle)">
+												<img :src="item.picid || img2" :alt="item.infoTitle">
+											</div>
+											<div class="video-a">
+												<router-link :to="{name:'AnimalDetails',params:{id:item.id}}" :title="item.infoTitle">
+													【{{item.infoTitle}}】
+												</router-link>
+											</div>
+										</el-col>
+									</template>
 								</el-row>
 							</div>
 
-							<div class="ani-title mt74">诙谐的小胖子</div>
+							<div class="ani-title mt74">{{$t('animal.Text5')}}</div>
 							<div class="list clearDiv">
 								<el-row :gutter="20">
-									<el-col :span="8">
-										<div class="video" @click="handleOpen('海狮')"><img src="../../assets/img/Moonify 1.0.png" alt="【海狮】"></div>
-										<div class="video-a">
-											<router-link :to="{name:'AnimalDetails',params:{id:'1'}}" title="【海狮】">【海狮】</router-link>
-										</div>
-									</el-col>
+									<template v-for="(item,k) in data" v-if="k == 10">
+										<el-col :span="8">
+											<div class="video" @click="handleOpen(item.infoTitle)">
+												<img :src="item.picid || img2" :alt="item.infoTitle">
+											</div>
+											<div class="video-a">
+												<router-link :to="{name:'AnimalDetails',params:{id:item.id}}" :title="item.infoTitle">
+													【{{item.infoTitle}}】
+												</router-link>
+											</div>
+										</el-col>
+									</template>
 								</el-row>
 							</div>
 						</div>
@@ -198,13 +192,33 @@
 				isEnglish: Cookies.get('language') == 'en' ? 1 : 0,
 				list1: [],
 				list2: [],
+				list: [],
 				count: 0,
 				img: require('../../assets/img/specialOffier-bg201.png'), //默认图片
+				img2: require('../../assets/img/Moonify 1.0.png'),
 				imgs: [], //科普活动图片集合
-				imgs2: [] //保育救助图片集合
+				imgs2: [], //保育救助图片集合
+				imgs3: []
 			};
 		},
 		computed: {
+			data() { //处理动物课堂数据
+				let list = this.list;
+				let str = [];
+				list.forEach((v, k) => {
+					if (v.infoPic) { //是否有图片
+						v.infoPic.forEach((val, key) => {
+							this.imgs3.forEach(res => {
+								if (val.picid == res.id) {
+									v['picid'] = IMG_Url + res.fileName;
+								}
+							});
+						})
+					}
+					str.push(v);
+				});
+				return str.reverse();
+			},
 			data1() { //处理保育救助数据
 				let list = this.list1;
 				let str = [];
@@ -246,11 +260,11 @@
 		methods: {
 			//分页
 			changePage(val) {
-				this.getSearch2(4, this.pageSize, val, this.isEnglish);
+				this.getSearch(4, this.pageSize, val, this.isEnglish);
 			},
 			//分页
 			changePage2(val) {
-				this.getSearch3(5, this.pageSize, val, this.isEnglish);
+				this.getSearch(5, this.pageSize, val, this.isEnglish);
 			},
 			handleClose(done) { //关闭播放器
 				this.title = "提示";
@@ -263,16 +277,28 @@
 					"http://1.193.217.86/657248386D83E718FD97C341D/03001201005C272BC3EDF784F483AB6D146CAF-A7C5-4A26-9198-6BF30CFBA061.mp4?ccode=050F&duration=210&expire=18000&psid=c29bfef98e764b2f54cd6e8a41ad948e&ups_client_netip=6fafa990&ups_ts=1546497446&ups_userid=&utid=P2yiFEgDlTgCAXdinMiUZGFx&vid=XMzk4OTIwNTMwOA%3D%3D&vkey=Aaf59e348471e335f57107983201e1d8c&sp=&ali_redirect_domain=ykugc.cp31.ott.cibntv.net&ali_redirect_ex_ftag=003a300d1e2b623e20946ba931ca9d3844326089170f166a&ali_redirect_ex_tmining_ts=1546497456&ali_redirect_ex_tmining_expire=3600&ali_redirect_ex_hot=0";
 				this.centerDialogVisible = !this.centerDialogVisible;
 			},
-			getSearch2(type, pageSize, pageIndex, isEnglish) { //获取保育救助列表 保育救助后台ID=4 pageSize分页大小 pageIndex第几页 isEnglish中英文标识
+			getSearch(type, pageSize, pageIndex, isEnglish) { //获取保育救助列表 保育救助后台ID=4 pageSize分页大小 pageIndex第几页 isEnglish中英文标识
 				this.$fetch(
 					`${this.$url1}:6110/mongodb-mucon/info/primary/search?type=${type}&pageSize=${pageSize}&pageNum=${pageIndex}&isEnglish=${isEnglish}`
 				).then(res => {
 					if (res.code === 200) {
-						this.list1 = res.data.contents || [];
-						this.totle = res.data.totalElements;
 						let xin = [];
 						let xin2 = "";
-						this.list1.forEach((v, k) => {
+						let list = [];
+						if (type == 4) {
+							this.list1 = res.data.contents || [];
+							list = this.list1;
+							this.totle = res.data.totalElements;
+						} else if (type == 5) {
+							this.list2 = res.data.contents || [];
+							list = this.list2;
+							this.count = res.data.totalElements;
+						} else if (type == 6) {
+							this.list = res.data.contents || [];
+							list = this.list;
+						}
+
+						list.forEach((v, k) => { //拼接图片字符串
 							if (v.infoPic) { //是否有图片
 								v.infoPic.forEach((val, key) => {
 									if (key == 0) { //获取第一个图片
@@ -282,34 +308,9 @@
 								})
 							}
 						});
-						this.GetSelectFiles(xin2, 2);
+						this.GetSelectFiles(xin2, type);
 					} else {
-						this.$message.error("读取失败");
-					}
-				});
-			},
-			getSearch3(type, pageSize, pageIndex, isEnglish) { //获取科普活动列表 科普活动后台ID=5 pageSize分页大小 pageIndex第几页 isEnglish中英文标识
-				this.$fetch(
-					`${this.$url1}:6110/mongodb-mucon/info/primary/search?type=${type}&pageSize=${pageSize}&pageNum=${pageIndex}&isEnglish=${isEnglish}`
-				).then(res => {
-					if (res.code === 200) {
-						this.list2 = res.data.contents || [];
-						this.count = res.data.totalElements;
-						let xin = [];
-						let xin2 = "";
-						this.list2.forEach((v, k) => {
-							if (v.infoPic) { //是否有图片
-								v.infoPic.forEach((val, key) => {
-									if (key == 0) { //获取第一个图片
-										xin.push(val.picid);
-										xin2 = xin.join(",");
-									}
-								})
-							}
-						});
-						this.GetSelectFiles(xin2, 1);
-					} else {
-						this.$message.error("读取失败");
+						console.log("读取失败");
 					}
 				});
 			},
@@ -317,8 +318,9 @@
 				this.$fetch("http://101.201.101.138:2600/staticResource-mucon/selectFiles", {
 					ids: obj
 				}).then(res => {
-					if (type == 1) this.imgs = res.data;
-					else if (type == 2) this.imgs2 = res.data;
+					if (type == 4) this.imgs2 = res.data;
+					else if (type == 5) this.imgs = res.data;
+					else if (type == 6) this.imgs3 = res.data;
 				});
 			}
 		},
@@ -327,8 +329,10 @@
 			if (id != undefined) {
 				this.actives = id;
 			}
-			this.getSearch2(4, this.pageSize, this.pageIndex, this.isEnglish);
-			this.getSearch3(5, this.pageSize, this.pageIndex2, this.isEnglish);
+			//获取数据列表  （保育救助后台ID=4 科普活动后台ID=5 动物课堂后台ID=6）pageSize分页大小 pageIndex第几页 isEnglish中英文标识
+			this.getSearch(4, this.pageSize, this.pageIndex, this.isEnglish);
+			this.getSearch(5, this.pageSize, this.pageIndex2, this.isEnglish);
+			this.getSearch(6, 11, 1, this.isEnglish);
 		},
 		watch: {
 			$route() {

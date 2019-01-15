@@ -84,6 +84,12 @@ export default {
 		navName1: "Animal Classroom",
 		navName2: "Conservation assistance",
 		navName3: "Popular Science activities",
+		Text: 'The Marine family of the whale shark Pavilion',
+		Text1: 'Guests from the polar regions',
+		Text2: 'Ocean Elf',
+		Text3: 'Flying wings in the water',
+		Text4: 'Treasures of the South China Sea',
+		Text5: 'Witty little fat Man.'
 	},
 	mine: { //个人中心
 		navNmae1: "My deal.",

@@ -534,11 +534,13 @@ export default {
 @media screen and (max-width: 1700px) {
   .main .main-content ul li {
     padding: 21px 22px 0 22px !important;
+		width: auto;
   }
 }
 @media screen and (max-width: 1550px) {
   .main .main-content ul li {
     padding: 21px 15px 0 15px !important;
+		width: auto;
   }
   .main .main-content .logo {
     margin-left: 160px !important;
@@ -547,6 +549,7 @@ export default {
 @media screen and (max-width: 1400px) {
   .main .main-content ul li {
     padding: 21px 15px 0 15px !important;
+		width: auto;
   }
   .main .main-content .logo {
     margin-left: 70px !important;
@@ -555,6 +558,7 @@ export default {
 @media screen and (max-width: 1300px) {
   .main .main-content ul li {
     padding: 21px 10px 0 10px !important;
+		width: auto;
   }
   .main .main-content .logo {
     margin-left: 20px !important;

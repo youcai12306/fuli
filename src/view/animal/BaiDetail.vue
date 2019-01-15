@@ -15,7 +15,7 @@
 			<div class="content clearDiv">
 				<div class="left floatLeft">
 					<ul class="ul">
-						<li class="li" v-for="(item,keys) in 3" :key="keys" @click="go" :class="{anActive:actives == keys || type == keys}">
+						<li class="li" v-for="(item,keys) in 3" :key="keys" @click="go(keys)" :class="{anActive:actives == keys || type == keys}">
 							<template v-if="keys == 0">{{$t('animal.navName1')}}</template>
 							<template v-if="keys == 1">{{$t('animal.navName2')}}</template>
 							<template v-if="keys == 2">{{$t('animal.navName3')}}</template>
@@ -75,11 +75,11 @@
 			this.getList();
 		},
 		methods: {
-			go() { //返回
+			go(keys) { //返回
 				this.$router.push({
 					path: '/animal',
 					query: {
-						type: this.type
+						type: keys || this.type
 					}
 				})
 			},

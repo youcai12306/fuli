@@ -12,7 +12,7 @@ import store from './vuex/store'
 import i18n from './lang'
 import {something,translate} from "@/package/language"
 
-import {HTTP_DETAIL1,HTTP_DETAIL} from '@/package/common'
+import {HTTP_DETAIL1,HTTP_DETAIL,isEnglish} from '@/package/common'
 
 Vue.use(ElementUI);
 Vue.use(ElementUI, {
@@ -31,6 +31,7 @@ Vue.prototype.$put=put;
 Vue.prototype.$url1 = HTTP_DETAIL1;
 Vue.prototype.$url = HTTP_DETAIL;
 Vue.prototype.$translate = translate;
+Vue.prototype.$isEnglish = isEnglish;
 something();
 
 //vue点击图片预览放大 https://github.com/fengyuanchen/viewerjs

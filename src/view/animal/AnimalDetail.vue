@@ -8,19 +8,17 @@
 		<Header></Header>
 		<div class="risk">
 			<div class="title">
-				<div class="location">当前位置><router-link to="/index" tag="span">首页></router-link>
-					<router-link to="animal" tag="span">动物百科</router-link>
+				<div class="location">{{$t('Position')}}>
+					<router-link to="/index" tag="span">{{$t('Home')}}></router-link>
+					<router-link to="animal" tag="span">{{$t('animal.title')}}</router-link>
 				</div>
 			</div>
 			<div class="content clearDiv">
 				<div class="left floatLeft">
 					<ul class="ul">
-						<li class="li" v-for="(item,keys) in 3" :key="keys" @click="go" :class="{anActive:actives == keys}">
-							<template v-if="keys == 0">{{$t('animal.navName1')}}</template>
-							<template v-if="keys == 1">{{$t('animal.navName2')}}</template>
-							<template v-if="keys == 2">{{$t('animal.navName3')}}</template>
-							<img src="../../assets/img/animal-r.png" alt v-show="keys == actives">
-						</li>
+						<router-link class="li" :to="{path:'/animal',query:{type:item}}" tag="li" v-for="item in 3" :key="item" :class="{anActive:actives == item}">
+							{{$t(`animal.navName${item}`)}}
+						</router-link>
 					</ul>
 				</div>
 				<div class="right floatRight">
@@ -226,8 +224,7 @@
 	export default {
 		data() {
 			return {
-				active: 0,
-				actives: 0,
+				actives: 1,
 				swiperOption: { //轮播图配置
 					autoplay: true,
 					navigation: {
@@ -235,9 +232,9 @@
 						prevEl: ".swiper-button-prev"
 					},
 				},
+				id: this.$route.params.id || 1,
 				type: this.$route.params.id,
-				list: '',
-				id: 1
+				list: ''
 			}
 		},
 		components: {
@@ -249,14 +246,14 @@
 
 		},
 		mounted() {
-			this.getList();
+			// this.getList();
 		},
 		methods: {
 			go() { //返回
 				this.$router.push({
 					path: '/animal',
 					query: {
-						type: '0'
+						type: 1
 					}
 				})
 			},

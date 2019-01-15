@@ -16,16 +16,13 @@
 			<div class="content clearDiv">
 				<div class="left floatLeft">
 					<ul class="ul">
-						<li class="li" v-for="(item,keys) in 3" :key="keys" @click="actives = keys" :class="{anActive:actives == keys}">
-							<template v-if="keys == 0">{{$t('animal.navName1')}}</template>
-							<template v-if="keys == 1">{{$t('animal.navName2')}}</template>
-							<template v-if="keys == 2">{{$t('animal.navName3')}}</template>
-							<!-- <img src="../../assets/img/animal-r.png" alt v-show="keys == actives"> -->
-						</li>
+						<router-link class="li" :to="{path:'/animal',query:{type:item}}" tag="li" v-for="item in 3" :key="item" :class="{anActive:actives == item}">
+							{{$t(`animal.navName${item}`)}}
+						</router-link>
 					</ul>
 				</div>
 				<div class="right floatRight">
-					<template v-if="actives == 0">
+					<template v-if="actives == 1">
 						<div class="box">
 							<div class="ani-title">鲸鲨馆的海洋大家庭</div>
 							<div class="list clearDiv">
@@ -134,13 +131,12 @@
 									</el-col>
 								</el-row>
 							</div>
-
 						</div>
 					</template>
-					<template v-if="actives == 1">
+					<template v-if="actives == 2">
 						<div class="box2">
 							<template v-for="item in data1">
-								<router-link tag="li" :to="{name:'BaiDetails',params:{type:'1',id:item.id}}">
+								<router-link tag="li" :to="{name:'BaiDetails',params:{type:'2',id:item.id}}">
 									<img :src="item.picid || img" :alt="item.infoTitle">
 									<div class="box3">
 										<h3 class="t">{{item.infoTitle}}</h3>
@@ -154,10 +150,10 @@
 							</div>
 						</div>
 					</template>
-					<template v-if="actives == 2">
+					<template v-if="actives == 3">
 						<div class="box2 box-shadow">
 							<template v-for="item in data2">
-								<router-link tag="li" :to="{name:'BaiDetails',params:{type:'2',id:item.id}}">
+								<router-link tag="li" :to="{name:'BaiDetails',params:{type:'3',id:item.id}}">
 									<img :src="item.picid || img" :alt="item.infoTitle">
 									<div class="box3">
 										<h3 class="t">{{item.infoTitle}}</h3>
@@ -286,7 +282,7 @@
 								})
 							}
 						});
-						this.GetSelectFiles(xin2,2);
+						this.GetSelectFiles(xin2, 2);
 					} else {
 						this.$message.error("读取失败");
 					}
@@ -311,18 +307,18 @@
 								})
 							}
 						});
-						this.GetSelectFiles(xin2,1);
+						this.GetSelectFiles(xin2, 1);
 					} else {
 						this.$message.error("读取失败");
 					}
 				});
 			},
-			GetSelectFiles(obj,type) { //批量获取图片
+			GetSelectFiles(obj, type) { //批量获取图片
 				this.$fetch("http://101.201.101.138:2600/staticResource-mucon/selectFiles", {
 					ids: obj
 				}).then(res => {
-					if(type == 1) this.imgs = res.data;
-					else if(type == 2) this.imgs2 = res.data;
+					if (type == 1) this.imgs = res.data;
+					else if (type == 2) this.imgs2 = res.data;
 				});
 			}
 		},
@@ -333,6 +329,11 @@
 			}
 			this.getSearch2(4, this.pageSize, this.pageIndex, this.isEnglish);
 			this.getSearch3(5, this.pageSize, this.pageIndex2, this.isEnglish);
+		},
+		watch: {
+			$route() {
+				this.actives = this.$route.query.type;
+			}
 		}
 	};
 </script>

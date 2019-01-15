@@ -16,9 +16,9 @@
 				<div class="left floatLeft">
 					<ul class="ul">
 						<li class="li" v-for="(item,keys) in 3" :key="keys" @click="go" :class="{anActive:actives == keys}">
-							<template v-if="keys == 0">动物课堂</template>
-							<template v-if="keys == 1">保育救助</template>
-							<template v-if="keys == 2">科普活动</template>
+							<template v-if="keys == 0">{{$t('animal.navName1')}}</template>
+							<template v-if="keys == 1">{{$t('animal.navName2')}}</template>
+							<template v-if="keys == 2">{{$t('animal.navName3')}}</template>
 							<img src="../../assets/img/animal-r.png" alt v-show="keys == actives">
 						</li>
 					</ul>
@@ -27,7 +27,7 @@
 					<div class="box">
 						<template v-if="type == 1">
 							<div class="title-1">
-								哺乳类-鲸豚类 <span @click="go">返回</span>
+								哺乳类-鲸豚类 <span @click="go">{{$t('Return')}}</span>
 							</div>
 							<div class="title-2">
 								瓶鼻海豚<span>中文名 宽吻海豚 拉丁学名 Tursiops truncatus (Montagu, 1821)</span>

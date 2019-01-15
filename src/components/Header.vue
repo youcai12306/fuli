@@ -311,10 +311,7 @@ export default {
 		handleSetLanguage(lang){
 			this.$i18n.locale = lang;
 			this.$store.dispatch("setLanguage",lang);
-			this.$message({
-				message:"success",
-				type:'success'
-			})
+			window.location.reload();
 		}
   }
 };

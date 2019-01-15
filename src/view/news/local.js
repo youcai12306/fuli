@@ -7,7 +7,8 @@ export default {
 			navTitle3: '园区公告',
 			Position: "当前位置",
 			Details: "新闻详情",
-			Details2: "公告详情"
+			Details2: "公告详情",
+			text: "来源：富力海洋欢乐世界"
 		}
 	},
 	en: {
@@ -17,7 +18,8 @@ export default {
 			navTitle3: 'Notice',
 			Position: "Current Location",
 			Details: "News Details",
-			Details2: "Announcement details"
+			Details2: "Announcement details",
+			text: "Source: Fury Ocean Happy World"
 		}
 	}
 }

@@ -139,82 +139,36 @@
 					</template>
 					<template v-if="actives == 1">
 						<div class="box2">
-							<!-- <ul>
-								<li>
-									<router-link :to="{name:'BaiDetails',params:{type:'1',id:'1'}}" title="搁浅领航鲸救助(上)">
-										<i></i>
-										<span class="p1">搁浅领航鲸救助(上)</span>
-										<span class="p2">海南海洋欢乐世界 | 2016-05-18</span>
-									</router-link>
-								</li>
-								<li>
-									<router-link :to="{name:'BaiDetails',params:{type:'1',id:'2'}}" title="搁浅领航鲸救助(下)">
-										<i></i>
-										<span class="p1">搁浅领航鲸救助(下)</span>
-										<span class="p2">海南海洋欢乐世界 | 2016-05-18</span>
-									</router-link>
-								</li>
-							</ul>
-							<div class="pages">
-								
-              </div>-->
-							<template v-for="item in 2">
-								<router-link tag="li" :to="{name:'BaiDetails',params:{type:'1',id:item}}">
-									<img src="../../assets/img/specialOffier-bg201.png" alt>
+							<template v-for="item in data1">
+								<router-link tag="li" :to="{name:'BaiDetails',params:{type:'1',id:item.id}}">
+									<img :src="item.picid || img" :alt="item.infoTitle">
 									<div class="box3">
-										<template v-if="item == 1"><h3 class="t">搁浅领航鲸救助(上)</h3></template>
-										<template v-if="item == 2"><h3 class="t">搁浅领航鲸救助(下)</h3></template>
-										<p>2016-05-18</p>
+										<h3 class="t">{{item.infoTitle}}</h3>
+										<p>{{item.createTime}}</p>
 									</div>
 								</router-link>
 							</template>
+							<div class="pages" v-if="totle > pageSize">
+								<el-pagination background layout="prev, pager, next" :total="totle" :current-page.sync="pageIndex" :page-size="pageSize"
+								 @current-change="changePage"></el-pagination>
+							</div>
 						</div>
 					</template>
 					<template v-if="actives == 2">
 						<div class="box2 box-shadow">
-							<!-- <ul>
-                <li>
-                  <router-link
-                    :to="{name:'BaiDetails',params:{type:'2',id:'1'}}"
-                    title="携手 “净滩”，向海洋垃圾宣战"
-                  >
-                    <i></i>
-                    <span class="p1">携手 “净滩”，向海洋垃圾宣战</span>
-                    <span class="p2">海南海洋欢乐世界 | 09.19</span>
-                  </router-link>
-                </li>
-                <li>
-                  <router-link
-                    :to="{name:'BaiDetails',params:{type:'2',id:'2'}}"
-                    title="海洋日系列活动-科普进校园暨世界"
-                  >
-                    <i></i>
-                    <span class="p1">海洋日系列活动-科普进校园暨世界</span>
-                    <span class="p2">海南海洋欢乐世界 | 2018.07.08</span>
-                  </router-link>
-                </li>
-                <li>
-                  <router-link :to="{name:'BaiDetails',params:{type:'2',id:'3'}}" title="行动吧海洋小卫士">
-                    <i></i>
-                    <span class="p1">行动吧海洋小卫士</span>
-                    <span class="p2">海南海洋欢乐世界 | 2018.06.09</span>
-                  </router-link>
-                </li>
-              </ul> -->
-							<!-- <div class="pages">
-               
-              </div> -->
-							<template v-for="item in 3">
-								<router-link tag="li" :to="{name:'BaiDetails',params:{type:'2',id:item}}">
-									<img src="../../assets/img/specialOffier-bg201.png" alt>
+							<template v-for="item in data2">
+								<router-link tag="li" :to="{name:'BaiDetails',params:{type:'2',id:item.id}}">
+									<img :src="item.picid || img" :alt="item.infoTitle">
 									<div class="box3">
-										<template v-if="item == 1"><h3 class="t">携手 “净滩”，向海洋垃圾宣战</h3></template>
-										<template v-if="item == 2"><h3 class="t">海洋日系列活动-科普进校园暨世界</h3></template>
-										<template v-if="item == 3"><h3 class="t">行动吧海洋小卫士</h3></template>
-										<p>2018-11-11</p>
+										<h3 class="t">{{item.infoTitle}}</h3>
+										<p>{{item.createTime}}</p>
 									</div>
 								</router-link>
 							</template>
+							<div class="pages" v-if="count > pageSize">
+								<el-pagination background layout="prev, pager, next" :total="count" :current-page.sync="pageIndex2" :page-size="pageSize"
+								 @current-change="changePage2"></el-pagination>
+							</div>
 						</div>
 					</template>
 				</div>
@@ -229,38 +183,147 @@
 </template>
 
 <script>
+	import Cookies from 'js-cookie'
+	import {
+		IMG_Url
+	} from "@/package/common";
 	import Header from "@/components/Header"; //引入头部
 	export default {
 		data() {
 			return {
 				actives: 0,
-				pageSize: 10,
+				pageSize: 4,
 				pageIndex: 1,
-				totle: 100,
+				pageIndex2: 1,
+				totle: 0,
 				centerDialogVisible: false,
 				title: "提示",
-				url: ""
+				url: "",
+				isEnglish: Cookies.get('language') == 'en' ? 1 : 0,
+				list1: [],
+				list2: [],
+				count: 0,
+				img: require('../../assets/img/specialOffier-bg201.png'), //默认图片
+				imgs: [], //科普活动图片集合
+				imgs2: [] //保育救助图片集合
 			};
 		},
-		computed: {},
+		computed: {
+			data1() { //处理保育救助数据
+				let list = this.list1;
+				let str = [];
+				list.forEach((v, k) => {
+					if (v.infoPic) { //是否有图片
+						v.infoPic.forEach((val, key) => {
+							this.imgs2.forEach(res => {
+								if (val.picid == res.id) {
+									v['picid'] = IMG_Url + res.fileName;
+								}
+							});
+						})
+					}
+					str.push(v);
+				});
+				return str;
+			},
+			data2() { //处理科普活动数据
+				let list = this.list2;
+				let str = [];
+				list.forEach((v, k) => {
+					if (v.infoPic) { //是否有图片
+						v.infoPic.forEach((val, key) => {
+							this.imgs.forEach(res => {
+								if (val.picid == res.id) {
+									v['picid'] = IMG_Url + res.fileName;
+								}
+							});
+						})
+					}
+					str.push(v);
+				});
+				return str;
+			}
+		},
 		components: {
 			Header
 		},
 		methods: {
 			//分页
 			changePage(val) {
-				this.GetList(0, this.pageSize, val);
+				this.getSearch2(4, this.pageSize, val, this.isEnglish);
 			},
-			handleClose(done) {
+			//分页
+			changePage2(val) {
+				this.getSearch3(5, this.pageSize, val, this.isEnglish);
+			},
+			handleClose(done) { //关闭播放器
 				this.title = "提示";
 				this.url = "";
 				done();
 			},
-			handleOpen(title, url) {
+			handleOpen(title, url) { //打开播放器
 				this.title = title;
 				this.url = url ||
 					"http://1.193.217.86/657248386D83E718FD97C341D/03001201005C272BC3EDF784F483AB6D146CAF-A7C5-4A26-9198-6BF30CFBA061.mp4?ccode=050F&duration=210&expire=18000&psid=c29bfef98e764b2f54cd6e8a41ad948e&ups_client_netip=6fafa990&ups_ts=1546497446&ups_userid=&utid=P2yiFEgDlTgCAXdinMiUZGFx&vid=XMzk4OTIwNTMwOA%3D%3D&vkey=Aaf59e348471e335f57107983201e1d8c&sp=&ali_redirect_domain=ykugc.cp31.ott.cibntv.net&ali_redirect_ex_ftag=003a300d1e2b623e20946ba931ca9d3844326089170f166a&ali_redirect_ex_tmining_ts=1546497456&ali_redirect_ex_tmining_expire=3600&ali_redirect_ex_hot=0";
 				this.centerDialogVisible = !this.centerDialogVisible;
+			},
+			getSearch2(type, pageSize, pageIndex, isEnglish) { //获取保育救助列表 保育救助后台ID=4 pageSize分页大小 pageIndex第几页 isEnglish中英文标识
+				this.$fetch(
+					`${this.$url1}:6110/mongodb-mucon/info/primary/search?type=${type}&pageSize=${pageSize}&pageNum=${pageIndex}&isEnglish=${isEnglish}`
+				).then(res => {
+					if (res.code === 200) {
+						this.list1 = res.data.contents || [];
+						this.totle = res.data.totalElements;
+						let xin = [];
+						let xin2 = "";
+						this.list1.forEach((v, k) => {
+							if (v.infoPic) { //是否有图片
+								v.infoPic.forEach((val, key) => {
+									if (key == 0) { //获取第一个图片
+										xin.push(val.picid);
+										xin2 = xin.join(",");
+									}
+								})
+							}
+						});
+						this.GetSelectFiles(xin2,2);
+					} else {
+						this.$message.error("读取失败");
+					}
+				});
+			},
+			getSearch3(type, pageSize, pageIndex, isEnglish) { //获取科普活动列表 科普活动后台ID=5 pageSize分页大小 pageIndex第几页 isEnglish中英文标识
+				this.$fetch(
+					`${this.$url1}:6110/mongodb-mucon/info/primary/search?type=${type}&pageSize=${pageSize}&pageNum=${pageIndex}&isEnglish=${isEnglish}`
+				).then(res => {
+					if (res.code === 200) {
+						this.list2 = res.data.contents || [];
+						this.count = res.data.totalElements;
+						let xin = [];
+						let xin2 = "";
+						this.list2.forEach((v, k) => {
+							if (v.infoPic) { //是否有图片
+								v.infoPic.forEach((val, key) => {
+									if (key == 0) { //获取第一个图片
+										xin.push(val.picid);
+										xin2 = xin.join(",");
+									}
+								})
+							}
+						});
+						this.GetSelectFiles(xin2,1);
+					} else {
+						this.$message.error("读取失败");
+					}
+				});
+			},
+			GetSelectFiles(obj,type) { //批量获取图片
+				this.$fetch("http://101.201.101.138:2600/staticResource-mucon/selectFiles", {
+					ids: obj
+				}).then(res => {
+					if(type == 1) this.imgs = res.data;
+					else if(type == 2) this.imgs2 = res.data;
+				});
 			}
 		},
 		mounted() {
@@ -268,6 +331,8 @@
 			if (id != undefined) {
 				this.actives = id;
 			}
+			this.getSearch2(4, this.pageSize, this.pageIndex, this.isEnglish);
+			this.getSearch3(5, this.pageSize, this.pageIndex2, this.isEnglish);
 		}
 	};
 </script>
@@ -549,7 +614,8 @@
 					/* padding: 50px 0; */
 					background: #fff;
 					margin: 0 auto;
-					
+					position: relative;
+
 					li {
 						cursor: pointer;
 						float: left;
@@ -561,6 +627,7 @@
 							width: 339px;
 							height: 214px;
 							font-size: 0;
+							box-shadow: 0px -3px 7px 0px rgba(0, 0, 0, 0.16);
 						}
 
 						.box3 {
@@ -717,5 +784,15 @@
 			width: 100%;
 			height: 100%;
 		}
+	}
+
+	.pages {
+		position: absolute;
+		height: 32px;
+		margin-top: 60px;
+		text-align: center;
+		left: 50%;
+		bottom: 30px;
+		transform: translateX(-50%);
 	}
 </style>

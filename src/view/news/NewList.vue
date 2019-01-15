@@ -33,6 +33,7 @@
 </template>
 
 <script>
+	import Cookies from 'js-cookie'
 	import {
 		IMG_Url
 	} from "@/package/common";
@@ -46,7 +47,8 @@
 				pageSize: 10,
 				pageIndex: 1,
 				totle: 0,
-				img: ""
+				img: "",
+				isEnglish: Cookies.get('language') == 'en' ? 1 : 0
 			};
 		},
 		methods: {
@@ -57,18 +59,13 @@
 			},
 			// 园区公告
 			// 获取新闻數據
-			GetList(type, pageSize, pageIndex) {
-				this.$post(
-					this.$url1 +
-					":6110/mongodb-mucon/info/primary/search?type=1&pageSize=" +
-					pageSize +
-					"&pageNum=" +
-					pageIndex
+			GetList(type, pageSize, pageIndex, isEnglish) {
+				this.$fetch(
+					`${this.$url1}:6110/mongodb-mucon/info/primary/search?type=${type}&pageSize=${pageSize}&pageNum=${pageIndex}&isEnglish=${isEnglish}`
 				).then(res => {
-					console.log(res);
 					if (res.code === 200) {
 						if (pageIndex == 1) {
-							this.list = res.data.content[0];
+							this.list = res.data.contents[0];
 							if (this.list.infoPic.length) {
 								this.$fetch(
 									this.$url1 +
@@ -81,7 +78,7 @@
 								});
 							}
 						}
-						this.list1 = res.data.content;
+						this.list1 = res.data.contents;
 						this.totle = res.data.totalElements;
 					} else {
 						this.$message.error("读取新闻列表失败");
@@ -90,7 +87,7 @@
 			},
 			//分页
 			changePage(val) {
-				this.GetList(0, this.pageSize, val);
+				this.GetList(0, this.pageSize, val, this.isEnglish);
 			},
 			jumpDetail(id) {
 				this.$router.push({
@@ -105,8 +102,13 @@
 			document.title = "新闻中心";
 		},
 		mounted() {
-			this.GetList(0, this.pageSize, this.pageIndex);
+			this.GetList(0, this.pageSize, this.pageIndex, this.isEnglish);
 		}
+// 		watch: {
+// 			isEnglish(v) {
+// 				this.GetList(0, this.pageSize, this.pageIndex, this.isEnglish);
+// 			}
+// 		}
 	};
 </script>
 

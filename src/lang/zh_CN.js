@@ -79,11 +79,17 @@ export default {
 		name4: "企鹅帕西",
 	},
 	animal: { //动物百科
-		title: "动物百科",
+		title: "海洋百科",
 		description: "倘若你徜徉在这片资讯丰富的地带<br>也一定能收获无穷欢乐！",
 		navName1: "动物课堂",
 		navName2: "保育救助",
 		navName3: "科普活动",
+		Text: '鲸鲨馆的海洋大家庭',
+		Text1: '来自极地的客人们',
+		Text2: '海洋精灵',
+		Text3: '水中飞翼',
+		Text4: '南海之珍',
+		Text5: '诙谐的小胖子'
 	},
 	mine: { //个人中心
 		navNmae1: "我的交易",
@@ -349,15 +355,15 @@ export default {
 	Feedback: "我要反馈",
 	Feedback2: "我要反馈",
 	FeedbackDetail: {
-		Text:"反馈类型",
-		Text1:"请选择反馈类型",
-		Text2:"反馈内容",
-		Text3:"最多输入500字",
-		Text4:"上传图片",
-		Text5:"姓名",
-		Text6:"请输入姓名",
-		Text7:"手机",
-		Text8:"请输入手机号码",
-		Text9:"提 交"
+		Text: "反馈类型",
+		Text1: "请选择反馈类型",
+		Text2: "反馈内容",
+		Text3: "最多输入500字",
+		Text4: "上传图片",
+		Text5: "姓名",
+		Text6: "请输入姓名",
+		Text7: "手机",
+		Text8: "请输入手机号码",
+		Text9: "提 交"
 	}
 }

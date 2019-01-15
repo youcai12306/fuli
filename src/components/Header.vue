@@ -139,12 +139,12 @@
           <!-- 动物百科 -->
           <li
             class="animal"
-            :class="{'actives' : $route.name == 'Animal'}"
+            :class="{'actives' : $route.name == 'Animal' || $route.name == 'BaiDetails'}"
             @mouseover="overHover('Animal')"
             @mouseout="outHover('')"
           >
             <router-link to="/animal" tag="p">
-              <template v-if="$route.name == 'Animal' || hover == 'Animal'">
+              <template v-if="$route.name == 'Animal' || $route.name == 'BaiDetails' || hover == 'Animal'">
                 <img src="../assets/img/header-8.png" alt>
               </template>
               <template v-else>
@@ -311,10 +311,7 @@ export default {
 		handleSetLanguage(lang){
 			this.$i18n.locale = lang;
 			this.$store.dispatch("setLanguage",lang);
-			this.$message({
-				message:"success",
-				type:'success'
-			})
+			window.location.reload();
 		}
   }
 };
@@ -537,11 +534,13 @@ export default {
 @media screen and (max-width: 1700px) {
   .main .main-content ul li {
     padding: 21px 22px 0 22px !important;
+		width: auto;
   }
 }
 @media screen and (max-width: 1550px) {
   .main .main-content ul li {
     padding: 21px 15px 0 15px !important;
+		width: auto;
   }
   .main .main-content .logo {
     margin-left: 160px !important;
@@ -550,6 +549,7 @@ export default {
 @media screen and (max-width: 1400px) {
   .main .main-content ul li {
     padding: 21px 15px 0 15px !important;
+		width: auto;
   }
   .main .main-content .logo {
     margin-left: 70px !important;
@@ -558,6 +558,7 @@ export default {
 @media screen and (max-width: 1300px) {
   .main .main-content ul li {
     padding: 21px 10px 0 10px !important;
+		width: auto;
   }
   .main .main-content .logo {
     margin-left: 20px !important;

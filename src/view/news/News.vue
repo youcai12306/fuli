@@ -7,8 +7,8 @@
 				<div class="l">
 					<div class="header-title">{{$t('i18nView.navTitle1')}}</div>
 					<ul>
-						<li :class="{hover:tabs==1}" @click="changeType(1)">{{$t('i18nView.navTitle2')}}</li>
-						<li :class="{hover:tabs==2}" @click="changeType(2)">{{$t('i18nView.navTitle3')}}</li>
+						<li :class="{hover:$route.path == '/news' || $route.path == '/newList' || $route.path == '/newDetail'}" @click="changeType(1)">{{$t('i18nView.navTitle2')}}</li>
+						<li :class="{hover:$route.path == '/noticeList' || $route.path == '/noticeDetail'}" @click="changeType(0)">{{$t('i18nView.navTitle3')}}</li>
 					</ul>
 				</div>
 				<!-- 园区新闻 -->

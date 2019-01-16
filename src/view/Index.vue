@@ -98,7 +98,7 @@
 								<img src="../assets/img/index-img4.png" alt>
 								<p>{{$t('index.Latest1')}}</p>
 							</router-link>
-							<router-link to="/animal" tag="li" class="li2">
+							<router-link to="/animal?type=1" tag="li" class="li2">
 								<img src="../assets/img/index-img5.png" alt>
 								<p>{{$t('index.Latest2')}}</p>
 							</router-link>

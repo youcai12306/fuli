@@ -126,7 +126,7 @@
 			<img src="../../assets/img/theme-art-img4.png" alt class="img">
 			<div class="meng2">
 				<swiper :options="certifySwiper1" ref="certifySwiper1">
-					<swiper-slide v-for="item in 1" :key="item">
+					<swiper-slide v-for="item in 2" :key="item">
 						<img src="../../assets/img/Adventure1.png" alt>
 					</swiper-slide>
 				</swiper>
@@ -135,7 +135,7 @@
 			<div class="meng">
 				<div class="certify" id="certify">
 					<swiper :options="certifySwiper" ref="certifySwiper">
-						<swiper-slide v-for="item in 1" :key="item">
+						<swiper-slide v-for="item in 2" :key="item">
 							<div class="venve" @click="jumpArtDetail(0)">
 								<img src="../../assets/img/Adventure1.png" alt>
 								<div class="p1">海狮剧场
@@ -147,8 +147,8 @@
 							</div>
 						</swiper-slide>
 					</swiper>
-					<!-- <div class="swiper-button-prev"></div>
-          <div class="swiper-button-next"></div>-->
+					<div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
 				</div>
 			</div>
 		</div>
@@ -343,10 +343,10 @@
 					//         loop: true,
 					//         loopedSlides: 5,
 					// autoplay: true,
-					//         navigation: {
-					//           nextEl: ".swiper-button-next",
-					//           prevEl: ".swiper-button-prev"
-					//         },
+					        navigation: {
+					          nextEl: ".swiper-button-next",
+					          prevEl: ".swiper-button-prev"
+					        },
 					on: {
 						progress: function(progress) {
 							for (let i = 0; i < this.slides.length; i++) {

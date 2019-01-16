@@ -286,15 +286,15 @@
 						let xin2 = "";
 						let list = [];
 						if (type == 4) {
-							this.list1 = res.data.contents || [];
+							this.list1 = res.data.content || [];
 							list = this.list1;
 							this.totle = res.data.totalElements;
 						} else if (type == 5) {
-							this.list2 = res.data.contents || [];
+							this.list2 = res.data.content || [];
 							list = this.list2;
 							this.count = res.data.totalElements;
 						} else if (type == 6) {
-							this.list = res.data.contents || [];
+							this.list = res.data.content || [];
 							list = this.list;
 						}
 
@@ -315,7 +315,7 @@
 				});
 			},
 			GetSelectFiles(obj, type) { //批量获取图片
-				this.$fetch("http://101.201.101.138:2600/staticResource-mucon/selectFiles", {
+				this.$fetch(`${this.$url1}:2600/staticResource-mucon/selectFiles`, {
 					ids: obj
 				}).then(res => {
 					if (type == 4) this.imgs2 = res.data;

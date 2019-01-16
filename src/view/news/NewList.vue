@@ -65,7 +65,7 @@
 				).then(res => {
 					if (res.code === 200) {
 						if (pageIndex == 1) {
-							this.list = res.data.contents[0];
+							this.list = res.data.content[0];
 							if (this.list.infoPic.length) {
 								this.$fetch(
 									this.$url1 +
@@ -78,7 +78,7 @@
 								});
 							}
 						}
-						this.list1 = res.data.contents;
+						this.list1 = res.data.content;
 						this.totle = res.data.totalElements;
 					} else {
 						this.$message.error("读取新闻列表失败");

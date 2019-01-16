@@ -143,7 +143,7 @@
             @mouseover="overHover('Animal')"
             @mouseout="outHover('')"
           >
-            <router-link to="/animal" tag="p">
+            <router-link to="/animal?type=1" tag="p">
               <template v-if="$route.name == 'Animal' || $route.name == 'BaiDetails' || hover == 'Animal'">
                 <img src="../assets/img/header-8.png" alt>
               </template>

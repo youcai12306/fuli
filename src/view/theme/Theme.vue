@@ -8,50 +8,23 @@
 				<p>麦迪卡斯水乐园</p>
 			</div>
 			<div class="list-one">
-				<div class="one-change">
-					<swiper :options="swiperOption" ref="mySwiper">
+				<div class="one-change" @mouseover="stopTimes" @mouseout="startTimes">
+					<swiper :options="swiperOption" ref="mySwiper" v-if="list2.length > 0">
 						<!-- slides -->
 						<template v-for="(item,k) in list2">
 							<swiper-slide>
-								<img :src="item.facePictureId[0] || imgSrc" :alt="item.title">
-								<p>{{item.title}}</p>
+								<img :src="item.facePictureId[0] || imgSrc" :alt="item.title" @click.stop="jumpImg(k)">
+								<p :class="{imgActive:index === k}">{{item.title}}</p>
 							</swiper-slide>
 						</template>
 						<!-- Optional controls -->
 					</swiper>
-					<div class="swiper-prev"></div>
-					<div class="swiper-next"></div>
+					<div class="swiper-prev" @click="prev"></div>
+					<div class="swiper-next" @click="next"></div>
 				</div>
 			</div>
 			<div class="shebei">
-				<div class="banner-imgs">
-					<swiper :options="swiperOption2" ref="mySwiper2">
-						<swiper-slide class="imgList" v-for="(v,i) in list2" :key="i">
-							<div class="top">
-								<!-- <div class="top-imgList" v-for="(item,key) in list2" :key="key" v-show="key === datailIndex">
-									<template v-for="val in item.facePictureId">
-										<img :src="val || imgSrc" :alt="item.title" class="img" v-show="changeImg == key">
-									</template>
-								</div> -->
-								<div class="top-imgMinList">
-									<ul>
-										<!-- <li v-for="(item,keys) in list2" :key="keys" @click="showDatail(keys)">
-											<template v-for="val in item.facePictureId">
-												<img :src="val || imgSrc" :alt="item.title" class="imgMin">
-											</template>
-										</li> -->
-									</ul>
-								</div>
-							</div>
-							<div class="bottom clearDiv">
-								<div class="floatLeft" v-for="(item,key) in list2" :key="key" v-if="i == key">
-									<h3>{{item.title}}</h3>
-									<p class="pad1" v-html="item.content0"></p>
-								</div>
-							</div>
-						</swiper-slide>
-					</swiper>
-				</div>
+				
 			</div>
 		</div>
 		<!-- 精彩演绎 -->
@@ -184,16 +157,8 @@
 				value: "购票",
 				date: "2018-12-12",
 				swiperOption: {
-					// centeredSlides: true,
+					notNextTick: true,
 					slidesPerView: 6,
-					spaceBetween: 20
-				},
-				swiperOption2: {
-					effect: "fade",
-					navigation: {
-						nextEl: ".swiper-next",
-						prevEl: ".swiper-prev"
-					}
 				},
 				swiperOptions: {
 					//设定初始化时slide的索引
@@ -292,16 +257,6 @@
 		},
 		mounted() {
 			// this.swiperInit();
-			this.$nextTick(() => {
-				var swiper = this.$refs.certifySwiper.swiper;
-				var swiper2 = this.$refs.certifySwiper1.swiper;
-				swiper.controller.control = swiper2;
-
-				var mySwiper = this.$refs.mySwiper.swiper;
-				var mySwiper2 = this.$refs.mySwiper2.swiper;
-				// mySwiper.controller.control = mySwiper2;
-				mySwiper2.controller.control = mySwiper;
-			});
 			window.addEventListener("scroll", this.handleScroll);
 		},
 		methods: {
@@ -357,19 +312,19 @@
 			change(newVal, oldVal) {
 				this.newSwiperIndex = newVal;
 			},
-			// 			swiperInit() {
-			// 				this.times = setInterval(() => {
-			// 					this.index++;
-			// 				}, 2000);
-			// 			},
+			swiperInit() {
+				this.times = setInterval(() => {
+					this.index++;
+				}, 2000);
+			},
 			//停止定时器
 			stopTimes() {
 				clearInterval(this.times);
 			},
 			//开启定时器
-			// 			startTimes() {
-			// 				this.swiperInit();
-			// 			},
+			startTimes() {
+				this.swiperInit();
+			},
 			//切换上一张
 			prev() {
 				this.index--;
@@ -378,7 +333,6 @@
 			//切换下一张
 			next() {
 				this.index++;
-				console.log(this.index);
 				this.swiper.slideTo(this.index, 500, false);
 			},
 			prevs() {
@@ -498,6 +452,16 @@
 				that.list4 = that.data(that.list4);
 				that.list5 = that.data(that.list5);
 				that.list6 = that.data(that.list6);
+				this.$nextTick(() => {
+					var swiper = this.$refs.certifySwiper.swiper;
+					var swiper2 = this.$refs.certifySwiper1.swiper;
+					swiper.controller.control = swiper2;
+
+// 					var mySwiper = this.$refs.mySwiper.swiper;
+// 					var mySwiper2 = this.$refs.mySwiper2.swiper;
+// 					mySwiper.controller.control = mySwiper2;
+// 					mySwiper2.controller.control = mySwiper;
+				});
 			},
 			data(obj) { //处理返回数据
 				let list = obj;
@@ -531,14 +495,15 @@
 		},
 		watch: {
 			index: function(newVal, oldVal) {
-				//console.log(newVal)
+				console.log(oldVal)
+				console.log(this.list2.length)
 				if (newVal >= 7 && newVal <= 12) {
 					this.swiper.slideTo(newVal + 1, 500, false); //切换到看不见的slide，速度为.5秒
-				} else if (newVal === 13) {
+				} else if (newVal === this.list2.length) {
 					this.index = 0;
 					this.swiper.slideTo(this.index, 500, false); //切换到第一个slide，速度为.5秒
 				} else if (newVal === -1) {
-					this.index = 11;
+					this.index = this.list2.length-1;
 					this.swiper.slideTo(this.index, 500, false); //切换到最后一个slide，速度为.5秒
 				}
 			},

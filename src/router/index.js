@@ -192,6 +192,7 @@ let router = new Router({
 				},
 				{
 					path: '/events',
+					name: 'events',
 					component: Events,
 				},
 				{

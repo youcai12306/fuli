@@ -8,15 +8,14 @@
 
 		<!-- 列表 -->
 		<ul class="content clearDiv">
-			<template v-for="item in 2">
-				<router-link tag="li" :to="{path:'/EventsDetail',query:{id:'5c1f5349f8dac609dd5cd6b7'}}">
-					<img src="../../assets/img/specialOffier-bg1.png" alt>
+			<div v-for="(item,key) in data" :key="key">
+				<router-link v-if="data.length > 0" tag="li" :to="{path:'/EventsDetail',query:{id: item.structureId}}">
+					<img :src="item.facePictureId[0]" alt>
 					<div class="box">
-						<h3 class="t">百变万圣节</h3>
+						<h3 class="t">{{item.title}}</h3>
 					</div>
 				</router-link>
-			</template>
-			
+			</div>
 		</ul>
 		<!-- <div class="pages">
 			<el-pagination background layout="prev, pager, next" :total="100" :page-size="7" @current-change="handleCurrentChange"></el-pagination>
@@ -25,23 +24,88 @@
 </template>
 
 <script>
+	import {
+		IMG_Url
+	} from "@/package/common";
 	export default {
 		name: "News",
 		data() {
 			return {
-				page: 1
+				page: 1,
+				id: this.$route.query.id,
+				list:[],
+				imgs:[],
+				imgs1:[]
 			};
+		},
+		computed: {
+			data() { //处理精彩活动、优惠信息数据
+				let list = this.list;
+				list.forEach((v, k) => {
+					if (v.facePictureId) { //是否有图片
+						v.facePictureId.forEach((val, key) => {
+							this.imgs.forEach(res => {
+								if (val == res.id) {
+									v.facePictureId[key] = IMG_Url + res.fileName;
+								}
+							});
+						})
+					}
+				});
+				return list;
+			}
 		},
 		methods: {
 			// 分页
 			handleCurrentChange(val) {
 				console.log(val);
+			},
+			getSearch(type, pageSize, pageIndex, isEnglish) { //获取精彩活动后台ID=E 优惠信息后台ID=F  pageSize分页大小 pageIndex第几页 isEnglish中英文标识
+				this.$fetch(
+					`${this.$url1}:6110/mongodb-mucon/structure/primary/searchLinkIndex?linkIndex=${type}&pageSize=${pageSize}&pageNum=${pageIndex}&isEnglish=${isEnglish}`
+				).then(res => {
+					if (res.code === 200) {
+						let xin = [];
+						let xin2 = "";
+						let list = [];
+						list = res.data.content || [];
+						this.list = list;
+						list.forEach((v, k) => { //拼接图片字符串
+							if (v.facePictureId) { //是否有图片
+								v.facePictureId.forEach((val, key) => {
+									if (key == 0) { //获取第一个图片
+										xin.push(val);
+										xin2 = xin.join(",");
+									}
+								})
+							}
+						});
+						this.GetSelectFiles(xin2);
+					} else {
+						console.log("读取失败");
+					}
+				});
+			},
+			GetSelectFiles(obj) { //批量获取图片
+				this.$fetch(`${this.$url1}:2600/staticResource-mucon/selectFiles`, {
+					ids: obj
+				}).then(res => {
+					this.imgs = res.data; //精彩活动
+				});
 			}
 		},
 		created() {
 			document.title = "精彩活动";
 		},
-		mounted() {}
+		mounted() {
+			this.getSearch(this.id,6,this.page,this.$isEnglish);
+		},
+		watch:{
+			$route() {
+				let id = this.$route.query.id;
+				this.getSearch(id,6,this.page,this.$isEnglish);
+			}
+		}
 	};
 </script>
 

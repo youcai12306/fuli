@@ -8,21 +8,16 @@
     <div class="top">
       <swiper :options="swiperOption" ref="mySwiper">
         <!-- slides -->
-        <swiper-slide>
-          <img src="../../assets/img/hotel-img3.png" alt>
-        </swiper-slide>
-        <swiper-slide>
-          <img src="../../assets/img/hotel-img3.png" alt>
-        </swiper-slide>
-        <swiper-slide>
-          <img src="../../assets/img/hotel-img3.png" alt>
+        <swiper-slide v-for="(img,index) in swiperImg" :key="index">
+          <img :src="img" alt>
         </swiper-slide>
         <div class="swiper-pagination" slot="pagination"></div>
       </swiper>
     </div>
     <div class="bottom">
-      <h3>凯悦酒店</h3>
-      <p>奇思妙想的海景酒店，不仅可以推窗看海，还可以感受来自海洋欢乐世界的奇幻主题，更有神秘卡通人物不经意间的给您带来的惊喜。</p>
+      <h3>{{data.title}}</h3>
+      <!-- <p>奇思妙想的海景酒店，不仅可以推窗看海，还可以感受来自海洋欢乐世界的奇幻主题，更有神秘卡通人物不经意间的给您带来的惊喜。</p> -->
+      <div v-html="data.content0"></div>
     </div>
   </div>
 </template>
@@ -48,7 +43,9 @@ export default {
           clickable: true
         }
       },
-      id: 0
+      id: 0,
+      data: {},
+      swiperImg: []
     };
   },
 
@@ -60,9 +57,17 @@ export default {
 
   computed: {},
 
-  methods: {},
+  methods: {
+    GetList() {
+				this.$fetch('http://101.201.101.138:6110/mongodb-mucon/structure/primary/get?structureId=' + this.id + '&isEnglish='+ this.$isEnglish).then((res) => {
+					this.data = res.data;
+				})
+			}
+  },
   mounted() {
     this.id = this.$route.query.id;
+    this.swiperImg = this.$route.query.swiperImg;
+    this.GetList();
   }
 };
 </script>

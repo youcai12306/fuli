@@ -28,6 +28,14 @@ export default {
 		title4: "Explore the Harbor",
 		title5: "City of the Deep sea",
 	},
+	parkItem: { //主题乐园下左侧导航
+		item1: "Park Introduction",
+		item2: "Play facilities",
+		item3: "Wonderful arts",
+		item4: "Animal venue",
+		item5: "Theme store",
+		item6: "special restaurant"
+	},
 	Center: { //登录hover框
 		Center: "Personal Center",
 		Exit: "Exit",

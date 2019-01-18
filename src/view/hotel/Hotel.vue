@@ -12,25 +12,9 @@
     <div class="bottom">
       <h3>度假酒店/Resort Hotel</h3>
       <ul class="clearDiv">
-        <li @click="jumpDetail(0)">
-          <img src="../../assets/img/hotel-img4.png" alt>
-          <p>凯悦酒店</p>
-        </li>
-        <li @click="jumpDetail(1)">
-          <img src="../../assets/img/hotel-img5.png" alt>
-          <p>凯悦酒店</p>
-        </li>
-        <li @click="jumpDetail(2)">
-          <img src="../../assets/img/hotel-img6.png" alt>
-          <p>凯悦酒店</p>
-        </li>
-        <li @click="jumpDetail(3)">
-          <img src="../../assets/img/hotel-img7.png" alt>
-          <p>凯悦酒店</p>
-        </li>
-        <li @click="jumpDetail(4)">
-          <img src="../../assets/img/hotel-img8.png" alt>
-          <p>凯悦酒店</p>
+        <li @click="jumpDetail(item.structureId,item.facePictureId)" v-for="(item,index) in data" :key="index">
+          <img :src="item.facePictureId[0]" alt>
+          <p>{{item.title}}</p>
         </li>
       </ul>
     </div>
@@ -39,26 +23,89 @@
 
 <script>
 import Header from "@/components/Header"; //引入头部
+import Cookies from 'js-cookie';
+import {
+		IMG_Url
+	} from "@/package/common";
 export default {
   data() {
-    return {};
+    return {
+      pageSize: 4,
+      pageIndex: 1,
+      imgs: [],
+      list: [],
+      isEnglish: Cookies.get('language') == 'en' ? 1 : 0
+    };
   },
-
   components: {
     Header
   },
-
-  computed: {},
-
+  computed: {
+    data() { //处理度假酒店图片数据
+				let list = this.list;
+				list.forEach((v, k) => {
+					if (v.facePictureId) { //是否有图片
+						v.facePictureId.forEach((val, key) => {
+							this.imgs.forEach(res => {
+								if (val == res.id) {
+                  v.facePictureId[key] = IMG_Url + res.fileName;
+								}
+							});
+						})
+					}
+				});
+				return list;
+			}
+  },
   methods: {
-    jumpDetail(id) {
+    getSearch(type, pageSize, pageIndex, isEnglish) { //获取度假酒店列表 度假酒店后台ID=4 pageSize分页大小 pageIndex第几页 isEnglish中英文标识
+      this.$fetch(
+        `${this.$url1}:6110/mongodb-mucon/structure/primary/searchLinkIndex?linkIndex=${type}&pageSize=${pageSize}&pageNum=${pageIndex}&isEnglish=${isEnglish}`
+      ).then(res => {
+        if (res.code === 200) {
+          let xin = [];
+          let xin2 = "";
+          let list = [];
+          if (type == 'C') {
+            this.list = res.data.content || [];
+            list = this.list;
+            this.totle = res.data.totalElements;
+          }
+          list.forEach((v, k) => { //拼接图片字符串
+            if (v.facePictureId) { //是否有图片
+              v.facePictureId.forEach((val, key) => {
+                // if (key == 0) { //获取第一个图片
+                  xin.push(val);
+                  xin2 = xin.join(",");
+                // }
+              })
+            }
+          });
+          this.GetSelectFiles(xin2, type);
+        } else {
+          console.log("读取失败");
+        }
+      });
+    },
+    GetSelectFiles(obj, type) { //批量获取图片
+      this.$fetch(`${this.$url1}:2600/staticResource-mucon/selectFiles`, {
+        ids: obj
+      }).then(res => {
+        this.imgs = res.data;
+      });
+		},
+    jumpDetail(id,swiperImg) {
       this.$router.push({
         path: "/hotelDetail",
         query: {
-          id: id
+          id: id,
+          swiperImg: swiperImg
         }
       });
     }
+  },
+  mounted() {
+    this.getSearch('C', this.pageSize, this.pageIndex, this.isEnglish);
   }
 };
 </script>

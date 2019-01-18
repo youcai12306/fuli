@@ -28,6 +28,14 @@ export default {
 		title4: "探索港湾",
 		title5: "深海之城",
 	},
+	parkItem: { //乐园下左侧导航
+		item1: "园区介绍",
+		item2: "游玩设施",
+		item3: "精彩演艺",
+		item4: "动物场馆",
+		item5: "主题商店",
+		item6: "特色餐厅"
+	},
 	Center: { //登录hover框
 		Center: "个人中心",
 		Exit: "退出",

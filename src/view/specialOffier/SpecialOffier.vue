@@ -12,8 +12,8 @@
 				<div class="l">
 					<div class="header-title" :title="$t('specialOffier.navTitle1')">{{$t('specialOffier.navTitle1')}}</div>
 					<ul>
-						<li :class="{hover:tabs==1}" @click="changeType(1)">{{$t('specialOffier.navTitle2')}}</li>
-						<li :class="{hover:tabs==2}" @click="changeType(2)">{{$t('specialOffier.navTitle3')}}</li>
+						<li :class="{hover:$route.query.id == 'E'}" @click="changeType(1)">{{$t('specialOffier.navTitle2')}}</li>
+						<li :class="{hover:$route.query.id == 'F'}" @click="changeType(2)">{{$t('specialOffier.navTitle3')}}</li>
 					</ul>
 				</div>
 				<!-- 园区新闻 -->
@@ -41,7 +41,7 @@
 		methods: {
 			changeType(type) {
 				this.tabs = type
-				return type === 1 ? this.$router.push('events') : this.$router.push('events')
+				return type === 1 ? this.$router.push({path:'/events',query:{id:'E'}}) : this.$router.push({path:'/events',query:{id:'F'}})
 			}
 		},
 		created() {

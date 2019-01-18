@@ -98,7 +98,7 @@
 								<img src="../assets/img/index-img4.png" alt>
 								<p>{{$t('index.Latest1')}}</p>
 							</router-link>
-							<router-link to="/animal" tag="li" class="li2">
+							<router-link to="/animal?type=1" tag="li" class="li2">
 								<img src="../assets/img/index-img5.png" alt>
 								<p>{{$t('index.Latest2')}}</p>
 							</router-link>
@@ -250,9 +250,9 @@
 					":6110/mongodb-mucon/info/primary/search?type=1&pageSize=5&pageNum=1&isEnglish=" + this.isEnglish
 				).then(res => {
 					if (res.code === 200) {
-						let newList = res.data.contents;
+						let newList = res.data.content;
 						if (newList != null) {
-							this.newFirst = res.data.contents[0];
+							this.newFirst = res.data.content[0];
 							if (this.newFirst.infoPic.length) {
 								this.$fetch(
 									this.$url1 +
@@ -273,7 +273,7 @@
 									this.newFirstContent = res.data.infoContent;
 								}
 							});
-							this.newList = res.data.contents.slice(1);
+							this.newList = res.data.content.slice(1);
 						}
 					}
 				});

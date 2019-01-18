@@ -245,7 +245,7 @@ let router = new Router({
 			component: error1 //支付失败
 		},
 		{
-			path: '/theme',
+			path: '/theme/:id',
 			name: 'Theme',
 			component: Theme //主题乐园
 		},

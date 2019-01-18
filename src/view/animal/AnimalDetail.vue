@@ -124,7 +124,7 @@
 				})
 			},
 			GetSelectFiles(obj) { //批量获取图片
-				this.$fetch("http://101.201.101.138:2600/staticResource-mucon/selectFiles", {
+				this.$fetch(`${this.$url1}:2600/staticResource-mucon/selectFiles`, {
 					ids: obj
 				}).then(res => {
 					this.img = res.data;

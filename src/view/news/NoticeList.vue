@@ -56,7 +56,7 @@
 					`${this.$url1}:6110/mongodb-mucon/info/primary/search?type=${type}&pageSize=${pageSize}&pageNum=${pageIndex}&isEnglish=${isEnglish}`
 				).then(res => {
 					if (res.code === 200) {
-						this.list = res.data.contents
+						this.list = res.data.content;
 						this.totle = res.data.totalElements;
 					} else {
 						this.$message.error("读取公告列表失败");

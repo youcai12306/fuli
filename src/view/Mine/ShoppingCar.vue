@@ -182,17 +182,13 @@ export default {
     // 计算选中商品金额
     getTotal() {
       this.totalNum = 0;
+      this.arr.splice(0,this.arr.length);
       this.good_list.forEach((v, i) => {
         if (v.is_selected) {
           this.dis = false;
-          this.arr[i] = {};
-          this.arr[i]["id"] = v.id;
-          this.arr[i]["productId"] = v.productId;
-          this.arr[i]["num"] = v.productCount;
+          this.arr.push({id: v.id,productId: v.productId,num: v.productCount,stockId: v.createDateId,saleType: v.saleType ? "1" : "0"});
           // console.log(this.arr[i]["num"]);
           this.totalNum += this.arr[i]["num"];
-          this.arr[i]["stockId"] = v.createDateId;
-          this.arr[i]["saleType"] = v.saleType ? "1" : "0";
         }
       });
     },
@@ -288,7 +284,7 @@ export default {
           id2: this.id2,
           totalNum: this.totalNum,
           stockId: this.stockId,
-          arr: this.arr,
+          arr: JSON.stringify(this.arr),
           saleType: this.saleType,
           typeId:this.typeId
         }

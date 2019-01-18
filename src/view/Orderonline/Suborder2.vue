@@ -36,16 +36,16 @@
                 <td>{{productname}}
                   <p>{{$t('Suborder.Text8')}}：{{playtime}}</p>
                   <!-- <p>{{canDebook(saleType)}}</p> -->
-                  <p class="type" v-show="flag2">
+                 <p class="type" v-show="flag2">
                     配送方式：
-                    <span :class="{active:isactive}" @click="toggle()">canDebook(1)</span>
-                    <span :class="{active:!isactive}" @click="toggle()">canDebook(2)</span>
+                    <span :class="{active:isactive ==0}" @click="toggle(0)">邮寄</span>
+                    <span :class="{active:isactive ==1}" @click="toggle(1)">自提</span>
                   </p>
 
                 </td>
                 <td>¥{{price1}}{{$t('Yuan')}}</td>
                 <td>×{{count}}</td>
-                <td class="td">¥{{price2}}{{$t('Yuan')}}</td>
+                <td class="td">¥{{price1 * count}}{{$t('Yuan')}}</td>
               </tr>
               <!-- <tr>
                 <td>富力成人全日票
@@ -74,16 +74,44 @@
           <div class="su5">
 
             <span class="su6">{{$t('Suborder.Text9')}}</span>
-            <span class="su7">{{$t('Suborder.Text10')}}</span>
-            
+            <!-- <span class="su7">{{$t('Suborder.Text10')}}</span> -->
+
           </div>
           <div class="jian1">
-                      <div>
-                        <el-radio v-model="radio7" label="1" @change="youhui()">满减</el-radio><span class="jian">-¥40</span> <br>
-                        <el-radio v-model="radio7" label="2" @change="youhui()">满赠</el-radio><span class="jian">-¥40</span><br>
-                        <el-radio v-model="radio7" label="3" @change="youhui()">折扣</el-radio><span class="jian">-¥40</span>
-                      </div>
-                    </div>
+            <div>
+              <div v-if="0 in activeTypeList"><el-radio v-model="radio7" label="1" @change="youhui()" >{{activityName1}}</el-radio><span class="jian" v-if="radio7==1">-¥{{decimal}}</span></div>
+              <div v-if="1 in activeTypeList"><el-radio v-model="radio7" label="2" @change="youhui()">{{activityName2}}</el-radio></div>
+              <div class="su4" v-if="radio7==2">
+                <table cellspacing="0" width="1078">
+                  <tr>
+                    <th>赠品名称</th>
+                    <th>数量</th>
+                    <th v-show="flag2">配送方式</th>
+                  </tr>
+                  <tr v-for="(product,key) in productList" :key="key">
+                    <td>
+                      {{product.productName}}
+                      
+                      </td>
+                    <td>×{{product.productCount}}</td>
+                    <td v-show="flag2">
+                      <p class="type" >
+                    配送方式：
+                    <span :class="{active:isactive ==0}" @click="toggle(0)">邮寄</span>
+                    <span :class="{active:isactive ==1}" @click="toggle(1)">自提</span>
+                  </p>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <div v-if="2 in activeTypeList"><el-radio v-model="radio7" label="3" @change="youhui()">{{activityName3}}</el-radio></div>
+              <!-- <el-form-item label="线路类型：" prop="isGive">
+ <el-radio-group v-model="currentLine.isGive">
+ <el-radio :label="item.id" :key="item.id" v-for="item in isGive" >{{item.name}}</el-radio>
+ </el-radio-group>
+</el-form-item> -->
+            </div>
+          </div>
           <!-- 游客信息 -->
           <div class="su8">
             <div class="su9">
@@ -142,10 +170,9 @@
 
                     <span class="su6">{{$t('Suborder.Text17')}}</span>
                     <span class="su7" @click="address()">{{$t('Suborder.Text18')}}</span>
-                    
 
                   </div>
-                  
+
                   <div class="q1" v-show="flag1">
                     <div class="q2">
                       <p>{{$t('Suborder.Text19')}}：<span>{{name1}}</span></p>
@@ -176,7 +203,7 @@
       </div>
     </div>
   </div>
-  </div>
+  
 </template>
 
 <script>
@@ -187,12 +214,21 @@ export default {
   },
   data() {
     return {
+//       isGive:[
+//   {
+//   id : "n",
+//   name : "购买"
+//   },
+//   {
+//   id : "y",
+//   name : "赠送"
+//   }
+//  ],
       numberValidateForm: {
         name1: "",
         name2: "",
         phone: "",
-        text: "",
-         
+        text: ""
       },
       form: {
         name: "",
@@ -224,13 +260,25 @@ export default {
       dis: true,
       isactive: true,
       flag2: true,
-      radio7: '1',
+      radio7: "1",
+      id: "",
+      list3:[],
+      price:"",
+      activityName:"",
+      productList:[],
+      activeTypeList: [],
+      idList: [],
+      decimal: 0,
+      productId: "",
+      activityName1:"",
+      activityName2:"",
+      activityName3:""
     };
   },
   mounted() {
     this.changeType();
     this.shopmsg();
-    this.youhui()
+    this.canDebook()
     // this.saleType = this.$route.query.saleType
     // 监听路由跳转路径，如果是购物车，标志为a1，直接接受上个页面的参数
     // if (this.a1 === 1) {
@@ -252,43 +300,94 @@ export default {
   //   }
   // },
   methods: {
-    youhui(){
-      console.log(this.radio7);
-      if(this.radio7 == 1){
-        
-        this.$post('http://101.201.101.138:2060/activity/activityOperation?activityId='+0).then(res =>{
-          console.log(res);
-        })
-      }else if(this.radio7 == 2){
-        this.$post('http://101.201.101.138:2060/activity/activityOperation?activityId='+1).then(res =>{
-          console.log(res);
-        })
-      }else if(this.radio7 == 3){
-        let data ={
-          activityId:3,
-          productList:{
-            productId:111,
-            Cash:100,
-           
-          }
+    youhui() {
+      // console.log('this.radio7:'+this.radio7);
+      // for (var i = 0; i < this.idList.length; i++){
+      //   if(this.idList[i] != ''){
+      //     this.radio7 = this.idList[i];
+      //     break;
+      //   }
+      // }
+      if (this.radio7 == 1) {
+        if(this.idList[0] == ''){
+          return;
         }
-        this.$post('http://101.201.101.138:2060/activity/activityOperation',data).then(res =>{
+        console.log('this.idList[0]:'+this.idList[0]);
+        this.$post("http://101.201.101.138:2060/activity/activityOperation", {
+          activityId: this.idList[0],
+          productList: [{}]
+        }).then(res => {
+          this.decimal = res.data.decimal;
+        });
+      } else if (this.radio7 == 2) {
+        if(this.idList[1] == ''){
+          return;
+        }
+        this.$post("http://101.201.101.138:2060/activity/activityOperation", {
+          activityId: this.idList[1],
+          productList: [{}]
+        }).then(res => {
           console.log(res);
-        })
+          this.productList = res.data.productList;
+        });
+      } else if (this.radio7 == 3) {
+        if(this.idList[2] == ''){
+          return;
+        }
+        let data = {
+          activityId: this.idList[2],
+          productList: [{
+            productId: this.productId,
+            cash: this.price1
+          }]
+        };
+        this.$post(
+          "http://101.201.101.138:2060/activity/activityOperation",
+          data
+        ).then(res => {
+          console.log(res);
+          this.price1 = res.data.productList[0].cash;
+        });
       }
     },
-    active(){
-      this.$fetch('http://101.201.101.138:2060/activity/activityShow',{
+    active() {
+      this.$fetch("http://101.201.101.138:2060/activity/activityShow", {
         touristId: this.$store.getters.getUserData.userId,
-        orderCash:this.price2
-      }).then(res =>{
-        console.log(res);
-        console.log(res.data[0].activityType)
-        
-      })
+        orderCash: this.price2
+      }).then(res => {
+        // console.log(res);
+        // console.log(res.data[0].activityType);
+        // this.activityName = res.data[0].activityName
+        // console.log(this.activityName)
+        console.log(res.data)
+        res.data.forEach((value,index)=>{
+          console.log(value);
+          if(value){
+            this.activeTypeList.push(value.activityType);
+            this.idList.push(value.id);
+            this.activityName1 = res.data[0].activityName
+            this.activityName2 = res.data[1].activityName
+            this.activityName3 = res.data[2].activityName
+          }else{
+            this.activeTypeList.push('');
+            this.idList.push('');
+          }
+        });
+        console.log('this.activeTypeList:'+this.activeTypeList);
+        console.log('this.idList:'+this.idList);
+        console.log(this.activityName);
+        this.youhui();
+      });
     },
-    toggle() {
-      this.isactive = !this.isactive;
+     toggle(type) {
+      this.isactive = type;
+      if(type ==1){
+        this.flag1 = false
+        this.saleType = 2
+      }else{
+         this.flag1 = true
+         this.saleType = 1
+      }
     },
     changeType() {
       console.log(this.checked);
@@ -311,7 +410,7 @@ export default {
     },
     // 验证信息
     submitForm(formName) {
-      console.log(999);
+      // console.log(999);
       this.$refs[formName].validate(valid => {
         if (valid) {
           this.flag = true;
@@ -331,9 +430,10 @@ export default {
     shopmsg() {
       console.log(111);
       let id = this.$route.query.id;
-      console.log(id);
+      // console.log(id);
       let stockId = this.$route.query.stockId;
       let num1 = this.$route.query.num;
+      this.toggle();
       this.saleType = this.$route.query.saleType;
       let typeId = this.$route.query.typeId; //是门票还是产品，0为门票，1为产品
       // console.log(typeId)
@@ -357,17 +457,20 @@ export default {
         touristId: this.$store.getters.getUserData.userId
       }).then(res => {
         if (res.code === 200) {
-          console.log(111);
+          // console.log(111);
           this.productname = res.data.productName;
-          console.log(this.productname);
+          // console.log(this.productname);
           this.playtime = res.data.dataBaseDate;
           this.price1 = res.data.settlementPrice;
-          this.active()
+          this.productId = res.data.id;
+          this.active();
         }
       });
     },
     // 判断是邮寄或者自提，邮寄需要显示邮寄地址，传邮寄ID到李顺仪
-    canDebook(type) {
+     canDebook() {
+          this.sign = "邮寄";
+          this.isactive = 0;
       let data2 = {
         touristId: this.$store.getters.getUserData.userId
       };
@@ -376,7 +479,7 @@ export default {
         "http://101.201.101.138:2060/user-aggregate/address/selectOneReceiveAddress",
         data2
       ).then(res => {
-        console.log(res);
+        // console.log(res);
         this.name1 = res.data.receivePersonName;
         this.phone1 = res.data.receivePersonMobile;
         this.address1 =
@@ -385,6 +488,8 @@ export default {
           res.data.receiveArea;
         this.receiveId = res.data.id;
       });
+       
+      return this.sign;
     },
     //   提交
     onSubmit() {
@@ -396,16 +501,35 @@ export default {
             productId: this.$route.query.id,
             num: this.$route.query.num,
             stockId: this.$route.query.stockId,
-            saleType: parseInt(this.$route.query.saleType)
-          }
+            saleType: parseInt(this.$route.query.saleType),
+           
+          },
+          // {
+          //    productId:this.productList[0].productId,
+          //    num:this.productList[0].productCount,
+          //    saleType:1,
+          //    stockId:this.productList[0].priceId,
+          // }
         ],
 
         receiveId: this.receiveId, //邮寄ID
         receiveName: this.numberValidateForm.name1,
         receiveMobile: this.numberValidateForm.phone,
         receiveIdentityCode: this.numberValidateForm.name2,
-        createCannel: 1 //官网下单为1
+        createCannel: 1, //官网下单为1,
+        activitieId:3,//优惠券活动ID
+        activitieType:2,//优惠券活动类型
+        returnSign:0,//优惠券折扣
+       
       };
+      this.productList.forEach((value) => {
+        data.productFormList.push({
+          productId: value.productId,
+          num: value.productCount,
+          saleType: 1,
+          stockId: value.priceId
+        })
+      });
       // 拿到guid以及订单号
       this.$post("http://101.201.101.138:5001/order-aggregate/save", data, {
         headers: { "Content-Type": "application/json;charset=UTF-8" }
@@ -413,10 +537,13 @@ export default {
         if (res.code === 200) {
           console.log(res);
           this.orderId = res.data.orderId;
+          this.price = res.data.price;
+          // console.log(this.price)
           let data1 = {
             guid: res.data.guid,
             userId: this.$store.getters.getUserData.userId
           };
+          
           // console.log(111);
           // 读redis，成功创建订单后关闭遮罩层，跳转支付页面
           this.times = setInterval(() => {
@@ -454,8 +581,12 @@ export default {
   // 计算产品总价格
   computed: {
     price2() {
-      console.log(this.price1 * this.count)
-      return this.price1 * this.count;
+      console.log('this.radio7:' + this.radio7);
+      if(this.radio7 == 1){
+        return this.price1 * this.count - this.decimal;
+      }else{
+        return this.price1 * this.count;
+      }
     }
   }
 };
@@ -758,12 +889,11 @@ export default {
   left: 0px;
   color: red;
 }
-.el-radio{
+.el-radio {
   font-size: 42px;
-  margin-right:200px;
- 
+  margin-right: 200px;
 }
-.jian1 .jian{
-  color:#F16B11;
+.jian1 .jian {
+  color: #f16b11;
 }
 </style>

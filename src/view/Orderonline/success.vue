@@ -14,7 +14,7 @@
               <div class="su22">{{$t('Success.Text')}}</div>
               <div class="su23">
                 <div class="su24">
-                  <p>{{$t('Success.Text1')}}：<span>{{this.$route.query.price2}}</span></p>
+                  <p>{{$t('Success.Text1')}}：<span>{{this.$route.query.price}}</span></p>
                 </div>
                 <div class="su25">
                   <!-- <img src="../../assets/img/erweima.png" alt=""> -->
@@ -33,7 +33,7 @@
           </div>
           <div class="sc5">
             <div class="sc6">
-              <p class="sc61">{{$t('Success.Text4')}}： <span class="sc7">{{this.$route.query.price2}}{{$t('Yuan')}}</span></p>
+              <p class="sc61">{{$t('Success.Text4')}}： <span class="sc7">{{this.$route.query.price}}{{$t('Yuan')}}</span></p>
 
               <span class="sc62">{{$t('Success.Text5')}}：</span>
               <img

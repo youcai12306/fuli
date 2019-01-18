@@ -36,10 +36,18 @@
                 <td>{{item.product.productName}}
                   <p>{{$t('Suborder.Text8')}}：{{item.product.dataBaseDate}}</p>
                   <!-- <p>{{canDebook(item.product.saleType)}}</p> -->
+                  <div v-if="item.product.typeId == 1">
+                    <p class="type">
+                    配送方式：
+                    
+                      <span :class="{active:isactive == 0}" @click="toggle(0)">邮寄</span>
+                      <span :class="{active:isactive == 1}" @click="toggle(1)">自提</span>
+                    </p>
+                  </div>
                 </td>
                 <td>¥{{item.settlementPrice}}{{$t('Yuan')}}</td>
                 <td>×{{item.productCount}}</td>
-                <td class="td">¥{{item.settlementPrice*item.productCount}}{{$t('Yuan')}}</td>
+                <td class="td">¥{{item.cash ? (item.cash * item.productCount) : (item.settlementPrice * item.productCount)}}{{$t('Yuan')}}</td>
               </tr>
               <!-- <tr>
                 <td>富力成人全日票
@@ -68,8 +76,27 @@
           <div class="su5">
 
             <span class="su6">{{$t('Suborder.Text9')}}</span>
-            <span class="su7">{{$t('Suborder.Text10')}}</span>
+            <!-- <span class="su7">{{$t('Suborder.Text10')}}</span> -->
 
+          </div>
+          <div class="jian1">
+            <div>
+              <div v-if="0 in activeTypeList"><el-radio v-model="radio7" label="1" @change="youhui()">{{activityName1}}</el-radio><span class="jian" v-if="radio7==1">-¥{{decimal}}</span></div>
+              <div v-if="1 in activeTypeList"><el-radio v-model="radio7" label="2" @change="youhui()">{{activityName2}}</el-radio></div>
+              <div class="su4" v-if="radio7==2">
+                <table cellspacing="0" width="1078">
+                  <tr>
+                    <th>赠品名称</th>
+                    <th>数量</th>
+                  </tr>
+                  <tr v-for="(product,key) in productList" :key="key">
+                    <td>{{product.productName}}</td>
+                    <td>×{{product.productCount}}</td>
+                  </tr>
+                </table>
+              </div>
+              <div v-if="2 in activeTypeList"><el-radio v-model="radio7" label="3" @change="youhui()">{{activityName3}}</el-radio></div>
+            </div>
           </div>
           <!-- 游客信息 -->
           <div class="su8">
@@ -144,7 +171,7 @@
 
                   <div class="su14">
                     <span class="su15">{{$t('Suborder.Text22')}}：</span>
-                    <span class="su16">¥{{price2}}{{$t('Yuan')}}</span>
+                    <span class="su16">¥{{price3}}{{$t('Yuan')}}</span>
                   </div>
 
                   <el-form-item>
@@ -208,12 +235,26 @@ export default {
       arr2: [],
       arr3: [],
       ids: "",
-      dis: true
+      dis: true,
+      radio7: "1",
+      id: "",
+      list3:[],
+      price:"",
+      activityName:"",
+      productList:[],
+      activeTypeList: [],
+      idList: [],
+      decimal: 0,
+      productId: "",
+      activityName1:"",
+      activityName2:"",
+      activityName3:""
     };
   },
   mounted() {
     this.changeType();
     this.shopmsg();
+    this.canDebook()
     // this.saleType = this.$route.query.saleType
     // 监听路由跳转路径，如果是购物车，标志为a1，直接接受上个页面的参数
     if (this.a1 == 1) {
@@ -229,9 +270,17 @@ export default {
         this.price = item.settlementPrice;
         // console.log(this.price)
         this.count = item.productCount;
+        this.typeId = item.product.typeId;
+        console.log(this.typeId);
         this.pricetotal = this.price * this.count;
         // console.log(typeOf()this.pricetotal)
         this.price2 += this.pricetotal;
+        // 判断产品是门票还是零售，门票typeId为0 零售typeId为1
+        // if(this.typeId == 1){
+        //   this.flag2 = true
+        // }else if(this.typeId == 0){
+        //   this.flag2 = false
+        // }
       }
     }
   },
@@ -243,6 +292,108 @@ export default {
   //   }
   // },
   methods: {
+    youhui() {
+      // console.log('this.radio7:'+this.radio7);
+      // for (var i = 0; i < this.idList.length; i++){
+      //   if(this.idList[i] != ''){
+      //     this.radio7 = this.idList[i];
+      //     break;
+      //   }
+      // }
+      if (this.radio7 == 1) {
+        if(this.idList[0] == ''){
+          return;
+        }
+        console.log('this.idList[0]:'+this.idList[0]);
+        this.$post("http://101.201.101.138:2060/activity/activityOperation", {
+          activityId: this.idList[0],
+          productList: [{}]
+        }).then(res => {
+          this.decimal = res.data.decimal;
+        });
+      } else if (this.radio7 == 2) {
+        if(this.idList[1] == ''){
+          return;
+        }
+        this.$post("http://101.201.101.138:2060/activity/activityOperation", {
+          activityId: this.idList[1],
+          productList: [{}]
+        }).then(res => {
+          console.log(res);
+          this.productList = res.data.productList;
+        });
+      } else if (this.radio7 == 3) {
+        if(this.idList[2] == ''){
+          return;
+        }
+        let arr = this.$route.query.arr;
+        let prodata = [];
+        arr.forEach((value) => {
+          prodata.push({productId: value.productId});
+        });
+        this.list2.forEach((value,index) => {
+          prodata[index].cash = value.settlementPrice;
+        })
+        let data = {
+          activityId: this.idList[2],
+          productList: prodata
+        };
+        this.$post(
+          "http://101.201.101.138:2060/activity/activityOperation",
+          data
+        ).then(res => {
+          console.log(res);
+          // this.price1 = res.data.productList[0].cash;
+          let clist = res.data.productList;
+          this.list2.forEach((value,index) => {
+            clist.forEach((c) => {
+              if(value.productId == c.productId){
+                value.cash = c.cash;
+              }
+            });
+          })
+          console.log(this.list2);
+        });
+      }
+    },
+    active() {
+      this.$fetch("http://101.201.101.138:2060/activity/activityShow", {
+        touristId: this.$store.getters.getUserData.userId,
+        orderCash: this.price2
+      }).then(res => {
+        // console.log(res);
+        // console.log(res.data[0].activityType);
+        // this.activityName = res.data[0].activityName
+        // console.log(this.activityName)
+        console.log(res.data)
+        res.data.forEach((value,index)=>{
+          console.log(value);
+          if(value){
+            this.activeTypeList.push(value.activityType);
+            this.idList.push(value.id);
+             this.activityName1 = res.data[0].activityName
+            this.activityName2 = res.data[1].activityName
+            this.activityName3 = res.data[2].activityName
+          }else{
+            this.activeTypeList.push('');
+            this.idList.push('');
+          }
+        });
+        console.log('this.activeTypeList:'+this.activeTypeList);
+        console.log('this.idList:'+this.idList);
+        this.youhui();
+      });
+    },
+    toggle(type) {
+      this.isactive = type;
+      if(type ==1){
+        this.flag1 = false
+        this.saleType = 2
+      }else{
+         this.flag1 = true
+         this.saleType = 1
+      }
+    },
     changeType() {
       console.log(this.checked);
       if (this.checked == true) {
@@ -304,6 +455,7 @@ export default {
       this.saleType = this.$route.query.saleType;
       let list1 = this.$route.query.list1;
       let list2 = JSON.parse(list1);
+      // let typeId = this.$route.query.typeId;
       list2.forEach((v, i) => {
         this.arr2[i] = {};
         this.arr2[i]["id"] = v.id;
@@ -320,42 +472,40 @@ export default {
 
       this.$fetch("http://101.201.101.138:5001/product-aggregate/find/" + id, {
         stockId: stockId,
-        saleType: this.saleType
+        saleType: this.saleType,
+        touristId: this.$store.getters.getUserData.userId
       }).then(res => {
         if (res.code === 200) {
-          // console.log(res);
+          console.log(res.data);
           this.productname = res.data.productName;
           this.playtime = res.data.dataBaseDate;
           this.price1 = res.data.settlementPrice;
+          this.active();
         }
       });
     },
     // 判断是邮寄或者自提，邮寄需要显示邮寄地址，传邮寄ID到李顺仪
-    canDebook(type) {
-      // return type === 1 ? (this.sign = "邮寄") : (this.sign = "自提");
-      if (type == true) {
-        this.sign = "邮寄";
-        this.flag1 = true;
-        let data2 = {
-          touristId: this.$store.getters.getUserData.userId
-        };
-        // 调用邮寄接口
-        this.$fetch(
-          "http://101.201.101.138:5010/tourist-aggregate/address/selectOneReceiveAddress",
-          data2
-        ).then(res => {
-          // console.log(res);
-          this.name1 = res.data.receivePersonName;
-          this.phone1 = res.data.receivePersonMobile;
-          this.address1 =
-            res.data.receiveProvince +
-            res.data.receiveCity +
-            res.data.receiveArea;
-          this.receiveId = res.data.id;
-        });
-      } else if (type == false) {
-        this.sign = "自提";
-      }
+    canDebook() {
+          this.sign = "邮寄";
+          this.isactive = 0;
+      let data2 = {
+        touristId: this.$store.getters.getUserData.userId
+      };
+      // 调用邮寄接口
+      this.$fetch(
+        "http://101.201.101.138:2060/user-aggregate/address/selectOneReceiveAddress",
+        data2
+      ).then(res => {
+        // console.log(res);
+        this.name1 = res.data.receivePersonName;
+        this.phone1 = res.data.receivePersonMobile;
+        this.address1 =
+          res.data.receiveProvince +
+          res.data.receiveCity +
+          res.data.receiveArea;
+        this.receiveId = res.data.id;
+      });
+       
       return this.sign;
     },
     //   提交
@@ -363,7 +513,7 @@ export default {
       // if(this.checked === true){
       //       this.dis = false
       //     }
-      console.log(this.$route.query.arr);
+      
       let data = {
         touristId: this.$store.getters.getUserData.userId,
         productFormList: this.$route.query.arr,
@@ -373,6 +523,7 @@ export default {
         receiveIdentityCode: this.numberValidateForm.name2,
         createCannel:1   //官网下单为1
       };
+      console.log(this.$route.query.arr);
       // 拿到guid以及订单号
       this.$post("http://101.201.101.138:5001/order-aggregate/save", data, {
         headers: { "Content-Type": "application/json;charset=UTF-8" }
@@ -421,13 +572,17 @@ export default {
   // 销毁定时器
   beforeDestroy() {
     clearInterval(this.times);
+  },
+  //计算产品总价格
+  computed: {
+    price3() {
+      if(this.radio7 == 1){
+        return this.price2 - this.decimal;
+      }else{
+        return this.price2;
+      }
+    }
   }
-  // 计算产品总价格
-  // computed: {
-  //   price2() {
-  //     return this.pricetotal++;
-  //   }
-  // }
 };
 </script>
 
@@ -528,10 +683,22 @@ export default {
             text-align: center;
             border-bottom: 1px solid #e8f0fc;
             height: 122px;
+            .type{
+              span{
+                border: 1px solid #999999;
+                padding: 5px 14px;
+                cursor: pointer;
+              }
+                .active {
+                color: #e3574c;
+                border-color: #e3574c;
+              }
+            }
             p {
-              color: #fd7100;
+             
               margin-top: 22px;
               font-size: 12px;
+              
             }
           }
           .td {
@@ -548,7 +715,7 @@ export default {
     .su5 {
       border-bottom: 1px solid #d8d8d8;
       margin-top: 42px;
-      margin-bottom: 59px;
+      margin-bottom: 20px;
       padding-bottom: 14px;
 
       .su6 {
@@ -716,5 +883,12 @@ export default {
   top: 32px;
   left: 0px;
   color: red;
+}
+.el-radio {
+  font-size: 42px;
+  margin-right: 200px;
+}
+.jian1 .jian {
+  color: #f16b11;
 }
 </style>

@@ -25,7 +25,7 @@
             </div>
             <div class="clearDiv ti4">
               <p>{{item.productName}}</p>
-              <div class="can">{{canDebook(item.returnSign)}}</div>
+              <!-- <div class="can">{{canDebook(item.returnSign)}}</div> -->
               <div class="clearDiv">
                 <span class="ti5 ti6">{{item.originalPrice}}</span>
                 <span class="ti5 ti7">{{item.settlementPrice}}</span>
@@ -131,9 +131,9 @@ export default {
       });
     },
     //是否可退订
-    canDebook(type) {
-      return type === 1 ? (this.sign = "可退订") : (this.sign = "不可退订");
-    },
+    // canDebook(type) {
+    //   return type === 1 ? (this.sign = "可退订") : (this.sign = "不可退订");
+    // },
     //选择日期
     chooseDate(type) {
       let today = new Date();

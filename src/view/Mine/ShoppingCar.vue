@@ -125,7 +125,8 @@ export default {
       this.$fetch(
         `${this.$url1}:2060/user-aggregate/selectShopCarts`,
         {
-          touristId: Uid
+          touristId: Uid,
+          // typeId:this.$route.query.typeId
         }
       ).then(res => {
         console.log(res);
@@ -134,6 +135,7 @@ export default {
         // this.totalNum = res.data[0].productCount;
         this.stockId = res.data[0].createDateId;
         this.saleType = res.data[0].product.saleType;
+        this.typeId = res.data[0].product.typeId;
         // console.log(this.saleType);
         // console.log(this.id1)
         if (res.code === 200) {
@@ -287,7 +289,8 @@ export default {
           totalNum: this.totalNum,
           stockId: this.stockId,
           arr: this.arr,
-          saleType: this.saleType
+          saleType: this.saleType,
+          typeId:this.typeId
         }
       });
     }
@@ -399,7 +402,9 @@ export default {
           }
           .del {
             width: 150px;
+            
             .del-btn {
+               cursor: pointer;
               width: 31px;
               height: 32px;
               background: url(../../assets/img/shopping-car-del.png) no-repeat;
@@ -425,6 +430,7 @@ export default {
               font-weight: 400;
               color: rgba(102, 102, 102, 1);
               margin-left: 50px;
+              cursor: pointer;
             }
             .choosed {
               margin-left: 520px;
@@ -444,6 +450,7 @@ export default {
               background-size: 100% 100%;
               vertical-align: middle;
               margin-top: 25px;
+              cursor: pointer;
             }
           }
         }

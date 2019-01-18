@@ -259,7 +259,8 @@ export default {
           touristId: Uid,
           productId: this.product.id,
           createDateId: createDateId,
-          productCount: this.num1
+          productCount: this.num1,
+          typeId:this.$route.query.typeId
         },
         { headers: { "Content-Type": "application/json;charset=UTF-8" } }
       ).then(res => {

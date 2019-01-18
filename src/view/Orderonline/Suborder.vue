@@ -275,7 +275,7 @@ export default {
         this.pricetotal = this.price * this.count;
         // console.log(typeOf()this.pricetotal)
         this.price2 += this.pricetotal;
-        // 判断产品是门票还是零售，门票typeId为0 零售typeId为1
+        // 判断产品是门票还是零售，门票typeId为0 零售typeId为1..
         // if(this.typeId == 1){
         //   this.flag2 = true
         // }else if(this.typeId == 0){

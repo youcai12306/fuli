@@ -626,26 +626,20 @@
 					`${this.$url1}:6110/mongodb-mucon/structure/primary/searchLinkIndex?linkIndex=${type}&pageSize=${pageSize}&pageNum=${pageIndex}&isEnglish=${isEnglish}`
 				).then(res => {
 					if (res.code === 200) {
-					let list = [];
 					if (type == 'H1') {
 						this.list = res.data.content || [];
-						list = this.list;
 					}
 					if (type == 'H2-1') {
 						this.list2 = res.data.content || [];
-						list = this.list;
 					}
 					if (type == 'H2-2') {
 						this.list3 = res.data.content || [];
-						list = this.list;
 					}
 					if (type == 'H2-3') {
 						this.list4 = res.data.content || [];
-						list = this.list;
 					}
 					if (type == 'H3') {
 						this.list5 = res.data.content || [];
-						list = this.list;
 					}
 					} else {
 					console.log("读取失败");

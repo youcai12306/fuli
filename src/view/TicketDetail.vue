@@ -99,7 +99,8 @@ export default {
       shopNum: 0,
       list: "",
       touristId: "",
-      dataBaseDate:""
+      dataBaseDate:"",
+      parkId:""
     };
   },
   components: {
@@ -133,7 +134,8 @@ export default {
         console.log(res);
         console.log(res.data.dataBaseDate);
         this.dataBaseDate = res.data.dataBaseDate; //库存日期
-        console.log(this.dataBaseDate)
+        this.parkId = res.data.parkId;
+        console.log(this.parkId)
         if (res.code === 200) {
           // console.log(111);
           this.product = res.data;
@@ -267,6 +269,7 @@ export default {
           productCount: this.num1,
           typeId:this.$route.query.typeId,
           dataBaseDate:this.product.dataBaseDate,
+          parkId:this.product.parkId,
         },
         { headers: { "Content-Type": "application/json;charset=UTF-8" } }
       ).then(res => {

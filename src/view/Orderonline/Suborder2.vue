@@ -79,9 +79,9 @@
           </div>
           <div class="jian1">
             <div>
-              <div v-if="0 in activeTypeList"><el-radio v-model="radio7" label="1" @change="youhui()" >{{activityName1}}</el-radio><span class="jian" v-if="radio7==1">-¥{{decimal}}</span></div>
-              <div v-if="1 in activeTypeList"><el-radio v-model="radio7" label="2" @change="youhui()">{{activityName2}}</el-radio></div>
-              <div class="su4" v-if="radio7==2">
+              <div v-if="typeList.indexOf(0)>-1"><el-radio v-model="radio7" label="0" @change="youhui()" >满减</el-radio><span class="jian" v-if="radio7==0">-¥{{decimal}}</span></div>
+              <div v-if="typeList.indexOf(1)>-1"><el-radio v-model="radio7" label="1" @change="youhui()">满赠</el-radio></div>
+              <div class="su4" v-if="radio7==1">
                 <table cellspacing="0" width="1078">
                   <tr>
                     <th>赠品名称</th>
@@ -104,7 +104,7 @@
                   </tr>
                 </table>
               </div>
-              <div v-if="2 in activeTypeList"><el-radio v-model="radio7" label="3" @change="youhui()">{{activityName3}}</el-radio></div>
+              <div v-if="typeList.indexOf(2)>-1"><el-radio v-model="radio7" label="2" @change="youhui()">折扣</el-radio></div>
               <!-- <el-form-item label="线路类型：" prop="isGive">
  <el-radio-group v-model="currentLine.isGive">
  <el-radio :label="item.id" :key="item.id" v-for="item in isGive" >{{item.name}}</el-radio>
@@ -245,6 +245,7 @@ export default {
       flag1: false,
       count: 0,
       price1: "",
+      pricezhe: "",
       productname: "",
       playtime: "",
       orderId: "",
@@ -266,13 +267,11 @@ export default {
       price:"",
       activityName:"",
       productList:[],
-      activeTypeList: [],
-      idList: [],
+      activeTypeIDList: [],
+      typeList: [],
       decimal: 0,
       productId: "",
-      activityName1:"",
-      activityName2:"",
-      activityName3:""
+      activeNameList: []
     };
   },
   mounted() {
@@ -301,41 +300,33 @@ export default {
   // },
   methods: {
     youhui() {
-      // console.log('this.radio7:'+this.radio7);
-      // for (var i = 0; i < this.idList.length; i++){
-      //   if(this.idList[i] != ''){
-      //     this.radio7 = this.idList[i];
-      //     break;
-      //   }
-      // }
-      if (this.radio7 == 1) {
-        if(this.idList[0] == ''){
+      if (this.radio7 == 0) {
+        if(this.activeTypeIDList[0].activityId == ''){
           return;
         }
-        console.log('this.idList[0]:'+this.idList[0]);
         this.$post("http://101.201.101.138:2060/activity/activityOperation", {
-          activityId: this.idList[0],
+          activityId: this.activeTypeIDList[0].activityId,
           productList: [{}]
         }).then(res => {
           this.decimal = res.data.decimal;
         });
-      } else if (this.radio7 == 2) {
-        if(this.idList[1] == ''){
+      } else if (this.radio7 == 1) {
+        if(this.activeTypeIDList[1].activityId == ''){
           return;
         }
         this.$post("http://101.201.101.138:2060/activity/activityOperation", {
-          activityId: this.idList[1],
+          activityId: this.activeTypeIDList[1].activityId,
           productList: [{}]
         }).then(res => {
           console.log(res);
           this.productList = res.data.productList;
         });
-      } else if (this.radio7 == 3) {
-        if(this.idList[2] == ''){
+      } else if (this.radio7 == 2) {
+        if(this.activeTypeIDList[2].activityId == ''){
           return;
         }
         let data = {
-          activityId: this.idList[2],
+          activityId: this.activeTypeIDList[2].activityId,
           productList: [{
             productId: this.productId,
             cash: this.price1
@@ -346,7 +337,7 @@ export default {
           data
         ).then(res => {
           console.log(res);
-          this.price1 = res.data.productList[0].cash;
+          this.pricezhe = res.data.productList[0].cash;
         });
       }
     },
@@ -355,27 +346,16 @@ export default {
         touristId: this.$store.getters.getUserData.userId,
         orderCash: this.price2
       }).then(res => {
-        // console.log(res);
-        // console.log(res.data[0].activityType);
-        // this.activityName = res.data[0].activityName
-        // console.log(this.activityName)
-        console.log(res.data)
         res.data.forEach((value,index)=>{
           console.log(value);
           if(value){
-            this.activeTypeList.push(value.activityType);
-            this.idList.push(value.id);
-            this.activityName1 = res.data[0].activityName
-            this.activityName2 = res.data[1].activityName
-            this.activityName3 = res.data[2].activityName
+            this.activeTypeIDList.push({activityType: value.activityType,activityId: value.id});
+            this.typeList.push(value.activityType);
           }else{
-            this.activeTypeList.push('');
-            this.idList.push('');
+            this.activeTypeIDList.push({activityType: '',activityId: ''});
+            this.typeList.push('');
           }
         });
-        console.log('this.activeTypeList:'+this.activeTypeList);
-        console.log('this.idList:'+this.idList);
-        console.log(this.activityName);
         this.youhui();
       });
     },
@@ -517,9 +497,9 @@ export default {
         receiveMobile: this.numberValidateForm.phone,
         receiveIdentityCode: this.numberValidateForm.name2,
         createCannel: 1, //官网下单为1,
-        activitieId:3,//优惠券活动ID
-        activitieType:2,//优惠券活动类型
-        returnSign:0,//优惠券折扣
+        activitieId:this.activeTypeIDList[parseInt(this.radio7)].activityId,//优惠券活动ID
+        activitieType: parseInt(this.radio7),//优惠券活动类型
+        returnSign:0//优惠券折扣
        
       };
       this.productList.forEach((value) => {
@@ -559,7 +539,7 @@ export default {
                   path: "./success",
                   query: {
                     orderId: this.orderId,
-                    price2: this.price2
+                    price: this.price
                   }
                 });
               } else if (res.code === 400) {
@@ -581,11 +561,13 @@ export default {
   // 计算产品总价格
   computed: {
     price2() {
-      console.log('this.radio7:' + this.radio7);
-      if(this.radio7 == 1){
-        return this.price1 * this.count - this.decimal;
+      console.log(parseFloat(this.price1 * this.count - this.decimal).toFixed(2));
+      if(this.radio7 == 0){
+        return parseFloat(this.price1 * this.count - this.decimal).toFixed(2);
+      }else if(this.radio7 == 1){
+        return parseFloat(this.price1 * this.count).toFixed(2);
       }else{
-        return this.price1 * this.count;
+        return parseFloat(this.pricezhe * this.count).toFixed(2);
       }
     }
   }

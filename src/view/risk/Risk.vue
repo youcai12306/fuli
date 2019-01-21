@@ -12,106 +12,21 @@
 			<div class="content">
 				<div class="inner-box">
 					<swiper :options="swiperOption">
-						<swiper-slide :style="{background:'rgba(246,179,127,.65)',width:'1200px',height:'686px'}">
+						<swiper-slide v-for="(item,index) in data" :key="index" :style="{background:'rgba(246,179,127,.65)',width:'1200px',height:'686px'}">
 							<div class="clearDiv">
 								<div class="left floatLeft">
-									<img src="../../assets/img/risk-bg5.png" alt="图片">
+									<img :src="item.facePictureId[0]" alt="图片">
 									<button class="btn1">{{$t('risk.btn1')}}</button>
 									<button class="btn2">{{$t('risk.btn2')}}</button>
 								</div>
 								<div class="right floatRight">
-									<p class="p1">你们好我是杰克船长</p>
-									<p class="p2">勇敢、爱冒险、有领导才能，但偶尔有点冒失，需三思而后行。</p>
+									<p class="p1">{{item.title}}</p>
+									<p class="p2">{{item.content0.substring(3,item.content0.length-4)}}</p>
 									<div class="video" @click="status=true">
 										<img src="../../assets/img/risk-bg6.png" alt="视频背景图片" v-if="!status">
 										<template v-if="status">
 											<video controls="" autoplay="" name="media">
-												<source src="http://220.164.101.233/6972ABA05563D7189138F285D/03000A17005A6D6FDD431E055EEB3ED1C172E0-9A6B-0F5C-3683-71EB5632A884.mp4?ccode=050F&amp;duration=392&amp;expire=18000&amp;psid=9de947e6e0e2165a511f0bbaaa3a0f24&amp;ups_client_netip=77629cc8&amp;ups_ts=1545639349&amp;ups_userid=&amp;utid=P2yiFEgDlTgCAXdinMiUZGFx&amp;vid=XMzEyMjcxNjAw&amp;vkey=A424309d5ad1aaba3737f078c6d9fdae9&amp;sp=&amp;ali_redirect_domain=ykugc.cp31.ott.cibntv.net&amp;ali_redirect_ex_ftag=95670d958d49197e342f1df4ea06b2766aaef08cf8811e3d&amp;ali_redirect_ex_tmining_ts=1545639355&amp;ali_redirect_ex_tmining_expire=3600&amp;ali_redirect_ex_hot=0"
-												 type="video/mp4"></video>
-										</template>
-									</div>
-								</div>
-							</div>
-						</swiper-slide>
-						<swiper-slide :style="{background:'rgba(246,179,127,.65)',width:'1200px',height:'686px'}">
-							<div class="clearDiv">
-								<div class="left floatLeft">
-									<img src="../../assets/img/img103.png" alt="图片" class="img1">
-									<button class="btn1">{{$t('risk.btn1')}}</button>
-									<button class="btn2">{{$t('risk.btn2')}}</button>
-								</div>
-								<div class="right floatRight">
-									<p class="p1">你们好我是北极熊帕克</p>
-									<p class="p2">内柔外刚，自尊心很强。他特别爱惜自己的白毛，容不得其他人碰！但其实内心非常善良。</p>
-									<div class="video" @click="status=true">
-										<img src="../../assets/img/risk-bg6.png" alt="视频背景图片" v-if="!status">
-										<template v-if="status">
-											<video controls="" autoplay="" name="media">
-												<source src="http://220.164.101.233/6972ABA05563D7189138F285D/03000A17005A6D6FDD431E055EEB3ED1C172E0-9A6B-0F5C-3683-71EB5632A884.mp4?ccode=050F&amp;duration=392&amp;expire=18000&amp;psid=9de947e6e0e2165a511f0bbaaa3a0f24&amp;ups_client_netip=77629cc8&amp;ups_ts=1545639349&amp;ups_userid=&amp;utid=P2yiFEgDlTgCAXdinMiUZGFx&amp;vid=XMzEyMjcxNjAw&amp;vkey=A424309d5ad1aaba3737f078c6d9fdae9&amp;sp=&amp;ali_redirect_domain=ykugc.cp31.ott.cibntv.net&amp;ali_redirect_ex_ftag=95670d958d49197e342f1df4ea06b2766aaef08cf8811e3d&amp;ali_redirect_ex_tmining_ts=1545639355&amp;ali_redirect_ex_tmining_expire=3600&amp;ali_redirect_ex_hot=0"
-												 type="video/mp4"></video>
-										</template>
-									</div>
-								</div>
-							</div>
-						</swiper-slide>
-						<swiper-slide :style="{background:'rgba(246,179,127,.65)',width:'1200px',height:'686px'}">
-							<div class="clearDiv">
-								<div class="left floatLeft">
-									<img src="../../assets/img/img104.png" alt="图片" class="img2">
-									<button class="btn1">{{$t('risk.btn1')}}</button>
-									<button class="btn2">{{$t('risk.btn2')}}</button>
-								</div>
-								<div class="right floatRight">
-									<p class="p1">你们好我是海龟泰利</p>
-									<p class="p2">他是团队最小的成员，大家总认为他是个小孩。他总是向团队成员发问，来了解他所生活的世界。他善良、活跃、好奇心强、健谈，乐于助人但是总帮倒忙。</p>
-									<div class="video" @click="status=true">
-										<img src="../../assets/img/risk-bg6.png" alt="视频背景图片" v-if="!status">
-										<template v-if="status">
-											<video controls="" autoplay="" name="media">
-												<source src="http://220.164.101.233/6972ABA05563D7189138F285D/03000A17005A6D6FDD431E055EEB3ED1C172E0-9A6B-0F5C-3683-71EB5632A884.mp4?ccode=050F&amp;duration=392&amp;expire=18000&amp;psid=9de947e6e0e2165a511f0bbaaa3a0f24&amp;ups_client_netip=77629cc8&amp;ups_ts=1545639349&amp;ups_userid=&amp;utid=P2yiFEgDlTgCAXdinMiUZGFx&amp;vid=XMzEyMjcxNjAw&amp;vkey=A424309d5ad1aaba3737f078c6d9fdae9&amp;sp=&amp;ali_redirect_domain=ykugc.cp31.ott.cibntv.net&amp;ali_redirect_ex_ftag=95670d958d49197e342f1df4ea06b2766aaef08cf8811e3d&amp;ali_redirect_ex_tmining_ts=1545639355&amp;ali_redirect_ex_tmining_expire=3600&amp;ali_redirect_ex_hot=0"
-												 type="video/mp4"></video>
-										</template>
-									</div>
-								</div>
-							</div>
-						</swiper-slide>
-						<swiper-slide :style="{background:'rgba(246,179,127,.65)',width:'1200px',height:'686px'}">
-							<div class="clearDiv">
-								<div class="left floatLeft">
-									<img src="../../assets/img/img105.png" alt="图片" class="img3">
-									<button class="btn1">{{$t('risk.btn1')}}</button>
-									<button class="btn2">{{$t('risk.btn2')}}</button>
-								</div>
-								<div class="right floatRight">
-									<p class="p1">你们好我是安迪</p>
-									<p class="p2">博爱、有活力、乐于助人、好奇心很强的可爱男孩，不是非常聪明，对阿薇有好感。</p>
-									<div class="video" @click="status=true">
-										<img src="../../assets/img/risk-bg6.png" alt="视频背景图片" v-if="!status">
-										<template v-if="status">
-											<video controls="" autoplay="" name="media">
-												<source src="http://220.164.101.233/6972ABA05563D7189138F285D/03000A17005A6D6FDD431E055EEB3ED1C172E0-9A6B-0F5C-3683-71EB5632A884.mp4?ccode=050F&amp;duration=392&amp;expire=18000&amp;psid=9de947e6e0e2165a511f0bbaaa3a0f24&amp;ups_client_netip=77629cc8&amp;ups_ts=1545639349&amp;ups_userid=&amp;utid=P2yiFEgDlTgCAXdinMiUZGFx&amp;vid=XMzEyMjcxNjAw&amp;vkey=A424309d5ad1aaba3737f078c6d9fdae9&amp;sp=&amp;ali_redirect_domain=ykugc.cp31.ott.cibntv.net&amp;ali_redirect_ex_ftag=95670d958d49197e342f1df4ea06b2766aaef08cf8811e3d&amp;ali_redirect_ex_tmining_ts=1545639355&amp;ali_redirect_ex_tmining_expire=3600&amp;ali_redirect_ex_hot=0"
-												 type="video/mp4"></video>
-										</template>
-									</div>
-								</div>
-							</div>
-						</swiper-slide>
-						<swiper-slide :style="{background:'rgba(246,179,127,.65)',width:'1200px',height:'686px'}">
-							<div class="clearDiv">
-								<div class="left floatLeft">
-									<img src="../../assets/img/img106.png" alt="图片" class="img4">
-									<button class="btn1">{{$t('risk.btn1')}}</button>
-									<button class="btn2">{{$t('risk.btn2')}}</button>
-								</div>
-								<div class="right floatRight">
-									<p class="p1">你们好我是鲸鲨惠特尼</p>
-									<p class="p2">也是一位高贵的女士，经常帮助身边的朋友，永远保持乐观的性格,在朋友中非常受欢迎。最爱引吭高歌，有着非一般的女高音功力。</p>
-									<div class="video" @click="status=true">
-										<img src="../../assets/img/risk-bg6.png" alt="视频背景图片" v-if="!status">
-										<template v-if="status">
-											<video controls="" autoplay="" name="media">
-												<source src="http://220.164.101.233/6972ABA05563D7189138F285D/03000A17005A6D6FDD431E055EEB3ED1C172E0-9A6B-0F5C-3683-71EB5632A884.mp4?ccode=050F&amp;duration=392&amp;expire=18000&amp;psid=9de947e6e0e2165a511f0bbaaa3a0f24&amp;ups_client_netip=77629cc8&amp;ups_ts=1545639349&amp;ups_userid=&amp;utid=P2yiFEgDlTgCAXdinMiUZGFx&amp;vid=XMzEyMjcxNjAw&amp;vkey=A424309d5ad1aaba3737f078c6d9fdae9&amp;sp=&amp;ali_redirect_domain=ykugc.cp31.ott.cibntv.net&amp;ali_redirect_ex_ftag=95670d958d49197e342f1df4ea06b2766aaef08cf8811e3d&amp;ali_redirect_ex_tmining_ts=1545639355&amp;ali_redirect_ex_tmining_expire=3600&amp;ali_redirect_ex_hot=0"
-												 type="video/mp4"></video>
+												<source :src="item.content1.substring(3,item.content1.length-4)" type="video/mp4"></video>
 										</template>
 									</div>
 								</div>
@@ -142,11 +57,15 @@
 
 <script>
 	import "swiper/dist/css/swiper.css";
+	import Cookies from 'js-cookie';
 	import {
 		swiper,
 		swiperSlide
 	} from "vue-awesome-swiper";
 	import Header from "@/components/Header"; //引入头部
+	import {
+		IMG_Url
+	} from "@/package/common";
 	export default {
 		data() {
 			return {
@@ -183,7 +102,12 @@
 						nextEl: ".swiper-button-next",
 						prevEl: ".swiper-button-prev"
 					}
-				}
+				},
+				pageSize: 4,
+				pageIndex: 1,
+				imgs: [],
+				list: [],
+				isEnglish: Cookies.get('language') == 'en' ? 1 : 0
 			};
 		},
 
@@ -192,10 +116,63 @@
 			swiperSlide,
 			Header
 		},
-
-		computed: {},
-
-		methods: {}
+		computed: {
+			data() { //处理冒险之旅图片数据
+				let list = this.list;
+				list.forEach((v, k) => {
+					if (v.facePictureId) { //是否有图片
+						v.facePictureId.forEach((val, key) => {
+							this.imgs.forEach(res => {
+								if (val == res.id) {
+                  					v.facePictureId[key] = IMG_Url + res.fileName;
+								}
+							});
+						})
+					}
+				});
+				return list;
+			}
+		},
+		methods: {
+			getSearch(type, pageSize, pageIndex, isEnglish) { //获取冒险之旅列表 后台ID=D pageSize分页大小 pageIndex第几页 isEnglish中英文标识
+				this.$fetch(
+					`${this.$url1}:6110/mongodb-mucon/structure/primary/searchLinkIndex?linkIndex=${type}&pageSize=${pageSize}&pageNum=${pageIndex}&isEnglish=${isEnglish}`
+				).then(res => {
+					if (res.code === 200) {
+					let xin = [];
+					let xin2 = "";
+					let list = [];
+					if (type == 'D') {
+						this.list = res.data.content || [];
+						list = this.list;
+					}
+					list.forEach((v, k) => { //拼接图片字符串
+						if (v.facePictureId) { //是否有图片
+						v.facePictureId.forEach((val, key) => {
+							// if (key == 0) { //获取第一个图片
+							xin.push(val);
+							xin2 = xin.join(",");
+							// }
+						})
+						}
+					});
+					this.GetSelectFiles(xin2, type);
+					} else {
+					console.log("读取失败");
+					}
+				});
+			},
+			GetSelectFiles(obj, type) { //批量获取图片
+				this.$fetch(`${this.$url1}:2600/staticResource-mucon/selectFiles`, {
+					ids: obj
+				}).then(res => {
+					this.imgs = res.data;
+				});
+			},
+		},
+		mounted() {
+			this.getSearch('D', this.pageSize, this.pageIndex, this.isEnglish);
+		}
 	};
 </script>
 <style lang='scss' scoped>

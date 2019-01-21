@@ -81,9 +81,9 @@
           </div>
           <div class="jian1">
             <div>
-              <div v-if="0 in activeTypeList"><el-radio v-model="radio7" label="1" @change="youhui()">{{activityName1}}</el-radio><span class="jian" v-if="radio7==1">-¥{{decimal}}</span></div>
-              <div v-if="1 in activeTypeList"><el-radio v-model="radio7" label="2" @change="youhui()">{{activityName2}}</el-radio></div>
-              <div class="su4" v-if="radio7==2">
+              <div v-if="typeList.indexOf(0)>-1"><el-radio v-model="radio7" label="0" @change="youhui()" >满减</el-radio><span class="jian" v-if="radio7==0">-¥{{decimal}}</span></div>
+              <div v-if="typeList.indexOf(1)>-1"><el-radio v-model="radio7" label="1" @change="youhui()">满赠</el-radio></div>
+              <div class="su4" v-if="radio7==1">
                 <table cellspacing="0" width="1078">
                   <tr>
                     <th>赠品名称</th>
@@ -95,7 +95,7 @@
                   </tr>
                 </table>
               </div>
-              <div v-if="2 in activeTypeList"><el-radio v-model="radio7" label="3" @change="youhui()">{{activityName3}}</el-radio></div>
+              <div v-if="typeList.indexOf(2)>-1"><el-radio v-model="radio7" label="2" @change="youhui()">折扣</el-radio></div>
             </div>
           </div>
           <!-- 游客信息 -->
@@ -242,13 +242,11 @@ export default {
       price:"",
       activityName:"",
       productList:[],
-      activeTypeList: [],
+      activeTypeIDList: [],
+      typeList: [],
       idList: [],
       decimal: 0,
-      productId: "",
-      activityName1:"",
-      activityName2:"",
-      activityName3:""
+      productId: ""
     };
   },
   mounted() {
@@ -260,28 +258,7 @@ export default {
     if (this.a1 == 1) {
       let list1 = this.$route.query.list1;
       this.list2 = JSON.parse(list1);
-      console.log(this.list2);
-      // this.productName =this.product.productName;
-      // this.playtime = this.product.dataBaseDate;
-      // this.price1 = this.product.settlementPrice;
-      // console.log(this.price1);
-      // this.count = this.productCount;
-      for (let item of this.list2) {
-        this.price = item.settlementPrice;
-        // console.log(this.price)
-        this.count = item.productCount;
-        this.typeId = item.product.typeId;
-        console.log(this.typeId);
-        this.pricetotal = this.price * this.count;
-        // console.log(typeOf()this.pricetotal)
-        this.price2 += this.pricetotal;
-        // 判断产品是门票还是零售，门票typeId为0 零售typeId为1..
-        // if(this.typeId == 1){
-        //   this.flag2 = true
-        // }else if(this.typeId == 0){
-        //   this.flag2 = false
-        // }
-      }
+      this.getPrice(this.list2);
     }
   },
   // 监听路由跳转路径，如果是购物车，重新调用购物车接口
@@ -292,68 +269,71 @@ export default {
   //   }
   // },
   methods: {
+    getPrice(listnew) {
+      this.price2 = 0;
+      for (let item of listnew) {
+        this.price = item.settlementPrice;
+        this.count = item.productCount;
+        this.typeId = item.product.typeId;
+        this.pricetotal = this.price * this.count;
+        this.price2 += this.pricetotal;
+      }
+    },
     youhui() {
-      // console.log('this.radio7:'+this.radio7);
-      // for (var i = 0; i < this.idList.length; i++){
-      //   if(this.idList[i] != ''){
-      //     this.radio7 = this.idList[i];
-      //     break;
-      //   }
-      // }
-      if (this.radio7 == 1) {
-        if(this.idList[0] == ''){
+      if (this.radio7 == 0) {
+        if(this.activeTypeIDList[0].activityId == ''){
           return;
         }
-        console.log('this.idList[0]:'+this.idList[0]);
         this.$post("http://101.201.101.138:2060/activity/activityOperation", {
-          activityId: this.idList[0],
+          activityId: this.activeTypeIDList[0].activityId,
           productList: [{}]
         }).then(res => {
           this.decimal = res.data.decimal;
+          this.list2 = JSON.parse(this.$route.query.list1);
+          this.getPrice(this.list2);
         });
-      } else if (this.radio7 == 2) {
-        if(this.idList[1] == ''){
-          return;
-        }
-        this.$post("http://101.201.101.138:2060/activity/activityOperation", {
-          activityId: this.idList[1],
-          productList: [{}]
-        }).then(res => {
-          console.log(res);
-          this.productList = res.data.productList;
-        });
-      } else if (this.radio7 == 3) {
-        if(this.idList[2] == ''){
-          return;
-        }
-        let arr = this.$route.query.arr;
-        let prodata = [];
-        arr.forEach((value) => {
-          prodata.push({productId: value.productId});
-        });
-        this.list2.forEach((value,index) => {
-          prodata[index].cash = value.settlementPrice;
-        })
-        let data = {
-          activityId: this.idList[2],
-          productList: prodata
-        };
-        this.$post(
-          "http://101.201.101.138:2060/activity/activityOperation",
-          data
-        ).then(res => {
-          console.log(res);
-          // this.price1 = res.data.productList[0].cash;
-          let clist = res.data.productList;
-          this.list2.forEach((value,index) => {
-            clist.forEach((c) => {
-              if(value.productId == c.productId){
-                value.cash = c.cash;
-              }
-            });
-          })
-          console.log(this.list2);
-        });
+        } else if (this.radio7 == 1) {
+          if(this.activeTypeIDList[1].activityId == ''){
+            return;
+          }
+          this.$post("http://101.201.101.138:2060/activity/activityOperation", {
+            activityId: this.activeTypeIDList[1].activityId,
+            productList: [{}]
+          }).then(res => {
+            console.log(res);
+            this.productList = res.data.productList;
+            this.list2 = JSON.parse(this.$route.query.list1);
+            this.getPrice(this.list2);
+          });
+        } else if (this.radio7 == 2) {
+          if(this.activeTypeIDList[2].activityId == ''){
+            return;
+          }
+          let prodata = [];
+          this.list2.forEach((value) => {
+            prodata.push({productId: value.productId, cash: value.settlementPrice});
+          });
+          let data = {
+            activityId: this.activeTypeIDList[2].activityId,
+            productList: prodata
+          };
+          this.$post(
+            "http://101.201.101.138:2060/activity/activityOperation",
+            data
+          ).then(res => {
+            console.log(res);
+            let productList = res.data.productList;
+            // this.pricezhe = res.data.productList[0].cash;
+            // this.list2 = res.data.productList;
+            this.list2.forEach((value) => {
+              productList.forEach((product) => {
+                if(value.productId == product.productId){
+                  value.settlementPrice = product.cash;
+                }
+              })
+            })
+            this.getPrice(this.list2);
+          });
       }
     },
     active() {
@@ -361,26 +341,15 @@ export default {
         touristId: this.$store.getters.getUserData.userId,
         orderCash: this.price2
       }).then(res => {
-        // console.log(res);
-        // console.log(res.data[0].activityType);
-        // this.activityName = res.data[0].activityName
-        // console.log(this.activityName)
-        console.log(res.data)
         res.data.forEach((value,index)=>{
-          console.log(value);
           if(value){
-            this.activeTypeList.push(value.activityType);
-            this.idList.push(value.id);
-             this.activityName1 = res.data[0].activityName
-            this.activityName2 = res.data[1].activityName
-            this.activityName3 = res.data[2].activityName
+            this.activeTypeIDList.push({activityType: value.activityType,activityId: value.id});
+            this.typeList.push(value.activityType);
           }else{
-            this.activeTypeList.push('');
-            this.idList.push('');
+            this.activeTypeIDList.push({activityType: '',activityId: ''});
+            this.typeList.push('');
           }
         });
-        console.log('this.activeTypeList:'+this.activeTypeList);
-        console.log('this.idList:'+this.idList);
         this.youhui();
       });
     },
@@ -395,7 +364,6 @@ export default {
       }
     },
     changeType() {
-      console.log(this.checked);
       if (this.checked == true) {
         this.dis = false;
       } else {
@@ -459,15 +427,10 @@ export default {
       list2.forEach((v, i) => {
         this.arr2[i] = {};
         this.arr2[i]["id"] = v.id;
-        console.log(this.arr2[i]["id"]);
         this.arr3.push(this.arr2[i]["id"]);
-        console.log(this.arr3);
       });
 
       this.ids = this.arr3.join(",");
-      console.log(this.ids);
-      // console.log(this.saleType);
-      // console.log(num1);
       this.count = num1;
 
       this.$fetch("http://101.201.101.138:5001/product-aggregate/find/" + id, {
@@ -476,7 +439,6 @@ export default {
         touristId: this.$store.getters.getUserData.userId
       }).then(res => {
         if (res.code === 200) {
-          console.log(res.data);
           this.productname = res.data.productName;
           this.playtime = res.data.dataBaseDate;
           this.price1 = res.data.settlementPrice;
@@ -516,14 +478,13 @@ export default {
       
       let data = {
         touristId: this.$store.getters.getUserData.userId,
-        productFormList: this.$route.query.arr,
+        productFormList: JSON.parse(this.$route.query.arr),
         receiveId: this.receiveId, //邮寄ID
         receiveName: this.numberValidateForm.name1,
         receiveMobile: this.numberValidateForm.phone,
         receiveIdentityCode: this.numberValidateForm.name2,
         createCannel:1   //官网下单为1
       };
-      console.log(this.$route.query.arr);
       // 拿到guid以及订单号
       this.$post("http://101.201.101.138:5001/order-aggregate/save", data, {
         headers: { "Content-Type": "application/json;charset=UTF-8" }
@@ -551,7 +512,7 @@ export default {
                   path: "./success",
                   query: {
                     orderId: this.orderId,
-                    price2: this.price2
+                    price: this.price2
                   }
                 });
               } else if (res.code === 403 && res.code === 400) {
@@ -576,7 +537,7 @@ export default {
   //计算产品总价格
   computed: {
     price3() {
-      if(this.radio7 == 1){
+      if(this.radio7 == 0){
         return this.price2 - this.decimal;
       }else{
         return this.price2;

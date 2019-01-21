@@ -234,6 +234,25 @@
 			this.swiperInit();
 		},
 		methods: {
+			getSearch(type, pageSize, pageIndex, isEnglish) { //获取Banner 最新活动列表 Banner后台ID=B 最新活动ID=E pageSize分页大小 pageIndex第几页 isEnglish中英文标识
+				this.$fetch(
+					`${this.$url1}:6110/mongodb-mucon/structure/primary/searchLinkIndex?linkIndex=${type}&pageSize=${pageSize}&pageNum=${pageIndex}&isEnglish=${isEnglish}`
+				).then(res => {
+					if (res.code === 200) {
+					let list = [];
+					if (type == 'B') {
+						this.list = res.data.content || [];
+						list = this.list;
+					}
+					if (type == 'E') {
+						this.list2 = res.data.content || [];
+						list = this.list;
+					}
+					} else {
+					console.log("读取失败");
+					}
+				});
+			},
 			//跳转背景
 			jumpImg(index) {
 				clearInterval(this.times);
@@ -417,7 +436,6 @@
 <style lang='scss' scoped>
 	.main {
 		width: 100%;
-
 		.banner {
 			// height: 864px;
 			padding-top: 45%;
@@ -431,7 +449,7 @@
 				top: 0;
 				height: 100%;
 				width: 100%;
-				z-index: -1;
+				z-index: 0;
 
 				img {
 					// height: 864px;
@@ -489,7 +507,7 @@
 			margin-top: -180px;
 			background: url(../assets/img/index-img9.png) no-repeat 0 0;
 			background-size: 1920px 100%;
-
+			position: relative;
 			.content-list {
 				width: 1200px;
 				min-width: 1200px;

@@ -75,8 +75,8 @@
 					<!-- 优惠活动 -->
 					<li class="active" :class="{'actives' : $route.path == '/specialOffier' || $route.path == '/events' || $route.path == '/EventsDetail'}"
 					 @mouseover="overHover('specialOffier')" @mouseout="outHover('')">
-						<router-link to="/specialOffier" tag="p">
-							<template v-if="$route.path == '/specialOffier' || $route.path == '/events' || $route.path == '/EventsDetail' || hover == 'specialOffier'">
+						<router-link :to="{path:'/events',query:{id:'E'}}" tag="p">
+							<template v-if="$route.path == '/specialOffier' || $route.name == 'events' || $route.path == '/EventsDetail' || hover == 'specialOffier'">
 								<img src="../assets/img/header-6.png" alt>
 							</template>
 							<template v-else>

@@ -130,10 +130,10 @@
 					<template v-if="actives == 2">
 						<div class="box2">
 							<template v-for="item in data1">
-								<router-link tag="li" :to="{name:'BaiDetails',params:{type:'2',id:item.id}}">
-									<img :src="item.picid || img" :alt="item.infoTitle">
+								<router-link tag="li" :to="{name:'BaiDetails',params:{type:'2',id:item.structureId}}">
+									<img :src="item.facePictureId[0] || img" :alt="item.infoTitle">
 									<div class="box3">
-										<h3 class="t">{{item.infoTitle}}</h3>
+										<h3 class="t">{{item.title}}</h3>
 										<p>{{item.createTime}}</p>
 									</div>
 								</router-link>
@@ -147,10 +147,10 @@
 					<template v-if="actives == 3">
 						<div class="box2 box-shadow">
 							<template v-for="item in data2">
-								<router-link tag="li" :to="{name:'BaiDetails',params:{type:'3',id:item.id}}">
-									<img :src="item.picid || img" :alt="item.infoTitle">
+								<router-link tag="li" :to="{name:'BaiDetails',params:{type:'3',id:item.structureId}}">
+									<img :src="item.facePictureId[0] || img" :alt="item.infoTitle">
 									<div class="box3">
-										<h3 class="t">{{item.infoTitle}}</h3>
+										<h3 class="t">{{item.title}}</h3>
 										<p>{{item.createTime}}</p>
 									</div>
 								</router-link>
@@ -206,11 +206,11 @@
 				let list = this.list;
 				let str = [];
 				list.forEach((v, k) => {
-					if (v.infoPic) { //是否有图片
-						v.infoPic.forEach((val, key) => {
+					if (v.facePictureId) { //是否有图片
+						v.facePictureId.forEach((val, key) => {
 							this.imgs3.forEach(res => {
-								if (val.picid == res.id) {
-									v['picid'] = IMG_Url + res.fileName;
+								if (val == res.id) {
+									v.facePictureId[key] = IMG_Url + res.fileName;
 								}
 							});
 						})
@@ -221,37 +221,33 @@
 			},
 			data1() { //处理保育救助数据
 				let list = this.list1;
-				let str = [];
-				list.forEach((v, k) => {
-					if (v.infoPic) { //是否有图片
-						v.infoPic.forEach((val, key) => {
+				list.forEach(v => {
+					if (v.facePictureId) { //是否有图片
+						v.facePictureId.forEach((val, key) => {
 							this.imgs2.forEach(res => {
-								if (val.picid == res.id) {
-									v['picid'] = IMG_Url + res.fileName;
+								if (val == res.id) {
+									v.facePictureId[key] = IMG_Url + res.fileName;
 								}
 							});
 						})
 					}
-					str.push(v);
 				});
-				return str;
+				return list;
 			},
 			data2() { //处理科普活动数据
 				let list = this.list2;
-				let str = [];
-				list.forEach((v, k) => {
-					if (v.infoPic) { //是否有图片
-						v.infoPic.forEach((val, key) => {
+				list.forEach(v => {
+					if (v.facePictureId) { //是否有图片
+						v.facePictureId.forEach((val, key) => {
 							this.imgs.forEach(res => {
-								if (val.picid == res.id) {
-									v['picid'] = IMG_Url + res.fileName;
+								if (val == res.id) {
+									v.facePictureId[key] = IMG_Url + res.fileName;
 								}
 							});
 						})
 					}
-					str.push(v);
 				});
-				return str;
+				return list;
 			}
 		},
 		components: {
@@ -279,30 +275,29 @@
 			},
 			getSearch(type, pageSize, pageIndex, isEnglish) { //获取保育救助列表 保育救助后台ID=4 pageSize分页大小 pageIndex第几页 isEnglish中英文标识
 				this.$fetch(
-					`${this.$url1}:6110/mongodb-mucon/info/primary/search?type=${type}&pageSize=${pageSize}&pageNum=${pageIndex}&isEnglish=${isEnglish}`
+					`${this.$url1}:6110/mongodb-mucon/structure/primary/searchLinkIndex?linkIndex=${type}&pageSize=${pageSize}&pageNum=${pageIndex}&isEnglish=${isEnglish}`
 				).then(res => {
 					if (res.code === 200) {
 						let xin = [];
 						let xin2 = "";
 						let list = [];
-						if (type == 4) {
+						if (type == 'G2-1') {
 							this.list1 = res.data.content || [];
 							list = this.list1;
 							this.totle = res.data.totalElements;
-						} else if (type == 5) {
+						} else if (type == 'G2-2') {
 							this.list2 = res.data.content || [];
 							list = this.list2;
 							this.count = res.data.totalElements;
-						} else if (type == 6) {
+						} else if (type == "G1-1") {
 							this.list = res.data.content || [];
 							list = this.list;
 						}
-
 						list.forEach((v, k) => { //拼接图片字符串
-							if (v.infoPic) { //是否有图片
-								v.infoPic.forEach((val, key) => {
+							if (v.facePictureId) { //是否有图片
+								v.facePictureId.forEach((val, key) => {
 									if (key == 0) { //获取第一个图片
-										xin.push(val.picid);
+										xin.push(val);
 										xin2 = xin.join(",");
 									}
 								})
@@ -318,9 +313,9 @@
 				this.$fetch(`${this.$url1}:2600/staticResource-mucon/selectFiles`, {
 					ids: obj
 				}).then(res => {
-					if (type == 4) this.imgs2 = res.data;
-					else if (type == 5) this.imgs = res.data;
-					else if (type == 6) this.imgs3 = res.data;
+					if (type == 'G2-1') this.imgs2 = res.data;
+					else if (type == 'G2-2') this.imgs = res.data;
+					else if (type == 'G1-1') this.imgs3 = res.data;
 				});
 			}
 		},
@@ -330,9 +325,9 @@
 				this.actives = id;
 			}
 			//获取数据列表  （保育救助后台ID=4 科普活动后台ID=5 动物课堂后台ID=6）pageSize分页大小 pageIndex第几页 isEnglish中英文标识
-			this.getSearch(4, this.pageSize, this.pageIndex, this.isEnglish);
-			this.getSearch(5, this.pageSize, this.pageIndex2, this.isEnglish);
-			this.getSearch(6, 11, 1, this.isEnglish);
+			this.getSearch('G2-1', this.pageSize, this.pageIndex, this.isEnglish);
+			this.getSearch('G2-2', this.pageSize, this.pageIndex2, this.isEnglish);
+			// this.getSearch('G1-1', 11, 1, this.isEnglish);
 		},
 		watch: {
 			$route() {

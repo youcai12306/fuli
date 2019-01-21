@@ -25,13 +25,13 @@
 						<!-- <li class="li" @click="actives = 1" :class="{anActive:actives === 1}">
 						酒店预定
 					</li> -->
-						<li class="li" @click="actives = 2" :class="{anActive:actives == 2}" :title="$t('ditu.navTitle2')">
+						<li class="li" @click="actives = 2,getBusinessTime()" :class="{anActive:actives == 2}" :title="$t('ditu.navTitle2')">
 							{{$t('ditu.navTitle2')}}
 						</li>
 						<li class="li" @click="actives = 3" :class="{anActive:actives == 3}" :title="$t('ditu.navTitle3')">
 							{{$t('ditu.navTitle3')}}
 						</li>
-						<li class="li" @click="actives = 4" :class="{anActive:actives == 4}" :title="$t('ditu.navTitle4')">
+						<li class="li" @click="actives = 4,getQuestion()" :class="{anActive:actives == 4}" :title="$t('ditu.navTitle4')">
 							{{$t('ditu.navTitle4')}}
 						</li>
 						<li class="li" @click="actives = 5" :class="{anActive:actives == 5}" :title="$t('ditu.navTitle5')">
@@ -59,10 +59,10 @@
 									<div class="info-2-td">平日</div>
 									<div class="info-2-td">特定日</div>
 								</div>
-								<div class="info-2-tr">
-									<div class="info-2-td">成人票（示例）</div>
-									<div class="info-2-td color">XXX元/人</div>
-									<div class="info-2-td color">XXX元/人</div>
+								<div class="info-2-tr" v-for="(item,index) in list" :key="index">
+									<div class="info-2-td">{{item.title}}</div>
+									<div class="info-2-td color">{{item.content0.substring(3,item.content0.length-4)}}/人</div>
+									<div class="info-2-td color">{{item.content1.substring(3,item.content1.length-4)}}/人</div>
 								</div>
 								<div class="info-2-tr" v-if="status">
 									<div class="info-2-td">儿童票</div>
@@ -198,17 +198,11 @@
 									<div class="td">设备名称</div>
 									<div class="td">开放时间</div>
 								</div>
-								<div class="tr">
-									<div class="td">1</div>
-									<div class="td">麦迪卡斯水乐园</div>
-									<div class="td">梦幻转马</div>
-									<div class="td">10:30-17:00</div>
-								</div>
-								<div class="tr">
-									<div class="td">2</div>
-									<div class="td">冒险海洋</div>
-									<div class="td">水手秋千</div>
-									<div class="td">10:30-17:00</div>
+								<div class="tr" v-for="(item,index) in list2" :key="index">
+									<div class="td">{{index + 1}}</div>
+									<div class="td" v-html="item.content1"></div>
+									<div class="td">{{item.title}}</div>
+									<div class="td" v-html="item.content0"></div>
 								</div>
 								<div class="footer">
 									<p>备注：</p>
@@ -231,17 +225,11 @@
 									<div class="td">动物场馆名称</div>
 									<div class="td">开放时间</div>
 								</div>
-								<div class="tr">
-									<div class="td">1</div>
-									<div class="td">麦迪卡斯水乐园</div>
-									<div class="td">梦幻转马</div>
-									<div class="td">10:30-17:00</div>
-								</div>
-								<div class="tr">
-									<div class="td">2</div>
-									<div class="td">冒险海洋</div>
-									<div class="td">水手秋千</div>
-									<div class="td">10:30-17:00</div>
+								<div class="tr" v-for="(item,index) in list4" :key="index">
+									<div class="td">{{index + 1}}</div>
+									<div class="td" v-html="item.content1"></div>
+									<div class="td">{{item.title}}</div>
+									<div class="td" v-html="item.content0"></div>
 								</div>
 								<div class="footer">
 									<p>备注：</p>
@@ -255,17 +243,11 @@
 									<div class="td">精彩演艺名称</div>
 									<div class="td">开放时间</div>
 								</div>
-								<div class="tr">
-									<div class="td">1</div>
-									<div class="td">麦迪卡斯水乐园</div>
-									<div class="td">梦幻转马</div>
-									<div class="td">10:30-17:00</div>
-								</div>
-								<div class="tr">
-									<div class="td">2</div>
-									<div class="td">冒险海洋</div>
-									<div class="td">水手秋千</div>
-									<div class="td">10:30-17:00</div>
+								<div class="tr" v-for="(item,index) in list3" :key="index">
+									<div class="td">{{index + 1}}</div>
+									<div class="td" v-html="item.content1"></div>
+									<div class="td">{{item.title}}</div>
+									<div class="td" v-html="item.content0"></div>
 								</div>
 								<div class="footer">
 									<p>备注：</p>
@@ -436,20 +418,12 @@
 						<div class="box_header">常见问题</div>
 						<div class="box4_con">
 							<el-collapse accordion>
-								<el-collapse-item>
-									<template slot="title">
-										<span class="span">1</span>海洋公园在哪里？
-									</template>
-									<div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
-									<div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
-								</el-collapse-item>
-								<template v-for="(item,k) in 10">
-									<el-collapse-item>
+								<template v-for="(item,k) in list5" >
+									<el-collapse-item :key="k">
 										<template slot="title">
-											<span class="span">{{k+2}}</span>海洋公园票价节假日打不打折？
+											<span class="span">{{k+1}}</span>{{item.title}}
 										</template>
-										<div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
-										<div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
+										<div v-html="item.content0"></div>
 									</el-collapse-item>
 								</template>
 
@@ -625,20 +599,67 @@
 
 <script>
 	import Header from "@/components/Header"; //引入头部
+	import Cookies from 'js-cookie';
 	export default {
 		data() {
 			return {
 				tab: 0,
 				actives: 0,
 				imgs: ['../../../static/ditu9.jpg'],
-				status:false
+				status:false,
+				pageSize: 100,
+				pageIndex: 1,
+				list: [], //门票价格
+				list2: [], //营业时间：游玩设施
+				list3: [], //营业时间：精彩演艺
+				list4: [], //营业时间：动物场馆
+				list5: [], //常见问题
+				isEnglish: Cookies.get('language') == 'en' ? 1 : 0
 			};
 		},
 		components: {
 			Header
 		},
 		methods: {
-
+			getSearch(type, pageSize, pageIndex, isEnglish) { //获取门票价格 运营时间 常见问题列表 后台ID=门票价格H1 运营时间H2 常见问题H3 pageSize分页大小 pageIndex第几页 isEnglish中英文标识
+				this.$fetch(
+					`${this.$url1}:6110/mongodb-mucon/structure/primary/searchLinkIndex?linkIndex=${type}&pageSize=${pageSize}&pageNum=${pageIndex}&isEnglish=${isEnglish}`
+				).then(res => {
+					if (res.code === 200) {
+					let list = [];
+					if (type == 'H1') {
+						this.list = res.data.content || [];
+						list = this.list;
+					}
+					if (type == 'H2-1') {
+						this.list2 = res.data.content || [];
+						list = this.list;
+					}
+					if (type == 'H2-2') {
+						this.list3 = res.data.content || [];
+						list = this.list;
+					}
+					if (type == 'H2-3') {
+						this.list4 = res.data.content || [];
+						list = this.list;
+					}
+					if (type == 'H3') {
+						this.list5 = res.data.content || [];
+						list = this.list;
+					}
+					} else {
+					console.log("读取失败");
+					}
+				});
+			},
+			getBusinessTime() {
+				this.getSearch('H2-1', this.pageSize, this.pageIndex, this.isEnglish);//营业时间：游玩设施
+				this.getSearch('H2-2', this.pageSize, this.pageIndex, this.isEnglish);//营业时间：精彩演艺
+				this.getSearch('H2-3', this.pageSize, this.pageIndex, this.isEnglish);//营业时间：动物场馆
+			},
+			getQuestion() {
+				this.getSearch('H3', this.pageSize, this.pageIndex, this.isEnglish);//常见问题
+			}
 		},
 		created() {
 			document.title = "游玩指南";
@@ -648,6 +669,7 @@
 			if (id != undefined) {
 				this.actives = id;
 			}
+			this.getSearch('H1', this.pageSize, this.pageIndex, this.isEnglish);//门票价格
 		}
 	};
 </script>

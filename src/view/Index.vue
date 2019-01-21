@@ -417,7 +417,6 @@
 <style lang='scss' scoped>
 	.main {
 		width: 100%;
-
 		.banner {
 			// height: 864px;
 			padding-top: 45%;
@@ -431,7 +430,7 @@
 				top: 0;
 				height: 100%;
 				width: 100%;
-				z-index: -1;
+				z-index: 0;
 
 				img {
 					// height: 864px;
@@ -489,7 +488,7 @@
 			margin-top: -180px;
 			background: url(../assets/img/index-img9.png) no-repeat 0 0;
 			background-size: 1920px 100%;
-
+			position: relative;
 			.content-list {
 				width: 1200px;
 				min-width: 1200px;

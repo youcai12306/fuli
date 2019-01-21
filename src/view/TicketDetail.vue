@@ -82,17 +82,11 @@ export default {
         preventClicks: false, //用于防止触摸时触发链接跳转
         preventLinksPropagation: false //阻止click冒泡。拖动Swiper时阻止click事件
       },
-      imgs: [
-        "../static/piao-1.png",
-        "../static/le0.png",
-        "../static/piao-1.png",
-        "../static/le0.png"
-      ],
       index: 0,
       num1: 1,
       changeA: 0,
       changeB: 0,
-      img: [],
+      imgs: [],
       img3: "",
       time: "2018.12.09 08.00- 17.30",
       product: {},
@@ -133,17 +127,24 @@ export default {
         if (res.code === 200) {
           // console.log(111);
           this.product = res.data;
-          //请求图片接口
-          this.$fetch(
-            "http://101.201.101.138:2600/staticResource-mucon/selectFileById",
-            { id: this.product.pictureId }
-          ).then(res => {
-            this.img = IMG_Url + res.data.fileName;
-          });
+          let list = res.data.productPictureList;
+          let xin = [];
+          let xin2 = "";
+          list.forEach((v, k) => { //拼接图片字符串
+								xin.push(v.id);
+								xin2 = xin.join(",");
+					});
+					this.GetSelectFiles(xin2);
         }
       });
     },
-
+    GetSelectFiles(obj) { //批量获取图片
+      this.$fetch(`${this.$url1}:2600/staticResource-mucon/selectFiles`, {
+        ids: obj
+      }).then(res => {
+        this.imgs = res.data;
+      });
+    },
     prev() {
       this.swiper.slidePrev();
 

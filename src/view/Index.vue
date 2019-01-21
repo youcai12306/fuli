@@ -73,10 +73,10 @@
 					<div class="new-swiper">
 						<div class="swiper-box">
 							<el-carousel :interval="4000" type="card" height="248px" :autoplay="false" arrow="never" ref="car" @change="change">
-								<el-carousel-item v-for="(item,key) in 6" :key="key">
-									<div class="div" @click="jumpHuodongDetail(id)">
-										<img src="../assets/img/index-img1.png" alt :class="{colorA:key === newSwiperIndex}">
-										<p class="titless" :class="{colorB:key != newSwiperIndex}">2019精彩活动马上来袭！</p>
+								<el-carousel-item v-for="(item,key) in data" :key="key">
+									<div class="div" @click="jumpHuodongDetail(item.structureId)">
+										<img :src="item.facePictureId[0]" alt :class="{colorA:key === newSwiperIndex}">
+										<p class="titless" :class="{colorB:key != newSwiperIndex}">{{item.title}}</p>
 									</div>
 								</el-carousel-item>
 							</el-carousel>
@@ -223,7 +223,12 @@
 						return time.getTime() < Date.now() - 8.64e7;
 					}
 				},
-				isEnglish: Cookies.get('language') == 'en' ? 1 : 0
+				isEnglish: Cookies.get('language') == 'en' ? 1 : 0,
+				pageSize: 100,
+				pageIndex: 1,
+				list: [],
+				list2: [],
+				imgs : []
 			};
 		},
 		mounted() {
@@ -232,6 +237,8 @@
 			this.getNewList();
 			this.getTicketList();
 			this.swiperInit();
+			this.getSearch('B', this.pageSize, this.pageIndex, this.isEnglish);//Banner
+			this.getSearch('E', this.pageSize, this.pageIndex, this.isEnglish);//最新活动
 		},
 		methods: {
 			getSearch(type, pageSize, pageIndex, isEnglish) { //获取Banner 最新活动列表 Banner后台ID=B 最新活动ID=E pageSize分页大小 pageIndex第几页 isEnglish中英文标识
@@ -239,18 +246,37 @@
 					`${this.$url1}:6110/mongodb-mucon/structure/primary/searchLinkIndex?linkIndex=${type}&pageSize=${pageSize}&pageNum=${pageIndex}&isEnglish=${isEnglish}`
 				).then(res => {
 					if (res.code === 200) {
+					let xin = [];
+          			let xin2 = "";
 					let list = [];
 					if (type == 'B') {
 						this.list = res.data.content || [];
-						list = this.list;
 					}
 					if (type == 'E') {
 						this.list2 = res.data.content || [];
-						list = this.list;
+						list = this.list2;
+						list.forEach((v, k) => { //拼接图片字符串
+							if (v.facePictureId) { //是否有图片
+							v.facePictureId.forEach((val, key) => {
+								// if (key == 0) { //获取第一个图片
+								xin.push(val);
+								xin2 = xin.join(",");
+								// }
+							})
+							}
+						});
+						this.GetSelectFiles(xin2, type);
 					}
 					} else {
 					console.log("读取失败");
 					}
+				});
+			},
+			GetSelectFiles(obj, type) { //批量获取图片
+				this.$fetch(`${this.$url1}:2600/staticResource-mucon/selectFiles`, {
+					ids: obj
+				}).then(res => {
+					this.imgs = res.data;
 				});
 			},
 			//跳转背景
@@ -416,6 +442,21 @@
 		computed: {
 			swiper() {
 				return this.$refs.mySwiper.swiper;
+			},
+			data() { //处理最新活动图片数据
+				let list = this.list2;
+				list.forEach((v, k) => {
+					if (v.facePictureId) { //是否有图片
+						v.facePictureId.forEach((val, key) => {
+							this.imgs.forEach(res => {
+								if (val == res.id) {
+                  					v.facePictureId[key] = IMG_Url + res.fileName;
+								}
+							});
+						})
+					}
+				});
+				return list;
 			}
 		},
 		watch: {

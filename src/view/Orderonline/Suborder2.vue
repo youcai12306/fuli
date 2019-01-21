@@ -806,7 +806,7 @@ export default {
   }
 }
 </style>
-<style lang="">
+<style lang="" scoped>
 .suborder .el-input {
   width: 340px;
 }

@@ -32,11 +32,13 @@
           <ul>
             <li class="or8">{{$t('Tickets.Text1')}}</li>
             <router-link class="clearDiv or9 oo" tag="li" :to="{ path: '/tickets/'+0}">
-              <img src="../../../src/assets/img/menpiao.png" alt>
+              <img v-show="h1 == 0" src="../../../src/assets/img/menpiao.png" alt>
+              <img v-show="h1 == 1" src="../../../src/assets/img/menpiao-h.png" alt>
               <p>{{$t('Tickets.Text2')}}</p>
             </router-link>
             <router-link class="clearDiv or9 or10" tag="li" :to="{ path: '/tickets/'+1}">
-              <img src="../../../src/assets/img/linshou.png" alt>
+              <img v-show="h2 == 0" src="../../../src/assets/img/linshou.png" alt>
+              <img v-show="h2 == 1" src="../../../src/assets/img/linshou-h.png" alt>
               <p>{{$t('Tickets.Text3')}}</p>
             </router-link>
             <li class="clearDiv or9 or10">
@@ -61,7 +63,12 @@ import Header from '@/components/Header'
 export default {
   data() {
     return {
-      shopNum:0
+      shopNum:0,
+      h1: 0,
+      h2: 0,
+      h3: 0,
+      h4: 0,
+      num: 0
     };
   },
   // props:['typeId'],
@@ -69,8 +76,43 @@ export default {
     Header
   },
   methods: {
-    
+    changeNum() {
+      this.num = this.$route.path.substring(this.$route.path.length-1,this.$route.path.length);
+    console.log(this.num);
+      if(this.num == 0){
+        this.h1 = 1;
+        this.h2 = 0;
+        this.h3 = 0;
+        this.h4 = 0;
+      }
+      if(this.num == 1){
+        this.h1 = 0;
+        this.h2 = 1;
+        this.h3 = 0;
+        this.h4 = 0;
+      }
+      if(this.num == 2){
+        this.h1 = 0;
+        this.h2 = 0;
+        this.h3 = 1;
+        this.h4 = 0;
+      }
+      if(this.num == 3){
+        this.h1 = 0;
+        this.h2 = 0;
+        this.h3 = 0;
+        this.h4 = 1;
+      }
+    }
   },
+  mounted() {
+    this.changeNum()
+  },
+  watch: {
+    $route(to,from) {
+      this.changeNum()
+    }
+  }
 };
 </script>
 
@@ -125,8 +167,11 @@ export default {
     .pp1 {
       width: 240px;
       float: left;
-       .oo {
+       .router-link-active {
         background-color: #ffb518;
+        p{
+          color: #fff;
+        }
       }
     }
     .or8 {

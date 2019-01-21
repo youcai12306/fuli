@@ -92,7 +92,9 @@ export default {
       product: {},
       shopNum: 0,
       list: "",
-      touristId: ""
+      touristId: "",
+      dataBaseDate:"",
+      parkId:""
     };
   },
   components: {
@@ -123,7 +125,11 @@ export default {
         touristId,
         typeId:typeId
       }).then(res => {
-        // console.log(res);
+        console.log(res);
+        console.log(res.data.dataBaseDate);
+        this.dataBaseDate = res.data.dataBaseDate; //库存日期
+        this.parkId = res.data.parkId;
+        console.log(this.parkId)
         if (res.code === 200) {
           // console.log(111);
           this.product = res.data;
@@ -252,7 +258,8 @@ export default {
         touristId: Uid,
         productId: this.product.id,
         createDateId: createDateId,
-        productCount: this.num1
+        productCount: this.num1,
+        dataBaseDate:this.dataBaseDate
       };
       this.$post(
         "http://101.201.101.138:2060/user-aggregate/addToshopCart",
@@ -261,7 +268,9 @@ export default {
           productId: this.product.id,
           createDateId: createDateId,
           productCount: this.num1,
-          typeId:this.$route.query.typeId
+          typeId:this.$route.query.typeId,
+          dataBaseDate:this.product.dataBaseDate,
+          parkId:this.product.parkId,
         },
         { headers: { "Content-Type": "application/json;charset=UTF-8" } }
       ).then(res => {

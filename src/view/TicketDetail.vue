@@ -12,12 +12,12 @@
       </div>
       <div class="main-one clearDiv">
         <div class="one-left">
-          <img :src="img3" alt>
+          <img :src="imgs2[0]" alt>
           <div class="swiper">
             <div class="swiper-contents">
               <swiper :options="swiperOption" ref="mySwiper">
-                <swiper-slide v-for="(list,key) in imgs" :key="key">
-                  <img :src="list" :class="{borderImg:key === index}">
+                <swiper-slide v-for="(item,key) in imgs2" :key="key">
+                  <img :src="item" :class="{borderImg:key === index}">
                 </swiper-slide>
               </swiper>
             </div>
@@ -25,6 +25,7 @@
             <div class="swiper-next" @click="next"></div>
           </div>
         </div>
+        {{data}}
         <div class="one-right">
           <div class="right-title">{{product.productName}}</div>
           <div class="right-pay clearDiv">
@@ -87,11 +88,13 @@ export default {
       changeA: 0,
       changeB: 0,
       imgs: [],
+      imgs2: [],
       img3: "",
       time: "2018.12.09 08.00- 17.30",
       product: {},
       shopNum: 0,
       list: "",
+      list2: [],
       touristId: "",
       dataBaseDate:"",
       parkId:""
@@ -134,10 +137,11 @@ export default {
           // console.log(111);
           this.product = res.data;
           let list = res.data.productPictureList;
+          this.list2 = res.data.productPictureList;
           let xin = [];
           let xin2 = "";
           list.forEach((v, k) => { //拼接图片字符串
-								xin.push(v.id);
+								xin.push(v.subPictureId);
 								xin2 = xin.join(",");
 					});
 					this.GetSelectFiles(xin2);
@@ -149,6 +153,17 @@ export default {
         ids: obj
       }).then(res => {
         this.imgs = res.data;
+        this.list2.forEach((v, k) => {
+					if (v.subPictureId) { //是否有图片
+							this.imgs.forEach(res => {
+								if (v.subPictureId == res.id) {
+                  console.log(IMG_Url + res.fileName);
+                  this.imgs2.push(IMG_Url + res.fileName);
+								}
+							});
+					  }
+          });
+          console.log(this.imgs2);
       });
     },
     prev() {
@@ -313,7 +328,20 @@ export default {
   computed: {
     swiper() {
       return this.$refs.mySwiper.swiper;
-    }
+    },
+    data() { //处理最新活动图片数据
+        // console.log(this.list2);
+				// this.list2.forEach((v, k) => {
+				// 	if (v.subPictureId) { //是否有图片
+				// 			this.imgs.forEach(res => {
+				// 				if (v.subPictureId == res.id) {
+        //           v.subPictureId = IMG_Url + res.fileName;
+				// 				}
+				// 			});
+				// 	}
+				// });
+				// return list2;
+		}
   }
 };
 </script>

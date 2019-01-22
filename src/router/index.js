@@ -9,7 +9,7 @@ import {
 const Login = r => require.ensure([], () => r(require('@/view/Login')), 'Login')
 //注册
 
-const Register = r => require.ensure([], () => r(require('@/view/Register')), 'Register')
+
 //忘记密码
 const Forget = r => require.ensure([], () => r(require('@/view/Forget')), 'Forget')
 //首页
@@ -128,11 +128,7 @@ let router = new Router({
 				component: Tickets, //订票列表
 			}]
 		},
-		{
-			path: '/register',
-			name: 'Register',
-			component: Register //注册
-		},
+		
 		{
 			path: '/suborder',
 			name: 'Suborder',

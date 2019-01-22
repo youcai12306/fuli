@@ -271,7 +271,8 @@ export default {
       typeList: [],
       decimal: 0,
       productId: "",
-      activeNameList: []
+      activeNameList: [],
+      returnSignList: []
     };
   },
   mounted() {
@@ -351,9 +352,11 @@ export default {
           if(value){
             this.activeTypeIDList.push({activityType: value.activityType,activityId: value.id});
             this.typeList.push(value.activityType);
+            this.returnSignList.push(value.returnSign);
           }else{
             this.activeTypeIDList.push({activityType: '',activityId: ''});
             this.typeList.push('');
+            this.returnSignList.push('');
           }
         });
         this.youhui();
@@ -499,7 +502,7 @@ export default {
         createCannel: 1, //官网下单为1,
         activitieId:this.activeTypeIDList[parseInt(this.radio7)].activityId,//优惠券活动ID
         activitieType: parseInt(this.radio7),//优惠券活动类型
-        returnSign:0//优惠券折扣
+        returnSign:this.returnSignList[parseInt(this.radio7)]//优惠券折扣
        
       };
       this.productList.forEach((value) => {

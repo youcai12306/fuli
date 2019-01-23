@@ -3,14 +3,7 @@
 		<Header></Header>
 		<div class="banner">
 			<div class="banner-imgs">
-				<img src="../assets/img/index-banner1.jpg" alt v-show="0 === index" @click="jumpHuodongDetail(0)">
-				<img src="../assets/img/img102.jpg" alt v-show="1 === index" @click="jumpHuodongDetail(0)">
-				<img src="../assets/img/index-banner1.jpg" alt v-show="2 === index" @click="jumpHuodongDetail(0)">
-				<img src="../assets/img/index-banner1.jpg" alt v-show="3 === index" @click="jumpHuodongDetail(0)">
-				<img src="../assets/img/index-banner1.jpg" alt v-show="4 === index" @click="jumpHuodongDetail(0)">
-				<img src="../assets/img/img102.jpg" alt v-show="5 === index" @click="jumpHuodongDetail(0)">
-				<img src="../assets/img/index-banner1.jpg" alt v-show="6 === index" @click="jumpHuodongDetail(0)">
-				<img src="../assets/img/index-banner1.jpg" alt v-show="7 === index" @click="jumpHuodongDetail(0)">
+				<img v-for="(item,key) in data2" :key="key" :src="item.facePictureId[0]" alt v-show="key === index" @click="jumpHuodongDetail(item.structureId)">
 			</div>
 			<div class="banner-content clearDiv">
 				<div class="content-list">{{$t('index.date')}}
@@ -33,29 +26,8 @@
 					<div class="one-change" @mouseover="stopTimes" @mouseout="startTimes">
 						<swiper :options="swiperOption" ref="mySwiper">
 							<!-- slides -->
-							<swiper-slide>
-								<img src="../assets/img/index-img12.png" alt :class="{imgActive:index === 0}" @click.stop="jumpImg(0)">
-							</swiper-slide>
-							<swiper-slide>
-								<img src="../assets/img/img101.png" alt :class="{imgActive:index === 1}" @click.stop="jumpImg(1)">
-							</swiper-slide>
-							<swiper-slide>
-								<img src="../assets/img/index-img14.png" alt :class="{imgActive:index === 2}" @click.stop="jumpImg(2)">
-							</swiper-slide>
-							<swiper-slide>
-								<img src="../assets/img/index-img15.png" alt :class="{imgActive:index === 3}" @click.stop="jumpImg(3)">
-							</swiper-slide>
-							<swiper-slide>
-								<img src="../assets/img/index-img12.png" alt :class="{imgActive:index === 4}" @click.stop="jumpImg(4)">
-							</swiper-slide>
-							<swiper-slide>
-								<img src="../assets/img/img101.png" alt :class="{imgActive:index === 5}" @click.stop="jumpImg(5)">
-							</swiper-slide>
-							<swiper-slide>
-								<img src="../assets/img/index-img14.png" alt :class="{imgActive:index === 6}" @click.stop="jumpImg(6)">
-							</swiper-slide>
-							<swiper-slide>
-								<img src="../assets/img/index-img15.png" alt :class="{imgActive:index === 7}" @click.stop="jumpImg(7)">
+							<swiper-slide v-for="(item,key) in data2" :key="key">
+								<img :src="item.facePictureId[0]" alt :class="{imgActive:index === key}" @click.stop="jumpImg(key)">
 							</swiper-slide>
 							<!-- Optional controls -->
 						</swiper>
@@ -228,7 +200,8 @@
 				pageIndex: 1,
 				list: [],
 				list2: [],
-				imgs : []
+				imgs : [],
+				imgs2 : []
 			};
 		},
 		mounted() {
@@ -251,24 +224,25 @@
 					let list = [];
 					if (type == 'B') {
 						this.list = res.data.content || [];
+						list = this.list;
 					}
 					if (type == 'E') {
 						this.list2 = res.data.content || [];
 						list = this.list2;
-						list.forEach((v, k) => { //拼接图片字符串
-							if (v.facePictureId) { //是否有图片
-							v.facePictureId.forEach((val, key) => {
-								// if (key == 0) { //获取第一个图片
-								xin.push(val);
-								xin2 = xin.join(",");
-								// }
-							})
-							}
-						});
-						this.GetSelectFiles(xin2, type);
 					}
+					list.forEach((v, k) => { //拼接图片字符串
+						if (v.facePictureId) { //是否有图片
+						v.facePictureId.forEach((val, key) => {
+							// if (key == 0) { //获取第一个图片
+							xin.push(val);
+							xin2 = xin.join(",");
+							// }
+						})
+						}
+					});
+					this.GetSelectFiles(xin2, type);
 					} else {
-					console.log("读取失败");
+						console.log("读取失败");
 					}
 				});
 			},
@@ -276,7 +250,12 @@
 				this.$fetch(`${this.$url1}:2600/staticResource-mucon/selectFiles`, {
 					ids: obj
 				}).then(res => {
-					this.imgs = res.data;
+					if(type=='E'){
+						this.imgs = res.data;
+					}else if(type == 'B'){
+						this.imgs2 = res.data;
+					}
+					
 				});
 			},
 			//跳转背景
@@ -379,7 +358,11 @@
 			},
 			swiperInit() {
 				this.times = setInterval(() => {
-					this.index++;
+					if(this.index < this.data2.length-1){
+						this.index++;
+					}else{
+						this.index = 0;
+					}
 				}, 4000);
 			},
 			//停止定时器
@@ -392,12 +375,20 @@
 			},
 			//切换上一张
 			prev() {
-				this.index--;
+				if(this.index == 0){
+					this.index = this.data2.length-1;
+				}else{
+					this.index--;
+				}
 				this.swiper.slideTo(this.index, 500, false);
 			},
 			//切换下一张
 			next() {
-				this.index++;
+				if(this.index < this.data2.length-1){
+					this.index++;
+				}else{
+					this.index = 0;
+				}
 				this.swiper.slideTo(this.index, 500, false);
 			},
 			prevs() {
@@ -457,19 +448,42 @@
 					}
 				});
 				return list;
+			},
+			data2() { //处理Banner图片数据
+				let list = this.list;
+				list.forEach((v, k) => {
+					if (v.facePictureId) { //是否有图片
+						v.facePictureId.forEach((val, key) => {
+							this.imgs2.forEach(res => {
+								if (val == res.id) {
+                  					v.facePictureId[key] = IMG_Url + res.fileName;
+								}
+							});
+						})
+					}
+				});
+				return list;
 			}
 		},
 		watch: {
 			index: function(newVal, oldVal) {
-				if (newVal === 6) {
+				console.log(newVal < this.data2.length-1);
+				if(newVal < this.data2.length-1){
+					this.swiper.slideTo(newVal + 1, 500, false);
+					if (newVal === 6) {
 					this.swiper.slideTo(newVal + 1, 500, false); //切换到看不见的slide，速度为.5秒
-				} else if (newVal === 8) {
-					this.index = 0;
-					this.swiper.slideTo(this.index, 500, false); //切换到第一个slide，速度为.5秒
-				} else if (newVal === -1) {
-					this.index = 7;
-					this.swiper.slideTo(this.index, 500, false); //切换到最后一个slide，速度为.5秒
+					} else if (newVal === 8) {
+						this.index = 0;
+						this.swiper.slideTo(this.index, 500, false); //切换到第一个slide，速度为.5秒
+					} else if (newVal === -1) {
+						this.index = 7;
+						this.swiper.slideTo(this.index, 500, false); //切换到最后一个slide，速度为.5秒
+					}
+				}else{
+					console.log(123456789);
+					this.swiper.slideTo(0, 500, false);
 				}
+				
 			}
 		}
 	};

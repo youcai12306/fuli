@@ -73,12 +73,13 @@
 								<tr class="tr">
 									<td colspan="6">
 										{{$t('Order.ecode')}}：
-										<a href="#">{{item.ecode}}</a>({{$t('OrderDetail.Text12')}})
+										<a @click="getCode()" href="javascript:;">{{item.ecode}}</a>({{$t('OrderDetail.Text12')}})
 									</td>
 								</tr>
 							</template>
 						</tbody>
 					</table>
+					<img v-if="url" class="code" :src="'data:image/jpeg;base64,'+url" alt="">
 				</div>
 				<div class="four">
 					<table class="four-table" cellspacing="0" cellpadding="0">
@@ -164,7 +165,8 @@
 				data: [],
 				list: [],
 				item: [],
-				item2:[]
+				item2:[],
+				url: ''
 			};
 		},
 
@@ -275,6 +277,15 @@
 				}).catch(error => {
 					console.log(error)
 				})
+			},
+			getCode() {
+				console.log(this.list);
+				this.$fetch(`${this.$url1}:5001/product-aggregate/findOrderByeCode?eCode=`+ this.list[0].ecode).then(res => {
+					console.log();
+					this.url = res.data;
+				}).catch(error => {
+					console.log(error)
+				})
 			}
 		},
 		mounted() {
@@ -349,6 +360,12 @@
 	};
 </script>
 <style lang='scss' scoped>
+	.code{
+		display: block;
+		margin-left: 74px;
+		width: 100px;
+		height: 100px;
+	}
 	.order-detail {
 		.nav {
 			width: 100%;
@@ -548,7 +565,7 @@
 						font-size: 14px;
 						font-weight: 400;
 						color: rgba(51, 51, 51, 1);
-
+					
 						.title {
 							width: 921px;
 							height: 57px;

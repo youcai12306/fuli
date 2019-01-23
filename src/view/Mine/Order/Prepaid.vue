@@ -175,7 +175,7 @@
 					path: "./success",
 					query: {
 						orderId: id,
-						price2: price
+						price: price
 					}
 				});
 			},

@@ -509,7 +509,7 @@ export default {
         data.productFormList.push({
           productId: value.productId,
           num: value.productCount,
-          saleType: 1,
+          saleType: value.saleType,
           stockId: value.priceId
         })
       });

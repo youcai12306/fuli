@@ -5,14 +5,14 @@
 		<!-- 第一部分 -->
 		<div class="banner" id="banner">
 			<div class="theme-title">
-				<p>麦迪卡斯水乐园</p>
+				<p>{{title}}</p>
 			</div>
 			<div class="list-one">
 				<div class="one-change" @mouseover="stopTimes" @mouseout="startTimes">
 					<swiper :options="swiperOption" ref="mySwiper" v-if="list2.length > 0">
 						<!-- slides -->
 						<template v-for="(item,k) in list2">
-							<swiper-slide>
+							<swiper-slide :key="k">
 								<img :src="item.facePictureId[0] || imgSrc" :alt="item.title" @click.stop="jumpImg(k)">
 								<p :class="{imgActive:index === k}">{{item.title}}</p>
 							</swiper-slide>
@@ -25,160 +25,29 @@
 			</div>
 			<div class="shebei">
 				<div class="banner-imgs" @mouseover="stopTimes" @mouseout="startTimes">
-          <div class="imgList" v-for="(item,i) in 13" :key="item" v-show="i === index">
+          <div class="imgList" v-for="(item,i) in list2" :key="i" v-show="i === index">
             <div class="top">
-              <div
-                class="top-imgList"
-                v-for="(item,key) in 2"
-                :key="key"
-                v-show="key === datailIndex"
-              >
-                <img
-                  :src="`../../../static/theme/${i+1}.png`"
-                  alt
-                  class="img"
-                  v-show="changeImg == 0"
-                >
-                <img
-                  :src="`../../../static/theme/${i+2}.png`"
-                  alt
-                  class="img"
-                  v-show="changeImg == 1"
-                >
+              <div class="top-imgList"  >
+                <img v-for="(itemImg,key) in item.facePictureId" :key="key" :src="itemImg" alt class="img" v-show="changeImg == key">
               </div>
               <div class="top-imgMinList">
                 <ul>
-                  <li v-for="(item,keys) in 2" :key="keys" @click="showDatail(keys)">
-                    <img src="../../assets/img/banner-img1.png" alt class="imgMin">
+                  <li v-for="(itemImg,keys) in item.facePictureId" :key="keys" @click="showDatail(keys)">
+                    <img :src="itemImg" alt class="imgMin">
                   </li>
                 </ul>
               </div>
             </div>
             <div class="bottom clearDiv">
-              <div class="floatLeft" v-if="i == 0">
-                <h3>暴风海神湾</h3>
-                <p class="p1">从涓涓细浪到拍岸巨浪的八种海浪为你带来全海域舒适感觉，陪同家人朋友在浮圈上享受如同海浪中的美好历程。</p>
+              <div class="floatLeft" v-if="i == index">
+                <h3>{{item.title}}</h3>
+								<p v-html="item.content0"></p>
+                <!-- <p class="p1">从涓涓细浪到拍岸巨浪的八种海浪为你带来全海域舒适感觉，陪同家人朋友在浮圈上享受如同海浪中的美好历程。</p>
                 <p class="p1 mt-30">• 水池面积：4050㎡
                   <br>• 水深：2.0m
                   <br>• 身高在1.2m以下须有监护人陪同参玩，身高在1.5m以下、长者及不识水性者必须穿着救生衣参玩。
                   <br>
-                </p>
-              </div>
-              <div class="floatLeft" v-if="i == 1">
-                <h3>美杜莎没落之河</h3>
-                <p
-                  class="p1"
-                >是一个长470的漂流河，乘坐浮圈顺着湍急的河流忽左忽右，趣味无限。躺在浮圈上悠闲的沿着河漂流真是再惬意不过了，你可以静静的欣赏园里的风景，或跟家人朋友畅谈，也可以想想下一个等待自己的惊险设备会是哪一个。</p>
-                <p class="p1 mt-30">• 水深1.05m。
-                  <br>• 懒人河长470m。
-                  <br>• 身高在1.2m以下须有监护人陪同参玩，身高在1.5m以下、长者及不识水性者必须穿着救生衣参玩。
-                  <br>
-                </p>
-              </div>
-              <div class="floatLeft" v-if="i == 2">
-                <h3>争霸塔</h3>
-                <p class="p1">你和你的家人或朋友乘坐圆形皮筏从18.7米的高空出发，迅速穿越一段螺旋滑槽后，挑战地心引力的极限，尽享被龙卷风吸入旋回的感受。</p>
-                <p class="p1 mt-30">•哈帝斯滑道 长106.7m，宙斯滑道长98.5m。
-                  <br>•高度18.7m，仅限身高1.07m以上的客人游玩。
-                  <br>
-                </p>
-              </div>
-              <div class="floatLeft" v-if="i == 3">
-                <h3>双神战道</h3>
-                <p
-                  class="p1"
-                >你和你的家人或朋友乘坐圆形皮筏，准备好挑战这个庞大的海蛇型水滑道，它会带您和您的朋友穿越黑暗蜿蜒的隧道弹射到一个狂野的漂浮设施，然后掉进玻璃纤维管内，尝试强烈的倾斜和来回猛冲。</p>
-                <p class="p1 mt-30">•帕尔修斯滑道长186.2m，海克力斯滑道长202.5m。
-                  <br>•高度18.25m，仅限身高1.07m以上的客人游玩。
-                  <br>
-                </p>
-              </div>
-              <div class="floatLeft" v-if="i == 4">
-                <h3>赫拉彩虹天梯</h3>
-                <p
-                  class="p1"
-                >由八条各自独立的滑道组成，八个游客可各自选一条滑道，从18.8米高的塔端进入，开始疾驰滑行。游客趴在飞毯似的滑毯上，在完全密封的水槽中完成一个完整回环，进入到开放式的直到俯冲部分，一路激起浪花片片，十分好玩。</p>
-                <p class="p1 mt-30">•高18.8m。
-                  <br>•滑毯滑道，仅限身高1.07m以上的客人游玩。
-                  <br>
-                </p>
-              </div>
-              <div class="floatLeft" v-if="i == 5">
-                <h3>奥林匹克竞赛</h3>
-                <p
-                  class="p1"
-                >两个舱室地面装配令人恐惧的活板门，连接着95米长蜿蜒的水滑道。走进舱室静待脚下地面脱落的瞬间，感受肾上腺素的急速飙升，然后骤然垂直落下以15米/秒的速度穿过这个水滑道，推动着您上下颠簸。</p>
-                <p class="p1 mt-30">•阿波罗赛道长105.9m，阿尔忒弥斯赛道长83.1m，赫尔默斯赛道长88.3m。
-                  <br>•仅限身高1.22m以上的客人游玩。
-                  <br>
-                </p>
-              </div>
-              <div class="floatLeft" v-if="i == 6">
-                <h3>宙斯雷电环</h3>
-                <p
-                  class="p1"
-                >自由选择三种人体单行直滑的滑道。俯冲而下的高速滑行，彻底体验自由落体的畅快，逆风而行的紧张与刺激，让游客身体的每一个毛孔都充满了疯狂的愉悦感。尽情挑战勇气与胆量，让尖叫和水花伴着你畅享风一般的感觉。</p>
-                <p class="p1 mt-30">•闪电之环/雷电之环 长94.4m。
-                  <br>•仅限身高1.22m以上的客人游玩。
-                  <br>
-                </p>
-              </div>
-              <div class="floatLeft" v-if="i == 7">
-                <h3>泰坦战场</h3>
-                <p class="p1">和家人朋友一同参与，乘坐浮筏，穿越弯道，在高低起伏的滑道上，一同经历跌宕起伏、无与伦比的快感。</p>
-                <p class="p1 mt-30">•普罗米修斯滑道长178.4m，圆形橡皮筏，可4人共乘。
-                  <br>•海波里恩滑道长141.4m，美迪思滑道长133.2m，克洛诺斯滑道长92.5m，客人使用双人皮筏。
-                  <br>•仅限身高1.07m以上的客人游玩.
-                  <br>
-                </p>
-              </div>
-              <div class="floatLeft" v-if="i == 8">
-                <h3>赫斯特天地</h3>
-                <p
-                  class="p1"
-                >专为儿童设计包含12个水炮、5个喷泉水嘴儿童戏水设施。专为所有年龄儿童打造的水上互动游玩设施，这里是充满欢乐童趣的水上乐园，如同梦幻般的童话世界。</p>
-                <p class="p1 mt-30">•水深0.6m。
-                  <br>•有三条宽而低的滑道。
-                  <br>
-                </p>
-              </div>
-              <div class="floatLeft" v-if="i == 9">
-                <h3>奥林匹斯挑战池</h3>
-                <p
-                  class="p1"
-                >配备有水上冲关的刺激设备，可以和家人朋友一起比赛，缤纷的游玩设施，超乎想象的奇异场景，在这里享受一段活力四射的时光，在青春洋溢中，感受非比寻常的夏日激情。</p>
-                <p class="p1 mt-30">•深1.8m。
-                  <br>•面积是836㎡和714㎡。
-                  <br>•身高在1.2m以下须有监护人陪同参玩，身高在1.5m以下、长者及不识水性者必须穿着救生衣参玩
-                  <br>
-                </p>
-              </div>
-              <div class="floatLeft" v-if="i == 10">
-                <h3>德墨特尔城堡</h3>
-                <p
-                  class="p1"
-                >精心设计的水上游戏、滑道和攀爬架为特色的水上游乐场。精心设计的水上游戏、滑道和攀爬架为特色的水上游乐场，创造一个惊险刺激的世界。专为儿童设计开发的儿童身体滑梯和管状滑道，滑梯高度让每个孩子都能自信安全地体验征服世界上最好的水滑梯给他们带来的无限快乐。</p>
-                <p class="p1 mt-30">•水深0.3m。
-                  <br>•身高1.02m以下的小朋友
-                  <br>
-                </p>
-              </div>
-              <div class="floatLeft" v-if="i == 11">
-                <h3>科孚冲浪</h3>
-                <p class="p1">这是一座人造冲浪设备，以模拟如真实海洋的波浪，享受冲浪乐趣，水上滑板等都可在这里玩个过瘾，其困难度与挑战性让人如真实冲浪般的体验</p>
-                <p class="p1 mt-30">•趴式及跪式冲浪身高：≥1.07m
-                  <br>•站立式冲浪身高：≥1.22m
-                  <br>
-                </p>
-              </div>
-              <div class="floatLeft" v-if="i == 12">
-                <h3>雅典娜浴场</h3>
-                <p class="p1">经历了动感的水上欢腾，将身体浸于舒适的SPA绿洲之中，享受水疗按摩所带来的惬意，身体随波荡漾，闭目冥思体验宁静致远的无比轻松畅快</p>
-                <p class="p1 mt-30">•水深0.9m.
-                  <br>•面积 8.5 X 6, 380㎡。
-                  <br>•温度38°。
-                  <br>
-                </p>
+                </p> -->
               </div>
             </div>
           </div>
@@ -275,9 +144,9 @@
 			<li @click="showYuanQu()">园区介绍</li>
 			<li @click="jumpColumn('#banner')" :class="{navColorActive:abc== 0}">游玩设施</li>
 			<li @click="jumpColumn('#art')" :class="{navColorActive:abc== 1}">精彩演艺</li>
-			<li @click="jumpColumn('#animal')" v-if="list4 != 0">动物场馆</li>
-			<li @click="jumpColumn('#shop')" :class="{navColorActive:abc== 2}">主题商店</li>
-			<li @click="jumpColumn('#eat')" :class="{navColorActive:abc== 3}">特色餐厅</li>
+			<li @click="jumpColumn('#animal')" v-if="list4 != 0" :class="{navColorActive:abc== 2}">动物场馆</li>
+			<li @click="jumpColumn('#shop')" :class="{navColorActive:abc== 3}">主题商店</li>
+			<li @click="jumpColumn('#eat')" :class="{navColorActive:abc== 4}">特色餐厅</li>
 		</ul>
 		<div class="alert" v-show="alertShow" @click="closeYuanQu()">
 			<div class="alert-box" @click.stop>
@@ -410,7 +279,8 @@
 				list5: [],
 				list6: [],
 				img: [], //图片集合
-				imgSrc: require('@/assets/img/blank.png')
+				imgSrc: require('@/assets/img/blank.png'),
+				title: ''
 			};
 		},
 		mounted() {
@@ -422,6 +292,7 @@
 			jumpImg(index) {
 				clearInterval(this.times);
 				this.index = index;
+				this.changeImg = 0;
 			},
 			//跳转动物详情
 			jumpAnimalDetail(id) {
@@ -529,16 +400,30 @@
 					document.documentElement.scrollTop ||
 					document.body.scrollTop;
 				this.topShow = scrollTop;
-
-				if (scrollTop >= 0 && scrollTop < 1757) {
-					this.abc = 0;
-				} else if (scrollTop >= 1757 && scrollTop < 2819) {
-					this.abc = 1;
-				} else if (scrollTop >= 2819 && scrollTop < 3899) {
-					this.abc = 2;
-				} else {
-					this.abc = 3;
+				if(this.list4 != 0){
+					if (scrollTop >= 0 && scrollTop < 1757) {
+						this.abc = 0;
+					} else if (scrollTop >= 1757 && scrollTop < 2819) {
+						this.abc = 1;
+					} else if (scrollTop >= 2819 && scrollTop < 3899) {
+						this.abc = 2;
+					} else if(scrollTop >= 3899 && scrollTop < 4969){
+						this.abc = 3;
+					}else{
+						this.abc = 4;
+					}
+				}else{
+					if (scrollTop >= 0 && scrollTop < 1757) {
+						this.abc = 0;
+					} else if (scrollTop >= 1757 && scrollTop < 2819) {
+						this.abc = 1;
+					} else if (scrollTop >= 2819 && scrollTop < 3899) {
+						this.abc = 3;
+					} else{
+						this.abc = 4;
+					}
 				}
+				
 			},
 			getIntroduced() {
 				return this.$fetch(
@@ -620,6 +505,8 @@
 // 					mySwiper.controller.control = mySwiper2;
 // 					mySwiper2.controller.control = mySwiper;
 				});
+				console.log(that.list2);
+				this.title = that.list1[0].title;
 			},
 			data(obj) { //处理返回数据
 				let list = obj;
@@ -655,8 +542,8 @@
 			index: function(newVal, oldVal) {
 				console.log(oldVal)
 				console.log(this.list2.length)
-				if (newVal >= 7 && newVal <= 12) {
-					this.swiper.slideTo(newVal + 1, 500, false); //切换到看不见的slide，速度为.5秒
+				if (newVal >= 6 && newVal <= 12) {
+					this.swiper.slideTo(newVal, 500, false); //切换到看不见的slide，速度为.5秒
 				} else if (newVal === this.list2.length) {
 					this.index = 0;
 					this.swiper.slideTo(this.index, 500, false); //切换到第一个slide，速度为.5秒
@@ -664,6 +551,7 @@
 					this.index = this.list2.length-1;
 					this.swiper.slideTo(this.index, 500, false); //切换到最后一个slide，速度为.5秒
 				}
+				this.changeImg = 0;
 			},
 			$route() { //监听路由参数变化
 				console.log(this.$route.params.id)

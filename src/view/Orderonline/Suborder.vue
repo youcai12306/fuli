@@ -323,8 +323,6 @@ export default {
           ).then(res => {
             console.log(res);
             let productList = res.data.productList;
-            // this.pricezhe = res.data.productList[0].cash;
-            // this.list2 = res.data.productList;
             this.list2.forEach((value) => {
               productList.forEach((product) => {
                 if(value.productId == product.productId){
@@ -538,7 +536,7 @@ export default {
   computed: {
     price3() {
       if(this.radio7 == 0){
-        return this.price2 - this.decimal;
+        return parseFloat(this.price2 - this.decimal).toFixed(2);
       }else{
         return this.price2;
       }

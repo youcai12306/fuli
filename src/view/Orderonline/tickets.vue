@@ -153,6 +153,7 @@ export default {
         }
         this.date = this.value2;
       } else {
+        this.radio2 = 0;
         this.date = this.value1;
       }
       // console.log(id)

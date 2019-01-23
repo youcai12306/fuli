@@ -3,7 +3,7 @@
 		<Header></Header>
 		<div class="banner">
 			<div class="banner-imgs">
-				<img v-for="(item,key) in data2" :key="key" :src="item.facePictureId[0]" alt v-show="key === index" @click="jumpHuodongDetail(item.structureId)">
+				<a v-for="(item,key) in data2" :key="key" href="javascript:;" @click="jumpNews(item.content0)"><img :src="item.facePictureId[0]" alt v-show="key === index"></a>
 			</div>
 			<div class="banner-content clearDiv">
 				<div class="content-list">{{$t('index.date')}}
@@ -128,11 +128,11 @@
 							<div class="info-p">
 								<p>
 									{{$t('index.Ticket1')}}
-									<span>{{$t('index.Ticket1_yuan')}}</span>/{{$t('index.person')}}
+									<span>{{ticketPrice.content0 ? ticketPrice.content0.substring(3,ticketPrice.content0.length-4) : ''}}</span>/{{$t('index.person')}}
 								</p>
 								<p class="p">
 									{{$t('index.Ticket2')}}
-									<span>{{$t('index.Ticket2_yuan')}}</span>/{{$t('index.person')}}
+									<span>{{ticketPrice.content1 ? ticketPrice.content1.substring(3,ticketPrice.content1.length-4) : ''}}</span>/{{$t('index.person')}}
 								</p>
 							</div>
 						</div>
@@ -201,7 +201,8 @@
 				list: [],
 				list2: [],
 				imgs : [],
-				imgs2 : []
+				imgs2 : [],
+				ticketPrice: []
 			};
 		},
 		mounted() {
@@ -212,6 +213,7 @@
 			this.swiperInit();
 			this.getSearch('B', this.pageSize, this.pageIndex, this.isEnglish);//Banner
 			this.getSearch('E', this.pageSize, this.pageIndex, this.isEnglish);//最新活动
+			this.getSearch('H1', this.pageSize, this.pageIndex, this.isEnglish);//门票价格
 		},
 		methods: {
 			getSearch(type, pageSize, pageIndex, isEnglish) { //获取Banner 最新活动列表 Banner后台ID=B 最新活动ID=E pageSize分页大小 pageIndex第几页 isEnglish中英文标识
@@ -229,6 +231,11 @@
 					if (type == 'E') {
 						this.list2 = res.data.content || [];
 						list = this.list2;
+					}
+					if (type == 'H1') {
+						console.log(res.data);
+						this.ticketPrice = res.data.content[0];
+						return;
 					}
 					list.forEach((v, k) => { //拼接图片字符串
 						if (v.facePictureId) { //是否有图片
@@ -307,7 +314,8 @@
 				this.options = [];
 				this.key = "";
 				this.$fetch(this.$url1 + ":5001/product-aggregate/findProductByStock", {
-					playDate: this.date
+					playDate: this.date,
+					typeId: 0
 				}).then(res => {
 					if (res.code == 200) {
 						let data = res.data.list;
@@ -352,6 +360,12 @@
 						id: id
 					}
 				});
+			},
+			jumpNews(url){
+				window.location.href=url.substring(3,url.length-4);
+				// this.$router.push({
+				// 	path: url
+				// });
 			},
 			change(newVal, oldVal) {
 				this.newSwiperIndex = newVal;
@@ -471,7 +485,7 @@
 				if(newVal < this.data2.length-1){
 					this.swiper.slideTo(newVal + 1, 500, false);
 					if (newVal === 6) {
-					this.swiper.slideTo(newVal + 1, 500, false); //切换到看不见的slide，速度为.5秒
+						this.swiper.slideTo(newVal + 1, 500, false); //切换到看不见的slide，速度为.5秒
 					} else if (newVal === 8) {
 						this.index = 0;
 						this.swiper.slideTo(this.index, 500, false); //切换到第一个slide，速度为.5秒

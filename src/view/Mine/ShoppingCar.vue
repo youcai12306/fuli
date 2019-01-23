@@ -149,7 +149,7 @@ export default {
           this.good_list.forEach(val => {
             val.is_selected = false;
           });
-          // console.log(this.good_list.length);
+          console.log(this.good_list);
         }
       });
     },
@@ -249,8 +249,6 @@ export default {
         console.log(this.arr[i]["id"]);
         this.arr1.push(this.arr[i]["id"]);
         console.log(this.arr1);
-
-        console.log(ids);
       });
       let ids = this.arr1.join(",");
 
@@ -269,26 +267,29 @@ export default {
       // this.$router.push("/suborder");
       let list1 = [];
       this.good_list.forEach((v, k) => {
+        console.log(v.is_selected);
         if (v.is_selected) {
           list1.push(v);
-          console.log(v);
           // this.delShopping(v,k)
         }
       });
-      this.$router.push({
-        path: "/suborder",
-        query: {
-          list1: JSON.stringify(list1),
-          a: 1,
-          id1: this.id1,
-          id2: this.id2,
-          totalNum: this.totalNum,
-          stockId: this.stockId,
-          arr: JSON.stringify(this.arr),
-          saleType: this.saleType,
-          typeId:this.typeId
-        }
-      });
+      if(list1.length>0){
+        this.$router.push({
+          path: "/suborder",
+          query: {
+            list1: JSON.stringify(list1),
+            a: 1,
+            id1: this.id1,
+            id2: this.id2,
+            totalNum: this.totalNum,
+            stockId: this.stockId,
+            arr: JSON.stringify(this.arr),
+            saleType: this.saleType,
+            typeId:this.typeId
+          }
+        });
+      }
+      
     }
     //计数器方法
     // handleChange() {

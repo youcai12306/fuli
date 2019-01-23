@@ -84,7 +84,7 @@ export default {
       },
       index: 0,
       num1: 1,
-      changeA: 0,
+      
       changeB: 0,
       imgs: [],
       img3: "",
@@ -184,9 +184,9 @@ export default {
       // }
     },
     //配送方式切换
-    changeGiveType(type) {
-      this.changeA = type;
-    },
+    // changeGiveType(type) {
+    //   this.changeA = type;
+    // },
     //详情和须知切换
     changeType(type) {
       this.changeB = type;
@@ -219,23 +219,24 @@ export default {
       //     num: this.num1 //
       //   }
       // });
-      // 判如果是邮寄，传stockId参数过去
-      if (this.changeA === 0) {
+      // 判如果是邮寄，传stockId参数过去..
+      let typeId = this.$route.query.typeId;
+      if (typeId == 0) {
         this.$router.push({
           path: "/Suborder2",
           query: {
-            saleType: this.product.saleType,
+            saleType: "",
             id: this.product.id,
             stockId: this.$route.query.stockId,
             num: this.num1,
             typeId:this.$route.query.typeId
           }
         });
-      } else if (this.changeA === 1) {
+      } else if (typeId == 1) {
         this.$router.push({
           path: "/Suborder2",
           query: {
-            saleType: 2,
+            saleType: this.product.saleType,
             id: this.product.id,
             stockId: this.$route.query.stockId,
             num: this.num1 ,

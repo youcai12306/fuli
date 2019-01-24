@@ -187,8 +187,7 @@ export default {
         if (v.is_selected) {
           this.dis = false;
           this.arr.push({id: v.id,productId: v.productId,num: v.productCount,stockId: v.createDateId,saleType: v.saleType ? "1" : "0"});
-          // console.log(this.arr[i]["num"]);
-          this.totalNum += this.arr[i]["num"];
+          this.totalNum += v.productCount;
         }
       });
     },
@@ -227,14 +226,18 @@ export default {
     slect_all() {
       if (this.selected_all) {
         for (let i = 0; i < this.good_list.length; i++) {
-          this.good_list[i].is_selected = false;
+          if(this.good_list[i].enableStock){
+            this.good_list[i].is_selected = false;
+          }
           // this.good_list[i].is_selected.length == this.totalNum1
           // console.log(this.good_list[i].is_selected.length);
         }
         this.selected_all = false;
       } else {
         for (let i = 0; i < this.good_list.length; i++) {
-          this.good_list[i].is_selected = true;
+          if(this.good_list[i].enableStock){
+            this.good_list[i].is_selected = true;
+          }
         }
         this.selected_all = true;
       }

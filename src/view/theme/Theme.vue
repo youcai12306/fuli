@@ -286,6 +286,7 @@
 		mounted() {
 			// this.swiperInit();
 			window.addEventListener("scroll", this.handleScroll);
+			this.index = 0;
 		},
 		methods: {
 			//跳转对应图片
@@ -541,13 +542,16 @@
 		watch: {
 			index: function(newVal, oldVal) {
 				console.log(oldVal)
-				console.log(this.list2.length)
+				console.log(this.list2.length-1)
+				console.log(newVal === this.list2.length-1);
 				if (newVal >= 6 && newVal <= 12) {
 					this.swiper.slideTo(newVal, 500, false); //切换到看不见的slide，速度为.5秒
-				} else if (newVal === this.list2.length) {
+				} if (oldVal === this.list2.length-1) {
+					newVal = 0;
 					this.index = 0;
 					this.swiper.slideTo(this.index, 500, false); //切换到第一个slide，速度为.5秒
-				} else if (newVal === -1) {
+				}
+				if (newVal === -1) {
 					this.index = this.list2.length-1;
 					this.swiper.slideTo(this.index, 500, false); //切换到最后一个slide，速度为.5秒
 				}
@@ -557,6 +561,7 @@
 				console.log(this.$route.params.id)
 				let ID = this.$route.params.id;
 				this.id = ID;
+				this.index = 0;
 				this.getLists();
 			}
 		}

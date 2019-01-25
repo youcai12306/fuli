@@ -53,11 +53,11 @@
               <button class="bac9" @click="login">{{$t('Login.Text8')}}</button>
               <span>{{msg}}</span>
             </div>
-            <div>
+            <!-- <div>
               <img src="../assets/img/qita.png" alt>
-            </div>
+            </div> -->
           </div>
-          <div class="bac10 clearDiv">
+          <!-- <div class="bac10 clearDiv">
             <div class="bac11">
               <a href>
                 <img src="../assets/img/login-wexin.png" alt>
@@ -70,7 +70,7 @@
                 <p>{{$t('Login.Text10')}}</p>
               </a>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

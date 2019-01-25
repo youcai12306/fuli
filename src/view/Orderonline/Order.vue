@@ -32,8 +32,8 @@
           <ul>
             <li class="or8">{{$t('Tickets.Text1')}}</li>
             <router-link class="clearDiv or9 oo" tag="li" :to="{ path: '/tickets/'+0}">
-              <img v-show="h1 == 0" src="../../../src/assets/img/menpiao.png" alt>
-              <img v-show="h1 == 1" src="../../../src/assets/img/menpiao-h.png" alt>
+              <img style="margin-top:2px" v-show="h1 == 0" src="../../../src/assets/img/menpiao.png" alt>
+              <img style="margin-top:2px" v-show="h1 == 1" src="../../../src/assets/img/menpiao-h.png" alt>
               <p>{{$t('Tickets.Text2')}}</p>
             </router-link>
             <router-link class="clearDiv or9 or10" tag="li" :to="{ path: '/tickets/'+1}">
@@ -41,14 +41,15 @@
               <img v-show="h2 == 1" src="../../../src/assets/img/linshou-h.png" alt>
               <p>{{$t('Tickets.Text3')}}</p>
             </router-link>
-            <li class="clearDiv or9 or10">
-              <img src="../../../src/assets/img/canyin.png" alt>
+            <router-link class="clearDiv or9 or10" tag="li" :to="{ path: '/tickets/'+2}">
+              <img v-show="h3 == 0" src="../../../src/assets/img/canyin.png" alt>
+              <img v-show="h3 == 1" src="../../../src/assets/img/canyin-h.png" alt>
               <p>{{$t('Tickets.Text4')}}</p>
-            </li>
-            <li class="clearDiv or9 or10 or11">
+            </router-link>
+            <!-- <li class="clearDiv or9 or10 or11">
               <img src="../../../src/assets/img/taopiao.png" alt>
               <p>{{$t('Tickets.Text5')}}</p>
-            </li>
+            </li> -->
           </ul>
         </div>
         <!-- 右边 -->

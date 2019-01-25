@@ -17,9 +17,9 @@
 				</router-link>
 			</div>
 		</ul>
-		<!-- <div class="pages">
-			<el-pagination background layout="prev, pager, next" :total="100" :page-size="7" @current-change="handleCurrentChange"></el-pagination>
-		</div> -->
+		<div class="pages">
+			<el-pagination background layout="prev, pager, next" :total="totle" :current-page.sync="pageIndex" :page-size="pageSize" @current-change="handleCurrentChange"></el-pagination>
+		</div>
 	</div>
 </template>
 
@@ -35,7 +35,10 @@
 				id: this.$route.query.id,
 				list:[],
 				imgs:[],
-				imgs1:[]
+				imgs1:[],
+				totle: 0,
+				pageSize: 4,
+      			pageIndex: 1
 			};
 		},
 		computed: {
@@ -59,6 +62,8 @@
 			// 分页
 			handleCurrentChange(val) {
 				console.log(val);
+				let id = this.$route.params.id;
+				this.getSearch(id, this.pageSize, this.pageSize, this.$isEnglish);
 			},
 			getSearch(type, pageSize, pageIndex, isEnglish) { //获取精彩活动后台ID=E 优惠信息后台ID=F  pageSize分页大小 pageIndex第几页 isEnglish中英文标识
 				this.$fetch(
@@ -70,6 +75,7 @@
 						let list = [];
 						list = res.data.content || [];
 						this.list = list;
+						this.totle = res.data.content.length;
 						list.forEach((v, k) => { //拼接图片字符串
 							if (v.facePictureId) { //是否有图片
 								v.facePictureId.forEach((val, key) => {

@@ -1,5 +1,5 @@
 <template>
-  <div class="clearDiv ti1">
+  <div class="clearDiv ti1 xx">
     <div class="ti2 clearDiv">
       <!-- 选择游玩日期 -->
       <p class="ti3">{{$t('Tickets.Text6')}}：</p>
@@ -347,5 +347,9 @@ export default {
 .el-date-editor.el-input,
 .el-date-editor.el-input__inner {
   width: 140px;
+}
+.xx .el-radio{
+  font-size:14px;
+  margin-right:0;
 }
 </style>

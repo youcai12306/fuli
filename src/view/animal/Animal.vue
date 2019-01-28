@@ -256,11 +256,11 @@
 		methods: {
 			//分页
 			changePage(val) {
-				this.getSearch(4, this.pageSize, val, this.isEnglish);
+				this.getSearch('G2-1', this.pageSize, val, this.isEnglish);
 			},
 			//分页
 			changePage2(val) {
-				this.getSearch(5, this.pageSize, val, this.isEnglish);
+				this.getSearch('G2-2', this.pageSize, val, this.isEnglish);
 			},
 			handleClose(done) { //关闭播放器
 				this.title = "提示";

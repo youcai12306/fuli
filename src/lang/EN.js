@@ -253,7 +253,8 @@ export default {
 		Text19: "Recipient",
 		Text20: "Address",
 		Text21: "Agree to the purchase agreement",
-		Text22: "Total Amount"
+		Text22: "Total Amount",
+		Text23: "Number of enrolment"
 	},
 	Success: { //支付页面
 		Text: "WeChat payment",
@@ -277,8 +278,11 @@ export default {
 		navTitle1: 'Promotional activities',
 		navTitle2: 'Wonderful events',
 		navTitle3: 'Offer info',
+		navTitle4: 'Public benefit activities',
 		Position: "Current Location",
-		description: "If you wander through this informative area,<br>must also be able to harvest endless joy!"
+		description: "If you wander through this informative area,<br>must also be able to harvest endless joy!",
+		text1: "Registration of activities",
+		button: "Submit application"
 	},
 	ditu: { //游玩指南
 		navTitle1: 'Ticket price',

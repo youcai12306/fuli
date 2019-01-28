@@ -13,6 +13,7 @@
 					<div class="header-title" :title="$t('specialOffier.navTitle1')">{{$t('specialOffier.navTitle1')}}</div>
 					<ul>
 						<li :class="{hover:$route.query.id == 'E'}" @click="changeType(1)">{{$t('specialOffier.navTitle2')}}</li>
+						<li :class="{hover:$route.query.id == '0'}" @click="changeType(0)">{{$t('specialOffier.navTitle4')}}</li>
 						<li :class="{hover:$route.query.id == 'F'}" @click="changeType(2)">{{$t('specialOffier.navTitle3')}}</li>
 					</ul>
 				</div>
@@ -41,7 +42,13 @@
 		methods: {
 			changeType(type) {
 				this.tabs = type
-				return type === 1 ? this.$router.push({path:'/events',query:{id:'E'}}) : this.$router.push({path:'/events',query:{id:'F'}})
+				if(type === 1){
+					this.$router.push({path:'/events',query:{id:'E'}}) 
+				}else if(type === 2) {
+					this.$router.push({path:'/events',query:{id:'F'}})
+				}else{
+					this.$router.push({path:'/events',query:{id:'0'}})
+				}
 			}
 		},
 		created() {
@@ -122,11 +129,11 @@
 					font-size: 20px;
 					font-weight: bold;
 					color: rgba(238, 238, 238, 1);
+					border-top: 4px solid #4dafec;
 					cursor: pointer;
 					background: rgba(111, 196, 249, 1);
 
-					&:nth-of-type(2) {
-						margin-top: 5px;
+					&:nth-of-type(3) {
 						border-radius: 0 0 10px 10px;
 					}
 

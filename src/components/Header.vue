@@ -275,6 +275,11 @@
 				this.$router.go(0);
 			},
 			handleSetLanguage(lang) {
+				if(lang == 'zh'){
+					sessionStorage.setItem('isChinese','0')
+				}else{
+					sessionStorage.setItem('isChinese','1')
+				}
 				this.$i18n.locale = lang;
 				this.$store.dispatch("setLanguage", lang);
 				window.location.reload();

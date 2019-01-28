@@ -1,20 +1,13 @@
 <template>
   <div class="message-detail">
     <div class="nav clearDiv">
-      <div class="floatLeft">消息详情</div>
-      <div class="back floatRight" @click="backMessage">返回</div>
+      <div class="floatLeft">{{$t('MessageDetail')}}</div>
+      <div class="back floatRight" @click="backMessage">{{$t('Return')}}</div>
     </div>
     <div class="content">
-      <div class="title">关于一期海南富力开业后价格确定的公告</div>
-      <div class="time">2018-12-01 16:14:12</div>
-      <div class="box">
-        亲爱的游客朋友：
-        海南富力一期将于2019年1月全新开放。海南富力一期是北京欢乐谷重磅打造的原汁原味香格里拉风情主题区，全新引进浪漫指数爆棚的音乐过山车、模拟雅鲁藏布江水上探险的大漂流，实景交互式雪域鬼屋、丛林版碰碰车等多项酷爽项目。
-        从2006年北京欢乐谷落地首善之都，到2010年二期·欢乐时光区、2014年三期·爱琴港区、2018年四期·甜品王国区、2019年五期·香格里拉区，北京欢乐谷在产品丰富、品质提升、游客服务的道路上从未止步、不忘初心，持之以恒地创造、传递、分享欢乐，致力于打造世界一流的连锁主题公园。
-        而今，来欢乐谷，与所爱尽享欢乐时光，已成为闺蜜游、亲子游的理想体验之旅。
-        2019年6月起，北京欢乐谷日场全价票价格调整为299元/人，适用于身高超过1.4米的儿童及成人。
-        特此公告，敬请悉知！
-      </div>
+      <div class="title">{{info.title}}</div>
+      <div class="time">{{info.createTime}}</div>
+      <div class="box" v-html="info.content0"></div>
     </div>
   </div>
 </template>
@@ -22,23 +15,33 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      info:{},
+      isChinese: sessionStorage.getItem('isChinese') || 0
+    };
   },
   mounted(){
-      this.init()
+      this.init(this.isChinese)
   },
   components: {},
 
   computed: {},
 
   methods: {
-      init(){
+      init(isEnglish){
           let id = this.$route.query.id;
-          console.log(id)
+          this.$fetch(this.$url+":6110/mongodb-mucon/structure/primary/get",{
+            structureId: this.$route.query.id,
+            isEnglish: isEnglish
+          }).then(res =>{
+              if(res.code == 200){
+                this.info = res.data;
+              }
+          })
       },
       //返回消息列表
       backMessage(){
-          this.$router.push('/myMessage')
+          this.$router.push('myMessage')
       }
   }
 };

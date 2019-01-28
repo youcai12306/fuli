@@ -3,21 +3,21 @@
     <div class="member-info">
       <p class="change-title clearDiv">{{$t('Personal.Text')}}</p>
       <div class="change-content">
-        <p>
+        <!-- <p>
           <label for>{{$t('Personal.Text1')}}：</label>
           <input type="text" v-model="name" :placeholder="$t('Personal.Text2')" :disabled="showBtn1">
           <span class="change" @click="chang(0)" v-show="showBtn1">{{$t('Personal.Text3')}}</span>
           <button class="btn" v-show="!showBtn1" @click="revision(1)">{{$t('Personal.Text4')}}</button>
           <span class="tip">{{nameTip}}</span>
-        </p>
-        <p>
+        </p> -->
+        <!-- <p>
           <label for>{{$t('Personal.Text5')}}：</label>
           <input type="radio" value="0" class="sex" v-model="sex" @click="chooseSex(0)">
           <span class="men">{{$t('Personal.Text6')}}</span>
           <input type="radio" value="1" class="sex sex1" v-model="sex" @click="chooseSex(1)">
           <span class="men">{{$t('Personal.Text7')}}</span>
-        </p>
-        <p>
+        </p> -->
+        <!-- <p>
           <label for>{{$t('Personal.Text8')}}：</label>
           <input
             type="text"
@@ -36,27 +36,27 @@
             :class="{colorActive:can}"
           >{{showPin}}</button>
           <span class="tip">{{phoneTip}}</span>
-        </p>
-        <p class="code" v-show="!showBtn2">
+        </p> -->
+        <!-- <p class="code" v-show="!showBtn2">
           <label for>&nbsp;</label>
           <input type="text" class="codes" v-model="code" :placeholder="$t('Personal.Text11')">
           <button class="btn" @click="changePhone">{{$t('Personal.Text4')}}</button>
           <span class="tip">{{codeTip}}</span>
-        </p>
-        <p>
+        </p> -->
+        <!-- <p>
           <label for>{{$t('Personal.Text13')}}：</label>
           <input type="text" :placeholder="$t('Personal.Text14')" v-model="IdCard" :disabled="showBtn3">
           <span class="change" @click="chang(2)" v-show="showBtn3">{{$t('Personal.Text15')}}</span>
           <button class="btn" v-show="!showBtn3" @click="revision(3)">{{$t('Personal.Text4')}}</button>
           <span class="tip" ref="IdCardTip">{{IdCardTip}}</span>
-        </p>
-        <p>
+        </p> -->
+        <!-- <p>
           <label for>{{$t('Personal.Text16')}}：</label>
           <input type="text" :placeholder="$t('Personal.Text17')" v-model="email" :disabled="showBtn4">
           <span class="change" @click="chang(3)" v-show="showBtn4">{{$t('Personal.Text15')}}</span>
           <button class="btn" v-show="!showBtn4" @click="revision(4)">{{$t('Personal.Text4')}}</button>
           <span class="tip" ref="emailTip">{{emailTip}}</span>
-        </p>
+        </p> -->
         <p>
           <label for>{{$t('Personal.Text18')}}：</label>
           <input

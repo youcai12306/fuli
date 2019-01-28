@@ -84,7 +84,14 @@ const MessageDetail = r => require.ensure([], () => r(require('@/view/Mine/Messa
 // 个人中心-反馈
 const Feedback = r => require.ensure([], () => r(require('@/view/Mine/Feedback')), 'Feedback')
 const FeedbackDetail = r => require.ensure([], () => r(require('@/view/Mine/FeedbackDetail')), 'FeedbackDetail')
-
+// 个人中心-我的会员
+const MyMember = r => require.ensure([], () => r(require('@/view/Mine/MyMember')), 'MyMember')
+// 个人中心-兑换列表
+const ConvertList = r => require.ensure([], () => r(require('@/view/Mine/ConvertList')), 'ConvertList')
+// 个人中心-提交兑换
+const CommitConvert = r => require.ensure([], () => r(require('@/view/Mine/CommitConvert')), 'CommitConvert')
+// 个人中心-兑换流水
+const OrderWater = r => require.ensure([], () => r(require('@/view/Mine/OrderWater')), 'OrderWater')
 Vue.use(Router)
 
 let router = new Router({
@@ -397,6 +404,42 @@ let router = new Router({
 					path: '/FeedbackDetail',
 					name: 'FeedbackDetail',
 					component: FeedbackDetail, //反馈详情
+					meta: {
+						nav: 3,
+						requireAuth: true
+					}
+				},
+				{
+					path: '/myMember',
+					name: 'MyMember',
+					component: MyMember, //我的会员
+					meta: {
+						nav: 3,
+						requireAuth: true
+					}
+				},
+				{
+					path: '/convertList',
+					name: 'ConvertList',
+					component: ConvertList, //兑换列表
+					meta: {
+						nav: 3,
+						requireAuth: true
+					}
+				},
+				{
+					path: '/commitConvert',
+					name: 'CommitConvert',
+					component: CommitConvert, //兑换列表
+					meta: {
+						nav: 3,
+						requireAuth: true
+					}
+				},
+				{
+					path: '/orderWater',
+					name: 'OrderWater',
+					component: OrderWater, //兑换列表
 					meta: {
 						nav: 3,
 						requireAuth: true

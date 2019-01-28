@@ -5,10 +5,7 @@
       <div class="sc2">
         <div class="sc3">
           <!-- 微信支付遮罩层 -->
-          <div
-            class="su21 clearDiv"
-            v-show="flag"
-          >
+          <div class="su21 clearDiv" v-show="flag">
             <div class="bg clearDiv"></div>
             <div class="show clearDiv">
               <div class="su22">{{$t('Success.Text')}}</div>
@@ -36,40 +33,19 @@
               <p class="sc61">{{$t('Success.Text4')}}： <span class="sc7">{{this.$route.query.price}}{{$t('Yuan')}}</span></p>
 
               <span class="sc62">{{$t('Success.Text5')}}：</span>
-              <img
-                class="m1"
-                src="../../assets/img/zhifubao.png"
-                alt=""
-                :class="{active:isActive==0}"
-                @click="change(0)"
-              >
-              <img
-                class="m2"
-                src="../../assets/img/weixin.png"
-                alt=""
-                :class="{active:isActive==1}"
-                @click="change(1)"
-              >
+              <img class="m1" src="../../assets/img/zhifubao.png" alt="" :class="{active:isActive==0}" @click="change(0)">
+              <img class="m2" src="../../assets/img/weixin.png" alt="" :class="{active:isActive==1}" @click="change(1)">
 
-              <img
-                class="m3"
-                src="../../assets/img/wangyin.png"
-                alt=""
-                :class="{active:isActive==2}"
-                @click="change(2)"
-              >
+              <img class="m3" src="../../assets/img/wangyin.png" alt="" :class="{active:isActive==2}" @click="change(2)">
               <p class="scc">{{$t('Success.Text6')}}</p>
               <p class="sc63">{{$t('Success.Text7')}}</p>
-              <p class="sc64">{{$t('Success.Text8')}} <span>{{minute}} {{$t('Success.minutes')}} {{second}} {{$t('Success.seconds')}}</span></p>
+              <p class="sc64">{{$t('Success.Text8')}} <span>{{minute}} {{$t('Success.minutes')}} {{second}}
+                  {{$t('Success.seconds')}}</span></p>
 
             </div>
           </div>
           <div class="sc7">
-            <img
-              src="../../assets/img/zhifu111.png"
-              alt=""
-              @click="weixin()"
-            >
+            <img src="../../assets/img/zhifu111.png" alt="" @click="weixin()">
           </div>
         </div>
       </div>
@@ -88,7 +64,7 @@ export default {
   data() {
     return {
       isActive: "",
-      minutes:29,
+      minutes: 29,
       seconds: 59,
       flag: false
     };
@@ -166,25 +142,24 @@ export default {
     success() {
       // 判断回调是否有值，跳转支付成功页面
       this.times = setInterval(() => {
-       let data ={
-          guid : this.$route.query.orderId
-        }
-        this.$fetch("http://101.201.101.138:6110/callBack-mucon/getPay",data).then((res) => {
-            console.log(res)
-        if (res.code === 200) {
-          window.clearInterval(this.times);
-          this.$router.push("./ok");
-           
-        }else if(res.code === 400){
-          
-          this.$router.push("./error1");
-        }
-      });
-      },6000);
-       
+        let data = {
+          guid: this.$route.query.orderId
+        };
+        this.$fetch(
+          "http://101.201.101.138:6110/callBack-mucon/getPay",
+          data
+        ).then(res => {
+          console.log(res);
+          if (res.code === 200) {
+            window.clearInterval(this.times);
+            this.$router.push("./ok");
+          } else if (res.code === 400) {
+            this.$router.push("./error1");
+          }
+        });
+      }, 6000);
     },
-    
-   
+
     qrcode(aaa) {
       let qrcode = new QRCode("qrcode", {
         width: 200,
@@ -196,8 +171,14 @@ export default {
       // console.log(qrcode)
     }
   },
-   beforeDestroy() {
-    window.clearInterval(this.times);
+  //  destroyed() {
+  //   window.clearInterval(this.times);
+  // },
+  destroyed() {
+    if (this.times) {
+      //如果定时器在运行则关闭
+      clearInterval(this.times);
+    }
   },
   watch: {
     second: {

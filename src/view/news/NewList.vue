@@ -87,7 +87,7 @@
 			},
 			//分页
 			changePage(val) {
-				this.GetList(0, this.pageSize, val, this.isEnglish);
+				this.GetList(1, this.pageSize, val, this.isEnglish);
 			},
 			jumpDetail(id) {
 				this.$router.push({
@@ -102,7 +102,7 @@
 			document.title = "新闻中心";
 		},
 		mounted() {
-			this.GetList(0, this.pageSize, this.pageIndex, this.isEnglish);
+			this.GetList(1, this.pageSize, this.pageIndex, this.isEnglish);
 		}
 // 		watch: {
 // 			isEnglish(v) {

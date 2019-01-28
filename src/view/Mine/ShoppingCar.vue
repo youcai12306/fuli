@@ -29,7 +29,7 @@
               <div class="tui">{{canDebook(item.product.returnSign)}}</div>
               <div class="timeslot">
                 {{$t('Car.Text6')}}：
-                <span>{{item.product.dataBaseDate}}</span>
+                <span>{{item.dataBaseDate}}</span>
               </div>
             </td>
             <td class="num">

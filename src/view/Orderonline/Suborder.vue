@@ -487,7 +487,7 @@ export default {
       this.$post("http://101.201.101.138:5001/order-aggregate/save", data, {
         headers: { "Content-Type": "application/json;charset=UTF-8" }
       }).then(res => {
-        console.log(res.data.createCannel);
+        // console.log(res.data.createCannel);
         if (res.code === 200) {
           // console.log(res);
           this.orderId = res.data.orderId;

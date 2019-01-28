@@ -22,7 +22,7 @@
       <div class="bac1-content clearDiv">
         <div class="bac2">
           <div class="bac3 clearDiv">
-            <a href="javascript:;" class="bac4">{{$t('Login.Text2')}}</a>
+            <!-- <a href="javascript:;" class="bac4">{{$t('Login.Text2')}}</a> -->
             <a href @click.prevent="changeLoginType(1)" class="a">{{$t('Login.Text3')}}</a>
           </div>
           <div class="bac5">
@@ -53,11 +53,11 @@
               <button class="bac9" @click="login">{{$t('Login.Text8')}}</button>
               <span>{{msg}}</span>
             </div>
-            <div>
+            <!-- <div>
               <img src="../assets/img/qita.png" alt>
-            </div>
+            </div> -->
           </div>
-          <div class="bac10 clearDiv">
+          <!-- <div class="bac10 clearDiv">
             <div class="bac11">
               <a href>
                 <img src="../assets/img/login-wexin.png" alt>
@@ -70,7 +70,7 @@
                 <p>{{$t('Login.Text10')}}</p>
               </a>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -250,7 +250,8 @@ a {
     height: 497px;
     .bac3 {
       padding-top: 43px;
-      margin-left: 112px;
+      // margin-left: 112px;
+      margin-left:186px;
       padding-bottom: 23px;
       a {
         float: left;

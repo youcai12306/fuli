@@ -8,7 +8,7 @@ import {
 //登录
 const Login = r => require.ensure([], () => r(require('@/view/Login')), 'Login')
 //注册
-
+const Register = r => require.ensure([], () => r(require('@/view/Register')), 'Register')
 
 //忘记密码
 const Forget = r => require.ensure([], () => r(require('@/view/Forget')), 'Forget')
@@ -118,6 +118,11 @@ let router = new Router({
 			path: '/login',
 			name: 'Login',
 			component: Login //登录
+		},
+		{
+			path: '/register',
+			name: 'Register',
+			component: Register //登录
 		},
 		{
 			path: '/forget',

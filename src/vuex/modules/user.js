@@ -42,6 +42,10 @@ const actions = {
         commit(types.COM_LOADING_STATUS, false)
         commit(types.SET_USER_DATA, res)
     },
+    updateUserData({commit},res){
+        localStorage.setItem('userData', JSON.stringify(res))
+        commit(types.UPDATE_USER_DATA, res)
+    }
 }
 
 const getters = {
@@ -61,7 +65,10 @@ const mutations = {
 
     [types.SET_USER_DATA](state, res) {
         state.userData = res
-    }  
+    },
+    [types.UPDATE_USER_DATA](state, res) {
+        state.userData = res
+    }   
 }
 
 export default {

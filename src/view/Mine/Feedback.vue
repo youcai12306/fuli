@@ -6,19 +6,28 @@
   -->
   <div class="feedback">
     <div class="box-titles">
-      {{$t('Feedback')}}
-      <router-link class="span1" to="/FeedbackDetail">{{$t('Feedback2')}}</router-link>
+      {{$t('Feedback3.Text')}}
+      <router-link class="span1" to="/FeedbackDetail">{{$t('Feedback3.Text1')}}</router-link>
     </div>
-    <div class="title clearDiv">
-      <div class="floatLeft left">反馈问题：</div>
+    <div class="title clearDiv" v-for="(item,key) in data||list" :key="key">
+      <div class="floatLeft left">{{$t('Feedback3.Text2')}}</div>
       <div class="floatLeft right">
-        <p class="p1">这个景区东西丢失怎么办？</p>
+        <p class="p1">{{item.content}}</p>
         <p class="p2">
-          <img src="../../assets/img/feedback-img.png" alt>
-          <img src="../../assets/img/feedback-img.png" alt>
+          <img :src="imgAddress(value.fileName)" alt v-for="(value,key) in item.imgList" :key="key">
         </p>
-        <p class="p3">您好！您可以直接去服务台广播播报，并且提供最详细的失物信息。</p>
+        <p class="p3">{{item.feedbackContent|| '暂无回复'}}</p>
       </div>
+    </div>
+    <div class="pages">
+      <el-pagination
+        background
+        layout="prev, pager, next"
+        :total="total"
+        :current-page.sync="pageNum"
+        :page-size="pageSize"
+        @current-change="changePage"
+      ></el-pagination>
     </div>
   </div>
 </template>
@@ -26,17 +35,71 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      pageNum: 1,
+      pageSize: 3,
+      total: 0,
+      list: [],
+      imgids: [],
+      data:[]
+    };
   },
   components: {},
   computed: {},
-  mounted() {},
-  methods: {}
+  mounted() {
+    this.init(this.pageNum);
+  },
+  methods: {
+    init(val) {
+      this.$fetch(this.$url + ":2060/myfeedback-aggregate/findList", {
+        pageNum: val,
+        pageSize: this.pageSize,
+        touristId: this.$store.getters.getUserData.userId
+      }).then(res => {
+        // console.log(res);
+        if (res.code == 200) {
+          this.list = res.data.list;
+          this.total = res.data.total;
+          let imgList = [];
+          this.data = [];
+          this.list.forEach(val => {
+            console.log(typeof(val.picture))
+            if (val.picture != "" && val.picture != null) {
+              this.$fetch(
+                `${this.$url}:2600/staticResource-mucon/selectFiles`,
+                {
+                  ids: val.picture
+                }
+              ).then(res => {
+                val.imgList = res.data;
+                this.data.push(val)
+              });
+            }else{
+              this.data.push(val)
+            }
+          });
+          // setTimeout(() =>{
+          //   this.data = this.list;
+          // },5000)
+          
+        }
+      });
+    },
+    //分页
+    changePage(val) {
+      this.init(this.pageNum);
+    },
+    //处理图片地址
+    imgAddress(value){
+      return `http://101.201.101.138:2600/file/${value}`
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped="scoped">
 .feedback {
+  position: relative;
   .box-titles {
     width: 100%;
     height: 58px;
@@ -84,10 +147,10 @@ export default {
       .p1 {
         height: 16px;
         line-height: 16px;
-		margin-bottom: 30px;
+        margin-bottom: 30px;
       }
       .p2 {
-		  margin-bottom: 22px;
+        margin-bottom: 22px;
         img {
           width: 82px;
           height: 82px;
@@ -98,10 +161,17 @@ export default {
         width: 674px;
         height: 159px;
         background: rgba(247, 247, 247, 1);
-		padding-top: 20px;
-		padding-left: 10px;
+        padding-top: 20px;
+        padding-left: 10px;
       }
     }
+  }
+  .pages {
+    position: absolute;
+    height: 32px;
+    text-align: center;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 </style>

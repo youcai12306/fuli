@@ -7,12 +7,22 @@
 		</div>
 
 		<!-- 列表 -->
-		<ul class="content clearDiv">
+		<ul class="content clearDiv" v-if="this.status!='0'">
 			<div v-for="(item,key) in data" :key="key">
-				<router-link v-if="data.length > 0" tag="li" :to="{path:'/EventsDetail',query:{id: item.structureId}}">
-					<img :src="item.facePictureId[0]" alt>
+				<router-link v-if="data.length > 0" tag="li" :to="{path:'/EventsDetail',query:{id: item.structureId,type: id}}">
+					<img :src="item.facePictureId[0]? item.facePictureId[0]: ''" alt>
 					<div class="box">
 						<h3 class="t">{{item.title}}</h3>
+					</div>
+				</router-link>
+			</div>
+		</ul>
+		<ul class="content clearDiv" v-else>
+			<div v-for="(item,key) in data2" :key="key">
+				<router-link v-if="data2.length > 0" tag="li" :to="{path:'/EventsDetail',query:{id: item.id,type: id}}">
+					<img :src="item.pictures[0].picid? item.pictures[0].picid : ''" alt>
+					<div class="box">
+						<h3 class="t">{{item.activityName}}</h3>
 					</div>
 				</router-link>
 			</div>
@@ -31,9 +41,11 @@
 		name: "News",
 		data() {
 			return {
+				status: '',
 				page: 1,
-				id: this.$route.query.id,
+				id: '',
 				list:[],
+				list1:[],
 				imgs:[],
 				imgs1:[],
 				totle: 0,
@@ -56,6 +68,21 @@
 					}
 				});
 				return list;
+			},
+			data2() {
+				let list = this.list1;
+				list.forEach((v, k) => {
+				if (v.pictures) { //是否有图片
+					v.pictures.forEach((val, key) => {
+						this.imgs1.forEach(res => {
+						if (val.picid == res.id) {
+							v.pictures[key].picid = IMG_Url + res.fileName;
+						}
+						});
+					})
+				}
+				});
+				return list;
 			}
 		},
 		methods: {
@@ -63,40 +90,71 @@
 			handleCurrentChange(val) {
 				console.log(val);
 				let id = this.$route.params.id;
-				this.getSearch(id, this.pageSize, this.pageSize, this.$isEnglish);
+				this.getSearch(id, this.pageSize, val, this.$isEnglish);
 			},
 			getSearch(type, pageSize, pageIndex, isEnglish) { //获取精彩活动后台ID=E 优惠信息后台ID=F  pageSize分页大小 pageIndex第几页 isEnglish中英文标识
-				this.$fetch(
-					`${this.$url1}:6110/mongodb-mucon/structure/primary/searchLinkIndex?linkIndex=${type}&pageSize=${pageSize}&pageNum=${pageIndex}&isEnglish=${isEnglish}`
-				).then(res => {
-					if (res.code === 200) {
-						let xin = [];
-						let xin2 = "";
-						let list = [];
-						list = res.data.content || [];
-						this.list = list;
-						this.totle = res.data.content.length;
-						list.forEach((v, k) => { //拼接图片字符串
-							if (v.facePictureId) { //是否有图片
-								v.facePictureId.forEach((val, key) => {
-									if (key == 0) { //获取第一个图片
-										xin.push(val);
-										xin2 = xin.join(",");
-									}
+				
+				if(type!= '0'){
+					this.$fetch(
+						`${this.$url1}:6110/mongodb-mucon/structure/primary/searchLinkIndex?linkIndex=${type}&pageSize=${pageSize}&pageNum=${pageIndex}&isEnglish=${isEnglish}`
+					).then(res => {
+						if (res.code === 200) {
+							let xin = [];
+							let xin2 = "";
+							let list = [];
+							list = res.data.content || [];
+							this.list = list;
+							this.totle = res.data.content.length;
+							list.forEach((v, k) => { //拼接图片字符串
+								if (v.facePictureId) { //是否有图片
+									v.facePictureId.forEach((val, key) => {
+										if (key == 0) { //获取第一个图片
+											xin.push(val);
+											xin2 = xin.join(",");
+										}
+									})
+								}
+							});
+							this.GetSelectFiles(xin2);
+						} else {
+							console.log("读取失败");
+						}
+					});
+				}else{
+					this.$post(
+						`${this.$url1}:6110/mongodb-mucon/activity/primary?pageSize=${pageSize}&pageNum=${pageIndex}`
+					).then(res => {
+						if(res.code === 200){
+							let xin = [];
+							let xin2 = "";
+							let list = [];
+							this.list1 = res.data.content || [];
+							this.totle = res.data.content.length;
+							list = this.list1;
+							list.forEach((v, k) => { //拼接图片字符串
+							if (v.pictures) { //是否有图片
+								v.pictures.forEach((val, key) => {
+								if (key == 0) { //获取第一个图片
+									xin.push(val.picid);
+									xin2 = xin.join(",");
+								}
 								})
 							}
-						});
-						this.GetSelectFiles(xin2);
-					} else {
-						console.log("读取失败");
-					}
-				});
+							});
+							this.GetSelectFiles(xin2);
+						}
+					})
+				}
 			},
 			GetSelectFiles(obj) { //批量获取图片
 				this.$fetch(`${this.$url1}:2600/staticResource-mucon/selectFiles`, {
 					ids: obj
 				}).then(res => {
-					this.imgs = res.data; //精彩活动
+					if(this.$route.query.id!= '0'){
+						this.imgs = res.data; //精彩活动
+					}else{
+						this.imgs1 = res.data;
+					}
 				});
 			}
 		},
@@ -104,11 +162,14 @@
 			document.title = "精彩活动";
 		},
 		mounted() {
+			this.id = this.$route.query.id;
+			this.status = this.id;
 			this.getSearch(this.id,6,this.page,this.$isEnglish);
 		},
 		watch:{
 			$route() {
 				let id = this.$route.query.id;
+				this.status = id;
 				this.getSearch(id,6,this.page,this.$isEnglish);
 			}
 		}

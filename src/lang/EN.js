@@ -108,7 +108,7 @@ export default {
 		navNmae6: "My coupon.",
 		navNmae7: "My balance.",
 		navNmae8: "Member Center",
-		navNmae9: "Personal information",
+		navNmae9: "Change Password",
 		navNmae10: "My members.",
 		navNmae11: "Shipping Address",
 		navNmae12: "Message",
@@ -253,7 +253,8 @@ export default {
 		Text19: "Recipient",
 		Text20: "Address",
 		Text21: "Agree to the purchase agreement",
-		Text22: "Total Amount"
+		Text22: "Total Amount",
+		Text23: "Number of enrolment"
 	},
 	Success: { //支付页面
 		Text: "WeChat payment",
@@ -277,8 +278,11 @@ export default {
 		navTitle1: 'Promotional activities',
 		navTitle2: 'Wonderful events',
 		navTitle3: 'Offer info',
+		navTitle4: 'Public benefit activities',
 		Position: "Current Location",
-		description: "If you wander through this informative area,<br>must also be able to harvest endless joy!"
+		description: "If you wander through this informative area,<br>must also be able to harvest endless joy!",
+		text1: "Registration of activities",
+		button: "Submit application"
 	},
 	ditu: { //游玩指南
 		navTitle1: 'Ticket price',
@@ -311,7 +315,15 @@ export default {
 		Text1: "Points Source",
 		Text2: "Points change",
 		Text3: "Date",
-		Text4: "Note"
+		Text4: "Note",
+		Text5: "For points",
+		Text6: "Through the consumption in PC official website, APP and WeChat official account: according to the actual payment amount, 10 yuan for each payment will get 1 point;The park reserves the right of final interpretation.",
+		Text7: "Integral rights",
+		Text8: "Purpose 1: upgrade members with points;",
+		Text9: "Purpose 2: exchange points for gifts in the park.",
+		Text10: 'All',
+		Text11: 'Income',
+		Text12: 'Expenditure',
 	},
 	Personal: { //个人信息
 		Text: "Personal information",
@@ -360,8 +372,19 @@ export default {
 		Text19: "Close"
 	},
 	Message: "Message Management",
+	MessageDetail:'Message for details',
+	Message1:{
+		Text:'Message Management',
+		Text1:'Systematic notification'
+	},
+	isEnglish:1,
 	Feedback: "I want feedback.",
 	Feedback2: "Feedback",
+	Feedback3:{
+		Text:'I want feedback.',
+		Text1:'Feedback',
+		Text2:'problem feedback：'
+	},
 	FeedbackDetail: {
 		Text:"Feedback type",
 		Text1:"Please select a feedback type",
@@ -373,5 +396,65 @@ export default {
 		Text7:"Phone",
 		Text8:"Please enter your mobile phone number",
 		Text9:"Submitted"
+	},
+	Member:{
+		Text:'A member of the I',
+		Text1:'Membership privileges',
+		Text2:'The higher the level, the higher the membership benefits.',
+		Text3:'Level of membership',
+		Text4:'Consumption discount',
+		Text5:'No Discount',
+		Text6:'Discount',
+		Text7:'How to upgrade?',
+		Text8:'Upgrade rules: membership levels are upgraded by buying credits.Points cannot be withdrawn after the upgrade.',
+		Text9:'Level up',
+		Text10:'The integral',
+		Text11:'Operation',
+		Text12:'Upgrade to',
+		Text13:'Here and Now',
+	},
+	ConvertList:{
+		Text:'Exchange',
+		Text1:'Exchanged order',
+		Text2:'Exchange',
+		Text3:'Convertible notes',
+		Text4:'For the crowd',
+		Text5:'Suitable for adults or children with height 1.5 m',
+		Text6:'Please select the quantity of exchange',
+		Text7:'Cancel',
+		Text8:'Confirm',
+		Text9: 'points'
+	},
+	commitConvert:{
+		Text:'Exchange',
+		Text1:'Exchanged order',
+		Text2:'Informercia',
+		Text3:'The integral',
+		Text4:'Num',
+		Text5:'Subtotal',
+		Text6:'Mode of distribution',
+		Text7:'Mail',
+		Text8:'Take their',
+		Text9: 'Tourist information',
+		Text10:'Name：',
+		Text11:'Phone：',
+		Text12: 'Mailing address',
+		Text13:'Select the shipping address',
+		Text14:'Recipients：',
+		Text15: 'Phone：',
+		Text16:'Address：',
+		Text17:'Confirm',
+	},
+	orderWater:{
+		Text:'Exchange',
+		Text1:'Convertible notes',
+		Text2:'For the crowd',
+		Text3:'Suitable for adults or children with height 1.5 m',
+		Text4:'Product name',
+		Text5:'Num',
+		Text6:'The integral',
+		Text7:'Order status',
+		Text8:'Date',
+		Text9:'Contact way'
 	}
 }

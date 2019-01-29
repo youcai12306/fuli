@@ -20,9 +20,9 @@
 						<p>{{$t('header.title1')}}</p>
 					</li>
 					<!-- 主题乐园 -->
-					<router-link to="/theme/1" tag="li" @mouseover="showNavList(1),overHover('Theme'),height='97px'" @mouseout="hiddenNavList(1),outHover(''),height='0px'"
+					<li to="/theme/1" @mouseover="showNavList(1),overHover('Theme'),height='97px'" @mouseout="hiddenNavList(1),outHover(''),height='0px'"
 					 class="theme" :class="{'actives' : $route.name == 'Theme'}">
-						<p>
+						<router-link to="/theme/1" tag="p">
 							<template v-if="$route.name == 'Theme' || hover == 'Theme'">
 								<img src="../assets/img/header-2.png" alt>
 							</template>
@@ -30,8 +30,8 @@
 								<img src="../assets/img/header2.png" alt>
 							</template>
 							<p>{{$t('header.title2')}}</p>
-						</p>
-					</router-link>
+						</router-link>
+					</li>
 					<!-- 度假酒店 -->
 					<li class="hotel" :class="{'actives' : $route.name == 'Hotel' ||  $route.name == 'HotelDetail'}" @mouseover="overHover('a')"
 					 @mouseout="outHover('')">

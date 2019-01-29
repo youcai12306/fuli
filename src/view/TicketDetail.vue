@@ -154,15 +154,17 @@ export default {
       }).then(res => {
         this.imgs = res.data;
         this.list2.forEach((v, k) => {
-					if (v.subPictureId) { //是否有图片
-							this.imgs.forEach(res => {
-								if (v.subPictureId == res.id) {
-                  console.log(IMG_Url + res.fileName);
-                  this.imgs2.push(IMG_Url + res.fileName);
-								}
-							});
-					  }
-          });
+          if (v.subPictureId) { //是否有图片
+            this.imgs.forEach(res => {
+              if (v.subPictureId == res.id) {
+                console.log(IMG_Url + res.fileName);
+                this.imgs2.push(IMG_Url + res.fileName);
+              }
+            })
+					}else{
+            this.imgs2.push(IMG_Url + this.imgs[0].fileName);
+          }
+        });
           console.log(this.imgs2);
       });
     },

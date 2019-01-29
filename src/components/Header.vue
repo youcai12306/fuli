@@ -9,9 +9,9 @@
 			<div class="floatLeft">
 				<ul>
 					<!-- 网上订购 -->
-					<li class="order" @click="jumpOrderTicket" :class="{'actives' : $route.name == 'Tickets'}" @mouseover="overHover('Tickets')"
+					<li class="order" @click="jumpOrderTicket" :class="{'actives' : ['Tickets','TicketDetail','Suborder2','suborder'].indexOf($route.name) != -1}" @mouseover="overHover('Tickets')"
 					 @mouseout="outHover('')">
-						<template v-if="$route.name == 'Tickets' || hover == 'Tickets'">
+						<template v-if="['Tickets','TicketDetail','Suborder2','suborder'].indexOf($route.name) != -1 || hover == 'Tickets' || hover == 'TicketDetail' || hover == 'Suborder2' || hover == 'suborder'">
 							<img src="../assets/img/header-1.png" alt>
 						</template>
 						<template v-else>
@@ -20,9 +20,9 @@
 						<p>{{$t('header.title1')}}</p>
 					</li>
 					<!-- 主题乐园 -->
-					<li @mouseover="showNavList(1),overHover('Theme'),height='97px'" @mouseout="hiddenNavList(1),outHover(''),height='0px'"
+					<router-link to="/theme/1" tag="li" @mouseover="showNavList(1),overHover('Theme'),height='97px'" @mouseout="hiddenNavList(1),outHover(''),height='0px'"
 					 class="theme" :class="{'actives' : $route.name == 'Theme'}">
-						<router-link to="/theme/1" tag="p">
+						<p>
 							<template v-if="$route.name == 'Theme' || hover == 'Theme'">
 								<img src="../assets/img/header-2.png" alt>
 							</template>
@@ -30,8 +30,8 @@
 								<img src="../assets/img/header2.png" alt>
 							</template>
 							<p>{{$t('header.title2')}}</p>
-						</router-link>
-					</li>
+						</p>
+					</router-link>
 					<!-- 度假酒店 -->
 					<li class="hotel" :class="{'actives' : $route.name == 'Hotel' ||  $route.name == 'HotelDetail'}" @mouseover="overHover('a')"
 					 @mouseout="outHover('')">

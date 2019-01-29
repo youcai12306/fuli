@@ -228,6 +228,7 @@ export default {
       a1: this.$route.query.a,
       list2: [],
       price2: 0,
+      sendPrice: 0,
       name1: "",
       phone1: "",
       address1: "",
@@ -475,6 +476,8 @@ export default {
       //     }
       
       let data = {
+        activitieId:this.activeTypeIDList[parseInt(this.radio7)].activityId,//优惠券活动ID
+        activitieType: parseInt(this.radio7),//优惠券活动类型
         touristId: this.$store.getters.getUserData.userId,
         productFormList: JSON.parse(this.$route.query.arr),
         receiveId: this.receiveId, //邮寄ID
@@ -495,6 +498,7 @@ export default {
             guid: res.data.guid,
             userId: this.$store.getters.getUserData.userId
           };
+          this.sendPrice = res.data.price;
           // console.log(111);
           // 读redis，成功创建订单后关闭遮罩层，跳转支付页面
           this.times = setInterval(() => {
@@ -510,7 +514,7 @@ export default {
                   path: "./success",
                   query: {
                     orderId: this.orderId,
-                    price: this.price2
+                    price: this.sendPrice
                   }
                 });
               } else if (res.code === 403 && res.code === 400) {

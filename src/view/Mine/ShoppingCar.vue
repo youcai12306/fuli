@@ -29,7 +29,7 @@
               <div class="tui">{{canDebook(item.product.returnSign)}}</div>
               <div class="timeslot">
                 {{$t('Car.Text6')}}：
-                <span>{{item.dataBaseDate}}</span>
+                <span>{{item.dataBaseDate}}<font v-if="!item.enableStock" color="red">&nbsp;(该商品已过期)</font></span>
               </div>
             </td>
             <td class="num">

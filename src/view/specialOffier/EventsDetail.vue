@@ -4,40 +4,91 @@
 		时间：2018-12-24
 		描述：活动详情页面
 	-->
-	<div class="even" id="even">
-		<div class="r">
-			<div class="title clearDiv">
-				<div class="floatLeft">{{$t('specialOffier.navTitle1')}}</div>
-				<div class="floatRight location">{{$t('specialOffier.Position')}}>{{$t('specialOffier.navTitle1')}}</div>
-			</div>
+	<div>
+		<div class="even" id="even">
+			<div class="r">
+				<div class="title clearDiv">
+					<div class="floatLeft">{{$t('specialOffier.navTitle1')}}</div>
+					<div class="floatRight location">{{$t('specialOffier.Position')}}>{{$t('specialOffier.navTitle1')}}</div>
+				</div>
 
-			<!-- 所有新闻 -->
-			<div class="main-new">
-				<div class="titles clearDiv">
-					<div class="title-left floatLeft">
-						<!-- <div class="one">{{data.infoTitle}}</div>
-						<div class="two">{{data.createTime}}&nbsp;&nbsp; 来源：海洋欢乐世界</div> -->
-						<div class="one">{{data.title}}</div>
-						<div class="two">{{data.createTime}}</div>
+				<!-- 所有新闻 -->
+				<div class="main-new">
+					<div class="titles clearDiv">
+						<div class="title-left floatLeft">
+							<!-- <div class="one">{{data.infoTitle}}</div>
+							<div class="two">{{data.createTime}}&nbsp;&nbsp; 来源：海洋欢乐世界</div> -->
+							<div class="one" v-if="this.type!='0'">{{data.title}}</div>
+							<div class="one" v-else>{{data.activityName}}</div>
+							<div class="two">{{data.createTime}}</div>
+						</div>
+						<div @click="back" class="title-right floatRight">返回</div>
+						<div v-if="this.type=='0'" @click="mengActive = !mengActive" class="title-right floatRight blue" style="margin-right: 5px;">立即报名</div>
 					</div>
-					<div @click="back" class="title-right floatRight">返回</div>
+					<!-- <div class="content">
+						<img src="../../assets/img/new-bg2.png">
+					</div> -->
+					<div class="content-main">
+						<div v-html="data.content0"></div>
+					</div>
 				</div>
-				<!-- <div class="content">
-					<img src="../../assets/img/new-bg2.png">
-				</div> -->
-				<div class="content-main">
-					<div v-html="data.content0"></div>
-				</div>
+			</div>
+		</div>
+		<div class="meng" v-show="mengActive">
+			<div class="b-box">
+				<p>{{$t('specialOffier.text1')}}</p>
+				<el-form ref="numberValidateForm" :model="numberValidateForm" label-width="85px">
+                  <el-form-item :label="$t('Suborder.Text13')" class="el1" prop="name1" :rules="[
+                          { required: true, message: '请输入姓名'},
+                          { type: 'string', message: '姓名必须为中文'},
+                          {
+                            pattern:/^[\u4E00-\u9FA5]+$/,
+                            message: '用户名只能为中文'
+                          }
+                      ]">
+
+                    <el-input type="name1" v-model.trim="numberValidateForm.name1" autocomplete="off"></el-input>
+                  </el-form-item>
+                  <el-form-item :label="$t('Suborder.Text14')" class="el2" prop="phone" :rules="[
+                          { required: true, message: '请输入手机号',trigger:'blur'},
+                          { 
+								validator: (rule, value, callback)=>{validateSku(rule, value, callback)}, 
+								trigger: ['blur', 'change'] 
+							}
+                      ]">
+                    <el-input type="phone" v-model.number="numberValidateForm.phone" autocomplete="off"></el-input>
+                  </el-form-item>
+				  <el-form-item :label="$t('Suborder.Text23')" class="el2" prop="number" :rules="[
+                          { required: true, message: '请输入报名人数',trigger:'blur'},
+						  { 
+								validator: (rule, value, callback)=>{validateNum(rule, value, callback)}, 
+								trigger: ['blur', 'change'] 
+							}
+                      ]">
+                    <el-input type="number" v-model.number="numberValidateForm.number" autocomplete="off"></el-input>
+                  </el-form-item>
+                  <el-form-item>
+                    <button @click="submitForm('numberValidateForm')" :plain="true">提交报名</button>
+                  </el-form-item>
+                </el-form>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
+import { Message } from 'element-ui';
 	export default {
 		data() {
 			return {
-				data: {}
+				data: {},
+				numberValidateForm: {
+					name1: "",
+					phone: "",
+					number: ""
+				},
+				mengActive: false,
+				type:  this.$route.query.type
 			}
 		},
 		components: {
@@ -47,22 +98,129 @@
 			document.title = "活动详情";
 		},
 		mounted() {
+			this.id = this.$route.query.id;
 			this.GetList();
 		},
 		methods: {
+			open() {
+				this.$message({
+					message: '恭喜你，报名成功',
+					type: 'success'
+				});
+			},
 			GetList() {
-				this.$fetch('http://101.201.101.138:6110/mongodb-mucon/structure/primary/get?structureId=' + this.$route.query.id + '&isEnglish='+ this.$isEnglish).then((res) => {
-					this.data = res.data;
-				})
+				if(this.type!='0'){
+					this.$fetch('http://101.201.101.138:6110/mongodb-mucon/structure/primary/get?structureId=' + this.$route.query.id + '&isEnglish='+ this.$isEnglish).then((res) => {
+						this.data = res.data;
+					})
+				}else{
+					this.$fetch('http://101.201.101.138:6110/mongodb-mucon/activity/primary?id=' + this.id).then((res) => {
+						console.log(res.data);
+						this.data = res.data;
+					})
+				}
+				
 			},
 			back(){
 				this.$router.go(-1);
+			},
+			validateSku: function(rule, value, callback) {
+				if (/^1[34578]\d{9}$/.test(value) == false) {
+					callback(new Error("请输入正确的手机号"));
+				} else {
+					callback();
+				}
+			},
+			validateNum: function(rule, value, callback) {
+				if (value == 0) {
+					callback(new Error("人数不能为零"));
+				} else {
+					callback();
+				}
+			},
+			// 验证信息
+			submitForm(formName) {
+			// console.log(999);
+				this.$refs[formName].validate(valid => {
+					if (valid) {
+						this.flag = true;
+						// alert("submit!");
+						this.onSubmit();
+					} else {
+						console.log("error submit!!");
+						return false;
+					}
+				});
+			},
+			onSubmit() {
+				console.log(999);
+				this.$post('http://101.201.101.138:6110//mongodb-mucon/participant/primary/insert',{
+						count: this.numberValidateForm.number,
+						createTime: this.data.createTime,
+						mainId: this.id,
+						name: this.numberValidateForm.name1,
+						phone: this.numberValidateForm.phone
+					}).then((res) => {
+						console.log(res.data);
+						this.data = res.data;
+						if(res.code == 200){
+							this.mengActive = !this.mengActive;
+							this.open();
+							setTimeout(()=>{
+								this.$router.push("/events?id=0");
+							},2000)
+						}else{
+							this.$message.error('报名失败');
+						}
+						// this.getPic(res.data.pictures);
+					})
 			}
 		}
 	}
 </script>
 
 <style scoped="" lang="scss">
+	.meng{
+		background: rgba(0,0,0,0.6);
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+
+		.b-box{
+			position: absolute;
+			top: 20%;
+			left: 36%;
+			width:482px;
+			height:420px;
+			background:rgba(255,255,255,1);
+			padding: 26px 80px;
+
+			p{
+				font-size:18px;
+				font-weight:bold;
+				color:rgba(51,51,51,1);
+				line-height:27px;
+				text-align: center;
+				margin-bottom: 43px;
+			}
+
+			button {
+				width:169px;
+				height:45px;
+				background:rgba(7,100,233,1);
+				border-radius:6px;
+				font-size:15px;
+				font-weight:bold;
+				color:rgba(255,255,255,1);
+				line-height:27px;
+				font-family:MicrosoftYaHei-Bold;
+				margin-top: 41px;
+				cursor: pointer;
+			}
+		}
+	}
 	// 主体
 	.r {
 		position: relative;
@@ -134,6 +292,10 @@
 					color: rgba(102, 102, 102, 1);
 					margin-top: 18px;
 					cursor: pointer;
+				}
+				.blue {
+					background:rgba(7,100,233,1);
+					color: #fff;
 				}
 			}
 

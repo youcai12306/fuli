@@ -253,7 +253,8 @@ export default {
 		Text19: "收件人",
 		Text20: "地址",
 		Text21: "同意《购买协议》",
-		Text22: "总计金额"
+		Text22: "总计金额",
+		Text23: "报名人数"
 	},
 	Success: { //支付页面
 		Text: "微信支付",
@@ -277,8 +278,11 @@ export default {
 		navTitle1: '优惠活动',
 		navTitle2: '精彩活动',
 		navTitle3: '优惠信息',
+		navTitle4: '公益活动',
 		Position: "当前位置",
-		description: "倘若你徜徉在这片资讯丰富的地带<br>也一定能收获无穷欢乐！"
+		description: "倘若你徜徉在这片资讯丰富的地带<br>也一定能收获无穷欢乐！",
+		text1: "活动报名",
+		button: "提交报名"
 	},
 	ditu: { //游玩指南
 		navTitle1: '门票价格',

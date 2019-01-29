@@ -143,7 +143,7 @@ export default {
 		smallTotalCash: "小计",
 		Operation: "操作",
 		exit: "退票申请",
-		text: "没有符合条件的宝贝，请尝试其他搜索条件。"
+		text: "没有符合条件的宝贝，请尝试其他搜索条件。",
 	},
 	OrderDetail: { //订单详情
 		Text1: "您的位置：个人中心 > 订单信息",

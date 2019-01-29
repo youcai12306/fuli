@@ -274,7 +274,7 @@ export default {
         height: 254px;
         float: left;
         margin-right: 6px;
-        margin-bottom: 60px;
+        margin-bottom: 110px;
         cursor: pointer;
         .pp {
           height: 254px;

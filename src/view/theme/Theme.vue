@@ -541,12 +541,9 @@
 		},
 		watch: {
 			index: function(newVal, oldVal) {
-				console.log(oldVal)
-				console.log(this.list2.length-1)
-				console.log(newVal === this.list2.length-1);
 				if (newVal >= 6 && newVal <= 12) {
 					this.swiper.slideTo(newVal, 500, false); //切换到看不见的slide，速度为.5秒
-				} if (oldVal === this.list2.length-1) {
+				} if (oldVal === this.list2.length-1 && oldVal < newVal) {
 					newVal = 0;
 					this.index = 0;
 					this.swiper.slideTo(this.index, 500, false); //切换到第一个slide，速度为.5秒

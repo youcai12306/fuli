@@ -45,7 +45,7 @@
                 </td>
                 <td>¥{{price1}}{{$t('Yuan')}}</td>
                 <td>×{{count}}</td>
-                <td class="td">¥{{price1 * count}}{{$t('Yuan')}}</td>
+                <td class="td">¥{{parseFloat(this.price1 * this.count).toFixed(2)}}{{$t('Yuan')}}</td>
               </tr>
               <!-- <tr>
                 <td>富力成人全日票

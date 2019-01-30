@@ -512,15 +512,19 @@
 
 	@media screen and (max-width: 1700px) {
 		.main .main-content ul li {
-			padding: 21px 22px 0 22px !important;
-			width: auto;
+			padding: 21px 0px 0 0px !important;
+			width: 105px;
+			font-size: 14px;
+			word-break: break-all;
 		}
 	}
 
 	@media screen and (max-width: 1550px) {
 		.main .main-content ul li {
-			padding: 21px 15px 0 15px !important;
-			width: auto;
+			padding: 21px 0px 0 0px !important;
+			width: 88px;
+			font-size: 12px;
+			word-break: break-all;
 		}
 
 		.main .main-content .logo {
@@ -530,8 +534,10 @@
 
 	@media screen and (max-width: 1400px) {
 		.main .main-content ul li {
-			padding: 21px 15px 0 15px !important;
-			width: auto;
+			padding: 21px 0px 0 0px !important;
+			width: 86px;
+			font-size: 12px;
+			word-break: break-all;
 		}
 
 		.main .main-content .logo {
@@ -541,8 +547,10 @@
 
 	@media screen and (max-width: 1300px) {
 		.main .main-content ul li {
-			padding: 21px 10px 0 10px !important;
-			width: auto;
+			padding: 21px 0px 0 0px !important;
+			width: 74px;
+			font-size: 12px;
+			word-break: break-all;
 		}
 
 		.main .main-content .logo {

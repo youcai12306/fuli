@@ -348,7 +348,8 @@
 					path: "/TicketDetail",
 					query: {
 						id: this.id,
-						stockId: this.skId
+						stockId: this.skId,
+						typeId:0
 					}
 				});
 			},

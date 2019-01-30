@@ -182,7 +182,7 @@
 		data() {
 			return {
 				actives: 0,
-				pageSize: 4,
+				pageSize: 1,
 				pageIndex: 1,
 				pageIndex2: 1,
 				totle: 0,

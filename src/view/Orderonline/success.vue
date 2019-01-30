@@ -18,7 +18,7 @@
                   <div id='qrcode'></div>
                 </div>
                 <div class="su26">
-                  <button @click="success()">{{$t('Success.Text2')}}</button>
+                  <button @click="success()" :disabled="dis">{{$t('Success.Text2')}}</button>
                 </div>
               </div>
             </div>
@@ -66,7 +66,8 @@ export default {
       isActive: "",
       minutes: 29,
       seconds: 59,
-      flag: false
+      flag: false,
+      dis:false
     };
   },
   mounted() {
@@ -153,11 +154,13 @@ export default {
           if (res.code === 200) {
             window.clearInterval(this.times);
             this.$router.push("./ok");
+            
           } else if (res.code === 400) {
             this.$router.push("./error1");
           }
         });
       }, 6000);
+      this.dis = true
     },
 
     qrcode(aaa) {

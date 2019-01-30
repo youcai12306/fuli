@@ -410,7 +410,7 @@ export default {
               returnCount: vall.productCount,
               returnContent: val.value
             };
-            if (vall.typeId == 1) {
+            if (vall.typeId == 0) {
               //银科退票接口
               this.$post(
                 `${this.$url1}:5080/returnCash-aggregate/refund/apply`,

@@ -39,7 +39,7 @@
               :class="{li5:integral>=item.integration && lv == key+1}"
               class="btn"
               :disabled="integral<item.integration || lv != key+1"
-              @click="upgrade(item.id,item.integration)"
+              @click="upgrade(item.integration)"
             >{{$t('Member.Text13')}}</button>
           </div>
         </div>
@@ -79,10 +79,10 @@ export default {
     },
     //升级
     ...mapActions(["updateUserData"]),
-    upgrade(lv, integration) {
+    upgrade(integration) {
       let data = {
         id: this.$store.getters.getUserData.userId,
-        memberLevel: lv
+        memberLevel: this.$store.getters.getUserData.memberlevel+1
       };
       this.$put(
         this.$url + ":2060/memberinte-aggregate/updateToMemberLevel",
@@ -96,9 +96,8 @@ export default {
           });
           let userData = this.$store.getters.getUserData;
           userData.integration -= integration;
-          userData.memberlevel = lv + 1;
+          userData.memberlevel = this.lv + 1;
           this.updateUserData(userData);
-          //localStorage.setItem("userData", JSON.stringify(userData));
           this.reload();
         } else {
           this.$message({
@@ -223,6 +222,7 @@ export default {
             background: rgba(219, 219, 219, 1);
             border-radius: 15px;
             color: rgba(130, 130, 130, 1);
+            cursor: pointer;
           }
           .li5 {
             color: rgba(238, 55, 40, 1);

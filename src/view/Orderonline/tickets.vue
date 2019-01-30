@@ -169,7 +169,7 @@ export default {
       // console.log(this.date)
       // console.log(this.pageSize)
       // console.log(this.pageIndex)
-      this.getTicketList(id, this.date, this.pageSize, val);
+      this.getTicketList(id, this.value1, this.pageSize, val);
     },
     //获取门票信息
     getTicketList(typeId, date, pageSize, pageIndex) {
@@ -179,7 +179,9 @@ export default {
         "http://101.201.101.138:5001/product-aggregate/findProductByStock",
         {
           playDate: date,
-          typeId: this.$route.params.typeId
+          typeId: this.$route.params.typeId,
+          pageSize: pageSize,
+          pageNum: pageIndex
         }
       )
         .then(res => {
@@ -232,7 +234,7 @@ export default {
 
       // this.items = list;
       //此处要获取总条数
-      this.totle = this.items.length;
+      // this.totle = this.items.length;
     }
   },
   watch: {
@@ -240,8 +242,9 @@ export default {
     //   console.log("typeId = " + val + " , oldValue = " + oldVal)
     // },
     $route() {
+      this.pageIndex = 0;
       console.log(this.$route.params.typeId);
-     this.getTicketList(this.$route.params.typeId, this.value2, this.pageSize, this.pageIndex);
+      this.getTicketList(this.$route.params.typeId, this.value2, this.pageSize, this.pageIndex);
     }
   }
 };

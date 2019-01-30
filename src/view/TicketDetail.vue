@@ -60,9 +60,17 @@
       </div>
       <div class="details">
         <ul class="clearDiv">
-          <li :class="{li:changeB === 0}" @click="changeType(0)">{{$t('TicketDetail.Text6')}}</li>
+          <li :class="{li:changeB === 0}" @click="changeType(0)">{{$t('TicketDetail.Text6')}}
+
+          </li>
           <li :class="{li:changeB === 1}" @click="changeType(1)">{{$t('TicketDetail.Text7')}}</li>
         </ul>
+        <div v-show="changeB === 0">
+          {{useContent}}
+        </div>
+        <div v-show="changeB === 1">
+          {{returnContent}}
+        </div>
       </div>
     </div>
   </div>
@@ -97,7 +105,9 @@ export default {
       list2: [],
       touristId: "",
       dataBaseDate:"",
-      parkId:""
+      parkId:"",
+      useContent:"",
+      returnContent:""
     };
   },
   components: {
@@ -132,10 +142,13 @@ export default {
         console.log(res.data.dataBaseDate);
         this.dataBaseDate = res.data.dataBaseDate; //库存日期
         this.parkId = res.data.parkId;
+       
         console.log(this.parkId)
         if (res.code === 200) {
           // console.log(111);
           this.product = res.data;
+           this.useContent = res.data.useContent;
+        this.returnContent = res.data.returnContent;
           let list = res.data.productPictureList;
           this.list2 = res.data.productPictureList;
           let xin = [];
@@ -257,7 +270,7 @@ export default {
             id: this.product.id,
             stockId: this.$route.query.stockId,
             num: this.num1 ,
-             typeId:this.$route.query.typeId
+            typeId:this.$route.query.typeId
           }
         });
       }
@@ -530,6 +543,7 @@ export default {
     }
     .details {
       padding-top: 120px;
+          padding-bottom: 200px;
       ul {
         li {
           float: left;

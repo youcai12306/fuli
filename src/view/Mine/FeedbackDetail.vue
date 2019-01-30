@@ -100,12 +100,13 @@ export default {
             content: this.form.desc,
             picture: imgIds
           }).then(res => {
-            if (res.data == 200) {
+            console.log(res)
+            if (res.code == 200) {
               this.$message({
                 type: "success",
                 message: "反馈成功！"
               });
-              this.$router.push('feedback')
+              this.$router.push('/Feedback')
             } else {
               this.$message({
                 type: "success",

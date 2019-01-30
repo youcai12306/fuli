@@ -71,13 +71,13 @@
                 <span>{{$t('mine.navNmae8')}}</span>
               </template>
               <el-menu-item
-                :index="`/Membership`"
-                :class="{'is_active' : $route.path=='/Membership'}"
-              >{{$t('mine.navNmae9')}}</el-menu-item>
-              <el-menu-item
                 :index="`/MyMember`"
                 :class="{'is_active' : $route.path=='/MyMember'}"
               >{{$t('mine.navNmae10')}}</el-menu-item>
+               <el-menu-item
+                :index="`/Membership`"
+                :class="{'is_active' : $route.path=='/Membership'}"
+              >{{$t('mine.navNmae9')}}</el-menu-item>
               <el-menu-item
                 :index="`/ShoppingAdress`"
                 :class="{'is_active' : $route.path=='/ShoppingAdress'}"

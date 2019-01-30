@@ -9,7 +9,7 @@
         <li class="floatRight">
           <span class="phone-img"></span>{{$t('header2.Tel')}}400-xxxx-xxx
         </li>
-        <li class="floatRight phon-type">{{$t('header2.Phone')}}</li>
+        <!-- <li class="floatRight phon-type">{{$t('header2.Phone')}}</li> -->
       </ul>
     </div>
     <div class="nav2">

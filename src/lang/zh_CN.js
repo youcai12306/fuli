@@ -106,7 +106,7 @@ export default {
 		navNmae4: "我的钱包",
 		navNmae5: "我的积分",
 		navNmae6: "我的优惠券",
-		navNmae7: "我的余额",
+		navNmae7: "电子发票",
 		navNmae8: "会员中心",
 		navNmae9: "修改密码",
 		navNmae10: "我的会员",

@@ -106,7 +106,7 @@ export default {
 		navNmae4: "My wallet.",
 		navNmae5: "My points.",
 		navNmae6: "My coupon.",
-		navNmae7: "My balance.",
+		navNmae7: "Electronic Invoice.",
 		navNmae8: "Member Center",
 		navNmae9: "Change Password",
 		navNmae10: "My members.",

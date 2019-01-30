@@ -238,7 +238,7 @@ export default {
       // });
       // 判如果是邮寄，传stockId参数过去..
       let typeId = this.$route.query.typeId;
-      if (typeId == 0) {
+      if (typeId == 0 || typeId == 2) {
         this.$router.push({
           path: "/Suborder2",
           query: {

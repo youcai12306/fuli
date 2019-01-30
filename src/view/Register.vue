@@ -121,6 +121,10 @@ export default {
   },
   mounted() {
     this.getCode();
+    this.phone = '';
+    this.code = '';
+    this.code1 = '';
+    this.password = ''
   },
   methods: {
     //显示图形验证码

@@ -316,9 +316,8 @@ export default {
       let data = {
         receiveId: id
       };
-      console.log(id);
       this.$fetch(
-        `${this.$url}:5010/tourist-aggregate/address/selectReceiveAddressById`,
+        `${this.$url}:2060/user-aggregate/address/selectReceiveAddressById `,
         data
       )
         .then(res => {
@@ -357,13 +356,11 @@ export default {
         });
     },
     getCode() {
-      console.log(this.list);
       this.$fetch(
         `${this.$url1}:5001/product-aggregate/findOrderByeCode?eCode=` +
           this.list[0].ecode
       )
         .then(res => {
-          console.log();
           this.url = res.data;
         })
         .catch(error => {

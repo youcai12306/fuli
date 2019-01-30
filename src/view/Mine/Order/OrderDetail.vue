@@ -313,13 +313,7 @@ export default {
     GetAdder() {
       //收件人信息
       let id = this.data.receiveId;
-      let data = {
-        receiveId: id
-      };
-      this.$fetch(
-        `${this.$url}:2060/user-aggregate/address/selectReceiveAddressById `,
-        data
-      )
+      this.$fetch(`${this.$url}:2060/user-aggregate/address/selectReceiveAddressById?receiveId=`+id)
         .then(res => {
           if (res.code == 200) {
             if (res.data) {

@@ -131,7 +131,7 @@
 									<img src="../assets/img/touxiang123.png" alt class="floatLeft">
 									<div class="floatLeft">
 										<p>{{$store.getters.userInfo.mobile}}</p>
-										<p>{{$t('Center.my')}}：2</p>
+										<p>{{$t('Center.my')}}：{{this.$store.getters.getUserData.memberlevel}}</p>
 									</div>
 								</div>
 							</div>

@@ -160,7 +160,7 @@ export default {
     back(){
       clearInterval(this.times);
       this.step = ! this.step;
-      this.phone = '';
+      // this.phone = '';
       this.phoneTip = '';
       this.code = '';
       this.codeTip = '';

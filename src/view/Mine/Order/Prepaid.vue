@@ -333,7 +333,7 @@ export default {
             returnCount: obj.productCount,
             returnContent: val.value
           };
-          if (obj.typeId == 1) {
+          if (obj.typeId == 0) {
 			  //银科退票接口
             this.$post(
               `${this.$url1}:5080/returnCash-aggregate/refund/apply`,

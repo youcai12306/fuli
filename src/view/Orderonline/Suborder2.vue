@@ -38,7 +38,7 @@
                   <!-- <p>{{canDebook(saleType)}}</p> -->
                  <p class="type" v-show="flag2">
                     配送方式：
-                    <span :class="{active:isactive ==0}" @click="toggle(0)">邮寄</span>
+                    <span :class="{active:isactive ==2}" @click="toggle(2)">邮寄</span>
                     <span :class="{active:isactive ==1}" @click="toggle(1)">自提</span>
                   </p>
 
@@ -97,7 +97,7 @@
                     <td v-show="flag2">
                       <p class="type" >
                     配送方式：
-                    <span :class="{active:isactive ==0}" @click="toggle(0)">邮寄</span>
+                    <span :class="{active:isactive ==2}" @click="toggle(2)">邮寄</span>
                     <span :class="{active:isactive ==1}" @click="toggle(1)">自提</span>
                   </p>
                     </td>
@@ -250,7 +250,7 @@ export default {
       playtime: "",
       orderId: "",
       times: "",
-      saleType: "",
+      saleType: 2,
       sign: "",
       a1: this.$route.query.a,
       list2: [],
@@ -259,7 +259,7 @@ export default {
       address1: "",
       receiveId: "",
       dis: true,
-      isactive: true,
+      isactive: 2,
       flag2: true,
       radio7: "1",
       id: "",
@@ -364,11 +364,11 @@ export default {
     },
      toggle(type) {
       this.isactive = type;
-      if(type ==1){
-        this.flag1 = false
-        this.saleType = 2
+      if(type ==2){
+        this.flag1 = true;
+        this.saleType = 2;
       }else{
-         this.flag1 = true
+         this.flag1 = false;
          this.saleType = 1
       }
     },
@@ -416,17 +416,17 @@ export default {
       // console.log(id);
       let stockId = this.$route.query.stockId;
       let num1 = this.$route.query.num;
-      this.toggle();
-      this.saleType = this.$route.query.saleType;
+      this.toggle(2);
+      this.saleType = this.saleType;
       let typeId = this.$route.query.typeId; //是门票还是产品，0为门票，1为产品
-      // console.log(typeId)
+      console.log(typeId)
       // let list1 = this.$route.query.list1;
       // let list2 = JSON.parse(list1)
       // console.log(list2);
       // console.log(this.saleType);
       // console.log(num1);
       this.count = num1;
-      if (typeId == 0) {
+      if (typeId != 1) {
         this.flag2 = false;
         this.flag1 = false;
       } else {
@@ -453,7 +453,7 @@ export default {
     // 判断是邮寄或者自提，邮寄需要显示邮寄地址，传邮寄ID到李顺仪
      canDebook() {
           this.sign = "邮寄";
-          this.isactive = 0;
+          this.isactive = 2;
       let data2 = {
         touristId: this.$store.getters.getUserData.userId
       };
@@ -476,7 +476,7 @@ export default {
     },
     //   提交
     onSubmit() {
-      // console.log(111);
+      console.log(this.saleType);
       let data = {
         touristId: this.$store.getters.getUserData.userId,
         productFormList: [
@@ -484,7 +484,7 @@ export default {
             productId: this.$route.query.id,
             num: this.$route.query.num,
             stockId: this.$route.query.stockId,
-            saleType: parseInt(this.$route.query.saleType),
+            saleType: parseInt(this.saleType),
            
           },
           // {
@@ -509,7 +509,7 @@ export default {
         data.productFormList.push({
           productId: value.productId,
           num: value.productCount,
-          saleType: value.saleType,
+          saleType: parseInt(this.saleType),
           stockId: value.priceId
         })
       });

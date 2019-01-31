@@ -322,6 +322,11 @@ export default {
               message: "修改成功"
             });
             this.init();
+          }else{
+            this.$message({
+              type: "error",
+              message: res.message
+            });
           }
         });
       }

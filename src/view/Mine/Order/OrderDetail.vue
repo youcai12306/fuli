@@ -89,7 +89,7 @@
                   </td>
                   <!-- <td class="td-6" v-else></td> -->
                 </tr>
-                <tr class="tr">
+                <tr class="tr" v-if="item.saleType == 0">
                   <td colspan="6">
                     {{$t('Order.ecode')}}：
                     <a @click="getCode()" href="javascript:;">{{item.ecode}}</a>

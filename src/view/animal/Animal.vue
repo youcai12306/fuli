@@ -138,7 +138,7 @@
 									</div>
 								</router-link>
 							</template>
-							<div class="pages" v-if="totle > pageSize">
+							<div class="pages">
 								<el-pagination background layout="prev, pager, next" :total="totle" :current-page.sync="pageIndex" :page-size="pageSize"
 								 @current-change="changePage"></el-pagination>
 							</div>
@@ -155,7 +155,7 @@
 									</div>
 								</router-link>
 							</template>
-							<div class="pages" v-if="count > pageSize">
+							<div class="pages">
 								<el-pagination background layout="prev, pager, next" :total="count" :current-page.sync="pageIndex2" :page-size="pageSize"
 								 @current-change="changePage2"></el-pagination>
 							</div>
@@ -182,7 +182,7 @@
 		data() {
 			return {
 				actives: 0,
-				pageSize: 1,
+				pageSize: 4,
 				pageIndex: 1,
 				pageIndex2: 1,
 				totle: 0,

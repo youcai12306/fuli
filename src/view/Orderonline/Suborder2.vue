@@ -71,13 +71,13 @@
             </table>
           </div>
           <!-- 优惠券信息 -->
-          <div class="su5">
+          <div class="su5" v-if="typeList.indexOf(0)>-1 || typeList.indexOf(1)>-1 || typeList.indexOf(2)>-1">
 
             <span class="su6">{{$t('Suborder.Text9')}}</span>
             <!-- <span class="su7">{{$t('Suborder.Text10')}}</span> -->
 
           </div>
-          <div class="jian1">
+          <div class="jian1" v-if="typeList.indexOf(0)>-1 || typeList.indexOf(1)>-1 || typeList.indexOf(2)>-1">
             <div>
               <div v-if="typeList.indexOf(0)>-1"><el-radio v-model="radio7" label="0" @change="youhui()" >{{activeNameList[0]}}</el-radio><span class="jian" v-if="radio7==0">-¥{{decimal}}</span></div>
               <div v-if="typeList.indexOf(1)>-1"><el-radio v-model="radio7" label="1" @change="youhui()">{{activeNameList[1]}}</el-radio></div>

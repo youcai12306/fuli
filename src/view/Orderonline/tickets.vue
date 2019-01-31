@@ -27,8 +27,8 @@
               <p>{{item.productName}}</p>
               <!-- <div class="can">{{canDebook(item.returnSign)}}</div> -->
               <div class="clearDiv">
-                <span class="ti5 ti6">{{item.originalPrice}}</span>
-                <span class="ti5 ti7">{{item.settlementPrice}}</span>
+                <span class="ti5 ti6">{{item.settlementPrice}}</span>
+                <span class="ti5 ti7">{{item.originalPrice}}</span>
               </div>
             </div>
           </li>

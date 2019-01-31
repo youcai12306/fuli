@@ -432,7 +432,7 @@ export default {
             }
             button {
               float: left;
-              margin-left: 33px;
+              margin-left: 20px;
               width: 91px;
               height: 30px;
               background: url(../../assets/img/mine-shoppingcar-pay1.png)

@@ -25,7 +25,7 @@
             <div class="swiper-next" @click="next"></div>
           </div>
         </div>
-        {{data}}
+        <!-- {{data}} -->
         <div class="one-right">
           <div class="right-title">{{product.productName}}</div>
           <div class="right-pay clearDiv">
@@ -320,11 +320,11 @@ export default {
       ).then(res => {
         if (res.code === 200) {
           // console.log(res.data);
-          let list = res.data;
+          let list = res.data.list;
           let shopNum = 0;
-          for (let item of list) {
+          list.forEach((item)=>{
             shopNum += item.productCount;
-          }
+          })
           this.shopNum = shopNum;
         }
       });

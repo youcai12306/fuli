@@ -79,8 +79,8 @@
           </div>
           <div class="jian1">
             <div>
-              <div v-if="typeList.indexOf(0)>-1"><el-radio v-model="radio7" label="0" @change="youhui()" >满减</el-radio><span class="jian" v-if="radio7==0">-¥{{decimal}}</span></div>
-              <div v-if="typeList.indexOf(1)>-1"><el-radio v-model="radio7" label="1" @change="youhui()">满赠</el-radio></div>
+              <div v-if="typeList.indexOf(0)>-1"><el-radio v-model="radio7" label="0" @change="youhui()" >{{activeNameList[0]}}</el-radio><span class="jian" v-if="radio7==0">-¥{{decimal}}</span></div>
+              <div v-if="typeList.indexOf(1)>-1"><el-radio v-model="radio7" label="1" @change="youhui()">{{activeNameList[1]}}</el-radio></div>
               <div class="su4" v-if="radio7==1">
                 <table cellspacing="0" width="1078">
                   <tr>
@@ -104,7 +104,7 @@
                   </tr>
                 </table>
               </div>
-              <div v-if="typeList.indexOf(2)>-1"><el-radio v-model="radio7" label="2" @change="youhui()">折扣</el-radio></div>
+              <div v-if="typeList.indexOf(2)>-1"><el-radio v-model="radio7" label="2" @change="youhui()">{{activeNameList[2]}}</el-radio></div>
               <!-- <el-form-item label="线路类型：" prop="isGive">
  <el-radio-group v-model="currentLine.isGive">
  <el-radio :label="item.id" :key="item.id" v-for="item in isGive" >{{item.name}}</el-radio>
@@ -353,10 +353,12 @@ export default {
             this.activeTypeIDList.push({activityType: value.activityType,activityId: value.id});
             this.typeList.push(value.activityType);
             this.returnSignList.push(value.returnSign);
+            this.activeNameList.push(value.activityName);
           }else{
             this.activeTypeIDList.push({activityType: '',activityId: ''});
             this.typeList.push('');
             this.returnSignList.push('');
+            this.activeNameList.push('');
           }
         });
         this.youhui();

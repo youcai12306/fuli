@@ -47,7 +47,7 @@
                 </td>
                 <td>¥{{item.settlementPrice}}{{$t('Yuan')}}</td>
                 <td>×{{item.productCount}}</td>
-                <td class="td">¥{{item.cash ? (item.cash * item.productCount) : (item.settlementPrice * item.productCount)}}{{$t('Yuan')}}</td>
+                <td class="td">¥{{item.cash ? parseFloat(item.cash * item.productCount).toFixed(2) : parseFloat(item.settlementPrice * item.productCount).toFixed(2)}}{{$t('Yuan')}}</td>
               </tr>
               <!-- <tr>
                 <td>富力成人全日票
@@ -171,7 +171,7 @@
 
                   <div class="su14">
                     <span class="su15">{{$t('Suborder.Text22')}}：</span>
-                    <span class="su16">¥{{price3}}{{$t('Yuan')}}</span>
+                    <span class="su16">¥{{parseFloat(price3).toFixed(2)}}{{$t('Yuan')}}</span>
                   </div>
 
                   <el-form-item>
@@ -259,6 +259,7 @@ export default {
     if (this.a1 == 1) {
       let list1 = this.$route.query.list1;
       this.list2 = JSON.parse(list1);
+      console.log(this.list2);
       this.getPrice(this.list2);
     }
   },

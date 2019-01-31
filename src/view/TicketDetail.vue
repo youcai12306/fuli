@@ -255,7 +255,7 @@ export default {
         this.$router.push({
           path: "/Suborder2",
           query: {
-            saleType: "",
+            saleType: 0,
             id: this.product.id,
             stockId: this.$route.query.stockId,
             num: this.num1,

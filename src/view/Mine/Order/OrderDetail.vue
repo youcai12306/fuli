@@ -31,7 +31,7 @@
                   <div
                     class="now-pay"
                     @click="refund()"
-                   v-show="data.status == 3 && btnCanUse(data.orderDetailDTOList)"
+                    v-show="data.status == 3 && btnCanUse(data.orderDetailDTOList)"
                   >{{$t('Order.exit')}}</div>
                 </template>
               </td>
@@ -84,12 +84,10 @@
                   <td class="td-3">X{{item.productCount}}</td>
                   <td class="td-4">￥{{item.smallTotalCash}}</td>
                   <td class="td-5">{{item.singleTicketState|status}}</td>
-                  <td
-                    class="td-6"
-                    v-if="status == 3 && item.returnSign == 1"
-                    @click="refund(item)"
-                  ><button>{{$t('Order.exit')}}</button></td>
-                  <td class="td-6" v-else></td>
+                  <td class="td-6" @click="refund(item)" v-if="status == 3 && item.returnSign == 1">
+                    <button>{{$t('Order.exit')}}</button>
+                  </td>
+                  <!-- <td class="td-6" v-else></td> -->
                 </tr>
                 <tr class="tr">
                   <td colspan="6">
@@ -217,7 +215,8 @@ export default {
       item: [],
       item2: [],
       url: "",
-      orderDetailList: []
+      orderDetailList: [],
+      num: 0
     };
   },
 
@@ -313,7 +312,11 @@ export default {
     GetAdder() {
       //收件人信息
       let id = this.data.receiveId;
-      this.$fetch(`${this.$url}:2060/user-aggregate/address/selectReceiveAddressById?receiveId=`+id)
+      this.$fetch(
+        `${
+          this.$url
+        }:2060/user-aggregate/address/selectReceiveAddressById?receiveId=` + id
+      )
         .then(res => {
           if (res.code == 200) {
             if (res.data) {
@@ -360,8 +363,8 @@ export default {
         .catch(error => {
           console.log(error);
         });
-	},
-	    //判断申请退款按钮是否可用
+    },
+    //判断申请退款按钮是否可用
     btnCanUse(list) {
       return list.some(v => v.returnSign == 1);
     },
@@ -370,11 +373,10 @@ export default {
       //清空临时数组
       this.orderDetailList = [];
       //查看订单是单退还是多退
+      console.log(item);
       if (item == "all") {
-        console.log(this.data.orderDetailDTOList);
         this.data.orderDetailDTOList.forEach(val => {
           if (val.returnSign == 1) {
-            console.log(val);
             this.orderDetailList.push(val);
           }
         });
@@ -386,7 +388,7 @@ export default {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         inputValidator: val => {
-          if (val === null) {
+          if (val == null || val == "") {
             return true; //初始化的值为null，不做处理的话，刚打开MessageBox就会校验出错，影响用户体验
           }
           return !(val.length < 6 || val.length > 100);
@@ -411,13 +413,20 @@ export default {
                 this.$tool.formatDatas(data)
               )
                 .then(res => {
-                  if (res.code == 0) {
-                    That.num = num++;
+                  if (res.code == 200) {
+                    let num = 0;
+                    num++;
+                    if (num == 1) {
+                      this.$message({
+                        type: "success",
+                        message: "退票发起成功"
+                      });
+                    }
                   } else {
                   }
                 })
                 .catch(error => {
-                  this.$message.error(error.response.data.message);
+                  //this.$message.error(error.response.data.message);
                 });
             } else {
               //其他退票接口
@@ -427,28 +436,22 @@ export default {
               )
                 .then(res => {
                   if (res.code == 200) {
-                    That.num = num++;
-                    this.PostFindOrderDetail();
+                    let num = 0;
+                    num++;
+                    if (num == 1) {
+                      this.$message({
+                        type: "success",
+                        message: "退票发起成功"
+                      });
+                    }
                   } else {
                   }
                 })
                 .catch(error => {
-                  this.$message.error(error.response.data.message);
+                  //this.$message.error(error.response.data.message);
                 });
             }
           });
-          if (That.num > 0) {
-            this.$message({
-              type: "success",
-              message: "退票发起成功"
-            });
-          } else {
-            this.$message({
-              type: "error",
-              message: "退票发起失败"
-            });
-          }
-          this.PostFindOrderDetail();
         })
         .catch(() => {
           this.$message({
@@ -782,7 +785,7 @@ export default {
               text-align: center;
               background: #0764e9;
               color: white;
-			  cursor: pointer;
+              cursor: pointer;
             }
           }
 

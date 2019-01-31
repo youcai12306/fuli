@@ -12,12 +12,12 @@
       </div>
       <div class="main-one clearDiv">
         <div class="one-left">
-          <img :src="imgs2[0]" alt>
+          <img :src="imgs2[index]" alt>
           <div class="swiper">
             <div class="swiper-contents">
               <swiper :options="swiperOption" ref="mySwiper">
                 <swiper-slide v-for="(item,key) in imgs2" :key="key">
-                  <img :src="item" :class="{borderImg:key === index}">
+                  <img :src="item" :class="{borderImg:key === index}" @click="jumpImg(key)">
                 </swiper-slide>
               </swiper>
             </div>
@@ -332,6 +332,10 @@ export default {
     //跳转购物车页面
     jumpShoppingCar() {
       this.$router.push("/shoppingCar");
+    },
+    //跳转对应图片
+    jumpImg(key){
+      this.index = key;
     }
   },
 

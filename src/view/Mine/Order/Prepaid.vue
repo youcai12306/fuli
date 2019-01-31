@@ -340,7 +340,8 @@ export default {
               this.$tool.formatDatas(data)
             )
               .then(res => {
-                if (res.code == 0) {
+                if (res.code == 200) {
+                  console.log(res)
                   this.$message({
                     type: "success",
                     message: "申请成功"
@@ -363,12 +364,13 @@ export default {
               this.$tool.formatDatas(data)
             )
               .then(res => {
+                console.log(res)
                 if (res.code == 200) {
                   this.$message({
                     type: "success",
                     message: "申请成功"
                   });
-                  this.PostFindOrderDetail();
+                 
                 } else {
                   this.$message({
                     type: "error",
@@ -386,6 +388,9 @@ export default {
             type: "info",
             message: "取消退票"
           });
+        });
+        this.$nextTick(function() {
+            this.PostFindOrderDetail();
         });
     }
   },

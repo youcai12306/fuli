@@ -1,7 +1,8 @@
 <template>
   <div class="main">
     <div class="take-address clearDiv">
-      <div class="change-title">{{$t('Adress.Text')}}
+      <div class="change-title">
+        {{$t('Adress.Text')}}
         <div class="add-dizhi floatRight" @click="showMeng">
           {{$t('Adress.Text1')}}
           <span class="floatRight add">+</span>
@@ -15,18 +16,41 @@
           :header-cell-style="{background:'#CDE2FF'}"
           class="table-address"
         >
-          <el-table-column prop="receivePersonName" :label="$t('Adress.Text2')" width="96" align="center"></el-table-column>
+          <el-table-column
+            prop="receivePersonName"
+            :label="$t('Adress.Text2')"
+            width="96"
+            align="center"
+          ></el-table-column>
           <el-table-column :label="$t('Adress.Text3')" width="123" align="center">
             <template
               slot-scope="scope"
             >{{scope.row.receiveProvince}}{{scope.row.receiveCity}}{{scope.row.receiveArea}}</template>
           </el-table-column>
-          <el-table-column prop="receiveAddress" :label="$t('Adress.Text4')" width="136" align="center"></el-table-column>
-          <el-table-column prop="receieveCode" :label="$t('Adress.Text5')" width="99" align="center"></el-table-column>
-          <el-table-column prop="receivePersonMobile" :label="$t('Adress.Text6')" width="136" align="center"></el-table-column>
+          <el-table-column
+            prop="receiveAddress"
+            :label="$t('Adress.Text4')"
+            width="136"
+            align="center"
+          ></el-table-column>
+          <el-table-column
+            prop="receieveCode"
+            :label="$t('Adress.Text5')"
+            width="99"
+            align="center"
+          ></el-table-column>
+          <el-table-column
+            prop="receivePersonMobile"
+            :label="$t('Adress.Text6')"
+            width="136"
+            align="center"
+          ></el-table-column>
           <el-table-column :label="$t('Adress.Text7')" width="167" align="center">
             <template slot-scope="scope">
-              <span class="change-address" @click="changeAddress(scope.$index,list)">{{$t('Adress.Text8')}}</span>
+              <span
+                class="change-address"
+                @click="changeAddress(scope.$index,list)"
+              >{{$t('Adress.Text8')}}</span>
               <span
                 @click.prevent="deleteRow(scope.$index,list,scope.row.id)"
                 class="del-address"
@@ -35,7 +59,10 @@
           </el-table-column>
           <el-table-column prop="name" :label="$t('Adress.Text10')" align="center" fixed="right">
             <template slot-scope="scope">
-              <span v-show="scope.row.defaultSign === true" class="default-address">{{$t('Adress.Text10')}}</span>
+              <span
+                v-show="scope.row.defaultSign === true"
+                class="default-address"
+              >{{$t('Adress.Text10')}}</span>
               <span
                 @click.prevent="setDefault(scope.$index,scope.row.id)"
                 v-show="scope.row.defaultSign === false"
@@ -78,7 +105,7 @@
         </p>
         <p class="clearDiv detailAdress-box">
           <label for="detailAdress">{{$t('Adress.Text16')}}：</label>
-          <input type="text" class="detailAdress" v-model="detailAdress" id="detailAdress">
+          <textarea type="text" class="detailAdress" v-model="detailAdress" id="detailAdress"></textarea>
           <span class="tip">{{detailAdressTip}}</span>
         </p>
         <p class="clearDiv default" v-show="isChange">
@@ -189,7 +216,7 @@ export default {
         this.mobile = "";
         this.phoneTip = "";
         this.code = "";
-        this.codeTip = '';
+        this.codeTip = "";
         this.select.province = "";
         this.select.city = "";
         this.select.area = "";
@@ -201,19 +228,19 @@ export default {
       }
     },
     //关闭蒙版
-    close(){
-       this.name = "";
-        this.mobile = "";
-        this.phoneTip = "";
-        this.code = "";
-        this.codeTip = '';
-        this.select.province = "";
-        this.select.city = "";
-        this.select.area = "";
-        this.adressTip = "";
-        this.detailAdress = "";
-        this.detailAdressTip = "";
-        this.mengShow = false;
+    close() {
+      this.name = "";
+      this.mobile = "";
+      this.phoneTip = "";
+      this.code = "";
+      this.codeTip = "";
+      this.select.province = "";
+      this.select.city = "";
+      this.select.area = "";
+      this.adressTip = "";
+      this.detailAdress = "";
+      this.detailAdressTip = "";
+      this.mengShow = false;
     },
     //获取地址栏的值
     selected(val) {
@@ -247,15 +274,15 @@ export default {
     //新增收货地址
     addAddress(key) {
       if (this.name == "") {
-        this.$message.error('姓名不能为空');
+        this.$message.error("姓名不能为空");
         return;
       }
       if (this.mobile == "") {
-        this.$message.error('手机号不能为空');
+        this.$message.error("手机号不能为空");
         return;
       }
       if (this.code == "") {
-        this.$message.error('邮编不能为空');
+        this.$message.error("邮编不能为空");
         return;
       }
       if (
@@ -263,13 +290,13 @@ export default {
         this.select.city == "" ||
         this.select.area == ""
       ) {
-        this.$message.error('请选择地址');
+        this.$message.error("请选择地址");
         return;
       } else {
         this.adressTip = "";
       }
       if (this.detailAdress == "") {
-        this.$message.error('请填写详细地址');
+        this.$message.error("请填写详细地址");
         return;
       }
       if (key === 0) {
@@ -322,7 +349,7 @@ export default {
               message: "修改成功"
             });
             this.init();
-          }else{
+          } else {
             this.$message({
               type: "error",
               message: res.message
@@ -495,8 +522,11 @@ export default {
       .detailAdress-box {
         height: 129px;
         .detailAdress {
+          border: 1px solid rgba(191, 191, 191, 1);
+          text-indent: 10px;
+          width: 80%;
           height: 129px;
-          padding-bottom: 100px;
+          //padding-bottom: 100px;
         }
         .tip {
           top: 122px;
@@ -509,7 +539,7 @@ export default {
       .btn {
         margin-top: 40px;
         button {
-					cursor: pointer;
+          cursor: pointer;
           width: 114px;
           height: 44px;
           background: rgba(7, 100, 233, 1);

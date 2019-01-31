@@ -56,7 +56,7 @@ export default {
         pageSize: this.pageSize,
         touristId: this.$store.getters.getUserData.userId
       }).then(res => {
-        // console.log(res);
+         console.log(res);
         if (res.code == 200) {
           this.list = res.data.list;
           this.total = res.data.total;

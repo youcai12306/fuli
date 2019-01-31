@@ -372,6 +372,7 @@ export default {
     refund(item = "all") {
       //清空临时数组
       this.orderDetailList = [];
+      let That = this;
       //查看订单是单退还是多退
       console.log(item);
       if (item == "all") {
@@ -414,12 +415,12 @@ export default {
               )
                 .then(res => {
                   if (res.code == 200) {
-                    let num = 0;
-                    num++;
-                    if (num == 1) {
-                      this.$message({
-                        type: "success",
-                        message: "退票发起成功"
+                    That.num++;
+                    if (That.num == 1) {
+                      Toast({
+                        message: "退票申请已发起",
+                        position: "middle",
+                        duration: 2000
                       });
                     }
                   } else {
@@ -436,12 +437,12 @@ export default {
               )
                 .then(res => {
                   if (res.code == 200) {
-                    let num = 0;
-                    num++;
-                    if (num == 1) {
-                      this.$message({
-                        type: "success",
-                        message: "退票发起成功"
+                    That.num++;
+                    if (That.num == 1) {
+                      Toast({
+                        message: "退票申请已发起",
+                        position: "middle",
+                        duration: 2000
                       });
                     }
                   } else {
@@ -459,6 +460,9 @@ export default {
             message: "取消退票"
           });
         });
+      this.$nextTick(function() {
+        this.PostFindOrderDetail();
+      });
     }
   },
   mounted() {

@@ -68,7 +68,7 @@ export default {
       type: 0,
       integral: 0,
       pageNum: 1,
-      pageSize: 20,
+      pageSize: 10,
       total: 0
     };
   },
@@ -117,6 +117,9 @@ export default {
           this.tableDate1 = res.data.IntegrationList.list;
           this.total = res.data.IntegrationList.total;
           // console.log(res.data.IntegrationList.total);
+        }else{
+          this.tableDate1 = [];
+          this.total = 0;
         }
       });
     },

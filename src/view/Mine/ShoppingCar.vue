@@ -423,7 +423,7 @@ export default {
               cursor: pointer;
             }
             .choosed {
-              margin-left: 520px;
+              margin-left: 500px;
               //   margin-right: 45px;
               color: rgba(238, 50, 35, 1);
               span {

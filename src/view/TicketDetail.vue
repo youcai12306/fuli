@@ -3,7 +3,9 @@
     <Header></Header>
     <div class="content">
       <div class="nav clearDiv">
-        <div class="floatLeft" @click="orderr">{{$t('TicketDetail.Text1')}}</div>
+        <div class="floatLeft" @click="orderr" v-if="this.$route.query.typeId == 0">{{$t('TicketDetail.Text1')}}</div>
+        <div class="floatLeft" @click="orderr" v-else-if="this.$route.query.typeId == 1">{{$t('TicketDetail.Text')}}</div>
+        <div class="floatLeft" @click="orderr" v-else-if="this.$route.query.typeId == 2">{{$t('TicketDetail.Text0')}}</div>
         <div class="floatRight" @click="myorder">{{$t('TicketDetail.Text2')}}</div>
         <div class="floatRight shopping-car" @click="jumpShoppingCar">
           <img src="../assets/img/shopping-car.png">{{$t('TicketDetail.Text3')}}(

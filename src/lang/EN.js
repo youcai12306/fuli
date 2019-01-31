@@ -193,6 +193,7 @@ export default {
 	},
 	TicketDetail: { //门票详情
 		Text: "Current location: Online ordering > retail product Details page",
+		Text0: "Current location: Online ordering > catering Details page",
 		Text1: "Current location: Online ordering > ticket details page",
 		Text2: "My order.",
 		Text3: "Shopping Cart",

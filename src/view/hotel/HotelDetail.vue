@@ -6,7 +6,7 @@
       <router-link to="/hotel">度假酒店</router-link>> 酒店详情
     </div>
     <div class="top">
-      <swiper :options="swiperOption" ref="mySwiper">
+      <swiper :options="swiperOption" ref="mySwiper" v-if="swiperImg.length>0">
         <!-- slides -->
         <swiper-slide v-for="(img,index) in swiperImg" :key="index">
           <img :src="img" alt>
@@ -33,7 +33,7 @@ export default {
         loop: true,
         //自动播放
         autoplay: {
-          delay: 5000,
+          delay: 4000,
           stopOnLastSlide: false,
           disableOnInteraction: true
         },

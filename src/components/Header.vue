@@ -22,7 +22,7 @@
 					<!-- 主题乐园 -->
 					<li to="/theme/1" @mouseover="showNavList(1),overHover('Theme'),height='97px'" @mouseout="hiddenNavList(1),outHover(''),height='0px'"
 					 class="theme" :class="{'actives' : $route.name == 'Theme'}">
-						<router-link to="/theme/1" tag="p">
+						<router-link to="/theme/1" tag="div">
 							<template v-if="$route.name == 'Theme' || hover == 'Theme'">
 								<img src="../assets/img/header-2.png" alt>
 							</template>
@@ -35,7 +35,7 @@
 					<!-- 度假酒店 -->
 					<li class="hotel" :class="{'actives' : $route.name == 'Hotel' ||  $route.name == 'HotelDetail'}" @mouseover="overHover('a')"
 					 @mouseout="outHover('')">
-						<router-link to="/hotel" tag="p">
+						<router-link to="/hotel" tag="div">
 							<template v-if="$route.name == 'Hotel' || $route.name == 'HotelDetail' || hover == 'a'">
 								<img src="../assets/img/header-3.png" alt>
 							</template>
@@ -48,7 +48,7 @@
 					<!-- 新闻中心 -->
 					<li class="news" :class="{'actives' : $route.path == '/news' || $route.path == '/newList' || $route.path == '/noticeList' || $route.path == '/newDetail' || $route.path == '/noticeDetail'}"
 					 @mouseover="overHover('news')" @mouseout="outHover('')">
-						<router-link to="/news" tag="p">
+						<router-link to="/news" tag="div">
 							<template v-if="$route.path == '/news' || $route.path == '/newList' || $route.path == '/noticeList' || $route.path == '/newDetail' || $route.path == '/noticeDetail' || hover == 'news'">
 								<img src="../assets/img/header-4.png" alt>
 							</template>
@@ -61,7 +61,7 @@
 
 					<!-- 游玩指南 -->
 					<li class="trip" :class="{'actives' : $route.name == 'ditu'}" @mouseover="overHover('ditu')" @mouseout="outHover('')">
-						<router-link to="/ditu" tag="p">
+						<router-link to="/ditu" tag="div">
 							<template v-if="$route.name == 'ditu' || hover == 'ditu'">
 								<img src="../assets/img/header-5.png" alt>
 							</template>
@@ -75,7 +75,7 @@
 					<!-- 优惠活动 -->
 					<li class="active" :class="{'actives' : $route.path == '/specialOffier' || $route.path == '/events' || $route.path == '/EventsDetail'}"
 					 @mouseover="overHover('specialOffier')" @mouseout="outHover('')">
-						<router-link :to="{path:'/events',query:{id:'E'}}" tag="p">
+						<router-link :to="{path:'/events',query:{id:'E'}}" tag="div">
 							<template v-if="$route.path == '/specialOffier' || $route.name == 'events' || $route.path == '/EventsDetail' || hover == 'specialOffier'">
 								<img src="../assets/img/header-6.png" alt>
 							</template>
@@ -88,7 +88,7 @@
 
 					<!-- 冒险之旅 -->
 					<li class="risk" :class="{'actives' : $route.name == 'Risk'}" @mouseover="overHover('Risk')" @mouseout="outHover('')">
-						<router-link to="/risk" tag="p">
+						<router-link to="/risk" tag="div">
 							<template v-if="$route.name == 'Risk' || hover == 'Risk'">
 								<img src="../assets/img/header-7.png" alt>
 							</template>
@@ -102,7 +102,7 @@
 					<!-- 动物百科 -->
 					<li class="animal" :class="{'actives' : $route.name == 'Animal' || $route.name == 'BaiDetails'}" @mouseover="overHover('Animal')"
 					 @mouseout="outHover('')">
-						<router-link to="/animal?type=1" tag="p">
+						<router-link to="/animal?type=1" tag="div">
 							<template v-if="$route.name == 'Animal' || $route.name == 'BaiDetails' || hover == 'Animal'">
 								<img src="../assets/img/header-8.png" alt>
 							</template>
@@ -308,7 +308,7 @@
 
 				li {
 					height: 97px;
-					padding-top: 20px;
+					//padding-top: 20px;
 					width: 150px;
 					float: left;
 					font-size: 14px;
@@ -323,6 +323,13 @@
 						background: rgba(7, 100, 233, 1);
 						color: rgba(255, 255, 255, 1);
 					}
+					div{
+						padding-top: 20px;
+						height: 100%;
+					}
+				}
+				.order{
+					padding-top: 20px;
 				}
 
 				.theme {

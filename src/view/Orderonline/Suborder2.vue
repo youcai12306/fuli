@@ -279,6 +279,10 @@ export default {
     this.changeType();
     this.shopmsg();
     this.canDebook()
+    if(this.$route.query.typeId == 0){
+      this.saleType = 0
+    }
+    console.log(this.saleType)
     // this.saleType = this.$route.query.saleType
     // 监听路由跳转路径，如果是购物车，标志为a1，直接接受上个页面的参数
     // if (this.a1 === 1) {

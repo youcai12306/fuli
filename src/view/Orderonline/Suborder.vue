@@ -538,10 +538,13 @@ export default {
         }
       },error => {
         if(error.response.data.code === 400){
-          this.$alert(error.response.data.message, '提示', {
-            confirmButtonText: '确定'
-          });
-        }
+            this.$alert(error.response.data.message, '提示', {
+              confirmButtonText: '确定',
+              callback: () => {
+                this.$router.push('/tickets/0');
+              }
+            });
+          }
       });
     }
   },

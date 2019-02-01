@@ -79,7 +79,7 @@
                   <td colspan="6" class="td-8">{{item.productName}}</td>
                 </tr>
                 <tr class="tr">
-                  <td class="td-1">{{$t('Order.useBeginDateTime')}}：{{item.useBeginDateTime}}</td>
+                  <td class="td-1">{{$t('Order.useBeginDateTime')}}：{{changeTime(item.useBeginDateTime)}}</td>
                   <td class="td-2">￥{{item.settlementPrice}}</td>
                   <td class="td-3">X{{item.productCount}}</td>
                   <td class="td-4">￥{{item.smallTotalCash}}</td>
@@ -89,7 +89,10 @@
                   </td>
                   <!-- <td class="td-6" v-else></td> -->
                 </tr>
-                <tr class="tr" v-if="(item.saleType == 0 || item.saleType == 1) && item.singleTicketState == 3">
+                <tr
+                  class="tr"
+                  v-if="(item.saleType == 0 || item.saleType == 1) && item.singleTicketState == 3"
+                >
                   <td colspan="6">
                     {{$t('Order.ecode')}}：
                     <a @click="getCode()" href="javascript:;">{{item.ecode}}</a>
@@ -167,10 +170,10 @@
                 <td class="td-5">支付</td>
                 <td class="td-6">{{item.createtime}}</td>
               </tr>
-              <tr>
+              <!-- <tr>
                 <td class="td-1 td-bottom" colspan="2">{{$t('OrderDetail.sum')}}</td>
                 <td class="td-6 td-bottom" colspan="4">{{data.orderTotalCash}}</td>
-              </tr>
+              </tr>-->
             </table>
             <table
               cellspacing="0"
@@ -186,13 +189,13 @@
                 <td class="td-5">{{$t('OrderDetail.PayName7')}}</td>
                 <td class="td-6">{{$t('OrderDetail.PayName8')}}</td>
               </tr>
-              <tr class="bodys">
-                <td class="td-1 td-bottom">1</td>
-                <td class="td-2 td-bottom">A</td>
-                <td class="td-3 td-bottom">2018/12/05 14:30:00</td>
-                <td class="td-4 td-bottom">1</td>
-                <td class="td-5 td-bottom">退款审核中</td>
-                <td class="td-6 td-bottom">2018/12/05 14:30:00</td>
+              <tr class="bodys" v-for="(item,key) in refundList" :key="key">
+                <td class="td-1 td-bottom">{{key}}</td>
+                <td class="td-2 td-bottom">{{item.orderId}}</td>
+                <td class="td-3 td-bottom">{{changeTime(item.createDate)}}</td>
+                <td class="td-4 td-bottom">{{item.returnCount}}</td>
+                <td class="td-5 td-bottom">{{setTip(item.audioSign)}}</td>
+                <td class="td-6 td-bottom">{{changeTime(item.audioDateTime)}}</td>
               </tr>
             </table>
           </div>
@@ -216,15 +219,32 @@ export default {
       item2: [],
       url: "",
       orderDetailList: [],
-      num: 0
+      num: 0,
+      refundList: [] //退票
     };
   },
 
   components: {},
 
   computed: {},
-
+  created() {
+    this.getTicketinformation();
+  },
   methods: {
+    //退单标识
+    setTip(type){
+      if( type == -1){
+        return '未审核'
+      }else if(type == 0){
+        return '不同意'
+      }else if (type == 1){
+        return '同意' 
+      }
+    },
+    //改变时间
+    changeTime(time) {
+      return this.$tool.formatData(time,'yyyy-MM-dd hh:ss:mm')
+    },
     //切换类型
     changeType(type) {
       this.type = type;
@@ -462,6 +482,22 @@ export default {
         });
       this.$nextTick(function() {
         this.PostFindOrderDetail();
+      });
+    },
+    //退票信息
+    getTicketinformation() {
+      this.$post(this.$url + ":6080/returnCash-mucon/refund/all", {
+        pageNum: 1,
+        pageSize: 10,
+        list: [
+          {
+            touristId: this.id,
+            orderId: this.orderId
+          }
+        ]
+      }).then(res => {
+        this.refundList = res.data.list;
+        console.log(this.refundList);
       });
     }
   },
@@ -919,15 +955,15 @@ export default {
           }
 
           .td-3 {
-            width: 100px;
+            width: 200px;
           }
 
           .td-4 {
-            width: 150px;
+            width: 100px;
           }
 
           .td-5 {
-            width: 150px;
+            width: 100px;
           }
 
           .td-6 {

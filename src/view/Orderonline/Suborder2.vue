@@ -490,8 +490,7 @@ export default {
             productId: this.$route.query.id,
             num: this.$route.query.num,
             stockId: this.$route.query.stockId,
-            saleType: parseInt(this.saleType),
-           
+            saleType: parseInt(this.saleType)
           },
           // {
           //    productId:this.productList[0].productId,
@@ -508,7 +507,7 @@ export default {
         createCannel: 1, //官网下单为1,
         activitieId:this.activeTypeIDList[parseInt(this.radio7)].activityId,//优惠券活动ID
         activitieType: parseInt(this.radio7),//优惠券活动类型
-        returnSign:this.returnSignList[parseInt(this.radio7)]//优惠券折扣
+        returnSign:this.$route.query.returnSign//优惠券折扣
        
       };
       this.productList.forEach((value) => {
@@ -560,7 +559,13 @@ export default {
 
           ///
         }
-      });
+      },error => {
+          if(error.response.data.code === 400){
+            this.$alert(error.response.data.message, '提示', {
+              confirmButtonText: '确定'
+            });
+          }
+        });
     }
   },
   // 销毁定时器

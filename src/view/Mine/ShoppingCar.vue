@@ -117,9 +117,9 @@ export default {
       }).then(res => {
         this.id1 = res.data.list[0].createDateId;
         this.id2 = res.data.list[0].productId;
-        this.stockId = res.data.list[0].createDateId;
-        this.saleType = res.data.list[0].product.saleType;
-        this.typeId = res.data.list[0].product.typeId;
+        // this.stockId = res.data.list[0].createDateId;
+        // this.saleType = res.data.list[0].product.saleType;
+        // this.typeId = res.data.list[0].product.typeId;
         if (res.code == 200) {
           this.good_list = res.data.list;
           if (this.good_list.length === 0) {
@@ -161,6 +161,7 @@ export default {
     getTotal() {
       this.totalNum = 0;
       this.arr.splice(0, this.arr.length);
+      console.log(this.good_list);
       this.good_list.forEach((v, i) => {
         if (v.is_selected) {
           this.dis = false;
@@ -169,7 +170,8 @@ export default {
             productId: v.productId,
             num: v.productCount,
             stockId: v.createDateId,
-            saleType: v.saleType ? "1" : "0"
+            saleType: v.product.saleType ? 2 : 0,
+            typeId: v.product.typeId
           });
           this.totalNum += v.productCount;
         }
@@ -265,13 +267,13 @@ export default {
           query: {
             list1: JSON.stringify(list1),
             a: 1,
-            id1: this.id1,
-            id2: this.id2,
+            // id1: this.id1,
+            // id2: this.id2,
             totalNum: this.totalNum,
-            stockId: this.stockId,
-            arr: JSON.stringify(this.arr),
-            saleType: this.saleType,
-            typeId: this.typeId
+            // stockId: this.stockId,
+            arr: JSON.stringify(this.arr)
+            // saleType: this.saleType,
+            // typeId: this.typeId
           }
         });
       }

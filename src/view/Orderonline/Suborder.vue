@@ -40,7 +40,7 @@
                     <p class="type">
                     配送方式：
                     
-                      <span :class="{active:isactive == 0}" @click="toggle(0)">邮寄</span>
+                      <span :class="{active:isactive == 2}" @click="toggle(2)">邮寄</span>
                       <span :class="{active:isactive == 1}" @click="toggle(1)">自提</span>
                     </p>
                   </div>
@@ -73,16 +73,16 @@
             </table>
           </div>
           <!-- 优惠券信息 -->
-          <div class="su5">
+          <div class="su5" v-if="typeList.indexOf(0)>-1 || typeList.indexOf(1)>-1 || typeList.indexOf(2)>-1">
 
             <span class="su6">{{$t('Suborder.Text9')}}</span>
             <!-- <span class="su7">{{$t('Suborder.Text10')}}</span> -->
 
           </div>
-          <div class="jian1">
+          <div class="jian1" v-if="typeList.indexOf(0)>-1 || typeList.indexOf(1)>-1 || typeList.indexOf(2)>-1">
             <div>
-              <div v-if="typeList.indexOf(0)>-1"><el-radio v-model="radio7" label="0" @change="youhui()" >满减</el-radio><span class="jian" v-if="radio7==0">-¥{{decimal}}</span></div>
-              <div v-if="typeList.indexOf(1)>-1"><el-radio v-model="radio7" label="1" @change="youhui()">满赠</el-radio></div>
+              <div v-if="typeList.indexOf(0)>-1"><el-radio v-model="radio7" label="0" @change="youhui()" >{{activeNameList[0]}}</el-radio><span class="jian" v-if="radio7==0">-¥{{decimal}}</span></div>
+              <div v-if="typeList.indexOf(1)>-1"><el-radio v-model="radio7" label="1" @change="youhui()">{{activeNameList[1]}}</el-radio></div>
               <div class="su4" v-if="radio7==1">
                 <table cellspacing="0" width="1078">
                   <tr>
@@ -95,7 +95,7 @@
                   </tr>
                 </table>
               </div>
-              <div v-if="typeList.indexOf(2)>-1"><el-radio v-model="radio7" label="2" @change="youhui()">折扣</el-radio></div>
+              <div v-if="typeList.indexOf(2)>-1"><el-radio v-model="radio7" label="2" @change="youhui()">{{activeNameList[2]}}</el-radio></div>
             </div>
           </div>
           <!-- 游客信息 -->
@@ -247,7 +247,8 @@ export default {
       typeList: [],
       idList: [],
       decimal: 0,
-      productId: ""
+      productId: "",
+      activeNameList: []
     };
   },
   mounted() {
@@ -256,10 +257,10 @@ export default {
     this.canDebook()
     // this.saleType = this.$route.query.saleType
     // 监听路由跳转路径，如果是购物车，标志为a1，直接接受上个页面的参数
+    console.log(JSON.parse(this.$route.query.arr))
     if (this.a1 == 1) {
       let list1 = this.$route.query.list1;
       this.list2 = JSON.parse(list1);
-      console.log(this.list2);
       this.getPrice(this.list2);
     }
   },
@@ -345,9 +346,11 @@ export default {
           if(value){
             this.activeTypeIDList.push({activityType: value.activityType,activityId: value.id});
             this.typeList.push(value.activityType);
+            this.activeNameList.push(value.activityName);
           }else{
             this.activeTypeIDList.push({activityType: '',activityId: ''});
             this.typeList.push('');
+            this.activeNameList.push('');
           }
         });
         this.youhui();
@@ -355,12 +358,12 @@ export default {
     },
     toggle(type) {
       this.isactive = type;
-      if(type ==1){
-        this.flag1 = false
-        this.saleType = 2
+      if(type ==2){
+        this.flag1 = true;
+        this.saleType = 2;
       }else{
-         this.flag1 = true
-         this.saleType = 1
+         this.flag1 = false;
+         this.saleType = 1;
       }
     },
     changeType() {
@@ -415,12 +418,13 @@ export default {
     },
     //接受产品详情页面的产品ID，库存ID,数量，是否邮寄，调用接口，展示订单信息
     shopmsg() {
-      let id = this.$route.query.id2;
-      let stockId = this.$route.query.stockId;
+      // let id = this.$route.query.id2;
+      // let stockId = this.$route.query.stockId;
       // console.log(id);
       // console.log(stockId)
-      let num1 = this.$route.query.num;
-      this.saleType = this.$route.query.saleType;
+      // let num1 = this.$route.query.num;
+      this.toggle(2);
+      // this.saleType = this.$route.query.saleType;
       let list1 = this.$route.query.list1;
       let list2 = JSON.parse(list1);
       // let typeId = this.$route.query.typeId;
@@ -431,25 +435,23 @@ export default {
       });
 
       this.ids = this.arr3.join(",");
-      this.count = num1;
+      // this.count = num1;
 
-      this.$fetch("http://101.201.101.138:5001/product-aggregate/find/" + id, {
-        stockId: stockId,
-        saleType: this.saleType,
-        touristId: this.$store.getters.getUserData.userId
-      }).then(res => {
-        if (res.code === 200) {
-          this.productname = res.data.productName;
-          this.playtime = res.data.dataBaseDate;
-          this.price1 = res.data.settlementPrice;
+      // this.$fetch("http://101.201.101.138:5001/product-aggregate/find/" + id, {
+      //   stockId: stockId,
+      //   saleType: this.saleType,
+      //   touristId: this.$store.getters.getUserData.userId
+      // }).then(res => {
+      //   if (res.code === 200) {
+      //     this.productname = res.data.productName;
+      //     this.playtime = res.data.dataBaseDate;
+      //     this.price1 = res.data.settlementPrice;
           this.active();
-        }
-      });
+      //   }
+      // });
     },
     // 判断是邮寄或者自提，邮寄需要显示邮寄地址，传邮寄ID到李顺仪
     canDebook() {
-          this.sign = "邮寄";
-          this.isactive = 0;
       let data2 = {
         touristId: this.$store.getters.getUserData.userId
       };
@@ -468,19 +470,23 @@ export default {
         this.receiveId = res.data.id;
       });
        
-      return this.sign;
     },
     //   提交
     onSubmit() {
       // if(this.checked === true){
       //       this.dis = false
       //     }
-      
+      let arr = JSON.parse(this.$route.query.arr);
+      arr.forEach(value => {
+        if(value.saleType != 0){
+          value.saleType = this.saleType;
+        }
+      })
       let data = {
         activitieId:this.activeTypeIDList[parseInt(this.radio7)].activityId,//优惠券活动ID
         activitieType: parseInt(this.radio7),//优惠券活动类型
         touristId: this.$store.getters.getUserData.userId,
-        productFormList: JSON.parse(this.$route.query.arr),
+        productFormList: arr,
         receiveId: this.receiveId, //邮寄ID
         receiveName: this.numberValidateForm.name1,
         receiveMobile: this.numberValidateForm.phone,
@@ -529,6 +535,12 @@ export default {
         } else if (res.code === 403 && res.code === 400) {
           this.$router.push("./mine");
           console.log(res);
+        }
+      },error => {
+        if(error.response.data.code === 400){
+          this.$alert(error.response.data.message, '提示', {
+            confirmButtonText: '确定'
+          });
         }
       });
     }

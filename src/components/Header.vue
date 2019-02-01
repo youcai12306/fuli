@@ -519,7 +519,6 @@
 
 	@media screen and (max-width: 1700px) {
 		.main .main-content ul li {
-			padding: 21px 0px 0 0px !important;
 			width: 105px;
 			font-size: 14px;
 			word-break: break-all;
@@ -528,7 +527,6 @@
 
 	@media screen and (max-width: 1550px) {
 		.main .main-content ul li {
-			padding: 21px 0px 0 0px !important;
 			width: 88px;
 			font-size: 12px;
 			word-break: break-all;
@@ -541,7 +539,6 @@
 
 	@media screen and (max-width: 1400px) {
 		.main .main-content ul li {
-			padding: 21px 0px 0 0px !important;
 			width: 86px;
 			font-size: 12px;
 			word-break: break-all;
@@ -554,7 +551,6 @@
 
 	@media screen and (max-width: 1300px) {
 		.main .main-content ul li {
-			padding: 21px 0px 0 0px !important;
 			width: 74px;
 			font-size: 12px;
 			word-break: break-all;

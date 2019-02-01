@@ -261,7 +261,8 @@ export default {
             id: this.product.id,
             stockId: this.$route.query.stockId,
             num: this.num1,
-            typeId:this.$route.query.typeId
+            typeId:this.$route.query.typeId,
+            returnSign: this.product.returnSign
           }
         });
       } else if (typeId == 1) {
@@ -272,7 +273,8 @@ export default {
             id: this.product.id,
             stockId: this.$route.query.stockId,
             num: this.num1 ,
-            typeId:this.$route.query.typeId
+            typeId:this.$route.query.typeId,
+            returnSign: this.product.returnSign
           }
         });
       }

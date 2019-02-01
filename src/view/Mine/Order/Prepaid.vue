@@ -105,7 +105,7 @@
                     @click="getCode(scope.row.ecode)"
                     v-if="scope.row.singleTicketState == 3 &&(scope.row.saleType == 0 || scope.row.saleType == 1)"
                   >{{$t('Order.ecode')}}：<span style = "color:#0066cc; cursor: pointer;">{{scope.row.ecode}}</span></div>
-                  <img v-if="url" class="code" :src="'data:image/jpeg;base64,'+url" alt>
+                  <p v-show="scope.row.ecode == ecode"><img v-if="url" class="code" :src="'data:image/jpeg;base64,'+url" alt ></p>
                 </template>
               </el-table-column>
               <el-table-column
@@ -172,12 +172,14 @@ export default {
       loading: true,
       times: "",
       orderId: "",
-      url:''
+      url:'',
+      ecode:''
     };
   },
   methods: {
     //获取核销二维码
     getCode(code) {
+      this.ecode = code;
       this.$fetch(
         `${this.$url1}:5001/product-aggregate/findOrderByeCode?eCode=` +
           code

@@ -93,16 +93,17 @@
                   class="tr"
                   v-if="(item.saleType == 0 || item.saleType == 1) && item.singleTicketState == 3"
                 >
-                  <td colspan="6">
+                  <td colspan="2">
                     {{$t('Order.ecode')}}：
-                    <a @click="getCode()" href="javascript:;">{{item.ecode}}</a>
+                    <a @click.stop="getCode(item.ecode)" href="javascript:;">{{item.ecode}}</a>
                     ({{$t('OrderDetail.Text12')}})
                   </td>
+                  <td v-show="item.ecode == ecode" ><img v-if="url" class="code" :src="'data:image/jpeg;base64,'+url" alt></td>
                 </tr>
               </template>
             </tbody>
           </table>
-          <img v-if="url" class="code" :src="'data:image/jpeg;base64,'+url" alt>
+         
         </div>
         <div class="four">
           <table class="four-table" cellspacing="0" cellpadding="0">
@@ -220,7 +221,8 @@ export default {
       url: "",
       orderDetailList: [],
       num: 0,
-      refundList: [] //退票
+      refundList: [], //退票
+      ecode:''
     };
   },
 
@@ -372,10 +374,12 @@ export default {
           console.log(error);
         });
     },
-    getCode() {
+    getCode(ecode) {
+      console.log(ecode)
+      this.ecode = ecode;
       this.$fetch(
         `${this.$url1}:5001/product-aggregate/findOrderByeCode?eCode=` +
-          this.list[0].ecode
+          ecode
       )
         .then(res => {
           this.url = res.data;

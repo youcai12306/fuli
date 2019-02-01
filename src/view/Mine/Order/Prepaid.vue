@@ -100,7 +100,12 @@
                   <div
                     class="ticket-time"
                   >{{$t('Order.useBeginDateTime')}}：{{scope.row.useBeginDateTime}}</div>
-                  <div class="ticket-code">{{$t('Order.ecode')}}：{{scope.row.ecode || '无'}}</div>
+                  <div
+                    class="ticket-code"
+                    @click="getCode(scope.row.ecode)"
+                    v-if="scope.row.singleTicketState == 3 &&(scope.row.saleType == 0 || scope.row.saleType == 1)"
+                  >{{$t('Order.ecode')}}：<span style = "color:#0066cc; cursor: pointer;">{{scope.row.ecode}}</span></div>
+                  <img v-if="url" class="code" :src="'data:image/jpeg;base64,'+url" alt>
                 </template>
               </el-table-column>
               <el-table-column
@@ -166,10 +171,24 @@ export default {
       list: [],
       loading: true,
       times: "",
-      orderId: ""
+      orderId: "",
+      url:''
     };
   },
   methods: {
+    //获取核销二维码
+    getCode(code) {
+      this.$fetch(
+        `${this.$url1}:5001/product-aggregate/findOrderByeCode?eCode=` +
+          code
+      )
+        .then(res => {
+          this.url = res.data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
     //再次下单
     pay(id, price) {
       // 拿到guid以及订单号
@@ -334,14 +353,14 @@ export default {
             returnContent: val.value
           };
           if (obj.typeId == 0) {
-			  //银科退票接口
+            //银科退票接口
             this.$post(
               `${this.$url1}:5080/returnCash-aggregate/refund/apply`,
               this.$tool.formatDatas(data)
             )
               .then(res => {
                 if (res.code == 200) {
-                  console.log(res)
+                  console.log(res);
                   this.$message({
                     type: "success",
                     message: "申请成功"
@@ -358,19 +377,18 @@ export default {
                 this.$message.error(error.response.data.message);
               });
           } else {
-			  //其他退票接口
+            //其他退票接口
             this.$post(
               `${this.$url1}:5080/returnCash-aggregate/refund/applyPark`,
               this.$tool.formatDatas(data)
             )
               .then(res => {
-                console.log(res)
+                console.log(res);
                 if (res.code == 200) {
                   this.$message({
                     type: "success",
                     message: "申请成功"
                   });
-                 
                 } else {
                   this.$message({
                     type: "error",
@@ -389,9 +407,9 @@ export default {
             message: "取消退票"
           });
         });
-        this.$nextTick(function() {
-            this.PostFindOrderDetail();
-        });
+      this.$nextTick(function() {
+        this.PostFindOrderDetail();
+      });
     }
   },
   mounted() {
@@ -448,7 +466,12 @@ export default {
 .pt40 {
   padding-top: 40px;
 }
-
+.code {
+  display: block;
+  margin-left: 50px;
+  width: 100px;
+  height: 100px;
+}
 .tab-s {
   width: 100%;
   // height: 40px;

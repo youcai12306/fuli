@@ -287,7 +287,7 @@ export default {
 	},
 	ditu: { //游玩指南
 		navTitle1: 'Ticket price',
-		navTitle2: 'Opening hours',
+		navTitle2: ' Opening hours',
 		navTitle3: 'Transportation Guide',
 		navTitle4: 'Problems',
 		navTitle5: 'Guest Services',
@@ -296,7 +296,11 @@ export default {
 		navTitle8: 'Map of the park',
 		Position: "Current Location",
 		Home: "Home",
-		Title: "Play Guide"
+		Title: "Play Guide",
+		parkName: "Ocean Fun World Resort",
+		Name1: "Ticket",
+		Name7: "Year Card",
+		Name8: "Membership Card"
 	},
 	Car: { //个人中心购物车
 		Text: "Shopping Cart",

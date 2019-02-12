@@ -51,7 +51,7 @@
 				<div class="right floatRight">
 					<div class="box7 box0" v-if="actives == 0">
 						<div class="info">
-							<div class="info-1">海洋欢乐世界度假区——门票<router-link tag="i" to="/tickets/1"></router-link></div>
+							<div class="info-1">{{$t('ditu.parkName')}}——{{$t('ditu.Name1')}}<router-link tag="i" to="/tickets/1"></router-link></div>
 							<div class="info-title-2" v-if="status">有效期：2018年1月1日~2019年1月1日<span>单位：每人/元</span></div>
 							<div class="info-2">
 								<div class="info-2-tr">
@@ -61,8 +61,8 @@
 								</div>
 								<div class="info-2-tr" v-for="(item,index) in list" :key="index">
 									<div class="info-2-td">{{item.title}}</div>
-									<div class="info-2-td color">{{item.content0.substring(3,item.content0.length-4)}}/人</div>
-									<div class="info-2-td color">{{item.content1.substring(3,item.content1.length-4)}}/人</div>
+									<div class="info-2-td color">{{item.content0.substring(3,item.content0.length-4)}}</div>
+									<div class="info-2-td color">{{item.content1.substring(3,item.content1.length-4)}}</div>
 								</div>
 								<div class="info-2-tr" v-if="status">
 									<div class="info-2-td">儿童票</div>
@@ -176,7 +176,7 @@
 					<!-- 营业时间 -->
 					<div class="box2" v-if="actives == 2">
 						<el-row class="row1">
-							<el-col>海洋欢乐世界度假区营业时间</el-col>
+							<el-col>{{$t('ditu.parkName')}}{{$t('ditu.navTitle2')}}</el-col>
 						</el-row>
 
 						<el-row class="row2">
@@ -259,7 +259,7 @@
 
 					<!-- 交通指南 -->
 					<div class="box3" v-if="actives == 3">
-						<div class="box_header">交通指南</div>
+						<div class="box_header">{{$t('ditu.navTitle3')}}</div>
 						<div class="map"><a href="https://j.map.baidu.com/WC0L2" target="_blank"><img src="../../assets/img/ditu10.png" alt=""></a></div>
 						<div class="table">
 							<el-row class="th">
@@ -415,7 +415,7 @@
 
 					<!-- 常见问题 -->
 					<div class="box4" v-if="actives == 4">
-						<div class="box_header">常见问题</div>
+						<div class="box_header">{{$t('ditu.navTitle4')}}</div>
 						<div class="box4_con">
 							<el-collapse accordion>
 								<template v-for="(item,k) in list5" >
@@ -433,7 +433,7 @@
 
 					<!-- 宾客服务 -->
 					<div class="box5" v-if="actives == 5" style="background:#fff url();">
-						<div class="botton" style="margin-bottom: 40px;">宾客服务</div>
+						<div class="botton" style="margin-bottom: 40px;">{{$t('ditu.navTitle5')}}</div>
 						<div class="box5-title" v-if="status">
 							为了大家的安全着想，我们会依据天气情况开放或关闭部分设施。
 						</div>
@@ -505,7 +505,7 @@
 
 					<!-- 恶劣天气预案 -->
 					<div class="box5" v-if="actives == 6">
-						<div class="botton">恶劣天气预案</div>
+						<div class="botton">{{$t('ditu.navTitle6')}}</div>
 						<div class="box5-title">
 							为了大家的安全着想，我们会依据天气情况开放或关闭部分设施。
 						</div>
@@ -520,9 +520,9 @@
 
 					<!-- 年卡/会员卡 -->
 					<div class="box7" v-if="actives == 7">
-						<div class="info-title">年卡/会员卡</div>
+						<div class="info-title">{{$t('ditu.navTitle7')}}</div>
 						<div class="info">
-							<div class="info-1">海洋欢乐世界度假区——年卡<i></i></div>
+							<div class="info-1">{{$t('ditu.parkName')}}——{{$t('ditu.Name7')}}<i></i></div>
 							<div style="margin-bottom: 150px;">年卡介绍信息等待上传</div>
 							<div class="info-2" v-if="status">
 								<div class="info-2-tr">
@@ -544,7 +544,7 @@
 						</div>
 
 						<div class="info">
-							<div class="info-1">海洋欢乐世界度假区——会员卡<i></i></div>
+							<div class="info-1">{{$t('ditu.parkName')}}——{{$t('ditu.Name8')}}<i></i></div>
 							<div style="margin-bottom: 150px;padding-bottom: 200px;">会员卡介绍信息等待上传</div>
 							<div class="info-2" v-if="status">
 								<div class="info-2-tr">
@@ -580,7 +580,7 @@
 
 					<!-- 园区地图 -->
 					<div class="box8" v-if="actives == 8">
-						<div class="info-title">园区地图</div>
+						<div class="info-title">{{$t('ditu.navTitle8')}}</div>
 						<div class="info-8-img">
 							<viewer :images="imgs">
 								<img v-for="src in imgs" :src="src" :key="src">

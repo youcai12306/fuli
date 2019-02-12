@@ -296,7 +296,11 @@ export default {
 		navTitle8: '园区地图',
 		Position: "当前位置",
 		Home: "首页",
-		Title: "游玩指南"
+		Title: "游玩指南",
+		parkName: "海洋欢乐世界度假区",
+		Name1: "门票",
+		Name7: "年卡",
+		Name8: "会员卡"
 	},
 	Car: { //个人中心购物车
 		Text: "购物车",

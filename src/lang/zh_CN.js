@@ -359,6 +359,7 @@ export default {
 		Text10: '全部',
 		Text11: '收入',
 		Text12: '支出',
+		Text13: '兑换积分'
 	},
 	Personal: { //个人信息
 		Text: "个人信息",

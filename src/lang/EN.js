@@ -359,6 +359,7 @@ export default {
 		Text10: 'All',
 		Text11: 'Income',
 		Text12: 'Expenditure',
+		Text13: 'Redeem'
 	},
 	Personal: { //个人信息
 		Text: "Personal information",

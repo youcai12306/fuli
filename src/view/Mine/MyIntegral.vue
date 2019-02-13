@@ -6,7 +6,7 @@
           {{$t('Integral.Text')}}：
           <span>{{integral}}</span>
         </p>
-        <img src="../../assets/img/mine-duihuan1.png" alt class="floatRight" @click="jumpConvert()">
+        <div class="floatRight rightBtn" @click="jumpConvert()">{{$t('Integral.Text13')}}</div>
       </div>
       <p class="t1">{{$t('Integral.Text5')}}</p>
       <p class="t3">{{$t('Integral.Text6')}}</p>
@@ -152,12 +152,17 @@ export default {
           color: #ee3223;
         }
       }
-      img {
+      .rightBtn {
         width: 93px;
         height: 41px;
         vertical-align: middle;
         margin-left: 63px;
+        line-height: 41px;
+        text-align: center;
+        color: #fff;
+        font-size: 15px;
         cursor: pointer;
+        background: url(../../assets/img/mine-duihuan1.png) no-repeat;
       }
     }
     .t1 {

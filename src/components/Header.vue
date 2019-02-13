@@ -309,7 +309,7 @@
 				li {
 					height: 97px;
 					//padding-top: 20px;
-					width: 150px;
+					width: 140px;
 					float: left;
 					font-size: 14px;
 					font-weight: bold;

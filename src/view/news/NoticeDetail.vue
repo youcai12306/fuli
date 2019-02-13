@@ -27,7 +27,7 @@
 		data() {
 			return {
 				data: {},
-				isEnglish: sessionStorage.getItem('language') == 'en' ? 1 : 0
+				isEnglish: Cookies.get('language') == 'en' ? 1 : 0
 			};
 		},
 		created() {

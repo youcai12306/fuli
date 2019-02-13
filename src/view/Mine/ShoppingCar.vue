@@ -136,7 +136,7 @@ export default {
     },
     //是否可退订
     canDebook(type) {
-      return type === 1 ? (this.sign = "可退订") : (this.sign = "可退订");
+      return type === 1 ? (this.sign = "可退订") : (this.sign = "不可退订");
     },
     //删除表格数据
     // deleteRow(index, rows) {

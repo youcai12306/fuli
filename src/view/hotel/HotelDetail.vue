@@ -2,8 +2,8 @@
 <template>
   <div class="hotel-detail">
     <Header></Header>
-    <div class="nav">当前位置：
-      <router-link to="/hotel">度假酒店</router-link>> 酒店详情
+    <div class="nav">{{$t('HotelDetail.Text1')}}：
+      <router-link to="/hotel">{{$t('HotelDetail.Text2')}}</router-link>> {{$t('HotelDetail.Text3')}}
     </div>
     <div class="top">
       <swiper :options="swiperOption" ref="mySwiper" v-if="swiperImg.length>0">
@@ -26,6 +26,7 @@
 import "swiper/dist/css/swiper.css";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
 import Header from "@/components/Header"; //引入头部
+import Cookies from 'js-cookie';
 export default {
   data() {
     return {
@@ -45,7 +46,8 @@ export default {
       },
       id: 0,
       data: {},
-      swiperImg: []
+      swiperImg: [],
+      isEnglish: Cookies.get('language') == 'en' ? 1 : 0
     };
   },
 

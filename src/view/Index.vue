@@ -147,7 +147,7 @@
         </div>
         <el-row class="info-row clearDiv">
           <el-col :span="12" class="info-col1">
-            <span class="icoe"></span>
+            <span class="icoe"><img src="../assets/img/md-3.png" alt=""><i>{{$t('index.text1')}}</i></span>
             <span class="time">{{showTime()}}</span>
             <div class="info-img clearDiv">
               <img src="../assets/img/md-5.png">
@@ -159,7 +159,7 @@
             </div>
           </el-col>
           <el-col :span="12" class="info-col1">
-            <span class="icoe"></span>
+            <span class="icoe"><img src="../assets/img/md-4.png" alt=""><i>{{$t('index.text2')}}</i></span>
             <div class="info-img2 clearDiv">
               <img src="../assets/img/md-10.png">
               <div class="info-p">
@@ -453,15 +453,28 @@ export default {
       this.$refs.car.next();
     },
     showTime() {
-      let show_day = new Array(
-        "星期日",
-        "星期一",
-        "星期二",
-        "星期三",
-        "星期四",
-        "星期五",
-        "星期六"
-      );
+      let show_day;
+      if(this.isEnglish == 0){
+        show_day = new Array(
+          "星期日",
+          "星期一",
+          "星期二",
+          "星期三",
+          "星期四",
+          "星期五",
+          "星期六"
+        );
+      }else {
+        show_day = new Array(
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        );
+      }
       let time = new Date();
       let year = time.getFullYear();
       let month = time.getMonth() + 1;
@@ -473,7 +486,12 @@ export default {
       hour < 10 ? (hour = "0" + hour) : hour;
       minutes < 10 ? (minutes = "0" + minutes) : minutes;
       second < 10 ? (second = "0" + second) : second;
-      let now_time = month + "月" + date + "日" + " " + show_day[day] + "";
+      let now_time;
+      if(this.isEnglish == 0){
+        now_time = year + "年" + month + "月" + date + "日" + " " + show_day[day] + "";
+      }else {
+        now_time = year + "." + month + "." + date + "" + " " + show_day[day] + "";
+      }
       return now_time;
     }
   },
@@ -967,13 +985,27 @@ export default {
         position: relative;
 
         .icoe {
-          display: block;
+          display: flex;
+          justify-content: center;
+          align-items: center;
           position: absolute;
           top: 10px;
           left: -20px;
           width: 232px;
           height: 72px;
           background: url(../assets/img/md-6.png) no-repeat top center;
+
+          img{
+            height: 33px;
+            margin-right: 10px;
+          }
+
+          i{
+            color: #fff;
+            font-style: normal;
+            font-size: 19px;
+            font-weight: bold;
+          }
         }
 
         .time {

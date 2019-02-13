@@ -9,7 +9,7 @@
 		<!-- 列表 -->
 		<ul class="content clearDiv" v-if="this.status!='0'">
 			<div v-for="(item,key) in data" :key="key">
-				<router-link v-if="data.length > 0" tag="li" :to="{path:'/EventsDetail',query:{id: item.structureId,type: id}}">
+				<router-link v-if="data.length > 0" tag="li" :to="{path:'/EventsDetail',query:{id: item.structureId,type: status}}">
 					<img :src="item.facePictureId[0]? item.facePictureId[0]: ''" alt>
 					<div class="box">
 						<h3 class="t">{{item.title}}</h3>
@@ -19,7 +19,7 @@
 		</ul>
 		<ul class="content clearDiv" v-else>
 			<div v-for="(item,key) in data2" :key="key">
-				<router-link v-if="data2.length > 0" tag="li" :to="{path:'/EventsDetail',query:{id: item.id,type: id}}">
+				<router-link v-if="data2.length > 0" tag="li" :to="{path:'/EventsDetail',query:{id: item.id,type: status}}">
 					<img :src="item.pictures[0].picid? item.pictures[0].picid : ''" alt>
 					<div class="box">
 						<h3 class="t">{{item.activityName}}</h3>

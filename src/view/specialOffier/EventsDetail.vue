@@ -36,15 +36,12 @@
 		</div>
 		<div class="meng" v-show="mengActive">
 			<div class="b-box">
+				<img @click="mengActive = !mengActive" src="../../assets/img/cancel.jpg" alt="">
 				<p>{{$t('specialOffier.text1')}}</p>
 				<el-form ref="numberValidateForm" :model="numberValidateForm" label-width="85px">
                   <el-form-item :label="$t('Suborder.Text13')" class="el1" prop="name1" :rules="[
                           { required: true, message: '请输入姓名'},
-                          { type: 'string', message: '姓名必须为中文'},
-                          {
-                            pattern:/^[\u4E00-\u9FA5]+$/,
-                            message: '用户名只能为中文'
-                          }
+                          { type: 'string', message: '姓名必须为中文'}
                       ]">
 
                     <el-input type="name1" v-model.trim="numberValidateForm.name1" autocomplete="off"></el-input>
@@ -52,18 +49,18 @@
                   <el-form-item :label="$t('Suborder.Text14')" class="el2" prop="phone" :rules="[
                           { required: true, message: '请输入手机号',trigger:'blur'},
                           { 
-								validator: (rule, value, callback)=>{validateSku(rule, value, callback)}, 
-								trigger: ['blur', 'change'] 
-							}
+														validator: (rule, value, callback)=>{validateSku(rule, value, callback)}, 
+														trigger: ['blur', 'change'] 
+													}
                       ]">
                     <el-input type="phone" v-model.number="numberValidateForm.phone" autocomplete="off"></el-input>
                   </el-form-item>
 				  <el-form-item :label="$t('Suborder.Text23')" class="el2" prop="number" :rules="[
                           { required: true, message: '请输入报名人数',trigger:'blur'},
-						  { 
-								validator: (rule, value, callback)=>{validateNum(rule, value, callback)}, 
-								trigger: ['blur', 'change'] 
-							}
+													{ 
+														validator: (rule, value, callback)=>{validateNum(rule, value, callback)}, 
+														trigger: ['blur', 'change'] 
+													}
                       ]">
                     <el-input type="number" v-model.number="numberValidateForm.number" autocomplete="off"></el-input>
                   </el-form-item>
@@ -124,6 +121,9 @@ import { Message } from 'element-ui';
 			back(){
 				this.$router.go(-1);
 			},
+			isInteger(obj) {
+				return obj%1 === 0
+			},
 			validateSku: function(rule, value, callback) {
 				if (/^1[34578]\d{9}$/.test(value) == false) {
 					callback(new Error("请输入正确的手机号"));
@@ -134,6 +134,10 @@ import { Message } from 'element-ui';
 			validateNum: function(rule, value, callback) {
 				if (value == 0) {
 					callback(new Error("人数不能为零"));
+				}else if(value > 100){
+					callback(new Error("人数不能大于100"));
+				}else if(!this.isInteger(value)){
+					callback(new Error("人数必须为整数"));
 				} else {
 					callback();
 				}
@@ -196,6 +200,13 @@ import { Message } from 'element-ui';
 			height:420px;
 			background:rgba(255,255,255,1);
 			padding: 26px 80px;
+
+			img{
+				position: absolute;
+				right: 12px;
+				top: 12px;
+				cursor: pointer;
+			}
 
 			p{
 				font-size:18px;

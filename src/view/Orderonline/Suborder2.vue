@@ -470,7 +470,8 @@ export default {
         this.address1 =
           res.data.receiveProvince +
           res.data.receiveCity +
-          res.data.receiveArea;
+          res.data.receiveArea +
+          res.data.receiveAddress;
         this.receiveId = res.data.id;
       });
        

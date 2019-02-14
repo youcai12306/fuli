@@ -721,7 +721,7 @@ export default {
 
       .su6 {
         font-weight: bold;
-        margin-right: 913px;
+        margin-right: 900px;
         margin-left: 18px;
         position: relative;
 

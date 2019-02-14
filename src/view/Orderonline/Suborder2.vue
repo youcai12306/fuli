@@ -124,11 +124,7 @@
 
                   <el-form-item :label="$t('Suborder.Text13')" class="el1" prop="name1" :rules="[
                           { required: true, message: '姓名不能为空'},
-                          { type: 'string', message: '姓名必须为中文'},
-                          {
-                            pattern:/^[\u4E00-\u9FA5]+$/,
-                            message: '用户名只能为中文'
-                          }
+                          { type: 'string', message: '姓名必须为中文'}
                       ]">
 
                     <el-input type="name1" v-model.number="numberValidateForm.name1" autocomplete="off">

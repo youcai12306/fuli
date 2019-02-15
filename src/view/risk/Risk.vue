@@ -291,6 +291,7 @@
 						}
 						.btn1 {
 							cursor: pointer;
+							float: left;
 							width: 100px;
 							height: 38px;
 							background: rgba(248, 181, 81, 1);
@@ -299,7 +300,7 @@
 							font-size: 14px;
 							font-weight: 400;
 							color: rgba(255, 255, 255, 1);
-							margin-left: 34px;
+							margin-left: 79px;
 							margin-right: 24px;
 							&:hover{
 								background: #f8d651;

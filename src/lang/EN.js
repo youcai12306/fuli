@@ -72,6 +72,8 @@ export default {
 		Layer3: "Subscription",
 		name1:"more",
 		name2:"detail",
+		text1: "Business hours",
+		text2: "Price/Booking"
 	},
 	Position: "Current Location",
 	Home: "Home",
@@ -186,6 +188,11 @@ export default {
 		Text1: "New Year's Day offer<br>Warm across the year on the journey",
 		Text2: "Come with me and meet the New Year in the new landscape",
 	},
+	HotelDetail: { //酒店详情
+		Text1: "Current position",
+		Text2: "Vacation hotel",
+		Text3: "Hotel details"
+	},
 	Tickets: { //网上订购
 		Text1: "Online Ordering",
 		Text2: "Tickets",
@@ -285,7 +292,7 @@ export default {
 		navTitle1: 'Promotional activities',
 		navTitle2: 'Wonderful events',
 		navTitle3: 'Offer info',
-		navTitle4: 'Public benefit activities',
+		navTitle4: 'Benefit activities',
 		Position: "Current Location",
 		description: "If you wander through this informative area,<br>must also be able to harvest endless joy!",
 		text1: "Registration of activities",
@@ -293,7 +300,7 @@ export default {
 	},
 	ditu: { //游玩指南
 		navTitle1: 'Ticket price',
-		navTitle2: 'Opening hours',
+		navTitle2: ' Opening hours',
 		navTitle3: 'Transportation Guide',
 		navTitle4: 'Problems',
 		navTitle5: 'Guest Services',
@@ -302,7 +309,34 @@ export default {
 		navTitle8: 'Map of the park',
 		Position: "Current Location",
 		Home: "Home",
-		Title: "Play Guide"
+		Title: "Play Guide",
+		parkName: "Ocean Fun World Resort",
+		Name1: "Ticket",
+		Name7: "Year Card",
+		Name8: "Membership Card",
+		thead1: "Ticket category",
+		thead2: "Weekday",
+		thead3: "Specific day",
+		text1: "Weekend",
+		text2: "Facility opening schedule",
+		text3: "On the same day, the equipment opening situation will be dynamically adjusted according to the weather conditions, please refer to the on-site announcement, or consult the scenic spot customer service center in advance: 010-67389898 or 010-67383333",
+		text4: "Play facility opening hours",
+		text5: "Animal venue opening hours",
+		text6: "performance time",
+		text7: "Serial number",
+		text8: "Partition",
+		text9: "Device name",
+		text10: "Opening hours",
+		text11: "Animal venue name",
+		text12: "performing arts name",
+		text13: "Departure",
+		text14: "Transportation",
+		text15: "Route",
+		text16: "The route is for everyone's safety, we will open or close some facilities according to the weather conditions.",
+		text17: "Member card introduction information waiting for upload",
+		text18: "Year card introduction information waiting for upload",
+		text19: "Reservation",
+		text20: "Buy Now"
 	},
 	Car: { //个人中心购物车
 		Text: "Shopping Cart",
@@ -331,6 +365,7 @@ export default {
 		Text10: 'All',
 		Text11: 'Income',
 		Text12: 'Expenditure',
+		Text13: 'Redeem'
 	},
 	Personal: { //个人信息
 		Text: "Personal information",

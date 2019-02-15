@@ -12,9 +12,9 @@
 				<div class="l">
 					<div class="header-title" :title="$t('specialOffier.navTitle1')">{{$t('specialOffier.navTitle1')}}</div>
 					<ul>
-						<li :class="{hover:$route.query.id == 'E'}" @click="changeType(1)">{{$t('specialOffier.navTitle2')}}</li>
+						<li :class="{hover:$route.query.id == 'E'}" @click="changeType('E')">{{$t('specialOffier.navTitle2')}}</li>
 						<li :class="{hover:$route.query.id == '0'}" @click="changeType(0)">{{$t('specialOffier.navTitle4')}}</li>
-						<li :class="{hover:$route.query.id == 'F'}" @click="changeType(2)">{{$t('specialOffier.navTitle3')}}</li>
+						<li :class="{hover:$route.query.id == 'F'}" @click="changeType('F')">{{$t('specialOffier.navTitle3')}}</li>
 					</ul>
 				</div>
 				<!-- 园区新闻 -->
@@ -42,9 +42,9 @@
 		methods: {
 			changeType(type) {
 				this.tabs = type
-				if(type === 1){
+				if(type === 'E'){
 					this.$router.push({path:'/events',query:{id:'E'}}) 
-				}else if(type === 2) {
+				}else if(type === 'F') {
 					this.$router.push({path:'/events',query:{id:'F'}})
 				}else{
 					this.$router.push({path:'/events',query:{id:'0'}})

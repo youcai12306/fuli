@@ -141,12 +141,12 @@
 		</div>
 		<!-- 左侧导航 -->
 		<ul class="leftNav">
-			<li @click="showYuanQu()">园区介绍</li>
-			<li @click="jumpColumn('#banner')" :class="{navColorActive:abc== 0}">游玩设施</li>
-			<li @click="jumpColumn('#art')" :class="{navColorActive:abc== 1}">精彩演艺</li>
-			<li @click="jumpColumn('#animal')" v-if="list4 != 0" :class="{navColorActive:abc== 2}">动物场馆</li>
-			<li @click="jumpColumn('#shop')" :class="{navColorActive:abc== 3}">主题商店</li>
-			<li @click="jumpColumn('#eat')" :class="{navColorActive:abc== 4}">特色餐厅</li>
+			<li @click="showYuanQu()">{{$t('parkItem.item1')}}</li>
+			<li @click="jumpColumn('#banner')" :class="{navColorActive:abc== 0}">{{$t('parkItem.item2')}}</li>
+			<li @click="jumpColumn('#art')" :class="{navColorActive:abc== 1}">{{$t('parkItem.item3')}}</li>
+			<li @click="jumpColumn('#animal')" v-if="list4 != 0" :class="{navColorActive:abc== 2}">{{$t('parkItem.item4')}}</li>
+			<li @click="jumpColumn('#shop')" :class="{navColorActive:abc== 3}">{{$t('parkItem.item5')}}</li>
+			<li @click="jumpColumn('#eat')" :class="{navColorActive:abc== 4}">{{$t('parkItem.item6')}}</li>
 		</ul>
 		<div class="alert" v-show="alertShow" @click="closeYuanQu()">
 			<div class="alert-box" @click.stop>

@@ -59,13 +59,13 @@
 
 		.title {
 			text-align: center;
-			font-size: 35px;
+			font-size: 26px;
 			font-weight: bold;
-			color: rgba(238, 238, 238, 1);
+			color: #eeeeee;
 			width: 100%;
 			height: 91px;
 			line-height: 91px;
-			background: rgba(77, 175, 236, 1);
+			background: #4dafec;
 			padding-left: 37px;
 			border-radius: 10px 10px 0 0;
 
@@ -78,7 +78,7 @@
 				line-height: 22px;
 				padding-left: 40px;
 				background: url(../../assets/img/new-4.png) no-repeat 15px 0;
-				margin-top: 50px;
+				margin-top: 40px;
 				margin-right: 34px;
 			}
 		}

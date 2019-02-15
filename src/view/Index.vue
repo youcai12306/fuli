@@ -544,11 +544,11 @@ export default {
   },
   watch: {
     index: function(newVal, oldVal) {
-      if (newVal < this.data2.length - 1) {
-        this.swiper.slideTo(newVal + 1, 500, false);
+      if (newVal < this.data2.length) {
+        this.swiper.slideTo(newVal, 500, false);
         if (newVal === 6) {
           this.swiper.slideTo(newVal + 1, 500, false); //切换到看不见的slide，速度为.5秒
-        } else if (newVal === 8) {
+        } else if (newVal === this.data2.length) {
           this.index = 0;
           this.swiper.slideTo(this.index, 500, false); //切换到第一个slide，速度为.5秒
         } else if (newVal === -1) {

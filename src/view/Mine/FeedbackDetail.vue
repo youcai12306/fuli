@@ -47,12 +47,6 @@
           <img width="100%" :src="dialogImageUrl" alt>
         </el-dialog>
       </el-form-item>
-      <!-- <el-form-item :label="$t('FeedbackDetail.Text5')" prop="name" :rules="[{ required: true, message: '姓名不能为空'}]">
-				<el-input v-model="form.name" :placeholder="$t('FeedbackDetail.Text6')"></el-input>
-			</el-form-item>
-			<el-form-item :label="$t('FeedbackDetail.Text7')" prop="iPhone" :rules="[{ required: true, message: '手机号不能为空',trigger:'blur'}]">
-				<el-input v-model="form.iPhone" :placeholder="$t('FeedbackDetail.Text8')"></el-input>
-      </el-form-item>-->
       <el-form-item>
         <el-button type="primary" @click="onSubmit" class="submit">{{$t('FeedbackDetail.Text9')}}</el-button>
       </el-form-item>
@@ -78,6 +72,7 @@ export default {
       },
       dialogImageUrl: "",
       imgIds: [],
+      imgList: [],
       dialogVisible: false,
       file: {}
     };
@@ -90,9 +85,9 @@ export default {
     onSubmit() {
       this.$refs["formRules"].validate(valid => {
         let imgIds = "";
-        this.imgIds.forEach((val) =>{
-			imgIds += val + ','
-		})
+        this.imgIds.forEach(val => {
+          imgIds += val + ",";
+        });
         if (valid) {
           this.$post(this.$url + ":2060/myfeedback-aggregate/addToMyFeedback", {
             touristId: this.$store.getters.getUserData.userId,
@@ -100,13 +95,12 @@ export default {
             content: this.form.desc,
             picture: imgIds
           }).then(res => {
-            console.log(res)
             if (res.code == 200) {
               this.$message({
                 type: "success",
                 message: "反馈成功！"
               });
-              this.$router.push('/Feedback')
+              this.$router.push("/Feedback");
             } else {
               this.$message({
                 type: "success",
@@ -120,8 +114,27 @@ export default {
         }
       });
     },
+    //删除图片
     handleRemove(file, fileList) {
-      console.log(file, fileList);
+      this.imgList.forEach((val, key) => {
+        if (val.name == file.name) {
+          this.$fetch(
+            this.$url +
+              ":2600//staticResource-mucon/deleteFileById?id=" +
+              val.id
+          ).then(res => {
+            if (res.code == 200) {
+              //删除数组中的元素
+              this.imgList.splice(key, 1);
+              this.imgIds.splice(key, 1);
+              this.$message({
+                type: "success",
+                message: "删除成功！"
+              });
+            }
+          });
+        }
+      });
     },
     handlePictureCardPreview(file) {
       this.dialogImageUrl = file.url;
@@ -137,6 +150,7 @@ export default {
         type: "warning"
       });
     },
+    //返回上一页
     go() {
       this.$router.go(-1);
     },
@@ -156,6 +170,7 @@ export default {
             type: "success"
           });
           this.imgIds.push(res.data.id);
+          this.imgList.push({ name: this.file.name, id: res.data.id });
         }
       });
     }

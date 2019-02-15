@@ -102,7 +102,7 @@
 					<!-- 动物百科 -->
 					<li class="animal" :class="{'actives' : $route.name == 'Animal' || $route.name == 'BaiDetails'}" @mouseover="overHover('Animal')"
 					 @mouseout="outHover('')">
-						<router-link to="/animal?type=1" tag="div">
+						<router-link to="/animal" tag="div">
 							<template v-if="$route.name == 'Animal' || $route.name == 'BaiDetails' || hover == 'Animal'">
 								<img src="../assets/img/header-8.png" alt>
 							</template>

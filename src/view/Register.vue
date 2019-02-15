@@ -295,7 +295,7 @@ export default {
         //注册接口
         this.$post(this.$url+
           ":2060/user-aggregate/regist",
-          { mobile: this.phone, passWord: this.password, smsCode: this.code1 },
+          { mobile: this.phone, passWord: this.password, smsCode: this.code1,registType:0},
           { headers: { "Content-Type": "application/json;charset=UTF-8" } }
         ).then(res => {
           if (res.code === 200) {

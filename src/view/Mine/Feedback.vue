@@ -50,6 +50,7 @@ export default {
     this.init(this.pageNum);
   },
   methods: {
+    //查询反馈列表
     init(val) {
       this.$fetch(this.$url + ":2060/myfeedback-aggregate/findList", {
         pageNum: val,

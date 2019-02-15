@@ -126,7 +126,7 @@
                 <div class="top-box floatLeft">
                   <div class="clearDiv box-top">
                     <div class="floatLeft">{{newFirst.infoTitle}}</div>
-                    <router-link to="/news" class="floatRight">更多>></router-link>
+                    <router-link to="/news" class="floatRight">{{$t('index.name1')}}>></router-link>
                   </div>
                   <div class="floatLeft box-bottom" v-html="newFirstContent"></div>
                 </div>
@@ -134,7 +134,7 @@
               <ul class="bottom">
                 <li class="clearDiv" v-for="(item,key) in newList" :key="key">
                   {{item.infoTitle}}
-                  <router-link :to="{path:'/newDetail',query:{id:item.id}}">详情>></router-link>
+                  <router-link :to="{path:'/newDetail',query:{id:item.id}}">{{$t('index.name2')}}>></router-link>
                 </li>
               </ul>
             </div>

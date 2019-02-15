@@ -117,7 +117,7 @@ export default {
     return {
       openeds: ["1", "2", "3", "4"], //展开的菜单导航
       lv: JSON.parse(localStorage.getItem("userData")).memberlevel,
-      integral: JSON.parse(localStorage.getItem("userData")).integration
+      integral: 0
       // integral:this.$store.getters.getUserData.integration 
     };
   },
@@ -129,7 +129,15 @@ export default {
       console.log(key, keyPath);
     }
   },
-  mounted() {},
+  mounted() {
+    this.$fetch(
+        this.$url + ":2060/user-aggregate/selectTourist?touristId=" + this.$store.getters.getUserData.userId
+      ).then(res => {
+        if (res.code == 200) {
+          this.integral = res.data.integration;
+        }
+      });
+  },
   watch: {
     $route() {
       this.reload();

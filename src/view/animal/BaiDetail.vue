@@ -16,7 +16,7 @@
 			<div class="content clearDiv">
 				<div class="left floatLeft">
 					<ul class="ul">
-						<router-link class="li" :to="{path:'/animal',query:{type:item}}" tag="li" v-for="item in 3" :key="item" :class="{anActive:actives == item}">
+						<router-link class="li" :to="{path:'/animal',query:{type:item}}" tag="li" v-for="item in 7" :key="item" :class="{anActive:actives == item}">
 							{{$t(`animal.navName${item}`)}}
 						</router-link>
 					</ul>
@@ -24,15 +24,14 @@
 				<div class="right floatRight">
 					<div class="box">
 						<div class="title-1">
-							{{list.infoTitle}}<span @click="go">{{$t('Return')}}</span>
+							{{list.title}}<span @click="go">{{$t('Return')}}</span>
 						</div>
 						<div class="title-2">
 							<span>{{list.createTime}}</span>
 						</div>
-						<div class="conent-main" v-html="list.infoContent">
+						<div class="conent-main" v-html="list.content0">
 
 						</div>
-
 					</div>
 				</div>
 			</div>
@@ -49,7 +48,7 @@
 				actives: 0,
 				type: this.$route.params.type,
 				id: this.$route.params.id,
-				list: '',
+				list: {},
 				isEnglish: Cookies.get('language') == 'en' ? 1 : 0
 			}
 		},
@@ -68,21 +67,19 @@
 					}
 				})
 			} else {
-				this.actives = this.type;
+				this.actives = Number(this.type)+4;
+				console.log(this.actives)
 			}
 			this.getList();
 		},
 		methods: {
 			go() { //返回
 				this.$router.push({
-					path: '/animal',
-					query: {
-						type: this.type
-					}
+					path: '/animal'
 				})
 			},
 			getList() { //根据id获取内容
-				this.$fetch(this.$url1 + ':6110/mongodb-mucon/info/primary/get?infoId=' + this.$route.params.id + '&isEnglish=' +
+				this.$fetch(this.$url1 + ':6110//mongodb-mucon/structure/primary/get?structureId=' + this.$route.params.id + '&isEnglish=' +
 					this.isEnglish).then((res) => {
 					this.list = res.data;
 				})

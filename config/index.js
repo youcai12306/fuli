@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
 			'/api':{
-					target: "http://192.168.2.34",//接口链接头
+					target: "http://getway.mayou365.com",//接口链接头
 					changeOrigin:true,
 					pathRewrite:{
 							'^/api':''

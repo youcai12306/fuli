@@ -16,7 +16,7 @@
 			<div class="content clearDiv">
 				<div class="left floatLeft">
 					<ul class="ul">
-						<router-link class="li" :to="{path:'/animal',query:{type:item}}" tag="li" v-for="item in 3" :key="item" :class="{anActive:actives == item}">
+						<router-link class="li" :to="{path:'/animal',query:{type:item}}" tag="li" v-for="item in 7" :key="item" :class="{anActive:actives == item}">
 							{{$t(`animal.navName${item}`)}}
 						</router-link>
 					</ul>
@@ -101,10 +101,7 @@
 		methods: {
 			go() { //返回
 				this.$router.push({
-					path: '/animal',
-					query: {
-						type: 1
-					}
+					path: '/animal'
 				})
 			},
 			getList() { //根据id获取内容

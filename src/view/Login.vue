@@ -43,7 +43,7 @@
                 <span>{{codeTip}}</span>
               </div>
               <div v-show="showLogin === 1" class="password">
-                <input type="password" :placeholder="$t('Login.Text6')" class="inp" v-model="password">
+                <input type="password" :placeholder="$t('Login.Text6')" class="inp" v-model="password" @keyup.enter="login">
               </div>
             </div>
             <div class="bac7">

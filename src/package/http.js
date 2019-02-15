@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {getCookie} from '@/package/cookie'
 // axios配置
 // axios.defaults.timeout = 5000;
 axios.defaults.withCredentials=true;
@@ -8,15 +9,17 @@ axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
 //http request 拦截器，通过这个，我们就可以把cookie传给后台
 axios.interceptors.request.use(
   config => {
-    // const token = getCookie('session');//获取cookie
+    const touristId = getCookie('touristId');//获取cookie
+    const touristToken = getCookie('touristToken');
     //;注意使用的时候需要引入cookie方法，推荐js-cookie
     // config.data = JSON.stringify(config.data);
     // config.headers = {
     //   'Content-Type': 'application/x-www-form-urlencoded'//设置跨域头部
     // }
-    // if(token){
-    //   config.headers = {'picCode':token}//后台接受的参数
-    // }
+    if(touristId){
+      config.headers = {'Cookie':{'touristId':touristId,'touristToken':touristToken}}//后台接受的参数
+    }
+    console.log(config)
     return config;
   },
   error => {

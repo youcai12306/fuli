@@ -14,11 +14,12 @@
         <div class="t1">{{item.productName}}</div>
         <div class="c1 clearDiv">
           <div class="jifen floatLeft">{{item.settlementPrice}}{{$t('ConvertList.Text9')}}</div>
-          <div
+          <button
             class="btn floatRight"
             :class="{btnDisable:lv == 6|| integral<item.settlementPrice}"
             @click="mengShow(key)"
-          >{{$t('ConvertList.Text2')}}</div>
+            :disabled="(lv == 6 || integral<item.settlementPrice)"
+          >{{$t('ConvertList.Text2')}}</button>
         </div>
       </div>
     </div>

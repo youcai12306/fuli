@@ -698,14 +698,17 @@ export default {
 
             h3 {
               height: 80px;
-              line-height: 18px;
+              // line-height: 18px;
               font-size: 18px;
               font-family: MicrosoftYaHei-Bold;
               font-weight: bold;
-              padding: 42px 20px 20px 0;
-              overflow: hidden;
-              text-overflow: ellipsis;
-              white-space: nowrap;
+              padding: 30px 20px 20px 0;
+              word-break: break-all;
+                    text-overflow: ellipsis;
+                    display: -webkit-box; /** 将对象作为伸缩盒子模型显示 **/
+                    -webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+                    -webkit-line-clamp: 2; /** 显示的行数 **/
+                    overflow: hidden;  /** 隐藏超出的内容 **/
             }
 
             p {
@@ -716,6 +719,7 @@ export default {
               font-weight: 400;
               color: rgba(102, 102, 102, 1);
               padding-bottom: 36px;
+              padding-top: 10px;
             }
 
             hr {

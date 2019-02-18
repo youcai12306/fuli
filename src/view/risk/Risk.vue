@@ -35,7 +35,7 @@
 						<div class="swiper-button-prev swiper-button-black" slot="button-prev"></div>
 						<div class="swiper-button-next swiper-button-black" slot="button-next"></div>
 					</swiper>
-					<div class="list">
+					<!-- <div class="list">
 						<p class="list-t" v-html="$t('risk.h2_title')"></p>
 						<ul class="clearDiv">
 							<li v-for="item in 4" :key="item">
@@ -48,7 +48,7 @@
 								</p>
 							</li>
 						</ul>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>

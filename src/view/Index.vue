@@ -129,6 +129,10 @@
                     <router-link to="/news" class="floatRight">{{$t('index.name1')}}>></router-link>
                   </div>
                   <div class="floatLeft box-bottom" v-html="newFirstContent"></div>
+                  <router-link
+                    :to="{path:'/newDetail',query:{id:newFirst.id}}"
+                    class="a"
+                  >{{$t('index.name2')}}>></router-link>
                 </div>
               </div>
               <ul class="bottom">
@@ -147,7 +151,10 @@
         </div>
         <el-row class="info-row clearDiv">
           <el-col :span="12" class="info-col1">
-            <span class="icoe"><img src="../assets/img/md-3.png" alt=""><i>{{$t('index.text1')}}</i></span>
+            <span class="icoe">
+              <img src="../assets/img/md-3.png" alt>
+              <i>{{$t('index.text1')}}</i>
+            </span>
             <span class="time">{{showTime()}}</span>
             <div class="info-img clearDiv">
               <img src="../assets/img/md-5.png">
@@ -159,7 +166,10 @@
             </div>
           </el-col>
           <el-col :span="12" class="info-col1">
-            <span class="icoe"><img src="../assets/img/md-4.png" alt=""><i>{{$t('index.text2')}}</i></span>
+            <span class="icoe">
+              <img src="../assets/img/md-4.png" alt>
+              <i>{{$t('index.text2')}}</i>
+            </span>
             <div class="info-img2 clearDiv">
               <img src="../assets/img/md-10.png">
               <div class="info-p">
@@ -333,12 +343,16 @@ export default {
               });
             }
             this.$fetch(
-              this.$url1 + ":6110/mongodb-mucon/info/primary/get?infoId="+this.newFirst.id+"&isEnglish="+this.isEnglish
-            //   this.$tool.formatDatas({
-            //     infoId: this.newFirst.id,
-            //     isEnglish: 0
-			//   }
-			 // )
+              this.$url1 +
+                ":6110/mongodb-mucon/info/primary/get?infoId=" +
+                this.newFirst.id +
+                "&isEnglish=" +
+                this.isEnglish
+              //   this.$tool.formatDatas({
+              //     infoId: this.newFirst.id,
+              //     isEnglish: 0
+              //   }
+              // )
             ).then(res => {
               if (res.code === 200) {
                 this.newFirstContent = res.data.infoContent;
@@ -454,7 +468,7 @@ export default {
     },
     showTime() {
       let show_day;
-      if(this.isEnglish == 0){
+      if (this.isEnglish == 0) {
         show_day = new Array(
           "星期日",
           "星期一",
@@ -464,7 +478,7 @@ export default {
           "星期五",
           "星期六"
         );
-      }else {
+      } else {
         show_day = new Array(
           "Sunday",
           "Monday",
@@ -487,10 +501,12 @@ export default {
       minutes < 10 ? (minutes = "0" + minutes) : minutes;
       second < 10 ? (second = "0" + second) : second;
       let now_time;
-      if(this.isEnglish == 0){
-        now_time = year + "年" + month + "月" + date + "日" + " " + show_day[day] + "";
-      }else {
-        now_time = year + "." + month + "." + date + "" + " " + show_day[day] + "";
+      if (this.isEnglish == 0) {
+        now_time =
+          year + "年" + month + "月" + date + "日" + " " + show_day[day] + "";
+      } else {
+        now_time =
+          year + "." + month + "." + date + "" + " " + show_day[day] + "";
       }
       return now_time;
     }
@@ -867,7 +883,7 @@ export default {
 
             .top-box {
               margin-left: 14px;
-
+              position: relative;
               .box-top {
                 height: 17px;
                 line-height: 17px;
@@ -898,6 +914,14 @@ export default {
                 font-weight: 400;
                 color: rgba(102, 102, 102, 1);
                 overflow: hidden;
+              }
+              .a {
+                position: absolute;
+                bottom: 10px;
+                right: 0;
+                font-size: 12px;
+                font-weight: 400;
+                color: #999999;
               }
             }
           }
@@ -995,12 +1019,12 @@ export default {
           height: 72px;
           background: url(../assets/img/md-6.png) no-repeat top center;
 
-          img{
+          img {
             height: 33px;
             margin-right: 10px;
           }
 
-          i{
+          i {
             color: #fff;
             font-style: normal;
             font-size: 19px;

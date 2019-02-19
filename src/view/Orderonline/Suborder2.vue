@@ -343,9 +343,13 @@ export default {
       }
     },
     active() {
-      this.$fetch("http://101.201.101.138:2060/activity/activityShow", {
+      this.$post("http://101.201.101.138:2060/activity/activityShow", {
         touristId: this.$store.getters.getUserData.userId,
-        orderCash: this.price2
+        productList: [{
+           productId:this.productId,
+           cash: this.price1.toString(),
+           count: parseInt(this.count)
+        }]
       }).then(res => {
         res.data.forEach((value,index)=>{
           console.log(value);

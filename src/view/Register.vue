@@ -129,7 +129,7 @@ export default {
   methods: {
     //显示图形验证码
     getCode() {
-      this.$fetch(this.$url+":2060/user-aggregate/getKaptcha").then(
+      this.$fetch(this.$url2+"/api-bkf-user/user-aggregate/getKaptcha").then(
         res => {
           this.codeImg = "data:image/png;base64," + res;
         }
@@ -142,8 +142,8 @@ export default {
         this.isOk = false;
       } else {
         this.$fetch(
-          this.$url+
-          ":2060/user-aggregate/checkIsRegist",
+          this.$url2+
+          "/api-bkf-user/user-aggregate/checkIsRegist",
           { mobile: this.phone }
         ).then(res => {
           if (res.code === 200) {
@@ -174,7 +174,7 @@ export default {
         this.isOk1 = false;
         return false;
       } else {
-        this.$fetch(this.$url+":2060/user-aggregate/checkKaptcha", {
+        this.$fetch(this.$url2+"/api-bkf-user/user-aggregate/checkKaptcha", {
           picCode: this.code
         }).then(res => {
           if (res.code === 200) {
@@ -219,7 +219,7 @@ export default {
     getCode1() {
       clearInterval(this.times);
       this.isActive = true;
-      this.$fetch(this.$url+":2060/user-aggregate/getSmsCode", {
+      this.$fetch(this.$url2+"/api-bkf-user/user-aggregate/getSmsCode", {
         mobile: this.phone,
         smsFlag: "sms_code"
       }).then(res => {
@@ -247,7 +247,7 @@ export default {
         this.codeTip1 = "请输入正确的验证码";
         return false;
       } else {
-        this.$fetch(this.$url+":2060/user-aggregate/checkSmsCode", {
+        this.$fetch(this.$url2+"/api-bkf-user/user-aggregate/checkSmsCode", {
           smsCode: this.code1,
           smsFlag: 'sms_code'
         }).then(res => {
@@ -293,8 +293,8 @@ export default {
         return false;
       } else {
         //注册接口
-        this.$post(this.$url+
-          ":2060/user-aggregate/regist",
+        this.$post(this.$url2+
+          "/api-bkf-user/user-aggregate/regist",
           { mobile: this.phone, passWord: this.password, smsCode: this.code1,registType:0},
           { headers: { "Content-Type": "application/json;charset=UTF-8" } }
         ).then(res => {

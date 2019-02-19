@@ -162,7 +162,7 @@ export default {
           mobile: this.phone,
           passWord: this.password
         };
-        this.$post("http://getway.mayou365.com/api-hkf-user/user-aggregate/login", data, 
+        this.$post(this.$url2+"/api-bkf-user/user-aggregate/login", data, 
         {                                                                                                                              
           headers: { "Content-Type": "application/json;charset=UTF-8" }
         }).then(res => {

@@ -11,7 +11,7 @@ import {post,fetch,patch,put} from './package/http'
 import store from './vuex/store'
 import i18n from './lang'
 
-import {HTTP_DETAIL1,HTTP_DETAIL,isEnglish} from '@/package/common'
+import {HTTP_DETAIL1,HTTP_DETAIL,isEnglish,HTTP_DETAIL2} from '@/package/common'
 
 Vue.use(ElementUI);
 Vue.use(ElementUI, {
@@ -30,6 +30,7 @@ Vue.prototype.$patch=patch;
 Vue.prototype.$put=put;
 Vue.prototype.$url1 = HTTP_DETAIL1;
 Vue.prototype.$url = HTTP_DETAIL;
+Vue.prototype.$url2 = HTTP_DETAIL2; //域名接口
 Vue.prototype.$isEnglish = isEnglish;
 
 //vue点击图片预览放大 https://github.com/fengyuanchen/viewerjs

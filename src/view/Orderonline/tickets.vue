@@ -176,7 +176,7 @@ export default {
       //请求后台接口
 
       this.$fetch(
-        "http://101.201.101.138:5001/product-aggregate/findProductByStock",
+        this.$url2+"/api-bkf-product/product-aggregate/findProductByStock",
         {
           playDate: date,
           typeId: this.$route.params.typeId,

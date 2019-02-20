@@ -34,7 +34,7 @@
 			document.title = "公告中心详情";
 		},
 		mounted() {
-			this.$fetch(this.$url + ':6110/mongodb-mucon/info/primary/get?infoId=' + this.$route.query.id + '&isEnglish=' + this
+			this.$fetch(this.$url2 + '/api-nkf-callback/mongodb-mucon/info/primary/get?infoId=' + this.$route.query.id + '&isEnglish=' + this
 					.isEnglish)
 				.then((res) => {
 					this.data = res.data

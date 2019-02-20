@@ -428,32 +428,32 @@
 			},
 			getIntroduced() {
 				return this.$fetch(
-					`${this.$url1}:6110/mongodb-mucon/structure/primary/searchLinkIndex?pageNum=1&pageSize=100&linkIndex=A1-${this.id}&isEnglish=${this.$isEnglish}`
+					`${this.$url2}/api-nkf-callback/mongodb-mucon/structure/primary/searchLinkIndex?pageNum=1&pageSize=100&linkIndex=A1-${this.id}&isEnglish=${this.$isEnglish}`
 				)
 			},
 			getFacilities() {
 				return this.$fetch(
-					`${this.$url1}:6110/mongodb-mucon/structure/primary/searchLinkIndex?pageNum=1&pageSize=100&linkIndex=A2-${this.id}&isEnglish=${this.$isEnglish}`
+					`${this.$url2}/api-nkf-callback/mongodb-mucon/structure/primary/searchLinkIndex?pageNum=1&pageSize=100&linkIndex=A2-${this.id}&isEnglish=${this.$isEnglish}`
 				)
 			},
 			getActing() {
 				return this.$fetch(
-					`${this.$url1}:6110/mongodb-mucon/structure/primary/searchLinkIndex?pageNum=1&pageSize=100&linkIndex=A3-${this.id}&isEnglish=${this.$isEnglish}`
+					`${this.$url2}/api-nkf-callback/mongodb-mucon/structure/primary/searchLinkIndex?pageNum=1&pageSize=100&linkIndex=A3-${this.id}&isEnglish=${this.$isEnglish}`
 				)
 			},
 			getVenues() {
 				return this.$fetch(
-					`${this.$url1}:6110/mongodb-mucon/structure/primary/searchLinkIndex?pageNum=1&pageSize=100&linkIndex=A4-${this.id}&isEnglish=${this.$isEnglish}`
+					`${this.$url2}/api-nkf-callback/mongodb-mucon/structure/primary/searchLinkIndex?pageNum=1&pageSize=100&linkIndex=A4-${this.id}&isEnglish=${this.$isEnglish}`
 				)
 			},
 			getStore() {
 				return this.$fetch(
-					`${this.$url1}:6110/mongodb-mucon/structure/primary/searchLinkIndex?pageNum=1&pageSize=100&linkIndex=A5-${this.id}&isEnglish=${this.$isEnglish}`
+					`${this.$url2}/api-nkf-callback/mongodb-mucon/structure/primary/searchLinkIndex?pageNum=1&pageSize=100&linkIndex=A5-${this.id}&isEnglish=${this.$isEnglish}`
 				)
 			},
 			getRestaurant() {
 				return this.$fetch(
-					`${this.$url1}:6110/mongodb-mucon/structure/primary/searchLinkIndex?pageNum=1&pageSize=100&linkIndex=A6-${this.id}&isEnglish=${this.$isEnglish}`
+					`${this.$url2}/api-nkf-callback/mongodb-mucon/structure/primary/searchLinkIndex?pageNum=1&pageSize=100&linkIndex=A6-${this.id}&isEnglish=${this.$isEnglish}`
 				)
 			},
 			getLists() { //获取6个模块数据 
@@ -480,7 +480,7 @@
 					}))
 			},
 			GetSelectFiles(obj) { //批量获取图片
-				this.$fetch(`${this.$url1}:2600/staticResource-mucon/selectFiles`, {
+				this.$fetch(`${this.$url2}/api-bkf-staticResource/staticResource-mucon/selectFiles`, {
 					ids: obj
 				}).then(res => {
 					this.img = res.data;

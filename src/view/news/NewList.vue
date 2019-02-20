@@ -61,15 +61,15 @@
 			// 获取新闻數據
 			GetList(type, pageSize, pageIndex, isEnglish) {
 				this.$fetch(
-					`${this.$url1}:6110/mongodb-mucon/info/primary/search?type=${type}&pageSize=${pageSize}&pageNum=${pageIndex}&isEnglish=${isEnglish}`
+					`${this.$url2}/api-nkf-callback/mongodb-mucon/info/primary/search?type=${type}&pageSize=${pageSize}&pageNum=${pageIndex}&isEnglish=${isEnglish}`
 				).then(res => {
 					if (res.code === 200) {
 						if (pageIndex == 1) {
 							this.list = res.data.content[0];
 							if (this.list.infoPic.length) {
 								this.$fetch(
-									this.$url1 +
-									":2600/staticResource-mucon/selectFileById?id=" +
+									this.$url2 +
+									"/api-bkf-staticResource/staticResource-mucon/selectFileById?id=" +
 									this.list.infoPic[0].picid
 								).then(res => {
 									if (res.code === 200) {

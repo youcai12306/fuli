@@ -107,11 +107,11 @@ import { Message } from 'element-ui';
 			},
 			GetList() {
 				if(this.type!='0'){
-					this.$fetch('http://101.201.101.138:6110/mongodb-mucon/structure/primary/get?structureId=' + this.$route.query.id + '&isEnglish='+ this.$isEnglish).then((res) => {
+					this.$fetch(this.$url2+'/api-nkf-callback/mongodb-mucon/structure/primary/get?structureId=' + this.$route.query.id + '&isEnglish='+ this.$isEnglish).then((res) => {
 						this.data = res.data;
 					})
 				}else{
-					this.$fetch('http://101.201.101.138:6110/mongodb-mucon/activity/primary?id=' + this.id).then((res) => {
+					this.$fetch(this.$url2+'/api-nkf-callback/mongodb-mucon/activity/primary?id=' + this.id).then((res) => {
 						console.log(res.data);
 						this.data = res.data;
 					})
@@ -158,7 +158,7 @@ import { Message } from 'element-ui';
 			},
 			onSubmit() {
 				console.log(999);
-				this.$post('http://101.201.101.138:6110//mongodb-mucon/participant/primary/insert',{
+				this.$post(this.$url2+'/api-nkf-callback/mongodb-mucon/participant/primary/insert',{
 						count: this.numberValidateForm.number,
 						createTime: this.data.createTime,
 						mainId: this.id,

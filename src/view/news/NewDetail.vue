@@ -39,7 +39,7 @@
 			document.title = "新闻中心详情";
 		},
 		mounted() {
-			this.$fetch(this.$url1 + ':6110/mongodb-mucon/info/primary/get?infoId=' + this.$route.query.id + '&isEnglish=' + this.isEnglish).then((res) => {
+			this.$fetch(this.$url2 + '/api-nkf-callback/mongodb-mucon/info/primary/get?infoId=' + this.$route.query.id + '&isEnglish=' + this.isEnglish).then((res) => {
 				this.data = res.data
 			})
 		}

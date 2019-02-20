@@ -61,7 +61,7 @@ export default {
 
   methods: {
     GetList() {
-				this.$fetch('http://101.201.101.138:6110/mongodb-mucon/structure/primary/get?structureId=' + this.id + '&isEnglish='+ this.$isEnglish).then((res) => {
+				this.$fetch(this.$url2+'/api-nkf-callback/mongodb-mucon/structure/primary/get?structureId=' + this.id + '&isEnglish='+ this.$isEnglish).then((res) => {
 					this.data = res.data;
 				})
 			}

@@ -623,7 +623,7 @@
 		methods: {
 			getSearch(type, pageSize, pageIndex, isEnglish) { //获取门票价格 运营时间 常见问题列表 后台ID=门票价格H1 运营时间H2 常见问题H3 pageSize分页大小 pageIndex第几页 isEnglish中英文标识
 				this.$fetch(
-					`${this.$url1}:6110/mongodb-mucon/structure/primary/searchLinkIndex?linkIndex=${type}&pageSize=${pageSize}&pageNum=${pageIndex}&isEnglish=${isEnglish}`
+					`${this.$url2}/api-nkf-callback/mongodb-mucon/structure/primary/searchLinkIndex?linkIndex=${type}&pageSize=${pageSize}&pageNum=${pageIndex}&isEnglish=${isEnglish}`
 				).then(res => {
 					if (res.code === 200) {
 					if (type == 'H1') {

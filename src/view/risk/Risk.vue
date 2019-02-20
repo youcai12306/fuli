@@ -136,7 +136,7 @@
 		methods: {
 			getSearch(type, pageSize, pageIndex, isEnglish) { //获取冒险之旅列表 后台ID=D pageSize分页大小 pageIndex第几页 isEnglish中英文标识
 				this.$fetch(
-					`${this.$url1}:6110/mongodb-mucon/structure/primary/searchLinkIndex?linkIndex=${type}&pageSize=${pageSize}&pageNum=${pageIndex}&isEnglish=${isEnglish}`
+					`${this.$url2}/api-nkf-callback/mongodb-mucon/structure/primary/searchLinkIndex?linkIndex=${type}&pageSize=${pageSize}&pageNum=${pageIndex}&isEnglish=${isEnglish}`
 				).then(res => {
 					if (res.code === 200) {
 					let xin = [];
@@ -163,7 +163,7 @@
 				});
 			},
 			GetSelectFiles(obj, type) { //批量获取图片
-				this.$fetch(`${this.$url1}:2600/staticResource-mucon/selectFiles`, {
+				this.$fetch(`${this.$url2}/api-bkf-staticResource/staticResource-mucon/selectFiles`, {
 					ids: obj
 				}).then(res => {
 					this.imgs = res.data;

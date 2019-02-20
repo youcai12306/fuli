@@ -118,8 +118,8 @@ export default {
       if (type != "0") {
         this.$fetch(
           `${
-            this.$url1
-          }:6110/mongodb-mucon/structure/primary/searchLinkIndex?linkIndex=${type}&pageSize=${pageSize}&pageNum=${pageIndex}&isEnglish=${isEnglish}`
+            this.$url2
+          }/api-nkf-callback/mongodb-mucon/structure/primary/searchLinkIndex?linkIndex=${type}&pageSize=${pageSize}&pageNum=${pageIndex}&isEnglish=${isEnglish}`
         ).then(res => {
           if (res.code === 200) {
             let xin = [];
@@ -149,8 +149,8 @@ export default {
       } else {
         this.$post(
           `${
-            this.$url1
-          }:6110/mongodb-mucon/activity/primary?pageSize=${pageSize}&pageNum=${pageIndex}`
+            this.$url2
+          }/api-nkf-callback/mongodb-mucon/activity/primary?pageSize=${pageSize}&pageNum=${pageIndex}`
         ).then(res => {
           if (res.code === 200) {
             let xin = [];
@@ -179,7 +179,7 @@ export default {
     },
     GetSelectFiles(obj) {
       //批量获取图片
-      this.$fetch(`${this.$url1}:2600/staticResource-mucon/selectFiles`, {
+      this.$fetch(`${this.$url2}/api-bkf-staticResource/staticResource-mucon/selectFiles`, {
         ids: obj
       }).then(res => {
         if (this.$route.query.id != "0") {

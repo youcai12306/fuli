@@ -53,7 +53,7 @@
 			// 获取新闻數據
 			GetList(type, pageSize, pageIndex, isEnglish) {
 				this.$fetch(
-					`${this.$url1}:6110/mongodb-mucon/info/primary/search?type=${type}&pageSize=${pageSize}&pageNum=${pageIndex}&isEnglish=${isEnglish}`
+					`${this.$url2}/api-nkf-callback/mongodb-mucon/info/primary/search?type=${type}&pageSize=${pageSize}&pageNum=${pageIndex}&isEnglish=${isEnglish}`
 				).then(res => {
 					if (res.code === 200) {
 						this.list = res.data.content;

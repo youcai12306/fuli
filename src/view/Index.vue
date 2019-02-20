@@ -262,8 +262,8 @@ export default {
       //获取Banner 最新活动列表 Banner后台ID=B 最新活动ID=E pageSize分页大小 pageIndex第几页 isEnglish中英文标识
       this.$fetch(
         `${
-          this.$url1
-        }:6110/mongodb-mucon/structure/primary/searchLinkIndex?linkIndex=${type}&pageSize=${pageSize}&pageNum=${pageIndex}&isEnglish=${isEnglish}`
+          this.$url2
+        }/api-nkf-callback/mongodb-mucon/structure/primary/searchLinkIndex?linkIndex=${type}&pageSize=${pageSize}&pageNum=${pageIndex}&isEnglish=${isEnglish}`
       ).then(res => {
         if (res.code === 200) {
           let xin = [];
@@ -301,7 +301,7 @@ export default {
     },
     GetSelectFiles(obj, type) {
       //批量获取图片
-      this.$fetch(`${this.$url1}:2600/staticResource-mucon/selectFiles`, {
+      this.$fetch(`${this.$url2}/api-bkf-staticResource/staticResource-mucon/selectFiles`, {
         ids: obj
       }).then(res => {
         if (type == "E") {
@@ -323,8 +323,8 @@ export default {
     //获取新闻列表
     getNewList() {
       this.$fetch(
-        this.$url1 +
-          ":6110/mongodb-mucon/info/primary/search?type=1&pageSize=5&pageNum=1&isEnglish=" +
+        this.$url2 +
+          "/api-nkf-callback/mongodb-mucon/info/primary/search?type=1&pageSize=5&pageNum=1&isEnglish=" +
           this.isEnglish
       ).then(res => {
         if (res.code === 200) {
@@ -333,8 +333,8 @@ export default {
             this.newFirst = res.data.content[0];
             if (this.newFirst.infoPic.length) {
               this.$fetch(
-                this.$url1 +
-                  ":2600/staticResource-mucon/selectFileById?id=" +
+                this.$url2 +
+                  "/api-bkf-staticResource/staticResource-mucon/selectFileById?id=" +
                   this.newFirst.infoPic[0].picid
               ).then(res => {
                 if (res.code === 200) {
@@ -343,8 +343,8 @@ export default {
               });
             }
             this.$fetch(
-              this.$url1 +
-                ":6110/mongodb-mucon/info/primary/get?infoId=" +
+              this.$url2 +
+                "/api-nkf-callback/mongodb-mucon/info/primary/get?infoId=" +
                 this.newFirst.id +
                 "&isEnglish=" +
                 this.isEnglish
@@ -367,7 +367,7 @@ export default {
     getTicketList() {
       this.options = [];
       this.key = "";
-      this.$fetch(this.$url1 + ":5001/product-aggregate/findProductByStock", {
+      this.$fetch(this.$url2 + "/api-bkf-product/product-aggregate/findProductByStock", {
         playDate: this.date,
         typeId: 0
       }).then(res => {

@@ -191,7 +191,7 @@ export default {
     }
   },
   created() {
-    document.title = "精彩活动";
+    document.title = "优惠活动";
   },
   mounted() {
     this.id = this.$route.query.id;

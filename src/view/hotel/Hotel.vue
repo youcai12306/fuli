@@ -106,7 +106,10 @@ export default {
   },
   mounted() {
     this.getSearch('C', this.pageSize, this.pageIndex, this.isEnglish);
-  }
+  },
+  created() {
+    document.title = "度假酒店";
+  },
 };
 </script>
 <style lang='scss' scoped>

@@ -104,8 +104,15 @@
                     class="ticket-code"
                     @click="getCode(scope.row.ecode)"
                     v-if="scope.row.singleTicketState == 3 &&(scope.row.saleType == 0 || scope.row.saleType == 1)"
-                  >{{$t('Order.ecode')}}：<span style = "color:#0066cc; cursor: pointer;">{{scope.row.ecode}}</span></div>
-                  <p v-show="scope.row.ecode == ecode"><img v-if="url" class="code" :src="'data:image/jpeg;base64,'+url" alt ></p>
+                  >
+                    {{$t('Order.ecode')}}：
+                    <span
+                      style="color:#0066cc; cursor: pointer;"
+                    >{{scope.row.ecode}}</span>
+                  </div>
+                  <p v-show="scope.row.ecode == ecode">
+                    <img v-if="url" class="code" :src="'data:image/jpeg;base64,'+url" alt>
+                  </p>
                 </template>
               </el-table-column>
               <el-table-column
@@ -172,8 +179,8 @@ export default {
       loading: true,
       times: "",
       orderId: "",
-      url:'',
-      ecode:''
+      url: "",
+      ecode: ""
     };
   },
   methods: {
@@ -181,8 +188,9 @@ export default {
     getCode(code) {
       this.ecode = code;
       this.$fetch(
-        `${this.$url1}:5001/product-aggregate/findOrderByeCode?eCode=` +
-          code
+        `${
+          this.$url2
+        }/api-bkf-product /product-aggregate/findOrderByeCode?eCode=` + code
       )
         .then(res => {
           this.url = res.data;
@@ -195,7 +203,9 @@ export default {
     pay(id, price) {
       // 拿到guid以及订单号
       this.$post(
-        `${this.$url1}:5001/order-aggregate/reSaveOrder?orderId=${id}`,
+        `${
+          this.$url2
+        }/api-bkf-product/order-aggregate/reSaveOrder?orderId=${id}`,
         {
           headers: {
             "Content-Type": "application/json;charset=UTF-8"
@@ -213,7 +223,9 @@ export default {
             // 读redis，成功创建订单后关闭遮罩层，跳转支付页面
             this.times = setInterval(() => {
               this.$fetch(
-                `${this.$url1}:5100/callBack-aggregate/getOccupation`,
+                `${
+                  this.$url2
+                }/api-nkf-callback/callBack-aggregate/getOccupation`,
                 data1
               ).then(res => {
                 if (res.code === 200) {
@@ -239,8 +251,8 @@ export default {
           this.$message.error(error.response.data.message);
         });
     },
+    //待支付直接去支付页面
     pay2(id, price) {
-      //待支付直接去支付页面
       this.$router.push({
         path: "./success",
         query: {
@@ -260,8 +272,8 @@ export default {
         }
       });
     },
+    //订单列表
     PostFindOrderDetail() {
-      //订单列表
       if (this.tabs != "a") {
         var data = {
           orderState: this.tabs,
@@ -274,7 +286,9 @@ export default {
       }
       this.loading = true;
       this.$post(
-        `${this.$url1}:5001/order-aggregate/findOrderDetail?pageNum=${
+        `${
+          this.$url2
+        }/api-bkf-product/order-aggregate/findOrderDetail?pageNum=${
           this.page
         }&pageSize=${this.pageSize}`,
         data
@@ -296,13 +310,13 @@ export default {
           this.$message.error(error.response.data.message);
         });
     },
+    //分页
     handleCurrentChange(val) {
-      //分页
       this.page = val;
       this.PostFindOrderDetail();
     },
-    delOrder(id) {
-      //取消订单
+    //取消订单
+    delOrder(id) { 
       this.$confirm("此操作将取消订单, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -311,8 +325,8 @@ export default {
         .then(() => {
           this.$put(
             `${
-              this.$url1
-            }:5001/order-aggregate/canceOrder?orderId=${id}&status=-1`
+              this.$url2
+            }/api-bkf-product/order-aggregate/canceOrder?orderId=${id}&status=-1`
           )
             .then(res => {
               if (res.code === 200) {
@@ -331,8 +345,8 @@ export default {
         })
         .catch(() => {});
     },
+    //退票
     refund(obj, id, name) {
-      //退票
       this.$prompt("请输入退票原因", "退票", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",

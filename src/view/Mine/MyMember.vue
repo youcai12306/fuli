@@ -66,8 +66,8 @@ export default {
     //获取用户等级和升级积分
     getUpgradeRules() {
       this.$post(
-        this.$url +
-          ":2060/memberinte-aggregate/getToursAndMember?touristId=" +
+        this.$url2 +
+          "/api-bkf-user/memberinte-aggregate/getToursAndMember?touristId=" +
           this.$store.getters.getUserData.userId
       ).then(res => {
         if (res.code == 200) {
@@ -85,7 +85,7 @@ export default {
         memberLevel: this.$store.getters.getUserData.memberlevel+1
       };
       this.$put(
-        this.$url + ":2060/memberinte-aggregate/updateToMemberLevel",
+        this.$url2 + "/api-bkf-user/memberinte-aggregate/updateToMemberLevel",
         this.$tool.formatDatas(data),
         { headers: { "Content-Type": "application/x-www-form-urlencoded" } }
       ).then(res => {

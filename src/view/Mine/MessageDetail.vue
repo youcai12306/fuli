@@ -30,7 +30,7 @@ export default {
   methods: {
       init(isEnglish){
           let id = this.$route.query.id;
-          this.$fetch(this.$url+":6110/mongodb-mucon/structure/primary/get",{
+          this.$fetch(this.$url2+"/api-nkf-callback/mongodb-mucon/structure/primary/get",{
             structureId: this.$route.query.id,
             isEnglish: isEnglish
           }).then(res =>{

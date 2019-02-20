@@ -79,7 +79,9 @@
                   <td colspan="6" class="td-8">{{item.productName}}</td>
                 </tr>
                 <tr class="tr">
-                  <td class="td-1">{{$t('Order.useBeginDateTime')}}：{{changeTime(item.useBeginDateTime)}}</td>
+                  <td
+                    class="td-1"
+                  >{{$t('Order.useBeginDateTime')}}：{{changeTime(item.useBeginDateTime)}}</td>
                   <td class="td-2">￥{{item.settlementPrice}}</td>
                   <td class="td-3">X{{item.productCount}}</td>
                   <td class="td-4">￥{{item.smallTotalCash}}</td>
@@ -95,15 +97,19 @@
                 >
                   <td colspan="2">
                     {{$t('Order.ecode')}}：
-                    <a @click.stop="getCode(item.ecode)" href="javascript:;">{{item.ecode}}</a>
+                    <a
+                      @click.stop="getCode(item.ecode)"
+                      href="javascript:;"
+                    >{{item.ecode}}</a>
                     ({{$t('OrderDetail.Text12')}})
                   </td>
-                  <td v-show="item.ecode == ecode" ><img v-if="url" class="code" :src="'data:image/jpeg;base64,'+url" alt></td>
+                  <td v-show="item.ecode == ecode">
+                    <img v-if="url" class="code" :src="'data:image/jpeg;base64,'+url" alt>
+                  </td>
                 </tr>
               </template>
             </tbody>
           </table>
-         
         </div>
         <div class="four">
           <table class="four-table" cellspacing="0" cellpadding="0">
@@ -222,7 +228,7 @@ export default {
       orderDetailList: [],
       num: 0,
       refundList: [], //退票
-      ecode:''
+      ecode: ""
     };
   },
 
@@ -234,29 +240,29 @@ export default {
   },
   methods: {
     //退单标识
-    setTip(type){
-      if( type == -1){
-        return '未审核'
-      }else if(type == 0){
-        return '不同意'
-      }else if (type == 1){
-        return '同意' 
+    setTip(type) {
+      if (type == -1) {
+        return "未审核";
+      } else if (type == 0) {
+        return "不同意";
+      } else if (type == 1) {
+        return "同意";
       }
     },
     //改变时间
     changeTime(time) {
-      return this.$tool.formatData(time,'yyyy-MM-dd hh:ss:mm')
+      return this.$tool.formatData(time, "yyyy-MM-dd hh:ss:mm");
     },
     //切换类型
     changeType(type) {
       this.type = type;
     },
+    //返回
     goBack() {
-      //返回
       this.$router.go(-1);
     },
+    //订单列表
     PostFindOrderDetail() {
-      //订单列表
       var data = {};
       if (this.status != "a") {
         data = {
@@ -271,8 +277,8 @@ export default {
 
       this.$post(
         `${
-          this.$url1
-        }:5001/order-aggregate/findOrderDetail?pageNum=1&pageSize=10`,
+          this.$url2
+        }/api-bkf-product/order-aggregate/findOrderDetail?pageNum=1&pageSize=10`,
         data
       )
         .then(res => {
@@ -301,8 +307,8 @@ export default {
         }
       });
     },
+    //取消订单
     delOrder(id) {
-      //取消订单
       this.$confirm("此操作将取消订单, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -311,8 +317,8 @@ export default {
         .then(() => {
           this.$put(
             `${
-              this.$url1
-            }:5001/order-aggregate/canceOrder?orderId=${id}&status=-1`
+              this.$url2
+            }/api-bkf-product/order-aggregate/canceOrder?orderId=${id}&status=-1`
           )
             .then(res => {
               if (res.code === 200) {
@@ -331,13 +337,14 @@ export default {
         })
         .catch(() => {});
     },
+    //收件人信息
     GetAdder() {
-      //收件人信息
       let id = this.data.receiveId;
       this.$fetch(
         `${
-          this.$url
-        }:2060/user-aggregate/address/selectReceiveAddressById?receiveId=` + id
+          this.$url2
+        }/api-bkf-user/user-aggregate/address/selectReceiveAddressById?receiveId=` +
+          id
       )
         .then(res => {
           if (res.code == 200) {
@@ -352,13 +359,13 @@ export default {
           console.log(error);
         });
     },
+    //根据订单id查询订单流水
     GetfindPayMentreByOrderId() {
-      //根据订单id查询订单流水
       let data = {
         orderSubId: this.orderId
       };
       this.$fetch(
-        `${this.$url1}:2130/payment-aggregate/findPayMentreByOrderId`,
+        `${this.$url2}/api-bkf-pay/payment-aggregate/findPayMentreByOrderId`,
         data
       )
         .then(res => {
@@ -374,12 +381,13 @@ export default {
           console.log(error);
         });
     },
+    //获取二维码
     getCode(ecode) {
-      console.log(ecode)
       this.ecode = ecode;
       this.$fetch(
-        `${this.$url1}:5001/product-aggregate/findOrderByeCode?eCode=` +
-          ecode
+        `${
+          this.$url2
+        }/api-bkf-product/product-aggregate/findOrderByeCode?eCode=` + ecode
       )
         .then(res => {
           this.url = res.data;
@@ -434,7 +442,9 @@ export default {
             if (vall.typeId == 0) {
               //银科退票接口
               this.$post(
-                `${this.$url1}:5080/returnCash-aggregate/refund/apply`,
+                `${
+                  this.$url2
+                }/api-bkf-returnCash/returnCash-aggregate/refund/apply`,
                 this.$tool.formatDatas(data)
               )
                 .then(res => {
@@ -456,7 +466,9 @@ export default {
             } else {
               //其他退票接口
               this.$post(
-                `${this.$url1}:5080/returnCash-aggregate/refund/applyPark`,
+                `${
+                  this.$url2
+                }/api-bkf-returnCash/returnCash-aggregate/refund/applyPark`,
                 this.$tool.formatDatas(data)
               )
                 .then(res => {
@@ -490,18 +502,20 @@ export default {
     },
     //退票信息
     getTicketinformation() {
-      this.$post(this.$url + ":6080/returnCash-mucon/refund/all", {
-        pageNum: 1,
-        pageSize: 10,
-        list: [
-          {
-            touristId: this.id,
-            orderId: this.orderId
-          }
-        ]
-      }).then(res => {
+      this.$post(
+        this.$ur2 + "/api-bkf-returnCash/returnCash-mucon/refund/all",
+        {
+          pageNum: 1,
+          pageSize: 10,
+          list: [
+            {
+              touristId: this.id,
+              orderId: this.orderId
+            }
+          ]
+        }
+      ).then(res => {
         this.refundList = res.data.list;
-        console.log(this.refundList);
       });
     }
   },

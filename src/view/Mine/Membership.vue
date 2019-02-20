@@ -315,7 +315,7 @@ export default {
     changePwd() {
       if (this.isOk && this.isOk1 && this.isOk2) {
         this.$post(
-          `${this.$url}:2060/user-aggregate/updateTouristPassword`,
+          `${this.$url2}/api-bkf-user/user-aggregate/updateTouristPassword`,
           {
             id: this.$store.getters.getUserData.userId,
             passWord: this.password,

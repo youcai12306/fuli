@@ -248,17 +248,17 @@ export default {
     };
   },
   mounted() {
-    this.changeType();
-    this.shopmsg();
-    this.canDebook()
-    // this.saleType = this.$route.query.saleType
-    // 监听路由跳转路径，如果是购物车，标志为a1，直接接受上个页面的参数
-    console.log(JSON.parse(this.$route.query.arr))
     if (this.a1 == 1) {
       let list1 = this.$route.query.list1;
       this.list2 = JSON.parse(list1);
       this.getPrice(this.list2);
     }
+    this.changeType();
+    this.shopmsg();
+    this.canDebook()
+    // this.saleType = this.$route.query.saleType
+    // 监听路由跳转路径，如果是购物车，标志为a1，直接接受上个页面的参数
+    
   },
   // 监听路由跳转路径，如果是购物车，重新调用购物车接口
   // watch :{
@@ -334,9 +334,19 @@ export default {
       }
     },
     active() {
-      this.$fetch("http://101.201.101.138:2060/activity/activityShow", {
+      let prodata = [];
+      let arr = this.list2;
+      console.log(this.list2);
+      arr.forEach(value => {
+        prodata.push({
+          productId: value.productId,
+          count: value.productCount,
+          cash: value.settlementPrice.toString()
+        });
+      })
+      this.$post("http://101.201.101.138:2060/activity/activityShow", {
         touristId: this.$store.getters.getUserData.userId,
-        orderCash: this.price2
+        productList: prodata
       }).then(res => {
         res.data.forEach((value,index)=>{
           if(value){

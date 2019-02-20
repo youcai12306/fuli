@@ -31,15 +31,15 @@ axios.interceptors.request.use(
 //http response 拦截器
 axios.interceptors.response.use(
   response => {
-    // response.data.errCode是接口返回值，如果是2，说明cookie丢失，然后跳转到登录页
-    if (response.data.errCode == 2) {
-      router.push({
-        path: "/login",
-        querry: {
-          redirect: router.currentRoute.fullPath//从哪个页面跳转
-        } 
-      })
-    }
+    // response.data.errCode是接口返回值，如果是401，说明cookie丢失，然后跳转到登录页
+    // if (response.data.errCode == 401) {
+    //   router.push({
+    //     path: "/login",
+    //     querry: {
+    //       redirect: router.currentRoute.fullPath//从哪个页面跳转
+    //     } 
+    //   })
+    // }
     return response;
   },
   error => {

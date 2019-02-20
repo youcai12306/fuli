@@ -520,7 +520,7 @@ export default {
         })
       });
       // 拿到guid以及订单号
-      this.$post(this.$url2+"/api-bkf-user/product-aggregate/save", data, {
+      this.$post(this.$url2+"/api-bkf-product/order-aggregate/save", data, {
         headers: { "Content-Type": "application/json;charset=UTF-8" }
       }).then(res => {
         if (res.code === 200) {

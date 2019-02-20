@@ -67,7 +67,7 @@ export default {
             console.log(typeof(val.picture))
             if (val.picture != "" && val.picture != null) {
               this.$fetch(
-                `${this.$url2}/api-bkf-user/staticResource-mucon/selectFiles`,
+                `${this.$url2}/api-bkf-staticResource/staticResource-mucon/selectFiles`,
                 {
                   ids: val.picture
                 }

@@ -85,8 +85,7 @@ export default {
         memberLevel: this.$store.getters.getUserData.memberlevel+1
       };
       this.$put(
-        this.$url2 + "/api-bkf-user/memberinte-aggregate/updateToMemberLevel",
-        this.$tool.formatDatas(data),
+        this.$url2 + "/api-bkf-user/memberinte-aggregate/updateToMemberLevel?"+this.$tool.formatDatas(data),
         { headers: { "Content-Type": "application/x-www-form-urlencoded" } }
       ).then(res => {
         if (res.code == 200) {

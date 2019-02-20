@@ -164,7 +164,7 @@ export default {
       });
     },
     GetSelectFiles(obj) { //批量获取图片
-      this.$fetch(`${this.$url1}:2600/staticResource-mucon/selectFiles`, {
+      this.$fetch(`${this.$url2}/api-bkf-staticResource/staticResource-mucon/selectFiles`, {
         ids: obj
       }).then(res => {
         this.imgs = res.data;

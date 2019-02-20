@@ -213,7 +213,7 @@ export default {
           // console.log(xin2);
           let imgs = [];
           this.$fetch(
-            "http://101.201.101.138:2600/staticResource-mucon/selectFiles",
+            this.$url2+"/api-bkf-staticResource/staticResource-mucon/selectFiles",
             {
               ids: xin2
             }

@@ -283,7 +283,7 @@ export default {
         if(this.activeTypeIDList[0].activityId == ''){
           return;
         }
-        this.$post("http://101.201.101.138:2060/activity/activityOperation", {
+        this.$post(this.$url2+"/api-bkf-user/activity/activityOperation", {
           activityId: this.activeTypeIDList[0].activityId,
           productList: [{}]
         }).then(res => {
@@ -295,7 +295,7 @@ export default {
           if(this.activeTypeIDList[1].activityId == ''){
             return;
           }
-          this.$post("http://101.201.101.138:2060/activity/activityOperation", {
+          this.$post(this.$url2+"/api-bkf-user/activity/activityOperation", {
             activityId: this.activeTypeIDList[1].activityId,
             productList: [{}]
           }).then(res => {
@@ -317,7 +317,7 @@ export default {
             productList: prodata
           };
           this.$post(
-            "http://101.201.101.138:2060/activity/activityOperation",
+            this.$url2+"/api-bkf-user/activity/activityOperation",
             data
           ).then(res => {
             console.log(res);
@@ -344,7 +344,7 @@ export default {
           cash: value.settlementPrice.toString()
         });
       })
-      this.$post("http://101.201.101.138:2060/activity/activityShow", {
+      this.$post(this.$url2+"/api-bkf-user/activity/activityShow", {
         touristId: this.$store.getters.getUserData.userId,
         productList: prodata
       }).then(res => {
@@ -490,8 +490,8 @@ export default {
         }
       })
       let data = {
-        activitieId:this.activeTypeIDList[parseInt(this.radio7)].activityId,//优惠券活动ID
-        activitieType: parseInt(this.radio7),//优惠券活动类型
+        activitieId:this.activeTypeIDList[parseInt(this.radio7)].activityId == '' ? null : this.activeTypeIDList[parseInt(this.radio7)].activityId,//优惠券活动ID
+        activitieType: parseInt(this.radio7) == '' ? null : parseInt(this.radio7),//优惠券活动类型
         touristId: this.$store.getters.getUserData.userId,
         productFormList: arr,
         receiveId: this.receiveId, //邮寄ID
@@ -517,7 +517,7 @@ export default {
           // 读redis，成功创建订单后关闭遮罩层，跳转支付页面
           this.times = setInterval(() => {
             this.$fetch(
-              "http://101.201.101.138:6110/callBack-mucon/getOccupation",
+              this.$url2+"/api-nkf-callback/callBack-mucon/getOccupation",
               data1
             ).then(res => {
               console.log(res);

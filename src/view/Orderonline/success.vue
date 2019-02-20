@@ -106,7 +106,7 @@ export default {
           out_trade_no: this.$route.query.orderId
         };
         this.$post(
-          "http://payment.mayou365.com/payment-aggregate/scanpay?out_trade_no=" +
+           this.$url2+"/api-bkf-pay/payment-aggregate/scanpay?out_trade_no=" +
             this.$route.query.orderId,
           data,
           { headers: { "Content-Type": "application/json;charset=UTF-8" } }
@@ -120,7 +120,7 @@ export default {
           out_trade_no: this.$route.query.orderId
         };
         this.$post(
-          "http://payment.mayou365.com/payment-aggregate/aliToPay?out_trade_no=" +
+          this.$url2+"/api-bkf-pay/payment-aggregate/aliToPay?out_trade_no=" +
             this.$route.query.orderId,
           data,
           {
@@ -147,7 +147,7 @@ export default {
           guid: this.$route.query.orderId
         };
         this.$fetch(
-          "http://101.201.101.138:6110/callBack-mucon/getPay",
+          this.$url2+"/api-nkf-callback/callBack-mucon/getPay",
           data
         ).then(res => {
           console.log(res);

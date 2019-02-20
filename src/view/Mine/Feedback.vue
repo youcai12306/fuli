@@ -52,7 +52,7 @@ export default {
   methods: {
     //查询反馈列表
     init(val) {
-      this.$fetch(this.$url + ":2060/myfeedback-aggregate/findList", {
+      this.$fetch(this.$url2 + "/api-bkf-user/myfeedback-aggregate/findList", {
         pageNum: val,
         pageSize: this.pageSize,
         touristId: this.$store.getters.getUserData.userId
@@ -67,7 +67,7 @@ export default {
             console.log(typeof(val.picture))
             if (val.picture != "" && val.picture != null) {
               this.$fetch(
-                `${this.$url}:2600/staticResource-mucon/selectFiles`,
+                `${this.$url2}/api-bkf-user/staticResource-mucon/selectFiles`,
                 {
                   ids: val.picture
                 }

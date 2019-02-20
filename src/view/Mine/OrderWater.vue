@@ -62,7 +62,7 @@ export default {
   },
   methods: {
     getList(val) {
-      this.$fetch(this.$url + ":2060/gift-exchange/queryByPage", {
+      this.$fetch(this.$url2 + "/api-bkf-user/gift-exchange/queryByPage", {
         touristId: this.$store.getters.getUserData.userId,
         pageNum: val,
         pageSize: this.pageSize

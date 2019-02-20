@@ -44,8 +44,7 @@ export default {
     },
     //获取消息列表
     getList(val,isEnglish) {
-      console.log(isEnglish)
-      this.$fetch(this.$url + ":6110/mongodb-mucon/structure/primary/search", {
+      this.$fetch(this.$url2 + "/api-nkf-callback/mongodb-mucon/structure/primary/search", {
         pageNum: val,
         pageSize: this.pageSize,
         type: 2,
@@ -54,7 +53,6 @@ export default {
       }).then(res => {
         if(res.code == 200){
           this.list = res.data.content;
-          console.log(this.list)
         }
       });
     }

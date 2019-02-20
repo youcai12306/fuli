@@ -105,7 +105,7 @@ export default {
   methods: {
     getList() {
       let id = this.$route.query.id;
-      this.$fetch(this.$url + ":5001/product-aggregate/find/" + id, {
+      this.$fetch(this.$url2 + "/api-bkf-product/product-aggregate/find/" + id, {
         stockId: this.$route.query.stockId,
         touristId: ""
       }).then(res => {
@@ -124,8 +124,8 @@ export default {
     //获取邮寄信息
     getAddress() {
       this.$fetch(
-        this.$url +
-          ":2060/user-aggregate/address/selectOneReceiveAddress?touristId=" +
+        this.$url2 +
+          "/api-bkf-user/user-aggregate/address/selectOneReceiveAddress?touristId=" +
           this.$store.getters.getUserData.userId
       ).then(res => {
         if (res.code == 200) {
@@ -152,7 +152,7 @@ export default {
       } else {
         receiveId = "";
       }
-      this.$post(this.$url + ":2060/gift-exchange/addChange", {
+      this.$post(this.$url2 + "/api-bkf-user/gift-exchange/addChange", {
         touristId: this.$store.getters.getUserData.userId,
         receiveName: this.name,
         mobile: this.phone,
@@ -177,8 +177,8 @@ export default {
     //获取地址列表
     getAddressList() {
       this.$fetch(
-        this.$url +
-          ":2060/user-aggregate/address/selectReceiveAddress?touristId=" +
+        this.$url2 +
+          "/api-bkf-user/user-aggregate/address/selectReceiveAddress?touristId=" +
           this.$store.getters.getUserData.userId
       ).then(res => {
         if (res.code == 200) {
@@ -193,7 +193,6 @@ export default {
     },
     //
     goback(type) {
-      console.log(type);
       this.$router.push(type);
     }
   }

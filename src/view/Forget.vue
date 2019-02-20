@@ -147,7 +147,7 @@ export default {
     getCode() {
       let that = this;
       clearInterval(that.setsund);
-      this.$fetch(this.$url+":2060/user-aggregate/getSmsCode", {
+      this.$fetch(this.$url2+"/api-bkf-user/user-aggregate/getSmsCode", {
         mobile: this.phone,
         smsFlag: "sms_passWord_back"
       }).then(res => {
@@ -194,7 +194,7 @@ export default {
       if (!this.checkCode()) {
         return;
       }
-      this.$fetch(this.$url+":2060/user-aggregate/checkSmsCode", {
+      this.$fetch(this.$url2+"/api-bkf-user/user-aggregate/checkSmsCode", {
         smsCode: this.code,
         smsFlag:'sms_passWord_back'
       }).then(res => {
@@ -242,8 +242,8 @@ export default {
         return;
       }
       this.$post(
-        this.$url+
-        ":2060/user-aggregate/getBackTouristPassWord",
+        this.$url2+
+        "/api-bkf-user/user-aggregate/getBackTouristPassWord",
         { mobile: this.phone, passWord: this.password, smsCode: this.code },
         { headers: { "Content-Type": "application/json;charset=UTF-8" } }
       ).then(res => {

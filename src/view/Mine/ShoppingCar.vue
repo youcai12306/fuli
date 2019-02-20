@@ -109,7 +109,7 @@ export default {
     },
     //查询购物车
     searchShoppingCar(val) {
-      this.$fetch(`${this.$url1}:2060/user-aggregate/selectShopCarts`, {
+      this.$fetch(`${this.$url2}/api-bkf-user/user-aggregate/selectShopCarts`, {
         touristId: this.$store.getters.getUserData.userId,
         pageNum: val,
         pageSize: this.pageSize
@@ -144,7 +144,7 @@ export default {
     // },
     //删除购物车商品
     delShopping(item, key) {
-      this.$fetch(`${this.$url1}:2060/user-aggregate/deleteshopCart`, {
+      this.$fetch(`${this.$url2}/api-bkf-user/user-aggregate/deleteshopCart`, {
         id: item.id
       }).then(res => {
         if (res.code === 200) {
@@ -235,16 +235,13 @@ export default {
       this.good_list.forEach((v, i) => {
         this.arr[i] = {};
         this.arr[i]["id"] = v.id;
-        console.log(this.arr[i]["id"]);
         this.arr1.push(this.arr[i]["id"]);
-        console.log(this.arr1);
       });
       let ids = this.arr1.join(",");
 
       this.$fetch(
-        `${this.$url1}:2060/user-aggregate/bathDeleteShopCarts?ids=` + ids
+        `${this.$url2}/api-bkf-user/user-aggregate/bathDeleteShopCarts?ids=` + ids
       ).then(res => {
-        console.log(11);
         if (res.code === 200) {
           this.good_list = {};
           this.flag = true;
@@ -255,7 +252,6 @@ export default {
       // this.$router.push("/suborder");
       let list1 = [];
       this.good_list.forEach((v, k) => {
-        console.log(v.is_selected);
         if (v.is_selected) {
           list1.push(v);
           // this.delShopping(v,k)

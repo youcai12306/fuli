@@ -15,9 +15,21 @@
       <p class="t3">{{$t('Integral.Text9')}}</p>
       <div class="change-content">
         <ul class="clearDiv typess">
-          <li class="floatLeft" :class="{li:type == 0}" @click="chooseType(0)">{{$t('Integral.Text10')}}</li>
-          <li class="floatLeft" :class="{li:type == 1}" @click="chooseType(1)">{{$t('Integral.Text11')}}</li>
-          <li class="floatLeft" :class="{li:type == 2}" @click="chooseType(2)">{{$t('Integral.Text12')}}</li>
+          <li
+            class="floatLeft"
+            :class="{li:type == 0}"
+            @click="chooseType(0)"
+          >{{$t('Integral.Text10')}}</li>
+          <li
+            class="floatLeft"
+            :class="{li:type == 1}"
+            @click="chooseType(1)"
+          >{{$t('Integral.Text11')}}</li>
+          <li
+            class="floatLeft"
+            :class="{li:type == 2}"
+            @click="chooseType(2)"
+          >{{$t('Integral.Text12')}}</li>
         </ul>
         <el-table
           :data="tableDate1"
@@ -87,7 +99,9 @@ export default {
     getUserInfo() {
       let id = this.$store.getters.getUserData.userId;
       this.$fetch(
-        this.$url + ":2060/user-aggregate/selectTourist?touristId=" + id
+        this.$url2 +
+          "/api-bkf-user/user-aggregate/selectTourist?touristId=" +
+          id
       ).then(res => {
         if (res.code == 200) {
           this.integral = res.data.integration;
@@ -105,7 +119,8 @@ export default {
         useType = 1;
       }
       this.$fetch(
-        this.$url + ":2060/memberinte-aggregate/getIntegralAndWaterInfo",
+        this.$url2 +
+          "/api-bkf-user/memberinte-aggregate/getIntegralAndWaterInfo",
         {
           touristId: this.$store.getters.getUserData.userId,
           pageNum: val,
@@ -117,7 +132,7 @@ export default {
           this.tableDate1 = res.data.IntegrationList.list;
           this.total = res.data.IntegrationList.total;
           // console.log(res.data.IntegrationList.total);
-        }else{
+        } else {
           this.tableDate1 = [];
           this.total = 0;
         }
@@ -127,8 +142,8 @@ export default {
       this.getConvertList(this.pageNum);
     },
     //跳转兑换页面
-    jumpConvert(){
-      this.$router.push('convertList')
+    jumpConvert() {
+      this.$router.push("convertList");
     }
   }
 };

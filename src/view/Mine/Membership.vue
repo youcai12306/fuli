@@ -9,14 +9,14 @@
           <span class="change" @click="chang(0)" v-show="showBtn1">{{$t('Personal.Text3')}}</span>
           <button class="btn" v-show="!showBtn1" @click="revision(1)">{{$t('Personal.Text4')}}</button>
           <span class="tip">{{nameTip}}</span>
-        </p> -->
+        </p>-->
         <!-- <p>
           <label for>{{$t('Personal.Text5')}}：</label>
           <input type="radio" value="0" class="sex" v-model="sex" @click="chooseSex(0)">
           <span class="men">{{$t('Personal.Text6')}}</span>
           <input type="radio" value="1" class="sex sex1" v-model="sex" @click="chooseSex(1)">
           <span class="men">{{$t('Personal.Text7')}}</span>
-        </p> -->
+        </p>-->
         <!-- <p>
           <label for>{{$t('Personal.Text8')}}：</label>
           <input
@@ -36,27 +36,27 @@
             :class="{colorActive:can}"
           >{{showPin}}</button>
           <span class="tip">{{phoneTip}}</span>
-        </p> -->
+        </p>-->
         <!-- <p class="code" v-show="!showBtn2">
           <label for>&nbsp;</label>
           <input type="text" class="codes" v-model="code" :placeholder="$t('Personal.Text11')">
           <button class="btn" @click="changePhone">{{$t('Personal.Text4')}}</button>
           <span class="tip">{{codeTip}}</span>
-        </p> -->
+        </p>-->
         <!-- <p>
           <label for>{{$t('Personal.Text13')}}：</label>
           <input type="text" :placeholder="$t('Personal.Text14')" v-model="IdCard" :disabled="showBtn3">
           <span class="change" @click="chang(2)" v-show="showBtn3">{{$t('Personal.Text15')}}</span>
           <button class="btn" v-show="!showBtn3" @click="revision(3)">{{$t('Personal.Text4')}}</button>
           <span class="tip" ref="IdCardTip">{{IdCardTip}}</span>
-        </p> -->
+        </p>-->
         <!-- <p>
           <label for>{{$t('Personal.Text16')}}：</label>
           <input type="text" :placeholder="$t('Personal.Text17')" v-model="email" :disabled="showBtn4">
           <span class="change" @click="chang(3)" v-show="showBtn4">{{$t('Personal.Text15')}}</span>
           <button class="btn" v-show="!showBtn4" @click="revision(4)">{{$t('Personal.Text4')}}</button>
           <span class="tip" ref="emailTip">{{emailTip}}</span>
-        </p> -->
+        </p>-->
         <p>
           <label for>{{$t('Personal.Text18')}}：</label>
           <input
@@ -71,7 +71,12 @@
         </p>
         <p v-show="!showBtn5">
           <label for>&nbsp;</label>
-          <input type="password" :placeholder="$t('Personal.Text20')" v-model="password" @blur="checkPwd1()">
+          <input
+            type="password"
+            :placeholder="$t('Personal.Text20')"
+            v-model="password"
+            @blur="checkPwd1()"
+          >
           <span class="tip">{{pwdTip}}</span>
         </p>
         <p v-show="!showBtn5">
@@ -126,7 +131,7 @@ export default {
     };
   },
   mounted() {
-    this.init()
+    this.init();
   },
   computed: {
     can() {
@@ -217,36 +222,35 @@ export default {
         email: this.email,
         idCard: this.IdCard
       };
-      this.$post(
-        `${this.$url}:2060/user-aggregate/updateTourist`,
-        data
-      ).then(res => {
-        if (res.code === 200) {
-          this.$message({
-            message: "修改成功",
-            type: "success"
-          });
-          switch (type) {
-            case 1:
-              this.showBtn1 = !this.showBtn1;
-              break;
-            case 2:
-              this.showBtn2 = !this.showBtn2;
-              break;
-            case 3:
-              this.showBtn3 = !this.showBtn3;
-              break;
-            case 4:
-              this.showBtn4 = !this.showBtn4;
-              break;
+      this.$post(`${this.$url}:2060/user-aggregate/updateTourist`, data).then(
+        res => {
+          if (res.code === 200) {
+            this.$message({
+              message: "修改成功",
+              type: "success"
+            });
+            switch (type) {
+              case 1:
+                this.showBtn1 = !this.showBtn1;
+                break;
+              case 2:
+                this.showBtn2 = !this.showBtn2;
+                break;
+              case 3:
+                this.showBtn3 = !this.showBtn3;
+                break;
+              case 4:
+                this.showBtn4 = !this.showBtn4;
+                break;
+            }
+          } else {
+            this.$message({
+              message: res.message,
+              type: "error"
+            });
           }
-        } else {
-          this.$message({
-            message: res.message,
-            type: "error"
-          });
         }
-      });
+      );
     },
     //修改手机号
     changePhone() {
@@ -257,7 +261,7 @@ export default {
         this.codeTip = "";
       }
       this.$post(
-        `${this.$url}:2060/user-aggregate/updateTouristMobile`,
+        `${this.$url2}/api-bkf-user/user-aggregate/updateTouristMobile`,
         {
           id: this.$store.getters.getUserData.userId,
           mobile: this.phone,
@@ -315,7 +319,7 @@ export default {
     changePwd() {
       if (this.isOk && this.isOk1 && this.isOk2) {
         this.$post(
-          `${this.$url}:2060/user-aggregate/updateTouristPassword`,
+          `${this.$url2}/api-bkf-user/user-aggregate/updateTouristPassword`,
           {
             id: this.$store.getters.getUserData.userId,
             passWord: this.password,
@@ -341,6 +345,7 @@ export default {
         return;
       }
     },
+    //获取验证码
     setCode() {
       //检测手机号码合法性
       if (/^1[34578]\d{9}$/.test(this.phone)) {
@@ -373,16 +378,18 @@ export default {
       });
     },
     //获取数据
-    init(){
-      this.$fetch(`${this.$url}:2060/user-aggregate/selectTourist`,{touristId:this.$store.getters.getUserData.userId}).then((res) =>{
-          if(res.code === 200){
-            this.name = res.data.nickName;
-            if(res.data.sex === false) this.sex = 0;
-            this.phone = res.data.mobile;
-            this.idCard = res.data.idCard;
-            this.email = res.data.email;
-          }
-      })
+    init() {
+      this.$fetch(`${this.$url}:2060/user-aggregate/selectTourist`, {
+        touristId: this.$store.getters.getUserData.userId
+      }).then(res => {
+        if (res.code === 200) {
+          this.name = res.data.nickName;
+          if (res.data.sex === false) this.sex = 0;
+          this.phone = res.data.mobile;
+          this.idCard = res.data.idCard;
+          this.email = res.data.email;
+        }
+      });
     }
   }
 };

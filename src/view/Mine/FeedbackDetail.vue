@@ -89,7 +89,7 @@ export default {
           imgIds += val + ",";
         });
         if (valid) {
-          this.$post(this.$url + ":2060/myfeedback-aggregate/addToMyFeedback", {
+          this.$post(this.$url2 + "/api-bkf-user/myfeedback-aggregate/addToMyFeedback", {
             touristId: this.$store.getters.getUserData.userId,
             questionType: this.form.region,
             content: this.form.desc,
@@ -119,8 +119,8 @@ export default {
       this.imgList.forEach((val, key) => {
         if (val.name == file.name) {
           this.$fetch(
-            this.$url +
-              ":2600//staticResource-mucon/deleteFileById?id=" +
+            this.$url2 +
+              "/api-bkf-user/staticResource-mucon/deleteFileById?id=" +
               val.id
           ).then(res => {
             if (res.code == 200) {
@@ -161,7 +161,7 @@ export default {
       // 后端接受参数 ，可以接受多个参数
       form.append("file", this.file);
       this.$post(
-        this.$url + ":2600/staticResource-mucon/uploadFile",
+        this.$url2 + "/api-bkf-user/staticResource-mucon/uploadFile",
         form
       ).then(res => {
         if (res.code == 200) {

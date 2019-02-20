@@ -111,7 +111,7 @@ export default {
     },
     //得到产品列表
     getConvert(val) {
-      this.$fetch(this.$url + ":5001/product-aggregate/findProductByStock", {
+      this.$fetch(this.$url2 + "/api-bkf-product/product-aggregate/findProductByStock", {
         playDate: this.$tool.formatData(
           new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
         ),
@@ -138,7 +138,7 @@ export default {
     },
     //获取图片
     GetSelectFiles(obj) {
-      this.$fetch(`${this.$url}:2600/staticResource-mucon/selectFiles`, {
+      this.$fetch(`${this.$url2}/api-bkf-user/staticResource-mucon/selectFiles`, {
         ids: obj
       }).then(res => {
         this.img = res.data;
@@ -151,7 +151,7 @@ export default {
     getUserInfo() {
       let id = this.$store.getters.getUserData.userId;
       this.$fetch(
-        this.$url + ":2060/user-aggregate/selectTourist?touristId=" + id
+        this.$url2 + "/api-bkf-user/user-aggregate/selectTourist?touristId=" + id
       ).then(res => {
         if (res.code == 200) {
           console.log(res);
@@ -181,7 +181,6 @@ export default {
       });
     },
     goback(type) {
-      console.log(type);
       this.$router.push(type);
     }
   }

@@ -19,7 +19,7 @@ axios.interceptors.request.use(
     if(touristId){
       config.headers = {'Cookie':{'touristId':touristId,'touristToken':touristToken}}//后台接受的参数
     }
-    console.log(config)
+    // console.log(config)
     return config;
   },
   error => {
@@ -32,17 +32,18 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   response => {
     // response.data.errCode是接口返回值，如果是2，说明cookie丢失，然后跳转到登录页
-    // if (response.data.errCode == 2) {
-    //   router.push({
-    //     path: "/login",
-    //     querry: {
-    //       redirect: router.currentRoute.fullPath//从哪个页面跳转
-    //     } 
-    //   })
-    // }
+    if (response.data.errCode == 2) {
+      router.push({
+        path: "/login",
+        querry: {
+          redirect: router.currentRoute.fullPath//从哪个页面跳转
+        } 
+      })
+    }
     return response;
   },
   error => {
+    console.log(error.response.data.code)
     return Promise.reject(error)
   }
 )

@@ -257,7 +257,7 @@ export default {
       dis: true,
       isactive: 2,
       flag2: true,
-      radio7: "1",
+      radio7: 0,
       id: "",
       list3:[],
       price:"",
@@ -305,7 +305,7 @@ export default {
         if(this.activeTypeIDList[0].activityId == ''){
           return;
         }
-        this.$post("http://101.201.101.138:2060/activity/activityOperation", {
+        this.$post(this.$url2+"/api-bkf-user/activity/activityOperation", {
           activityId: this.activeTypeIDList[0].activityId,
           productList: [{}]
         }).then(res => {
@@ -315,7 +315,7 @@ export default {
         if(this.activeTypeIDList[1].activityId == ''){
           return;
         }
-        this.$post("http://101.201.101.138:2060/activity/activityOperation", {
+        this.$post(this.$url2+"/api-bkf-user/activity/activityOperation", {
           activityId: this.activeTypeIDList[1].activityId,
           productList: [{}]
         }).then(res => {
@@ -334,7 +334,7 @@ export default {
           }]
         };
         this.$post(
-          "http://101.201.101.138:2060/activity/activityOperation",
+          this.$url2+"/api-bkf-user/activity/activityOperation",
           data
         ).then(res => {
           console.log(res);
@@ -343,7 +343,7 @@ export default {
       }
     },
     active() {
-      this.$post("http://101.201.101.138:2060/activity/activityShow", {
+      this.$post(this.$url2+"/api-bkf-user/activity/activityShow", {
         touristId: this.$store.getters.getUserData.userId,
         productList: [{
            productId:this.productId,
@@ -440,7 +440,7 @@ export default {
         this.flag1 = true;
       }
 
-      this.$fetch("http://101.201.101.138:5001/product-aggregate/find/" + id, {
+      this.$fetch(this.$url2+"/api-bkf-product/product-aggregate/find/" + id, {
         stockId: stockId,
         saleType: this.saleType,
         touristId: this.$store.getters.getUserData.userId
@@ -465,7 +465,7 @@ export default {
       };
       // 调用邮寄接口
       this.$fetch(
-        "http://101.201.101.138:2060/user-aggregate/address/selectOneReceiveAddress",
+       this.$url2+"/api-bkf-user/user-aggregate/address/selectOneReceiveAddress",
         data2
       ).then(res => {
         // console.log(res);
@@ -506,8 +506,8 @@ export default {
         receiveMobile: this.numberValidateForm.phone,
         receiveIdentityCode: this.numberValidateForm.name2,
         createCannel: 1, //官网下单为1,
-        activitieId:this.activeTypeIDList[parseInt(this.radio7)].activityId,//优惠券活动ID
-        activitieType: parseInt(this.radio7),//优惠券活动类型
+        activitieId:this.activeTypeIDList[parseInt(this.radio7)].activityId == '' ? null : this.activeTypeIDList[parseInt(this.radio7)].activityId,//优惠券活动ID
+        activitieType: parseInt(this.radio7) == '' ? null : parseInt(this.radio7),//优惠券活动类型
         returnSign:this.$route.query.returnSign//优惠券折扣
        
       };
@@ -520,7 +520,7 @@ export default {
         })
       });
       // 拿到guid以及订单号
-      this.$post("http://101.201.101.138:5001/order-aggregate/save", data, {
+      this.$post(this.$url2+"/api-bkf-product/order-aggregate/save", data, {
         headers: { "Content-Type": "application/json;charset=UTF-8" }
       }).then(res => {
         if (res.code === 200) {
@@ -537,7 +537,7 @@ export default {
           // 读redis，成功创建订单后关闭遮罩层，跳转支付页面
           this.times = setInterval(() => {
             this.$fetch(
-              "http://101.201.101.138:6110/callBack-mucon/getOccupation",
+              this.$url2+"/api-nkf-callback/callBack-mucon/getOccupation",
               data1
             ).then(res => {
               console.log(res);

@@ -288,6 +288,9 @@
 			window.addEventListener("scroll", this.handleScroll);
 			this.index = 0;
 		},
+		created() {
+    document.title = "主题乐园";
+  },
 		methods: {
 			//跳转对应图片
 			jumpImg(index) {

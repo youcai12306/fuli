@@ -172,7 +172,10 @@
 		},
 		mounted() {
 			this.getSearch('D', this.pageSize, this.pageIndex, this.isEnglish);
-		}
+		},
+		created() {
+    document.title = "冒险之旅";
+  },
 	};
 </script>
 <style lang='scss' scoped>

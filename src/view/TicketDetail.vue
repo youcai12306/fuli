@@ -135,7 +135,7 @@ export default {
 
       // console.log(id);
       // console.log(stockId);
-      this.$fetch("http://101.201.101.138:5001/product-aggregate/find/" + id, {
+      this.$fetch( this.$url2+"/api-bkf-product/product-aggregate/find/" + id, {
         stockId: stockId,
         touristId,
         typeId:typeId
@@ -297,7 +297,7 @@ export default {
         dataBaseDate:this.dataBaseDate
       };
       this.$post(
-        "http://101.201.101.138:2060/user-aggregate/addToshopCart",
+        this.$url2+"/api-bkf-user/user-aggregate/addToshopCart",
         {
           touristId: Uid,
           productId: this.product.id,
@@ -317,7 +317,7 @@ export default {
     //查询购物车
     searchShoppingCar(Uid) {
       this.$fetch(
-        "http://101.201.101.138:2060/user-aggregate/selectShopCarts",
+        this.$url2+"/api-bkf-user/user-aggregate/selectShopCarts",
         {
           touristId: Uid
         }

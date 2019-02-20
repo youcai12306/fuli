@@ -257,7 +257,7 @@ export default {
       dis: true,
       isactive: 2,
       flag2: true,
-      radio7: "1",
+      radio7: 0,
       id: "",
       list3:[],
       price:"",
@@ -440,7 +440,7 @@ export default {
         this.flag1 = true;
       }
 
-      this.$fetch("http://101.201.101.138:5001/product-aggregate/find/" + id, {
+      this.$fetch(this.$url2+"/api-bkf-product/product-aggregate/find/" + id, {
         stockId: stockId,
         saleType: this.saleType,
         touristId: this.$store.getters.getUserData.userId
@@ -465,7 +465,7 @@ export default {
       };
       // 调用邮寄接口
       this.$fetch(
-        "http://101.201.101.138:2060/user-aggregate/address/selectOneReceiveAddress",
+       this.$url2+"/api-bkf-user/user-aggregate/address/selectOneReceiveAddress",
         data2
       ).then(res => {
         // console.log(res);
@@ -520,7 +520,7 @@ export default {
         })
       });
       // 拿到guid以及订单号
-      this.$post("http://101.201.101.138:5001/order-aggregate/save", data, {
+      this.$post(this.$url2+"/api-bkf-product/order-aggregate/save", data, {
         headers: { "Content-Type": "application/json;charset=UTF-8" }
       }).then(res => {
         if (res.code === 200) {

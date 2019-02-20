@@ -23,7 +23,9 @@
               :key="item"
               :class="{anActive:actives == item}"
               @click="changeType(item)"
-            >{{$t(`animal.navName${item}`)}}</li>
+            >
+              <p>{{$t(`animal.navName${item}`)}}</p>
+            </li>
           </ul>
         </div>
         <div class="right floatRight">
@@ -34,7 +36,13 @@
                   <div class="ab-2 floatLeft">
                     <img :src="item.facePictureId[0] || img" :alt="item.infoTitle" class="ab-2-img">
                     <!-- <a :href="setViodeAddress(item.content1)" target="_blank" v-if = 'item.content1'> -->
-                      <img src="@/assets/img/bofang.png" alt="" class="bofang" @click="handleOpen(item.title,item.content1)" v-if="item.content1">
+                    <img
+                      src="@/assets/img/bofang.png"
+                      alt
+                      class="bofang"
+                      @click="handleOpen(item.title,item.content1)"
+                      v-if="item.content1"
+                    >
                     <!-- </a> -->
                   </div>
                   <div class="ab-3 floatLeft">
@@ -121,9 +129,18 @@
       :before-close="handleClose"
     >
       <!-- <video ref="plays" :src="url" controls></video> -->
-      <embed :src='url' allowFullScreen='true' quality='high' width='700' height='400' align='middle' allowScriptAccess='always' type='application/x-shockwave-flash' autostart=true>
+      <embed
+        :src="url"
+        allowfullscreen="true"
+        quality="high"
+        width="700"
+        height="400"
+        align="middle"
+        allowScriptAccess="always"
+        type="application/x-shockwave-flash"
+        autostart="true"
+      >
     </el-dialog>
-    
   </section>
 </template>
 
@@ -228,9 +245,9 @@ export default {
       this.getSearch("G1-" + this.actives, this.pageSize, val, this.isEnglish);
     },
     //处理视频地址
-    setViodeAddress(url){
+    setViodeAddress(url) {
       let regx = /<[^>]*>|<\/[^>]*>/gm;
-      url = url.replace(regx,'');
+      url = url.replace(regx, "");
       return url;
     },
     handleClose(done) {
@@ -243,18 +260,18 @@ export default {
       //打开播放器
       this.title = title;
       let regx = /<[^>]*>|<\/[^>]*>/gm;
-      url = url.replace(regx,'')
+      url = url.replace(regx, "");
       // console.log(url)
       // console.log(this.$refs.plays.src)
-      this.url = url
+      this.url = url;
       this.centerDialogVisible = !this.centerDialogVisible;
     },
     getSearch(type, pageSize, pageIndex, isEnglish) {
       //获取保育救助列表 保育救助后台ID=4 pageSize分页大小 pageIndex第几页 isEnglish中英文标识
       this.$fetch(
         `${
-          this.$url1
-        }:6110/mongodb-mucon/structure/primary/searchLinkIndex?linkIndex=${type}&pageSize=${pageSize}&pageNum=${pageIndex}&isEnglish=${isEnglish}`
+          this.$url2
+        }/api-nkf-callback/mongodb-mucon/structure/primary/searchLinkIndex?linkIndex=${type}&pageSize=${pageSize}&pageNum=${pageIndex}&isEnglish=${isEnglish}`
       ).then(res => {
         if (res.code === 200) {
           let xin = [];
@@ -294,9 +311,12 @@ export default {
     },
     GetSelectFiles(obj, type) {
       //批量获取图片
-      this.$fetch(`${this.$url1}:2600/staticResource-mucon/selectFiles`, {
-        ids: obj
-      }).then(res => {
+      this.$fetch(
+        `${this.$url2}/api-bkf-staticResource/staticResource-mucon/selectFiles`,
+        {
+          ids: obj
+        }
+      ).then(res => {
         if (type == "G2-1") this.imgs2 = res.data;
         else if (type == "G2-2") this.imgs = res.data;
         else this.imgs3 = res.data;
@@ -424,13 +444,19 @@ export default {
         .li {
           position: relative;
           height: 70px;
-          line-height: 70px;
+          //line-height: 70px;
           text-align: center;
           font-size: 18px;
           font-weight: 400;
           color: rgba(51, 51, 51, 1);
           cursor: pointer;
-
+          p {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+            width: 100%;
+          }
           img {
             position: absolute;
             width: 8px;
@@ -627,11 +653,11 @@ export default {
               width: 100%;
               height: 100%;
             }
-            .bofang{
+            .bofang {
               position: absolute;
               left: 50%;
-              top:50%;
-              transform: translate(-50%,-50%);
+              top: 50%;
+              transform: translate(-50%, -50%);
               cursor: pointer;
             }
           }
@@ -704,11 +730,11 @@ export default {
               font-weight: bold;
               padding: 30px 20px 20px 0;
               word-break: break-all;
-                    text-overflow: ellipsis;
-                    display: -webkit-box; /** 将对象作为伸缩盒子模型显示 **/
-                    -webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
-                    -webkit-line-clamp: 2; /** 显示的行数 **/
-                    overflow: hidden;  /** 隐藏超出的内容 **/
+              text-overflow: ellipsis;
+              display: -webkit-box; /** 将对象作为伸缩盒子模型显示 **/
+              -webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+              -webkit-line-clamp: 2; /** 显示的行数 **/
+              overflow: hidden; /** 隐藏超出的内容 **/
             }
 
             p {

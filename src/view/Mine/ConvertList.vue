@@ -138,7 +138,7 @@ export default {
     },
     //获取图片
     GetSelectFiles(obj) {
-      this.$fetch(`${this.$url2}/api-bkf-user/staticResource-mucon/selectFiles`, {
+      this.$fetch(`${this.$url2}/api-bkf-staticResource/staticResource-mucon/selectFiles`, {
         ids: obj
       }).then(res => {
         this.img = res.data;

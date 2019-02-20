@@ -120,7 +120,7 @@ export default {
         if (val.name == file.name) {
           this.$fetch(
             this.$url2 +
-              "/api-bkf-user/staticResource-mucon/deleteFileById?id=" +
+              "/api-bkf-staticResource/staticResource-mucon/deleteFileById?id=" +
               val.id
           ).then(res => {
             if (res.code == 200) {
@@ -144,6 +144,7 @@ export default {
     handleChange(file) {
       this.file = file.raw;
     },
+    //图片上传张数
     exceed(files, fileList) {
       this.$message({
         message: "最多上传3个图片",
@@ -161,7 +162,7 @@ export default {
       // 后端接受参数 ，可以接受多个参数
       form.append("file", this.file);
       this.$post(
-        this.$url2 + "/api-bkf-user/staticResource-mucon/uploadFile",
+        this.$url2 + "/api-bkf-staticResource/staticResource-mucon/uploadFile",
         form
       ).then(res => {
         if (res.code == 200) {

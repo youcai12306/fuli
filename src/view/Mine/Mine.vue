@@ -131,7 +131,7 @@ export default {
   },
   mounted() {
     this.$fetch(
-        this.$url + ":2060/user-aggregate/selectTourist?touristId=" + this.$store.getters.getUserData.userId
+        this.$url2 + "/api-bkf-user/user-aggregate/selectTourist?touristId=" + this.$store.getters.getUserData.userId
       ).then(res => {
         if (res.code == 200) {
           this.integral = res.data.integration;

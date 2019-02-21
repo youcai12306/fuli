@@ -69,7 +69,7 @@
 				<div class="certify" id="certify">
 					<swiper :options="certifySwiper" ref="certifySwiper">
 						<swiper-slide v-for="(item,i) in list3" :key="i">
-							<div class="venve" @click="jumpArtDetail(item.structureId)">
+							<div class="venve" @click="jumpArtDetail(item)">
 								<img :src="item.facePictureId[0] || imgSrc" :alt="item.title">
 								<div class="p1">{{item.title}}
 									<!-- <span>表演时间14：00</span> -->
@@ -89,8 +89,8 @@
 			<img src="../../assets/img/theme-animal-title.png" alt class="img">
 			<div class="bottom">
 				<swiper :options="swiperOptions" ref="mySwipers">
-					<swiper-slide v-for="(item,i) in list3" :key="i">
-						<div class="venve" @click.stop="jumpAnimalDetail(item.structureId)">
+					<swiper-slide v-for="(item,i) in list4" :key="i">
+						<div class="venve" @click.stop="jumpAnimalDetail(item)">
 							<img :src="item.facePictureId[0] || imgSrc" :alt="item.title">
 							<h3>{{item.title}}</h3>
 							<p v-html="item.content0"></p>
@@ -107,7 +107,7 @@
 				<div class="bottom">
 					<swiper :options="swiperOptions1" ref="mySwipers1">
 						<swiper-slide v-for="(item,i) in list5" :key="i">
-							<div class="venve" @click="jumpShopDetail(item.structureId)">
+							<div class="venve" @click="jumpShopDetail(item)">
 								<div class="venve-list">
 									<img :src="item.facePictureId[0] || imgSrc" :alt="item.title">
 									<div class="venve-content">
@@ -128,7 +128,7 @@
 				<img src="../../assets/img/theme-eat-title.png" alt class="img">
 				<div class="eat-lists clearDiv">
 					<template v-for="(item,i) in list6">
-						<div class="eat-list floatLeft" @click="jumpEatDetail(item.structureId)">
+						<div class="eat-list floatLeft" @click="jumpEatDetail(item)">
 							<img :src="item.facePictureId[0] || imgSrc" :alt="item.title">
 							<div class="eat-content">
 								<div>{{item.title}}</div>
@@ -170,7 +170,7 @@
 		swiperSlide
 	} from "vue-awesome-swiper";
 	import {
-		IMG_Url
+		IMG_Url2
 	} from "@/package/common";
 	import Header from "@/components/Header"; //引入头部
 	export default {
@@ -299,38 +299,38 @@
 				this.changeImg = 0;
 			},
 			//跳转动物详情
-			jumpAnimalDetail(id) {
+			jumpAnimalDetail(item) {
 				this.$router.push({
 					path: "/animalDetail",
 					query: {
-						id: id
+						item: JSON.stringify(item)
 					}
 				});
 			},
 			//跳转主题商店
-			jumpShopDetail(id) {
+			jumpShopDetail(item) {
 				this.$router.push({
 					path: "/shopDetail",
 					query: {
-						id: id
+						item: JSON.stringify(item)
 					}
 				});
 			},
 			//跳转演绎中心
-			jumpArtDetail(id) {
+			jumpArtDetail(item) {
 				this.$router.push({
 					path: "/artDetail",
 					query: {
-						id: id
+						item: JSON.stringify(item)
 					}
 				});
 			},
 			//跳转餐厅详情页
-			jumpEatDetail(id) {
+			jumpEatDetail(item) {
 				this.$router.push({
 					path: "/eatDetail",
 					query: {
-						id: id
+						item: JSON.stringify(item)
 					}
 				});
 			},
@@ -519,7 +519,7 @@
 						v.facePictureId.forEach((val, key) => {
 							this.img.forEach(res => {
 								if (val == res.id) {
-									v.facePictureId[key] = IMG_Url + res.fileName;
+									v.facePictureId[key] = IMG_Url2 + res.fileName;
 								}
 							});
 						})

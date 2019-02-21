@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import { IMG_Url } from "@/package/common";
+import { IMG_Url2 } from "@/package/common";
 export default {
   name: "News",
   data() {
@@ -80,7 +80,7 @@ export default {
           v.facePictureId.forEach((val, key) => {
             this.imgs.forEach(res => {
               if (val == res.id) {
-                v.facePictureId[key] = IMG_Url + res.fileName;
+                v.facePictureId[key] = IMG_Url2 + res.fileName;
               }
             });
           });
@@ -96,7 +96,7 @@ export default {
           v.pictures.forEach((val, key) => {
             this.imgs1.forEach(res => {
               if (val.picid == res.id) {
-                v.pictures[key].picid = IMG_Url + res.fileName;
+                v.pictures[key].picid = IMG_Url2 + res.fileName;
               }
             });
           });

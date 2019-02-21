@@ -207,7 +207,7 @@
 <script>
 import "swiper/dist/css/swiper.css";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
-import { IMG_Url } from "@/package/common";
+import { IMG_Url2 } from "@/package/common";
 import Header from "@/components/Header"; //引入头部
 import defaultHead from "../assets/img/index-img8.png";
 import { HTTP_DETAIL } from "@/package/common";
@@ -338,7 +338,7 @@ export default {
                   this.newFirst.infoPic[0].picid
               ).then(res => {
                 if (res.code === 200) {
-                  this.img = IMG_Url + res.data.fileName;
+                  this.img = IMG_Url2 + res.data.fileName;
                 }
               });
             }
@@ -532,7 +532,7 @@ export default {
           v.facePictureId.forEach((val, key) => {
             this.imgs.forEach(res => {
               if (val == res.id) {
-                v.facePictureId[key] = IMG_Url + res.fileName;
+                v.facePictureId[key] = IMG_Url2 + res.fileName;
               }
             });
           });
@@ -549,7 +549,7 @@ export default {
           v.facePictureId.forEach((val, key) => {
             this.imgs2.forEach(res => {
               if (val == res.id) {
-                v.facePictureId[key] = IMG_Url + res.fileName;
+                v.facePictureId[key] = IMG_Url2 + res.fileName;
               }
             });
           });

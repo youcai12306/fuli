@@ -98,7 +98,7 @@ export default {
       list.forEach((v, k) => {
         this.imgs.forEach(val => {
           if (v.pictureId == val.id) {
-            v.pictureId = "http://101.201.101.138:2600/file/" + val.fileName;
+            v.pictureId = this.$url2+":2600/file/" + val.fileName;
           }
         });
         str.push(v);

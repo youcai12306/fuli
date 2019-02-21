@@ -79,7 +79,7 @@
 </template>
 
 <script>
-import { IMG_Url } from "../package/common.js";
+import { IMG_Url2 } from "../package/common.js";
 import "swiper/dist/css/swiper.css";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
 import Header from "@/components/Header";
@@ -172,12 +172,12 @@ export default {
           if (v.subPictureId) { //是否有图片
             this.imgs.forEach(res => {
               if (v.subPictureId == res.id) {
-                console.log(IMG_Url + res.fileName);
-                this.imgs2.push(IMG_Url + res.fileName);
+                console.log(IMG_Url2 + res.fileName);
+                this.imgs2.push(IMG_Url2 + res.fileName);
               }
             })
 					}else{
-            this.imgs2.push(IMG_Url + this.imgs[0].fileName);
+            this.imgs2.push(IMG_Url2 + this.imgs[0].fileName);
           }
         });
           console.log(this.imgs2);

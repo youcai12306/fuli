@@ -4,7 +4,7 @@
     <Header></Header>
     <div class="box">
       <div class="top clearDiv">
-        <h3 class="floatLeft">巡游表演</h3>
+        <h3 class="floatLeft">{{product.title}}</h3>
         <div class="floatRight clearDiv" @click="back()">
           <img src="../../assets/img/theme-back.png" alt>
           <span>返回</span>
@@ -14,20 +14,14 @@
         <div class="left floatLeft">
           <swiper :options="swiperOption" ref="mySwiper">
             <!-- slides -->
-            <swiper-slide>
-              <img src="../../assets/img/theme-art-img2.png" alt>
-            </swiper-slide>
-            <swiper-slide>
-              <img src="../../assets/img/theme-art-img2.png" alt>
-            </swiper-slide>
-            <swiper-slide>
-              <img src="../../assets/img/theme-art-img2.png" alt>
+            <swiper-slide v-for="(item,key) in product.facePictureId" :key="key">
+              <img :src="item" alt>
             </swiper-slide>
             <div class="swiper-pagination" slot="pagination"></div>
           </swiper>
         </div>
       </div>
-      <div class="content">我们的22个特色人物将带您前往壮丽的海底世界。 通过使用高科技灯光和音频效果，您将永远不会忘记该节目带给您的有趣体验。</div>
+      <div class="content"><div v-html="product.content0"></div></div>
     </div>
   </div>
 </template>
@@ -51,7 +45,8 @@ export default {
           el: ".swiper-pagination",
           clickable: true
         }
-      }
+      },
+      product: {}
     };
   },
   components: {
@@ -63,6 +58,9 @@ export default {
     back(){
       this.$router.go(-1)
     }
+  },
+  mounted() {
+    this.product = JSON.parse(this.$route.query.item);
   }
 };
 </script>

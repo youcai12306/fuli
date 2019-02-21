@@ -35,7 +35,7 @@
 <script>
 	import Cookies from 'js-cookie'
 	import {
-		IMG_Url
+		IMG_Url2
 	} from "@/package/common";
 	import defaultHead from "../../assets/img/new-bg2.png";
 	export default {
@@ -73,7 +73,7 @@
 									this.list.infoPic[0].picid
 								).then(res => {
 									if (res.code === 200) {
-										this.img = IMG_Url + res.data.fileName;
+										this.img = IMG_Url2 + res.data.fileName;
 									}
 								});
 							}

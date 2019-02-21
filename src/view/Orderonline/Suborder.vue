@@ -233,7 +233,7 @@ export default {
       arr3: [],
       ids: "",
       dis: true,
-      radio7: 0,
+      radio7: '0',
       id: "",
       list3:[],
       price:"",

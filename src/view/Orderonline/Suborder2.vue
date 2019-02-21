@@ -257,7 +257,7 @@ export default {
       dis: true,
       isactive: 2,
       flag2: true,
-      radio7: 0,
+      radio7: '0',
       id: "",
       list3:[],
       price:"",

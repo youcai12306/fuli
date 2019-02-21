@@ -31,7 +31,7 @@
                 <th>{{$t('Suborder.Text6')}}</th>
                 <th>{{$t('Suborder.Text7')}}</th>
               </tr>
-              <tr v-for="item in list2" :key="item.id">
+              <tr v-for="item in firstList" :key="item.id">
                 <!-- <tr v-for="item in list2" :key="item"> -->
                 <td>{{item.product.productName}}
                   <p>{{$t('Suborder.Text8')}}：{{item.product.dataBaseDate}}</p>
@@ -223,6 +223,7 @@ export default {
       sign: "",
       a1: this.$route.query.a,
       list2: [],
+      firstList: [],
       price2: 0,
       sendPrice: 0,
       name1: "",
@@ -250,8 +251,9 @@ export default {
   mounted() {
     if (this.a1 == 1) {
       let list1 = this.$route.query.list1;
+      this.firstList = JSON.parse(list1);
       this.list2 = JSON.parse(list1);
-      this.getPrice(this.list2);
+      this.getPrice(this.firstList);
     }
     this.changeType();
     this.shopmsg();

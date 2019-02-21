@@ -33,7 +33,7 @@ axios.interceptors.request.use(
   error => {
     // console.log(error)
     // return Promise.reject(error);
-
+    console.log(error.response.status)
     if (error.response && error.response.status === 401) {
       router.push({
         path: "/login",

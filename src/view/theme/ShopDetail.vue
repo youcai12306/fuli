@@ -2,9 +2,9 @@
   <div class="animalTheme">
      <!-- 头部 -->
     <Header></Header>
-    <div class="box" v-if="id == 0">
+    <div class="box">
       <div class="top clearDiv">
-        <h3 class="floatLeft">阳光回忆</h3>
+        <h3 class="floatLeft">{{product.title}}</h3>
         <div class="floatRight clearDiv" @click="back()">
           <img src="../../assets/img/theme-back.png" alt>
           <span>返回</span>
@@ -14,14 +14,8 @@
         <div class="left floatLeft">
           <swiper :options="swiperOption" ref="mySwiper">
             <!-- slides -->
-            <swiper-slide>
-              <img src="../../assets/img/theme-shop-img2.png" alt>
-            </swiper-slide>
-            <swiper-slide>
-              <img src="../../assets/img/theme-shop-img2.png" alt>
-            </swiper-slide>
-            <swiper-slide>
-              <img src="../../assets/img/theme-shop-img2.png" alt>
+            <swiper-slide v-for="(item,key) in product.facePictureId" :key="key">
+              <img :src="item" alt>
             </swiper-slide>
             <div class="swiper-pagination" slot="pagination"></div>
           </swiper>
@@ -31,38 +25,7 @@
           <p>纪念品/卡通玩具/衣服帽子周边</p>
         </div> -->
       </div>
-      <div class="content">想在水的世界尽情嬉戏？那让我们先补齐装备吧！这里会有各式各样的水上用品补给</div>
-    </div>
-    <div class="box" v-else>
-      <div class="top clearDiv">
-        <h3 class="floatLeft">木马奇珍坊</h3>
-        <div class="floatRight clearDiv" @click="back()">
-          <img src="../../assets/img/theme-back.png" alt>
-          <span>返回</span>
-        </div>
-      </div>
-      <div class="img-box clearDiv">
-        <div class="left floatLeft">
-          <swiper :options="swiperOption" ref="mySwiper">
-            <!-- slides -->
-            <swiper-slide>
-              <img src="../../assets/img/theme-shop-img2.png" alt>
-            </swiper-slide>
-            <swiper-slide>
-              <img src="../../assets/img/theme-shop-img2.png" alt>
-            </swiper-slide>
-            <swiper-slide>
-              <img src="../../assets/img/theme-shop-img2.png" alt>
-            </swiper-slide>
-            <div class="swiper-pagination" slot="pagination"></div>
-          </swiper>
-        </div>
-        <!-- <div class="right floatRight">
-          <h3>售卖商品</h3>
-          <p>纪念品/卡通玩具/衣服帽子周边</p>
-        </div> -->
-      </div>
-      <div class="content">集结了与海洋息息相关的纪念品，包括海豚、海龟、海狮等各种造型玩偶。让海洋朋友时刻伴您身边，这里你定能找到心水之选！</div>
+      <div class="content"><div v-html="product.content0"></div></div>
     </div>
   </div>
 </template>
@@ -87,7 +50,7 @@ export default {
           clickable: true
         }
       },
-      id:0
+      product: {}
     };
   },
   components: {
@@ -101,7 +64,7 @@ export default {
     }
   },
   mounted(){
-    this.id = this.$route.query.id;
+    this.product = JSON.parse(this.$route.query.item);
   }
 };
 </script>

@@ -4,7 +4,7 @@
     <Header></Header>
     <div class="box">
       <div class="top clearDiv">
-        <h3 class="floatLeft">鲸鲨馆</h3>
+        <h3 class="floatLeft">{{product.title}}</h3>
         <div class="floatRight clearDiv" @click="back()">
           <img src="../../assets/img/theme-back.png" alt>
           <span>返回</span>
@@ -14,26 +14,18 @@
         <div class="left floatLeft">
           <swiper :options="swiperOption" ref="mySwiper">
             <!-- slides -->
-            <swiper-slide>
-              <img src="../../assets/img/theme-animal-img2.png" alt>
-            </swiper-slide>
-            <swiper-slide>
-              <img src="../../assets/img/theme-animal-img2.png" alt>
-            </swiper-slide>
-            <swiper-slide>
-              <img src="../../assets/img/theme-animal-img2.png" alt>
+            <swiper-slide v-for="(item,key) in product.facePictureId" :key="key">
+              <img :src="item" alt>
             </swiper-slide>
             <div class="swiper-pagination" slot="pagination"></div>
           </swiper>
         </div>
-        <div class="right floatRight">
+        <!-- <div class="right floatRight">
           <h3>场馆动物</h3>
           <p>虎鲸/企鹅/中华鲟/海豹/周边</p>
-        </div>
+        </div> -->
       </div>
-      <div
-        class="content"
-      >总水量2.2万吨，配备海底观光隧道，超大观赏视窗让游客犹如置身海底，近距离领略长达7米的鲸鲨庞大身体游弋的壮观场面。鲸鲨馆放养生物超过1500种，总数量5万余只。</div>
+      <div class="content"><div v-html="product.content0"></div></div>
     </div>
   </div>
 </template>
@@ -57,7 +49,8 @@ export default {
           el: ".swiper-pagination",
           clickable: true
         }
-      }
+      },
+      product: {}
     };
   },
   components: {
@@ -69,6 +62,9 @@ export default {
     back(){
       this.$router.go(-1)
     }
+  },
+  mounted() {
+    this.product = JSON.parse(this.$route.query.item);
   }
 };
 </script>
@@ -122,7 +118,7 @@ export default {
     .img-box {
       margin-top: 44px;
       .left {
-        width: 670px;
+        width: 100%;
         height: 400px;
         overflow: hidden;
         img {

@@ -2,41 +2,9 @@
   <div class="animalTheme">
     <!-- 头部 -->
     <Header></Header>
-    <div class="box" v-if="id == 0">
+    <div class="box">
       <div class="top clearDiv">
-        <h3 class="floatLeft">塔瓦那餐厅</h3>
-        <div class="floatRight clearDiv cursor" @click="back()">
-          <img src="../../assets/img/theme-back.png" alt>
-          <span>返回</span>
-        </div>
-      </div>
-      <div class="img-box clearDiv">
-        <div class="left floatLeft">
-          <swiper :options="swiperOption" ref="mySwiper">
-            <!-- slides -->
-            <swiper-slide>
-              <img src="../../assets/img/theme-eat-img2.png" alt>
-            </swiper-slide>
-            <swiper-slide>
-              <img src="../../assets/img/theme-eat-img2.png" alt>
-            </swiper-slide>
-            <swiper-slide>
-              <img src="../../assets/img/theme-eat-img2.png" alt>
-            </swiper-slide>
-            <div class="swiper-pagination" slot="pagination"></div>
-          </swiper>
-        </div>
-        <!-- <div class="right floatRight">
-          <h3>水乐园入口右侧</h3>
-          <p>平均消费：￥60-90</p>
-        </div>-->
-      </div>
-      <div class="content">希腊风格，地中海西式美食广场及东南亚美食，适合一家大小</div>
-      <div class="price">平均消费：￥60-90</div>
-    </div>
-    <div class="box" v-else>
-      <div class="top clearDiv">
-        <h3 class="floatLeft">迈泽美食</h3>
+        <h3 class="floatLeft">{{product.title}}</h3>
         <div class="floatRight clearDiv" @click="back()">
           <img src="../../assets/img/theme-back.png" alt>
           <span>返回</span>
@@ -46,14 +14,8 @@
         <div class="left floatLeft">
           <swiper :options="swiperOption" ref="mySwiper">
             <!-- slides -->
-            <swiper-slide>
-              <img src="../../assets/img/theme-eat-img2.png" alt>
-            </swiper-slide>
-            <swiper-slide>
-              <img src="../../assets/img/theme-eat-img2.png" alt>
-            </swiper-slide>
-            <swiper-slide>
-              <img src="../../assets/img/theme-eat-img2.png" alt>
+            <swiper-slide v-for="(item,key) in product.facePictureId" :key="key">
+              <img :src="item" alt>
             </swiper-slide>
             <div class="swiper-pagination" slot="pagination"></div>
           </swiper>
@@ -63,8 +25,8 @@
           <p>平均消费：￥60-90</p>
         </div>-->
       </div>
-      <div class="content">地中海风格，西式快餐美食，提供炸鸡，汉堡包</div>
-      <div class="price">平均消费：￥50-80</div>
+      <div class="content"><div v-html="product.content0"></div></div>
+      <!-- <div class="price">平均消费：￥50-80</div> -->
     </div>
   </div>
 </template>
@@ -89,7 +51,7 @@ export default {
           clickable: true
         }
       },
-      id:0
+      product: {}
     };
   },
   components: {
@@ -103,7 +65,7 @@ export default {
     }
   },
   mounted(){
-    this.id = this.$route.query.id
+    this.product = JSON.parse(this.$route.query.item);
   }
 };
 </script>

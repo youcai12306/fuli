@@ -506,8 +506,8 @@ export default {
         receiveMobile: this.numberValidateForm.phone,
         receiveIdentityCode: this.numberValidateForm.name2,
         createCannel: 1, //官网下单为1,
-        activitieId:this.activeTypeIDList[parseInt(this.radio7)].activityId == '' ? null : this.activeTypeIDList[parseInt(this.radio7)].activityId,//优惠券活动ID
-        activitieType: parseInt(this.radio7) == '' ? null : parseInt(this.radio7),//优惠券活动类型
+        activitieId:this.activeTypeIDList[parseInt(this.radio7)].activityId === '' ? null : this.activeTypeIDList[parseInt(this.radio7)].activityId,//优惠券活动ID
+        activitieType: parseInt(this.radio7) === '' ? null : parseInt(this.radio7),//优惠券活动类型
         returnSign:this.$route.query.returnSign//优惠券折扣
        
       };

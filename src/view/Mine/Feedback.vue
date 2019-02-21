@@ -92,7 +92,7 @@ export default {
     },
     //处理图片地址
     imgAddress(value){
-      return `http://101.201.101.138:2600/file/${value}`
+      return `http://getway.mayou365.com:2600/file/${value}`
     }
   }
 };

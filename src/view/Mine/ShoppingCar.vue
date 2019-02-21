@@ -104,9 +104,6 @@ export default {
     this.searchShoppingCar(this.pageNum);
   },
   methods: {
-    aa() {
-      // console.log(11);
-    },
     //查询购物车
     searchShoppingCar(val) {
       this.$fetch(`${this.$url2}/api-bkf-user/user-aggregate/selectShopCarts`, {

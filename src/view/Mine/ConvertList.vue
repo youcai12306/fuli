@@ -92,7 +92,7 @@ export default {
           this.img.forEach(res => {
             if (val.pictureId == res.id) {
               val.pictureId =
-                "http://101.201.101.138:2600/file/" + res.fileName;
+                "http://getway.mayou365.com:2600/file/" + res.fileName;
             }
           });
         });

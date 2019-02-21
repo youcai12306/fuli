@@ -11,13 +11,13 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-			'/api':{
-					target: "http://getway.mayou365.com",//接口链接头
-					changeOrigin:true,
-					pathRewrite:{
-							'^/api':''
-					}
-			}
+			// '/api':{
+			// 		target: "http://getway.mayou365.com",//接口链接头
+			// 		changeOrigin:true,
+			// 		pathRewrite:{
+			// 				'^/api':''
+			// 		}
+			// }
 		},
 
     // Various Dev Server settings

@@ -50,7 +50,7 @@
 <script>
 	import Header from "@/components/Header"; //引入头部
 	import {
-		IMG_Url
+		IMG_Url2
 	} from "@/package/common";
 	import "swiper/dist/css/swiper.css";
 	import {
@@ -87,7 +87,7 @@
 					list.infoPic.forEach((val, key) => {
 						this.img.forEach(res => {
 							if (val.picid == res.id) {
-								val.picid = IMG_Url + res.fileName;
+								val.picid = IMG_Url2 + res.fileName;
 							}
 						});
 					})

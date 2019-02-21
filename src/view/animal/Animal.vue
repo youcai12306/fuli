@@ -146,7 +146,7 @@
 
 <script>
 import Cookies from "js-cookie";
-import { IMG_Url } from "@/package/common";
+import { IMG_Url2 } from "@/package/common";
 import Header from "@/components/Header"; //引入头部
 export default {
   data() {
@@ -184,7 +184,7 @@ export default {
           v.facePictureId.forEach((val, key) => {
             this.imgs3.forEach(res => {
               if (val == res.id) {
-                v.facePictureId[key] = IMG_Url + res.fileName;
+                v.facePictureId[key] = IMG_Url2 + res.fileName;
               }
             });
           });
@@ -202,7 +202,7 @@ export default {
           v.facePictureId.forEach((val, key) => {
             this.imgs2.forEach(res => {
               if (val == res.id) {
-                v.facePictureId[key] = IMG_Url + res.fileName;
+                v.facePictureId[key] = IMG_Url2 + res.fileName;
               }
             });
           });
@@ -219,7 +219,7 @@ export default {
           v.facePictureId.forEach((val, key) => {
             this.imgs.forEach(res => {
               if (val == res.id) {
-                v.facePictureId[key] = IMG_Url + res.fileName;
+                v.facePictureId[key] = IMG_Url2 + res.fileName;
               }
             });
           });

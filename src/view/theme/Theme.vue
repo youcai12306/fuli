@@ -170,7 +170,7 @@
 		swiperSlide
 	} from "vue-awesome-swiper";
 	import {
-		IMG_Url
+		IMG_Url2
 	} from "@/package/common";
 	import Header from "@/components/Header"; //引入头部
 	export default {
@@ -519,7 +519,7 @@
 						v.facePictureId.forEach((val, key) => {
 							this.img.forEach(res => {
 								if (val == res.id) {
-									v.facePictureId[key] = IMG_Url + res.fileName;
+									v.facePictureId[key] = IMG_Url2 + res.fileName;
 								}
 							});
 						})
